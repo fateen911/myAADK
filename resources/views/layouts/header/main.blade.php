@@ -23,8 +23,9 @@
             <div class="app-navbar flex-shrink-0">
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
-                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
-                        {{Auth::user()->name}}
+                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
+                        <i class="fa fa-user" style="color: #2d2d5d; padding-right:5px; font-size:15px;"></i>
+                        {{ strtoupper(Auth::user()->name) }}
                     </div>
                     <!--begin::Menu wrapper-->
                     {{-- @php

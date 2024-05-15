@@ -34,16 +34,6 @@
             <span class="myaadk-text">MyAADK</span>
         </a>
         
-        <!--end::Logo image-->
-        <!--begin::Sidebar toggle-->
-        <!--begin::Minimized sidebar setup:
-        if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_state"] === "on") {
-            1. "src/js/layout/sidebar.js" adds "sidebar_minimize_state" cookie value to save the sidebar minimize state.
-            2. Set data-kt-app-sidebar-minimize="on" attribute for body tag.
-            3. Set data-kt-toggle-state="active" attribute to the toggle element with "kt_app_sidebar_toggle" id.
-            4. Add "active" class to to sidebar toggle element with "kt_app_sidebar_toggle" id.
-        }
-        -->
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
             <i class="ki-duotone ki-black-left-line fs-3 rotate-180">
                 <span class="path1"></span>
@@ -53,6 +43,7 @@
         <!--end::Sidebar toggle-->
     </div>
     <!--end::Logo-->
+
     <!--begin::sidebar menu-->
     <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
         <!--begin::Menu wrapper-->
@@ -64,7 +55,7 @@
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                         <!--begin:Menu link-->
-                        <a class="menu-link active" href="../../demo1/dist/pages/user-profile/campaigns.html">
+                        <a class="menu-link" href="{{route('dashboard')}}">
                         <span class="menu-link">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-element-11 fs-2">
@@ -74,7 +65,7 @@
                                     <span class="path4"></span>
                                 </i>
                             </span>
-                                <span class="menu-title">Laman Utama</span>
+                            <span class="menu-title">Laman Utama</span>
                         </span>
                         </a>
                         <!--end:Menu link-->
@@ -85,7 +76,7 @@
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Pelajar</span>
+                            <span class="menu-heading fw-bold text-uppercase fs-7">PENDAFTARAN</span>
                         </div>
                         <!--end:Menu content-->
                     </div>
@@ -101,13 +92,12 @@
                                     <span class="path3"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Permohonan</span>
-                            <span class="menu-arrow"></span>
+                            <span class="menu-title">Daftar Pengguna</span>
                         </span>
                         <!--end:Menu link-->
 
                         <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
+                        {{-- <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
@@ -144,12 +134,13 @@
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
-                        </div>
+                        </div> --}}
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -218,7 +209,7 @@
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
                     
 
@@ -226,7 +217,7 @@
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Penyelaras</span>
+                            <span class="menu-heading fw-bold text-uppercase fs-7">PENGURUSAN</span>
                         </div>
                         <!--end:Menu content-->
                     </div>
@@ -241,12 +232,12 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Permohonan</span>
-                            <span class="menu-arrow"></span>
+                            <span class="menu-title">Profil Pengguna</span>
                         </span>
                         <!--end:Menu link-->
+
                         <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
+                        {{-- <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
@@ -283,10 +274,11 @@
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
-                        </div>
+                        </div> --}}
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
@@ -299,7 +291,7 @@
                                     <span class="path4"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Tuntutan</span>
+                            <span class="menu-title">Modal Kepulihan</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
@@ -312,7 +304,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Keseluruhan</span>
+                                    <span class="menu-title">Fizikal</span>
                                 </span>
                                 <!--end:Menu link-->
                             </div>
@@ -324,7 +316,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Wang Saku</span>
+                                    <span class="menu-title">Psikologi</span>
                                 </span>
                                 <!--end:Menu link-->
                             </div>
@@ -336,7 +328,91 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Yuran Pengajian dan Wang Saku</span>
+                                    <span class="menu-title">Sosial</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Persekitaran</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Insaniah dan Kompetensi</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kerohanian dan Spiritual</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Rawatan dan Pemulihan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Kesihatan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Jati Diri dan Strategi Daya Tahan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Resiliensi</span>
                                 </span>
                                 <!--end:Menu link-->
                             </div>
@@ -346,18 +422,8 @@
                     </div>
                     <!--end:Menu item-->   
 
-
-                    <!--begin:Menu item-->
-                    <div class="menu-item pt-5">
-                        <!--begin:Menu content-->
-                        <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Sekretariat</span>
-                        </div>
-                        <!--end:Menu content-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                     <!--begin:Menu item-->
+                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -366,7 +432,7 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Permohonan</span>
+                            <span class="menu-title">Program</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
@@ -379,7 +445,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Saringan</span>
+                                    <span class="menu-title">Hebahan</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -391,7 +457,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Kelulusan</span>
+                                    <span class="menu-title">Kehadiran</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -403,7 +469,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Keputusan</span>
+                                    <span class="menu-title">Pendaftaran</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -412,60 +478,12 @@
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-basket fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Tuntutan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Saringan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Keputusan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div>
-                    <!--end:Menu item--> 
                     
-
-                    {{-- Pentadbir Sistem --}}
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">Pentadbir Sistem</span>
+                            <span class="menu-heading fw-bold text-uppercase fs-7">PELAPORAN</span>
                         </div>
                         <!--end:Menu content-->
                     </div>
@@ -480,49 +498,8 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Daftar Pengguna</span>
+                            <span class="menu-title">Jana Laporan</span>
                         </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                            {{-- <div class="menu-sub menu-sub-accordion">
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Saringan</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Kelulusan</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                                <!--begin:Menu item-->
-                                <div class="menu-item">
-                                    <!--begin:Menu link-->
-                                    <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Keputusan</span>
-                                    </a>
-                                    <!--end:Menu link-->
-                                </div>
-                                <!--end:Menu item-->
-                            </div> --}}
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
                 </div>
@@ -533,15 +510,4 @@
         <!--end::Menu wrapper-->
     </div>
     <!--end::sidebar menu-->
-    <!--begin::Footer-->
-        {{-- <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-            <a href="https://preview.keenthemes.com/html/metronic/docs" class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="200+ in-house components and 3rd-party plugins">
-                <span class="btn-label">Docs & Components</span>
-                <i class="ki-duotone ki-document btn-icon fs-2 m-0">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                </i>
-            </a>
-        </div> --}}
-    <!--end::Footer-->
 </div>
