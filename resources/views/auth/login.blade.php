@@ -2,6 +2,34 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <head>
+        <style>
+            .relative {
+                position: relative;
+            }
+    
+            .absolute {
+                position: absolute;
+                top: 50%;
+                right: 10px; /* Adjust this value if necessary */
+                transform: translateY(-50%);
+            }
+    
+            .cursor-pointer {
+                cursor: pointer;
+            }
+    
+            .pr-10 {
+                padding-right: 2.5rem; /* Ensure there is enough space for the icon */
+            }
+
+            .eye-icon {
+                font-size: 12px; /* Adjust the size as needed */
+            }
+        </style>
+    </head>
+    
+
     <div class="text-center">
         <a href="/">
             <x-application-logo class="w-10 h-10 fill-current text-gray-500" />
@@ -22,12 +50,18 @@
         <div class="mt-4">
             <x-input-label for="password" :value="__('Kata Laluan')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+            <div class="relative flex items-center">
+                <x-text-input id="password" class="block mt-1 w-full pr-10"
+                                type="password"
+                                name="password"
+                                required autocomplete="current-password" />
+                <span id="togglePassword" class="absolute right-3 cursor-pointer">
+                    <i class="fa fa-eye-slash eye-icon"></i>
+                </span>
+            </div>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                
         </div>
 
         <!-- Remember Me -->
@@ -58,4 +92,26 @@
             </a>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#password');
+        
+            const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
+            const passwordConfirmation = document.querySelector('#password_confirmation');
+        
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                if (type === 'text') {
+                    this.querySelector('i').classList.remove('fa-eye-slash');
+                    this.querySelector('i').classList.add('fa-eye');
+                } else {
+                    this.querySelector('i').classList.remove('fa-eye');
+                    this.querySelector('i').classList.add('fa-eye-slash');
+                }
+            });
+        });
+    </script>        
 </x-guest-layout>

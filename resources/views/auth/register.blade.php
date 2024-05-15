@@ -8,11 +8,21 @@
             .absolute {
                 position: absolute;
                 top: 50%;
+                right: 10px;
                 transform: translateY(-50%);
             }
 
             .cursor-pointer {
                 cursor: pointer;
+            }
+
+            .eye-icon {
+                font-size: 12px; /* Adjust the size as needed */
+            }
+
+            .text-gray-600 {
+                color: #718096; /* Adjust the color as needed */
+                font-size: 11px; /* 14px */
             }
         </style>
     </head>
@@ -28,24 +38,23 @@
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nama')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" placeholder="{{ __('Faris Hakim bin Mohd') }}"/>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         {{-- No Kad Pengenalan --}}
         <div class="mt-4">
             <x-input-label for="no_kp" :value="__('No Kad Pengenalan')"/>
-            <x-text-input id="no_kp" class="block mt-1 w-full" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="no_kp" />
+            <x-text-input id="no_kp" class="block mt-1 w-full" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="no_kp" placeholder="{{ __('xxxxxxxxxxxx') }}"/>
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Emel')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" placeholder="{{ __('faris@gmail.com') }}"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-
 
         <!-- Password -->
         <div class="mt-4">
@@ -55,13 +64,16 @@
                 <x-text-input id="password" class="block mt-1 w-full pr-10"
                               type="password"
                               name="password"
-                              required autocomplete="new-password" />
+                              required autocomplete="new-password" 
+                              placeholder="{{ __('Testing1234#') }}" />
                 <span id="togglePassword" class="absolute right-3 cursor-pointer">
-                    <i class="fa fa-eye-slash"></i>
+                    <i class="fa fa-eye-slash eye-icon"></i>
                 </span>
             </div>
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+            <small class="text-gray-600">Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.</small>
         </div>
 
         <!-- Confirm Password -->
@@ -72,10 +84,11 @@
                 <x-text-input id="password_confirmation" class="block mt-1 w-full pr-10"
                               type="password"
                               name="password_confirmation" 
-                              required autocomplete="new-password" />
+                              required autocomplete="new-password" 
+                              placeholder="{{ __('Testing1234#') }}" />
 
                 <span id="togglePasswordConfirmation" class="absolute right-3 cursor-pointer">
-                    <i class="fa fa-eye-slash"></i>
+                    <i class="fa fa-eye-slash eye-icon"></i>
                 </span>
             </div>
 
@@ -89,7 +102,7 @@
         </div>
 
         <div class="flex items-center justify-center mt-2">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-500 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Klik di sini untuk log masuk?') }}
             </a>
         </div>
@@ -128,28 +141,4 @@
             });
         });
     </script>
-        
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const togglePassword = document.querySelector('#togglePassword');
-            const password = document.querySelector('#password');
-        
-            const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
-            const passwordConfirmation = document.querySelector('#password_confirmation');
-        
-            togglePassword.addEventListener('click', function () {
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('fa-eye-slash', type === 'text');
-                this.querySelector('i').classList.toggle('fa-eye', type !== 'text');
-            });
-        
-            togglePasswordConfirmation.addEventListener('click', function () {
-                const type = passwordConfirmation.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordConfirmation.setAttribute('type', type);
-                this.querySelector('i').classList.toggle('fa-eye-slash', type === 'text');
-                this.querySelector('i').classList.toggle('fa-eye', type !== 'text');
-            });
-        });
-    </script>          --}}
 </x-guest-layout>
