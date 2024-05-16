@@ -16,7 +16,7 @@ class HomeController extends Controller
 
             if($tahap == 1)
             {
-                return view('home');
+                return view('pentadbir.dashboard');
             }
             else if($tahap == 2)
             {

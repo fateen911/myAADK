@@ -17,6 +17,7 @@
         .eye-icon {
             font-size: 1.25rem;
             color: #6c757d;
+            padding-right: 10px;
         }
     </style>
 
@@ -579,6 +580,7 @@
                                     </span>
                                 </div>
                             </div>
+
                             <!-- New Password -->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
@@ -598,6 +600,7 @@
                                     </span>
                                 </div>
                             </div>
+
                             <!-- Confirm New Password -->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
