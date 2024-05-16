@@ -233,11 +233,12 @@
                                 </i>
                             </span>
                             <span class="menu-title">Profil Pengguna</span>
+                            <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
 
                         <!--begin:Menu sub-->
-                        {{-- <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
@@ -245,7 +246,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Keseluruhan</span>
+                                    <span class="menu-title">Maklumat Diri</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -257,7 +258,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Baharu</span>
+                                    <span class="menu-title">Maklumat Kesihatan</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -269,12 +270,36 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Perbaharui</span>
+                                    <span class="menu-title">Maklumat Pendidikan</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
-                        </div> --}}
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Maklumat Pekerjaan</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
+                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Maklumat Keluarga</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->

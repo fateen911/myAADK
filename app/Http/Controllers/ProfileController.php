@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -26,16 +27,73 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) 
+        {
+            $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
+            $request->gambar_profil->move('assets/gambar_profil',$filename);
+
+            if ($request->email !== $user->email) {
+                // Validate email uniqueness
+                $request->validate([
+                    'email' => 'required|email|unique:users,email',
+                ]);
+                
+                User::where('no_kp',Auth::user()->no_kp)
+                ->update([
+                    'gambar_profil' => $filename,
+                    'name' => $request->name,
+                    'no_kp' => $request->no_kp,
+                    $user->email => $request->email,
+                ]);
+            }
+            else{
+                User::where('no_kp',Auth::user()->no_kp)
+                ->update([
+                    'gambar_profil' => $filename,
+                    'name' => $request->name,
+                    'no_kp' => $request->no_kp,
+                ]);
+            }
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        else{
+            if ($request->email !== $user->email) {
+                // Validate email uniqueness
+                $request->validate([
+                    'email' => 'required|email|unique:users,email',
+                ]);
+                
+                User::where('no_kp',Auth::user()->no_kp)
+                ->update([
+                    'name' => $request->name,
+                    'no_kp' => $request->no_kp,
+                    $user->email => $request->email,
+                ]);
+            }
+            else{
+                User::where('no_kp',Auth::user()->no_kp)
+                ->update([
+                    'name' => $request->name,
+                    'no_kp' => $request->no_kp,
+                ]);
+            }
+        }
+        
+        return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
+    // public function update(ProfileUpdateRequest $request): RedirectResponse
+    // {
+    //     $request->user()->fill($request->validated());
+
+    //     if ($request->user()->isDirty('email')) {
+    //         $request->user()->email_verified_at = null;
+    //     }
+
+    //     $request->user()->save();
+
+    //     return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    // }
 
     /**
      * Delete the user's account.
