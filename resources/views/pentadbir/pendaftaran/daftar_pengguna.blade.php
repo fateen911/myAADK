@@ -6,18 +6,26 @@
         <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
         <!-- Custom AADK CSS -->
 		<link rel="stylesheet" href="/assets/css/customAADK.css">
+
+        <style>
+            .btn-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Multipurpose</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pendaftaran</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pendaftaran</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -26,7 +34,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Dashboards</li>
+            <li class="breadcrumb-item text-muted">Senarai Pengguna</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -52,7 +60,7 @@
 							<!--begin::Toolbar-->
 							<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 								<!--begin::Add customer-->
-								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pengguna</button>
+								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pengguna</button>
 								<!--end::Add customer-->
 							</div>
 							<!--end::Toolbar-->
@@ -60,6 +68,7 @@
 						<!--end::Card toolbar-->
 					</div>
 					<!--end::Card header-->
+
 					<!--begin::Card body-->
 					<div class="card-body pt-0">
 						<!--begin::Table-->
@@ -78,31 +87,40 @@
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($user as $user)
                                         @php
+                                            $text = ucwords(strtolower($user->name)); // Assuming you're sending the text as a POST parameter
+                                            $conjunctions = ['bin', 'binti'];
+                                            $words = explode(' ', $text);
+                                            $result = [];
+                                            foreach ($words as $word) {
+                                                if (in_array(Str::lower($word), $conjunctions)) {
+                                                    $result[] = Str::lower($word);
+                                                } else {
+                                                    $result[] = $word;
+                                                }
+                                            }
+                                            $nama_user = implode(' ', $result);
+
                                             $peranan = DB::table('tahap_pengguna')->where('id', $user['tahap_pengguna'])->value('jawatan');
                                         @endphp
 
                                         <tr>
-                                            <td>{{ $user->name}}</td>
-                                            <td>{{ $user->no_kp}}</td>
-                                            <td>{{ $user->email}}</td>
-                                            <td>{{ $peranan}}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->no_kp }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $peranan }}</td>
                                             <td>{{ $user->created_at->format('d/m/Y h:i:sa') }}</td>
                                             <td>
-                                                <!--begin::Toolbar-->
-                                                <div class="d-flex">
-                                                    <!--begin::Edit-->
-                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->no_kp}}">
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->id}}">
                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
                                                             <i class="ki-duotone bi bi-pencil fs-3"></i>
                                                         </span>
                                                     </a>
-                                                    <!--end::Edit-->
-                                                </div>
-                                                <!--end::Toolbar-->
+                                                </div>                                                
                                             </td>
 
                                             <!--begin::Modal - Customers - Edit-->
-											{{-- <div class="modal fade" id="kt_modal_new_card{{$user->no_kp}}" tabindex="-1" aria-hidden="true">
+											<div class="modal fade" id="kt_modal_new_card{{$user->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
 												<div class="modal-dialog modal-dialog-centered mw-650px">
 													<!--begin::Modal content-->
@@ -122,13 +140,14 @@
 															<!--end::Close-->
 														</div>
 														<!--end::Modal header-->
+
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('daftarpengguna.post') }}" method="post">
+															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
 																@csrf
-																<!--begin::Scroll-->
 
+                                                                <input type="hidden" name="id" value="{{ $user->id }}">
 																<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
@@ -136,7 +155,7 @@
 																		<label class="fs-6 fw-semibold mb-2">Nama</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="{{$user->nama}}" />
+																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user->name}}" />
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -166,16 +185,16 @@
 																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="tahap" id="tahap" class="form-select form-select-solid" data-placeholder="Pilih">
-																			@foreach($tahap as $tahap1)
-																				<option value="{{ $tahap1->id }}" {{$user->tahap == $tahap1->id  ? 'selected' : ''}}>{{ strtoupper($tahap1->name)}}</option>
-																			@endforeach
+																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+                                                                            @foreach ($tahap->sortBy('jawatan') as $tahap1)
+                                                                                <option value="{{$tahap1->id}}" {{$user->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
+                                                                            @endforeach
 																		</select>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 
-																	@if ($user->tahap =='2' || $user->tahap =='6')
+																	{{-- @if ($user->tahap =='2' || $user->tahap =='6')
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7" id="div_ipt">
 																		<!--begin::Label-->
@@ -190,10 +209,10 @@
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
-																	@endif
+																	@endif --}}
 																	
 
-																	@if ($user->tahap !='1')
+																	{{-- @if ($user->tahap !='1')
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
@@ -204,10 +223,10 @@
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
-																	@endif
+																	@endif --}}
 
 																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
+																	{{-- <div class="fv-row mb-7">
 																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Status</label>
 																		<!--end::Label-->
@@ -217,10 +236,8 @@
 																			<option value="0" {{$user->status == 0  ? 'selected' : ''}}>TIDAK AKTIF</option>
 																		</select>
 																		<!--end::Input-->
-																	</div>
+																	</div> --}}
 																	<!--end::Input group-->
-
-
 																</div>
 																<!--end::Scroll-->
 
@@ -241,7 +258,7 @@
 													<!--end::Modal content-->
 												</div>
 												<!--end::Modal dialog-->
-											</div> --}}
+											</div>
 										    <!--end::Modal - Customers - Edit-->
                                         </tr>
                                     @endforeach
@@ -253,13 +270,13 @@
 					<!--end::Card body-->
 
 					<!--begin::Modal - Customers - Add-->
-					{{-- <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+					<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
 						<!--begin::Modal dialog-->
 						<div class="modal-dialog modal-dialog-centered mw-650px">
 							<!--begin::Modal content-->
 							<div class="modal-content">
 								<!--begin::Form-->
-								<form class="form" action="{{ route('daftarpengguna.post') }}" id="kt_modal_add_customer_form" method="post" data-kt-redirect="{{ route('daftarpengguna') }}">
+								<form class="form" action="{{ route('daftar-pengguna') }}" id="kt_modal_add_customer_form" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
 									@csrf
 									<!--begin::Modal header-->
 									<div class="modal-header" id="kt_modal_add_customer_header">
@@ -286,7 +303,7 @@
 												<label class="fs-6 fw-semibold mb-2">Nama</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="nama" value="" />
+												<input type="text" class="form-control form-control-solid" placeholder="" name="name"/>
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -316,53 +333,12 @@
 												<label class="fs-6 fw-semibold mb-2">Peranan</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<select name="tahap" id="pilihtahap" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
+												<select name="tahap_pengguna" id="tahap_pengguna" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
 													<option value="">Pilih</option>
-													@foreach ($tahap as $tahap)
-													<option value="{{$tahap->id}}">{{$tahap->name}}</option>
-													@endforeach
-													
+                                                    @foreach ($tahap->sortBy('jawatan') as $tahap)
+                                                        <option value="{{$tahap->id}}">{{$tahap->jawatan}}</option>
+                                                    @endforeach
 												</select>
-												<!--end::Input-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="fv-row mb-7" id="div_id_institusi">
-												<!--begin::Label-->
-												<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
-												<!--end::Label-->
-												<!--begin::Input-->
-												<select name="id_institusibkoku" id="id_institusibkoku" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
-													<option value="">Pilih</option>
-													@foreach ($infoipt as $infoipt1)
-														<option value="{{ $infoipt1->id_institusi}}">{{ $infoipt1->nama_institusi}}</option>
-													@endforeach
-												</select>
-												<!--end::Input-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="fv-row mb-7" id="div_id_institusippk">
-												<!--begin::Label-->
-												<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
-												<!--end::Label-->
-												<!--begin::Input-->
-												<select name="id_institusippk" id="id_institusippk" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
-													<option value="">Pilih</option>
-													@foreach ($infoppk as $infoppk)
-														<option value="{{$infoppk->id_institusi}}">{{ $infoppk->nama_institusi}}</option>
-													@endforeach
-												</select>
-												<!--end::Input-->
-											</div>
-											<!--end::Input group-->
-											<!--begin::Input group-->
-											<div class="fv-row mb-7" id="div_jawatan">
-												<!--begin::Label-->
-												<label class="fs-6 fw-semibold mb-2">Jawatan</label>
-												<!--end::Label-->
-												<!--begin::Input-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -389,7 +365,7 @@
 								<!--end::Form-->
 							</div>
 						</div>
-					</div> --}}
+					</div>
 				</div>
 				<!--end::Content container-->
 			</div>
@@ -1836,6 +1812,36 @@
 	<script src="/assets/js/custom/apps/customers/list/list.js"></script>
 	<script src="/assets/js/custom/apps/customers/add.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<!--end::Custom Javascript-->
 
+    <script>
+		$(document).ready(function() {
+			$('.js-example-basic-single').select2();
+			});
+	</script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if there is a flash message
+            @if(session('message'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: '{!! session('message') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // Check if there is a flash error message
+            @if(session('tidak'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Aktif!',
+                    text: '{!! session('tidak') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
 @endsection

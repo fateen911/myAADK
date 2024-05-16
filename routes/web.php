@@ -25,5 +25,8 @@ Route::middleware('auth')->group(function () {
 
 // PENTADBIR - DAFTAR PENGGUNA
 Route::get('/senarai-pengguna',[PentadbirController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
+Route::post('kemaskini-pengguna', [PentadbirController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
+Route::post('daftar-pengguna', [PentadbirController::class, 'daftarPengguna'])->name('daftar-pengguna');
+
 
 require __DIR__.'/auth.php';

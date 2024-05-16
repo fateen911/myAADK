@@ -47498,7 +47498,7 @@ body[data-kt-sticky-landing-header=on] {
   --bs-app-blank-bg-color: #fcfcfc;
   --bs-app-header-base-bg-color: #b4b4c1;
   --bs-app-header-base-box-shadow: none;
-  --bs-app-header-minimize-bg-color: #7F8194;
+  --bs-app-header-minimize-bg-color: #b4b4c1;
   --bs-app-header-minimize-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
   --bs-app-toolbar-base-bg-color: #ffffff;
   --bs-app-toolbar-base-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);

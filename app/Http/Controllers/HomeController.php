@@ -24,7 +24,7 @@ class HomeController extends Controller
             }
             else
             {
-                return view('pegawai.dashboard');
+                return view('pentadbir.dashboard');
             }
         }
     }
