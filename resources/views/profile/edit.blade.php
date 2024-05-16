@@ -1,6 +1,25 @@
 @extends('layouts._default')
 
 @section('content')
+    <style>
+        .position-relative {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .eye-icon {
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+    </style>
+
     <!--begin::Page title-->
     {{-- <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
@@ -538,11 +557,11 @@
                 <div id="kt_account_settings_signin_method" class="collapse show">
                     <form method="post" action="{{ route('password.update') }}" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
-                            <!--begin::Input group-->
+                            <!-- Current Password -->
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Terkini</span>
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
@@ -553,17 +572,15 @@
                                         </i>
                                     </span>
                                 </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Terkini"/>
+                                <div class="col-lg-8 fv-row position-relative">
+                                    <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Terkini" id="currentPassword"/>
+                                    <span class="toggle-password" onclick="togglePassword('currentPassword')">
+                                        <i class="fa fa-eye-slash eye-icon"></i>
+                                    </span>
                                 </div>
-                                <!--end::Col-->
                             </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
+                            <!-- New Password -->
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Baharu</span>
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
@@ -574,18 +591,15 @@
                                         </i>
                                     </span>
                                 </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu"/>
+                                <div class="col-lg-8 fv-row position-relative">
+                                    <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu" id="newPassword"/>
+                                    <span class="toggle-password" onclick="togglePassword('newPassword')">
+                                        <i class="fa fa-eye-slash eye-icon"></i>
+                                    </span>
                                 </div>
-                                <!--end::Col-->
                             </div>
-                            <!--end::Input group-->
-
-                            <!--begin::Input group-->
+                            <!-- Confirm New Password -->
                             <div class="row mb-6">
-                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Sahkan Kata Laluan Baharu</span>
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
@@ -596,14 +610,13 @@
                                         </i>
                                     </span>
                                 </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" />
+                                <div class="col-lg-8 fv-row position-relative">
+                                    <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
+                                    <span class="toggle-password" onclick="togglePassword('confirmPassword')">
+                                        <i class="fa fa-eye-slash eye-icon"></i>
+                                    </span>
                                 </div>
-                                <!--end::Col-->
                             </div>
-                            <!--end::Input group-->
                         </div>
                         <!--end::Card body-->
 
@@ -680,4 +693,20 @@
         <!--end::Content container-->
     </div>
     <!--end::Content-->
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
 @endsection

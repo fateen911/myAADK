@@ -1,3 +1,22 @@
+<head>
+    <style>
+        .profile-picture {
+            width: 40px !important; /* Adjust the width as needed */
+            height: 40px !important; /* Ensure height is the same as width for a perfect circle */
+            border-radius: 50% !important; /* This makes the image circular */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            margin-right: 10px; /* Space between the image and the text */
+            vertical-align: middle; /* Align with text vertically */
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
 <div id="kt_app_header" class="app-header" data-kt-sticky="true" data-kt-sticky-activate="{default: true, lg: true}" data-kt-sticky-name="app-header-minimize" data-kt-sticky-offset="{default: '200px', lg: '0'}" data-kt-sticky-animation="false">
     <!--begin::Header container-->
     <div class="app-container container-fluid d-flex align-items-stretch justify-content-between" id="kt_app_header_container">
@@ -24,9 +43,19 @@
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                     <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
+                        @if(Auth::user()->gambar_profil)
+                            <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
+                            {{ strtoupper(Auth::user()->name) }}
+                        @else
+                            <i class="fa fa-user" style="color: #2d2d5d; padding-right:5px; font-size:15px;"></i>
+                            {{ strtoupper(Auth::user()->name) }}
+                        @endif
+                    </div>
+                    
+                    {{-- <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
                         <i class="fa fa-user" style="color: #2d2d5d; padding-right:5px; font-size:15px;"></i>
                         {{ strtoupper(Auth::user()->name) }}
-                    </div>
+                    </div> --}}
                     <!--begin::Menu wrapper-->
                     {{-- @php
                         $nama = DB::table('smoku')->where('nokp', Auth::user()->no_kp)->value('nama');
