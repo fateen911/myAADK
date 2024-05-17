@@ -228,7 +228,7 @@
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" href="{{ route('senarai-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-klien') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
@@ -240,7 +240,7 @@
                             </span>
                             <span class="menu-title">Profil Klien</span>
                             <span class="menu-arrow"></span>
-                        </span>
+                        </a>
                         <!--end:Menu link-->
 
                         <!--begin:Menu sub-->
@@ -830,7 +830,7 @@
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" href="{{ route('senarai-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-klien') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-user-edit fs-2">
                                     <span class="path1"></span>
@@ -840,7 +840,7 @@
                             </span>
                             <span class="menu-title">Profil Klien</span>
                             <span class="menu-arrow"></span>
-                        </span>
+                        </a>
                         <!--end:Menu link-->
 
                         <!--begin:Menu sub-->

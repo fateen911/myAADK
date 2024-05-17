@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PentadbirController;
+use App\Http\Controllers\ProfilKlienController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -29,5 +30,8 @@ Route::get('/senarai-pengguna',[PentadbirController::class, 'senaraiPengguna'])-
 Route::post('kemaskini-pengguna', [PentadbirController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
 Route::post('daftar-pengguna', [PentadbirController::class, 'daftarPengguna'])->name('daftar-pengguna');
 
+// PENTADBIR - PENGURUSAN PROFIL 
+Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
+Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 
 require __DIR__.'/auth.php';

@@ -384,23 +384,23 @@
 	</div>
 
     <!--begin::Javascript-->
-        <script>var hostUrl = "assets/";</script>
-        <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-        <script src="/assets/plugins/global/plugins.bundle.js"></script>
-        <script src="/assets/js/scripts.bundle.js"></script>
-        <!--end::Global Javascript Bundle-->
-        <!--begin::Vendors Javascript(used for this page only)-->
-        <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-        <script src="/assets/js/custom/apps/customers/list/export.js"></script>
-        <script src="/assets/js/custom/apps/customers/list/list.js"></script>
-        <script src="/assets/js/custom/apps/customers/add.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <!--end::Custom Javascript-->
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-        <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script>var hostUrl = "assets/";</script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Vendors Javascript(used for this page only)-->
+    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
+    <script src="/assets/js/custom/apps/customers/add.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!--end::Custom Javascript-->
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
 
     <script>
