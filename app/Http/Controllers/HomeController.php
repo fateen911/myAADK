@@ -13,18 +13,21 @@ class HomeController extends Controller
         if(Auth::id())
         {
             $tahap = Auth()->user()->tahap_pengguna;
+            $status = Auth()->user()->status;
 
-            if($tahap == 1)
+            if ($status == 0)
             {
-                return view('pentadbir.dashboard');
-            }
-            else if($tahap == 2)
-            {
-                return view('klien.dashboard');
+                session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
+                return view('profile.update_password');
             }
             else
             {
-                return view('pentadbir.dashboard');
+                if($tahap == 1)
+                    return view('pentadbir.dashboard');
+                else if($tahap == 2)
+                    return view('klien.dashboard');
+                else
+                    return view('kakitangan.dashboard');
             }
         }
     }

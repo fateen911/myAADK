@@ -49,7 +49,7 @@ class PentadbirController extends Controller
                         'tahap_pengguna' => $request->tahap_pengguna,
                         'password' => Hash::make($request->no_kp),
                         'profil_pengguna' => null,
-                        'status' => '1',
+                        'status' => '0',
                     ];
         
         $user = User::create($userData);

@@ -19,7 +19,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Pentadbir Sistem</li>
+        <li class="breadcrumb-item text-muted">Kakitangan AADK</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->

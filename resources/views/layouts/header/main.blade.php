@@ -42,7 +42,7 @@
             <div class="app-navbar flex-shrink-0">
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
-                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
+                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
                         @if(Auth::user()->gambar_profil)
                             <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
                             {{ strtoupper(Auth::user()->name) }}
@@ -51,39 +51,14 @@
                             {{ strtoupper(Auth::user()->name) }}
                         @endif
                     </div>
-                    
-                    {{-- <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-3" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
-                        <i class="fa fa-user" style="color: #2d2d5d; padding-right:5px; font-size:15px;"></i>
-                        {{ strtoupper(Auth::user()->name) }}
-                    </div> --}}
-                    <!--begin::Menu wrapper-->
-                    {{-- @php
-                        $nama = DB::table('smoku')->where('nokp', Auth::user()->no_kp)->value('nama');
-                        $fullname = Auth::user()->nama;
-                    @endphp
-                    <!--begin::Menu wrapper-->
-                    @if($fullname)
-                        <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
-                            {{$fullname}}
-                        </div>
-                    @elseif($nama)
-                        <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
-                            {{$nama}}
-                        </div>
-                    @else
-                        <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-5 text-white" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold;">
-                            {{Auth::user()->email}}
-                        </div>
-                    @endif --}}
-                    
 
                     <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
                         <!--begin::Menu item-->
                         <div class="menu-item px-3">
-                            <div class="menu-content d-flex align-items-center px-3">
-                                <div class="symbol symbol-50px me-5">
-                                    <div class="symbol-label fs-3 bg-light-primary text-primary">
+                            <div class="menu-content d-flex align-items-center">
+                                <div class="symbol symbol-40px me-5">
+                                    <div class="symbol-label fs-2 bg-light-primary text-primary">
                                         {{ substr(Auth::user()->name,0,1) }}
                                     </div>
                                 </div>
@@ -112,7 +87,7 @@
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bold d-flex align-items-center fs-6">{{Auth::user()->name}}</div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a>
+                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-8">{{ Auth::user()->email }}</a>
                                     {{-- @if($nama2)
                                         <div class="fw-bold d-flex align-items-center fs-5">{{$nama2}}</div>
                                     @else
