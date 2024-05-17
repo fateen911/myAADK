@@ -88,9 +88,10 @@
                         <span>
                             <a class="menu-link" href="{{ route('senarai-pengguna') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-pengguna') }}';">
                                 <span class="menu-icon">
-                                    <i class="ki-duotone ki-abstract-41 fs-2">
+                                    <i class="ki-duotone ki-user-edit fs-2">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
+                                        <span class="path3"></span>
                                     </i>
                                 </span>
                                 <span class="menu-title">Daftar Pengguna</span>
@@ -229,9 +230,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Profil Klien</span>
@@ -311,11 +315,9 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-basket fs-2">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Modal Kepulihan</span>
@@ -454,9 +456,13 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-calendar-add fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Program</span>
@@ -520,9 +526,13 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Jana Laporan</span>
@@ -599,9 +609,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Maklumat Diri</span>
@@ -614,9 +627,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Maklumat Kesihatan</span>
@@ -629,9 +645,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Maklumat Pendidikan</span>
@@ -644,9 +663,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Maklumat Pekerjaan</span>
@@ -659,9 +681,12 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Maklumat Waris</span>
@@ -684,7 +709,7 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
@@ -693,6 +718,51 @@
                         </span>
                     </div>
                     <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div class="menu-item pt-5">
+                        <!--begin:Menu content-->
+                        <div class="menu-content">
+                            <span class="menu-heading fw-bold text-uppercase fs-7">PROGRAM</span>
+                        </div>
+                        <!--end:Menu content-->
+                    </div>
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-calendar-add fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Pendaftaran</span>
+                        </span>
+                        <!--end:Menu link-->
+
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-calendar-add fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Kehadiran</span>
+                        </span>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
                 </div>
                 <!--end::Menu-->
             </div>
@@ -762,9 +832,10 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-user-edit fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Profil Klien</span>
@@ -844,11 +915,9 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-basket fs-2">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Modal Kepulihan</span>
@@ -982,14 +1051,18 @@
                     </div>
                     <!--end:Menu item-->   
 
-                     <!--begin:Menu item-->
-                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-calendar-add fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Program</span>
@@ -1053,9 +1126,13 @@
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-abstract-41 fs-2">
+                                <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Jana Laporan</span>

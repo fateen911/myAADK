@@ -88,12 +88,6 @@
                                 <div class="d-flex flex-column">
                                     <div class="fw-bold d-flex align-items-center fs-6">{{Auth::user()->name}}</div>
                                     <a href="#" class="fw-semibold text-muted text-hover-primary fs-8">{{ Auth::user()->email }}</a>
-                                    {{-- @if($nama2)
-                                        <div class="fw-bold d-flex align-items-center fs-5">{{$nama2}}</div>
-                                    @else
-                                        <div class="fw-bold d-flex align-items-center fs-5">{{$nama}}</div>
-                                    @endif
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ Auth::user()->email }}</a> --}}
                                 </div>
                                 <!--end::Username-->
                             </div>
