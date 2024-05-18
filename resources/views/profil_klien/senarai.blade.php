@@ -48,44 +48,27 @@
 				<!--begin::Content container-->
 				<div id="kt_app_content_container" class="app-container container-xxl">
 					<!--begin::Card header-->
-					<div class="card-header border-0 pt-6">
-						<!--begin::Card title-->
-						<div class="card-title">
-                            Senarai Klien AADK
-						</div>
-						<!--begin::Card title-->
-
-						<!--begin::Card toolbar-->
-						{{-- <div class="card-toolbar">
-							<!--begin::Toolbar-->
-							<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-								<!--begin::Add customer-->
-								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pengguna</button>
-								<!--end::Add customer-->
-							</div>
-							<!--end::Toolbar-->
-						</div> --}}
-						<!--end::Card toolbar-->
-					</div>
+                    <div class="header">
+                        <h2>Senarai Klien AADK<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                    </div>
 					<!--end::Card header-->
 
 					<!--begin::Card body-->
-					{{-- <div class="card-body pt-0"> --}}
-                    <div class="body">
+					<div class="card-body pt-0">
 						<!--begin::Table-->
-						<div class="table-responsive">
+						{{-- <div class="table-responsive"> --}}
 							{{-- <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table"> --}}
                             <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-125px">Nama</th>
-                                        <th class="min-w-125px">No. Kad Pengenalan</th>
-                                        <th class="min-w-125px">Daerah</th>
-                                        <th class="min-w-125px">Negeri</th> 
+										<th class="min-w-100px">Nama</th>
+                                        <th class="min-w-100px">No. Kad Pengenalan</th>
+                                        <th class="min-w-100px">Daerah</th>
+                                        <th class="min-w-100px">Negeri</th> 
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
-									@foreach ($user as $user)
+									@foreach ($klien as $user)
                                         @php
                                             $text = ucwords(strtolower($user->name)); // Assuming you're sending the text as a POST parameter
                                             $conjunctions = ['bin', 'binti'];
@@ -110,7 +93,7 @@
                                     @endforeach
 								</tbody>
 							</table>
-						</div>
+						{{-- </div> --}}
 						<!--end::Table-->
 					</div>
 					<!--end::Card body-->

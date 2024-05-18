@@ -9,15 +9,15 @@ class ProfilKlienController extends Controller
 {
     public function senaraiKlien()
     {
-        $user = User::where('tahap_pengguna','2')->get();
+        $klien = User::where('tahap_pengguna','2')->get();
 
-        return view ('profil_klien.senarai', compact('user'));
+        return view ('profil_klien.senarai', compact('klien'));
     }
 
     public function maklumatKlien($id)
     {
-        $user = User::find($id);
+        $klien = User::find($id);
 
-        return view('profil_klien.kemaskini',compact('user'));
+        return view('profil_klien.kemaskini',compact('klien'));
     }
 }

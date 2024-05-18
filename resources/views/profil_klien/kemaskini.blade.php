@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="nama" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="nama" name="nama" value=""/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="" data-kt-ecommerce-settings-type="tagify" />
+                                    <input type="text" class="form-control form-control-solid" maxlength="12" id="no_kp" name="no_kp" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="" data-kt-ecommerce-settings-type="tagify" />
+                                    <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="" data-kt-ecommerce-settings-type="tagify" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="emel" value=""/>
+                                    <input type="text" class="form-control form-control-solid" id="emel" name="emel" value=""/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -202,8 +202,26 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="alamat_rumah"></textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah"></textarea>
                                     <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-end">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Poskod</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="" />
+                                        <!--end::Select2-->
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -219,7 +237,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                             <option>Pilih daerah</option>
                                             <option value="Default">Default</option>
                                             <option value="Minimalist">Minimalist</option>
@@ -243,7 +261,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                             <option>Pilih negeri</option>
                                             <option value="Default">Default</option>
                                             <option value="Minimalist">Minimalist</option>
@@ -267,7 +285,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" name="jantina" data-control="select2" data-hide-search="true" data-placeholder="Pilih jantina">
+                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" data-placeholder="Pilih jantina">
                                             <option>Pilih jantina</option>
                                             <option value="Lelaki">Lelaki</option>
                                             <option value="Perempuan">Perempuan</option>
@@ -289,7 +307,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama">
+                                        <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama">
                                             <option>Pilih agama</option>
                                             <option value="Islam">Islam</option>
                                             <option value="Hindu">Hindu</option>
@@ -316,7 +334,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa">
+                                        <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa">
                                             <option>Pilih bangsa</option>
                                             <option value="Melayu">Melayu</option>
                                             <option value="Cina">Cina</option>
@@ -347,7 +365,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" name="tarikh_tamat" value=""/>
+                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat" name="tarikh_tamat" value=""/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -408,7 +426,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -431,7 +449,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="" />
+                                    <input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -454,7 +472,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -477,7 +495,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="alamat_rumah"></textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja"></textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -493,7 +511,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -516,7 +534,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -744,7 +762,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="nama_waris" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -760,7 +778,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="alamat_waris"></textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris"></textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -783,7 +801,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="no_tel_waris" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="" maxlength="11"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -799,7 +817,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="nama_pasangan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -815,7 +833,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="alamat_pasangan"></textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan"></textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -838,7 +856,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="no_tel_pasangan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="" maxlength="11"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -854,7 +872,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="alamat_kerja_pasangan"></textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan"></textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
