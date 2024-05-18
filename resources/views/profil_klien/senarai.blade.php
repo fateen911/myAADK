@@ -70,7 +70,7 @@
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($klien as $user)
                                         @php
-                                            $text = ucwords(strtolower($user->name)); // Assuming you're sending the text as a POST parameter
+                                            $text = ucwords(strtolower($user->nama)); // Assuming you're sending the text as a POST parameter
                                             $conjunctions = ['bin', 'binti'];
                                             $words = explode(' ', $text);
                                             $result = [];
@@ -82,13 +82,15 @@
                                                 }
                                             }
                                             $nama_user = implode(' ', $result);
+                                            $daerah = DB::table('senarai_daerah')->where('id', $user['daerah'])->value('senarai_daerah.daerah');
+                                            $negeri = DB::table('senarai_negeri')->where('id', $user['negeri'])->value('senarai_negeri.negeri');
                                         @endphp
 
                                         <tr>
-                                            <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->name}}</a></td>
+                                            <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
                                             <td>{{ $user->no_kp }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->status }}</td>
+                                            <td>{{ $daerah }}</td>
+                                            <td>{{ $negeri }}</td>
                                         </tr>
                                     @endforeach
 								</tbody>

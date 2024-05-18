@@ -27,11 +27,6 @@
             flex-direction: column;
             align-items: center; /* Center contents horizontally */
         }
-
-        /* .readonly-input[readonly] {
-            color: #a0a0a7;
-            cursor: not-allowed;
-        } */
     </style>
 </head>
 
@@ -53,7 +48,7 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Kemaskini Profil Klien</li>
+        <li class="breadcrumb-item text-muted">Lihat Profil Peribadi</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
@@ -142,10 +137,7 @@
                                 </div>
                             </div>
                             <!--end::Heading-->
-                            @php
-                                $daerahKlien = DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah');
-                                $negeriKlien = DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri');
-                            @endphp
+                            
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -157,7 +149,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" id="nama" name="nama" value="{{$klien->nama}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="nama" name="nama" value="{{$butiranKlien->nama}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -180,7 +172,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" maxlength="12" id="no_kp" name="no_kp" value="{{$klien->no_kp}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid" maxlength="12" id="no_kp" name="no_kp" value="{{$butiranKlien->no_kp}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -203,7 +195,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="{{$klien->no_tel}}"/>
+                                    <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="{{$butiranKlien->no_tel}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -226,7 +218,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{$klien->emel}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{$butiranKlien->emel}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -242,7 +234,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah">{{$klien->alamat_rumah}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah" readonly>{{$butiranKlien->alamat_rumah}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -259,7 +251,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="{{$klien->poskod}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" value="{{$butiranKlien->poskod}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -277,10 +269,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah" disabled>
                                             <option>Pilih daerah</option>
                                             @foreach ($daerah as $item)
-                                                <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
+                                                <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -300,9 +292,9 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri" disabled>
                                             @foreach ($negeri as $item)
-                                                <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -322,10 +314,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
+                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" data-placeholder="Pilih jantina" disabled>
                                             <option>Pilih jantina</option>
-                                            <option value="LELAKI" {{ $klien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
-                                            <option value="PEREMPUAN" {{ $klien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
+                                            <option value="LELAKI" {{ $butiranKlien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
+                                            <option value="PEREMPUAN" {{ $butiranKlien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -346,13 +338,13 @@
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
                                             <option>Pilih agama</option>
-                                            <option value="ISLAM" {{ $klien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
-                                            <option value="CINA" {{ $klien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
-                                            <option value="INDIA" {{ $klien->agama == 'INDIA' ? 'selected' : '' }}>INDIA</option>
-                                            <option value="KRISTIAN" {{ $klien->agama == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
-                                            <option value="BUDHA" {{ $klien->agama == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
-                                            <option value="SIKH" {{ $klien->agama == 'SIKH' ? 'selected' : '' }}>SIKH</option>
-                                            <option value="LAIN-LAIN" {{ $klien->agama == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                            <option value="ISLAM" {{ $butiranKlien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
+                                            <option value="CINA" {{ $butiranKlien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
+                                            <option value="INDIA" {{ $butiranKlien->agama == 'INDIA' ? 'selected' : '' }}>INDIA</option>
+                                            <option value="KRISTIAN" {{ $butiranKlien->agama == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
+                                            <option value="BUDHA" {{ $butiranKlien->agama == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
+                                            <option value="SIKH" {{ $butiranKlien->agama == 'SIKH' ? 'selected' : '' }}>SIKH</option>
+                                            <option value="LAIN-LAIN" {{ $butiranKlien->agama == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -373,11 +365,11 @@
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
                                             <option>Pilih bangsa</option>
-                                            <option value="MELAYU" {{ $klien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
-                                            <option value="CINA" {{ $klien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
-                                            <option value="INDIA" {{ $klien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
-                                            <option value="KRISTIAN" {{ $klien->bangsa == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
-                                            <option value="BUDHA" {{ $klien->bangsa == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
+                                            <option value="MELAYU" {{ $butiranKlien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
+                                            <option value="CINA" {{ $butiranKlien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
+                                            <option value="INDIA" {{ $butiranKlien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
+                                            <option value="KRISTIAN" {{ $butiranKlien->bangsa == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
+                                            <option value="BUDHA" {{ $butiranKlien->bangsa == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -402,7 +394,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat_pengawasan" name="tarikh_tamat_pengawasan" value="{{$klien->tarikh_tamat_pengawasan}}" readonly/>
+                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat_pengawasan" name="tarikh_tamat_pengawasan" value="{{$butiranKlien->tarikh_tamat_pengawasan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -414,11 +406,11 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-label">Muat Turun</span>
                                             <span class="indicator-progress">Sila tunggu...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
@@ -463,7 +455,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" value="{{$pekerjaan->pekerjaan}}" />
+                                    <input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" value="{{$butiranKlien->pekerjaan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -486,7 +478,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="{{$pekerjaan->pendapatan}}" />
+                                    <input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="{{$butiranKlien->pendapatan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -502,7 +494,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" />
+                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -518,7 +510,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$pekerjaan->alamat_kerja}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" readonly>{{$butiranKlien->alamat_kerja}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -535,7 +527,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$butiranKlien->poskod_kerja}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -556,10 +548,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" disabled>
                                             <option>Pilih daerah</option>
                                             @foreach ($daerahKerja as $daerahK)
-                                                <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
+                                                <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -579,10 +571,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih negeri</option>
                                             @foreach ($negeriKerja as $negeriK)
-                                                <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                                <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -601,7 +593,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$butiranKlien->nama_majikan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -624,7 +616,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" maxlength="11"/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}" maxlength="11" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -635,11 +627,11 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-label">Muat Turun</span>
                                             <span class="indicator-progress">Sila tunggu...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
@@ -852,7 +844,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="{{$keluarga->nama_waris}}" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="{{$butiranKlien->nama_waris}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -875,7 +867,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="{{$keluarga->no_tel_waris}}" maxlength="11"/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="{{$butiranKlien->no_tel_waris}}" maxlength="11" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -891,7 +883,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris">{{$keluarga->alamat_waris}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris" readonly>{{$butiranKlien->alamat_waris}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -908,7 +900,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_waris" name="poskod_waris" value="{{$keluarga->poskod_waris}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_waris" name="poskod_waris" value="{{$butiranKlien->poskod_waris}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -926,10 +918,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_waris" name="daerah_waris" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah_waris" name="daerah_waris" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih daerah</option>
                                             @foreach ($daerahWaris as $daerahW)
-                                                <option value="{{ $daerahW->id }}" {{ $keluarga->daerah_waris == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
+                                                <option value="{{ $daerahW->id }}" {{ $butiranKlien->daerah_waris == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -949,10 +941,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_waris" name="negeri_waris" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri_waris" name="negeri_waris" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih negeri</option>
                                             @foreach ($negeriWaris as $negeriW)
-                                                <option value="{{ $negeriW->id }}" {{ $keluarga->negeri_waris == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
+                                                <option value="{{ $negeriW->id }}" {{ $butiranKlien->negeri_waris == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -970,13 +962,13 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+                                    <select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih" disabled>
                                         <option>Pilih hubungan waris</option>
-                                        <option value="IBU" {{ $keluarga->hubungan_waris == 'IBU' ? 'selected' : '' }}>IBU</option>
-                                        <option value="BAPA" {{ $keluarga->hubungan_waris == 'BAPA' ? 'selected' : '' }}>BAPA</option>
-                                        <option value="PENJAGA" {{ $keluarga->hubungan_waris == 'PENJAGA' ? 'selected' : '' }}>PENJAGA</option>
-                                        <option value="SAUDARA KANDUNG" {{ $keluarga->hubungan_waris == 'SAUDARA KANDUNG' ? 'selected' : '' }}>SAUDARA KANDUNG</option>
-                                        <option value="LAIN-LAIN" {{ $keluarga->hubungan_waris == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                        <option value="IBU" {{ $butiranKlien->hubungan_waris == 'IBU' ? 'selected' : '' }}>IBU</option>
+                                        <option value="BAPA" {{ $butiranKlien->hubungan_waris == 'BAPA' ? 'selected' : '' }}>BAPA</option>
+                                        <option value="PENJAGA" {{ $butiranKlien->hubungan_waris == 'PENJAGA' ? 'selected' : '' }}>PENJAGA</option>
+                                        <option value="SAUDARA KANDUNG" {{ $butiranKlien->hubungan_waris == 'SAUDARA KANDUNG' ? 'selected' : '' }}>SAUDARA KANDUNG</option>
+                                        <option value="LAIN-LAIN" {{ $butiranKlien->hubungan_waris == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -993,7 +985,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{$keluarga->nama_pasangan}}" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{$butiranKlien->nama_pasangan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1016,7 +1008,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{$keluarga->no_tel_pasangan}}" maxlength="11"/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{$butiranKlien->no_tel_pasangan}}" maxlength="11" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1032,7 +1024,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan">{{$keluarga->alamat_pasangan}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan" readonly>{{$butiranKlien->alamat_pasangan}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1049,7 +1041,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{$keluarga->poskod_pasangan}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{$butiranKlien->poskod_pasangan}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -1067,10 +1059,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih daerah</option>
                                             @foreach ($daerahPasangan as $daerahP)
-                                                <option value="{{ $daerahP->id }}" {{ $keluarga->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
+                                                <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -1090,10 +1082,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih negeri</option>
                                             @foreach ($negeriPasangan as $negeriP)
-                                                <option value="{{ $negeriP->id }}" {{ $keluarga->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->daerah }}</option>
+                                                <option value="{{ $negeriP->id }}" {{ $butiranKlien->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -1112,7 +1104,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan">{{$keluarga->alamat_kerja_pasangan}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan" readonly>{{$butiranKlien->alamat_kerja_pasangan}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1130,7 +1122,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{$keluarga->poskod_kerja_pasangan}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{$butiranKlien->poskod_kerja_pasangan}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -1148,10 +1140,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih daerah</option>
                                             @foreach ($daerahKerjaPasangan as $daerahKP)
-                                                <option value="{{ $daerahKP->id }}" {{ $keluarga->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
+                                                <option value="{{ $daerahKP->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -1171,10 +1163,10 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih negeri</option>
                                             @foreach ($negeriKerjaPasangan as $negeriKP)
-                                                <option value="{{ $negeriKP->id }}" {{ $keluarga->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
+                                                <option value="{{ $negeriKP->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -1188,11 +1180,11 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-label">Muat Turun</span>
                                             <span class="indicator-progress">Sila tunggu...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>

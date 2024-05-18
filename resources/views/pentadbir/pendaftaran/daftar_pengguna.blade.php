@@ -58,9 +58,10 @@
 					<!--begin::Card header-->
 					<div class="card-header border-0 pt-6">
 						<!--begin::Card title-->
-						<div class="card-title">
-                            Senarai Pengguna
+						<div class="header p-0 m-0">
+                            <h2>Senarai Keseluruhan Pengguna Sistem AADK<br><small>Sila klik pada butang "Tambah Pengguna" untuk mendaftarkan pengguna baharu.</small></h2>	
 						</div>
+						
 						<!--begin::Card title-->
 
 						<!--begin::Card toolbar-->
@@ -81,8 +82,7 @@
 					{{-- <div class="card-body pt-0"> --}}
                     <div class="body">
 						<!--begin::Table-->
-						<div class="table-responsive">
-							{{-- <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table"> --}}
+						{{-- <div class="table-responsive"> --}}
                             <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
@@ -274,7 +274,7 @@
                                     @endforeach
 								</tbody>
 							</table>
-						</div>
+						{{-- </div> --}}
 						<!--end::Table-->
 					</div>
 					<!--end::Card body-->
