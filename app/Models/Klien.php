@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Klien extends Model
+{
+    use HasFactory;
+
+    protected $table = 'klien';
+
+    protected $fillable = [
+        'no_kp',
+        'nama',
+        'no_tel',
+        'emel',
+        'alamat_rumah',
+        'poskod',
+        'daerah',
+        'negeri',
+        'jantina',
+        'agama',
+        'bangsa',
+        'tarikh_tamat_pengawasan',
+    ];
+}

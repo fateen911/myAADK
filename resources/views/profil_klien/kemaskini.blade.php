@@ -1,6 +1,35 @@
 @extends('layouts._default')
 
 @section('content')
+<head>
+    <style>
+        /* Flexbox settings for the wrapper */
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Flexbox settings for the tab content container */
+        .tab-pane {
+            display: flex;
+            justify-content: center;
+            align-items: start; /* Change to 'center' if you want vertical centering */
+            min-height: 100vh; /* Ensure it takes full viewport height if needed */
+        }
+
+        /* Centered form settings */
+        .centered-form {
+            width: 100%;
+            padding-left: 120px; /* Add some padding for better appearance */
+            box-sizing: border-box; /* Ensure padding doesn't increase form size */
+            flex-direction: column;
+            align-items: center; /* Center contents horizontally */
+        }
+    </style>
+</head>
+
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
     <!--begin::Title-->
@@ -97,8 +126,10 @@
                 <div class="tab-content" id="myTabContent">
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
+                    {{-- <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> --}}
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form" action="#">
+                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
+                        {{-- <form id="kt_ecommerce_settings_general_form" class="form" action="#"> --}}
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
@@ -108,14 +139,14 @@
                             <!--end::Heading-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nama Penuh</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="nama" name="nama" value=""/>
                                     <!--end::Input-->
@@ -124,7 +155,7 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nombor Kad Pengenalan</span>
@@ -138,7 +169,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" maxlength="12" id="no_kp" name="no_kp" value="" />
                                     <!--end::Input-->
@@ -147,7 +178,7 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nombor Telefon</span>
@@ -161,7 +192,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="" data-kt-ecommerce-settings-type="tagify" />
                                     <!--end::Input-->
@@ -170,7 +201,7 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Alamat E-mel</span>
@@ -184,7 +215,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="emel" name="emel" value=""/>
                                     <!--end::Input-->
@@ -193,14 +224,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Alamat Rumah</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah"></textarea>
                                     <!--end::Input-->
@@ -209,14 +240,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Poskod</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="" />
@@ -227,22 +258,21 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Daerah</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                             <option>Pilih daerah</option>
-                                            <option value="Default">Default</option>
-                                            <option value="Minimalist">Minimalist</option>
-                                            <option value="Dark">Dark</option>
-                                            <option value="High_Contrast">High Contrast</option>
+                                            @foreach ($daerah as $daerah)
+                                                <option value="{{$daerah->id}}">{{ $daerah->daerah}}</option>
+                                            @endforeach
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -251,22 +281,21 @@
                             <!--end::Input group-->
                              <!--begin::Input group-->
                              <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Negeri</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                             <option>Pilih negeri</option>
-                                            <option value="Default">Default</option>
-                                            <option value="Minimalist">Minimalist</option>
-                                            <option value="Dark">Dark</option>
-                                            <option value="High_Contrast">High Contrast</option>
+                                            @foreach ($negeri as $negeri)
+                                                <option value="{{$negeri->id}}">{{ $negeri->negeri}}</option>
+                                            @endforeach
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -275,14 +304,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Jantina</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" data-placeholder="Pilih jantina">
@@ -297,14 +326,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Agama</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama">
@@ -324,14 +353,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Bangsa</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa">
@@ -349,7 +378,7 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Tarikh Tamat Pengawasan</span>
@@ -363,9 +392,9 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat" name="tarikh_tamat" value=""/>
+                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat_pengawasan" name="tarikh_tamat_pengawasan" value=""/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -377,7 +406,7 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
@@ -399,7 +428,7 @@
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_customers" class="form" action="#">
+                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
@@ -410,11 +439,11 @@
                     
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Pekerjaan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Jawatan pekerjaan">
+                                        <span class="ms-1" data-bs-toggle="tooltip" title="Jawatan pekerjaan / Status pekerjaan">
                                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -424,7 +453,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="pekerjaan" name="pekerjaan" value="" />
                                     <!--end::Input-->
@@ -433,10 +462,10 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Pendapatan (RM)</span>
+                                        <span>Pendapatan (RM)</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
                                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -447,7 +476,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="" />
                                     <!--end::Input-->
@@ -456,21 +485,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Bidang Perkerjaan </span>
-                                        {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Set the max number of login attempts before the customer account is locked for 1 hour.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span> --}}
+                                        <span>Bidang Perkerjaan </span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="" />
                                     <!--end::Input-->
@@ -479,21 +501,14 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Alamat Tempat Bekerja</span>
-                                        {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Set the max number of login attempts before the customer account is locked for 1 hour.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span> --}}
+                                        <span>Alamat Tempat Bekerja</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja"></textarea>
                                     <!--end::Input-->
@@ -502,14 +517,81 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nama Majikan</span>
+                                        <span>Poskod</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" placeholder="" value="" />
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Daerah</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                {{-- @php
+                                    dd($daerah);
+                                @endphp --}}
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <option>Pilih daerah</option>
+                                            @foreach ($daerahKerja as $daerahK)
+                                                <option value="{{ $daerahK->id }}">{{ $daerahK->daerah }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Negeri Tempat Bekerja</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <option>Pilih negeri</option>
+                                            @foreach ($negeriKerja as $negeriK)
+                                                <option value="{{$negeriK->id}}">{{ $negeriK->negeri}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Nama Majikan</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="" />
                                     <!--end::Input-->
@@ -518,10 +600,10 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nombor Telefon Majikan</span>
+                                        <span>Nombor Telefon Majikan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -532,9 +614,9 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="" />
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="" maxlength="11"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -545,7 +627,7 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
@@ -580,7 +662,7 @@
                                 <div class="col-md-3 text-md-end">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Store Name</span>
+                                        <span>Store Name</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Set the name of the store">
                                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -742,7 +824,7 @@
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_localization" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_localization" class="form" action="#">
+                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
@@ -753,39 +835,23 @@
                             
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nama Waris</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="" />
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Alamat Waris</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris"></textarea>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nombor Telefon Waris</span>
@@ -799,7 +865,7 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="" maxlength="11"/>
                                     <!--end::Input-->
@@ -808,14 +874,116 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nama Pasangan</span>
+                                        <span class="required">Alamat Waris</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris"></textarea>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Poskod</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_waris" name="poskod_waris" placeholder="" value="" />
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Daerah</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="daerah_waris" name="daerah_waris" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <option>Pilih daerah</option>
+                                            @foreach ($daerahWaris as $daerahW)
+                                                <option value="{{$daerahW->id}}">{{ $daerahW->daerah}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Negeri</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="negeri_waris" name="negeri_waris" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <option>Pilih negeri</option>
+                                            @foreach ($negeriWaris as $negeriW)
+                                                <option value="{{$negeriW->id}}">{{ $negeriW->negeri}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Hubungan Waris</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih">
+                                        <option>Pilih hubungan waris</option>
+                                            <option value="Ibu">Ibu</option>
+                                            <option value="Bapa">Bapa</option>
+                                            <option value="Penjaga">Penjaga</option>
+                                            <option value="Saudara Kandung">Saudara Kandung</option>
+                                            <option value="Lain Lain">Lain Lain</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <br>
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Nama Pasangan</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="" />
                                     <!--end::Input-->
@@ -824,26 +992,10 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Alamat Pasangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan"></textarea>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nombor Telefon Pasangan</span>
+                                        <span>Nombor Telefon Pasangan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -854,26 +1006,171 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="" maxlength="11"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Alamat Tempat Bekerja Pasangan</span>
+                                        <span>Alamat Pasangan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan"></textarea>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Poskod</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" placeholder="" value="" />
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Daerah</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <option>Pilih daerah</option>
+                                            @foreach ($daerahPasangan as $daerahP)
+                                                <option value="{{$daerahP->id}}">{{ $daerahP->daerah}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Negeri</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <option>Pilih negeri</option>
+                                            @foreach ($negeriPasangan as $negeriP)
+                                                <option value="{{$negeriP->id}}">{{ $negeriP->negeri}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Alamat Tempat Pasangan Bekerja</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
                                     <!--begin::Input-->
                                     <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan"></textarea>
                                     <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Poskod</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" placeholder="" value="" />
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Daerah</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <option>Pilih daerah</option>
+                                            @foreach ($daerahKerjaPasangan as $daerahKP)
+                                                <option value="{{$daerahKP->id}}">{{ $daerahKP->daerah}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Negeri</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <option>Pilih negeri</option>
+                                            @foreach ($negeriKerjaPasangan as $negeriKP)
+                                                <option value="{{$negeriKP->id}}">{{ $negeriKP->negeri}}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -883,7 +1180,7 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
@@ -1180,4 +1477,12 @@
     <!--end::Content container-->
 </div>
 <!--end::Content-->
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+		$('.js-example-basic-single').select2();
+	});
+</script>
 @endsection
