@@ -133,8 +133,8 @@
                     <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                     {{-- <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> --}}
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
-                        {{-- <form id="kt_ecommerce_settings_general_form" class="form" action="#"> --}}
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('kemaskini.maklumat.peribadi.klien', ['id' => $klien->id]) }}">
+                        @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
@@ -436,7 +436,8 @@
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('kemaskini.maklumat.pekerjaan.klien', ['id' => $klien->id]) }}">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
@@ -832,7 +833,8 @@
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_localization" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('kemaskini.maklumat.keluarga.klien', ['id' => $klien->id]) }}">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">

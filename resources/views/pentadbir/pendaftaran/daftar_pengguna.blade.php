@@ -62,8 +62,6 @@
                             <h2>Senarai Keseluruhan Pengguna Sistem AADK<br><small>Sila klik pada butang "Tambah Pengguna" untuk mendaftarkan pengguna baharu.</small></h2>	
 						</div>
 						
-						<!--begin::Card title-->
-
 						<!--begin::Card toolbar-->
 						<div class="card-toolbar">
 							<!--begin::Toolbar-->
@@ -79,7 +77,6 @@
 					<!--end::Card header-->
 
 					<!--begin::Card body-->
-					{{-- <div class="card-body pt-0"> --}}
                     <div class="body">
 						<!--begin::Table-->
 						{{-- <div class="table-responsive"> --}}

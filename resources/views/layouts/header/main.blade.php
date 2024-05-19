@@ -62,27 +62,6 @@
                                         {{ substr(Auth::user()->name,0,1) }}
                                     </div>
                                 </div>
-                                {{-- @php
-                                    $nama = DB::table('smoku')->where('nokp', Auth::user()->no_kp)->value('nama');
-                                    $nama2 = Auth::user()->nama;
-                                @endphp
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-50px me-5">
-                                    @if($nama2)
-                                        <div class="symbol-label fs-3 bg-light-primary text-primary">
-                                            {{ substr($nama2,0,1) }}
-                                        </div>
-                                    @elseif($nama)
-                                        <div class="symbol-label fs-3 bg-light-primary text-primary">
-                                            {{ substr($nama,0,1) }}
-                                        </div>
-                                    @else
-                                        <div class="symbol-label fs-3 bg-light-primary text-primary">
-                                            {{ substr(Auth::user()->email,0,1) }}
-                                        </div>
-                                    @endif
-                                </div> --}}
-                                <!--end::Avatar-->
                     
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
