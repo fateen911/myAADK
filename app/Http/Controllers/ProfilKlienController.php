@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 use App\Models\User;
 use App\Models\Daerah;
 use App\Models\KeluargaKlien;
 use App\Models\Negeri;
 use App\Models\Klien;
 use App\Models\PekerjaanKlien;
+
 
 class ProfilKlienController extends Controller
 {
@@ -141,5 +144,18 @@ class ProfilKlienController extends Controller
             ->first();
 
         return view('profil_klien.klien.view',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','butiranKlien'));
+    }
+
+    public function muatTurunProfilDiri()
+    {
+        $klien_id = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+
+        $klien = Klien::where('id',$klien_id)->first();
+        $pekerjaan = PekerjaanKlien::where('id',$klien_id)->first();
+        $keluarga = KeluargaKlien::where('id',$klien_id)->first();
+
+        $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','keluarga'));
+
+        return $pdf->stream('profil-peribadi.pdf');
     }
 }

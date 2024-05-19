@@ -35,9 +35,10 @@ Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->mid
 Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
 Route::post('/kemaskini/maklumat/pekerjaan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPekerjaanKlien'])->middleware('auth')->name('kemaskini.maklumat.pekerjaan.klien');
-Route::post('/kemaskini/maklumat/keluarga-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatKeluargaKlien'])->middleware('auth')->name('kemaskini.maklumat.keluarga.klien');
+Route::post('/kemaskini/maklumat/keluarga-klien', [ProfilKlienController::class, 'kemaskiniMaklumatKeluargaKlien'])->middleware('auth')->name('kemaskini.maklumat.keluarga.klien');
 
 // KLIEN - PENGURUSAN PROFIL 
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
+Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
 
 require __DIR__.'/auth.php';

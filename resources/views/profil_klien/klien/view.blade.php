@@ -2,6 +2,8 @@
 
 @section('content')
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /* Flexbox settings for the wrapper */
         .form-wrapper {
@@ -30,30 +32,41 @@
     </style>
 </head>
 
-<!--begin::Page title-->
-<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
-    <!--begin::Title-->
-    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
-    <!--end::Title-->
-    <!--begin::Breadcrumb-->
-    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">
-            <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pengurusan</a>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Lihat Profil Peribadi</li>
-        <!--end::Item-->
-    </ul>
-    <!--end::Breadcrumb-->
+<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+    <!--begin::Page title-->
+    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
+        <!--begin::Title-->
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
+        <!--end::Title-->
+        <!--begin::Breadcrumb-->
+        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-muted">
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pengurusan</a>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <!--end::Item-->
+            <!--begin::Item-->
+            <li class="breadcrumb-item text-muted">Lihat Profil Peribadi</li>
+            <!--end::Item-->
+        </ul>
+        <!--end::Breadcrumb-->
+    </div>
+    <!--end::Page title-->
+    <!--begin::Actions-->
+    <div class="d-flex align-items-center gap-2 gap-lg-3">
+        <!--begin::primary button-->
+        <a href="{{ route('export.profil.diri') }}" class="btn btn-sm fw-bold btn-primary">
+            <i class="fas fa-download"></i> Muat Turun
+        </a>
+        <!--end::primary button-->
+    </div>    
+    <!--end::Actions-->
 </div>
-<!--end::Page title-->
     
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -133,7 +146,7 @@
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Kemaskini Maklumat Peribadi</h2>
+                                    <h2>Maklumat Peribadi</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -400,25 +413,6 @@
                             </div>
                             <!--end::Input group-->
 
-
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Muat Turun</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -432,7 +426,7 @@
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Kemaskini Maklumat Pekerjaan</h2>
+                                    <h2>Maklumat Pekerjaan</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -621,25 +615,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Muat Turun</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -828,7 +803,7 @@
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Kemaskini Maklumat Keluarga</h2>
+                                    <h2>Maklumat Keluarga</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -1174,25 +1149,7 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button> --}}
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Muat Turun</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
+                        
                         </form>
                         <!--end::Form-->
                     </div>
