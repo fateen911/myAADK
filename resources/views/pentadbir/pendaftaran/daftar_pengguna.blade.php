@@ -283,7 +283,7 @@
 							<!--begin::Modal content-->
 							<div class="modal-content">
 								<!--begin::Form-->
-								<form class="form" action="{{ route('daftar-pengguna') }}" id="kt_modal_add_customer_form" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
+								<form class="form" action="{{ route('daftar-pengguna') }}" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
 									@csrf
 									<!--begin::Modal header-->
 									<div class="modal-header" id="kt_modal_add_customer_header">
@@ -300,6 +300,7 @@
 										<!--end::Close-->
 									</div>
 									<!--end::Modal header-->
+
 									<!--begin::Modal body-->
 									<div class="modal-body py-10 px-lg-17">
 										<!--begin::Scroll-->
@@ -310,7 +311,7 @@
 												<label class="fs-6 fw-semibold mb-2">Nama</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text" class="form-control form-control-solid" placeholder="" name="name"/>
+												<input type="text" class="form-control form-control-solid" placeholder="" id="name" name="name"/>
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -320,7 +321,7 @@
 												<label class="fs-6 fw-semibold mb-2">Emel</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="" />
+												<input type="email" class="form-control form-control-solid" placeholder="" id="email" name="email" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->
@@ -330,7 +331,7 @@
 												<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" />
+												<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="no_kp" name="no_kp" />
 												<!--end::Input-->
 											</div>
 											<!--end::Input group-->

@@ -13,7 +13,7 @@
             font-size: 30px;  /* Adjust the font size as needed */
             margin-left: 10px;  /* Adjust the space between the logo and the text */
             padding-top: 5px;
-            color: maroon;  /* Optional: Set the text color */
+            color: lightgray;  /* Optional: Set the text color */
             font-weight: bold;  /* Optional: Make the text bold */
         }
 

@@ -42,6 +42,8 @@ class PentadbirController extends Controller
 
     public function daftarPengguna(Request $request)
     {
+        // dd($request->all());
+
         $userData = [
                         'name' => strtoupper($request->name),
                         'no_kp' => $request->no_kp,

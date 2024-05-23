@@ -47496,9 +47496,9 @@ body[data-kt-sticky-landing-header=on] {
 [data-bs-theme=light] {
   --bs-app-bg-color: #fcfcfc;
   --bs-app-blank-bg-color: #fcfcfc;
-  --bs-app-header-base-bg-color: #b4b4c1;
+  --bs-app-header-base-bg-color: #D8D9DA;
   --bs-app-header-base-box-shadow: none;
-  --bs-app-header-minimize-bg-color: #b4b4c1;
+  --bs-app-header-minimize-bg-color: #D8D9DA;
   --bs-app-header-minimize-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
   --bs-app-toolbar-base-bg-color: #ffffff;
   --bs-app-toolbar-base-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
@@ -49400,7 +49400,7 @@ body,
   }
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar {
-  background-color: #2d2d5d;
+  background-color: #363062;
   border-right: 0;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .scroll-y,
@@ -49417,18 +49417,18 @@ body,
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .scroll-y:hover,
 [data-kt-app-layout=dark-sidebar] .app-sidebar .hover-scroll-overlay-y:hover {
-  scrollbar-color: #3e3e4b transparent;
+  scrollbar-color: #46598c transparent;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .scroll-y:hover::-webkit-scrollbar-thumb,
 [data-kt-app-layout=dark-sidebar] .app-sidebar .hover-scroll-overlay-y:hover::-webkit-scrollbar-thumb {
-  background-color: #3e3e4b;
+  background-color: #46598c;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .scroll-y:hover::-webkit-scrollbar-corner,
 [data-kt-app-layout=dark-sidebar] .app-sidebar .hover-scroll-overlay-y:hover::-webkit-scrollbar-corner {
   background-color: transparent;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .app-sidebar-logo {
-  border-bottom: 1px dashed #393945;
+  border-bottom: 1px dashed #435585;
 }
 [data-kt-app-layout=dark-sidebar] .app-sidebar .btn-custom {
   color: #B5B5C3;
@@ -49627,11 +49627,11 @@ body,
 
 @media (min-width: 992px) {
   [data-kt-app-layout=dark-sidebar] .app-sidebar .menu-sub-lg-dropdown {
-    background-color: #2d2d5d;
+    background-color: #363062;
   }
 }
 [data-bs-theme=dark] [data-kt-app-layout=dark-sidebar] .app-sidebar {
-  border-right: 1px dashed #393945;
+  border-right: 1px dashed #435585;
 }
 
 [data-kt-app-layout=light-sidebar] .app-sidebar {
