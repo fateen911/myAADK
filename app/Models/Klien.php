@@ -23,6 +23,6 @@ class Klien extends Model
         'jantina',
         'agama',
         'bangsa',
-        'tarikh_tamat_pengawasan',
+        'tahap_pendidikan',
     ];
 }

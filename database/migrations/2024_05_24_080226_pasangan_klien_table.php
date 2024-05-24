@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('keluarga_klien', function (Blueprint $table) {
+        Schema::create('pasangan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('nama_waris');
-            $table->string('no_tel_waris');
-            $table->string('alamat_waris');
-            $table->integer('poskod_waris');
-            $table->string('daerah_waris');
-            $table->string('negeri_waris');
-            $table->string('hubungan_waris');
+            $table->string('status_perkahwinan');
             $table->string('nama_pasangan');
             $table->integer('alamat_pasangan');
             $table->integer('poskod_pasangan');
@@ -40,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('keluarga_klien');
+        Schema::dropIfExists('pasangan_klien');
     }
 };

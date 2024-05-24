@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('jantina');
             $table->string('agama');
             $table->string('bangsa');
-            $table->date('tarikh_tamat_pengawasan');
+            $table->string('tahap_pendidikan');
             $table->timestamps();
         });
     }

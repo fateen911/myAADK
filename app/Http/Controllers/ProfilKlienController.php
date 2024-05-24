@@ -11,8 +11,10 @@ use App\Models\Daerah;
 use App\Models\KeluargaKlien;
 use App\Models\Negeri;
 use App\Models\Klien;
+use App\Models\PasanganKlien;
 use App\Models\PekerjaanKlien;
-
+use App\Models\RawatanKlien;
+use App\Models\WarisKlien;
 
 class ProfilKlienController extends Controller
 {
@@ -39,9 +41,11 @@ class ProfilKlienController extends Controller
 
         $klien = Klien::where('id', $id)->first();
         $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
-        $keluarga = KeluargaKlien::where('klien_id', $id)->first();
+        $waris = WarisKlien::where('klien_id',$id)->first();
+        $pasangan = PasanganKlien::where('klien_id',$id)->first();
+        $rawatan = RawatanKlien::where('klien_id',$id)->first();
 
-        return view('profil_klien.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','klien','pekerjaan','keluarga'));
+        return view('profil_klien.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','klien','pekerjaan','waris','pasangan','rawatan'));
     }
 
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
@@ -89,12 +93,12 @@ class ProfilKlienController extends Controller
         }
     }
 
-    public function kemaskiniMaklumatKeluargaKlien(Request $request, $id)
+    public function kemaskiniMaklumatWarisKlien(Request $request, $id)
     {
-        $klien = KeluargaKlien::where('klien_id',$id)->first();
+        $waris = WarisKlien::where('id',$id)->first();
 
-        if ($klien) {
-            $klien->update([
+        if ($waris) {
+            $waris->update([
                 'nama_waris' => $request->nama_waris,
                 'no_tel_waris' => $request->no_tel_waris,
                 'alamat_waris' => $request->alamat_waris,
@@ -102,6 +106,23 @@ class ProfilKlienController extends Controller
                 'daerah_waris' => $request->daerah_waris,
                 'negeri_waris' => $request->negeri_waris,
                 'hubungan_waris' => $request->hubungan_waris,
+            ]);
+    
+            return redirect()->back()->with('success', 'Maklumat waris klien berjaya dikemaskini.');
+        } 
+        else {
+            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+        }
+    }
+
+    public function kemaskiniMaklumatPasanganKlien(Request $request, $id)
+    {
+        $pasangan = PasanganKlien::where('id',$id)->first();
+
+        if ($pasangan) {
+            $pasangan->update([
+                'status_perkahwinan' => $request->status_perkahwinan,
+                'nama_pasangan' => $request->nama_pasangan,
                 'no_tel_pasangan' => $request->no_tel_pasangan,
                 'alamat_pasangan' => $request->alamat_pasangan,
                 'poskod_pasangan' => $request->poskod_pasangan,
@@ -113,7 +134,27 @@ class ProfilKlienController extends Controller
                 'negeri_kerja_pasangan' => $request->negeri_kerja_pasangan,
             ]);
     
-            return redirect()->back()->with('success', 'Maklumat profil berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Maklumat pasangan klien berjaya dikemaskini.');
+        } 
+        else {
+            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+        }
+    }
+
+    public function kemaskiniMaklumatRawatanKlien(Request $request, $id)
+    {
+        $rawatan = RawatanKlien::where('id',$id)->first();
+
+        if ($rawatan) {
+            $rawatan->update([
+                'status_kesihatan_mental' => $request->status_kesihatan_mental,
+                'status_oku' => $request->status_oku,
+                'seksyen_okp' => $request->seksyen_okp,
+                'tarikh_tamat_pengawasan' => $request->tarikh_tamat_pengawasan,
+                'skor_ccri' => $request->skor_ccri,
+            ]);
+    
+            return redirect()->back()->with('success', 'Maklumat rawatan dan pemulihan klien berjaya dikemaskini.');
         } 
         else {
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
@@ -152,9 +193,11 @@ class ProfilKlienController extends Controller
 
         $klien = Klien::where('id',$klien_id)->first();
         $pekerjaan = PekerjaanKlien::where('id',$klien_id)->first();
-        $keluarga = KeluargaKlien::where('id',$klien_id)->first();
+        $waris = WarisKlien::where('id',$klien_id)->first();
+        $pasangan = PasanganKlien::where('id',$klien_id)->first();
+        $rawatan = RawatanKlien::where('id',$klien_id)->first();
 
-        $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','keluarga'));
+        $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
 
         return $pdf->stream('profil-peribadi.pdf');
     }
