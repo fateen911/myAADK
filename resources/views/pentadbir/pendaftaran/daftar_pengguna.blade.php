@@ -79,199 +79,272 @@
 					<!--begin::Card body-->
                     <div class="body">
 						<!--begin::Table-->
-						{{-- <div class="table-responsive"> --}}
-                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
-								<thead>
-									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-175px">Nama</th>
-                                        <th class="min-w-125px">No. Kad Pengenalan</th>
-                                        <th class="min-w-125px">Emel</th>
-                                        <th class="min-w-125px">Peranan</th>
-                                        <th class="min-w-125px">Tarikh Daftar</th>
-                                        <th class="min-w-75px">Tindakan</th>
-									</tr>
-								</thead>
-								<tbody class="fw-semibold text-gray-600">
-									@foreach ($user as $user)
-                                        @php
-                                            $text = ucwords(strtolower($user->name)); // Assuming you're sending the text as a POST parameter
-                                            $conjunctions = ['bin', 'binti'];
-                                            $words = explode(' ', $text);
-                                            $result = [];
-                                            foreach ($words as $word) {
-                                                if (in_array(Str::lower($word), $conjunctions)) {
-                                                    $result[] = Str::lower($word);
-                                                } else {
-                                                    $result[] = $word;
-                                                }
-                                            }
-                                            $nama_user = implode(' ', $result);
+						<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+							<thead>
+								<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+									<th class="min-w-175px">Nama</th>
+									<th class="min-w-125px">No. Kad Pengenalan</th>
+									<th class="min-w-125px">Emel</th>
+									<th class="min-w-125px">Peranan</th>
+									<th class="min-w-125px">Tarikh Daftar</th>
+									<th class="min-w-75px">Tindakan</th>
+								</tr>
+							</thead>
+							<tbody class="fw-semibold text-gray-600">
+								@foreach ($user as $user)
+									@php
+										$text = ucwords(strtolower($user->name)); // Assuming you're sending the text as a POST parameter
+										$conjunctions = ['bin', 'binti'];
+										$words = explode(' ', $text);
+										$result = [];
+										foreach ($words as $word) {
+											if (in_array(Str::lower($word), $conjunctions)) {
+												$result[] = Str::lower($word);
+											} else {
+												$result[] = $word;
+											}
+										}
+										$nama_user = implode(' ', $result);
 
-                                            $peranan = DB::table('tahap_pengguna')->where('id', $user['tahap_pengguna'])->value('jawatan');
-                                        @endphp
+										$peranan = DB::table('tahap_pengguna')->where('id', $user['tahap_pengguna'])->value('jawatan');
+									@endphp
 
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->no_kp }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $peranan }}</td>
-                                            <td>{{ $user->created_at->format('d/m/Y h:i:sa') }}</td>
-                                            <td>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->id}}">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-                                                            <i class="ki-duotone bi bi-pencil fs-3"></i>
-                                                        </span>
-                                                    </a>
-                                                </div>                                                
-                                            </td>
+									<tr>
+										<td>{{ $user->name }}</td>
+										<td>{{ $user->no_kp }}</td>
+										<td>{{ $user->email }}</td>
+										<td>{{ $peranan }}</td>
+										<td>{{ $user->created_at->format('d/m/Y h:i:sa') }}</td>
+										<td>
+											<div class="d-flex justify-content-center align-items-center">
+												<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user->id}}">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+														<i class="ki-duotone bi bi-pencil fs-3"></i>
+													</span>
+												</a>
+											</div>                                                
+										</td>
 
-                                            <!--begin::Modal - Customers - Edit-->
-											<div class="modal fade" id="kt_modal_new_card{{$user->id}}" tabindex="-1" aria-hidden="true">
-												<!--begin::Modal dialog-->
-												<div class="modal-dialog modal-dialog-centered mw-650px">
-													<!--begin::Modal content-->
-													<div class="modal-content">
-														<!--begin::Modal header-->
-														<div class="modal-header">
-															<!--begin::Modal title-->
-															<h2>Kemaskini Maklumat</h2>
-															<!--end::Modal title-->
-															<!--begin::Close-->
-															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-																<i class="ki-duotone ki-cross fs-1">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>
-															</div>
-															<!--end::Close-->
+										<!--begin::Modal - Customers - Edit-->
+										<div class="modal fade" id="kt_modal_new_card{{$user->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal dialog-->
+											<div class="modal-dialog modal-dialog-centered mw-650px">
+												<!--begin::Modal content-->
+												<div class="modal-content">
+													<!--begin::Modal header-->
+													<div class="modal-header">
+														<!--begin::Modal title-->
+														<h2>Kemaskini Maklumat</h2>
+														<!--end::Modal title-->
+														<!--begin::Close-->
+														<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+															<i class="ki-duotone ki-cross fs-1">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
 														</div>
-														<!--end::Modal header-->
-
-														<!--begin::Modal body-->
-														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
-																@csrf
-
-                                                                <input type="hidden" name="id" value="{{ $user->id }}">
-																<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Nama</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user->name}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Emel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user->email}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
-                                                                            @foreach ($tahap->sortBy('jawatan') as $tahap1)
-                                                                                <option value="{{$tahap1->id}}" {{$user->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
-                                                                            @endforeach
-																		</select>
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-
-																	{{-- @if ($user->tahap =='2' || $user->tahap =='6')
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7" id="div_ipt">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Nama Pusat Pengajian</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<select name="id_institusi" id="id_institusi" class="form-select form-select-solid js-example-basic-single" data-placeholder="Pilih">
-																			@foreach ($infoipt as $infoipt2)
-																			<option value="{{ $infoipt2->id_institusi}}" {{$user->id_institusi == $infoipt2->id_institusi ? 'selected' : ''}}>{{ strtoupper($infoipt2->nama_institusi)}}</option>
-																			@endforeach
-																		</select>
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	@endif --}}
-																	
-
-																	{{-- @if ($user->tahap !='1')
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Jawatan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="jawatan" value="{{$user->jawatan}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	@endif --}}
-
-																	<!--begin::Input group-->
-																	{{-- <div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Status</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<select name="status" id="status" class="form-select form-select-solid"  data-placeholder="Pilih">
-																			<option value="1" {{$user->status == 1  ? 'selected' : ''}}>AKTIF</option>
-																			<option value="0" {{$user->status == 0  ? 'selected' : ''}}>TIDAK AKTIF</option>
-																		</select>
-																		<!--end::Input-->
-																	</div> --}}
-																	<!--end::Input group-->
-																</div>
-																<!--end::Scroll-->
-
-																<!--begin::Actions-->
-																<div class="text-center pt-15">
-																	<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-																		<span class="indicator-label">Simpan</span>
-																		<span class="indicator-progress">Sila tunggu...
-																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-																	</button>
-																</div>
-																<!--end::Actions-->
-															</form>
-															<!--end::Form-->
-														</div>
-														<!--end::Modal body-->
+														<!--end::Close-->
 													</div>
-													<!--end::Modal content-->
+													<!--end::Modal header-->
+
+													<!--begin::Modal body-->
+													<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+														<!--begin::Form-->
+														<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
+															@csrf
+
+															<input type="hidden" name="id" value="{{ $user->id }}">
+															<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Nama</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user->name}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Emel</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user->email}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<div class="input-group">
+																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user->id}}" name="password" />
+																		<button type="button" class="btn btn-secondary" onclick="generatePassword('password{{$user->id}}')">Jana Kata Laluan</button>
+																	</div>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Peranan</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																		@foreach ($tahap->sortBy('jawatan') as $tahap1)
+																			<option value="{{$tahap1->id}}" {{$user->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
+																		@endforeach
+																	</select>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+															</div>
+															<!--end::Scroll-->
+
+															<!--begin::Actions-->
+															<div class="text-center pt-15">
+																<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+																	<span class="indicator-label">Simpan</span>
+																	<span class="indicator-progress">Sila tunggu...
+																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																</button>
+															</div>
+															<!--end::Actions-->
+														</form>
+														<!--end::Form-->
+													</div>
+													<!--end::Modal body-->
 												</div>
-												<!--end::Modal dialog-->
+												<!--end::Modal content-->
 											</div>
-										    <!--end::Modal - Customers - Edit-->
-                                        </tr>
-                                    @endforeach
-								</tbody>
-							</table>
-						{{-- </div> --}}
+											<!--end::Modal dialog-->
+										</div>
+										<!--end::Modal - Customers - Edit-->
+
+										<!--begin::Modal - Customers - Edit-->
+										{{-- <div class="modal fade" id="kt_modal_new_card{{$user->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal dialog-->
+											<div class="modal-dialog modal-dialog-centered mw-650px">
+												<!--begin::Modal content-->
+												<div class="modal-content">
+													<!--begin::Modal header-->
+													<div class="modal-header">
+														<!--begin::Modal title-->
+														<h2>Kemaskini Maklumat</h2>
+														<!--end::Modal title-->
+														<!--begin::Close-->
+														<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+															<i class="ki-duotone ki-cross fs-1">
+																<span class="path1"></span>
+																<span class="path2"></span>
+															</i>
+														</div>
+														<!--end::Close-->
+													</div>
+													<!--end::Modal header-->
+
+													<!--begin::Modal body-->
+													<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+														<!--begin::Form-->
+														<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
+															@csrf
+
+															<input type="hidden" name="id" value="{{ $user->id }}">
+															<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Nama</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user->name}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Emel</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user->email}}" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user->no_kp}}"/>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password" name="password" />
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+																<!--begin::Input group-->
+																<div class="fv-row mb-7">
+																	<!--begin::Label-->
+																	<label class="fs-6 fw-semibold mb-2">Peranan</label>
+																	<!--end::Label-->
+																	<!--begin::Input-->
+																	<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																		@foreach ($tahap->sortBy('jawatan') as $tahap1)
+																			<option value="{{$tahap1->id}}" {{$user->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
+																		@endforeach
+																	</select>
+																	<!--end::Input-->
+																</div>
+																<!--end::Input group-->
+															</div>
+															<!--end::Scroll-->
+
+															<!--begin::Actions-->
+															<div class="text-center pt-15">
+																<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+																	<span class="indicator-label">Simpan</span>
+																	<span class="indicator-progress">Sila tunggu...
+																	<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																</button>
+															</div>
+															<!--end::Actions-->
+														</form>
+														<!--end::Form-->
+													</div>
+													<!--end::Modal body-->
+												</div>
+												<!--end::Modal content-->
+											</div>
+											<!--end::Modal dialog-->
+										</div> --}}
+										<!--end::Modal - Customers - Edit-->
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
 						<!--end::Table-->
 					</div>
 					<!--end::Card body-->
@@ -430,14 +503,44 @@
             @endif
 
             // Check if there is a flash error message
-            @if(session('tidak'))
+            @if(session('error'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Tidak Aktif!',
-                    text: '{!! session('tidak') !!}',
+                    title: 'Tidak Berjaya!',
+                    text: '{!! session('error') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
         });
     </script>
+
+	<!-- Add this script at the end of your HTML body -->
+	<script>
+		function generatePassword(inputId) {
+			const length = 12;
+			const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			const numbers = '0123456789';
+			const symbols = '!@#$%^&*()-_+=<>?';
+			
+			const allCharacters = lowercase + uppercase + numbers + symbols;
+			let password = '';
+			
+			// Ensure the password contains at least one character from each category
+			password += lowercase[Math.floor(Math.random() * lowercase.length)];
+			password += uppercase[Math.floor(Math.random() * uppercase.length)];
+			password += numbers[Math.floor(Math.random() * numbers.length)];
+			password += symbols[Math.floor(Math.random() * symbols.length)];
+			
+			// Fill the remaining length of the password with random characters from all categories
+			for (let i = 4; i < length; i++) {
+				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
+			}
+			
+			// Shuffle the password to ensure a random order
+			password = password.split('').sort(() => 0.5 - Math.random()).join('');
+			
+			document.getElementById(inputId).value = password;
+		}
+	</script>	
 @endsection

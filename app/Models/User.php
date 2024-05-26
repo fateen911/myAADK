@@ -26,6 +26,11 @@ class User extends Authenticatable
         'status',
     ];
 
+    public function username()
+    {
+        return 'no_kp';
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

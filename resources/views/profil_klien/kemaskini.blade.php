@@ -191,7 +191,6 @@
                                 <div class="col-md-7">
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid readonly-input" id="umur" name="umur" readonly/>
-                                    {{-- <input type="text" class="form-control form-control-solid readonly-input" id="umur" name="umur" value="{{$klien->umur}}" readonly/> --}}
                                     <!--end::Input-->
                                 </div>
                             </div>

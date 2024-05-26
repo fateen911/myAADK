@@ -43,7 +43,7 @@ class DaftarPengguna extends Mailable
         return $this->subject($subject)
                     ->view('pentadbir.pendaftaran.emel_daftar_pengguna')
                     ->with([
-                        'email' => $this->email,
+                        'no_kp' => $this->no_kp,
                         'password' => $this->password,
                         // 'verificationUrl' => $verificationUrl,
                     ]);

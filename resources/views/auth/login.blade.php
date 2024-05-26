@@ -39,11 +39,11 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <!-- Email Address -->
+        <!-- No Kad Pengenalan -->
         <div>
-            <x-input-label for="email" :value="__('Emel Pengguna')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="no_kp" :value="__('No Kad Pengenalan')" />
+            <x-text-input id="no_kp" class="block mt-1 w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -60,8 +60,7 @@
                 </span>
             </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />        
         </div>
 
         <!-- Remember Me -->

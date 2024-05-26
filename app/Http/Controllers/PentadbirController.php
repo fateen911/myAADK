@@ -33,7 +33,7 @@ class PentadbirController extends Controller
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
                 'tahap_pengguna' => $request->tahap_pengguna,
-                'password' => Hash::make($request->no_kp),
+                'password' => Hash::make($request->password),
             ]);
 
             return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah ada dan telah dikemaskini.');
@@ -42,31 +42,64 @@ class PentadbirController extends Controller
 
     public function daftarPengguna(Request $request)
     {
-        // dd($request->all());
+        $user = User::where('no_kp', '=', $request->no_kp)->first();
 
-        $userData = [
-                        'name' => strtoupper($request->name),
-                        'no_kp' => $request->no_kp,
-                        'email' => $request->email,
-                        'tahap_pengguna' => $request->tahap_pengguna,
-                        'password' => Hash::make($request->no_kp),
-                        'profil_pengguna' => null,
-                        'status' => '0',
-                    ];
-        
-        $user = User::create($userData);
+        $password_length = 12;
+        $password = $this->generatePassword($password_length);
 
-        $email = $request->email;
-        $password = $request->no_kp;
-        Mail::to($email)->send(new DaftarPengguna($email, $password));
+        if ($user === null) {
+            $userData = [
+                'name' => strtoupper($request->name),
+                'no_kp' => $request->no_kp,
+                'email' => $request->email,
+                'tahap_pengguna' => $request->tahap_pengguna,
+                'password' => Hash::make($password),
+                'profil_pengguna' => null,
+                'status' => '0',
+            ];
 
-        // Redirect with a success message
-        return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
+            $user = User::create($userData);
+
+            $email = $request->email;
+            Mail::to($email)->send(new DaftarPengguna($email, $password));
+
+            // Redirect with a success message
+            return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
+        } else {
+            return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
+        }
+    }
+
+    private function generatePassword($length)
+    {
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $numbers = '0123456789';
+        $symbols = '!@#$%^&*()-_+=<>?';
+
+        $allCharacters = $lowercase . $uppercase . $numbers . $symbols;
+        $password = '';
+
+        // Ensure the password contains at least one character from each category
+        $password .= $lowercase[random_int(0, strlen($lowercase) - 1)];
+        $password .= $uppercase[random_int(0, strlen($uppercase) - 1)];
+        $password .= $numbers[random_int(0, strlen($numbers) - 1)];
+        $password .= $symbols[random_int(0, strlen($symbols) - 1)];
+
+        // Fill the remaining length of the password with random characters from all categories
+        for ($i = 4; $i < $length; $i++) {
+            $password .= $allCharacters[random_int(0, strlen($allCharacters) - 1)];
+        }
+
+        // Shuffle the password to ensure random order
+        return str_shuffle($password);
     }
 
 
     // public function daftarPengguna(Request $request)
-    // {   
+    // {
+    //     $user = User::where('no_kp', '=', $request->no_kp)->first();
+
     //     $characters = 'abcdef12345!@#$%^&';
     //     $password_length = 12;
 
@@ -75,19 +108,17 @@ class PentadbirController extends Controller
     //     for ($i = 0; $i < $password_length; $i++) {
     //         $password .= $characters[random_int(0, strlen($characters) - 1)];
     //     }
-        
-    //     $user = User::where('no_kp', '=', $request->no_kp)->first();
 
-    //     if ($user == null) 
+    //     if ($user === null)
     //     {
     //         $userData = [
     //             'name' => strtoupper($request->name),
     //             'no_kp' => $request->no_kp,
     //             'email' => $request->email,
     //             'tahap_pengguna' => $request->tahap_pengguna,
-    //             'password' => Hash::make($request->no_kp),
+    //             'password' => Hash::make($password),
     //             'profil_pengguna' => null,
-    //             'status' => '1',
+    //             'status' => '0',
     //         ];
 
     //         $user = User::create($userData);
@@ -95,22 +126,13 @@ class PentadbirController extends Controller
     //         $email = $request->email;
     //         $password = $request->no_kp;
     //         Mail::to($email)->send(new DaftarPengguna($email, $password));
-            
-    //         return response()->json(['message' => 'Emel notifikasi telah dihantar kepada ' . $request->nama]);
-    //     } 
-    //     else{
-    //         $user->update([
-    //             'name' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $request->email,
-    //             'tahap_pengguna' => $request->jawatan,
-    //             'password' => Hash::make($request->no_kp),
-    //         ]);
-            
-    //         return response()->json(['message' => 'Data pengguna ' . $request->nama . ' telah ada dan telah dikemaskini.']);
-    //     }
 
-    //     return redirect()->route('senarai-pengguna');
+    //         // Redirect with a success message
+    //         return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
+    //     }
+    //     else{
+    //         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
+    //     }
     // }
 
 }
