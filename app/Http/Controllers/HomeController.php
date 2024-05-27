@@ -23,11 +23,11 @@ class HomeController extends Controller
             else
             {
                 if($tahap == 1)
-                    return view('pentadbir.dashboard');
+                    return view('dashboard.pentadbir.dashboard');
                 else if($tahap == 2)
-                    return view('klien.dashboard');
+                    return view('dashboard.klien.dashboard');
                 else
-                    return view('kakitangan.dashboard');
+                    return view('dashboard.pegawai.dashboard');
             }
         }
     }

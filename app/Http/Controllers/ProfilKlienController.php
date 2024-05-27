@@ -23,7 +23,7 @@ class ProfilKlienController extends Controller
     {
         $klien = Klien::all();
 
-        return view ('profil_klien.senarai', compact('klien'));
+        return view ('profil_klien.pentadbir_pegawai.senarai', compact('klien'));
     }
 
     public function maklumatKlien($id)
@@ -45,7 +45,7 @@ class ProfilKlienController extends Controller
         $pasangan = PasanganKlien::where('klien_id',$id)->first();
         $rawatan = RawatanKlien::where('klien_id',$id)->first();
 
-        return view('profil_klien.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','klien','pekerjaan','waris','pasangan','rawatan'));
+        return view('profil_klien.pentadbir_pegawai.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','klien','pekerjaan','waris','pasangan','rawatan'));
     }
 
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
@@ -180,7 +180,9 @@ class ProfilKlienController extends Controller
 
         // Join tables and get the client's details
         $butiranKlien = Klien::leftJoin('pekerjaan_klien', 'klien.id', '=', 'pekerjaan_klien.klien_id')
-            ->leftJoin('keluarga_klien', 'klien.id', '=', 'keluarga_klien.klien_id')
+            ->leftJoin('waris_klien', 'klien.id', '=', 'waris_klien.klien_id')
+            ->leftJoin('pasangan_klien', 'klien.id', '=', 'pasangan_klien.klien_id')
+            ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
             ->where('klien.id', $clientId)
             ->first();
 
