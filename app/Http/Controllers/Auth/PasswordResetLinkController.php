@@ -7,6 +7,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SetSemulaKataLaluan;
+use App\Models\User;
 
 class PasswordResetLinkController extends Controller
 {
@@ -18,27 +23,49 @@ class PasswordResetLinkController extends Controller
         return view('auth.forgot-password');
     }
 
-    /**
-     * Handle an incoming password reset link request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function getEmail($no_kp)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-        ]);
+        // Retrieve the user by 'no_kp'
+        $user = User::where('no_kp', $no_kp)->first();
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+        // Check if user exists and get the email
+        if ($user) {
+            $email = $user->email;
+            $success = true;
+        } else {
+            $email = null;
+            $success = false;
+        }
+        
+        // Return JSON response with success flag and email data
+        return response()->json(['success' => $success, 'email' => $email]);
+    }
 
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+
+    public function store(Request $request)
+    {
+        $user = User::where('no_kp', $request->no_kp)->first();
+        if ($user) {
+            $emel = $user->email;
+
+            if ($emel) {
+                $token = Str::random(64); // Generate a unique token
+                DB::table('password_resets')->insert([
+                    'email' => $emel,
+                    'token' => $token,
+                    'created_at' => now(),
+                ]);
+
+                $resetLink = route('password.reset', ['token' => $token]);
+
+                // Send the email with the reset link and token
+                Mail::to($emel)->send(new SetSemulaKataLaluan($token));
+                return redirect()->back()->with('success', 'E-mel tetapan semula kata laluan telah berjaya dihantar.');
+            } else {
+                return redirect()->back()->with('failed', 'E-mel pengguna tersebut tidak dijumpai dalam sistem.');
+            }
+        } else {
+            return redirect()->back()->with('failed', 'Pengguna tidak wujud.');
+        }
     }
 }
