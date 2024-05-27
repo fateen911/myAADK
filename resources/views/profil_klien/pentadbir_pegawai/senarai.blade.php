@@ -57,14 +57,15 @@
 					<div class="card-body pt-0">
 						<!--begin::Table-->
 						{{-- <div class="table-responsive"> --}}
-							{{-- <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table"> --}}
                             <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-100px">Nama</th>
+										<th class="min-w-150px">Nama</th>
                                         <th class="min-w-100px">No. Kad Pengenalan</th>
                                         <th class="min-w-100px">Daerah</th>
-                                        <th class="min-w-100px">Negeri</th> 
+                                        <th class="min-w-70px">Negeri</th>
+                                        <th class="min-w-80px">Status</th> 
+                                        <th class="min-w-100px">Dikemaskini Oleh</th> 
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
@@ -84,6 +85,26 @@
                                             $nama_user = implode(' ', $result);
                                             $daerah = DB::table('senarai_daerah')->where('id', $user['daerah'])->value('senarai_daerah.daerah');
                                             $negeri = DB::table('senarai_negeri')->where('id', $user['negeri'])->value('senarai_negeri.negeri');
+                                            // $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
+
+                                            // if($user_id==null){
+                                            //     $user_name = "Tiada Maklumat";
+                                            // }
+                                            // else{
+                                            //     $user_name = DB::table('users')->where('id', $user_id)->value('nama');
+                                            //     $text = ucwords(strtolower($user_name)); // Assuming you're sending the text as a POST parameter
+                                            //     $conjunctions = ['bin', 'binti'];
+                                            //     $words = explode(' ', $text);
+                                            //     $result = [];
+                                            //     foreach ($words as $word) {
+                                            //         if (in_array(Str::lower($word), $conjunctions)) {
+                                            //             $result[] = Str::lower($word);
+                                            //         } else {
+                                            //             $result[] = $word;
+                                            //         }
+                                            //     }
+                                            //     $user_name = implode(' ', $result);
+                                            // }
                                         @endphp
 
                                         <tr>

@@ -90,24 +90,14 @@
                     </li>
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
-                    {{-- <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
-                            <i class="ki-duotone ki-book-square fs-2 me-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                            </i>Maklumat Pendidikan</a>
-                    </li> --}}
-                    <!--end:::Tab item-->
-                    <!--begin:::Tab item-->
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
                             <i class="ki-duotone ki-pulse fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>Maklumat Kesihatan
+                            </i>Maklumat Rawatan
                         </a>
-                    </li> --}}
+                    </li>
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
@@ -118,6 +108,16 @@
                                 <span class="path3"></span>
                             </i>Maklumat Pekerjaan
                         </a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                            <i class="ki-duotone ki-profile-user fs-2 me-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>Maklumat Pasangan</a>
                     </li>
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
@@ -139,14 +139,13 @@
                 <div class="tab-content" id="myTabContent">
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
-                    {{-- <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel"> --}}
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
-                        {{-- <form id="kt_ecommerce_settings_general_form" class="form" action="#"> --}}
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
+                        @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Maklumat Peribadi</h2>
+                                    <h2>Kemaskini Maklumat Peribadi</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -162,7 +161,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama" name="nama" value="{{$butiranKlien->nama}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid readonly-input" id="nama" name="nama" value="{{$butiranKlien->nama}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -185,7 +184,23 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" maxlength="12" id="no_kp" name="no_kp" value="{{$butiranKlien->no_kp}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid readonly-input" maxlength="12" id="no_kp" name="no_kp" value="{{$butiranKlien->no_kp}}" readonly/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Umur</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid readonly-input" id="umur" name="umur" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -264,7 +279,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" value="{{$butiranKlien->poskod}}" readonly/>
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="{{$butiranKlien->poskod}}" readonly/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -283,7 +298,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah" disabled>
-                                            <option>Pilih daerah</option>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
@@ -306,6 +321,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri" disabled>
+                                            <option>Pilih Negeri</option>
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
@@ -327,8 +343,8 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" data-placeholder="Pilih jantina" disabled>
-                                            <option>Pilih jantina</option>
+                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Jantina</option>
                                             <option value="LELAKI" {{ $butiranKlien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
                                             <option value="PEREMPUAN" {{ $butiranKlien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
                                         </select>
@@ -350,7 +366,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
-                                            <option>Pilih agama</option>
+                                            <option>Pilih Agama</option>
                                             <option value="ISLAM" {{ $butiranKlien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
                                             <option value="CINA" {{ $butiranKlien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
                                             <option value="INDIA" {{ $butiranKlien->agama == 'INDIA' ? 'selected' : '' }}>INDIA</option>
@@ -377,7 +393,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
-                                            <option>Pilih bangsa</option>
+                                            <option>Pilih Bangsa</option>
                                             <option value="MELAYU" {{ $butiranKlien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
                                             <option value="CINA" {{ $butiranKlien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
                                             <option value="INDIA" {{ $butiranKlien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
@@ -394,25 +410,160 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Tarikh Tamat Pengawasan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
+                                        <span class="required">Tahap Pendidikan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
+                                    <div class="w-100">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" data-placeholder="Pilih Tahap Pendidikan" disabled>
+                                            <option>Pilih Tahap Pendidikan</option>
+                                            <option value="PENDIDIKAN RENDAH" {{ $butiranKlien->tahap_pendidikan == 'PENDIDIKAN RENDAH' ? 'selected' : '' }}>PENDIDIKAN RENDAH</option>
+                                            <option value="PENDIDIKAN MENENGAH" {{ $butiranKlien->tahap_pendidikan == 'PENDIDIKAN MENENGAH' ? 'selected' : '' }}>PENDIDIKAN MENENGAH</option>
+                                            <option value="PENGAJIAN TINGGI" {{ $butiranKlien->tahap_pendidikan == 'PENGAJIAN TINGGI' ? 'selected' : '' }}>PENGAJIAN TINGGI</option>
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            
+                            <!--begin::Action buttons-->
+                            <div class="row py-5">
+                                <div class="col-md-9 offset-md-3">
+                                    <div class="d-flex">
+                                        <!--begin::Button-->
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end:::Tab pane-->
+
+
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
+                        <!--begin::Form-->
+                        <form method="post" id="kt_ecommerce_settings_general_store" class="form centered-form" action="">
+                            <!--begin::Heading-->
+                            <div class="row mb-7">
+                                <div class="col-md-9 offset-md-4">
+                                    <h2>Kemaskini Maklumat Rawatan</h2>
+                                </div>
+                            </div>
+                            <!--end::Heading-->
+                           
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Status Kesihatan Mental</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-6">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$butiranKlien->status_kesihatan_mental}}" readonly/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Status Orang Kurang Upaya (OKU)</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-6">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" id="status_oku" name="status_oku" value="{{$butiranKlien->status_oku}}" readonly/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Seksyen OKP (Perintah/Sukarela)</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-6">
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid" id="seksyen_okp" name="seksyen_okp" value="{{$butiranKlien->seksyen_okp}}" readonly/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Tarikh Tamat Program Rawatan dan Pemulihan</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-6">
                                     <!--begin::Input-->
                                     <input type="date" class="form-control form-control-solid" id="tarikh_tamat_pengawasan" name="tarikh_tamat_pengawasan" value="{{$butiranKlien->tarikh_tamat_pengawasan}}" readonly/>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Skor CCRI</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-6">
+                                    <!--begin::Input-->
+                                    <input type="number" class="form-control form-control-solid" id="skor_ccri" name="skor_ccri" value="{{$butiranKlien->skor_ccri}}" readonly/>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
 
+                             <!--begin::Action buttons-->
+                             <div class="row py-5">
+                                <div class="col-md-9 offset-md-4">
+                                    <div class="d-flex">
+                                        <!--begin::Button-->
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -422,11 +573,12 @@
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Maklumat Pekerjaan</h2>
+                                    <h2>Kemaskini Maklumat Pekerjaan</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -587,7 +739,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$butiranKlien->nama_majikan}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$butiranKlien->nama_majikan}}" disabled/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -610,179 +762,23 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}" maxlength="11" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}" maxlength="11" disabled/>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end:::Tab pane-->
 
-
-                    <!--begin:::Tab pane-->
-                    {{-- <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
-                        <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_store" class="form" action="#">
-                            <!--begin::Heading-->
-                            <div class="row mb-7">
-                                <div class="col-md-9 offset-md-3">
-                                    <h2>Store Settings</h2>
-                                </div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Store Name</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Set the name of the store">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="store_name" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Store Owner</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Set the store owner's name">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="store_owner" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Address</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Set the store's full address.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" name="store_address"></textarea>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Geocode</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Enter the store geocode manually (optional)">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="store_geocode" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Email</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="email" class="form-control form-control-solid" name="store_email" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Phone</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="store_phone" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Fax</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="store_fax" value="" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
                             <!--begin::Action buttons-->
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Save</span>
-                                            <span class="indicator-progress">Please wait...
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
                                         <!--end::Button-->
@@ -792,22 +788,44 @@
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
-                    </div> --}}
+                    </div>
                     <!--end:::Tab pane-->
 
 
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_localization" role="tabpanel">
                         <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
+                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-3">
-                                    <h2>Maklumat Keluarga</h2>
+                                    <h2>Kemaskini Maklumat Waris</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
                             
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span class="required">Hubungan Waris</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-solid" data-control="select2" disabled>
+                                        <option>Pilih hubungan waris</option>
+                                        <option value="IBU" {{ $butiranKlien->hubungan_waris == 'IBU' ? 'selected' : '' }}>IBU</option>
+                                        <option value="BAPA" {{ $butiranKlien->hubungan_waris == 'BAPA' ? 'selected' : '' }}>BAPA</option>
+                                        <option value="PENJAGA" {{ $butiranKlien->hubungan_waris == 'PENJAGA' ? 'selected' : '' }}>PENJAGA</option>
+                                        <option value="SAUDARA KANDUNG" {{ $butiranKlien->hubungan_waris == 'SAUDARA KANDUNG' ? 'selected' : '' }}>SAUDARA KANDUNG</option>
+                                        <option value="LAIN-LAIN" {{ $butiranKlien->hubungan_waris == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -819,7 +837,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="{{$butiranKlien->nama_waris}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="nama_waris" name="nama_waris" value="{{$butiranKlien->nama_waris}}" disabled/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -842,7 +860,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="{{$butiranKlien->no_tel_waris}}" maxlength="11" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_waris" name="no_tel_waris" value="{{$butiranKlien->no_tel_waris}}" maxlength="11" disabled/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -858,7 +876,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris" readonly>{{$butiranKlien->alamat_waris}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_waris" name="alamat_waris" disabled>{{$butiranKlien->alamat_waris}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -875,7 +893,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_waris" name="poskod_waris" value="{{$butiranKlien->poskod_waris}}" readonly/>
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_waris" name="poskod_waris" value="{{$butiranKlien->poskod_waris}}" disabled/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -894,7 +912,6 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_waris" name="daerah_waris" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih daerah</option>
                                             @foreach ($daerahWaris as $daerahW)
                                                 <option value="{{ $daerahW->id }}" {{ $butiranKlien->daerah_waris == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
                                             @endforeach
@@ -917,7 +934,6 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_waris" name="negeri_waris" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih negeri</option>
                                             @foreach ($negeriWaris as $negeriW)
                                                 <option value="{{ $negeriW->id }}" {{ $butiranKlien->negeri_waris == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
                                             @endforeach
@@ -927,28 +943,68 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row fv-row mb-7">
+                            
+                            <!--begin::Action buttons-->
+                            <div class="row py-5">
+                                <div class="col-md-9 offset-md-3">
+                                    <div class="d-flex">
+                                        <!--begin::Button-->
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                        <!--end::Button-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Action buttons-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end:::Tab pane-->
+
+
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
+                        <!--begin::Form-->
+                        <form method="post" id="kt_ecommerce_settings_general_products"  class="form centered-form" action="">
+                            <!--begin::Heading-->
+                            <div class="row mb-7">
+                                <div class="col-md-9 offset-md-3">
+                                    <h2>Kemaskini Maklumat Pasangan</h2>
+                                </div>
+                            </div>
+                            <!--end::Heading-->
+
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Hubungan Waris</span>
+                                        <span>Status Perkahwinan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <select id="hubungan_waris" name="hubungan_waris" class="form-select form-select-solid" data-control="select2" data-placeholder="Pilih" disabled>
-                                        <option>Pilih hubungan waris</option>
-                                        <option value="IBU" {{ $butiranKlien->hubungan_waris == 'IBU' ? 'selected' : '' }}>IBU</option>
-                                        <option value="BAPA" {{ $butiranKlien->hubungan_waris == 'BAPA' ? 'selected' : '' }}>BAPA</option>
-                                        <option value="PENJAGA" {{ $butiranKlien->hubungan_waris == 'PENJAGA' ? 'selected' : '' }}>PENJAGA</option>
-                                        <option value="SAUDARA KANDUNG" {{ $butiranKlien->hubungan_waris == 'SAUDARA KANDUNG' ? 'selected' : '' }}>SAUDARA KANDUNG</option>
-                                        <option value="LAIN-LAIN" {{ $butiranKlien->hubungan_waris == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
-                                    </select>
+                                    <div class="d-flex mt-3">
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Status Perkahwinan</option>
+                                            <option value="BUJANG" {{ $butiranKlien->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
+                                            <option value="BERKAHWIN" {{ $butiranKlien->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
+                                            <option value="BERCERAI" {{ $butiranKlien->status_perkahwinan == 'BERCERAI' ? 'selected' : '' }}>BERCERAI</option>
+                                            <option value="JANDA" {{ $butiranKlien->status_perkahwinan == 'JANDA' ? 'selected' : '' }}>JANDA</option>
+                                            <option value="DUDA" {{ $butiranKlien->status_perkahwinan == 'DUDA' ? 'selected' : '' }}>DUDA</option>
+                                        </select>
+                                        <!--end::Select2-->
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            <br>
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -1035,7 +1091,6 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih daerah</option>
                                             @foreach ($daerahPasangan as $daerahP)
                                                 <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
                                             @endforeach
@@ -1058,9 +1113,8 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih negeri</option>
                                             @foreach ($negeriPasangan as $negeriP)
-                                                <option value="{{ $negeriP->id }}" {{ $butiranKlien->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->daerah }}</option>
+                                                <option value="{{ $negeriP->id }}" {{ $butiranKlien->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->negeri }}</option>
                                             @endforeach
                                         </select>
                                         <!--end::Select2-->
@@ -1084,7 +1138,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -1116,8 +1169,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih daerah</option>
-                                            @foreach ($daerahKerjaPasangan as $daerahKP)
+                                            @foreach ($daerahKerjaPasangan as $daerahKP)    
                                                 <option value="{{ $daerahKP->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
                                             @endforeach
                                         </select>
@@ -1139,7 +1191,6 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih negeri</option>
                                             @foreach ($negeriKerjaPasangan as $negeriKP)
                                                 <option value="{{ $negeriKP->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
                                             @endforeach
@@ -1149,269 +1200,18 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                        
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end:::Tab pane-->
-
-
-                    <!--begin:::Tab pane-->
-                    {{-- <div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
-                        <!--begin::Form-->
-                        <form id="kt_ecommerce_settings_general_products" class="form" action="#">
-                            <!--begin::Heading-->
-                            <div class="row mb-7">
-                                <div class="col-md-9 offset-md-3">
-                                    <h2>Cateogries Settings</h2>
-                                </div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Category Product Count</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Show the number of products inside the subcategories in the storefront header category menu. Be warned, this will cause an extreme performance hit for stores with a lot of subcategories!">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="d-flex mt-3">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid me-5">
-                                            <input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_yes" checked="checked" />
-                                            <label class="form-check-label" for="category_product_count_yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_no" />
-                                            <label class="form-check-label" for="category_product_count_no">No</label>
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-16">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Default Items Per Page</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Determines how many items are shown per page.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="products_items_per_page" value="10" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Heading-->
-                            <div class="row mb-7">
-                                <div class="col-md-9 offset-md-3">
-                                    <h2>Reviews Settings</h2>
-                                </div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Allow Reviews</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable review entries for registered customers.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="d-flex mt-3">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid me-5">
-                                            <input class="form-check-input" type="radio" value="" name="allow_reviews" id="allow_reviews_yes" checked="checked" />
-                                            <label class="form-check-label" for="allow_reviews_yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="radio" value="" name="allow_reviews" id="allow_reviews_no" />
-                                            <label class="form-check-label" for="allow_reviews_no">No</label>
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-16">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Allow Guest Reviews</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Enable/disable review entries for public guest customers">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="d-flex mt-3">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid me-5">
-                                            <input class="form-check-input" type="radio" value="" name="allow_guest_reviews" id="allow_guest_reviews_yes" />
-                                            <label class="form-check-label" for="allow_guest_reviews_yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="radio" value="" name="allow_guest_reviews" id="allow_guest_reviews_no" checked="checked" />
-                                            <label class="form-check-label" for="allow_guest_reviews_no">No</label>
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Heading-->
-                            <div class="row mb-7">
-                                <div class="col-md-9 offset-md-3">
-                                    <h2>Vouchers Settings</h2>
-                                </div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Minimum Vouchers</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Minimum number of vouchers customers can attach to an order">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="products_min_voucher" value="1" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-16">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Maximum Vouchers</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Maximum number of vouchers customers can attach to an order">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="products_max_voucher" value="10" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Heading-->
-                            <div class="row mb-7">
-                                <div class="col-md-9 offset-md-3">
-                                    <h2>Tax Settings</h2>
-                                </div>
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Display Prices with Tax</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="d-flex mt-3">
-                                        <!--begin::Radio-->
-                                        <div class="form-check form-check-custom form-check-solid me-5">
-                                            <input class="form-check-input" type="radio" value="" name="product_tax" id="product_tax_yes" checked="checked" />
-                                            <label class="form-check-label" for="product_tax_yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="radio" value="" name="product_tax" id="product_tax_no" />
-                                            <label class="form-check-label" for="product_tax_no">No</label>
-                                        </div>
-                                        <!--end::Radio-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-end">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Default Tax Rate</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Determines the tax percentage (%) applied to orders">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" name="products_tax_rate" value="15%" />
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
+                            
                             <!--begin::Action buttons-->
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
                                         <!--end::Button-->
                                         <!--begin::Button-->
                                         <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Save</span>
-                                            <span class="indicator-progress">Please wait...
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
                                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
                                         <!--end::Button-->
@@ -1421,7 +1221,7 @@
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
-                    </div> --}}
+                    </div>
                     <!--end:::Tab pane-->
 
                 </div>
@@ -1441,5 +1241,36 @@
     $(document).ready(function() {
 		$('.js-example-basic-single').select2();
 	});
+</script>
+
+<script>
+    function calculateAgeFromIC() {
+        const icNumber = document.getElementById('no_kp').value;
+        if (icNumber.length !== 12) {
+            alert("Nombor Kad Pengenalan harus mempunyai 12 digit.");
+            return;
+        }
+
+        const year = parseInt(icNumber.substring(0, 2), 10);
+        const month = parseInt(icNumber.substring(2, 4), 10);
+        const day = parseInt(icNumber.substring(4, 6), 10);
+
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const currentDay = new Date().getDate();
+
+        let birthYear = year < (currentYear % 100) ? 2000 + year : 1900 + year;
+
+        let age = currentYear - birthYear;
+        if (currentMonth < month || (currentMonth === month && currentDay < day)) {
+            age--;
+        }
+
+        document.getElementById('umur').value = age;
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        calculateAgeFromIC();
+    });
 </script>
 @endsection

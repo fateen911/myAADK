@@ -201,6 +201,8 @@ class ProfilKlienController extends Controller
 
         $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
 
-        return $pdf->stream('profil-peribadi.pdf');
+        $no_kp = Auth()->user()->no_kp;
+
+        return $pdf->stream($no_kp . '-profil-peribadi.pdf');
     }
 }
