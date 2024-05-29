@@ -430,7 +430,7 @@
                             <!--end::Input group-->
                             
                             <!--begin::Action buttons-->
-                            <div class="row py-5">
+                            {{-- <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <!--begin::Button-->
@@ -445,7 +445,7 @@
                                         <!--end::Button-->
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
@@ -545,25 +545,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-
-                             <!--begin::Action buttons-->
-                             <div class="row py-5">
-                                <div class="col-md-9 offset-md-4">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -695,7 +676,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" disabled>
-                                            <option>Pilih daerah</option>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerahKerja as $daerahK)
                                                 <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                             @endforeach
@@ -718,7 +699,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih negeri</option>
+                                            <option>Pilih Negeri</option>
                                             @foreach ($negeriKerja as $negeriK)
                                                 <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                             @endforeach
@@ -767,25 +748,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -912,6 +874,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_waris" name="daerah_waris" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerahWaris as $daerahW)
                                                 <option value="{{ $daerahW->id }}" {{ $butiranKlien->daerah_waris == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
                                             @endforeach
@@ -934,6 +897,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_waris" name="negeri_waris" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Negeri</option>
                                             @foreach ($negeriWaris as $negeriW)
                                                 <option value="{{ $negeriW->id }}" {{ $butiranKlien->negeri_waris == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
                                             @endforeach
@@ -943,25 +907,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
@@ -1091,6 +1036,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerahPasangan as $daerahP)
                                                 <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
                                             @endforeach
@@ -1113,6 +1059,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Negeri</option>
                                             @foreach ($negeriPasangan as $negeriP)
                                                 <option value="{{ $negeriP->id }}" {{ $butiranKlien->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->negeri }}</option>
                                             @endforeach
@@ -1169,6 +1116,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerahKerjaPasangan as $daerahKP)    
                                                 <option value="{{ $daerahKP->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
                                             @endforeach
@@ -1191,6 +1139,7 @@
                                     <div class="w-100">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" disabled>
+                                            <option>Pilih Daerah</option>
                                             @foreach ($negeriKerjaPasangan as $negeriKP)
                                                 <option value="{{ $negeriKP->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
                                             @endforeach
@@ -1200,25 +1149,6 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            
-                            <!--begin::Action buttons-->
-                            <div class="row py-5">
-                                <div class="col-md-9 offset-md-3">
-                                    <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
                     </div>
