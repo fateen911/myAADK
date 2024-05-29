@@ -24,5 +24,6 @@ class Klien extends Model
         'agama',
         'bangsa',
         'tahap_pendidikan',
+        'status_kemaskini',
     ];
 }

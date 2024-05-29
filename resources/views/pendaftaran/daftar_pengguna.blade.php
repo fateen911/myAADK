@@ -10,7 +10,12 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
-
+		<!-- Include jQuery from CDN -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- Include Select2 CSS from CDN -->
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<!-- Include Select2 JS from CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Custom AADK CSS -->
 		<link rel="stylesheet" href="/assets/css/customAADK.css">
 
@@ -20,6 +25,9 @@
                 justify-content: center;
                 align-items: center;
             }
+			.d-none {
+				display: none;
+			}
         </style>
     </head>
 
@@ -303,17 +311,17 @@
 											<!--end::Input group-->
 											<!--begin::Input group-->
 											<div class="fv-row mb-7">
-												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">Peranan</label>
-												<!--end::Label-->
-												<!--begin::Input-->
-												<select name="tahap_pengguna" id="tahap_pengguna" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold">
+												<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid fw-bold">
 													<option value="">Pilih</option>
-                                                    @foreach ($tahap->sortBy('jawatan') as $tahap)
-                                                        <option value="{{$tahap->id}}">{{$tahap->jawatan}}</option>
-                                                    @endforeach
+													@foreach ($tahap->sortBy('jawatan') as $t)
+														<option value="{{ $t->id }}">{{ $t->jawatan }}</option>
+													@endforeach
 												</select>
-												<!--end::Input-->
+											</div>
+											<div class="fv-row mb-7 d-none" id="div-jawatan">
+												<label class="fs-6 fw-semibold mb-2">Jawatan</label>
+												<input type="text" class="form-control form-control-solid" id="jawatan" name="jawatan"/>
 											</div>
 											<!--end::Input group-->
 										</div>
@@ -349,18 +357,14 @@
 
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
-    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/assets/js/scripts.bundle.js"></script>
-    <!--end::Global Javascript Bundle-->
-    <!--begin::Vendors Javascript(used for this page only)-->
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="/assets/js/custom/apps/customers/list/export.js"></script>
     <script src="/assets/js/custom/apps/customers/list/list.js"></script>
     <script src="/assets/js/custom/apps/customers/add.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!--end::Custom Javascript-->
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <!-- DataTables JS -->
@@ -383,6 +387,40 @@
 			});
 	</script>
 
+	<script>
+		$(document).ready(function() 
+		{
+			// Verify jQuery is loaded
+			if (typeof $ !== 'undefined') {
+                console.log('jQuery is loaded');
+            } else {
+                console.log('jQuery is not loaded');
+            }
+
+			// Initialize Select2
+			$('#tahap_pengguna').select2();
+
+			function toggleJawatanField() {
+				var selectedValue = $('#tahap_pengguna').val();
+				console.log('Selected value:', selectedValue);
+
+				if (selectedValue == '3' || selectedValue == '4' || selectedValue == '5') {
+					$('#div-jawatan').removeClass('d-none');
+				} else {
+					$('#div-jawatan').addClass('d-none');
+				}
+			}
+
+			// Handle change event
+			$('#tahap_pengguna').on('change', function() {
+				toggleJawatanField();
+			});
+
+			// Initial call to set visibility based on default value
+			toggleJawatanField();
+		});
+	</script>
+	
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Check if there is a flash message

@@ -41,7 +41,7 @@ class DaftarPengguna extends Mailable
 
         $subject = "DAFTAR PENGGUNA SISTEM MYAADK";
         return $this->subject($subject)
-                    ->view('pentadbir.pendaftaran.emel_daftar_pengguna')
+                    ->view('pendaftaran.emel_daftar_pengguna')
                     ->with([
                         'no_kp' => $this->no_kp,
                         'password' => $this->password,

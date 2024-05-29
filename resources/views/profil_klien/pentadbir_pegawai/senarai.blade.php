@@ -10,7 +10,6 @@
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
-
         <!-- Custom AADK CSS -->
 		<link rel="stylesheet" href="/assets/css/customAADK.css">
     </head>
@@ -65,7 +64,7 @@
                                         <th class="min-w-100px">Daerah</th>
                                         <th class="min-w-70px">Negeri</th>
                                         <th class="min-w-80px">Status</th> 
-                                        <th class="min-w-100px">Dikemaskini Oleh</th> 
+                                        <th class="min-w-100px">Pengemaskini</th> 
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
@@ -127,15 +126,21 @@
 		</div>
 	</div>
 
-
+    <!--begin::Javascript-->
+    <script>var hostUrl = "assets/";</script>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/js/scripts.bundle.js"></script>
+    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
+    <script src="/assets/js/custom/apps/customers/add.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
-
+    
     <script>
         $('#sortTable1').DataTable({
                 ordering: true, // Enable manual sorting
