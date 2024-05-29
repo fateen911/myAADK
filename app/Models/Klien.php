@@ -26,4 +26,9 @@ class Klien extends Model
         'tahap_pendidikan',
         'status_kemaskini',
     ];
+
+    public function profileUpdateRequests()
+    {
+        return $this->hasMany(KlienUpdateRequest::class, 'klien_id');
+    }
 }

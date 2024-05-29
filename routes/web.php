@@ -32,7 +32,7 @@ Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna
 
 // PENTADBIR - PENGURUSAN PROFIL 
 Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
-Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'approveUpdate'])->middleware('auth')->name('maklumat-klien');
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
 Route::post('/kemaskini/maklumat/pekerjaan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPekerjaanKlien'])->middleware('auth')->name('kemaskini.maklumat.pekerjaan.klien');
 Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatWarisKlien'])->middleware('auth')->name('kemaskini.maklumat.waris.klien');
@@ -42,5 +42,13 @@ Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::cl
 // KLIEN - PENGURUSAN PROFIL 
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
 Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
+
+// Client routes
+Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'KlienRequestUpdate'])->name('klien.requestUpdate');
+
+// Officer routes
+Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewUpdateRequest'])->name('pegawai.viewUpdateRequest');
+Route::patch('/approve-update/{id}', [ProfilKlienController::class, 'approveUpdate'])->name('pegawai.approveUpdate');
+
 
 require __DIR__.'/auth.php';
