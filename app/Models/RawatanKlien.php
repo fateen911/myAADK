@@ -19,4 +19,9 @@ class RawatanKlien extends Model
         'tarikh_tamat_pengawasan',
         'skor_ccri',
     ];
+
+    public function rawatanProfileUpdateRequests()
+    {
+        return $this->hasMany(RawatanKlienUpdateRequest::class, 'klien_id');
+    }
 }

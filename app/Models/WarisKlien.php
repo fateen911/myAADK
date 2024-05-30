@@ -21,4 +21,9 @@ class WarisKlien extends Model
         'daerah_waris',
         'negeri_waris',
     ];
+
+    public function warisProfileUpdateRequests()
+    {
+        return $this->hasMany(WarisKlienUpdateRequest::class, 'klien_id');
+    }
 }

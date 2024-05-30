@@ -23,4 +23,9 @@ class PekerjaanKlien extends Model
         'nama_majikan',
         'no_tel_majikan',
     ];
+
+    public function pekerjaanProfileUpdateRequests()
+    {
+        return $this->hasMany(PekerjaanKlienUpdateRequest::class, 'klien_id');
+    }
 }

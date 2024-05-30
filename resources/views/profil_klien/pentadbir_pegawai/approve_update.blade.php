@@ -159,7 +159,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
                                 </div>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control form-control-solid" name="no_tel" value="{{ $requestedData['no_tel'] }}" />
+                                    <input type="text" class="form-control form-control-solid" maxlength="11" name="no_tel" value="{{ $requestedData['no_tel'] }}" />
                                 </div>
                             </div>
                     

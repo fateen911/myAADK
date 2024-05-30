@@ -16,6 +16,10 @@ use App\Models\PekerjaanKlien;
 use App\Models\RawatanKlien;
 use App\Models\WarisKlien;
 use App\Models\KlienUpdateRequest;
+use App\Models\PasanganKlienUpdateRequest;
+use App\Models\PekerjaanKlienUpdateRequest;
+use App\Models\RawatanKlienUpdateRequest;
+use App\Models\WarisKlienUpdateRequest;
 use Illuminate\Support\Facades\Log;
 
 class ProfilKlienController extends Controller
@@ -275,25 +279,254 @@ class ProfilKlienController extends Controller
         return $pdf->stream($no_kp . '-profil-peribadi.pdf');
     }
 
+    // public function KlienRequestUpdate(Request $request)
+    // {
+    //     Log::info('KlienRequestUpdate method called');
+    //     Log::info('Request data: ', $request->all());
+
+    //     $clientId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+
+    //     $updateRequest = KlienUpdateRequest::create([
+    //         'klien_id' => $clientId,
+    //         'requested_data' => json_encode($request->except('_token')), // Store all requested fields except CSRF token
+    //         'status' => 'Dikemaskini'
+    //     ]);
+
+    //     if ($updateRequest) {
+    //         Log::info('Update request stored successfully');
+    //     } else {
+    //         Log::error('Failed to store update request');
+    //     }
+
+    //     return redirect()->back()->with('success', 'Permintaan untuk kemaskini anda telah dihantar untuk kelulusan.');
+    // }
+
     public function KlienRequestUpdate(Request $request)
     {
-        Log::info('KlienRequestUpdate method called');
-        Log::info('Request data: ', $request->all());
-
-        $clientId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
-
-        $updateRequest = KlienUpdateRequest::create([
-            'klien_id' => $clientId,
-            'requested_data' => json_encode($request->except('_token')), // Store all requested fields except CSRF token
-            'status' => 'Dikemaskini'
+        $validatedData = $request->validate([
+            'emel' => 'required|email',
+            'nama' => 'required|string|max:255',
+            'umur' => 'required|integer',
+            'no_kp' => 'required|string|max:12',
+            'daerah' => 'required|string|max:255',
+            'negeri' => 'required|string|max:255',
+            'no_tel' => 'required|string|max:11',
+            'poskod' => 'required|string|max:5',
+            'alamat_rumah' => 'required|string|max:255',
+            'tahap_pendidikan' => 'required|string|max:255',
         ]);
+        
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequest = KlienUpdateRequest::where('klien_id', $klienId)->first();
 
         if ($updateRequest) {
-            Log::info('Update request stored successfully');
-        } else {
-            Log::error('Failed to store update request');
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini', 
+            ]);
+        } 
+        else {
+            // Create new request
+            KlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini',
+            ]);
         }
 
-        return redirect()->back()->with('success', 'Permintaan untuk kemaskini anda telah dihantar untuk kelulusan.');
+        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
     }
+
+    public function rawatanKlienRequestUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'status_kesihatan_mental' => 'required|string|max:255',
+            'status_oku' => 'required|string|max:255',
+            'seksyen_okp' => 'required|string|max:255',
+            'tarikh_tamat_pengawasan' => 'required|date',
+            'skor_ccri' => 'required|double',
+        ]);
+        
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequest = RawatanKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+        if ($updateRequest) {
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini', 
+            ]);
+        } 
+        else {
+            // Create new request
+            RawatanKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+    }
+
+    public function pekerjaanKlienRequestUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pekerjaan' => 'required|string|max:255',
+            'pendapatan' => 'nullable|string|max:255',
+            'bidang_kerja' => 'nullable|string|max:255',
+            'alamat_kerja' => 'nullable|string|max:255',
+            'poskod_kerja' => 'nullable|integer|max:5',
+            'daerah_kerja' => 'nullable|string|max:255',
+            'negeri_kerja' => 'nullable|string|max:255',
+            'nama_majikan' => 'nullable|string|max:255',
+            'no_tel_majikan' => 'nullable|string|max:11',
+        ]);
+
+        // Temporarily bypass validation for testing
+        $validatedData = $request->all();
+
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequest = PekerjaanKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+        if ($updateRequest) {
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini', 
+            ]);
+        } 
+        else {
+            // Create new request
+            PekerjaanKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+    }
+
+    public function warisKlienRequestUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'hubungan_waris' => 'required|string|max:255',
+            'nama_waris' => 'required|string|max:255',
+            'no_tel_waris' => 'required|string|max:11',
+            'alamat_waris' => 'required|string|max:255',
+            'poskod_waris' => 'required|string|max:5',
+            'daerah_waris' => 'required|string|max:255',
+            'negeri_waris' => 'required|string|max:255',
+        ]);
+        
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequest = WarisKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+        if ($updateRequest) {
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini', // or any other status you prefer
+            ]);
+        } 
+        else {
+            // Create new request
+            WarisKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Dikemaskini',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+    }
+
+    public function pasanganKlienRequestUpdate(Request $request)
+    {
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'status_perkahwinan' => 'required|string|max:255',
+            'nama_pasangan' => 'required|string|max:255',
+            'alamat_pasangan' => 'nullable|string|max:255',
+            'poskod_pasangan' => 'nullable|string|max:5',
+            'daerah_pasangan' => 'nullable|string|max:255',
+            'negeri_pasangan' => 'nullable|string|max:255',
+            'no_tel_pasangan' => 'nullable|string|max:11',
+            'alamat_kerja_pasangan' => 'nullable|string|max:255',
+            'poskod_kerja_pasangan' => 'nullable|string|max:5',
+            'daerah_kerja_pasangan' => 'nullable|string|max:255',
+            'negeri_kerja_pasangan' => 'nullable|string|max:255',
+        ]);
+
+        // Check for default select values and set to null if needed
+        $validatedData['daerah_pasangan'] = $validatedData['daerah_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_pasangan'];
+        $validatedData['negeri_pasangan'] = $validatedData['negeri_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_pasangan'];
+        $validatedData['daerah_kerja_pasangan'] = $validatedData['daerah_kerja_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja_pasangan'];
+        $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
+
+        // Proceed with the existing logic
+        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+        $updateRequest = PasanganKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+        if ($updateRequest) {
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+                'status' => 'Dikemaskini', // or any other status you prefer
+            ]);
+        } else {
+            // Create new request
+            PasanganKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+                'status' => 'Dikemaskini',
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+    }
+
+    // public function pasanganKlienRequestUpdate(Request $request)
+    // {
+    //     // Validate the incoming request
+    //     $validatedData = $request->validate([
+    //         'status_perkahwinan' => 'required|string|max:255',
+    //         'nama_pasangan' => 'nullable|string|max:255',
+    //         'alamat_pasangan' => 'nullable|string|max:255',
+    //         'poskod_pasangan' => 'nullable|string|max:5',
+    //         'daerah_pasangan' => 'nullable|string|max:255',
+    //         'negeri_pasangan' => 'nullable|string|max:255',
+    //         'no_tel_pasangan' => 'nullable|string|max:11',
+    //         'alamat_kerja_pasangan' => 'nullable|string|max:255',
+    //         'poskod_kerja_pasangan' => 'nullable|string|max:5',
+    //         'daerah_kerja_pasangan' => 'nullable|string|max:255',
+    //         'negeri_kerja_pasangan' => 'nullable|string|max:255',
+    //     ]);
+        
+    //     $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+    //     $updateRequest = PasanganKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+    //     // Ensure to debug the incoming request data
+    //     Log::info('Request data: ', $validatedData);
+
+    //     if ($updateRequest) {
+    //         // Update existing request
+    //         $updateRequest->update([
+    //             'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+    //             'status' => 'Dikemaskini', // or any other status you prefer
+    //         ]);
+    //     } else {
+    //         // Create new request
+    //         PasanganKlienUpdateRequest::create([
+    //             'klien_id' => $klienId,
+    //             'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+    //             'status' => 'Dikemaskini',
+    //         ]);
+    //     }
+
+    //     return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+    // }
+
 }

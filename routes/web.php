@@ -39,16 +39,20 @@ Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::clas
 Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPasanganKlien'])->middleware('auth')->name('kemaskini.maklumat.pasangan.klien');
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
 
+// PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE 
+Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewUpdateRequest'])->name('pegawai.viewUpdateRequest');
+Route::patch('/approve-update/{id}', [ProfilKlienController::class, 'approveUpdate'])->name('pegawai.approveUpdate');
+
 // KLIEN - PENGURUSAN PROFIL 
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
 Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
 
-// Client routes
-Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'KlienRequestUpdate'])->name('klien.requestUpdate');
-
-// Officer routes
-Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewUpdateRequest'])->name('pegawai.viewUpdateRequest');
-Route::patch('/approve-update/{id}', [ProfilKlienController::class, 'approveUpdate'])->name('pegawai.approveUpdate');
+// KLIEN - SEND REQUEST TO UPDATE PROFILE 
+Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');
+Route::post('/klien/maklumat-rawatan/request-update', [ProfilKlienController::class, 'rawatanKlienRequestUpdate'])->name('rawatanKlien.requestUpdate');
+Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController::class, 'pekerjaanKlienRequestUpdate'])->name('pekerjaanKlien.requestUpdate');
+Route::post('/klien/maklumat-waris/request-update', [ProfilKlienController::class, 'warisKlienRequestUpdate'])->name('warisKlien.requestUpdate');
+Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'pasanganKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
 
 
 require __DIR__.'/auth.php';

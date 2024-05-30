@@ -25,4 +25,9 @@ class PasanganKlien extends Model
         'daerah_kerja_pasangan',
         'negeri_kerja_pasangan',
     ];
+
+    public function pasanganProfileUpdateRequests()
+    {
+        return $this->hasMany(PasanganKlienUpdateRequest::class, 'klien_id');
+    }
 }
