@@ -107,7 +107,7 @@
                                         @endphp
 
                                         <tr>
-                                            <td><a href="{{ url('officer/view-requests/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
+                                            <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
                                             <td>{{ $user->no_kp }}</td>
                                             <td>{{ $daerah }}</td>
                                             <td>{{ $negeri }}</td>

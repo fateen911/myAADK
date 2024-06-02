@@ -46,14 +46,52 @@ class ProfilKlienController extends Controller
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
 
         $klien = Klien::where('id', $id)->first();
+        $updateRequestKlien = KlienUpdateRequest::where('klien_id', $id)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+                                                    
         $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
-        $waris = WarisKlien::where('klien_id',$id)->first();
-        $pasangan = PasanganKlien::where('klien_id',$id)->first();
-        $rawatan = RawatanKlien::where('klien_id',$id)->first();
+        $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+        // Decode the requested data updates
+        $requestedDataPekerjaan = json_decode($updateRequestPekerjaan->requested_data, true);
 
-        return view('profil_klien.pentadbir_pegawai.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan','klien','pekerjaan','waris','pasangan','rawatan'));
+        $waris = WarisKlien::where('klien_id',$id)->first();
+        $updateRequestWaris = WarisKlienUpdateRequest::where('klien_id', $id)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+
+        $pasangan = PasanganKlien::where('klien_id',$id)->first();
+        $updateRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+
+        $rawatan = RawatanKlien::where('klien_id',$id)->first();
+        $updateRequestRawatan = RawatanKlienUpdateRequest::where('klien_id', $id)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+
+        return view('profil_klien.pentadbir_pegawai.kemaskini',compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
+                    'klien', 'updateRequestKlien', 'pekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 'waris', 'updateRequestWaris', 'pasangan', 'updateRequestPasangan', 'rawatan', 'updateRequestRawatan'));
     }
 
+    // public function maklumatKlien($id)
+    // {
+    //     $negeriKerja = Negeri::all()->sortBy('negeri');
+    //     $daerahKerja = Daerah::all()->sortBy('daerah');
+                                                    
+    //     $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
+    //     $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)
+    //                                                 ->where('status', 'Dikemaskini')
+    //                                                 ->first();
+    //     // Decode the requested data updates
+    //     $requestedDataPekerjaan = json_decode($updateRequestPekerjaan->requested_data, true);
+
+    //     return view('profil_klien.pentadbir_pegawai.kemaskini',compact('daerahKerja','negeriKerja', 'pekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan'));
+    // }
+
+    // UPDATE WITHOUT REQUEST
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
     {
         $klien = Klien::find($id);
@@ -167,71 +205,112 @@ class ProfilKlienController extends Controller
         }
     }
 
-    public function viewUpdateRequest($id)
+    // TEST
+    public function viewClientProfile($clientId)
     {
-        // Find the update request by its ID
-        $updateRequest = KlienUpdateRequest::findOrFail($id);
+        // Fetch client information
+        $klien = Klien::findOrFail($clientId);
 
-        // Decode the requested data JSON
-        $requestedData = json_decode($updateRequest->requested_data, true);
-        
+        // Fetch pending profile update request, if any
+        $profileUpdateRequest = PasanganKlienUpdateRequest::where('klien_id', $clientId)
+                                                    ->where('status', 'Dikemaskini')
+                                                    ->first();
+
         $negeri = Negeri::all()->sortBy('negeri');
         $daerah = Daerah::all()->sortBy('daerah');
-        $negeriKerja = Negeri::all()->sortBy('negeri');
-        $daerahKerja = Daerah::all()->sortBy('daerah');
-        $negeriWaris = Negeri::all()->sortBy('negeri');
-        $daerahWaris = Daerah::all()->sortBy('daerah');
-        $negeriPasangan = Negeri::all()->sortBy('negeri');
-        $daerahPasangan = Daerah::all()->sortBy('daerah');
-        $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
-        $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
 
-        $klien = Klien::where('id', $id)->first();
-        $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
-        $waris = WarisKlien::where('klien_id',$id)->first();
-        $pasangan = PasanganKlien::where('klien_id',$id)->first();
-        $rawatan = RawatanKlien::where('klien_id',$id)->first();
-
-        // Pass the update request to the view
-        return view('profil_klien.pentadbir_pegawai.approve_update', compact('updateRequest','requestedData','klien','pekerjaan','waris','pasangan','rawatan','daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan'));
+        return view('profil_klien.pentadbir_pegawai.test', compact('klien', 'profileUpdateRequest', 'daerah', 'negeri'));
     }
 
-    public function approveUpdate(Request $request, $id)
-    {
-        $updateRequest = KlienUpdateRequest::findOrFail($id);
+    // QIV UPDATE WITH APPROVE THE CLIENT'S REQUEST
+    // public function approveClientProfileUpdate(Request $request, $id)
+    // {
+    //     $profileUpdateRequest = PasanganKlienUpdateRequest::findOrFail($id);
+    //     $requestedData = json_decode($profileUpdateRequest->requested_data, true);
+    //     $klien = PasanganKlien::findOrFail($profileUpdateRequest->klien_id);
 
-        if ($request->status == 'Lulus') {
-            $client = $updateRequest->client;
-            $requestedData = json_decode($updateRequest->requested_data, true);
+    //     if ($request->has('approve_field')) {
+    //         $field = $request->input('approve_field');
+    //         $klien->$field = $requestedData[$field];
+    //         $klien->save();
 
-            // Update the client's profile with the requested data
-            $client->update($requestedData);
-        }
+    //         // Remove the approved field from the requested data
+    //         unset($requestedData[$field]);
+    //         if (empty($requestedData)) {
+    //             $profileUpdateRequest->status = 'Lulus';
+    //             $profileUpdateRequest->save();
+    //         } else {
+    //             $profileUpdateRequest->requested_data = json_encode($requestedData);
+    //             $profileUpdateRequest->save();
+    //         }
+    //     } elseif ($request->has('reject_field')) {
+    //         $field = $request->input('reject_field');
 
-        $updateRequest->update(['status' => $request->status]);
+    //         // Remove the rejected field from the requested data
+    //         unset($requestedData[$field]);
+    //         if (empty($requestedData)) {
+    //             $profileUpdateRequest->status = 'Ditolak';
+    //             $profileUpdateRequest->save();
+    //         } else {
+    //             $profileUpdateRequest->requested_data = json_encode($requestedData);
+    //             $profileUpdateRequest->save();
+    //         }
+    //     }
 
-        // Fetch all daerah and negeri
-        $negeri = Negeri::all()->sortBy('negeri');
-        $daerah = Daerah::all()->sortBy('daerah');
-        $negeriKerja = Negeri::all()->sortBy('negeri');
-        $daerahKerja = Daerah::all()->sortBy('daerah');
-        $negeriWaris = Negeri::all()->sortBy('negeri');
-        $daerahWaris = Daerah::all()->sortBy('daerah');
-        $negeriPasangan = Negeri::all()->sortBy('negeri');
-        $daerahPasangan = Daerah::all()->sortBy('daerah');
-        $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
-        $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
+    //     return redirect()->back()->with('success', 'Profile update processed successfully.');
+    // }
 
-        $klien = Klien::where('id', $id)->first();
-        $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
-        $waris = WarisKlien::where('klien_id',$id)->first();
-        $pasangan = PasanganKlien::where('klien_id',$id)->first();
-        $rawatan = RawatanKlien::where('klien_id',$id)->first();
+    // public function rejectProfileUpdate(Request $request, $clientId)
+    // {
+    //     // Fetch the pending update request
+    //     $profileUpdateRequest = KlienUpdateRequest::where('klien_id', $clientId)
+    //                                                 ->where('status', 'Dikemaskini')
+    //                                                 ->firstOrFail();
 
-        return view('profil_klien.pentadbir_pegawai.approve_update', ['updateRequest' => $updateRequest, 'requestedData' => json_decode($updateRequest->requested_data, true)], 
-        compact('klien','pekerjaan','waris','pasangan','rawatan','daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan'))
-        ->with('success', 'Permintaan Kemaskini telah ' . $request->status . '.');
-    }
+    //     // Mark the request as rejected
+    //     $profileUpdateRequest->status = 'Ditolak';
+    //     $profileUpdateRequest->save();
+
+    //     return redirect()->back()->with('success', 'Profile update request rejected.');
+    // }
+
+    // CURRENT METHOD OF APPROVAL CLIENT'S REQUEST
+    // public function approveUpdate(Request $request, $id)
+    // {
+    //     $updateRequest = KlienUpdateRequest::findOrFail($id);
+
+    //     if ($request->status == 'Lulus') {
+    //         $client = $updateRequest->client;
+    //         $requestedData = json_decode($updateRequest->requested_data, true);
+
+    //         // Update the client's profile with the requested data
+    //         $client->update($requestedData);
+    //     }
+
+    //     $updateRequest->update(['status' => $request->status]);
+
+    //     // Fetch all daerah and negeri
+    //     $negeri = Negeri::all()->sortBy('negeri');
+    //     $daerah = Daerah::all()->sortBy('daerah');
+    //     $negeriKerja = Negeri::all()->sortBy('negeri');
+    //     $daerahKerja = Daerah::all()->sortBy('daerah');
+    //     $negeriWaris = Negeri::all()->sortBy('negeri');
+    //     $daerahWaris = Daerah::all()->sortBy('daerah');
+    //     $negeriPasangan = Negeri::all()->sortBy('negeri');
+    //     $daerahPasangan = Daerah::all()->sortBy('daerah');
+    //     $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
+    //     $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
+
+    //     $klien = Klien::where('id', $id)->first();
+    //     $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
+    //     $waris = WarisKlien::where('klien_id',$id)->first();
+    //     $pasangan = PasanganKlien::where('klien_id',$id)->first();
+    //     $rawatan = RawatanKlien::where('klien_id',$id)->first();
+
+    //     return view('profil_klien.pentadbir_pegawai.approve_update', ['updateRequest' => $updateRequest, 'requestedData' => json_decode($updateRequest->requested_data, true)], 
+    //     compact('klien','pekerjaan','waris','pasangan','rawatan','daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan'))
+    //     ->with('success', 'Permintaan Kemaskini telah ' . $request->status . '.');
+    // }
 
 
     // KLIEN
@@ -278,28 +357,6 @@ class ProfilKlienController extends Controller
 
         return $pdf->stream($no_kp . '-profil-peribadi.pdf');
     }
-
-    // public function KlienRequestUpdate(Request $request)
-    // {
-    //     Log::info('KlienRequestUpdate method called');
-    //     Log::info('Request data: ', $request->all());
-
-    //     $clientId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
-
-    //     $updateRequest = KlienUpdateRequest::create([
-    //         'klien_id' => $clientId,
-    //         'requested_data' => json_encode($request->except('_token')), // Store all requested fields except CSRF token
-    //         'status' => 'Dikemaskini'
-    //     ]);
-
-    //     if ($updateRequest) {
-    //         Log::info('Update request stored successfully');
-    //     } else {
-    //         Log::error('Failed to store update request');
-    //     }
-
-    //     return redirect()->back()->with('success', 'Permintaan untuk kemaskini anda telah dihantar untuk kelulusan.');
-    // }
 
     public function KlienRequestUpdate(Request $request)
     {
@@ -372,21 +429,34 @@ class ProfilKlienController extends Controller
 
     public function pekerjaanKlienRequestUpdate(Request $request)
     {
+        // dd($request->all());
+
         $validatedData = $request->validate([
             'pekerjaan' => 'required|string|max:255',
             'pendapatan' => 'nullable|string|max:255',
             'bidang_kerja' => 'nullable|string|max:255',
             'alamat_kerja' => 'nullable|string|max:255',
-            'poskod_kerja' => 'nullable|integer|max:5',
+            'poskod_kerja' => 'nullable|integer',
             'daerah_kerja' => 'nullable|string|max:255',
             'negeri_kerja' => 'nullable|string|max:255',
             'nama_majikan' => 'nullable|string|max:255',
             'no_tel_majikan' => 'nullable|string|max:11',
-        ]);
+        ]);        
 
         // Temporarily bypass validation for testing
         $validatedData = $request->all();
 
+        // Remove the CSRF token from the validated data
+        unset($validatedData['_token']);
+
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
+        if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
+            $validatedData['daerah_kerja'] = null;
+        }
+        if ($validatedData['negeri_kerja'] === 'Pilih Negeri') {
+            $validatedData['negeri_kerja'] = null;
+        }
+        
         $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
         $updateRequest = PekerjaanKlienUpdateRequest::where('klien_id', $klienId)->first();
 
@@ -487,46 +557,5 @@ class ProfilKlienController extends Controller
 
         return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
     }
-
-    // public function pasanganKlienRequestUpdate(Request $request)
-    // {
-    //     // Validate the incoming request
-    //     $validatedData = $request->validate([
-    //         'status_perkahwinan' => 'required|string|max:255',
-    //         'nama_pasangan' => 'nullable|string|max:255',
-    //         'alamat_pasangan' => 'nullable|string|max:255',
-    //         'poskod_pasangan' => 'nullable|string|max:5',
-    //         'daerah_pasangan' => 'nullable|string|max:255',
-    //         'negeri_pasangan' => 'nullable|string|max:255',
-    //         'no_tel_pasangan' => 'nullable|string|max:11',
-    //         'alamat_kerja_pasangan' => 'nullable|string|max:255',
-    //         'poskod_kerja_pasangan' => 'nullable|string|max:5',
-    //         'daerah_kerja_pasangan' => 'nullable|string|max:255',
-    //         'negeri_kerja_pasangan' => 'nullable|string|max:255',
-    //     ]);
-        
-    //     $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
-    //     $updateRequest = PasanganKlienUpdateRequest::where('klien_id', $klienId)->first();
-
-    //     // Ensure to debug the incoming request data
-    //     Log::info('Request data: ', $validatedData);
-
-    //     if ($updateRequest) {
-    //         // Update existing request
-    //         $updateRequest->update([
-    //             'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
-    //             'status' => 'Dikemaskini', // or any other status you prefer
-    //         ]);
-    //     } else {
-    //         // Create new request
-    //         PasanganKlienUpdateRequest::create([
-    //             'klien_id' => $klienId,
-    //             'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
-    //             'status' => 'Dikemaskini',
-    //         ]);
-    //     }
-
-    //     return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
-    // }
 
 }

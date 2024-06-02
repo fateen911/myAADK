@@ -136,10 +136,7 @@
                                 </div>
                             </div>
                             <!--end::Heading-->
-                            @php
-                                $daerahKlien = DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah');
-                                $negeriKlien = DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri');
-                            @endphp
+                            
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -332,12 +329,13 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
+                                        <input type="text" class="form-control form-control-solid" id="jantina" name="jantina" value="{{$klien->jantina}}" readonly/>
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
+                                        {{-- <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih Jantina</option>
                                             <option value="LELAKI" {{ $klien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
                                             <option value="PEREMPUAN" {{ $klien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
-                                        </select>
+                                        </select> --}}
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -354,8 +352,9 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
+                                        <input type="text" class="form-control form-control-solid" id="agama" name="agama" value="{{$klien->agama}}" readonly/>
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
+                                        {{-- <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
                                             <option>Pilih Agama</option>
                                             <option value="ISLAM" {{ $klien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
                                             <option value="CINA" {{ $klien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
@@ -364,7 +363,7 @@
                                             <option value="BUDHA" {{ $klien->agama == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
                                             <option value="SIKH" {{ $klien->agama == 'SIKH' ? 'selected' : '' }}>SIKH</option>
                                             <option value="LAIN-LAIN" {{ $klien->agama == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
-                                        </select>
+                                        </select> --}}
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -381,15 +380,16 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
+                                        <input type="text" class="form-control form-control-solid" id="bangsa" name="bangsa" value="{{$klien->bangsa}}" readonly/>
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
+                                        {{-- <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
                                             <option>Pilih Bangsa</option>
                                             <option value="MELAYU" {{ $klien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
                                             <option value="CINA" {{ $klien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
                                             <option value="INDIA" {{ $klien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
                                             <option value="KRISTIAN" {{ $klien->bangsa == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
                                             <option value="BUDHA" {{ $klien->bangsa == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
-                                        </select>
+                                        </select> --}}
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -423,24 +423,47 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
+                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        @if($updateRequestKlien)
+                                            <button type="button" class="btn btn-secondary" id="luluskanPermohonanKlien" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
+
+                        <!--begin::Modal-->
+                        <div class="modal fade" id="luluskanPermohonanKlien" tabindex="-1" aria-labelledby="luluskanPermohonanKlienLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="luluskanPermohonanKlienLabel">Maklumat Kemaskini</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Nama: <span id="modalNama"></span></p>
+                                        <p>No. KP: <span id="modalNoKP"></span></p>
+                                        <p>Umur: <span id="modalUmur"></span></p>
+                                        <p>No. Tel: <span id="modalNoTel"></span></p>
+                                        <p>E-mel: <span id="modalEmel"></span></p>
+                                        <p>Alamat Rumah: <span id="modalAlamatRumah"></span></p>
+                                        <p>Poskod: <span id="modalPoskod"></span></p>
+                                        <p>Daerah: <span id="modalDaerah"></span></p>
+                                        <p>Negeri: <span id="modalNegeri"></span></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="button" class="btn btn-primary">Luluskan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
+
 
 
                     <!--begin:::Tab pane-->
@@ -540,16 +563,10 @@
                              <div class="row py-5">
                                 <div class="col-md-9 offset-md-4">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
+                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        @if($updateRequestRawatan)
+                                            <button type="button" class="btn btn-secondary" id="luluskanPermohonanRawatan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -762,22 +779,187 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
+                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        @if($updateRequestPekerjaan)
+                                            <button type="button" class="btn btn-secondary" id="modalApprovalPekerjaan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->
+
+                        <!--begin::Modal-->
+                        <div class="modal fade" id="approvalModalPekerjaan" tabindex="-1" aria-labelledby="luluskanPermohonanPekerjaanLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="luluskanPermohonanPekerjaanLabel">Luluskan Permintaan Kemaskini Maklumat Pekerjaan Klien</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="{{ route('pegawai.approveUpdate', ['id' => $updateRequestPekerjaan->klien_id]) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <textarea class="form-control form-control-solid" name="alamat_kerja">{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Keja</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" />
+                                                </div>
+                                            </div>
+                                            <!--begin::Input group-->
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <!--begin::Label-->
+                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                        <span class="required">Daerah Tempat Kerja</span>
+                                                    </label>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="w-100">
+                                                        <!--begin::Select2-->
+                                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" data-hide-search="true">
+                                                            <option>Pilih Daerah Kerja</option>
+                                                            @foreach ($daerahKerja as $item)
+                                                                <option value="{{ $item->id }}" {{ $requestedDataPekerjaan['daerah_kerja'] == $item->id ? 'selected' : '' }}>{{ $item->daerah_kerja }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                             <!--begin::Input group-->
+                                             <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <!--begin::Label-->
+                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                        <span class="required">Negeri Kerja</span>
+                                                    </label>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="w-100">
+                                                        <!--begin::Select2-->
+                                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
+                                                            <option>Pilih Negeri Kerja</option>
+                                                            @foreach ($negeriKerja as $item)
+                                                                <option value="{{ $item->id }}" {{ $requestedDataPekerjaan['negeri_kerja'] == $item->id ? 'selected' : '' }}>{{ $item->negeri_kerja }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <!--end::Select2-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <!--begin::Label-->
+                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                        <span class="required">Nama Majikan</span>
+                                                    </label>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="w-100">
+                                                        <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <!--begin::Label-->
+                                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                                        <span class="required">No Telefon Majikan</span>
+                                                    </label>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="w-100">
+                                                        <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                    
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Maklumat Kemaskini</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <select class="form-select form-select-solid" name="status">
+                                                        <option value="Lulus" {{ $updateRequestPekerjaan->status == 'Lulus' ? 'selected' : '' }}>Lulus</option>
+                                                        <option value="Ditolak" {{ $updateRequestPekerjaan->status == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="row py-5">
+                                                <div class="col-md-9 offset-md-3">
+                                                    <div class="d-flex">
+                                                        <button type="reset" class="btn btn-light me-3">Ditolak</button>
+                                                        <button type="button" class="btn btn-primary">Luluskan</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">
+                                            <span class="indicator-label">Simpan</span>
+                                            <span class="indicator-progress">Sila tunggu...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
 
@@ -940,16 +1122,10 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
+                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        @if($updateRequestWaris)
+                                            <button type="button" class="btn btn-secondary" id="luluskanPermohonanWaris" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1212,16 +1388,10 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Batal</button>
-                                        <!--end::Button-->
-                                        <!--begin::Button-->
-                                        <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                        <!--end::Button-->
+                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        @if($updateRequestPasangan)
+                                            <button type="button" class="btn btn-secondary" id="luluskanPermohonanPasangan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1280,4 +1450,38 @@
         calculateAgeFromIC();
     });
 </script>
+
+<!--begin::Script-->
+<script>
+    document.getElementById('luluskanPermohonanKlienButton').addEventListener('click', function() {
+        document.getElementById('modalNama').innerText = document.getElementById('nama').value;
+        document.getElementById('modalNoKP').innerText = document.getElementById('no_kp').value;
+        document.getElementById('modalUmur').innerText = document.getElementById('umur').value;
+        document.getElementById('modalNoTel').innerText = document.getElementById('no_tel').value;
+        document.getElementById('modalEmel').innerText = document.getElementById('emel').value;
+        document.getElementById('modalAlamatRumah').innerText = document.getElementById('alamat_rumah').value;
+        document.getElementById('modalPoskod').innerText = document.getElementById('poskod').value;
+        document.getElementById('modalDaerah').innerText = document.getElementById('daerah').options[document.getElementById('daerah').selectedIndex].text;
+        document.getElementById('modalNegeri').innerText = document.getElementById('negeri').options[document.getElementById('negeri').selectedIndex].text;
+        var modal = new bootstrap.Modal(document.getElementById('luluskanPermohonanKlien'));
+        modal.show();
+    });
+</script>
+
+<script>
+    document.getElementById('modalApprovalPekerjaan').addEventListener('click', function() {
+        // document.getElementById('modalNama').innerText = document.getElementById('nama').value;
+        // document.getElementById('modalNoKP').innerText = document.getElementById('no_kp').value;
+        // document.getElementById('modalUmur').innerText = document.getElementById('umur').value;
+        // document.getElementById('modalNoTel').innerText = document.getElementById('no_tel').value;
+        // document.getElementById('modalEmel').innerText = document.getElementById('emel').value;
+        // document.getElementById('modalAlamatRumah').innerText = document.getElementById('alamat_rumah').value;
+        // document.getElementById('modalPoskod').innerText = document.getElementById('poskod').value;
+        // document.getElementById('modalDaerah').innerText = document.getElementById('daerah').options[document.getElementById('daerah').selectedIndex].text;
+        // document.getElementById('modalNegeri').innerText = document.getElementById('negeri').options[document.getElementById('negeri').selectedIndex].text;
+        var modal = new bootstrap.Modal(document.getElementById('approvalModalPekerjaan'));
+        modal.show();
+    });
+</script>
+<!--end::Script-->
 @endsection

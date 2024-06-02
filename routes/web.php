@@ -32,7 +32,7 @@ Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna
 
 // PENTADBIR - PENGURUSAN PROFIL 
 Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
-Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'approveUpdate'])->middleware('auth')->name('maklumat-klien');
+Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
 Route::post('/kemaskini/maklumat/pekerjaan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPekerjaanKlien'])->middleware('auth')->name('kemaskini.maklumat.pekerjaan.klien');
 Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatWarisKlien'])->middleware('auth')->name('kemaskini.maklumat.waris.klien');
@@ -40,8 +40,9 @@ Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::c
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
 
 // PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE 
-Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewUpdateRequest'])->name('pegawai.viewUpdateRequest');
+Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewClientProfile'])->name('pegawai.viewUpdateRequest');
 Route::patch('/approve-update/{id}', [ProfilKlienController::class, 'approveUpdate'])->name('pegawai.approveUpdate');
+Route::patch('/pegawai/rejectUpdate/{id}', [ProfilKlienController::class, 'rejectProfileUpdate'])->name('pegawai.rejectUpdate');
 
 // KLIEN - PENGURUSAN PROFIL 
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
