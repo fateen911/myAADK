@@ -435,7 +435,7 @@
                         <!--end::Form-->
 
                         <!--begin::Modal-->
-                        <div class="modal fade" id="luluskanPermohonanKlien" tabindex="-1" aria-labelledby="luluskanPermohonanKlienLabel" aria-hidden="true">
+                        {{-- <div class="modal fade" id="luluskanPermohonanKlien" tabindex="-1" aria-labelledby="luluskanPermohonanKlienLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -459,7 +459,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
@@ -695,9 +695,6 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                {{-- @php
-                                    dd($daerah);
-                                @endphp --}}
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
@@ -780,7 +777,7 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($updateRequestPekerjaan)
+                                        @if($requestPekerjaan)
                                             <button type="button" class="btn btn-secondary" id="modalApprovalPekerjaan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
                                         @endif
                                     </div>
@@ -790,7 +787,7 @@
                         </form>
                         <!--end::Form-->
 
-                        <!--begin::Modal-->
+                        <!--begin::Modal Pekerjaan-->
                         <div class="modal fade" id="approvalModalPekerjaan" tabindex="-1" aria-labelledby="luluskanPermohonanPekerjaanLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -802,163 +799,109 @@
                                         <form method="post" action="{{ route('pegawai.approveUpdate', ['id' => $updateRequestPekerjaan->klien_id]) }}">
                                             @csrf
                                             @method('PATCH')
+
+                                            @php
+                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
+                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                            @endphp
                                     
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" />
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" />
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" />
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja">{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Keja</label>
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" />
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
                                                 </div>
                                             </div>
-                                            <!--begin::Input group-->
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                        <span class="required">Daerah Tempat Kerja</span>
-                                                    </label>
-                                                    <!--end::Label-->
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <div class="w-100">
-                                                        <!--begin::Select2-->
-                                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" data-hide-search="true">
-                                                            <option>Pilih Daerah Kerja</option>
-                                                            @foreach ($daerahKerja as $item)
-                                                                <option value="{{ $item->id }}" {{ $requestedDataPekerjaan['daerah_kerja'] == $item->id ? 'selected' : '' }}>{{ $item->daerah_kerja }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <!--end::Select2-->
-                                                    </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
                                                 </div>
                                             </div>
-                                            <!--end::Input group-->
-                                             <!--begin::Input group-->
-                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                        <span class="required">Negeri Kerja</span>
-                                                    </label>
-                                                    <!--end::Label-->
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="w-100">
-                                                        <!--begin::Select2-->
-                                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
-                                                            <option>Pilih Negeri Kerja</option>
-                                                            @foreach ($negeriKerja as $item)
-                                                                <option value="{{ $item->id }}" {{ $requestedDataPekerjaan['negeri_kerja'] == $item->id ? 'selected' : '' }}>{{ $item->negeri_kerja }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <!--end::Select2-->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                        <span class="required">Nama Majikan</span>
-                                                    </label>
-                                                    <!--end::Label-->
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <div class="w-100">
-                                                        <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" />
-                                                    </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
                                                 </div>
                                             </div>
-                                            <!--end::Input group-->
-                                            <!--begin::Input group-->
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <!--begin::Label-->
-                                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                                        <span class="required">No Telefon Majikan</span>
-                                                    </label>
-                                                    <!--end::Label-->
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <div class="w-100">
-                                                        <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" />
-                                                    </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
                                                 </div>
                                             </div>
-                                            <!--end::Input group-->
-                                    
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Maklumat Kemaskini</label>
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
                                                 </div>
-                                                <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" name="status">
-                                                        <option value="Lulus" {{ $updateRequestPekerjaan->status == 'Lulus' ? 'selected' : '' }}>Lulus</option>
-                                                        <option value="Ditolak" {{ $updateRequestPekerjaan->status == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-                                                    </select>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
                                                 </div>
                                             </div>
-                                    
-                                            <div class="row py-5">
-                                                <div class="col-md-9 offset-md-3">
+
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
+                                                </div>
+                                                <div class="col-md-8">
                                                     <div class="d-flex">
-                                                        <button type="reset" class="btn btn-light me-3">Ditolak</button>
-                                                        <button type="button" class="btn btn-primary">Luluskan</button>
+                                                        <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
+                                                        <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
+
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                        <button type="submit" class="btn btn-primary">
-                                            <span class="indicator-label">Simpan</span>
-                                            <span class="indicator-progress">Sila tunggu...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>                                                
                         <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
@@ -1413,6 +1356,7 @@
 <!--end::Content-->
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script>
     $(document).ready(function() {
@@ -1451,6 +1395,30 @@
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if there is a flash message
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: '{!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        // Check if there is a flash error message
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: '{!! session('error') !!}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    });
+</script>
+
 <!--begin::Script-->
 <script>
     document.getElementById('luluskanPermohonanKlienButton').addEventListener('click', function() {
@@ -1469,16 +1437,8 @@
 </script>
 
 <script>
-    document.getElementById('modalApprovalPekerjaan').addEventListener('click', function() {
-        // document.getElementById('modalNama').innerText = document.getElementById('nama').value;
-        // document.getElementById('modalNoKP').innerText = document.getElementById('no_kp').value;
-        // document.getElementById('modalUmur').innerText = document.getElementById('umur').value;
-        // document.getElementById('modalNoTel').innerText = document.getElementById('no_tel').value;
-        // document.getElementById('modalEmel').innerText = document.getElementById('emel').value;
-        // document.getElementById('modalAlamatRumah').innerText = document.getElementById('alamat_rumah').value;
-        // document.getElementById('modalPoskod').innerText = document.getElementById('poskod').value;
-        // document.getElementById('modalDaerah').innerText = document.getElementById('daerah').options[document.getElementById('daerah').selectedIndex].text;
-        // document.getElementById('modalNegeri').innerText = document.getElementById('negeri').options[document.getElementById('negeri').selectedIndex].text;
+    document.getElementById('modalApprovalPekerjaan').addEventListener('click', function() 
+    {
         var modal = new bootstrap.Modal(document.getElementById('approvalModalPekerjaan'));
         modal.show();
     });
