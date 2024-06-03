@@ -367,7 +367,7 @@ class ProfilKlienController extends Controller
             'status_oku' => 'required|string|max:255',
             'seksyen_okp' => 'required|string|max:255',
             'tarikh_tamat_pengawasan' => 'required|date',
-            'skor_ccri' => 'required|double',
+            'skor_ccri' => 'required|numeric',
         ]);
         
         $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');

@@ -519,7 +519,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" id="skor_ccri" name="skor_ccri" value="{{$butiranKlien->skor_ccri}}"/>
+                                    <input type="number" class="form-control form-control-solid" id="skor_ccri" name="skor_ccri" step="0.01" value="{{$butiranKlien->skor_ccri}}"  required />
                                     <!--end::Input-->
                                 </div>
                             </div>

@@ -142,7 +142,7 @@
 													<!--begin::Modal header-->
 													<div class="modal-header">
 														<!--begin::Modal title-->
-														<h2>Kemaskini Maklumat</h2>
+														<h2>Kemaskini Maklumat Akaun Pengguna</h2>
 														<!--end::Modal title-->
 														<!--begin::Close-->
 														<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -265,7 +265,7 @@
 										<h2 class="fw-bold">Tambah Pengguna</h2>
 										<!--end::Modal title-->
 										<!--begin::Close-->
-										<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+										<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
 											<i class="ki-duotone ki-cross fs-1">
 												<span class="path1"></span>
 												<span class="path2"></span>
@@ -332,7 +332,7 @@
 									<!--begin::Modal footer-->
 									<div class="modal-footer flex-center">
 										<!--begin::Button-->
-										<button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-light me-3">Batal</button>
+										<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
 										<!--end::Button-->
 										<!--begin::Button-->
 										<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
