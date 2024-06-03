@@ -30,6 +30,10 @@
     </style>
 </head>
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
     <!--begin::Title-->
@@ -329,13 +333,12 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <input type="text" class="form-control form-control-solid" id="jantina" name="jantina" value="{{$klien->jantina}}" readonly/>
                                         <!--begin::Select2-->
-                                        {{-- <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
+                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
                                             <option>Pilih Jantina</option>
                                             <option value="LELAKI" {{ $klien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
                                             <option value="PEREMPUAN" {{ $klien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
-                                        </select> --}}
+                                        </select>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -352,9 +355,8 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <input type="text" class="form-control form-control-solid" id="agama" name="agama" value="{{$klien->agama}}" readonly/>
                                         <!--begin::Select2-->
-                                        {{-- <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
+                                        <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
                                             <option>Pilih Agama</option>
                                             <option value="ISLAM" {{ $klien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
                                             <option value="CINA" {{ $klien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
@@ -363,7 +365,7 @@
                                             <option value="BUDHA" {{ $klien->agama == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
                                             <option value="SIKH" {{ $klien->agama == 'SIKH' ? 'selected' : '' }}>SIKH</option>
                                             <option value="LAIN-LAIN" {{ $klien->agama == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
-                                        </select> --}}
+                                        </select>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -380,16 +382,15 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <input type="text" class="form-control form-control-solid" id="bangsa" name="bangsa" value="{{$klien->bangsa}}" readonly/>
                                         <!--begin::Select2-->
-                                        {{-- <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
+                                        <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
                                             <option>Pilih Bangsa</option>
                                             <option value="MELAYU" {{ $klien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
                                             <option value="CINA" {{ $klien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
                                             <option value="INDIA" {{ $klien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
                                             <option value="KRISTIAN" {{ $klien->bangsa == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
                                             <option value="BUDHA" {{ $klien->bangsa == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
-                                        </select> --}}
+                                        </select>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -424,8 +425,10 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($updateRequestKlien)
-                                            <button type="button" class="btn btn-secondary" id="approvalModalPeribadiKlien" class="modal-trigger" data-target="#approvalPeribadiKlien" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @if($requestKlien)
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPeribadiKlien" data-target="#approvalPeribadiKlien" style="background-color:darkblue; color: white;">
+                                                Luluskan Permohonan Kemaskini
+                                            </button>
                                         @endif
                                     </div>
                                 </div>
@@ -435,7 +438,7 @@
                         <!--end::Form-->
 
                         <!--begin::Modal PeribadiKlien-->
-                        <div class="modal fade" id="approvalModalPeribadiKlien" tabindex="-1" aria-labelledby="luluskanPermohonanPeribadiKlienLabel" aria-hidden="true">
+                        <div class="modal fade" id="approvalPeribadiKlien" tabindex="-1" aria-labelledby="luluskanPermohonanPeribadiKlienLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -448,84 +451,104 @@
                                             @method('PATCH')
 
                                             @php
-                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                                $daerahRumahKlien = DB::table('senarai_daerah')->where('id', $requestedDataKlien['daerah'])->value('senarai_daerah.daerah');
+                                                $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $requestedDataKlien['negeri'])->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="nama" value="{{ $requestedDataKlien['nama'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{ $requestedDataKlien['no_kp'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="no_tel" value="{{ $requestedDataKlien['no_tel'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Emel</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            {{-- <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="jantina" value="{{ $requestedDataKlien['jantina'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="agama" value="{{ $requestedDataKlien['agama'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="bangsa" value="{{ $requestedDataKlien['bangsa'] }}" readonly />
+                                                </div>
+                                            </div> --}}
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control form-control-solid" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahRumahKlien }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriRumahKlien }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Tahap Pendidikan</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
                                                 </div>
                                             </div>
 
@@ -619,7 +642,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Tarikh Tamat Program Rawatan dan Pemulihan</span>
+                                        <span class="required">Tarikh Tamat Rawatan dan Pemulihan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -652,8 +675,10 @@
                                 <div class="col-md-9 offset-md-4">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($updateRequestRawatan)
-                                            <button type="button" class="btn btn-secondary" id="approvalModalRawatan" class="modal-trigger" data-target="#approvalModalRawatan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @if($requestRawatan)
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalRawatan" data-target="#approvalRawatan" style="background-color:darkblue; color: white;">
+                                                Luluskan Permohonan Kemaskini
+                                            </button>
                                         @endif
                                     </div>
                                 </div>
@@ -663,97 +688,59 @@
                         <!--end::Form-->
 
                         <!--begin::Modal Rawatan-->
-                        <div class="modal fade" id="approvalModalRawatan" tabindex="-1" aria-labelledby="luluskanPermohonanRawatanLabel" aria-hidden="true">
+                        <div class="modal fade" id="approvalRawatan" tabindex="-1" aria-labelledby="luluskanPermohonanRawatanLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="luluskanPermohonanRawatanLabel">Luluskan Permintaan Kemaskini Maklumat Pekerjaan Klien</h5>
+                                        <h5 class="modal-title" id="luluskanPermohonanRawatanLabel">Luluskan Permintaan Kemaskini Maklumat Rawatan Klien</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="{{ route('pegawai.approveUpdate', ['id' => $updateRequestPekerjaan->klien_id]) }}">
+                                        <form method="post" action="{{ route('approve.update.rawatan', ['id' => $updateRequestRawatan->klien_id]) }}">
                                             @csrf
                                             @method('PATCH')
 
-                                            @php
-                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
-                                            @endphp
-                                    
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Kesihatan Mental</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="status_kesihatan_mental" value="{{ $requestedDataRawatan['status_kesihatan_mental'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Orang Kurang Upaya (OKU)</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="status_oku" value="{{ $requestedDataRawatan['status_oku'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Status OKP</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="seksyen_okp" value="{{ $requestedDataRawatan['seksyen_okp'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Tarikh Tamat Rawatan dan Pemulihan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                    @php
+                                                        $formattedDate = Carbon::parse($requestedDataRawatan['tarikh_tamat_pengawasan'])->format('d-m-Y');
+                                                    @endphp
+                                                    <input type="text" class="form-control form-control-solid" name="tarikh_tamat_pengawasan" value="{{ $formattedDate }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="skor_ccri" value="{{ $requestedDataRawatan['skor_ccri'] }}" readonly />
                                                 </div>
                                             </div>
 
@@ -983,7 +970,9 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         @if($requestPekerjaan)
-                                            <button type="button" class="btn btn-secondary" id="modalApprovalPekerjaan" class="modal-trigger" data-target="#approvalModalPekerjaan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPekerjaan" data-target="#approvalPekerjaan" style="background-color:darkblue; color: white;">
+                                                Luluskan Permohonan Kemaskini
+                                            </button>
                                         @endif
                                     </div>
                                 </div>
@@ -993,7 +982,7 @@
                         <!--end::Form-->
 
                         <!--begin::Modal Pekerjaan-->
-                        <div class="modal fade" id="approvalModalPekerjaan" tabindex="-1" aria-labelledby="luluskanPermohonanPekerjaanLabel" aria-hidden="true">
+                        <div class="modal fade" id="approvalPekerjaan" tabindex="-1" aria-labelledby="luluskanPermohonanPekerjaanLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -1271,8 +1260,10 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($updateRequestWaris)
-                                            <button type="button" class="btn btn-secondary" id="approvalModalWaris" class="modal-trigger" data-target="#approvalModalWaris" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @if($requestWaris)
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalWaris" data-target="#approvalWaris" style="background-color:darkblue; color: white;">
+                                                Luluskan Permohonan Kemaskini
+                                            </button>
                                         @endif
                                     </div>
                                 </div>
@@ -1282,97 +1273,77 @@
                         <!--end::Form-->
 
                         <!--begin::Modal Waris-->
-                        <div class="modal fade" id="approvalModalWaris" tabindex="-1" aria-labelledby="luluskanPermohonanWarisLabel" aria-hidden="true">
+                        <div class="modal fade" id="approvalWaris" tabindex="-1" aria-labelledby="luluskanPermohonanWarisLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="luluskanPermohonanWarisLabel">Luluskan Permintaan Kemaskini Maklumat Pekerjaan Klien</h5>
+                                        <h5 class="modal-title" id="luluskanPermohonanWarisLabel">Luluskan Permintaan Kemaskini Maklumat Waris Klien</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="{{ route('pegawai.approveUpdate', ['id' => $updateRequestPekerjaan->klien_id]) }}">
+                                        <form method="post" action="{{ route('approve.update.waris', ['id' => $updateRequestWaris->klien_id]) }}">
                                             @csrf
                                             @method('PATCH')
 
                                             @php
-                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                                $daerahWaris = DB::table('senarai_daerah')->where('id', $requestedDataWaris['daerah_waris'])->value('senarai_daerah.daerah');
+                                                $negeriWaris = DB::table('senarai_negeri')->where('id', $requestedDataWaris['negeri_waris'])->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Hubungan Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="hubungan_waris" value="{{ $requestedDataWaris['hubungan_waris'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="nama_waris" value="{{ $requestedDataWaris['nama_waris'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="no_tel_waris" value="{{ $requestedDataWaris['no_tel_waris'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                    <textarea class="form-control form-control-solid" name="alamat_waris" readonly>{{ $requestedDataWaris['alamat_waris'] }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="poskod_waris" value="{{ $requestedDataWaris['poskod_waris'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahWaris }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriWaris }}" readonly />
                                                 </div>
                                             </div>
 
@@ -1654,8 +1625,10 @@
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($updateRequestPasangan)
-                                            <button type="button" class="btn btn-secondary" id="approvalModalPasangan" class="modal-trigger" data-target="#approvalModalPasangan" style="background-color:darkblue; color: white;">Luluskan Permohonan Kemaskini</button>
+                                        @if($requestPasangan)
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPasangan" data-target="#approvalPasangan" style="background-color:darkblue; color: white;">
+                                                Luluskan Permohonan Kemaskini
+                                            </button>
                                         @endif
                                     </div>
                                 </div>
@@ -1665,73 +1638,105 @@
                         <!--end::Form-->
 
                         <!--begin::Modal Pasangan-->
-                        <div class="modal fade" id="approvalModalPasangan" tabindex="-1" aria-labelledby="luluskanPermohonanPasanganLabel" aria-hidden="true">
+                        <div class="modal fade" id="approvalPasangan" tabindex="-1" aria-labelledby="luluskanPermohonanPasanganLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="luluskanPermohonanPasanganLabel">Luluskan Permintaan Kemaskini Maklumat Pekerjaan Klien</h5>
+                                        <h5 class="modal-title" id="luluskanPermohonanPasanganLabel">Luluskan Permintaan Kemaskini Maklumat Pasangan Klien</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="{{ route('pegawai.approveUpdate', ['id' => $updateRequestPekerjaan->klien_id]) }}">
+                                        <form method="post" action="{{ route('approve.update.pasangan', ['id' => $updateRequestPasangan->klien_id]) }}">
                                             @csrf
                                             @method('PATCH')
 
                                             @php
-                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                                $daerahPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_pasangan'])->value('senarai_daerah.daerah');
+                                                $negeriPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_pasangan'])->value('senarai_negeri.negeri');
+                                                $daerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah');
+                                                $negeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Perkahwinan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
                                                 </div>
                                             </div>
                                     
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                </div>
-                                            </div>
-                                    
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
+                                                    <textarea class="form-control form-control-solid" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahPasangan }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriPasangan }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Kerja Pasangan</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control form-control-solid" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerjaPasangan }}" readonly />
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1739,23 +1744,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerjaPasangan }}" readonly />
                                                 </div>
                                             </div>
 
