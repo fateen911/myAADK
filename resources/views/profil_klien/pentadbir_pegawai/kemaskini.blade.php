@@ -1,6 +1,11 @@
 @extends('layouts._default')
 
 @section('content')
+
+@php
+    use Carbon\Carbon;
+@endphp
+
 <head>
     <style>
         /* Flexbox settings for the wrapper */
@@ -29,10 +34,6 @@
         }
     </style>
 </head>
-
-@php
-    use Carbon\Carbon;
-@endphp
 
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
@@ -1856,11 +1857,4 @@
     });
 </script>
 
-{{-- <script>
-    document.getElementById('modalApprovalPekerjaan').addEventListener('click', function() 
-    {
-        var modal = new bootstrap.Modal(document.getElementById('approvalModalPekerjaan'));
-        modal.show();
-    });
-</script> --}}
 @endsection
