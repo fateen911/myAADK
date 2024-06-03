@@ -466,7 +466,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" name="no_kp" value="{{ $requestedDataKlien['no_kp'] }}" readonly />

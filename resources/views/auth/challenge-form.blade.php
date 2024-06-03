@@ -12,7 +12,7 @@
         <!--end::Title-->
 
        <div class="mb-2 text-sm text-gray-600 justify-center">
-            {{ __('Sila masukkan No. Kad Pengenalan anda untuk menetapkan semula kata laluan.') }}
+            {{ __('Sila isikan maklumat di bawah untuk menetapkan semula kata laluan.') }}
         </div>
     </div>
     <!--begin::Heading-->
@@ -22,29 +22,29 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}" data-kt-redirect-url="{{ route('login') }}">
+    <form method="POST" action="{{ route('check.challenge.form') }}" data-kt-redirect-url="{{ route('login') }}">
         @csrf
 
         <div>
-            <x-input-label for="no_kp" :value="__('No Kad Pengenalan')" />
-            <x-text-input id="no_kp" class="block w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
+            <x-input-label for="no_kad_pengenalan" :value="__('No Kad Pengenalan')" />
+            <x-text-input id="no_kad_pengenalan" class="block w-full pr-10" type="text" name="no_kad_pengenalan" :value="old('no_kad_pengenalan')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('no_kad_pengenalan')" class="mt-2" />
+        </div>
+
+        <br>
+
+        <div>
+            <x-input-label for="nama_waris" :value="__('Apakah Nama Penuh Waris Anda ?')" />
+            <x-text-input id="nama_waris" class="block w-full pr-10" type="text" name="nama_waris" :value="old('nama_waris')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('nama_waris')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-center mt-3">
             <x-primary-button>
-                {{ __('Emel Pautan Tetapan Semula Kata Laluan') }}
+                {{ __('Seterusnya') }}
             </x-primary-button>
         </div>
     </form>
-
-    <div class="text-center">
-        <a href="{{ route('password.challenge') }}">
-            <div class="mt-3 text-sm text-gray-600 justify-center">
-                {{ __('Kaedah Lain ?') }}
-            </div>
-        </a>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

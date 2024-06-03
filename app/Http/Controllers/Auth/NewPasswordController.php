@@ -54,7 +54,7 @@ class NewPasswordController extends Controller
         $validator = Validator::make($request->all(), [
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:12',
         ]);
 
         // Check if the validation fails

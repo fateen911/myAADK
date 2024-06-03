@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\PasswordResetChallengeFormController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
                 ->name('password.email');
+
+    Route::get('/view/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'showChallengeForm'])->name('password.challenge');
+
+    Route::post('/check/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'checkChallengeAnswer'])->name('check.challenge.form');
+
+    Route::get('/reset-password/challenge', [PasswordResetChallengeFormController::class, 'viewResetPasswordChallenge'])->name('reset.password.challenge');
+
+    Route::post('/store/reset-password/challenge', [PasswordResetChallengeFormController::class, 'storeResetPasswordChallenge'])->name('store.reset.password.challenge');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
                 ->name('password.reset');
