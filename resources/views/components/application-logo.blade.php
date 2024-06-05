@@ -1,1 +1,1 @@
-<img alt="Logo" src="logo/aadk.png" style="height: 30%; width: 30%;  display: block; margin: 0 auto; padding-bottom: 10px;" />
+<img alt="Logo" src="{{ asset('logo/aadk.png') }}" style="height: 30%; width: 30%;  display: block; margin: 0 auto; padding-bottom: 10px;" />
