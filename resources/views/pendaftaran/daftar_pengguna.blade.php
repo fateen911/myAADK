@@ -95,7 +95,7 @@
 									<th class="min-w-125px">Emel</th>
 									<th class="min-w-125px">Peranan</th>
 									<th class="min-w-125px">Tarikh Daftar</th>
-									<th class="min-w-75px">Tindakan</th>
+									<th class="min-w-75px">Kemaskini</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold text-gray-600">

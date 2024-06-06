@@ -54,7 +54,7 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-xxl">
+        <div id="kt_app_content_container" class="app-container container-xxl" style="width: 80%;">
             <!--begin::Sign-in Method-->
             <div class="card mb-5 mb-xl-10">
                 <!--begin::Card header-->

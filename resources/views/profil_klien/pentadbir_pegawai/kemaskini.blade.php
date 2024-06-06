@@ -83,6 +83,29 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
+                            <i class="ki-duotone ki-profile-user fs-2 me-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>Maklumat Keluarga
+                        </a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                            <i class="ki-duotone ki-profile-user fs-2 me-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>Maklumat Pasangan
+                        </a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
                         <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
                             <i class="ki-duotone ki-pulse fs-2 me-2">
                                 <span class="path1"></span>
@@ -100,27 +123,6 @@
                                 <span class="path3"></span>
                             </i>Maklumat Pekerjaan
                         </a>
-                    </li>
-                    <!--end:::Tab item-->
-                    <!--begin:::Tab item-->
-                    <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
-                            <i class="ki-duotone ki-profile-user fs-2 me-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                            </i>Maklumat Pasangan</a>
-                    </li>
-                    <!--end:::Tab item-->
-                    <!--begin:::Tab item-->
-                    <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
-                            <i class="ki-duotone ki-profile-user fs-2 me-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
-                            </i>Maklumat Keluarga</a>
                     </li>
                     <!--end:::Tab item-->
                 </ul>
@@ -411,6 +413,7 @@
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" data-placeholder="Pilih Tahap Pendidikan">
                                             <option>Pilih Tahap Pendidikan</option>
+                                            <option value="PRA SEKOLAH" {{ $klien->tahap_pendidikan == 'PRA SEKOLAH' ? 'selected' : '' }}>PRA SEKOLAH</option>
                                             <option value="PENDIDIKAN RENDAH" {{ $klien->tahap_pendidikan == 'PENDIDIKAN RENDAH' ? 'selected' : '' }}>PENDIDIKAN RENDAH</option>
                                             <option value="PENDIDIKAN MENENGAH" {{ $klien->tahap_pendidikan == 'PENDIDIKAN MENENGAH' ? 'selected' : '' }}>PENDIDIKAN MENENGAH</option>
                                             <option value="PENGAJIAN TINGGI" {{ $klien->tahap_pendidikan == 'PENGAJIAN TINGGI' ? 'selected' : '' }}>PENGAJIAN TINGGI</option>
@@ -601,7 +604,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$rawatan->status_kesihatan_mental}}" readonly/>
+                                    <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$rawatan->status_kesihatan_mental}}"/>
                                     <!--end::Input-->
                                 </div>
                             </div>

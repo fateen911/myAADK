@@ -9,8 +9,8 @@
 
         /* Define styles for the MyAADK span */
         a .myaadk-text {
-            font-family: 'Arial', sans-serif;  /* You can choose another font if you prefer */
-            font-size: 30px;  /* Adjust the font size as needed */
+            font-family:Georgia, 'Times New Roman', Times, serif;  
+            font-size: 27px;  
             margin-left: 10px;  /* Adjust the space between the logo and the text */
             padding-top: 5px;
             color: lightgray;  /* Optional: Set the text color */
@@ -33,7 +33,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MyAADK</span>
+            <span class="myaadk-text">i-Recover</span>
         </a>
         
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -474,6 +474,18 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
+                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Pendaftaran</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item">
+                                <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
@@ -491,18 +503,6 @@
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Kehadiran</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pendaftaran</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>
@@ -554,7 +554,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MyAADK</span>
+            <span class="myaadk-text">i-Recover</span>
         </a>
         
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -714,7 +714,7 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Kemaskini</span>
+                            <span class="menu-title">Soal Selidik</span>
                         </span>
                     </div>
                     <!--end:Menu item-->
@@ -741,10 +741,9 @@
                                     <span class="path6"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Pendaftaran</span>
+                            <span class="menu-title">Kehadiran</span>
                         </span>
                         <!--end:Menu link-->
-
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -757,12 +756,11 @@
                                     <span class="path6"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Kehadiran</span>
+                            <span class="menu-title">Pengesahan Kehadiran</span>
                         </span>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
-
                 </div>
                 <!--end::Menu-->
             </div>
@@ -778,7 +776,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MyAADK</span>
+            <span class="myaadk-text">i-Recover</span>
         </a>
         
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
