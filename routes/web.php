@@ -19,6 +19,10 @@ Route::get('/', function () {
 Route::get('/pengurusan_program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
 Route::get('/pengurusan_program/try',[PengurusanProgController::class, 'try'])->name('pengurusan_program.try');
 
+// PENGURUSAN PROGRAM - QR CODE
+Route::get('/pengurusan_program/qr_code',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
+Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share']);
+
 // PENGURUSAN PROGRAM - PEGAWAI AADK
 Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
 Route::get('/pengurusan_program/pegawai_aadk/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');

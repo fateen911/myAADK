@@ -19,6 +19,7 @@
         <!-- Custom AADK CSS -->
         <link rel="stylesheet" href="/assets/css/customAADK.css">
 
+
         <style>
             .btn-icon {
                 display: flex;
@@ -104,8 +105,19 @@
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Belum Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -113,8 +125,19 @@
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -122,8 +145,19 @@
                                 </td>
                                 <td>Alumni</td>
                                 <td>Belum Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -131,8 +165,19 @@
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -140,8 +185,19 @@
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Belum Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -149,8 +205,19 @@
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -158,8 +225,19 @@
                                 </td>
                                 <td>Alumni</td>
                                 <td>Selesai</td>
-                                <td>-</td>
-                                <td>-</td>
+                                <td>
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -260,6 +338,22 @@
                 confirmButtonText: 'OK'
             });
             @endif
+        });
+    </script>
+    <!--share button-->
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('share-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+            var icons = document.getElementById('social-media-icons');
+            if (icons.classList.contains('hidden')) {
+                icons.classList.remove('hidden');
+            } else {
+                icons.classList.add('hidden');
+            }
         });
     </script>
 
