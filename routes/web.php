@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\ProfilKlienController;
+use App\Http\Controllers\PengurusanProgController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -13,6 +14,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//TRY
+Route::get('/pengurusan_program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
+
+// PENGURUSAN PROGRAM - PEGAWAI AADK
+Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
+Route::get('/pengurusan_program/pegawai_aadk/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
+Route::get('/pengurusan_program/pegawai_aadk/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
+Route::get('/pengurusan_program/pegawai_aadk/senarai_prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
+
+// PENGURUSAN PROGRAM - PENRADBIR SISTEM
+Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
+Route::get('/pengurusan_program/pentadbir_sistem/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
+Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
+Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
+
+// PENGURUSAN PROGRAM - KLIEN
+Route::get('/pengurusan_program/klien/daftar_prog',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
+
+
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -30,7 +51,7 @@ Route::get('/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPenggun
 Route::post('kemaskini-pengguna', [DaftarPenggunaController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
 Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
 
-// PENTADBIR - PENGURUSAN PROFIL 
+// PENTADBIR - PENGURUSAN PROFIL
 Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
 Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 
@@ -41,7 +62,7 @@ Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::clas
 Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPasanganKlien'])->middleware('auth')->name('kemaskini.maklumat.pasangan.klien');
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
 
-// PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE 
+// PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
 // Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewClientProfile'])->name('pegawai.viewUpdateRequest');
 // Route::patch('/pegawai/rejectUpdate/{id}', [ProfilKlienController::class, 'rejectProfileUpdate'])->name('pegawai.rejectUpdate');
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');
@@ -51,11 +72,11 @@ Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::clas
 Route::patch('/approve-update/rawatan-klien/{id}', [ProfilKlienController::class, 'approveUpdateRawatan'])->name('approve.update.rawatan');
 
 
-// KLIEN - PENGURUSAN PROFIL 
+// KLIEN - PENGURUSAN PROFIL
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
 Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
 
-// KLIEN - SEND REQUEST TO UPDATE PROFILE 
+// KLIEN - SEND REQUEST TO UPDATE PROFILE
 Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');
 Route::post('/klien/maklumat-rawatan/request-update', [ProfilKlienController::class, 'rawatanKlienRequestUpdate'])->name('rawatanKlien.requestUpdate');
 Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController::class, 'pekerjaanKlienRequestUpdate'])->name('pekerjaanKlien.requestUpdate');
