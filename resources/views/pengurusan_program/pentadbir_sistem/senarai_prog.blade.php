@@ -75,7 +75,7 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add customer-->
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Program</button>
+                                <a href={{url('/pengurusan_program/pentadbir_sistem/daftar_prog')}}> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer"> Tambah Program </button></a>
                                 <!--end::Add customer-->
                             </div>
                             <!--end::Toolbar-->
@@ -100,7 +100,7 @@
                             <tbody class="fw-semibold text-gray-600">
                             <tr>
                                 <td>
-                                    Program Pemulihan Bersepadu
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Pemulihan Bersepadu </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Belum Selesai</td>
@@ -109,7 +109,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Sesi Terapi Pencegahan Relaps
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Sesi Terapi Pencegahan Relaps </a>
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Selesai</td>
@@ -118,7 +118,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Program Kepulihan Komuniti
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Kepulihan Komuniti </a>
                                 </td>
                                 <td>Alumni</td>
                                 <td>Belum Selesai</td>
@@ -127,7 +127,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Kelab Sokongan Pulih Diri
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Kelab Sokongan Pulih Diri </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
@@ -136,7 +136,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Bengkel Kesedaran Diri
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Bengkel Kesedaran Diri </a>
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Belum Selesai</td>
@@ -145,7 +145,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Program Motivasi Kepulihan
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Motivasi Kepulihan </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
@@ -154,7 +154,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Rangkaian Alumni Pulih
+                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Rangkaian Alumni Pulih </a>
                                 </td>
                                 <td>Alumni</td>
                                 <td>Selesai</td>

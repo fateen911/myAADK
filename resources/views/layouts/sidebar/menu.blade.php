@@ -9,8 +9,8 @@
 
         /* Define styles for the MyAADK span */
         a .myaadk-text {
-            font-family:Georgia, 'Times New Roman', Times, serif;  
-            font-size: 27px;  
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-size: 27px;
             margin-left: 10px;  /* Adjust the space between the logo and the text */
             padding-top: 5px;
             color: lightgray;  /* Optional: Set the text color */
@@ -26,7 +26,7 @@
 </head>
 
 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
-    
+
     @if(Auth::user()->tahap_pengguna == 1)
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
@@ -35,7 +35,7 @@
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">i-Recover</span>
         </a>
-        
+
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
             <i class="ki-duotone ki-black-left-line fs-3 rotate-180">
                 <span class="path1"></span>
@@ -214,7 +214,7 @@
                         <!--end:Menu sub-->
                     </div> --}}
                     <!--end:Menu item-->
-                    
+
 
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
@@ -449,7 +449,7 @@
                         </div>
                         <!--end:Menu sub-->
                     </div>
-                    <!--end:Menu item-->   
+                    <!--end:Menu item-->
 
                      <!--begin:Menu item-->
                      <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -474,7 +474,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
+                                <a class="menu-link" href={{url('/pengurusan_program/pentadbir_sistem/senarai_prog')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -511,7 +511,7 @@
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
-                    
+
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
@@ -556,7 +556,7 @@
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">i-Recover</span>
         </a>
-        
+
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
             <i class="ki-duotone ki-black-left-line fs-3 rotate-180">
                 <span class="path1"></span>
@@ -694,7 +694,7 @@
                         <!--end:Menu link-->
                     </div> --}}
 
-                    
+
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
@@ -778,7 +778,7 @@
             <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">i-Recover</span>
         </a>
-        
+
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
             <i class="ki-duotone ki-black-left-line fs-3 rotate-180">
                 <span class="path1"></span>
@@ -815,7 +815,7 @@
                     </div>
                     <!--end:Menu item-->
 
-                    
+
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
@@ -1047,7 +1047,7 @@
                         </div>
                         <!--end:Menu sub-->
                     </div>
-                    <!--end:Menu item-->   
+                    <!--end:Menu item-->
 
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -1096,7 +1096,7 @@
                             <!--begin:Menu item-->
                             <div class="menu-item">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
+                                <a class="menu-link" href={{url('/pengurusan_program/pegawai_aadk/senarai_prog')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -1109,7 +1109,7 @@
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
-                    
+
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
