@@ -36,7 +36,8 @@ Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgC
 Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
 
 // PENGURUSAN PROGRAM - KLIEN
-Route::get('/pengurusan_program/klien/daftar_prog',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
+Route::get('/pengurusan_program/klien/daftar_kehadiran',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
+Route::get('/pengurusan_program/klien/pengesahan_kehadiran',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
 
 
 // DASHBOARD

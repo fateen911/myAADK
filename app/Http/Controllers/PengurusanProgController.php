@@ -94,4 +94,9 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.klien.daftar_kehadiran');
     }
 
+    public function pengesahanKehadiran()
+    {
+        return view('pengurusan_program.klien.pengesahan_kehadiran');
+    }
+
 }

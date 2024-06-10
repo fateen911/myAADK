@@ -81,25 +81,27 @@
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="#" id="kt_coming_soon_form">
-                        <div class="fv-row text-start">
-                            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                                <!--end::Input=-->
-                                <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" />
-                                <!--end::Input=-->
-                                <!--begin::Submit-->
-                                <button class="btn btn-primary text-nowrap" id="kt_coming_soon_submit">
-                                    <!--begin::Indicator label-->
-                                    <span class="indicator-label">Hantar</span>
-                                    <!--end::Indicator label-->
-                                    <!--begin::Indicator progress-->
-                                    <span class="indicator-progress">Please wait...
-											<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    <!--end::Indicator progress-->
-                                </button>
-                                <!--end::Submit-->
-                            </div>
+                    <form class="w-md-350px mb-2 mx-auto" action="#">
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Input-->
+                            <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" />
+                            <!--end::Input-->
                         </div>
+                        <!--begin::Actions-->
+                        <div class="d-flex flex-wrap justify-content-center pb-lg-0">
+                            <button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4">
+                                <!--begin::Indicator label-->
+                                <span class="indicator-label">Hadir</span>
+                                <!--end::Indicator label-->
+                                <!--begin::Indicator progress-->
+                                <span class="indicator-progress">Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                <!--end::Indicator progress-->
+                            </button>
+                            <a href="../../demo1/dist/authentication/layouts/creative/sign-in.html" class="btn btn-light">Tidak Hadir</a>
+                        </div>
+                        <!--end::Actions-->
                     </form>
                     <!--end::Form-->
                 </div>
