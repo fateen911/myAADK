@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 //TRY
 Route::get('/pengurusan_program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
+Route::get('/pengurusan_program/try',[PengurusanProgController::class, 'try'])->name('pengurusan_program.try');
 
 // PENGURUSAN PROGRAM - PEGAWAI AADK
 Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
@@ -32,7 +33,6 @@ Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgCo
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan_program/klien/daftar_prog',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
-
 
 
 // DASHBOARD

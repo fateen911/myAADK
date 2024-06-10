@@ -12,6 +12,11 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.tryQR');
     }
 
+    public function try()
+    {
+        return view('pengurusan_program.try');
+    }
+
     //PEGAWAI AADK
     public function daftarProgPA()
     {
