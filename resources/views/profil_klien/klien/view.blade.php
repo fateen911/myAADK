@@ -462,7 +462,7 @@
                                                 <div class="col-md-3 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Emel</label>
                                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
-                                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                        <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                             <span class="path1"></span>
                                                             <span class="path2"></span>
                                                             <span class="path3"></span>
@@ -569,7 +569,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nama Pekerjaan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Jawatan pekerjaan / Status pekerjaan">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -608,7 +608,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Pendapatan (RM)</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -720,7 +720,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nombor Telefon Majikan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -843,7 +843,7 @@
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Majikan
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                 <span class="path1"></span>
                                                                 <span class="path2"></span>
                                                                 <span class="path3"></span>
@@ -1061,7 +1061,7 @@
                                                 <div class="col-md-3 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Waris
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                 <span class="path1"></span>
                                                                 <span class="path2"></span>
                                                                 <span class="path3"></span>
@@ -1153,7 +1153,7 @@
                             <div class="row fv-row mb-2">
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3 required">
+                                    <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Status Perkahwinan</span>
                                     </label>
                                     <!--end::Label-->
@@ -1185,13 +1185,6 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nombor Telefon Pasangan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -1404,7 +1397,7 @@
                                                 <div class="col-md-5 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Pasangan
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                 <span class="path1"></span>
                                                                 <span class="path2"></span>
                                                                 <span class="path3"></span>
@@ -1460,7 +1453,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Tempat Kerja Pasangan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan">{{ $butiranKlien->alamat_kerja_pasangan }}</textarea>
@@ -1468,7 +1461,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Poskod Tempat Kerja Pasangan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <input type="text" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{ $butiranKlien->poskod_kerja_pasangan }}"/>
@@ -1476,7 +1469,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah Tempat Kerja Pasangan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
@@ -1489,7 +1482,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri Tempat Kerja Pasangan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri Tempat Kerja Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true">
