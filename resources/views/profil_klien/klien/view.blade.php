@@ -160,10 +160,12 @@
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" id="nama" name="nama" value="{{$butiranKlien->nama}}" readonly/>
-                                    <!--end::Input-->
+                                <div class="col-md-7 d-flex align-items-center">
+                                    <!--begin::Text-->
+                                    <span id="nama" name="nama">
+                                        :{{$butiranKlien->nama}}
+                                    </span>
+                                    <!--end::Text-->
                                 </div>
                             </div>
                             <!--end::Input group--> 
@@ -187,6 +189,9 @@
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid readonly-input" maxlength="12" id="no_kp" name="no_kp" value="{{$butiranKlien->no_kp}}" readonly/>
                                     <!--end::Input-->
+                                    {{-- <span id="no_kp" name="no_kp">
+                                        :{{$butiranKlien->no_kp}}
+                                    </span> --}}
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -203,6 +208,9 @@
                                     <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid readonly-input" id="umur" name="umur" readonly/>
                                     <!--end::Input-->
+                                    {{-- <span id="nama" name="nama">
+                                        :{{$butiranKlien->nama}}
+                                    </span> --}}
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -560,7 +568,7 @@
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-9 offset-md-4">
-                                    <h2>Kemaskini Maklumat Rawatan</h2>
+                                    <h2>Maklumat Rawatan</h2>
                                 </div>
                             </div>
                             <!--end::Heading-->
@@ -646,8 +654,8 @@
                             </div>
                             <!--end::Input group-->
 
-                             <!--begin::Action buttons-->
-                             <div class="row py-5">
+                            <!--begin::Action buttons-->
+                            {{-- <div class="row py-5">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="d-flex">
                                         <!--begin::Button-->
@@ -655,7 +663,7 @@
                                         <!--end::Button-->
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!--end::Action buttons-->
                         </form>
                         <!--end::Form-->

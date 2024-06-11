@@ -8514,14 +8514,6 @@ textarea.form-control-lg {
   height: 150px !important;
 }
 
-.h-155px {
- height: 155px !important;
-}
-
-.h-160px {
- height: 160px !important;
-}
-
 .h-175px {
   height: 175px !important;
 }
@@ -47504,9 +47496,9 @@ body[data-kt-sticky-landing-header=on] {
 [data-bs-theme=light] {
   --bs-app-bg-color: #fcfcfc;
   --bs-app-blank-bg-color: #fcfcfc;
-  --bs-app-header-base-bg-color: #D8D9DA;
+  --bs-app-header-base-bg-color: #990000;
   --bs-app-header-base-box-shadow: none;
-  --bs-app-header-minimize-bg-color: #D8D9DA;
+  --bs-app-header-minimize-bg-color: #990000;
   --bs-app-header-minimize-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
   --bs-app-toolbar-base-bg-color: #ffffff;
   --bs-app-toolbar-base-box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);

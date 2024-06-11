@@ -42,12 +42,12 @@
             <div class="app-navbar flex-shrink-0">
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
-                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:#2d2d5d;">
+                    <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:white;">
                         @if(Auth::user()->gambar_profil)
                             <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
                             {{ strtoupper(Auth::user()->name) }}
                         @else
-                            <i class="fa fa-user" style="color: #2d2d5d; padding-right:5px; font-size:15px;"></i>
+                            <i class="fa fa-user" style="color: white; padding-right:10px; font-size:16px;"></i>
                             {{ strtoupper(Auth::user()->name) }}
                         @endif
                     </div>
