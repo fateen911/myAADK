@@ -32,13 +32,23 @@
             flex-direction: column;
             align-items: center; /* Center contents horizontally */
         }
+
+        .form-control-plaintext {
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        .d-flex {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 
 <!--begin::Page title-->
-<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
+<div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
     <!--begin::Title-->
-    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
+    <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
     <!--end::Title-->
     <!--begin::Breadcrumb-->
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -106,22 +116,22 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
-                            <i class="ki-duotone ki-pulse fs-2 me-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>Maklumat Rawatan
-                        </a>
-                    </li>
-                    <!--end:::Tab item-->
-                    <!--begin:::Tab item-->
-                    <li class="nav-item">
                         <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
                             <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                             </i>Maklumat Pekerjaan
+                        </a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
+                            <i class="ki-duotone ki-pulse fs-2 me-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>Maklumat Rawatan
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -145,57 +155,98 @@
                             <!--end::Heading-->
                             
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-2">
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nama Penuh</span>
+                                        <span>Nama Penuh</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" id="nama" name="nama" value="{{$klien->nama}}" readonly/>
+                                    <span id="nama" class="fs-6 form-control-plaintext">:{{$klien->nama}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-2">
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nombor Kad Pengenalan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa '-'">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
+                                        <span>Nombor Kad Pengenalan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-2">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" maxlength="12" id="no_kp" name="no_kp" value="{{$klien->no_kp}}" readonly/>
+                                    <span id="no_kp" class="fs-6 form-control-plaintext">:{{$klien->no_kp}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-2">
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Umur</span>
+                                        <span>Umur</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid readonly-input" id="umur" name="umur" readonly/>
+                                    <span id="umur" class="fs-6 form-control-plaintext"></span>
                                     <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                             <!--begin::Input group-->
+                             <div class="row fv-row mb-2">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Jantina</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <span id="jantina" class="fs-6 form-control-plaintext">:{{$klien->jantina}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-2">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Agama</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <span id="agama" class="fs-6 form-control-plaintext">:{{$klien->agama}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-2">
+                                <div class="col-md-3 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Bangsa</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">:{{$klien->bangsa}}</span>
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -206,7 +257,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nombor Telefon</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -229,7 +280,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Alamat E-mel</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -330,80 +381,6 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Jantina</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="jantina" name="jantina" data-control="select2" data-hide-search="true" disabled>
-                                            <option>Pilih Jantina</option>
-                                            <option value="LELAKI" {{ $klien->jantina == 'LELAKI' ? 'selected' : '' }}>LELAKI</option>
-                                            <option value="PEREMPUAN" {{ $klien->jantina == 'PEREMPUAN' ? 'selected' : '' }}>PEREMPUAN</option>
-                                        </select>
-                                        <!--end::Select2-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Agama</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="agama" name="agama" data-control="select2" data-hide-search="true" data-placeholder="Pilih agama" disabled>
-                                            <option>Pilih Agama</option>
-                                            <option value="ISLAM" {{ $klien->agama == 'ISLAM' ? 'selected' : '' }}>ISLAM</option>
-                                            <option value="CINA" {{ $klien->agama == 'CINA' ? 'selected' : '' }}>CINA</option>
-                                            <option value="INDIA" {{ $klien->agama == 'INDIA' ? 'selected' : '' }}>INDIA</option>
-                                            <option value="KRISTIAN" {{ $klien->agama == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
-                                            <option value="BUDHA" {{ $klien->agama == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
-                                            <option value="SIKH" {{ $klien->agama == 'SIKH' ? 'selected' : '' }}>SIKH</option>
-                                            <option value="LAIN-LAIN" {{ $klien->agama == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
-                                        </select>
-                                        <!--end::Select2-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Bangsa</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="bangsa" name="bangsa" data-control="select2" data-hide-search="true" data-placeholder="Pilih bangsa" disabled>
-                                            <option>Pilih Bangsa</option>
-                                            <option value="MELAYU" {{ $klien->bangsa == 'MELAYU' ? 'selected' : '' }}>MELAYU</option>
-                                            <option value="CINA" {{ $klien->bangsa == 'CINA' ? 'selected' : '' }}>CINA</option>
-                                            <option value="INDIA" {{ $klien->bangsa == 'INDIA' ? 'selected' : '' }}>INDIA</option>
-                                            <option value="KRISTIAN" {{ $klien->bangsa == 'KRISTIAN' ? 'selected' : '' }}>KRISTIAN</option>
-                                            <option value="BUDHA" {{ $klien->bangsa == 'BUDHA' ? 'selected' : '' }}>BUDHA</option>
-                                        </select>
-                                        <!--end::Select2-->
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Tahap Pendidikan</span>
                                     </label>
                                     <!--end::Label-->
@@ -459,65 +436,95 @@
                                                 $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $requestedDataKlien['negeri'])->value('senarai_negeri.negeri');
                                             @endphp
                                     
-                                            <div class="row fv-row mb-7">
+                                            <div class="row fv-row">
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama" value="{{ $requestedDataKlien['nama'] }}" readonly />
+                                                    <span id="nama" class="fs-6 form-control-plaintext">:{{$klien->nama}}</span>
                                                 </div>
                                             </div>
-                                            <div class="row fv-row mb-7">
+                                            <div class="row fv-row">
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{ $requestedDataKlien['no_kp'] }}" readonly />
+                                                    <span id="no_kp" class="fs-6 form-control-plaintext">:{{$klien->no_kp}}</span>
                                                 </div>
                                             </div>
-                                            <div class="row fv-row mb-7">
+                                            <div class="row fv-row">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Umur</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel" value="{{ $requestedDataKlien['no_tel'] }}" readonly />
+                                                    <span id="modal_umur" class="fs-6 form-control-plaintext"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span id="jantina" class="fs-6 form-control-plaintext">:{{$klien->jantina}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span id="agama" class="fs-6 form-control-plaintext">:{{$klien->agama}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-2">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <span id="bangsa" class="fs-6 form-control-plaintext">:{{$klien->bangsa}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Emel</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                                <span class="path3"></span>
+                                                            </i>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <!-- Use a conditional class to highlight changes -->
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['no_tel'] != $klien->no_tel ? 'border-primary' : '' }}" name="no_tel" value="{{ $requestedDataKlien['no_tel'] }}" readonly />
+                                                    
+                                                    <!-- Add an icon to indicate change if there's a discrepancy -->
+                                                    @if ($requestedDataKlien['no_tel'] != $klien->no_tel)
+                                                        <i class="ki-duotone ki-warning-2 text-danger fs-6 position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);" data-bs-toggle="tooltip" title="This field has been modified by the client."></i>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Emel
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                                <span class="path3"></span>
+                                                            </i>
+                                                        </span>
+                                                    </label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly />
                                                 </div>
                                             </div>
-                                            {{-- <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="jantina" value="{{ $requestedDataKlien['jantina'] }}" readonly />
-                                                </div>
-                                            </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="agama" value="{{ $requestedDataKlien['agama'] }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bangsa" value="{{ $requestedDataKlien['bangsa'] }}" readonly />
-                                                </div>
-                                            </div> --}}
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <textarea class="form-control form-control-solid" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea>
@@ -525,7 +532,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly />
@@ -533,7 +540,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" value="{{ $daerahRumahKlien }}" readonly />
@@ -541,7 +548,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" value="{{ $negeriRumahKlien }}" readonly />
@@ -549,7 +556,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Tahap Pendidikan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
@@ -594,7 +601,7 @@
                             <!--end::Heading-->
                            
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -604,13 +611,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$rawatan->status_kesihatan_mental}}"/>
+                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">:{{$rawatan->status_kesihatan_mental}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -620,13 +627,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="status_oku" name="status_oku" value="{{$rawatan->status_oku}}" readonly/>
+                                    <span id="status_oku" class="fs-6 form-control-plaintext">:{{$rawatan->status_oku}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -636,13 +643,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="seksyen_okp" name="seksyen_okp" value="{{$rawatan->seksyen_okp}}" readonly/>
+                                    <span id="seksyen_okp" class="fs-6 form-control-plaintext">:{{$rawatan->seksyen_okp}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -652,13 +659,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="date" class="form-control form-control-solid" id="tarikh_tamat_pengawasan" name="tarikh_tamat_pengawasan" value="{{$rawatan->tarikh_tamat_pengawasan}}" readonly/>
+                                    @php
+                                        $formattedDate = Carbon::parse($rawatan->tarikh_tamat_pengawasan)->format('d-m-Y');
+                                    @endphp
+                                    <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">:{{$formattedDate}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
+                            <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -668,7 +678,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--begin::Input-->
-                                    <input type="number" class="form-control form-control-solid" id="skor_ccri" name="skor_ccri" value="{{$rawatan->skor_ccri}}" readonly/>
+                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">:{{$rawatan->skor_ccri}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -679,11 +689,11 @@
                                 <div class="col-md-9 offset-md-4">
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                        @if($requestRawatan)
+                                        {{-- @if($requestRawatan)
                                             <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalRawatan" data-target="#approvalRawatan" style="background-color:darkblue; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
-                                        @endif
+                                        @endif --}}
                                     </div>
                                 </div>
                             </div>
@@ -692,7 +702,7 @@
                         <!--end::Form-->
 
                         <!--begin::Modal Rawatan-->
-                        <div class="modal fade" id="approvalRawatan" tabindex="-1" aria-labelledby="luluskanPermohonanRawatanLabel" aria-hidden="true">
+                        {{-- <div class="modal fade" id="approvalRawatan" tabindex="-1" aria-labelledby="luluskanPermohonanRawatanLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -767,7 +777,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                                
+                        </div>                                                 --}}
                         <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
@@ -793,7 +803,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Pekerjaan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Jawatan pekerjaan / Status pekerjaan">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -816,7 +826,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Pendapatan (RM)</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -951,7 +961,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nombor Telefon Majikan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -1162,7 +1172,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Nombor Telefon Waris</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -1447,7 +1457,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nombor Telefon Pasangan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -1797,12 +1807,9 @@
 
 <script>
     function calculateAgeFromIC() {
-        const icNumber = document.getElementById('no_kp').value;
-        if (icNumber.length !== 12) {
-            alert("Nombor Kad Pengenalan harus mempunyai 12 digit.");
-            return;
-        }
-
+        let icNumber = document.getElementById('no_kp').textContent.trim();
+        icNumber = icNumber.replace(':', '').trim();  // Remove colon and trim whitespace
+        
         const year = parseInt(icNumber.substring(0, 2), 10);
         const month = parseInt(icNumber.substring(2, 4), 10);
         const day = parseInt(icNumber.substring(4, 6), 10);
@@ -1818,10 +1825,15 @@
             age--;
         }
 
-        document.getElementById('umur').value = age;
+        document.getElementById('umur').textContent = `:${age}`; // Update the text content of the span
+        document.getElementById('modal_umur').textContent = `:${age}`; 
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
+        calculateAgeFromIC();
+    });
+
+    document.getElementById('approvalPeribadiKlien').addEventListener('click', (event) => {
         calculateAgeFromIC();
     });
 </script>
