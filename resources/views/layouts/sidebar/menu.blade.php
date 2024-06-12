@@ -32,12 +32,10 @@
 
         .menu-item .menu-link:hover {
             background-color: darkgrey;
-            color: white !important;
         }
 
         .menu-item.active .menu-link {
             background-color: darkgrey; 
-            color: white !important;
         }
 
         .menu-icon {
