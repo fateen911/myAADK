@@ -1,13 +1,11 @@
 <head>
     <style>
-        /* Style for the link container */
         a.logo-container {
             display: flex;
             align-items: center;  /* Vertically centers the items */
             justify-content: center;  /* Horizontally centers the items */
         }
 
-        /* Define styles for the MyAADK span */
         a .myaadk-text {
             font-family:Georgia, 'Times New Roman', Times, serif;
             font-size: 27px;
@@ -21,6 +19,33 @@
             height: 50px;  /* Ensure the image height is consistent */
             margin-left: 10px !important;  /* Remove any default margins */
             vertical-align: middle;  /* Align the image middle */
+        }
+
+        .menu-item .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu-item .menu-link:hover {
+            background-color: darkgrey;
+            color: white !important;
+        }
+
+        .menu-item.active .menu-link {
+            background-color: darkgrey; 
+            color: white !important;
+        }
+
+        .menu-icon {
+            margin-right: 10px;
+        }
+
+        .menu-content {
+            padding: 10px;
         }
     </style>
 </head>
@@ -55,7 +80,7 @@
                 <!--begin::Menu-->
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('dashboard') }}" onclick="event.preventDefault(); window.location.href='{{ route('dashboard') }}';">
                             <span class="menu-icon">
@@ -83,7 +108,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-pengguna') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <span>
                             <a class="menu-link" href="{{ route('senarai-pengguna') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-pengguna') }}';">
@@ -98,125 +123,10 @@
                             </a>
                         </span>
                         <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        {{-- <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../#">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Baharu</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Sejarah</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/pages/user-profile/campaigns.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Perbaharui</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div> --}}
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-element-plus fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Tuntutan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/account/overview.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Baharu</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/account/settings.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Kemaskini</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/account/security.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Sejarah</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/account/activity.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Status</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div> --}}
-                    <!--end:Menu item-->
-
-
-                    <!--begin:Menu item-->
+                    <!--begin:Menu item PENGURUSAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -225,8 +135,9 @@
                         <!--end:Menu content-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-klien') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('senarai-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-klien') }}';">
                             <span class="menu-icon">
@@ -239,74 +150,8 @@
                                 </i>
                             </span>
                             <span class="menu-title">Profil Klien</span>
-                            {{-- <span class="menu-arrow"></span> --}}
                         </a>
                         <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        {{-- <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Diri</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Kesihatan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Pendidikan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Pekerjaan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Keluarga</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div> --}}
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
@@ -320,12 +165,41 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Modal Kepulihan</span>
+                            <span class="menu-title">Soal Selidik Kepulihan</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum-balas') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Maklum Balas</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Senarai Soalan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
+
+                        <!--begin:Menu sub-->
+                        {{-- <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                                 <!--begin:Menu link-->
@@ -446,13 +320,13 @@
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
-                        </div>
+                        </div> --}}
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
-                     <!--begin:Menu item-->
-                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -469,10 +343,11 @@
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
+
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href={{url('/pengurusan_program/pentadbir_sistem/senarai_prog')}}>
                                     <span class="menu-bullet">
@@ -484,7 +359,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
                                     <span class="menu-bullet">
@@ -496,7 +371,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
                                     <span class="menu-bullet">
@@ -512,7 +387,8 @@
                     </div>
                     <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
+
+                    <!--begin:Menu item PELAPORAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -521,6 +397,7 @@
                         <!--end:Menu content-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
@@ -536,7 +413,38 @@
                                 </i>
                             </span>
                             <span class="menu-title">Jana Laporan</span>
+                            <span class="menu-arrow"></span>
                         </span>
+                        <!--end:Menu link-->
+
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-modal-kepulihan') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Modal Kepulihan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-program-kepulihan') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Program Kepulihan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
                 </div>
@@ -576,7 +484,7 @@
                 <!--begin::Menu-->
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('dashboard') }}" onclick="event.preventDefault(); window.location.href='{{ route('dashboard') }}';">
                             <span class="menu-icon">
@@ -590,7 +498,7 @@
                             <span class="menu-title">Laman Utama</span>
                         </a>
                         <!--end:Menu link-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
 
 
@@ -605,7 +513,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan-profil') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('pengurusan-profil') }}" onclick="event.preventDefault(); window.location.href='{{ route('pengurusan-profil') }}';">
                             <span class="menu-icon">
@@ -622,78 +530,6 @@
                         <!--end:Menu link-->
                     </div>
 
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Maklumat Kesihatan</span>
-                        </span>
-                        <!--end:Menu link-->
-                    </div> --}}
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Maklumat Pendidikan</span>
-                        </span>
-                        <!--end:Menu link-->
-                    </div> --}}
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Maklumat Pekerjaan</span>
-                        </span>
-                        <!--end:Menu link-->
-                    </div> --}}
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Maklumat Waris</span>
-                        </span>
-                        <!--end:Menu link-->
-                    </div> --}}
-
 
                     <!--begin:Menu item-->
                     <div class="menu-item pt-5">
@@ -705,7 +541,7 @@
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien-soal-selidik') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -720,30 +556,16 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div class="menu-item pt-5">
+                    {{-- <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
                             <span class="menu-heading fw-bold text-uppercase fs-7">PROGRAM</span>
                         </div>
                         <!--end:Menu content-->
-                    </div>
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-calendar-add fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Kehadiran</span>
-                        </span>
-                        <!--end:Menu link-->
+                    </div> --}}
+
+                    <!--begin:Menu sub-->
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -759,8 +581,23 @@
                             <span class="menu-title">Pengesahan Kehadiran</span>
                         </span>
                         <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-calendar-add fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Perekodan Kehadiran </span>
+                        </span>
+                        <!--end:Menu link-->
+                    </div> --}}
+                    <!--end:Menu sub-->
                 </div>
                 <!--end::Menu-->
             </div>
@@ -798,7 +635,7 @@
                 <!--begin::Menu-->
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('dashboard') }}" onclick="event.preventDefault(); window.location.href='{{ route('dashboard') }}';">
                             <span class="menu-icon">
@@ -816,7 +653,7 @@
                     <!--end:Menu item-->
 
 
-                    <!--begin:Menu item-->
+                    <!--begin:Menu item PENGURUSAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -825,86 +662,23 @@
                         <!--end:Menu content-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-klien') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('senarai-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-klien') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-user-edit fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Profil Klien</span>
-                            {{-- <span class="menu-arrow"></span> --}}
                         </a>
                         <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        {{-- <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Diri</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Kesihatan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Pendidikan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Pekerjaan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/targets.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklumat Keluarga</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div> --}}
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
@@ -918,128 +692,32 @@
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Modal Kepulihan</span>
+                            <span class="menu-title">Soal Selidik Kepulihan</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum-balas') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <span class="menu-link">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Fizikal</span>
+                                    <span class="menu-title">Maklum Balas</span>
                                 </span>
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <span class="menu-link">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Psikologi</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Sosial</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Persekitaran</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Insaniah dan Kompetensi</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Kerohanian dan Spiritual</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Rawatan dan Pemulihan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Kesihatan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Jati Diri dan Strategi Daya Tahan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Resiliensi</span>
+                                    <span class="menu-title">Senarai Soalan</span>
                                 </span>
                                 <!--end:Menu link-->
                             </div>
@@ -1067,10 +745,23 @@
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
+
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <a class="menu-link" href={{url('/pengurusan_program/pentadbir_sistem/senarai_prog')}}>
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Pendaftaran</span>
+                                </a>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
                                     <span class="menu-bullet">
@@ -1082,7 +773,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item">
+                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
                                     <span class="menu-bullet">
@@ -1093,24 +784,13 @@
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{url('/pengurusan_program/pegawai_aadk/senarai_prog')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pendaftaran</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
+
+                    <!--begin:Menu item PELAPORAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -1119,6 +799,7 @@
                         <!--end:Menu content-->
                     </div>
                     <!--end:Menu item-->
+
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
@@ -1134,7 +815,38 @@
                                 </i>
                             </span>
                             <span class="menu-title">Jana Laporan</span>
+                            <span class="menu-arrow"></span>
                         </span>
+                        <!--end:Menu link-->
+
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-modal-kepulihan') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Modal Kepulihan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                            <!--begin:Menu item-->
+                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-program-kepulihan') ? 'active' : '' }}">
+                                <!--begin:Menu link-->
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Program Kepulihan</span>
+                                </span>
+                                <!--end:Menu link-->
+                            </div>
+                            <!--end:Menu item-->
+                        </div>
+                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
                 </div>
