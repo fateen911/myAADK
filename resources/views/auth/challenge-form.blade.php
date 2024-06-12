@@ -12,7 +12,7 @@
         <!--end::Title-->
 
        <div class="mb-2 text-sm text-gray-600 justify-center">
-            {{ __('Sila isikan maklumat di bawah untuk menetapkan semula kata laluan.') }}
+            {{ __('Sila isi maklumat di bawah untuk tetapkan semula kata laluan.') }}
         </div>
     </div>
     <!--begin::Heading-->
@@ -26,9 +26,9 @@
         @csrf
 
         <div>
-            <x-input-label for="no_kad_pengenalan" :value="__('No Kad Pengenalan')" />
-            <x-text-input id="no_kad_pengenalan" class="block w-full pr-10" type="text" name="no_kad_pengenalan" :value="old('no_kad_pengenalan')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('no_kad_pengenalan')" class="mt-2" />
+            <x-input-label for="negeri_lahir" :value="__('Dimanakah Negeri Lahir Anda ?')" />
+            <x-text-input id="negeri_lahir" class="block w-full pr-10" type="text" name="negeri_lahir" :value="old('negeri_lahir')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('negeri_lahir')" class="mt-2" />
         </div>
 
         <br>
@@ -45,6 +45,14 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class="text-center">
+        <a href="{{ route('password.email') }}">
+            <div class="underline mt-3 text-sm text-gray-600 justify-center">
+                {{ __('Hantar Emel Pautan Set Semula Kata Laluan?') }}
+            </div>
+        </a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

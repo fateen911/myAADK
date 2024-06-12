@@ -13,6 +13,7 @@ class Negeri extends Model
 
     protected $fillable = [
         'id',
+        'kod_negeri',
         'negeri',
     ];
 }

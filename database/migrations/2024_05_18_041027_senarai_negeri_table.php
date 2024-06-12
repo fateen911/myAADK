@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('senarai_negeri', function (Blueprint $table) {
             $table->id();
+            $table->string('kod_negeri');
             $table->string('negeri');
             $table->timestamps();
         });

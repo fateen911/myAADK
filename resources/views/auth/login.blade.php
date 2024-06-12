@@ -71,7 +71,7 @@
             </label>
         </div> --}}
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-2">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-500 hover:text-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('Lupa Kata Laluan ?') }}
@@ -79,17 +79,17 @@
             @endif
         </div>
 
-        <div class="flex items-center justify-center mt-4">
+        <div class="flex items-center justify-center mt-2">
             <x-primary-button class="ms-3">
                 {{ __('Log Masuk') }}
             </x-primary-button>
         </div>
 
-        <div class="flex items-center justify-center mt-2">
+        {{-- <div class="flex items-center justify-center mt-2">
             <a class="underline text-sm text-gray-500 hover:text-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
                 {{ __('Belum mempunyai akaun? Daftar') }}
             </a>
-        </div>
+        </div> --}}
     </form>
 
     <script>

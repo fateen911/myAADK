@@ -45,7 +45,9 @@ class PasswordResetLinkController extends Controller
     public function store(Request $request)
     {
         $user = User::where('no_kp', $request->no_kp)->first();
-        if ($user) {
+        $jenis_pengguna = $user->tahap_pengguna;
+
+        if ($jenis_pengguna != 2) {
             $emel = $user->email;
 
             if ($emel) {
@@ -65,7 +67,7 @@ class PasswordResetLinkController extends Controller
                 return redirect()->back()->with('failed', 'E-mel pengguna tersebut tidak dijumpai dalam sistem.');
             }
         } else {
-            return redirect()->back()->with('failed', 'Pengguna tidak wujud.');
+            return view('auth.challenge-form');
         }
     }
 }

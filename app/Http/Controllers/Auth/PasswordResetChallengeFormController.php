@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\Klien;
 use App\Models\User;
+use App\Models\Negeri;
 use App\Models\WarisKlien;
 
 class PasswordResetChallengeFormController extends Controller
@@ -21,24 +22,62 @@ class PasswordResetChallengeFormController extends Controller
     public function checkChallengeAnswer(Request $request)
     {
         $request->validate([
-            'no_kad_pengenalan' => 'required',
+            'negeri_lahir' => 'required',
             'nama_waris' => 'required'
         ]);
 
-        $klien = Klien::where('no_kp', $request->no_kad_pengenalan)->first();
+        // Retrieve user's details
+        $klien = Klien::where('no_kp', session('no_kp'))->first();
         $waris = WarisKlien::where('klien_id', $klien->id)->first();
 
-        if ($klien && $waris->nama_waris === $request->nama_waris) 
-        {
-            // Store the no_kad_pengenalan in the session
-            session(['no_kad_pengenalan' => $request->no_kad_pengenalan]);
-            return redirect()->route('reset.password.challenge');
-        } 
-        else 
-        {
-            return back()->withErrors(['nama_waris' => 'Jawapan tidak sepadan dengan data kami.']);
+        if ($klien) {
+            // Extract state code from IC number
+            $state_code = substr($klien->no_kp, 6, 2);
+
+            // Find the state from the database
+            $state = Negeri::where('kod_negeri', $state_code)->first();
+
+            // Validate the inputs
+            $isNegeriLahirValid = strtoupper($state->negeri) === strtoupper($request->negeri_lahir);
+            $isNamaWarisValid = strtoupper($waris->nama_waris) === strtoupper($request->nama_waris);
+
+            if ($isNegeriLahirValid && $isNamaWarisValid) {
+                // Store the no_kad_pengenalan in the session
+                session(['no_kp' => $klien->no_kp]);
+                return redirect()->route('reset.password.challenge');
+            } 
+            else {
+                return back()->withErrors([
+                    'negeri_lahir' => 'Jawapan tidak sepadan dengan data kami.',
+                    'nama_waris' => 'Jawapan tidak sepadan dengan data kami.'
+                ]);
+            }
+        } else {
+            return back()->withErrors(['no_kp' => 'No kad pengenalan tidak wujud.']);
         }
     }
+
+    // public function checkChallengeAnswer(Request $request)
+    // {
+    //     $request->validate([
+    //         'negeri_lahir' => 'required',
+    //         'nama_waris' => 'required'
+    //     ]);
+
+    //     $klien = Klien::where('no_kp', $request->no_kad_pengenalan)->first();
+    //     $waris = WarisKlien::where('klien_id', $klien->id)->first();
+
+    //     if ($klien && $waris->nama_waris === $request->nama_waris) 
+    //     {
+    //         // Store the no_kad_pengenalan in the session
+    //         session(['no_kad_pengenalan' => $request->no_kad_pengenalan]);
+    //         return redirect()->route('reset.password.challenge');
+    //     } 
+    //     else 
+    //     {
+    //         return back()->withErrors(['nama_waris' => 'Jawapan tidak sepadan dengan data kami.']);
+    //     }
+    // }
 
     public function viewResetPasswordChallenge(Request $request)
     {

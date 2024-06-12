@@ -26,25 +26,16 @@
         @csrf
 
         <div>
-            <x-input-label for="no_kp" :value="__('No Kad Pengenalan')" />
-            <x-text-input id="no_kp" class="block w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" />
+            <x-text-input id="no_kp" class="block w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="no_kp" placeholder="{{ __('No Kad Pengenalan') }}"/>
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-center mt-3">
             <x-primary-button>
-                {{ __('Emel Pautan Tetapan Semula Kata Laluan') }}
+                {{ __('Tetapan Semula Kata Laluan') }}
             </x-primary-button>
         </div>
     </form>
-
-    <div class="text-center">
-        <a href="{{ route('password.challenge') }}">
-            <div class="mt-3 text-sm text-gray-600 justify-center">
-                {{ __('Kaedah Lain ?') }}
-            </div>
-        </a>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
