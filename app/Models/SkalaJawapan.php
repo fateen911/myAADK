@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class SkalaJawapan extends Model
 {
     use HasFactory;
+
+    protected $table = 'skala_jawapan';
+
+    protected $fillable = [
+        'skala',
+        'jawapan',
+    ];
 }

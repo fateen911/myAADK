@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ModalKepulihan extends Model
 {
     use HasFactory;
+
+    protected $table = 'kategori_modal_kepulihan';
+
+    protected $fillable = [
+        'nama_modal',
+    ];
 }
