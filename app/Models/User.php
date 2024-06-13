@@ -32,6 +32,15 @@ class User extends Authenticatable
         return 'no_kp';
     }
 
+    public function program()
+    {
+        return $this->hasMany(Program::class);
+    }
+
+    public function programKehadiran()
+    {
+        return $this->hasMany(ProgramKehadiran::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

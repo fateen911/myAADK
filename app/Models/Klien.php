@@ -31,4 +31,9 @@ class Klien extends Model
     {
         return $this->hasMany(KlienUpdateRequest::class, 'klien_id');
     }
+
+    public function programKehadiran()
+    {
+        return $this->hasMany(ProgramKehadiran::class);
+    }
 }
