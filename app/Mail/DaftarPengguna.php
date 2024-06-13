@@ -19,9 +19,10 @@ class DaftarPengguna extends Mailable
     public $no_kp;
     public $password;
 
-    public function __construct($email, $password)
+    public function __construct($email, $password, $no_kp)
     {
         $this->email = $email;
+        $this->no_kp = $no_kp;
         $this->password = $password;
     }
 

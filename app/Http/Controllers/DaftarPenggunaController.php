@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DaftarPengguna;
 use App\Models\User;
+use App\Models\Pegawai;
+use App\Models\Negeri;
+use App\Models\Daerah;
 use App\Models\TahapPengguna;
 
 class DaftarPenggunaController extends Controller
@@ -14,11 +17,15 @@ class DaftarPenggunaController extends Controller
     public function senaraiPengguna()
     {
         $klien = User::where('tahap_pengguna', '=' ,'2')->get();
-        $pegawai = User::where('tahap_pengguna', '!=' ,'2')->get();
+        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
+                        ->whereIn('tahap_pengguna', [3, 4, 5])->get();
 
-        $tahap = TahapPengguna::all()->sortBy('id');
+        $negeri = Negeri::all()->sortBy('negeri');
+        $daerah = Daerah::all()->sortBy('daerah');
 
-        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap'));
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+
+        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap', 'daerah', 'negeri'));
     }
 
     public function kemaskiniPengguna(Request $request)
@@ -60,14 +67,26 @@ class DaftarPenggunaController extends Controller
                 'status' => '0',
             ];
 
+            $pegawaiData = [
+                'nama' => strtoupper($request->name),
+                'no_kp' => $request->no_kp,
+                'emel' => $request->email,
+                'bahagian' => $request->tahap_pengguna,
+                'negeri' => $request->negeri_bertugas,
+                'daerah' => $request->daerah_bertugas,
+                'jawatan' => $request->jawatan,
+            ];
+
             $user = User::create($userData);
+            $pegawai = Pegawai::create($pegawaiData);
 
             $email = $request->email;
-            Mail::to($email)->send(new DaftarPengguna($email, $password));
+            $no_kp = $request->no_kp;
+            Mail::to($email)->send(new DaftarPengguna($email, $password, $no_kp));
 
-            // Redirect with a success message
             return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
-        } else {
+        } 
+        else {
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
         }
     }

@@ -101,19 +101,6 @@
 									<tbody class="fw-semibold text-gray-600">
 										@foreach ($klien as $user1)
 											@php
-												// $text = ucwords(strtolower($user1->name)); // Assuming you're sending the text as a POST parameter
-												// $conjunctions = ['bin', 'binti'];
-												// $words = explode(' ', $text);
-												// $result = [];
-												// foreach ($words as $word) {
-												// 	if (in_array(Str::lower($word), $conjunctions)) {
-												// 		$result[] = Str::lower($word);
-												// 	} else {
-												// 		$result[] = $word;
-												// 	}
-												// }
-												// $nama_user1 = implode(' ', $result);
-		
 												$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('jawatan');
 											@endphp
 		
@@ -225,6 +212,8 @@
 		
 																	<!--begin::Actions-->
 																	<div class="text-center pt-15">
+																		<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+
 																		<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
 																			<span class="indicator-label">Simpan</span>
 																			<span class="indicator-progress">Sila tunggu...
@@ -312,7 +301,7 @@
 															<!--begin::Modal header-->
 															<div class="modal-header">
 																<!--begin::Modal title-->
-																<h2>Kemaskini Maklumat Akaun Pengguna</h2>
+																<h2>Kemaskini Maklumat Akaun Pegawai</h2>
 																<!--end::Modal title-->
 																<!--begin::Close-->
 																<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -339,7 +328,7 @@
 																			<label class="fs-6 fw-semibold mb-2">Nama</label>
 																			<!--end::Label-->
 																			<!--begin::Input-->
-																			<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user2->name}}" />
+																			<input type="text" class="form-control form-control-solid" name="name" value="{{$user2->name}}" />
 																			<!--end::Input-->
 																		</div>
 																		<!--end::Input group-->
@@ -349,7 +338,7 @@
 																			<label class="fs-6 fw-semibold mb-2">Emel</label>
 																			<!--end::Label-->
 																			<!--begin::Input-->
-																			<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user2->email}}" />
+																			<input type="email" class="form-control form-control-solid" name="email" value="{{$user2->email}}" />
 																			<!--end::Input-->
 																		</div>
 																		<!--end::Input group-->
@@ -359,20 +348,7 @@
 																			<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 																			<!--end::Label-->
 																			<!--begin::Input-->
-																			<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user2->no_kp}}"/>
-																			<!--end::Input-->
-																		</div>
-																		<!--end::Input group-->
-																		<!--begin::Input group-->
-																		<div class="fv-row mb-7">
-																			<!--begin::Label-->
-																			<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
-																			<!--end::Label-->
-																			<!--begin::Input-->
-																			<div class="input-group">
-																				<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user2->id}}" name="password" />
-																				<button type="button" class="btn btn-secondary" onclick="generatePassword('password{{$user2->id}}')">Jana Kata Laluan</button>
-																			</div>
+																			<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user2->no_kp}}"/>
 																			<!--end::Input-->
 																		</div>
 																		<!--end::Input group-->
@@ -390,11 +366,54 @@
 																			<!--end::Input-->
 																		</div>
 																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="fv-row mb-5" id="negeri_field">
+																			<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Negeri Bertugas</option>
+																				@foreach ($negeri as $item1)
+																					<option value="{{ $item1->negeri}}" {{$user2->negeri == $item1->negeri  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																				@endforeach
+																			</select>
+																		</div>
+																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="fv-row mb-5" id="daerah_field">
+																			<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Daerah Bertugas</option>
+																				@foreach ($daerah as $item2)
+																					<option value="{{ $item2->daerah}}" {{$user2->daerah == $item2->daerah  ? 'selected' : ''}}>{{$item2->daerah}}</option>
+																				@endforeach
+																			</select>
+																		</div>
+																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Jawatan</label>
+																			<input type="jawatan" class="form-control form-control-solid" name="jawatan" value="{{$user2->jawatan}}" />
+																		</div>
+																		<!--end::Input group-->
+																		<!--begin::Input group-->
+																		<div class="fv-row mb-7">
+																			<!--begin::Label-->
+																			<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																			<!--end::Label-->
+																			<!--begin::Input-->
+																			<div class="input-group">
+																				<input type="text" maxlength="12" class="form-control form-control-solid" id="password{{$user2->id}}" name="password" />
+																				<button type="button" class="btn btn-secondary" onclick="generatePassword('password{{$user2->id}}')">Jana Kata Laluan</button>
+																			</div>
+																			<!--end::Input-->
+																		</div>
+																		<!--end::Input group-->
 																	</div>
 																	<!--end::Scroll-->
-		
+
 																	<!--begin::Actions-->
 																	<div class="text-center pt-15">
+																		<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+
 																		<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
 																			<span class="indicator-label">Simpan</span>
 																			<span class="indicator-progress">Sila tunggu...
@@ -452,7 +471,7 @@
 										<!--begin::Scroll-->
 										<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											<div class="fv-row mb-5">
 												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">Nama</label>
 												<!--end::Label-->
@@ -462,7 +481,7 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											<div class="fv-row mb-5">
 												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">Emel</label>
 												<!--end::Label-->
@@ -472,7 +491,7 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											<div class="fv-row mb-5">
 												<!--begin::Label-->
 												<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 												<!--end::Label-->
@@ -482,8 +501,8 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
-												<label class="fs-6 fw-semibold mb-2">Peranan</label>
+											<div class="fv-row mb-5">
+												<label class="fs-6 fw-semibold mb-2">Bahagian</label>
 												<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid fw-bold">
 													<option value="">Pilih</option>
 													@foreach ($tahap->sortBy('jawatan') as $t)
@@ -493,7 +512,29 @@
 											</div>
 											<!--end::Input group-->
 											<!--begin::Input group-->
-											<div class="fv-row mb-7">
+											<div class="fv-row mb-5" id="negeri_field">
+												<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+												<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+													<option value="">Pilih Negeri Bertugas</option>
+													@foreach ($negeri as $item1)
+														<option value="{{ $item1->negeri }}">{{ $item1->negeri }}</option>
+													@endforeach
+												</select>
+											</div>
+											<!--end::Input group-->
+											<!--begin::Input group-->
+											<div class="fv-row mb-5" id="daerah_field">
+												<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+												<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+													<option value="">Pilih Daerah Bertugas</option>
+													@foreach ($daerah as $item2)
+														<option value="{{ $item2->daerah}}">{{ $item2->daerah}}</option>
+													@endforeach
+												</select>
+											</div>
+											<!--end::Input group-->
+											<!--begin::Input group-->
+											<div class="fv-row mb-5">
 												<label class="fs-6 fw-semibold mb-2">Jawatan</label>
 												<input type="text" class="form-control form-control-solid" id="jawatan" name="jawatan"/>
 											</div>
@@ -622,4 +663,28 @@
 			document.getElementById(inputId).value = password;
 		}
 	</script>	
+
+	{{-- <script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const tahapPenggunaSelect = document.getElementById('tahap_pengguna');
+			const negeriField = document.getElementById('negeri_field');
+			const daerahField = document.getElementById('daerah_field');
+		
+			tahapPenggunaSelect.addEventListener('change', function () {
+				const selectedValue = parseInt(this.value, 10);
+				console.log('Selected value:', selectedValue); // Log the selected value
+				
+				if (selectedValue === 4) {
+					negeriField.style.display = 'block';
+					daerahField.style.display = 'none';
+				} else if (selectedValue === 5) {
+					negeriField.style.display = 'block';
+					daerahField.style.display = 'block';
+				} else {
+					negeriField.style.display = 'none';
+					daerahField.style.display = 'none'; 
+				}
+			});
+		});
+	</script> --}}
 @endsection
