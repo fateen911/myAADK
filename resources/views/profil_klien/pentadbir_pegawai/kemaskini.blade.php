@@ -432,8 +432,10 @@
                                             @method('PATCH')
 
                                             @php
-                                                $daerahRumahKlien = DB::table('senarai_daerah')->where('id', $requestedDataKlien['daerah'])->value('senarai_daerah.daerah');
-                                                $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $requestedDataKlien['negeri'])->value('senarai_negeri.negeri');
+                                                $requestedDaerahRumahKlien = DB::table('senarai_daerah')->where('id', $requestedDataKlien['daerah'])->value('senarai_daerah.daerah');
+                                                $requestedNegeriRumahKlien = DB::table('senarai_negeri')->where('id', $requestedDataKlien['negeri'])->value('senarai_negeri.negeri');
+                                                $daerahRumahKlien = DB::table('senarai_daerah')->where('id', $klien->daerah)->value('senarai_daerah.daerah');
+                                                $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $klien->negeri)->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row">
@@ -519,7 +521,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['emel'] != $klien->emel ? 'border-primary' : '' }}" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -527,7 +530,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea>
+                                                    <textarea class="form-control form-control-solid {{ $requestedDataKlien['alamat_rumah'] != $klien->alamat_rumah ? 'border-primary' : '' }}" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea>
+                                                    {{-- <textarea class="form-control form-control-solid" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -535,7 +539,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['poskod'] != $klien->poskod ? 'border-primary' : '' }}" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -543,7 +548,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahRumahKlien }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDaerahRumahKlien != $daerahRumahKlien ? 'border-primary' : '' }}" name="daerah" value="{{ $requestedDaerahRumahKlien }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahRumahKlien }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -551,7 +557,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriRumahKlien }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedNegeriRumahKlien != $negeriRumahKlien ? 'border-primary' : '' }}" name="negeri" value="{{ $requestedNegeriRumahKlien }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriRumahKlien }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -559,7 +566,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['tahap_pendidikan'] != $klien->tahap_pendidikan ? 'border-primary' : '' }}" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
 
@@ -1009,8 +1017,10 @@
                                             @method('PATCH')
 
                                             @php
-                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                                $requestedDaerahKerja = DB::table('senarai_daerah')->where('id', $requestedDataPekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
+                                                $requestedNegeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
+                                                $daerahKerja = DB::table('senarai_daerah')->where('id', $pekerjaan->daerah_kerja)->value('senarai_daerah.daerah');
+                                                $negeriKerja = DB::table('senarai_negeri')->where('id', $pekerjaan->negeri_kerja)->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
@@ -1018,7 +1028,11 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pekerjaan'] != $pekerjaan->pekerjaan ? 'border-primary' : '' }}" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
+                                                    @if ($requestedDataPekerjaan['pekerjaan'] != $pekerjaan->pekerjaan)
+                                                        <i class="ki-duotone ki-warning-2 text-danger fs-6 position-absolute" style="right: 10px; top: 10px;" data-bs-toggle="tooltip" title="This field has been modified by the client."></i>
+                                                    @endif
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                     
@@ -1027,7 +1041,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pendapatan'] != $pekerjaan->pendapatan ? 'border-primary' : '' }}" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                     
@@ -1036,7 +1051,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['bidang_kerja'] != $pekerjaan->bidang_kerja ? 'border-primary' : '' }}" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                     
@@ -1045,7 +1061,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                    <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $klien->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                    {{-- <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea> --}}
                                                 </div>
                                             </div>
                                     
@@ -1054,7 +1071,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod Tempat Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['poskod_kerja'] != $pekerjaan->poskod_kerja ? 'border-primary' : '' }}" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1062,7 +1080,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah Tempat Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerja != $daerahKerja ? 'border-primary' : '' }}" name="daerah_kerja" value="{{ $requestedDaerahKerja }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1070,7 +1089,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerja != $negeriKerja ? 'border-primary' : '' }}" name="negeri_kerja" value="{{ $requestedNegeriKerja }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1078,7 +1098,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_majikan'] != $pekerjaan->nama_majikan ? 'border-primary' : '' }}" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1086,7 +1107,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['no_tel_majikan'] != $pekerjaan->no_tel_majikan ? 'border-primary' : '' }}" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
 
@@ -1300,8 +1322,10 @@
                                             @method('PATCH')
 
                                             @php
-                                                $daerahWaris = DB::table('senarai_daerah')->where('id', $requestedDataWaris['daerah_waris'])->value('senarai_daerah.daerah');
-                                                $negeriWaris = DB::table('senarai_negeri')->where('id', $requestedDataWaris['negeri_waris'])->value('senarai_negeri.negeri');
+                                                $requestedDaerahWaris = DB::table('senarai_daerah')->where('id', $requestedDataWaris['daerah_waris'])->value('senarai_daerah.daerah');
+                                                $requestedNegeriWaris = DB::table('senarai_negeri')->where('id', $requestedDataWaris['negeri_waris'])->value('senarai_negeri.negeri');
+                                                $daerahWaris = DB::table('senarai_daerah')->where('id', $waris->daerah_waris)->value('senarai_daerah.daerah');
+                                                $negeriWaris = DB::table('senarai_negeri')->where('id', $waris->negeri_waris)->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
@@ -1309,7 +1333,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Hubungan Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="hubungan_waris" value="{{ $requestedDataWaris['hubungan_waris'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataWaris['hubungan_waris'] != $pekerjaan->hubungan_waris ? 'border-primary' : '' }}" name="hubungan_waris" value="{{ $requestedDataWaris['hubungan_waris'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="hubungan_waris" value="{{ $requestedDataWaris['hubungan_waris'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1317,7 +1342,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_waris" value="{{ $requestedDataWaris['nama_waris'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataWaris['nama_waris'] != $pekerjaan->nama_waris ? 'border-primary' : '' }}" name="nama_waris" value="{{ $requestedDataWaris['nama_waris'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="nama_waris" value="{{ $requestedDataWaris['nama_waris'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1325,7 +1351,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_waris" value="{{ $requestedDataWaris['no_tel_waris'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataWaris['no_tel_waris'] != $pekerjaan->no_tel_waris ? 'border-primary' : '' }}" name="no_tel_waris" value="{{ $requestedDataWaris['no_tel_waris'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="no_tel_waris" value="{{ $requestedDataWaris['no_tel_waris'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1333,7 +1360,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah Waris</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_waris" readonly>{{ $requestedDataWaris['alamat_waris'] }}</textarea>
+                                                    <textarea class="form-control form-control-solid {{ $requestedDataWaris['alamat_waris'] != $klien->alamat_waris ? 'border-primary' : '' }}" name="alamat_waris" readonly>{{ $requestedDataWaris['alamat_waris'] }}</textarea>
+                                                    {{-- <textarea class="form-control form-control-solid" name="alamat_waris" readonly>{{ $requestedDataWaris['alamat_waris'] }}</textarea> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1341,7 +1369,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_waris" value="{{ $requestedDataWaris['poskod_waris'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataWaris['poskod_waris'] != $pekerjaan->poskod_waris ? 'border-primary' : '' }}" name="poskod_waris" value="{{ $requestedDataWaris['poskod_waris'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="poskod_waris" value="{{ $requestedDataWaris['poskod_waris'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1349,7 +1378,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahWaris }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDaerahWaris != $daerahWaris ? 'border-primary' : '' }}" name="daerah_waris" value="{{ $requestedDaerahWaris }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahWaris }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1357,7 +1387,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriWaris }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedNegeriWaris != $negeriWaris ? 'border-primary' : '' }}" name="negeri_waris" value="{{ $requestedNegeriWaris }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriWaris }}" readonly /> --}}
                                                 </div>
                                             </div>
 
@@ -1665,10 +1696,15 @@
                                             @method('PATCH')
 
                                             @php
-                                                $daerahPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_pasangan'])->value('senarai_daerah.daerah');
-                                                $negeriPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_pasangan'])->value('senarai_negeri.negeri');
-                                                $daerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah');
-                                                $negeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri');
+                                                $requestedDaerahPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_pasangan'])->value('senarai_daerah.daerah');
+                                                $requestedNegeriPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_pasangan'])->value('senarai_negeri.negeri');
+                                                $requestedDaerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah');
+                                                $requestedNegeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri');
+                                                
+                                                $daerahPasangan = DB::table('senarai_daerah')->where('id', $pasangan->daerah_pasangan)->value('senarai_daerah.daerah');
+                                                $negeriPasangan = DB::table('senarai_negeri')->where('id', $pasangan->negeri_pasangan)->value('senarai_negeri.negeri');
+                                                $daerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $pasangan->daerah_kerja_pasangan)->value('senarai_daerah.daerah');
+                                                $negeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $pasangan->negeri_kerja_pasangan)->value('senarai_negeri.negeri');
                                             @endphp
                                     
                                             <div class="row fv-row mb-7">
@@ -1676,7 +1712,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Status Perkahwinan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['status_perkahwinan'] != $pasangan->status_perkahwinan ? 'border-primary' : '' }}" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                     
@@ -1685,7 +1722,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['nama_pasangan'] != $pasangan->nama_pasangan ? 'border-primary' : '' }}" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                     
@@ -1694,7 +1732,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['no_tel_pasangan'] != $pasangan->no_tel_pasangan ? 'border-primary' : '' }}" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1702,7 +1741,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
+                                                    <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_pasangan'] != $pasangan->alamat_pasangan ? 'border-primary' : '' }}" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
+                                                    {{-- <textarea class="form-control form-control-solid" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1710,7 +1750,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['poskod_pasangan'] != $pasangan->poskod_pasangan ? 'border-primary' : '' }}" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1718,7 +1759,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahPasangan }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDaerahPasangan != $daerahPasangan ? 'border-primary' : '' }}" name="daerah_pasangan" value="{{ $requestedDaerahPasangan }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahPasangan }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1726,7 +1768,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriPasangan }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedNegeriPasangan != $negeriPasangan ? 'border-primary' : '' }}" name="negeri_pasangan" value="{{ $requestedNegeriPasangan }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriPasangan }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1734,7 +1777,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Kerja Pasangan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
+                                                    <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_kerja_pasangan'] != $pasangan->alamat_kerja_pasangan ? 'border-primary' : '' }}" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
+                                                    {{-- <textarea class="form-control form-control-solid" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1743,6 +1787,7 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1750,7 +1795,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $daerahKerjaPasangan }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerjaPasangan != $daerahKerjaPasangan ? 'border-primary' : '' }}" name="daerah_kerja_pasangan" value="{{ $requestedDaerahKerjaPasangan }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahKerjaPasangan }}" readonly /> --}}
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1758,7 +1804,8 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" value="{{ $negeriKerjaPasangan }}" readonly />
+                                                    <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerjaPasangan != $negeriKerjaPasangan ? 'border-primary' : '' }}" name="negeri_kerja_pasangan" value="{{ $requestedNegeriKerjaPasangan }}" readonly />
+                                                    {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriKerjaPasangan }}" readonly /> --}}
                                                 </div>
                                             </div>
 
@@ -1869,6 +1916,10 @@
             var modal = new bootstrap.Modal(document.querySelector(target));
             modal.show();
         });
+    });
+
+    $(document).ready(function(){
+        $('[data-bs-toggle="tooltip"]').tooltip(); 
     });
 </script>
 
