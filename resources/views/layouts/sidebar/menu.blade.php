@@ -99,7 +99,7 @@
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">PENDAFTARAN</span>
+                            <span class="menu-heading fw-bold text-uppercase fs-7">AKAUN PENGGUNA</span>
                         </div>
                         <!--end:Menu content-->
                     </div>
@@ -117,7 +117,7 @@
                                         <span class="path3"></span>
                                     </i>
                                 </span>
-                                <span class="menu-title">Daftar Pengguna</span>
+                                <span class="menu-title">Senarai Pengguna</span>
                             </a>
                         </span>
                         <!--end:Menu link-->

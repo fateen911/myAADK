@@ -13,10 +13,12 @@ class DaftarPenggunaController extends Controller
 {
     public function senaraiPengguna()
     {
-        $user = User::all();
+        $klien = User::where('tahap_pengguna', '=' ,'2')->get();
+        $pegawai = User::where('tahap_pengguna', '!=' ,'2')->get();
+
         $tahap = TahapPengguna::all()->sortBy('id');
 
-        return view ('pendaftaran.daftar_pengguna', compact('user', 'tahap'));
+        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap'));
     }
 
     public function kemaskiniPengguna(Request $request)
