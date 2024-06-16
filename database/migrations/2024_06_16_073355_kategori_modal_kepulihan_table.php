@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kategori_modal_kepulihan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('modal_id')->unique();
+            $table->unsignedBigInteger('modal_id');
             $table->string('kategori');
             $table->string('nama_kategori');
             $table->timestamps();
