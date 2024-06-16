@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
+use App\Http\Controllers\ModalKepulihanController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -52,13 +53,13 @@ Route::middleware('auth')->group(function () {
 });
 
 // PENTADBIR - DAFTAR PENGGUNA
-Route::get('/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
-Route::post('kemaskini-pengguna', [DaftarPenggunaController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
-Route::post('daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
+Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
+Route::post('pentadbir/kemaskini-pengguna', [DaftarPenggunaController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
+Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
 
 // PENTADBIR - PENGURUSAN PROFIL
-Route::get('/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
-Route::get('/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+Route::get('/pentadbir-pegawai/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
+Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 
 // PENTADBIR UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
@@ -76,7 +77,6 @@ Route::patch('/approve-update/waris-klien/{id}', [ProfilKlienController::class, 
 Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePasangan'])->name('approve.update.pasangan');
 Route::patch('/approve-update/rawatan-klien/{id}', [ProfilKlienController::class, 'approveUpdateRawatan'])->name('approve.update.rawatan');
 
-
 // KLIEN - PENGURUSAN PROFIL
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
 Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
@@ -88,5 +88,8 @@ Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController:
 Route::post('/klien/maklumat-waris/request-update', [ProfilKlienController::class, 'warisKlienRequestUpdate'])->name('warisKlien.requestUpdate');
 Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'pasanganKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
 
+// KLIEN - MODUL KEPULIHAN
+Route::get('/klien/modul-kepulihan/soal-selidik', [ModalKepulihanController::class, 'soalSelidik'])->middleware('auth')->name('klien.soalSelidik');
+Route::get('/klien/modul-kepulihan/bahagian-A', [ModalKepulihanController::class, 'soalanDemografi'])->middleware('auth')->name('klien.soalanDemografi');
 
 require __DIR__.'/auth.php';

@@ -539,9 +539,9 @@
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien-soal-selidik') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien.soalSelidik') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" href="{{ route('klien.soalSelidik') }}" onclick="event.preventDefault(); window.location.href='{{ route('klien.soalSelidik') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
@@ -549,7 +549,7 @@
                                 </i>
                             </span>
                             <span class="menu-title">Soal Selidik</span>
-                        </span>
+                        </a>
                     </div>
                     <!--end:Menu item-->
 
