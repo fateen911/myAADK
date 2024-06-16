@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('tkh_pengesahan',0)->nullable();
             $table->string('pengesahan')->nullable();
             $table->string('catatan')->nullable();
+            $table->string('pautan'); //Pautan ke rekod kehadiran
             $table->dateTime('tkh_perekodan',0)->nullable();
             $table->timestamps();
 

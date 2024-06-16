@@ -19,6 +19,7 @@ class Program extends Model
         'tarikh',
         'masa',
         'catatan',
+        'pautan'
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

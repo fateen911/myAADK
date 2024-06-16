@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tarikh');
             $table->time('masa');
             $table->string('catatan')->nullable();
+            $table->string('pautan');//Pautan ke pengesahan kehadiran
             $table->timestamps();
 
             // Foreign key constraint

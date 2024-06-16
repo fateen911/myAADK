@@ -18,6 +18,7 @@ class ProgramKehadiran extends Model
         'tkh_pengesahan',
         'pengesahan',
         'catatan',
+        'pautan',
         'tkh_pengesahan',
     ];
 
