@@ -531,12 +531,21 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-3 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3"></label>
                                                 </div>
-                                                <div class="col-md-7">
+                                                <div class="col-md-9">
                                                     <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Hantar</button>
+                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
+                                                        @if($resultRequestKlien->status == 'Lulus')
+                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
+                                                        @elseif($resultRequestKlien->status == 'Dikemaskini')
+                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
+                                                        @elseif($resultRequestKlien->status == 'Ditolak')
+                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
+                                                        @else
+                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -857,12 +866,21 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3"></label>
                                                 </div>
-                                                <div class="col-md-7">
+                                                <div class="col-md-8">
                                                     <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Hantar</button>
+                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
+                                                        @if($resultRequestPekerjaan->status == 'Lulus')
+                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
+                                                        @elseif($resultRequestPekerjaan->status == 'Dikemaskini')
+                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
+                                                        @elseif($resultRequestPekerjaan->status == 'Ditolak')
+                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
+                                                        @else
+                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1117,12 +1135,21 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
+                                                <div class="col-md-3 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3"></label>
                                                 </div>
-                                                <div class="col-md-7">
+                                                <div class="col-md-9">
                                                     <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Hantar</button>
+                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
+                                                        @if($resultRequestWaris->status == 'Lulus')
+                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
+                                                        @elseif($resultRequestWaris->status == 'Dikemaskini')
+                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
+                                                        @elseif($resultRequestWaris->status == 'Ditolak')
+                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
+                                                        @else
+                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1500,7 +1527,16 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Hantar</button>
+                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
+                                                        @if($resultRequestPasangan->status == 'Lulus')
+                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
+                                                        @elseif($resultRequestPasangan->status == 'Dikemaskini')
+                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
+                                                        @elseif($resultRequestPasangan->status == 'Ditolak')
+                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
+                                                        @else
+                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -1614,7 +1650,6 @@
                         <!--end::Form-->
                     </div>
                     <!--end:::Tab pane-->
-
                 </div>
                 <!--end:::Tab content-->
             </div>
