@@ -53,7 +53,7 @@
 					<!--end::Card header-->
 
 					<!--begin::Card body-->
-					<div class="card-body pt-0">
+					<div class="body">
 						<!--begin::Table-->
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>

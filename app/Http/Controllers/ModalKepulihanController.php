@@ -64,4 +64,8 @@ class ModalKepulihanController extends Controller
         return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $allQuestions]);
     }
 
+    public function maklumBalasKepulihan()
+    {
+        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
+    }
 }

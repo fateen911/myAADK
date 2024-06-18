@@ -95,5 +95,6 @@ Route::post('/simpan/jawapan-demografi', [ModalKepulihanController::class, 'stor
 Route::get('/klien/modul-kepulihan/soalan-kepulihan', [ModalKepulihanController::class, 'soalanKepulihan'])->middleware('auth')->name('klien.soalanKepulihan');
 
 // PENTADBIR - MODUL KEPULIHAN
+Route::get('/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
 
 require __DIR__.'/auth.php';
