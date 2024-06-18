@@ -199,20 +199,6 @@
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
-																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
-																				<option value="{{$tahap1->id}}" {{$user1->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
-																			@endforeach
-																		</select>
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
 																</div>
 																<!--end::Scroll-->
 	

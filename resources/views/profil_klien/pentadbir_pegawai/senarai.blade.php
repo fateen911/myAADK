@@ -87,14 +87,23 @@
                                     @endphp
 
                                     <tr>
-                                        <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
+                                        <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
                                         <td>{{ $user->no_kp }}</td>
                                         <td>{{ $daerah }}</td>
                                         <td>{{ $negeri }}</td>
                                         <td><button class="btn btn-sm bg-info text-white">DIKEMASKINI</button></td>
-                                        <td>PEGAWAI NEGERI</td>
+                                        <td>PEGAWAI DAERAH</td>
                                     </tr>
                                 @endforeach
+
+                                <tr>
+                                    <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">AMIR BIN HAKIM</a></td>
+                                    <td>011209130915</td>
+                                    <td>JOHOR BAHARU</td>
+                                    <td>JOHOR</td>
+                                    <td><button class="btn btn-sm bg-info text-white">LULUS</button></td>
+                                    <td>PEGAWAI NEGERI</td>
+                                </tr>
                             </tbody>
                         </table>
 						<!--end::Table-->
