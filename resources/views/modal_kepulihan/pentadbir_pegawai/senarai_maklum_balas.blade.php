@@ -57,44 +57,34 @@
 						<!--begin::Table-->
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
-                                <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+                                <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                     <th class="min-w-150px">Nama</th>
                                     <th class="min-w-100px">No. Kad Pengenalan</th>
                                     <th class="min-w-100px">Daerah</th>
                                     <th class="min-w-70px">Negeri</th>
-                                    <th class="min-w-80px">Status</th> 
-                                    <th class="min-w-100px">Pengemaskini</th> 
+                                    <th class="min-w-50px">Status</th> 
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                                {{-- @foreach ($klien as $user)
-                                    @php
-                                        $text = ucwords(strtolower($user->nama)); // Assuming you're sending the text as a POST parameter
-                                        $conjunctions = ['bin', 'binti'];
-                                        $words = explode(' ', $text);
-                                        $result = [];
-                                        foreach ($words as $word) {
-                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                $result[] = Str::lower($word);
-                                            } else {
-                                                $result[] = $word;
-                                            }
-                                        }
-                                        $nama_user = implode(' ', $result);
-                                        $daerah = DB::table('senarai_daerah')->where('id', $user['daerah'])->value('senarai_daerah.daerah');
-                                        $negeri = DB::table('senarai_negeri')->where('id', $user['negeri'])->value('senarai_negeri.negeri');
-                                        // $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
-                                    @endphp
-
-                                    <tr>
-                                        <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">{{$user->nama}}</a></td>
-                                        <td>{{ $user->no_kp }}</td>
-                                        <td>{{ $daerah }}</td>
-                                        <td>{{ $negeri }}</td>
-                                        <td><button class="btn btn-sm bg-info text-white">DIKEMASKINI</button></td>
-                                        <td>PEGAWAI NEGERI</td>
-                                    </tr>
-                                @endforeach --}}
+                                @foreach($responses as $response)
+                                @php
+                                    $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
+                                    $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
+                                @endphp
+                                <tr>
+                                    <td>
+                                        {{-- <a href="{{ route('admin.viewClient', $response->klien_id) }}"> --}}
+                                            {{ $response->nama }}
+                                        {{-- </a> --}}
+                                    </td>
+                                    <td>{{ $response->no_kp }}</td>
+                                    <td>{{ $daerah }}</td>
+                                    <td>{{ $negeri }}</td>
+                                    <td class="d-flex justify-content-center">
+                                        <button class="btn btn-sm bg-success text-white">{{ strtoupper($response->status) }}</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 						<!--end::Table-->

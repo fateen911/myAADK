@@ -88,7 +88,13 @@ class ModalKepulihanController extends Controller
     // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()
     {
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
+        $responses = DB::table('respon_modal_kepulihan as rm')
+        ->join('klien as u', 'rm.klien_id', '=', 'u.id')
+        ->select('u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', DB::raw('MAX(rm.status) as status'))
+        ->groupBy('rm.klien_id')
+        ->get();
+
+        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses'));
     }
 
 }
