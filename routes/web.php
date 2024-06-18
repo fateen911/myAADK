@@ -94,4 +94,6 @@ Route::get('/klien/modul-kepulihan/soalan-demografi', [ModalKepulihanController:
 Route::post('/simpan/jawapan-demografi', [ModalKepulihanController::class, 'storeDemografi'])->name('submit.demografi');
 Route::get('/klien/modul-kepulihan/soalan-kepulihan', [ModalKepulihanController::class, 'soalanKepulihan'])->middleware('auth')->name('klien.soalanKepulihan');
 
+// PENTADBIR - MODUL KEPULIHAN
+
 require __DIR__.'/auth.php';

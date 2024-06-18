@@ -182,7 +182,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
+                            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
                                 <span class="menu-link">
                                     <span class="menu-bullet">
@@ -191,7 +191,7 @@
                                     <span class="menu-title">Senarai Soalan</span>
                                 </span>
                                 <!--end:Menu link-->
-                            </div>
+                            </div> --}}
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->

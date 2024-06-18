@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('respon_modal_kepulihan', function (Blueprint $table) {
+        Schema::create('keputusan_kepulihan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->unsignedBigInteger('soalan_id'); //kombinasi modal,kategori,no soalan (BB5)
-            $table->unsignedBigInteger('skala_id');
+            $table->unsignedBigInteger('tahap_kepulihan_id');
+            $table->string('kebarangkalian_tahap_kepulihan');
+            $table->string('status_respon');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('respon_modal_kepulihan');
+        Schema::dropIfExists('keputusan_kepulihan_klien');
     }
 };
