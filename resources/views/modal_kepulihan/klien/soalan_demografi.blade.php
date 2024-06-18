@@ -65,7 +65,7 @@
         <!--begin::Card body-->
         <div class="card card-flush">
             <h2 class="text-center">BORANG SOAL SELIDIK MAKLUMAT DEMOGRAFI</h2>
-            <form method="POST" action="{{ route('submit.demografi') }}" class="p-4">
+            <form method="POST" action="{{ route('klien.submit.demografi') }}" class="p-4">
                 @csrf
 
                 <div class="mb-7">

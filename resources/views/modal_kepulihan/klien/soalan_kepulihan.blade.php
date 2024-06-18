@@ -69,7 +69,7 @@
             <h2 class="text-center pt-10">BORANG SOAL SELIDIK MODAL KEPULIHAN</h2>
 
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
                     @csrf
                     @foreach($questions as $question)
                         <div class="question" style="font-size: 12pt;">
@@ -85,17 +85,16 @@
                                     <input type="radio" name="answer[{{ $question->id }}]" value="3"> Setuju
                                 </label>
                                 <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4"> Sangat Setuju
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="4"> Sangat Setuju
                                 </label>
                             </div>
                         </div>
                         <br>
                     @endforeach
-
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
                     </div>
-                </form>
+                </form>                
             </div>
         </div>
         <!--end::Card body-->

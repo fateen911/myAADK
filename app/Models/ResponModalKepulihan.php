@@ -15,5 +15,6 @@ class ResponModalKepulihan extends Model
         'klien_id',
         'soalan_id',
         'skala_id',
+        'status',
     ];
 }

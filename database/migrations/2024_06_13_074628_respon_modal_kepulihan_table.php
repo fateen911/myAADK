@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('klien_id');
             $table->unsignedBigInteger('soalan_id'); //kombinasi modal,kategori,no soalan (BB5)
             $table->unsignedBigInteger('skala_id');
+            $table->enum('status', ['Selesai', 'Tidak Selesai'])->default('Tidak Selesai');
             $table->timestamps();
         });
     }

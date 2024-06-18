@@ -21,12 +21,12 @@ class ModalKepulihanController extends Controller
         return view('modal_kepulihan.klien.soalan_demografi');
     }
 
-    public function storeDemografi(Request $request)
+    public function storeResponSoalanDemografi(Request $request)
     {
         // Get the client ID from the authenticated user's 'no_kp'
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-        // Create an array of the data to be stored
+        // Prepare data for insertion/updating
         $data = $request->all();
         $data['klien_id'] = $clientId;
 
@@ -35,11 +35,14 @@ class ModalKepulihanController extends Controller
             $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
         }
 
-        // Create the demographic response
-        ResponDemografi::create($data);
+        // Update existing record or create a new one if it doesn't exist
+        ResponDemografi::updateOrCreate(
+            ['klien_id' => $clientId], // Condition to check for existing record
+            $data // Data to update/create
+        );
 
-        // Redirect to soalan kepulihan section with a success message
-        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon maklumat demografi anda telah disimpan.');
+        // Redirect to the desired route with a success message
+        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah disimpan.');
     }
 
     public function soalanKepulihan()
@@ -64,8 +67,28 @@ class ModalKepulihanController extends Controller
         return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $allQuestions]);
     }
 
+    public function storeResponSoalanKepulihan(Request $request)
+    {
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+        foreach ($request->input('answer') as $soalanId => $skalaId) {
+            DB::table('respon_modal_kepulihan')->insert([
+                'klien_id' => $klienId,
+                'soalan_id' => $soalanId,
+                'skala_id' => $skalaId,
+                'status' => 'Selesai',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah disimpan.');
+    }
+
+    // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()
     {
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
     }
+
 }
