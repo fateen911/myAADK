@@ -10,17 +10,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .question {
-            margin-bottom: 15px;
-        }
-        .options {
+        .card-flush {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-top: 100px;
+            margin-left: 200px;
+            width: 60%;
         }
-        .options label {
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .card-header {
             display: flex;
             align-items: center;
-            gap: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .card-header .profile-icon {
+            font-size: 40px;
+            color: #000;
+            margin-right: 20px;
+        }
+        .card-header div {
+            flex-grow: 1;
+        }
+        .status {
+            /* background: #e0f8e0; */
+            /* color: #34c759; */
+            color: black;
+            background-color: orange;
+            padding: 5px 10px;
+            border-radius: 16px;
+            text-align: center;
+            text-decoration: none; /* Ensure link text is styled like a button */
+            display: inline-block; /* Ensure it respects padding and dimensions */
+            width: 100%;
         }
     </style>
 </head>
@@ -46,14 +80,6 @@
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">Soal Selidik</li>
             <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soalan Kepulihan</li>
-            <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
     </div>
@@ -66,37 +92,23 @@
     <div id="kt_app_content_container" class="app-container container-xxl">
         <!--begin::Card body-->
         <div class="card card-flush">
-            <h2 class="text-center pt-10">BORANG SOAL SELIDIK MODAL KEPULIHAN</h2>
-
-            <div class="card-body">
-                <form action="" method="POST">
-                    @csrf
-                    @foreach($questions as $question)
-                        <div class="question" style="font-size: 12pt;">
-                            <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
-                            <div class="options">
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="1"> Sangat Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="2"> Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="3"> Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4"> Sangat Setuju
-                                </label>
-                            </div>
-                        </div>
-                        <br>
-                    @endforeach
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
-                    </div>
-                </form>
+            <!--begin::Card header-->
+            <div class="card-header">
+                <i class="fas fa-user profile-icon"></i>
+                <div>
+                    <h3>NAMA PENUH: HISHAM BIN MOHD</h3>
+                    <p>NO KAD PENGENALAN: 920604130917</p>
+                </div>
             </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body">
+                <p>TARIKH TERAKHIR JAWAB SOAL SELIDIK: 16/04/2024</p>
+                <p>STATUS: SOAL SELIDIK BELUM DIJAWAB</p>
+                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MOHON</a>
+                {{-- <div class="status">KLIK UNTUK MOHON</div> --}}
+            </div>
+            <!--end::Card body-->
         </div>
         <!--end::Card body-->
     </div>

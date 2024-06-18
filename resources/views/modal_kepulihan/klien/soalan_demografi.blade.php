@@ -21,10 +21,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        /* .h2 {
-            text-align: center !important;
-            padding-top: 20px;
-        } */
     </style>
 </head>
 
@@ -68,7 +64,7 @@
     <div id="kt_app_content_container" class="app-container container-xxl">
         <!--begin::Card body-->
         <div class="card card-flush">
-            <h2 class="text-center">BAHAGIAN A : DEMOGRAFI</h2>
+            <h2 class="text-center">BORANG SOAL SELIDIK MAKLUMAT DEMOGRAFI</h2>
             <form method="POST" action="{{ route('submit.demografi') }}" class="p-4">
                 @csrf
 
@@ -124,7 +120,7 @@
                         <input class="form-check-input" type="radio" name="kategori" value="Pascabebas (relapse)" id="kategori2">
                         <label class="form-check-label" for="kategori2">Pascabebas (relapse)</label>
                     </div>
-                    <input type="text" class="form-control mt-2 d-none" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan">
+                    <input type="text" class="form-control mt-2 d-none" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" style="width: 30%;">
                 </div>
 
                 <div class="mb-7">
@@ -205,38 +201,40 @@
                 </div>
 
                 <div class="mb-7">
-                    <label for="tinggal_di_kawasan">9) Di kawasan manakah anda tinggal ?</label><br>
+                    <label for="kawasan_tempat_tinggal">9) Di kawasan manakah anda tinggal ?</label><br>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Bandar" id="kawasan1">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Bandar" id="kawasan1">
                         <label class="form-check-label" for="kawasan1">Bandar</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Pinggir Bandar" id="kawasan2">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Pinggir Bandar" id="kawasan2">
                         <label class="form-check-label" for="kawasan2">Pinggir Bandar</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Luar Bandar/Kampung" id="kawasan3">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Luar Bandar/Kampung" id="kawasan3">
                         <label class="form-check-label" for="kawasan3">Luar Bandar/Kampung</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Felda" id="kawasan4">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Felda" id="kawasan4">
                         <label class="form-check-label" for="kawasan4">Felda</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Felcra" id="kawasan5">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Felcra" id="kawasan5">
                         <label class="form-check-label" for="kawasan5">Felcra</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Kebun Getah" id="kawasan6">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kebun Getah" id="kawasan6">
                         <label class="form-check-label" for="kawasan6">Kebun Getah</label>
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="tinggal_di_kawasan" value="Kawasan Nelayan" id="kawasan7">
+                        <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kawasan Nelayan" id="kawasan7">
                         <label class="form-check-label" for="kawasan7">Kawasan Nelayan</label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary text-center mt-5">Seterusnya</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
+                </div>
             </form>
         </div>
         <!--end::Card body-->

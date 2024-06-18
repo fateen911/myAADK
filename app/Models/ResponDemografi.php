@@ -9,6 +9,8 @@ class ResponDemografi extends Model
 {
     use HasFactory;
 
+    protected $table = 'respon_soalan_demografi';
+
     protected $fillable = [
         'klien_id', 
         'rawatan',
@@ -21,6 +23,6 @@ class ResponDemografi extends Model
         'jenis_kediaman',
         'lama_tinggal_lokasi',
         'tinggal_dengan',
-        'tinggal_kawasan',
+        'kawasan_tempat_tinggal',
     ];
 }
