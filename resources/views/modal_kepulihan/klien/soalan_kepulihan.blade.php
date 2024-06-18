@@ -92,23 +92,7 @@
     <div id="kt_app_content_container" class="app-container container-xxl">
         <!--begin::Card body-->
         <div class="card card-flush">
-            <!--begin::Card header-->
-            <div class="card-header">
-                <i class="fas fa-user profile-icon"></i>
-                <div>
-                    <h3>NAMA PENUH: HISHAM BIN MOHD</h3>
-                    <p>NO KAD PENGENALAN: 920604130917</p>
-                </div>
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body">
-                <p>TARIKH TERAKHIR JAWAB SOAL SELIDIK: 16/04/2024</p>
-                <p>STATUS: SOAL SELIDIK BELUM DIJAWAB</p>
-                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MOHON</a>
-                {{-- <div class="status">KLIK UNTUK MOHON</div> --}}
-            </div>
-            <!--end::Card body-->
+            
         </div>
         <!--end::Card body-->
     </div>

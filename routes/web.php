@@ -90,6 +90,8 @@ Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::c
 
 // KLIEN - MODUL KEPULIHAN
 Route::get('/klien/modul-kepulihan/soal-selidik', [ModalKepulihanController::class, 'soalSelidik'])->middleware('auth')->name('klien.soalSelidik');
-Route::get('/klien/modul-kepulihan/bahagian-A', [ModalKepulihanController::class, 'soalanDemografi'])->middleware('auth')->name('klien.soalanDemografi');
+Route::get('/klien/modul-kepulihan/soalan-demografi', [ModalKepulihanController::class, 'soalanDemografi'])->middleware('auth')->name('klien.soalanDemografi');
+Route::post('/simpan/jawapan-demografi', [ModalKepulihanController::class, 'storeDemografi'])->name('submit.demografi');
+Route::get('/klien/modul-kepulihan/soalan-kepulihan', [ModalKepulihanController::class, 'soalanKepulihan'])->middleware('auth')->name('klien.soalanKepulihan');
 
 require __DIR__.'/auth.php';

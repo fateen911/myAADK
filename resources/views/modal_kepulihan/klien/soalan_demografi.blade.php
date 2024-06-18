@@ -69,7 +69,7 @@
         <!--begin::Card body-->
         <div class="card card-flush">
             <h2 class="text-center">BAHAGIAN A : DEMOGRAFI</h2>
-            <form method="POST" action="" class="p-4">
+            <form method="POST" action="{{ route('submit.demografi') }}" class="p-4">
                 @csrf
 
                 <div class="mb-7">
@@ -111,7 +111,7 @@
 
                 <div class="mb-7">
                     <label for="lama_tidak_ambil_dadah">3) Berapa lama anda sudah tidak mengambil dadah ?</label>
-                    <input type="text" class="form-control" id="lama_tidak_ambil_dadah" name="lama_tidak_ambil_dadah" placeholder="Tahun">
+                    <input type="text" class="form-control" id="lama_tidak_ambil_dadah" name="lama_tidak_ambil_dadah" placeholder="Tahun" style="width: 30%;">
                 </div>
 
                 <div class="mb-7">
@@ -177,7 +177,7 @@
 
                 <div class="mb-7">
                     <label for="lama_tinggal_lokasi">7) Berapa lamakah anda tinggal di lokasi terkini ?</label>
-                    <input type="text" class="form-control" id="lama_tinggal_lokasi" name="lama_tinggal_lokasi" placeholder="Tahun">
+                    <input type="text" class="form-control" id="lama_tinggal_lokasi" name="lama_tinggal_lokasi" placeholder="Tahun" style="width: 30%;">
                 </div>
 
                 <div class="mb-7">
@@ -236,7 +236,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
+                <button type="submit" class="btn btn-primary text-center mt-5">Seterusnya</button>
             </form>
         </div>
         <!--end::Card body-->
