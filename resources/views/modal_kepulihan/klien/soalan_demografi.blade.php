@@ -233,7 +233,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
+                    <button type="submit" class="btn btn-primary text-center mt-5">Seterusnya</button>
                 </div>
             </form>
         </div>
