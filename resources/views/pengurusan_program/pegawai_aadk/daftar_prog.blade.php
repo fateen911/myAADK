@@ -83,7 +83,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Program</label>
-                                        <input type="text" name="nama_program" class="form-control mb-2" placeholder="Nama Program" value="" required/>
+                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -93,7 +93,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Objektif Program</label>
-                                        <input type="text" name="objektif_program" class="form-control mb-2" placeholder="Objektif Program" value="" required/>
+                                        <input type="text" name="objektif" class="form-control mb-2" placeholder="Objektif Program" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -103,7 +103,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Tarikh Program</label>
-                                        <input class="form-control form-control-solid" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                        <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -113,7 +113,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Tempat Program</label>
-                                        <input type="text" name="tempat_program" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
+                                        <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -123,7 +123,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Masa Program</label>
-                                        <input class="form-control form-control-solid" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
+                                        <input class="form-control form-control-solid" name="masa" placeholder="Pilih masa" id="kt_daterangepicker_2"/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -133,7 +133,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Penganjur Program</label>
-                                        <input type="text" name="penganjur_program" class="form-control mb-2" placeholder="Penganjur Program" value="" required/>
+                                        <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
