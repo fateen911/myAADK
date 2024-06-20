@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Program;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
@@ -47,8 +48,50 @@ class PengurusanProgController extends Controller
 //    }
 
     //PEGAWAI AADK
-    public function daftarProgPA(Request $request)
+    public function daftarProgPA()
     {
+        return view('pengurusan_program.pegawai_aadk.daftar_prog');
+    }
+
+    public function kemaskiniProgPA()
+    {
+        return view('pengurusan_program.pegawai_aadk.kemaskini_prog');
+    }
+
+//    public function postDaftarProgPA(Request $request)
+//    {
+//        // Validate the form data
+//        $request->validate([
+//            'nama'      => 'required|string|max:255',
+//            'objective' => 'required|string',
+//            'tempat'    => 'required|string',
+//            'tarikh'    => 'required|date',
+//            'masa'      => 'required|time',
+//            'catatan'   => 'required|string',
+//        ]);
+//
+//        $program = new Program();
+//        $program->penganjur_id  = $request->penganjur;
+//        $program->nama          = $request->nama;
+//        $program->objektif      = $request->objektif;
+//        $program->tempat        = $request->tempat;
+//        $program->tarikh        = $request->tarikh;
+//        $program->masa          = $request->masa;
+//        $program->catatan       = $request->catatan;
+//
+//        //$program->pautan = route('pengurusan_program.klien.pengesahan_kehadiran', $program->id);
+//        $program->pautan = "https://laravel.com/";
+//
+//        $program->save();
+//
+//        $s_program = Program::with(['penganjur_id', 'nama', 'pautan'])->get();
+//        $berjaya = "Program berjaya didaftar";
+//
+//        return view('pengurusan_program.pegawai_aadk.daftar_prog',compact('s_program','berjaya'));
+//    }
+
+//    public function postKemaskiniProgPA(Request $request, $id)
+//    {
 //        // Validate the form data
 //        $request->validate([
 //            'name' => 'required|string|max:255',
@@ -60,26 +103,25 @@ class PengurusanProgController extends Controller
 //            'location_id' => 'required|exists:locations,id',
 //        ]);
 //
-//        // Create a new program
-//        $program = new Program();
-//        $program->name = $request->name;
-//        $program->description = $request->description;
-//        $program->start_time = $request->start_time;
-//        $program->end_time = $request->end_time;
-//        $program->user_id = $request->user_id;
-//        $program->category_id = $request->category_id;
-//        $program->location_id = $request->location_id;
-//        $program->save();
+//        // Find the program
+//        $program = Program::findOrFail($id);
 //
-//        // Redirect to a specific route (e.g., the program's detail page)
-//        return redirect()->route('programs.show', $program->id)->with('success', 'Program created successfully');
-        return view('pengurusan_program.pegawai_aadk.daftar_prog');
-    }
-
-    public function kemaskiniProgPA()
-    {
-        return view('pengurusan_program.pegawai_aadk.kemaskini_prog');
-    }
+//        // Update the program details
+//        $program->penganjur_id  = $request->penganjur;
+//        $program->nama          = $request->nama;
+//        $program->objektif      = $request->objektif;
+//        $program->tempat        = $request->tempat;
+//        $program->tarikh        = $request->tarikh;
+//        $program->masa          = $request->masa;
+//        $program->catatan       = $request->catatan;
+//
+//        // Generate the registration link
+//        //$program->pautan = route('pengurusan_program.klien.pengesahan_kehadiran', $program->id);
+//        $program->pautan = "https://laravel.com/";
+//
+//        $program->save();
+//        return view('pengurusan_program.pegawai_aadk.kemaskini_prog');
+//    }
 
     public function maklumatProgPA()
     {
@@ -106,6 +148,71 @@ class PengurusanProgController extends Controller
     {
         return view('pengurusan_program.pentadbir_sistem.maklumat_prog');
     }
+
+    //    public function postDaftarProgPS(Request $request)
+//    {
+//        // Validate the form data
+//        $request->validate([
+//            'nama'      => 'required|string|max:255',
+//            'objective' => 'required|string',
+//            'tempat'    => 'required|string',
+//            'tarikh'    => 'required|date',
+//            'masa'      => 'required|time',
+//            'catatan'   => 'required|string',
+//        ]);
+//
+//        $program = new Program();
+//        $program->penganjur_id  = $request->penganjur;
+//        $program->nama          = $request->nama;
+//        $program->objektif      = $request->objektif;
+//        $program->tempat        = $request->tempat;
+//        $program->tarikh        = $request->tarikh;
+//        $program->masa          = $request->masa;
+//        $program->catatan       = $request->catatan;
+//
+//        //$program->pautan = route('pengurusan_program.klien.pengesahan_kehadiran', $program->id);
+//        $program->pautan = "https://laravel.com/";
+//
+//        $program->save();
+//
+//        $s_program = Program::with(['penganjur_id', 'nama', 'pautan'])->get();
+//        $berjaya = "Program berjaya didaftar";
+//
+//        return view('pengurusan_program.pentadbir_sistem.daftar_prog',compact('s_program','berjaya'));
+//    }
+
+//    public function postKemaskiniProgPA(Request $request, $id)
+//    {
+//        // Validate the form data
+//        $request->validate([
+//            'name' => 'required|string|max:255',
+//            'description' => 'required|string',
+//            'start_time' => 'required|date',
+//            'end_time' => 'required|date',
+//            'user_id' => 'required|exists:users,id',
+//            'category_id' => 'required|exists:categories,id',
+//            'location_id' => 'required|exists:locations,id',
+//        ]);
+//
+//        // Find the program
+//        $program = Program::findOrFail($id);
+//
+//        // Update the program details
+//        $program->penganjur_id  = $request->penganjur;
+//        $program->nama          = $request->nama;
+//        $program->objektif      = $request->objektif;
+//        $program->tempat        = $request->tempat;
+//        $program->tarikh        = $request->tarikh;
+//        $program->masa          = $request->masa;
+//        $program->catatan       = $request->catatan;
+//
+//        // Generate the registration link
+//        //$program->pautan = route('pengurusan_program.klien.pengesahan_kehadiran', $program->id);
+//        $program->pautan = "https://laravel.com/";
+//
+//        $program->save();
+//        return view('pengurusan_program.pentadbir_sistem.kemaskini_prog');
+//    }
 
     public function senaraiProgPS()
     {

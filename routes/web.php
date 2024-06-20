@@ -26,12 +26,14 @@ Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share
 
 // PENGURUSAN PROGRAM - PEGAWAI AADK
 Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
+//Route::post('/pengurusan_program/pegawai_aadk/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
 Route::get('/pengurusan_program/pegawai_aadk/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
 Route::get('/pengurusan_program/pegawai_aadk/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan_program/pegawai_aadk/senarai_prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM
 Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
+//Route::post('/pengurusan_program/pentadbir_sistem/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
