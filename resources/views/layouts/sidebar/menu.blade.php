@@ -360,7 +360,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
+                            <div class="menu-item">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
                                     <span class="menu-bullet">
@@ -372,7 +372,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
+                            <div class="menu-item">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
                                     <span class="menu-bullet">
@@ -762,7 +762,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
+                            <div class="menu-item">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
                                     <span class="menu-bullet">
@@ -774,7 +774,7 @@
                             </div>
                             <!--end:Menu item-->
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
+                            <div class="menu-item">
                                 <!--begin:Menu link-->
                                 <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
                                     <span class="menu-bullet">
