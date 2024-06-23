@@ -76,7 +76,11 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add customer-->
-                                <a href={{url('/pengurusan_program/pentadbir_sistem/daftar_prog')}}> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer"> Tambah Program </button></a>
+                                <a href={{url('/pengurusan_program/pentadbir_sistem/daftar_prog')}}>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
+                                        Tambah Program &nbsp; <i class="bi bi-plus-circle"></i>
+                                    </button>
+                                </a>
                                 <!--end::Add customer-->
                             </div>
                             <!--end::Toolbar-->
