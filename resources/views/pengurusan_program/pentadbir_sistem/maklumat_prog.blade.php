@@ -65,11 +65,19 @@
             <div class="card card-flush py-4">
                 <!--begin::Card header-->
                 <div class="card-header">
+{{--                    <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Zoom</a>--}}
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <h2>QR code</h2>
+                        <h2>Kod QR</h2>
                     </div>
                     <!--end::Card title-->
+                    <!--begin::Big QR-->
+                    <div class="card-title">
+                        <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">
+                            <i class="ki-solid bi-arrows-angle-expand"></i>
+                        </button>
+                    </div>
+                    <!--end::Big QR-->
                 </div>
                 <!--end::Card header-->
                 <!--begin::Card body-->
@@ -81,6 +89,18 @@
                     <!--begin::Link-->
                     <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="www.google.com" disabled/>
                     <!--end::Link-->
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Share-->
+                    <b class="fs-5">Hebahan:</b> &nbsp;
+                    <!--end::Share-->
+                    <!--begin::Share to-->
+                    <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                    <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                    <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                    <!--end::Share to-->
                 </div>
                 <!--end::Card body-->
             </div>
@@ -103,9 +123,9 @@
                         <option></option>
                         <option value="selesai" selected="selected">Belum Selesai</option>
                         <option value="belum">Sudah Selesai</option>
-                        <option value="progres">Dalam Progres</option>
                         <option value="tangguh">Ditangguhkan</option>
                     </select>
+                    <br>
                 </div>
                 <!--end::Card body-->
             </div>
@@ -522,7 +542,39 @@
         <!--end::Main column-->
     </form>
     <!--end::Form-->
-
+    <!--begin::Modal - Users Search-->
+    <div class="modal fade" id="kt_modal_users_search" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-750px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                    <!--begin::Content-->
+                    <!--begin::Image input-->
+                    {!! QrCode::size(570)->generate('www.google.com'); !!}
+                    <!--end::Image input-->
+                    <!--end::Search-->
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - Users Search-->
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
