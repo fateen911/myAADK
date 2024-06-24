@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HebahanMail;
 use App\Models\Program;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -228,6 +230,17 @@ class PengurusanProgController extends Controller
     public function pengesahanKehadiran()
     {
         return view('pengurusan_program.klien.pengesahan_kehadiran');
+    }
+
+    public function hebahanEmel()
+    {
+
+        $customMessage = "Habahan";
+        $recipientEmail = "ziba0506@gmail.com";
+
+        Mail::to($recipientEmail)->send(new HebahanMail($customMessage));
+
+        return back()->with('success', 'Email sent successfully!');
     }
 
 }

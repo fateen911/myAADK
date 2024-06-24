@@ -105,7 +105,7 @@
                             <tbody class="fw-semibold text-gray-600">
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Pemulihan Bersepadu </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Pemulihan Bersepadu </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Belum Selesai</td>
@@ -114,7 +114,7 @@
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
                                             <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="mailto:?subject=Check out this QR code&body=Here's the QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
                                             <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Sesi Terapi Pencegahan Relaps </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Sesi Terapi Pencegahan Relaps </a>
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Selesai</td>
@@ -145,7 +145,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Kepulihan Komuniti </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Kepulihan Komuniti </a>
                                 </td>
                                 <td>Alumni</td>
                                 <td>Belum Selesai</td>
@@ -165,7 +165,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Kelab Sokongan Pulih Diri </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Kelab Sokongan Pulih Diri </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
@@ -185,7 +185,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Bengkel Kesedaran Diri </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Bengkel Kesedaran Diri </a>
                                 </td>
                                 <td>Pencegahan Relaps</td>
                                 <td>Belum Selesai</td>
@@ -205,7 +205,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Program Motivasi Kepulihan </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Motivasi Kepulihan </a>
                                 </td>
                                 <td>Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td>Selesai</td>
@@ -225,7 +225,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}>Rangkaian Alumni Pulih </a>
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Rangkaian Alumni Pulih </a>
                                 </td>
                                 <td>Alumni</td>
                                 <td>Selesai</td>
