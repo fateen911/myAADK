@@ -42,8 +42,10 @@ Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgCo
 Route::get('/pengurusan_program/klien/daftar_kehadiran',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
 Route::get('/pengurusan_program/klien/pengesahan_kehadiran',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
 
-// PENGURUSAN PROGRAM - KLIEN
+// PENGURUSAN PROGRAM - HEBAHAN
 Route::get('/pengurusan_program/hebahan/emel', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan.emel');
+Route::get('/pengurusan_program/hebahan/sms', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan.sms');
+Route::get('/pengurusan_program/hebahan/telegram', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan.telegram');
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');

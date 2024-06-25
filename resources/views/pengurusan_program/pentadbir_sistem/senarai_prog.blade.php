@@ -19,7 +19,6 @@
         <!-- Custom AADK CSS -->
         <link rel="stylesheet" href="/assets/css/customAADK.css">
 
-
         <style>
             .btn-icon {
                 display: flex;
@@ -113,7 +112,7 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="sms:?body=Check out this QR code link: https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
                                             <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
                                             <a href="https://telegram.me/share/url?url=https://laravel.com/" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
@@ -359,6 +358,28 @@
                 icons.classList.add('hidden');
             }
         });
+    </script>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDX_uTxg5maW8ukv2SkprHHlCRlHhHdCr4",
+            authDomain: "aadk-de0b0.firebaseapp.com",
+            projectId: "aadk-de0b0",
+            storageBucket: "aadk-de0b0.appspot.com",
+            messagingSenderId: "839184168686",
+            appId: "1:839184168686:web:2a3678b00d6998016865ff"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firebase Cloud Messaging
+        const messaging = firebase.messaging();
     </script>
 
 @endsection

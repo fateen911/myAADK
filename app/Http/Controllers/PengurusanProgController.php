@@ -7,6 +7,7 @@ use App\Models\Program;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 
 class PengurusanProgController extends Controller
 {
@@ -232,6 +233,7 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.klien.pengesahan_kehadiran');
     }
 
+    //HEBAHAN - EMEL
     public function hebahanEmel()
     {
 
@@ -242,5 +244,38 @@ class PengurusanProgController extends Controller
 
         return back()->with('success', 'Email sent successfully!');
     }
+
+    //HEBAHAN - SMS
+    public function hebahanSMS()
+    {
+        // Get the program and registration link
+        $program = Program::findOrFail(1); //program_id
+        $registrationLink = $program->registration_link;
+
+        // Create the message
+        $message = "Register for the program {$program->name} using this link: {$registrationLink}";
+
+        // Send the SMS
+        $this->sendTwilioSms("+601135679794", $message);
+
+        return redirect()->route('programs.show', $program->id)
+            ->with('success', 'SMS sent successfully.');
+    }
+
+    protected function sendTwilioSms($to, $message)
+    {
+        $sid = config('services.twilio.sid');
+        $token = config('services.twilio.token');
+        $from = config('services.twilio.from');
+
+        $client = new Client($sid, $token);
+        $client->messages->create($to, [
+            'from' => $from,
+            'body' => $message,
+        ]);
+    }
+
+    //HEBAHAN - TELEGRAM
+    
 
 }

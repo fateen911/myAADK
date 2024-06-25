@@ -10,7 +10,8 @@
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "twilio/sdk": "^8.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",
