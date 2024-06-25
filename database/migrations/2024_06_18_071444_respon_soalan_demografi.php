@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('rawatan');
             $table->string('lain_lain_rawatan')->nullable();
             $table->string('pusat_rawatan');
-            $table->string('lama_tidak_ambil_dadah');
+            $table->string('tempoh_tidak_ambil_dadah');
             $table->string('kategori');
             $table->string('jumlah_relapse')->nullable();
             $table->json('jenis_dadah');  // Store as JSON

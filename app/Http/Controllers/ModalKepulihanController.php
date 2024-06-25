@@ -18,8 +18,36 @@ class ModalKepulihanController extends Controller
 
     public function soalanDemografi()
     {
-        return view('modal_kepulihan.klien.soalan_demografi');
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $respon = ResponDemografi::where('klien_id', $clientId)->first();
+
+        return view('modal_kepulihan.klien.soalan_demografi', compact('respon'));
     }
+
+    public function autosaveResponSoalanDemografi(Request $request)
+    {
+        // Get the client ID from the authenticated user's 'no_kp'
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+        // Prepare data for insertion/updating
+        $data = $request->all();
+        $data['klien_id'] = $clientId;
+
+        // Ensure 'jenis_dadah' is converted to JSON if it's an array
+        if (isset($data['jenis_dadah']) && is_array($data['jenis_dadah'])) {
+            $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
+        }
+
+        // Update existing record or create a new one if it doesn't exist
+        ResponDemografi::updateOrCreate(
+            ['klien_id' => $clientId], // Condition to check for existing record
+            $data // Data to update/create
+        );
+
+        // Return a JSON response
+        return response()->json(['success' => 'Data autosaved successfully.']);
+    }
+
 
     public function storeResponSoalanDemografi(Request $request)
     {

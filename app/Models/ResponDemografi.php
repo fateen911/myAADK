@@ -16,7 +16,7 @@ class ResponDemografi extends Model
         'rawatan',
         'lain_lain_rawatan',
         'pusat_rawatan',
-        'lama_tidak_ambil_dadah',
+        'tempoh_tidak_ambil_dadah',
         'kategori',
         'jumlah_relapse',
         'jenis_dadah',

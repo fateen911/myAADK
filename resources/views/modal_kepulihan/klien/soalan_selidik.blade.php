@@ -103,10 +103,9 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body">
-                <p>TARIKH TERAKHIR JAWAB SOAL SELIDIK: 16/04/2024</p>
-                <p>STATUS: SOAL SELIDIK BELUM DIJAWAB</p>
-                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MOHON</a>
-                {{-- <div class="status">KLIK UNTUK MOHON</div> --}}
+                <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b> 16/01/2024</p>
+                <p><b>STATUS SOAL SELIDIK:</b> BELUM DIJAWAB</p>
+                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULAKAN MENJAWAB</a>
             </div>
             <!--end::Card body-->
         </div>
