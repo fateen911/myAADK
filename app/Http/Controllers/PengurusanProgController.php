@@ -8,6 +8,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\Png;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+use Illuminate\Support\Facades\Log;
 
 class PengurusanProgController extends Controller
 {
@@ -276,6 +281,36 @@ class PengurusanProgController extends Controller
     }
 
     //HEBAHAN - TELEGRAM
-    
+    public function hebahanTelegram()
+    {
+        // Generate program link (replace with your logic)
+        $programLink = url('www.google.com');
+
+        // Generate QR code
+        $qrCode = $this->generateQrCode($programLink);
+
+        // Message to send via Telegram
+        $message = "Check out this program: " . $programLink;
+
+        // Example: integrate with Telegram API to send message with QR code
+        // Here we're logging the message to simulate sending via Telegram API
+        Log::info("Sending program details via Telegram: {$message}");
+
+        // Redirect back or to another page
+        return redirect()->back()->with('success', 'Program shared via Telegram successfully.');
+    }
+
+    protected function generateQrCode($text)
+    {
+        // Create QR code instance
+        $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new Png()
+        );
+        $writer = new Writer($renderer);
+        $qrCode = $writer->writeString($text);
+
+        return base64_encode($qrCode); // Encode QR code as base64 for embedding in HTML
+    }
 
 }
