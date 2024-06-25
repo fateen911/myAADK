@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('respon_modal_kepulihan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->unsignedBigInteger('soalan_id'); //kombinasi modal,kategori,no soalan (BB5)
-            $table->unsignedBigInteger('skala_id');
-            $table->enum('status', ['Selesai', 'Tidak Selesai'])->default('Tidak Selesai');
+            $table->unsignedBigInteger('soalan_id'); 
+            $table->unsignedBigInteger('skala_id')->nullable();
+            $table->enum('status', ['Selesai', 'Belum Selesai'])->default('Belum Selesai');
             $table->timestamps();
+
+            $table->foreign('klien_id')->references('id')->on('kliens')->onDelete('cascade');
         });
     }
 

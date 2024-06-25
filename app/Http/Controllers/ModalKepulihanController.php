@@ -70,64 +70,93 @@ class ModalKepulihanController extends Controller
         );
 
         // Redirect to the desired route with a success message
-        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah disimpan.');
+        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah berjaya dihantar.');
     }
-
-    // public function soalanKepulihan()
-    // {
-    //     // Fetch 13 fixed questions (assuming modal_id ranges or specific IDs are known)
-    //     $fixedQuestions = DB::table('soalan_modal_kepulihan')
-    //                         ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) // Adjust according to your fixed modal_id values
-    //                         ->limit(13)
-    //                         ->get();
-
-    //     // Fetch remaining 126 questions
-    //     $remainingQuestions = DB::table('soalan_modal_kepulihan')
-    //                             ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-    //                             ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    //                             ->inRandomOrder()
-    //                             ->limit(12)
-    //                             ->get();
-
-    //     // Combine both sets of questions
-    //     $allQuestions = $fixedQuestions->merge($remainingQuestions);
-
-    //     return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $allQuestions]);
-    // }
 
     public function soalanKepulihan()
     {
-        // Fetch 8 fixed questions with specific IDs
-        $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
-        $fixedQuestions = DB::table('soalan_modal_kepulihan')
-                            ->whereIn('id', $fixedQuestionIds)
-                            ->get();
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        
+        // Check if the client already has questions assigned
+        $existingQuestionIds = DB::table('respon_modal_kepulihan')
+                                ->where('klien_id', $klienId)
+                                ->pluck('soalan_id')
+                                ->toArray();
 
-        // Fetch 5 questions representing each recovery capital
-        $capitalQuestions = DB::table('soalan_modal_kepulihan')
-                            ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-                            ->whereNotIn('id', $fixedQuestionIds)
-                            ->inRandomOrder()
-                            ->limit(5)
-                            ->get();
-
-        // Merge the 13 fixed questions
-        $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
-
-        // Fetch remaining questions excluding the already selected ones
-        $remainingQuestions = DB::table('soalan_modal_kepulihan')
-                                ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-                                ->inRandomOrder()
-                                ->limit(12)
+        if (empty($existingQuestionIds)) {
+            // Fetch 8 fixed questions with specific IDs
+            $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
+            $fixedQuestions = DB::table('soalan_modal_kepulihan')
+                                ->whereIn('id', $fixedQuestionIds)
                                 ->get();
 
-        // Combine both sets of questions
-        $allQuestions = $fixedQuestions->merge($remainingQuestions);
+            // Fetch 5 questions representing each recovery capital
+            $capitalQuestions = DB::table('soalan_modal_kepulihan')
+                                ->whereIn('modal_id', range(2, 11))
+                                ->whereNotIn('id', $fixedQuestionIds)
+                                ->inRandomOrder()
+                                ->limit(5)
+                                ->get();
 
-        // Shuffle the questions to ensure randomness for every client
-        $shuffledQuestions = $allQuestions->shuffle();
+            // Merge the 13 fixed questions
+            $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
 
-        return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $shuffledQuestions]);
+            // Fetch remaining questions excluding the already selected ones
+            $remainingQuestions = DB::table('soalan_modal_kepulihan')
+                                    ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+                                    ->inRandomOrder()
+                                    ->limit(12)
+                                    ->get();
+
+            // Combine both sets of questions
+            $allQuestions = $fixedQuestions->merge($remainingQuestions);
+
+            // Shuffle the questions to ensure randomness for every client
+            $shuffledQuestions = $allQuestions->shuffle();
+
+            // Save the shuffled questions for the client
+            foreach ($shuffledQuestions as $question) {
+                DB::table('respon_modal_kepulihan')->insert([
+                    'klien_id' => $klienId,
+                    'soalan_id' => $question->id,
+                    'skala_id' => null, // No answer yet
+                    'status' => 'Baharu',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        } else {
+            // Fetch the already assigned questions for the client
+            $shuffledQuestions = DB::table('soalan_modal_kepulihan')
+                                    ->whereIn('id', $existingQuestionIds)
+                                    ->get();
+        }
+
+        // Fetch the client's existing answers
+        $existingAnswers = DB::table('respon_modal_kepulihan')
+                            ->where('klien_id', $klienId)
+                            ->pluck('skala_id', 'soalan_id')
+                            ->toArray();
+
+        return view('modal_kepulihan.klien.soalan_kepulihan', [
+            'questions' => $shuffledQuestions,
+            'existingAnswers' => $existingAnswers,
+        ]);
+    }
+
+    public function autosaveResponSoalanKepulihan(Request $request)
+    {
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+        foreach ($request->input('answer') as $soalanId => $skalaId) {
+            DB::table('respon_modal_kepulihan')
+                ->updateOrInsert(
+                    ['klien_id' => $klienId, 'soalan_id' => $soalanId],
+                    ['skala_id' => $skalaId, 'status' => 'Belum Selesai', 'created_at' => now(), 'updated_at' => now()]
+                );
+        }
+
+        return response()->json(['success' => true]);
     }
 
     public function storeResponSoalanKepulihan(Request $request)
@@ -135,17 +164,14 @@ class ModalKepulihanController extends Controller
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
         foreach ($request->input('answer') as $soalanId => $skalaId) {
-            DB::table('respon_modal_kepulihan')->insert([
-                'klien_id' => $klienId,
-                'soalan_id' => $soalanId,
-                'skala_id' => $skalaId,
-                'status' => 'Selesai',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('respon_modal_kepulihan')
+                ->updateOrInsert(
+                    ['klien_id' => $klienId, 'soalan_id' => $soalanId],
+                    ['skala_id' => $skalaId, 'status' => 'Selesai', 'created_at' => now(), 'updated_at' => now()]
+                );
         }
 
-        return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah disimpan.');
+        return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
 
     // PENTADBIR ATAU PEGAWAI

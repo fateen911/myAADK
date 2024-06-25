@@ -98,6 +98,7 @@ Route::get('/klien/modul-kepulihan/soalan-demografi', [ModalKepulihanController:
 Route::post('/klien/autosave/demografi', [ModalKepulihanController::class, 'autosaveResponSoalanDemografi'])->name('klien.autosave.demografi');
 Route::post('/simpan/jawapan-demografi', [ModalKepulihanController::class, 'storeResponSoalanDemografi'])->name('klien.submit.demografi');
 Route::get('/klien/modul-kepulihan/soalan-kepulihan', [ModalKepulihanController::class, 'soalanKepulihan'])->middleware('auth')->name('klien.soalanKepulihan');
+Route::post('/klien/autosave/kepulihan',  [ModalKepulihanController::class, 'autosaveResponSoalanKepulihan'])->name('klien.autosave.kepulihan');
 Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController::class, 'storeResponSoalanKepulihan'])->name('klien.submit.kepulihan');
 
 // PENTADBIR - MODUL KEPULIHAN

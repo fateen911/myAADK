@@ -75,24 +75,32 @@
                         <div class="question" style="font-size: 12pt;">
                             <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
                             <div class="options">
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="1"> Sangat Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="2"> Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="3"> Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="4"> Sangat Setuju
-                                </label>
+                                @for ($i = 1; $i <= 4; $i++)
+                                    <label>
+                                        <input type="radio" name="answer[{{ $question->id }}]" value="{{ $i }}"
+                                               {{ isset($existingAnswers[$question->id]) && $existingAnswers[$question->id] == $i ? 'checked' : '' }}>
+                                        @switch($i)
+                                            @case(1)
+                                                Sangat Tidak Setuju
+                                                @break
+                                            @case(2)
+                                                Tidak Setuju
+                                                @break
+                                            @case(3)
+                                                Setuju
+                                                @break
+                                            @case(4)
+                                                Sangat Setuju
+                                                @break
+                                        @endswitch
+                                    </label>
+                                @endfor
                             </div>
                         </div>
                         <br>
                     @endforeach
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-center mt-5">Simpan</button>
+                        <button type="submit" class="btn btn-primary text-center mt-5">Hantar</button>
                     </div>
                 </form>                
             </div>
@@ -106,6 +114,7 @@
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -130,4 +139,31 @@
         @endif
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('input[type=radio]').change(function() {
+            var formData = {
+                _token: '{{ csrf_token() }}',
+                answer: {}
+            };
+            $('input[type=radio]:checked').each(function() {
+                formData.answer[$(this).attr('name').replace('answer[', '').replace(']', '')] = $(this).val();
+            });
+
+            $.ajax({
+                url: '{{ route("klien.autosave.kepulihan") }}',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    console.log('Respon soal selidik kepulihan telah disimpan.');
+                },
+                error: function(response) {
+                    console.log('Respon soal selidik kepulihan gagal disimpan.');
+                }
+            });
+        });
+    });
+</script>
+
 @endsection
