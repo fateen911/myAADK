@@ -22,6 +22,18 @@
             align-items: center;
             gap: 5px;
         }
+
+        header {
+            font-family: 'Montserrat', sans-serif;
+            color: #444;
+            font-size: 1.8em;
+            background-color: lightgrey;
+            width: 94%;
+            margin: 0 auto; /* Center the header */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            text-align: center; /* Center the text inside the header */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a better look */
+        }
     </style>
 </head>
 
@@ -66,7 +78,8 @@
     <div id="kt_app_content_container" class="app-container container-xxl">
         <!--begin::Card body-->
         <div class="card card-flush">
-            <h2 class="text-center pt-10">BORANG SOAL SELIDIK MODAL KEPULIHAN</h2>
+            <br>
+            <header>SOAL SELIDIK MODAL KEPULIHAN</header>
 
             <div class="card-body">
                 <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
@@ -75,26 +88,21 @@
                         <div class="question" style="font-size: 12pt;">
                             <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
                             <div class="options">
-                                @for ($i = 1; $i <= 4; $i++)
-                                    <label>
-                                        <input type="radio" name="answer[{{ $question->id }}]" value="{{ $i }}"
-                                               {{ isset($existingAnswers[$question->id]) && $existingAnswers[$question->id] == $i ? 'checked' : '' }}>
-                                        @switch($i)
-                                            @case(1)
-                                                Sangat Tidak Setuju
-                                                @break
-                                            @case(2)
-                                                Tidak Setuju
-                                                @break
-                                            @case(3)
-                                                Setuju
-                                                @break
-                                            @case(4)
-                                                Sangat Setuju
-                                                @break
-                                        @endswitch
-                                    </label>
-                                @endfor
+                                @php
+                                    $savedAnswer = isset($autosavedAnswers[$question->id]) ? $autosavedAnswers[$question->id] : null;
+                                @endphp
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}> Sangat Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }}> Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
+                                </label>
                             </div>
                         </div>
                         <br>
@@ -102,7 +110,7 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary text-center mt-5">Hantar</button>
                     </div>
-                </form>                
+                </form>                                                        
             </div>
         </div>
         <!--end::Card body-->

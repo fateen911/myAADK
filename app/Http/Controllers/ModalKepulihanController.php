@@ -75,15 +75,21 @@ class ModalKepulihanController extends Controller
 
     public function soalanKepulihan()
     {
-        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-        
-        // Check if the client already has questions assigned
-        $existingQuestionIds = DB::table('respon_modal_kepulihan')
-                                ->where('klien_id', $klienId)
-                                ->pluck('soalan_id')
-                                ->toArray();
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-        if (empty($existingQuestionIds)) {
+        // Check if the client has previously saved questions
+        $savedQuestions = DB::table('respon_modal_kepulihan')
+                            ->where('klien_id', $clientId)
+                            ->pluck('soalan_id')
+                            ->toArray();
+
+        if (!empty($savedQuestions)) {
+            // Fetch the questions in the order they were previously saved
+            $questions = DB::table('soalan_modal_kepulihan')
+                        ->whereIn('id', $savedQuestions)
+                        ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
+                        ->get();
+        } else {
             // Fetch 8 fixed questions with specific IDs
             $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
             $fixedQuestions = DB::table('soalan_modal_kepulihan')
@@ -92,7 +98,7 @@ class ModalKepulihanController extends Controller
 
             // Fetch 5 questions representing each recovery capital
             $capitalQuestions = DB::table('soalan_modal_kepulihan')
-                                ->whereIn('modal_id', range(2, 11))
+                                ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
                                 ->whereNotIn('id', $fixedQuestionIds)
                                 ->inRandomOrder()
                                 ->limit(5)
@@ -114,34 +120,28 @@ class ModalKepulihanController extends Controller
             // Shuffle the questions to ensure randomness for every client
             $shuffledQuestions = $allQuestions->shuffle();
 
-            // Save the shuffled questions for the client
+            // Save the shuffled order for the first time with status as "Baharu"
             foreach ($shuffledQuestions as $question) {
                 DB::table('respon_modal_kepulihan')->insert([
-                    'klien_id' => $klienId,
+                    'klien_id' => $clientId,
                     'soalan_id' => $question->id,
                     'skala_id' => null, // No answer yet
-                    'status' => 'Baharu',
+                    'status' => 'Baharu', // Setting the status to Baharu
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             }
-        } else {
-            // Fetch the already assigned questions for the client
-            $shuffledQuestions = DB::table('soalan_modal_kepulihan')
-                                    ->whereIn('id', $existingQuestionIds)
-                                    ->get();
+            
+            $questions = $shuffledQuestions;
         }
 
-        // Fetch the client's existing answers
-        $existingAnswers = DB::table('respon_modal_kepulihan')
-                            ->where('klien_id', $klienId)
-                            ->pluck('skala_id', 'soalan_id')
-                            ->toArray();
+        // Fetch autosaved answers
+        $autosavedAnswers = DB::table('respon_modal_kepulihan')
+        ->where('klien_id', $clientId)
+        ->pluck('skala_id', 'soalan_id')
+        ->toArray();
 
-        return view('modal_kepulihan.klien.soalan_kepulihan', [
-            'questions' => $shuffledQuestions,
-            'existingAnswers' => $existingAnswers,
-        ]);
+        return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
     }
 
     public function autosaveResponSoalanKepulihan(Request $request)
@@ -161,14 +161,13 @@ class ModalKepulihanController extends Controller
 
     public function storeResponSoalanKepulihan(Request $request)
     {
-        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
         foreach ($request->input('answer') as $soalanId => $skalaId) {
-            DB::table('respon_modal_kepulihan')
-                ->updateOrInsert(
-                    ['klien_id' => $klienId, 'soalan_id' => $soalanId],
-                    ['skala_id' => $skalaId, 'status' => 'Selesai', 'created_at' => now(), 'updated_at' => now()]
-                );
+            DB::table('respon_modal_kepulihan')->updateOrInsert(
+                ['klien_id' => $clientId, 'soalan_id' => $soalanId],
+                ['skala_id' => $skalaId, 'status' => 'Selesai', 'updated_at' => now()]
+            );
         }
 
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
