@@ -12,6 +12,7 @@ class ModalKepulihan extends Model
     protected $table = 'kategori_modal_kepulihan';
 
     protected $fillable = [
+        'modal',
         'nama_modal',
     ];
 }

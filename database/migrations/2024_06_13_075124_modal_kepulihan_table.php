@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('modal_kepulihan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_modal')->unique();
+            $table->string('modal');
+            $table->string('nama_modal');
             $table->timestamps();
         });
     }

@@ -73,18 +73,50 @@ class ModalKepulihanController extends Controller
         return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah disimpan.');
     }
 
+    // public function soalanKepulihan()
+    // {
+    //     // Fetch 13 fixed questions (assuming modal_id ranges or specific IDs are known)
+    //     $fixedQuestions = DB::table('soalan_modal_kepulihan')
+    //                         ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) // Adjust according to your fixed modal_id values
+    //                         ->limit(13)
+    //                         ->get();
+
+    //     // Fetch remaining 126 questions
+    //     $remainingQuestions = DB::table('soalan_modal_kepulihan')
+    //                             ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+    //                             ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+    //                             ->inRandomOrder()
+    //                             ->limit(12)
+    //                             ->get();
+
+    //     // Combine both sets of questions
+    //     $allQuestions = $fixedQuestions->merge($remainingQuestions);
+
+    //     return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $allQuestions]);
+    // }
+
     public function soalanKepulihan()
     {
-        // Fetch 13 fixed questions (assuming modal_id ranges or specific IDs are known)
+        // Fetch 8 fixed questions with specific IDs
+        $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
         $fixedQuestions = DB::table('soalan_modal_kepulihan')
-                            ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) // Adjust according to your fixed modal_id values
-                            ->limit(13)
+                            ->whereIn('id', $fixedQuestionIds)
                             ->get();
 
-        // Fetch remaining 126 questions
+        // Fetch 5 questions representing each recovery capital
+        $capitalQuestions = DB::table('soalan_modal_kepulihan')
+                            ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+                            ->whereNotIn('id', $fixedQuestionIds)
+                            ->inRandomOrder()
+                            ->limit(5)
+                            ->get();
+
+        // Merge the 13 fixed questions
+        $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
+
+        // Fetch remaining questions excluding the already selected ones
         $remainingQuestions = DB::table('soalan_modal_kepulihan')
                                 ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-                                ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
                                 ->inRandomOrder()
                                 ->limit(12)
                                 ->get();
@@ -92,7 +124,10 @@ class ModalKepulihanController extends Controller
         // Combine both sets of questions
         $allQuestions = $fixedQuestions->merge($remainingQuestions);
 
-        return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $allQuestions]);
+        // Shuffle the questions to ensure randomness for every client
+        $shuffledQuestions = $allQuestions->shuffle();
+
+        return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $shuffledQuestions]);
     }
 
     public function storeResponSoalanKepulihan(Request $request)
