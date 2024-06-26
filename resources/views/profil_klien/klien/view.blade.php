@@ -378,11 +378,11 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
-                                            Mohon Kemaskini
-                                        </button>
-                                        <!--end::Button-->
+                                        @if ($resultRequestKlien->status != 'Dikemaskini')
+                                            <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
+                                                Mohon Kemaskini
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -531,24 +531,12 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-3 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3"></label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
-                                                        @if($resultRequestKlien->status == 'Lulus')
-                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
-                                                        @elseif($resultRequestKlien->status == 'Dikemaskini')
-                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
-                                                        @elseif($resultRequestKlien->status == 'Ditolak')
-                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
-                                                        @else
-                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
-                                                        @endif
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <button type="submit" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>   
                                         </form>
                                     </div>
                                 </div>
@@ -750,11 +738,11 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
-                                            Mohon Kemaskini
-                                        </button>
-                                        <!--end::Button-->
+                                        @if ($resultRequestPekerjaan->status != 'Dikemaskini')
+                                            <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
+                                                Mohon Kemaskini
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -866,24 +854,12 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3"></label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
-                                                        @if($resultRequestPekerjaan->status == 'Lulus')
-                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
-                                                        @elseif($resultRequestPekerjaan->status == 'Dikemaskini')
-                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
-                                                        @elseif($resultRequestPekerjaan->status == 'Ditolak')
-                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
-                                                        @else
-                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
-                                                        @endif
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <button type="submit" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>   
                                         </form>
                                     </div>
                                 </div>
@@ -1028,11 +1004,11 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="button" class="btn btn-primary modal-trigger" id="requestModalWarisKlien" data-target="#requestWarisKlien">
-                                            Mohon Kemaskini
-                                        </button>
-                                        <!--end::Button-->
+                                        @if ($resultRequestWaris->status != 'Dikemaskini')
+                                            <button type="button" class="btn btn-primary modal-trigger" id="requestModalWarisKlien" data-target="#requestWarisKlien">
+                                                Mohon Kemaskini
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1135,24 +1111,12 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-3 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3"></label>
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
-                                                        @if($resultRequestWaris->status == 'Lulus')
-                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
-                                                        @elseif($resultRequestWaris->status == 'Dikemaskini')
-                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
-                                                        @elseif($resultRequestWaris->status == 'Ditolak')
-                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
-                                                        @else
-                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
-                                                        @endif
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <button type="submit" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                            
                                         </form>
                                     </div>
                                 </div>
@@ -1371,11 +1335,11 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <!--begin::Button-->
-                                        <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">
-                                            Mohon Kemaskini
-                                        </button>
-                                        <!--end::Button-->
+                                        @if ($resultRequestPasangan->status != 'Dikemaskini')
+                                            <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">
+                                                Mohon Kemaskini
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -1522,24 +1486,12 @@
                                             </div>
 
                                             <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3"></label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="d-flex">
-                                                        <button type="submit" class="btn btn-primary text-center">Kemaskini Baharu</button>
-                                                        @if($resultRequestPasangan->status == 'Lulus')
-                                                            <button class="btn btn-success text-center ms-2">Lulus</button>
-                                                        @elseif($resultRequestPasangan->status == 'Dikemaskini')
-                                                            <button class="btn btn-warning text-center ms-2">Dikemaskini</button>
-                                                        @elseif($resultRequestPasangan->status == 'Ditolak')
-                                                            <button class="btn btn-danger text-center ms-2">Ditolak</button>
-                                                        @else
-                                                            <button class="btn btn-secondary text-center ms-2">Baharu</button>
-                                                        @endif
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <button type="submit" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                             
                                         </form>
                                     </div>
                                 </div>
