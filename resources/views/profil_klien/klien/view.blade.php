@@ -8,6 +8,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
     <style>
         /* Flexbox settings for the wrapper */
@@ -43,6 +44,22 @@
         .d-flex {
             display: flex;
             align-items: center;
+        }
+
+        .btn-light-warning {
+            background-color: #ffedcc; /* A light version of the warning color */
+            color: #ffc107; /* Bootstrap warning color */
+            padding: 0.75rem 1rem; /* Same padding as Bootstrap buttons */
+            border-radius: 0.25rem; /* Same border radius as Bootstrap buttons */
+            display: inline-block; /* To ensure it behaves like a button */
+            text-align: center; /* Center the text */
+        }
+
+        .btn-light-warning:hover,
+        .btn-light-warning:focus,
+        .btn-light-warning:active {
+            background-color: #ffedcc; /* Same light warning color */
+            color: #ffc107; /* Same warning color for text */
         }
     </style>
 </head>
@@ -381,7 +398,9 @@
                                         @if ($resultRequestKlien->status != 'Dikemaskini')
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
                                                 Mohon Kemaskini
-                                            </button>
+                                            </button>                                            
+                                        {{-- @else
+                                            <div class="btn-light-warning">Sedang Dikemaskini</div> --}}
                                         @endif
                                     </div>
                                 </div>
