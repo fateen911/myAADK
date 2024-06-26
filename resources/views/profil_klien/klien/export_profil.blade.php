@@ -96,6 +96,7 @@
                 </div>
             </td>
         </tr>
+        
         <tr>
             <td class="header-part" colspan="3">A. MAKLUMAT PERIBADI</td>
         </tr>
@@ -162,85 +163,12 @@
             </tr>
 
             <tr>
-                <td class="header-part" colspan="3">B. MAKLUMAT RAWATAN</td>
+                <td class="header-part" colspan="3">B. MAKLUMAT KELUARGA</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%" class="gap-top">Status Kesihatan Mental</td>
-                <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$rawatan->status_kesihatan_mental}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
+                <td style="width: 35%">Hubungan Waris</td>
                 <td style="width: 2%">:</td>
-                <td>{{$rawatan->status_oku}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Seksyen OKP (Perintah/Sukarela)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$rawatan->seksyen_okp}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Tarikh Tamat Pengawasan</td>
-                <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{date('d/m/Y', strtotime($rawatan->tarikh_tamat_pengawasan))}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Skor CCRI</td>
-                <td style="width: 2%">:</td>
-                <td>{{$rawatan->skor_ccri}}</td>
-            </tr>
-
-            <tr>
-                <td class="header-part" colspan="3">C. MAKLUMAT PEKERJAAN</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%" class="gap-top">Pekerjaan</td>
-                <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->pekerjaan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Pendapatan Bulanan (RM)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->pendapatan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Bidang Perkerjaan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->bidang_kerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Alamat Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->alamat_kerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Poskod Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->poskod_kerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Daerah Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$daerahKerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Negeri Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$negeriKerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Nama Majikan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->nama_majikan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon Majikan</td>
-                <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{$pekerjaan->no_tel_majikan}}</td>
-            </tr>
-
-            <tr>
-                <td class="header-part" colspan="3">D. MAKLUMAT KELUARGA</td>
+                <td>{{$waris->hubungan_waris}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%" class="gap-top">Nama Waris</td>
@@ -251,11 +179,6 @@
                 <td style="width: 35%">Nombor Telefon Waris</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_tel_waris}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Hubungan Waris</td>
-                <td style="width: 2%">:</td>
-                <td>{{$waris->hubungan_waris}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Alamat Waris</td>
@@ -279,7 +202,12 @@
             </tr>
 
             <tr>
-                <td class="header-part" colspan="3">E. MAKLUMAT PASANGAN</td>
+                <td class="header-part" colspan="3">C. MAKLUMAT PASANGAN</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Status Perkahwinan</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pasangan->status_perkahwinan}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Nama Pasangan</td>
@@ -331,6 +259,84 @@
                 <td style="width: 2%">:</td>
                 <td class="gap-bottom">{{$negeriKerjaPasangan}}</td>
             </tr>
+
+            <tr>
+                <td class="header-part" colspan="3">D. MAKLUMAT PEKERJAAN</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%" class="gap-top">Pekerjaan</td>
+                <td style="width: 2%" class="gap-top">:</td>
+                <td class="gap-top">{{$pekerjaan->pekerjaan}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Pendapatan Bulanan (RM)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pekerjaan->pendapatan}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Bidang Perkerjaan</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pekerjaan->bidang_kerja}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Alamat Tempat Bekerja</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pekerjaan->alamat_kerja}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Poskod Tempat Bekerja</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pekerjaan->poskod_kerja}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Daerah Tempat Bekerja</td>
+                <td style="width: 2%">:</td>
+                <td>{{$daerahKerja}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Negeri Tempat Bekerja</td>
+                <td style="width: 2%">:</td>
+                <td>{{$negeriKerja}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Nama Majikan</td>
+                <td style="width: 2%">:</td>
+                <td>{{$pekerjaan->nama_majikan}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Nombor Telefon Majikan</td>
+                <td style="width: 2%">:</td>
+                <td class="gap-bottom">{{$pekerjaan->no_tel_majikan}}</td>
+            </tr>
+
+            <tr>
+                <td class="header-part" colspan="3">E. MAKLUMAT RAWATAN</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%" class="gap-top">Status Kesihatan Mental</td>
+                <td style="width: 2%" class="gap-top">:</td>
+                <td class="gap-top">{{$rawatan->status_kesihatan_mental}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$rawatan->status_oku}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Seksyen OKP (Perintah/Sukarela)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$rawatan->seksyen_okp}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Tarikh Tamat Pengawasan</td>
+                <td style="width: 2%">:</td>
+                <td class="gap-bottom">{{date('d/m/Y', strtotime($rawatan->tarikh_tamat_pengawasan))}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Skor CCRI</td>
+                <td style="width: 2%">:</td>
+                <td>{{$rawatan->skor_ccri}}</td>
+            </tr>    
         </tbody>
     </table>
 </body>
