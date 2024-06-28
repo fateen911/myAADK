@@ -168,7 +168,6 @@
                     <!--end:::Tab item-->
                 </ul>
                 <!--end:::Tabs-->
-
                 
                 <!--begin:::Tab content-->
                 <div class="tab-content" id="myTabContent">
