@@ -125,12 +125,12 @@
                     <!--begin:::Tab item-->
                     <li class="nav-item">
                         <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
-                            <i class="ki-duotone ki-profile-user fs-2 me-2">
+                            <i class="ki-duotone ki-people fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                                 <span class="path4"></span>
-                            </i>Maklumat Keluarga
+                            </i>Maklumat Waris
                         </a>
                     </li>
                     <!--end:::Tab item-->
