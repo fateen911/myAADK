@@ -62,9 +62,9 @@
                                     <!--begin::Symbol and Text-->
                                     <div class="d-flex align-items-center mb-2">
                                         <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-3">
-                                            <span class="symbol-label">
-                                                <i class="ki-duotone ki-user-tick fs-1 text-primary">
+                                        <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
+                                            <span class="symbol-label" style="vertical-align: middle;">
+                                                <i class="ki-solid ki-user-tick fs-1 text-dark">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -78,7 +78,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-6 d-block">Dikemaskini</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Dikemaskini</span>
                                         <span class="text-gray-400 fw-semibold fs-6">26/5/2024</span>
                                     </div>
                                     <!--end::Info-->
@@ -93,9 +93,9 @@
                                     <!--begin::Symbol and Text-->
                                     <div class="d-flex align-items-center mb-2">
                                         <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-3">
-                                            <span class="symbol-label">
-                                                <i class="ki-duotone ki-people fs-1 text-primary">
+                                        <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
+                                            <span class="symbol-label" style="vertical-align: middle;">
+                                                <i class="ki-solid ki-people fs-1 text-dark">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
@@ -109,7 +109,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-6 d-block">Diluluskan</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
                                         <span class="text-gray-400 fw-semibold fs-6">25/6/2024</span>
                                     </div>
                                     <!--end::Info-->
@@ -129,9 +129,9 @@
                                     <!--begin::Symbol and Text-->
                                     <div class="d-flex align-items-center mb-2">
                                         <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-3">
-                                            <span class="symbol-label">
-                                                <i class="ki-duotone ki-profile-user fs-1 text-primary">
+                                        <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
+                                            <span class="symbol-label" style="vertical-align: middle;">
+                                                <i class="ki-solid ki-profile-user fs-1 text-dark">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                     <span class="path3"></span>
@@ -146,7 +146,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-6 d-block">Dikemaskini</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Dikemaskini</span>
                                         <span class="text-gray-400 fw-semibold fs-6">24/2/2024</span>
                                     </div>
                                     <!--end::Info-->
@@ -161,13 +161,9 @@
                                     <!--begin::Symbol and Text-->
                                     <div class="d-flex align-items-center mb-2">
                                         <!--begin::Symbol-->
-                                        <div class="symbol symbol-30px me-3">
-                                            <span class="symbol-label">
-                                                <i class="ki-duotone ki-brifecase-tick fs-1 text-primary">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                    <span class="path3"></span>
-                                                </i>
+                                        <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
+                                            <span class="symbol-label" style="vertical-align: middle;">
+                                                <i class="ki-solid ki-brifecase-tick fs-1 mb-8 text-dark"></i>
                                             </span>
                                         </div>
                                         <!--end::Symbol-->
@@ -178,7 +174,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-6 d-block">Ditolak</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
                                         <span class="text-gray-400 fw-semibold fs-6">26/6/2024</span>
                                     </div>
                                     <!--end::Info-->
