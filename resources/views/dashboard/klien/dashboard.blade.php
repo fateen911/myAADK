@@ -60,7 +60,7 @@
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol and Text-->
-                                    <div class="d-flex align-items-center mb-2">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
                                             <span class="symbol-label" style="vertical-align: middle;">
@@ -91,7 +91,7 @@
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol and Text-->
-                                    <div class="d-flex align-items-center mb-2">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
                                             <span class="symbol-label" style="vertical-align: middle;">
@@ -127,7 +127,7 @@
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol and Text-->
-                                    <div class="d-flex align-items-center mb-2">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
                                             <span class="symbol-label" style="vertical-align: middle;">
@@ -159,7 +159,7 @@
                                 <!--begin::Items-->
                                 <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                     <!--begin::Symbol and Text-->
-                                    <div class="d-flex align-items-center mb-2">
+                                    <div class="d-flex justify-content-center align-items-center mb-2">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-30px me-3" style="margin-top:20px;"> 
                                             <span class="symbol-label" style="vertical-align: middle;">
