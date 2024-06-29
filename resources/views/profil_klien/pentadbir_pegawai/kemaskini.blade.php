@@ -7,6 +7,8 @@
 @endphp
 
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /* Flexbox settings for the wrapper */
         .form-wrapper {
@@ -41,6 +43,18 @@
         .d-flex {
             display: flex;
             align-items: center;
+        }
+
+        .request-update-icon {
+            color: #ffc107 !important; 
+            font-size: 1rem !important;
+            position: relative;
+            top: -8px; 
+            margin-left: 4px;
+        }
+
+        .nav-link.active .request-update-icon {
+            color: #ffc107 !important; 
         }
     </style>
 </head>
@@ -88,6 +102,9 @@
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                             </i>Maklumat Peribadi
+                            @if($requestKlien)
+                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                            @endif
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -100,6 +117,9 @@
                                 <span class="path3"></span>
                                 <span class="path4"></span>
                             </i>Maklumat Keluarga
+                            @if($requestWaris)
+                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                            @endif
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -111,6 +131,9 @@
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                             </i>Maklumat Pasangan
+                            @if($requestPasangan)
+                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                            @endif
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -122,6 +145,9 @@
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                             </i>Maklumat Pekerjaan
+                            @if($requestPekerjaan)
+                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                            @endif
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -137,7 +163,6 @@
                     <!--end:::Tab item-->
                 </ul>
                 <!--end:::Tabs-->
-
                 
                 <!--begin:::Tab content-->
                 <div class="tab-content" id="myTabContent">
@@ -407,7 +432,7 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         @if($requestKlien)
-                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPeribadiKlien" data-target="#approvalPeribadiKlien" style="background-color:darkblue; color: white;">
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPeribadiKlien" data-target="#approvalPeribadiKlien" style="background-color:#ffc107; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
                                         @endif

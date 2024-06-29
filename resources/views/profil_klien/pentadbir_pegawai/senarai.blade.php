@@ -62,8 +62,8 @@
                                     <th class="min-w-100px">No. Kad Pengenalan</th>
                                     <th class="min-w-100px">Daerah</th>
                                     <th class="min-w-70px">Negeri</th>
-                                    <th class="min-w-80px">Status</th> 
-                                    <th class="min-w-100px">Pengemaskini</th> 
+                                    <th class="min-w-80px" style="text-align: center;">Status Profil Klien</th> 
+                                    <th class="min-w-100px" style="text-align: center;">Pengemaskini</th> 
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
@@ -91,8 +91,8 @@
                                         <td>{{ $user->no_kp }}</td>
                                         <td>{{ $daerah }}</td>
                                         <td>{{ $negeri }}</td>
-                                        <td><button class="btn btn-sm bg-info text-white">DIKEMASKINI</button></td>
-                                        <td>PEGAWAI DAERAH</td>
+                                        <td style="text-align: center;"><button class="btn btn-sm bg-info text-white">DIKEMASKINI</button></td>
+                                        <td style="text-align: center;">PEGAWAI DAERAH</td>
                                     </tr>
                                 @endforeach
 
@@ -101,8 +101,8 @@
                                     <td>011209130915</td>
                                     <td>JOHOR BAHARU</td>
                                     <td>JOHOR</td>
-                                    <td><button class="btn btn-sm bg-info text-white">LULUS</button></td>
-                                    <td>PEGAWAI NEGERI</td>
+                                    <td style="text-align: center;"><button class="btn btn-sm bg-info text-white">LULUS</button></td>
+                                    <td style="text-align: center;">PEGAWAI NEGERI</td>
                                 </tr>
                             </tbody>
                         </table>
