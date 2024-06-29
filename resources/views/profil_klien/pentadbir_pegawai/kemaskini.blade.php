@@ -103,7 +103,9 @@
                                 <span class="path3"></span>
                             </i>Maklumat Peribadi
                             @if($requestKlien)
-                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                    <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                </span>
                             @endif
                         </a>
                     </li>
@@ -118,7 +120,9 @@
                                 <span class="path4"></span>
                             </i>Maklumat Keluarga
                             @if($requestWaris)
-                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                    <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                </span>
                             @endif
                         </a>
                     </li>
@@ -132,7 +136,9 @@
                                 <span class="path3"></span>
                             </i>Maklumat Pasangan
                             @if($requestPasangan)
-                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                    <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                </span>
                             @endif
                         </a>
                     </li>
@@ -146,7 +152,9 @@
                                 <span class="path3"></span>
                             </i>Maklumat Pekerjaan
                             @if($requestPekerjaan)
-                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                    <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                </span>
                             @endif
                         </a>
                     </li>
@@ -723,7 +731,7 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         {{-- @if($requestRawatan)
-                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalRawatan" data-target="#approvalRawatan" style="background-color:darkblue; color: white;">
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalRawatan" data-target="#approvalRawatan" style="background-color:#ffc107; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
                                         @endif --}}
@@ -1017,7 +1025,7 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         @if($requestPekerjaan)
-                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPekerjaan" data-target="#approvalPekerjaan" style="background-color:darkblue; color: white;">
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPekerjaan" data-target="#approvalPekerjaan" style="background-color:#ffc107; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
                                         @endif
@@ -1322,7 +1330,7 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         @if($requestWaris)
-                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalWaris" data-target="#approvalWaris" style="background-color:darkblue; color: white;">
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalWaris" data-target="#approvalWaris" style="background-color:#ffc107; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
                                         @endif
@@ -1696,7 +1704,7 @@
                                     <div class="d-flex">
                                         <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                         @if($requestPasangan)
-                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPasangan" data-target="#approvalPasangan" style="background-color:darkblue; color: white;">
+                                            <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPasangan" data-target="#approvalPasangan" style="background-color:#ffc107; color: white;">
                                                 Luluskan Permohonan Kemaskini
                                             </button>
                                         @endif
