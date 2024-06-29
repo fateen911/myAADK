@@ -243,7 +243,9 @@
 						
 							<!--begin::Card toolbar-->
 							<div class="col-auto">
-								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">Tambah Pegawai</button>
+								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
+									<i class="bi bi-plus-circle"></i> &nbsp;Tambah Pegawai 
+								</button>
 							</div>
 							<!--end::Card toolbar-->
 						</div>

@@ -57,7 +57,7 @@
                 {{-- Profil Klien --}}
                 <div class="tab-pane fade show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
                     <!--Permohonan-->
-                    <div class="header pt-5">
+                    <div class="header pt-5 mb-5">
                         <h2>Status Permohonan Kemaskini Profil Klien</h2>
                     </div>
                     <div class="body">
@@ -78,8 +78,8 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">2</span>
+                                        <a href="{{ route('senarai-klien') }}">
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">3</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -105,7 +105,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
+                                        <a href="{{ route('senarai-klien') }}">
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -135,7 +135,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
+                                        <a href="{{ route('senarai-klien') }}">
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">1</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -162,7 +162,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
+                                        <a href="{{ route('senarai-klien') }}">
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -180,8 +180,8 @@
                 {{-- Soal Selidik --}}
                 <div class="tab-pane fade" id="soalSelidik" role="tabpanel" aria-labelledby="soalSelidik-tab">
                     <!--Permohonan-->
-                    <div class="header pt-5">
-                        <h2>Status Permohonan Kemaskini Soal Selidik</h2>
+                    <div class="header pt-5 mb-5">
+                        <h2>Status Soal Selidik Kepulihan Klien</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
@@ -201,7 +201,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">10</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -228,7 +228,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
