@@ -868,7 +868,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan">{{ $butiranKlien->no_tel_majikan }}</textarea>
+                                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
                                                 </div>
                                             </div>
 
