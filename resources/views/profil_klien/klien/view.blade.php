@@ -564,6 +564,7 @@
                     </div>
                     <!--end:::Tab pane-->
 
+                    
                     <!--begin:::Tab pane Pekerjaan-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                         <!--begin::Form-->
@@ -888,7 +889,7 @@
                     <!--end:::Tab pane-->
 
 
-                    <!--begin:::Tab pane-->
+                    <!--begin:::Tab pane Waris-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_localization" role="tabpanel">
                         <!--begin::Form-->
                         <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
@@ -1527,7 +1528,7 @@
                             @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
-                                <div class="col-md-9 offset-md-5">
+                                <div class="col-md-8 offset-md-4">
                                     <h2>Maklumat Rawatan</h2>
                                 </div>
                             </div>
@@ -1537,7 +1538,7 @@
                             <div class="row fv-row mb-2">
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
-                                    <label class="fs-5 fw-semibold form-label mt-3">
+                                    <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Status Kesihatan Mental</span>
                                     </label>
                                     <!--end::Label-->
