@@ -99,7 +99,7 @@
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 <!--end::Indicator progress-->
                             </button>
-                            <button type="button" value="0">Tidak Hadir</button>
+                            <button type="button" value="0" class="btn btn-secondary me-4">Tidak Hadir</button>
 {{--                            <a href="../../demo1/dist/authentication/layouts/creative/sign-in.html" ><button>Tidak Hadir</a>--}}
                         </div>
                         <!--end::Actions-->
