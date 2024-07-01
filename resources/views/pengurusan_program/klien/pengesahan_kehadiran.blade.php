@@ -90,6 +90,7 @@
                         </div>
                         <!--begin::Actions-->
                         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
+                            <button type="button" value="0" class="btn btn-secondary me-4">Tidak Hadir</button>
                             <button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4" value="1">
                                 <!--begin::Indicator label-->
                                 <span class="indicator-label">Hadir</span>
@@ -99,7 +100,7 @@
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 <!--end::Indicator progress-->
                             </button>
-                            <button type="button" value="0" class="btn btn-secondary me-4">Tidak Hadir</button>
+
 {{--                            <a href="../../demo1/dist/authentication/layouts/creative/sign-in.html" ><button>Tidak Hadir</a>--}}
                         </div>
                         <!--end::Actions-->
