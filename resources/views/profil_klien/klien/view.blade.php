@@ -47,19 +47,20 @@
         }
 
         .btn-light-warning {
-            background-color: #ffedcc; /* A light version of the warning color */
-            color: #ffc107; /* Bootstrap warning color */
-            padding: 0.75rem 1rem; /* Same padding as Bootstrap buttons */
+            background-color: #faf5d6; /* A light version of the warning color */
+            color: #ffbd07; /* Bootstrap warning color */
+            padding: 0.75rem 0.75rem; /* Same padding as Bootstrap buttons */
             border-radius: 0.25rem; /* Same border radius as Bootstrap buttons */
             display: inline-block; /* To ensure it behaves like a button */
             text-align: center; /* Center the text */
+            margin-left: 10px;
         }
 
         .btn-light-warning:hover,
         .btn-light-warning:focus,
         .btn-light-warning:active {
-            background-color: #ffedcc; /* Same light warning color */
-            color: #ffc107; /* Same warning color for text */
+            background-color: #faf5d6; /* Same light warning color */
+            color: #ffbd07; /* Same warning color for text */
         }
     </style>
 </head>
@@ -193,7 +194,7 @@
                                 </div>
                                 <div class="col-md-7 d-flex align-items-center">
                                     <!--begin::Text-->
-                                    <span id="nama" class="fs-6 form-control-plaintext">:{{$butiranKlien->nama}}</span>
+                                    <span id="nama" class="fs-6 form-control-plaintext">{{$butiranKlien->nama}}</span>
                                     <!--end::Text-->
                                 </div>
                             </div>
@@ -209,7 +210,7 @@
                                 </div>
                                 <div class="col-md-7 d-flex align-items-center">
                                     <!--begin::Input-->
-                                    <span id="no_kp" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_kp}}</span>
+                                    <span id="no_kp" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -241,7 +242,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="jantina" class="fs-6 form-control-plaintext">:{{$butiranKlien->jantina}}</span>
+                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$butiranKlien->jantina}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -257,7 +258,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="agama" class="fs-6 form-control-plaintext">:{{$butiranKlien->agama}}</span>
+                                        <span id="agama" class="fs-6 form-control-plaintext">{{$butiranKlien->agama}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +274,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="bangsa" class="fs-6 form-control-plaintext">:{{$butiranKlien->bangsa}}</span>
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$butiranKlien->bangsa}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +285,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3"><span>Nombor Telefon</span></label>
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="no_tel" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_tel}}</span>
+                                    <span id="no_tel" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel}}</span>
                                 </div>
                             </div>
                             <!--begin::Input group-->
@@ -298,7 +299,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="emel" class="fs-6 form-control-plaintext">:{{$butiranKlien->emel}}</span>
+                                    <span id="emel" class="fs-6 form-control-plaintext">{{$butiranKlien->emel}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -314,7 +315,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="alamat_rumah" class="fs-6 form-control-plaintext">:{{$butiranKlien->alamat_rumah}}</span>
+                                    <span id="alamat_rumah" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_rumah}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -331,7 +332,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <span id="poskod" class="fs-6 form-control-plaintext">:{{$butiranKlien->poskod}}</span>
+                                        <span id="poskod" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod}}</span>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -351,7 +352,7 @@
                                         @php
                                             $daerahKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah)->value('senarai_daerah.daerah');
                                         @endphp
-                                        <span id="daerah" class="fs-6 form-control-plaintext">:{{$daerahKlien}}</span>
+                                        <span id="daerah" class="fs-6 form-control-plaintext">{{$daerahKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +371,7 @@
                                         @php
                                             $negeriKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri)->value('senarai_negeri.negeri');
                                         @endphp
-                                        <span id="negeri" class="fs-6 form-control-plaintext">:{{$negeriKlien}}</span>
+                                        <span id="negeri" class="fs-6 form-control-plaintext">{{$negeriKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -385,7 +386,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">:{{$butiranKlien->tahap_pendidikan}}</span>
+                                    <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">{{$butiranKlien->tahap_pendidikan}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -398,8 +399,8 @@
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
                                                 Mohon Kemaskini
                                             </button>                                            
-                                        {{-- @else
-                                            <div class="btn-light-warning">Sedang Dikemaskini</div> --}}
+                                        @else
+                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -425,7 +426,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <span id="nama" class="fs-6 form-control-plaintext">:{{$butiranKlien->nama}}</span>
+                                                    <span id="nama" class="fs-6 form-control-plaintext">{{$butiranKlien->nama}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -433,7 +434,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <span id="no_kp" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_kp}}</span>
+                                                    <span id="no_kp" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -449,7 +450,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Jantina</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <span id="jantina" class="fs-6 form-control-plaintext">:{{$butiranKlien->jantina}}</span>
+                                                    <span id="jantina" class="fs-6 form-control-plaintext">{{$butiranKlien->jantina}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -457,7 +458,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Agama</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <span id="agama" class="fs-6 form-control-plaintext">:{{$butiranKlien->agama}}</span>
+                                                    <span id="agama" class="fs-6 form-control-plaintext">{{$butiranKlien->agama}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-4">
@@ -465,7 +466,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Bangsa</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <span id="bangsa" class="fs-6 form-control-plaintext">:{{$butiranKlien->bangsa}}</span>
+                                                    <span id="bangsa" class="fs-6 form-control-plaintext">{{$butiranKlien->bangsa}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -596,7 +597,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="pekerjaan" class="fs-6 form-control-plaintext">:{{$butiranKlien->pekerjaan}}</span>
+                                    <span id="pekerjaan" class="fs-6 form-control-plaintext">{{$butiranKlien->pekerjaan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -612,7 +613,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="bidang_kerja" class="fs-6 form-control-plaintext">:{{$butiranKlien->bidang_kerja}}</span>
+                                    <span id="bidang_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->bidang_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -635,7 +636,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="pendapatan" class="fs-6 form-control-plaintext">:{{$butiranKlien->pendapatan}}</span>
+                                    <span id="pendapatan" class="fs-6 form-control-plaintext">{{$butiranKlien->pendapatan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -651,7 +652,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="alamat_kerja" class="fs-6 form-control-plaintext">:{{$butiranKlien->alamat_kerja}}</span>
+                                    <span id="alamat_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -668,7 +669,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <span id="poskod_kerja" class="fs-6 form-control-plaintext">:{{$butiranKlien->poskod_kerja}}</span>
+                                        <span id="poskod_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja}}</span>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -689,7 +690,7 @@
                                         @php
                                             $daerahKerjaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja )->value('senarai_daerah.daerah');
                                         @endphp
-                                        <span id="daerah_kerja" class="fs-6 form-control-plaintext">:{{ $daerahKerjaKlien }}</span>
+                                        <span id="daerah_kerja" class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -708,7 +709,7 @@
                                         @php
                                             $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
                                         @endphp
-                                        <span id="negeri_kerja" class="fs-6 form-control-plaintext">:{{ $negeriKerjaKlien }}</span>
+                                        <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -724,7 +725,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="nama_majikan" class="fs-6 form-control-plaintext">:{{$butiranKlien->nama_majikan}}</span>
+                                    <span id="nama_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_majikan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -747,7 +748,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="no_tel_majikan" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_tel_majikan}}</span>
+                                    <span id="no_tel_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_majikan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -761,6 +762,8 @@
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
                                                 Mohon Kemaskini
                                             </button>
+                                        @else
+                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -912,7 +915,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="hubungan_waris" class="fs-6 form-control-plaintext">:{{$butiranKlien->hubungan_waris}}</span>
+                                    <span id="hubungan_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_waris}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -927,7 +930,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="nama_waris" class="fs-6 form-control-plaintext">:{{$butiranKlien->nama_waris}}</span>
+                                    <span id="nama_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_waris}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -943,7 +946,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="no_tel_waris" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_tel_waris}}</span>
+                                    <span id="no_tel_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_waris}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -959,7 +962,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="alamat_waris" class="fs-6 form-control-plaintext">:{{$butiranKlien->alamat_waris}}</span>
+                                    <span id="alamat_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_waris}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -975,7 +978,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="poskod_waris" class="fs-6 form-control-plaintext">:{{$butiranKlien->poskod_waris}}</span>
+                                        <span id="poskod_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_waris}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -994,7 +997,7 @@
                                         @php
                                             $daerahWarisKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_waris )->value('senarai_daerah.daerah');
                                         @endphp
-                                        <span id="daerah_waris" class="fs-6 form-control-plaintext">:{{ $daerahWarisKlien }}</span>
+                                        <span id="daerah_waris" class="fs-6 form-control-plaintext">{{ $daerahWarisKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1013,7 +1016,7 @@
                                         @php
                                             $negeriWarisKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_waris )->value('senarai_negeri.negeri');
                                         @endphp
-                                        <span id="negeri_waris" class="fs-6 form-control-plaintext">:{{ $negeriWarisKlien }}</span>
+                                        <span id="negeri_waris" class="fs-6 form-control-plaintext">{{ $negeriWarisKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1027,6 +1030,8 @@
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalWarisKlien" data-target="#requestWarisKlien">
                                                 Mohon Kemaskini
                                             </button>
+                                        @else
+                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -1169,186 +1174,189 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="status_perkahwinan" class="fs-6 form-control-plaintext">:{{$butiranKlien->status_perkahwinan}}</span>
+                                    <span id="status_perkahwinan" class="fs-6 form-control-plaintext">{{$butiranKlien->status_perkahwinan}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nama Pasangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="nama_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->nama_pasangan}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nombor Telefon Pasangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="no_tel_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->no_tel_pasangan}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Alamat Pasangan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="alamat_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->alamat_pasangan}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Poskod</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <span id="poskod_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->poskod_pasangan}}</span>
-                                        <!--end::Select2-->
+
+                            <div id="pasangan-fields">
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nama Pasangan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="nama_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_pasangan}}</span>
+                                        <!--end::Input-->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Daerah</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        @php
-                                            $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
-                                        @endphp
-                                        <span id="daerah_waris" class="fs-6 form-control-plaintext">:{{ $daerahPasanganKlien }}</span>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nombor Telefon Pasangan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="no_tel_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_pasangan}}</span>
+                                        <!--end::Input-->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Negeri</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        @php
-                                            $negeriPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_pasangan )->value('senarai_negeri.negeri');
-                                        @endphp
-                                        <span id="negeri_waris" class="fs-6 form-control-plaintext">:{{ $negeriPasanganKlien }}</span>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Alamat Pasangan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="alamat_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_pasangan}}</span>
+                                        <!--end::Input-->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Alamat Tempat Pasangan Bekerja</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="alamat_kerja_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->alamat_kerja_pasangan}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Poskod</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <span id="poskod_kerja_pasangan" class="fs-6 form-control-plaintext">:{{$butiranKlien->poskod_kerja_pasangan}}</span>
-                                        <!--end::Select2-->
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Poskod</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <span id="poskod_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_pasangan}}</span>
+                                            <!--end::Select2-->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Daerah</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        @php
-                                            $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
-                                        @endphp
-                                        <span id="daerah_kerja_pasangan" class="fs-6 form-control-plaintext">:{{ $daerahKerjaPasanganKlien }}</span>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            @php
+                                                $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
+                                            @endphp
+                                            <span id="daerah_waris" class="fs-6 form-control-plaintext">{{ $daerahPasanganKlien }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                             <!--begin::Input group-->
-                             <div class="row fv-row mb-2">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Negeri</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        @php
-                                            $negeriKerjaPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja_pasangan )->value('senarai_negeri.negeri');
-                                        @endphp
-                                        <span id="negeri_kerja_pasangan" class="fs-6 form-control-plaintext">:{{ $negeriKerjaPasanganKlien }}</span>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Negeri</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            @php
+                                                $negeriPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_pasangan )->value('senarai_negeri.negeri');
+                                            @endphp
+                                            <span id="negeri_waris" class="fs-6 form-control-plaintext">{{ $negeriPasanganKlien }}</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Alamat Tempat Pasangan Bekerja</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="alamat_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja_pasangan}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Poskod</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <span id="poskod_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja_pasangan}}</span>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            @php
+                                                $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
+                                            @endphp
+                                            <span id="daerah_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $daerahKerjaPasanganKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Negeri</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="w-100">
+                                            @php
+                                                $negeriKerjaPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja_pasangan )->value('senarai_negeri.negeri');
+                                            @endphp
+                                            <span id="negeri_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $negeriKerjaPasanganKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
                             </div>
-                            <!--end::Input group-->
 
                             <!--begin::Action buttons-->
                             <div class="row py-5">
@@ -1358,6 +1366,8 @@
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">
                                                 Mohon Kemaskini
                                             </button>
+                                        @else
+                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -1521,7 +1531,7 @@
                     <!--end:::Tab pane-->
                     
 
-                    <!--begin:::Tab pane-->
+                    <!--begin:::Tab pane Rawatan-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
                         <!--begin::Form-->
                         <form method="POST" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('rawatanKlien.requestUpdate') }}">
@@ -1545,7 +1555,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <!--begin::Input-->
-                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">:{{$butiranKlien->status_kesihatan_mental}}</span>
+                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1561,7 +1571,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <!--begin::Input-->
-                                    <span id="status_oku" class="fs-6 form-control-plaintext">:{{$butiranKlien->status_oku}}</span>
+                                    <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1571,13 +1581,13 @@
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Seksyen OKP (Perintah/Sukarela)</span>
+                                        <span class="required">Seksyen (Perintah/Sukarela)</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-5">
                                     <!--begin::Input-->
-                                    <span id="seksyen_okp" class="fs-6 form-control-plaintext">:{{$butiranKlien->seksyen_okp}}</span>
+                                    <span id="seksyen_okp" class="fs-6 form-control-plaintext">{{$butiranKlien->seksyen_okp}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1596,7 +1606,7 @@
                                     @php
                                         $formattedDate = Carbon::parse($butiranKlien->tarikh_tamat_pengawasan)->format('d-m-Y');
                                     @endphp
-                                    <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">:{{$formattedDate}}</span>
+                                    <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDate}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1612,7 +1622,7 @@
                                 </div>
                                 <div class="col-md-5">
                                     <!--begin::Input-->
-                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">:{{$butiranKlien->skor_ccri}}</span>
+                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -1686,8 +1696,8 @@
             age--;
         }
 
-        document.getElementById('umur').textContent = `:${age}`; // Update the text content of the span
-        document.getElementById('modal_umur').textContent = `:${age}`; 
+        document.getElementById('umur').textContent = `${age}`; // Update the text content of the span
+        document.getElementById('modal_umur').textContent = `${age}`; 
     }
 
     document.addEventListener('DOMContentLoaded', (event) => {
@@ -1708,4 +1718,29 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var statusSelect = document.getElementById('status_perkahwinan');
+        var pasanganFields = document.getElementById('pasangan-fields');
+    
+        function togglePasanganFields() {
+            console.log('Status Perkahwinan changed to: ', statusSelect.value); // Debugging line
+            if (statusSelect.value === 'BERKAHWIN') {
+                pasanganFields.style.display = 'block';
+            } else {
+                pasanganFields.style.display = 'none';
+            }
+        }
+    
+        // Initialize the visibility on page load
+        togglePasanganFields();
+    
+        // Listen for changes on the status select
+        statusSelect.addEventListener('change', function() {
+            console.log('Change event detected'); // Debugging line
+            togglePasanganFields();
+        });
+    });
+</script> 
 @endsection

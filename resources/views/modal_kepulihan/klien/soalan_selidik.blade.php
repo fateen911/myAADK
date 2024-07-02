@@ -105,7 +105,7 @@
             <div class="card-body">
                 <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b> 16/01/2024</p>
                 <p><b>STATUS SOAL SELIDIK:</b> BELUM DIJAWAB</p>
-                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULAKAN MENJAWAB</a>
+                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULA MENJAWAB</a>
             </div>
             <!--end::Card body-->
         </div>
