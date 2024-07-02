@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <!--begin::Input-->
-                                        <span id="nama" class="fs-6 form-control-plaintext">:{{$klien->nama}}</span>
+                                        <span id="nama" class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <!--begin::Input-->
-                                        <span id="no_kp" class="fs-6 form-control-plaintext">:{{$klien->no_kp}}</span>
+                                        <span id="no_kp" class="fs-6 form-control-plaintext">{{$klien->no_kp}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <div class="w-100">
-                                            <span id="jantina" class="fs-6 form-control-plaintext">:{{$klien->jantina}}</span>
+                                            <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <div class="w-100">
-                                            <span id="agama" class="fs-6 form-control-plaintext">:{{$klien->agama}}</span>
+                                            <span id="agama" class="fs-6 form-control-plaintext">{{$klien->agama}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <div class="w-100">
-                                            <span id="bangsa" class="fs-6 form-control-plaintext">:{{$klien->bangsa}}</span>
+                                            <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -477,7 +477,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="nama" class="fs-6 form-control-plaintext">:{{$klien->nama}}</span>
+                                                        <span id="nama" class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -485,7 +485,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="no_kp" class="fs-6 form-control-plaintext">:{{$klien->no_kp}}</span>
+                                                        <span id="no_kp" class="fs-6 form-control-plaintext">{{$klien->no_kp}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -501,7 +501,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="jantina" class="fs-6 form-control-plaintext">:{{$klien->jantina}}</span>
+                                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -509,7 +509,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="agama" class="fs-6 form-control-plaintext">:{{$klien->agama}}</span>
+                                                        <span id="agama" class="fs-6 form-control-plaintext">{{$klien->agama}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">
@@ -517,7 +517,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="bangsa" class="fs-6 form-control-plaintext">:{{$klien->bangsa}}</span>
+                                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -633,11 +633,11 @@
                         <!--begin:::Tab pane Rawatan-->
                         <div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
                             <!--begin::Form-->
-                            <form method="post" id="kt_ecommerce_settings_general_store" class="form centered-form" action="{{ route('kemaskini.maklumat.rawatan.klien', ['id' => $klien->id]) }}">
+                            <form method="post" id="kt_ecommerce_settings_general_store" class="form centered-form" style="margin-left: 100px;" action="{{ route('kemaskini.maklumat.rawatan.klien', ['id' => $klien->id]) }}">
                                 <!--begin::Heading-->
                                 <div class="row mb-7">
                                     <div class="col-md-9 offset-md-4">
-                                        <h2>Kemaskini Maklumat Rawatan</h2>
+                                        <h2>Maklumat Rawatan</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
@@ -653,7 +653,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <!--begin::Input-->
-                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">:{{$rawatan->status_kesihatan_mental}}</span>
+                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$rawatan->status_kesihatan_mental}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -669,7 +669,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <!--begin::Input-->
-                                        <span id="status_oku" class="fs-6 form-control-plaintext">:{{$rawatan->status_oku}}</span>
+                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$rawatan->status_oku}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -685,7 +685,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <!--begin::Input-->
-                                        <span id="seksyen_okp" class="fs-6 form-control-plaintext">:{{$rawatan->seksyen_okp}}</span>
+                                        <span id="seksyen_okp" class="fs-6 form-control-plaintext">{{$rawatan->seksyen_okp}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -704,7 +704,7 @@
                                         @php
                                             $formattedDate = Carbon::parse($rawatan->tarikh_tamat_pengawasan)->format('d-m-Y');
                                         @endphp
-                                        <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">:{{$formattedDate}}</span>
+                                        <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDate}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -720,25 +720,25 @@
                                     </div>
                                     <div class="col-md-6">
                                         <!--begin::Input-->
-                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">:{{$rawatan->skor_ccri}}</span>
+                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$rawatan->skor_ccri}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Action buttons-->
-                                <div class="row py-5">
+                                {{-- <div class="row py-5">
                                     <div class="col-md-9 offset-md-4">
                                         <div class="d-flex">
                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                            {{-- @if($requestRawatan)
+                                            @if($requestRawatan)
                                                 <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalRawatan" data-target="#approvalRawatan" style="background-color:#ffc107; color: white;">
                                                     Luluskan Permohonan Kemaskini
                                                 </button>
-                                            @endif --}}
+                                            @endif
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!--end::Action buttons-->
                             </form>
                             <!--end::Form-->
@@ -1910,8 +1910,8 @@
                 age--;
             }
 
-            document.getElementById('umur').textContent = `:${age}`; // Update the text content of the span
-            document.getElementById('modal_umur').textContent = `:${age}`; 
+            document.getElementById('umur').textContent = `${age}`; // Update the text content of the span
+            document.getElementById('modal_umur').textContent = `${age}`; 
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {

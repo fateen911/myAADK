@@ -21,7 +21,7 @@ class ResponDemografi extends Model
         'jumlah_relapse',
         'jenis_dadah',
         'jenis_kediaman',
-        'lama_tinggal_lokasi',
+        'tempoh_tinggal_lokasi_terkini',
         'tinggal_dengan',
         'kawasan_tempat_tinggal',
     ];

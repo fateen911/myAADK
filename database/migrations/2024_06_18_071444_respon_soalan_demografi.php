@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('jumlah_relapse')->nullable();
             $table->json('jenis_dadah');  // Store as JSON
             $table->string('jenis_kediaman');
-            $table->string('lama_tinggal_lokasi');
+            $table->string('tempoh_tinggal_lokasi_terkini');
             $table->string('tinggal_dengan');
             $table->string('kawasan_tempat_tinggal');
             $table->timestamps();
