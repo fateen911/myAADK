@@ -180,42 +180,42 @@
                             <div class="card-body pt-0">
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Nama Program:</label>
+                                    <label class="form-label">Nama Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">Program Pemulihan Bersepadu</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Objektif Program:</label>
+                                    <label class="form-label">Objektif Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Tarikh Program:</label>
+                                    <label class="form-label">Tarikh Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Tempat Program:</label>
+                                    <label class="form-label">Tempat Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Masa Program:</label>
+                                    <label class="form-label">Masa Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">8:00 AM</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="mb-6 fv-row">
-                                    <label class=" form-label">Penganjur Program:</label>
+                                    <label class="form-label">Penganjur Program:</label>
                                     <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
                                 </div>
                                 <!--end::Input group-->
@@ -245,6 +245,14 @@
                             <div class="card-header">
                                 <div class="card-title">
                                     <h2>Senarai Pengesahan Kehadiran</h2>
+                                </div>
+                                <div class="card-title">
+                                    <a href="#" class="btn btn-sm btn-danger btn-active-color-danger">
+                                        PDF &nbsp; <i class="bi bi-file-pdf"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-success btn-active-color-success">
+                                        Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </a>
                                 </div>
                             </div>
                             <!--end::Card header-->
@@ -417,6 +425,14 @@
                                 <!--begin::Card title-->
                                 <div class="card-title">
                                     <h2>Senarai Klien Yang Hadir</h2>
+                                </div>
+                                <div class="card-title">
+                                    <a href="#" class="btn btn-sm btn-danger btn-active-color-danger">
+                                        PDF &nbsp; <i class="bi bi-file-pdf"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-success btn-active-color-success">
+                                        Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </a>
                                 </div>
                                 <!--end::Card title-->
                             </div>
