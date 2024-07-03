@@ -66,7 +66,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+                    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pentadbir_sistem.maklumat_prog') }}" method="GET"">
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                             <!--begin::General options-->
@@ -161,7 +161,7 @@
                             <!--end::General options-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
-                                <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                                <a href="{{ url('pengurusan_program/pentadbir_sistem/senarai_prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
