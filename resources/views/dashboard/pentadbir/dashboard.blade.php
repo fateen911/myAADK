@@ -72,7 +72,7 @@
                                             <i class="fas fa-list-ol text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->

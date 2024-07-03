@@ -26,8 +26,12 @@ class HomeController extends Controller
                     return view('dashboard.pentadbir.dashboard');
                 else if($tahap == 2)
                     return view('dashboard.klien.dashboard');
-                else
-                    return view('dashboard.pegawai.dashboard');
+                else if($tahap == 3)
+                    return view('dashboard.pegawai.dashboard_brpp');
+                else if($tahap == 4)
+                    return view('dashboard.pegawai.dashboard_negeri');
+                else if($tahap == 5)
+                    return view('dashboard.pegawai.dashboard_daerah');
             }
         }
     }
