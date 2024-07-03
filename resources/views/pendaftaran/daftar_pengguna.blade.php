@@ -95,12 +95,11 @@
 							<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-175px">Nama</th>
-										<th class="min-w-125px">No. Kad Pengenalan</th>
-										<th class="min-w-125px">Emel</th>
-										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-125px">Tarikh Daftar</th>
-										<th class="min-w-75px">Kemaskini</th>
+										<th style="width: 40%;">Nama</th>
+										<th style="width: 15%;">No. Kad Pengenalan</th>
+										<th style="width: 25%;">Emel</th>
+										<th style="width: 10%;">Tarikh Daftar</th>
+										<th style="width: 10%;">Kemaskini</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
@@ -114,7 +113,6 @@
 											<td>{{ $user1->name }}</td>
 											<td>{{ $user1->no_kp }}</td>
 											<td>{{ $user1->email }}</td>
-											<td>{{ $peranan }}</td>
 											<td>{{ $tarikh_daftar1}}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
@@ -194,7 +192,7 @@
 																		<!--begin::Input-->
 																		<div class="input-group">
 																			<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user1->id}}" name="password" />
-																			<button type="button" class="btn btn-secondary" onclick="generatePassword('password{{$user1->id}}')">Jana Kata Laluan</button>
+																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('password{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
 																		<!--end::Input-->
 																	</div>
@@ -256,12 +254,12 @@
 							<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-175px">Nama</th>
+										<th class="min-w-275px">Nama</th>
 										<th class="min-w-125px">No. Kad Pengenalan</th>
 										<th class="min-w-125px">Emel</th>
 										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-125px">Tarikh Daftar</th>
-										<th class="min-w-75px">Kemaskini</th>
+										<th class="min-w-75px">Tarikh Daftar</th>
+										<th class="min-w-50px">Kemaskini</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
@@ -397,7 +395,7 @@
 																		<!--begin::Input-->
 																		<div class="input-group">
 																			<input type="text" maxlength="12" class="form-control form-control-solid" id="password{{$user2->id}}" name="password" />
-																			<button type="button" class="btn btn-secondary" onclick="generatePassword('password{{$user2->id}}')">Jana Kata Laluan</button>
+																			<button type="button" class="btn btn-secondary" onclick="generatePasswordPegawai('password{{$user2->id}}')">Jana Kata Laluan</button>
 																		</div>
 																		<!--end::Input-->
 																	</div>
@@ -631,7 +629,7 @@
 
 	<!-- Add this script at the end of your HTML body -->
 	<script>
-		function generatePassword(inputId) {
+		function generatePasswordPegawai(inputId) {
 			const length = 12;
 			const lowercase = 'abcdefghijklmnopqrstuvwxyz';
 			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -657,29 +655,32 @@
 			
 			document.getElementById(inputId).value = password;
 		}
-	</script>	
 
-	{{-- <script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const tahapPenggunaSelect = document.getElementById('tahap_pengguna');
-			const negeriField = document.getElementById('negeri_field');
-			const daerahField = document.getElementById('daerah_field');
-		
-			tahapPenggunaSelect.addEventListener('change', function () {
-				const selectedValue = parseInt(this.value, 10);
-				console.log('Selected value:', selectedValue); // Log the selected value
-				
-				if (selectedValue === 4) {
-					negeriField.style.display = 'block';
-					daerahField.style.display = 'none';
-				} else if (selectedValue === 5) {
-					negeriField.style.display = 'block';
-					daerahField.style.display = 'block';
-				} else {
-					negeriField.style.display = 'none';
-					daerahField.style.display = 'none'; 
-				}
-			});
-		});
-	</script> --}}
+		function generatePasswordKlien(inputId) {
+			const length = 6;
+			const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			const numbers = '0123456789';
+			const symbols = '!@#$%^&*()-_+=<>?';
+			
+			const allCharacters = lowercase + uppercase + numbers + symbols;
+			let password = '';
+			
+			// Ensure the password contains at least one character from each category
+			password += lowercase[Math.floor(Math.random() * lowercase.length)];
+			password += uppercase[Math.floor(Math.random() * uppercase.length)];
+			password += numbers[Math.floor(Math.random() * numbers.length)];
+			password += symbols[Math.floor(Math.random() * symbols.length)];
+			
+			// Fill the remaining length of the password with random characters from all categories
+			for (let i = 4; i < length; i++) {
+				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
+			}
+			
+			// Shuffle the password to ensure a random order
+			password = password.split('').sort(() => 0.5 - Math.random()).join('');
+			
+			document.getElementById(inputId).value = password;
+		}
+	</script>	
 @endsection
