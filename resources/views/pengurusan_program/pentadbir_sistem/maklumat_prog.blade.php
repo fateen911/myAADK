@@ -57,6 +57,28 @@
     <!--end::Page title-->
 
     <!--begin::Body-->
+    <div class="my-10">
+        <!--begin:::Tabs-->
+        <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
+            <!--begin:::Tab item-->
+            <li class="nav-item">
+                <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Maklumat Umum</a>
+            </li>
+            <!--end:::Tab item-->
+            <!--begin:::Tab item-->
+            <li class="nav-item">
+                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Pengesahan</a>
+            </li>
+            <!--end:::Tab item-->
+            <!--begin:::Tab item-->
+            <li class="nav-item">
+                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan</a>
+            </li>
+            <!--end:::Tab item-->
+        </ul>
+        <!--end:::Tabs-->
+    </div>
+
     <!--begin::Form-->
     <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row">
         <!--begin::Aside column-->
@@ -135,25 +157,6 @@
         <!--end::Aside column-->
         <!--begin::Main column-->
         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-            <!--begin:::Tabs-->
-            <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
-                <!--begin:::Tab item-->
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">Maklumat Umum</a>
-                </li>
-                <!--end:::Tab item-->
-                <!--begin:::Tab item-->
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Pengesahan</a>
-                </li>
-                <!--end:::Tab item-->
-                <!--begin:::Tab item-->
-                <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan</a>
-                </li>
-                <!--end:::Tab item-->
-            </ul>
-            <!--end:::Tabs-->
             <!--begin::Tab content-->
             <div class="tab-content">
                 <!--begin::Tab pane-->
@@ -167,7 +170,7 @@
                                     <h2>Maklumat Program</h2>
                                 </div>
                                 <div class="card-title">
-                                    <a href={{url('/pengurusan_program/pentadbir_sistem/kemaskini_prog')}} class="btn btn-sm btn-primary btn-active-color-primary">
+                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/kemaskini_prog')}}" class="btn btn-sm btn-primary btn-active-color-primary">
                                         Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </div>
@@ -176,75 +179,53 @@
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Nama Program</label>
-                                    <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="Program Pemulihan Bersepadu" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Nama Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">Program Pemulihan Bersepadu</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Objektif Program</label>
-                                    <input type="text" name="objektif" class="form-control mb-2" placeholder="Objektif Program" value="Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Objektif Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Tarikh Program</label>
-                                    <input type="text" name="tarikh" class="form-control mb-2" placeholder="Penganjur Program" value="1 Ogos 2024" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Tarikh Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Tempat Program</label>
-                                    <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Tempat Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Masa Program</label>
-                                    <input type="text" name="masa" class="form-control mb-2" placeholder="Penganjur Program" value="8:00 AM" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Masa Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">8:00 AM</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class=" form-label">Penganjur Program</label>
-                                    <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="Majlis Pemulihan Dadah Kebangsaan (MPDK)" disabled/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is  and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                <div class="mb-6 fv-row">
+                                    <label class=" form-label">Penganjur Program:</label>
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
-                                <div>
+                                <div class="mb-6 fv-row">
                                     <!--begin::Label-->
-                                    <label class="form-label">Catatan</label>
+                                    <label class="form-label">Catatan:</label>
                                     <!--end::Label-->
-                                    <textarea class="form-control" name="catatan" rows="4" cols="50" disabled>Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran. Semua peserta diminta untuk membawa dokumen pengenalan diri dan rekod perubatan.
-                                    </textarea>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
+                                    <p class="text-bg-light p-3 rounded border-bottom border-secondary">Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran.</p>
                                 </div>
                                 <!--end::Input group-->
                             </div>
