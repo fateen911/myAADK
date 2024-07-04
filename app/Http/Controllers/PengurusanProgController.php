@@ -13,6 +13,7 @@ use BaconQrCode\Renderer\Image\Png;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengurusanProgController extends Controller
 {
@@ -318,7 +319,7 @@ class PengurusanProgController extends Controller
     public function pdfPengesahan()
     {
         $data = ['title' => 'Senarai Pengesahan Kehadiran', 'date' => date('d/m/Y')];
-        $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data);
+        $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data)->setPaper('a4', 'landscape');
 
         return $pdf->download('senarai_pengesahan_kehadiran.pdf');
     }
@@ -326,8 +327,18 @@ class PengurusanProgController extends Controller
     public function pdfPerekodan()
     {
         $data = ['title' => 'Senarai Klien Yang Hadir', 'date' => date('d/m/Y')];
-        $pdf = PDF::loadView('pengurusan_program.pdf_perekodan', $data);
+        $pdf = PDF::loadView('pengurusan_program.pdf_perekodan', $data)->setPaper('a4');
 
         return $pdf->download('senarai_perekodan_kehadiran.pdf');
+    }
+
+    public function excelPengesahan()
+    {
+        return Excel::download(new Program,'senarai_pengesahan_kehadiran.xlsx');
+    }
+
+    public function excelPerekodan()
+    {
+        return Excel::download(new Program,'senarai_perekodan_kehadiran.xlsx');
     }
 }
