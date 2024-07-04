@@ -247,10 +247,10 @@
                                     <h2>Senarai Pengesahan Kehadiran</h2>
                                 </div>
                                 <div class="card-title">
-                                    <a href="#" class="btn btn-sm btn-danger btn-active-color-danger">
+                                    <a href="{{url('/pengurusan_program/pdf_pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                         PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-success btn-active-color-success">
+                                    <a href="{{url('/pengurusan_program/excel_pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                         Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                     </a>
                                 </div>
@@ -427,10 +427,10 @@
                                     <h2>Senarai Klien Yang Hadir</h2>
                                 </div>
                                 <div class="card-title">
-                                    <a href="#" class="btn btn-sm btn-danger btn-active-color-danger">
+                                    <a href="{{url('/pengurusan_program/pdf_perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                         PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-success btn-active-color-success">
+                                    <a href="{{url('/pengurusan_program/excel_perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                         Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                     </a>
                                 </div>

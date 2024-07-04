@@ -313,4 +313,21 @@ class PengurusanProgController extends Controller
         return base64_encode($qrCode); // Encode QR code as base64 for embedding in HTML
     }
 
+
+    //PDF
+    public function pdfPengesahan()
+    {
+        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'date' => date('d/m/Y')];
+        $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data);
+
+        return $pdf->download('senarai_pengesahan_kehadiran.pdf');
+    }
+
+    public function pdfPerekodan()
+    {
+        $data = ['title' => 'Senarai Klien Yang Hadir', 'date' => date('d/m/Y')];
+        $pdf = PDF::loadView('pengurusan_program.pdf_perekodan', $data);
+
+        return $pdf->download('senarai_perekodan_kehadiran.pdf');
+    }
 }

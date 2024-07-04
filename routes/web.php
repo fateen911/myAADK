@@ -47,6 +47,12 @@ Route::get('/pengurusan_program/hebahan/emel', [PengurusanProgController::class,
 Route::get('/pengurusan_program/hebahan/sms', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan.sms');
 Route::get('/pengurusan_program/hebahan/telegram', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan.telegram');
 
+// PENGURUSAN PROGRAM - PENRADBIR SISTEM - PDF/EXCEL
+Route::get('/pengurusan_program/pdf_pengesahan',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
+Route::get('/pengurusan_program/excel_pengesahan',[PengurusanProgController::class, 'excelPengesahan'])->name('pengurusan_program.excel_pengesahan');
+Route::get('/pengurusan_program/pdf_perekodan',[PengurusanProgController::class, 'pdfPerekodan'])->name('pengurusan_program.pdf_perekodan');
+Route::get('/pengurusan_program/excel_perekodan',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
+
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
