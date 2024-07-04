@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('no_kp');
             $table->string('nama');
             $table->string('emel');
+            $table->string('no_tel');
             $table->string('jawatan');
             $table->string('bahagian');
             $table->string('negeri');

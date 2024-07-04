@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('klien_id');
             $table->unsignedBigInteger('tahap_kepulihan_id');
-            $table->string('kebarangkalian_tahap_kepulihan');
-            $table->string('status_respon');
+            $table->double('skor');
             $table->timestamps();
         });
     }

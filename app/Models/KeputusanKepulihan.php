@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KepulihanKlien extends Model
+class KeputusanKepulihan extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,6 @@ class KepulihanKlien extends Model
     protected $fillable = [
         'klien_id',
         'tahap_kepulihan_id',
-        'kebarangkalian_tahap_kepulihan',
-        'status_respon',
+        'skor',
     ];
 }

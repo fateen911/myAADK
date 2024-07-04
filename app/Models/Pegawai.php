@@ -15,6 +15,7 @@ class Pegawai extends Model
         'no_kp',
         'nama',
         'emel',
+        'no_tel',
         'jawatan',
         'bahagian',
         'negeri',
