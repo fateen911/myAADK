@@ -98,7 +98,7 @@
                             <!--end::Card title-->
                             <!--begin::Big QR-->
                             <div class="card-title">
-                                <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">
+                                <button type="button" id="modal_1" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_maklumat">
                                     <i class="ki-solid bi-arrows-angle-expand"></i>
                                 </button>
                             </div>
@@ -253,7 +253,7 @@
                             <!--end::Card title-->
                             <!--begin::Big QR-->
                             <div class="card-title">
-                                <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">
+                                <button type="button" id="modal_2" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_pengesahan">
                                     <i class="ki-solid bi-arrows-angle-expand"></i>
                                 </button>
                             </div>
@@ -448,7 +448,7 @@
                             <!--end::Card title-->
                             <!--begin::Big QR-->
                             <div class="card-title">
-                                <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">
+                                <button type="button" id="modal_3" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_perekodan">
                                     <i class="ki-solid bi-arrows-angle-expand"></i>
                                 </button>
                             </div>
@@ -640,8 +640,8 @@
     </div>
     <!--end::Main column-->
 
-    <!--begin::Modal - Users Search-->
-    <div class="modal fade" id="kt_modal_users_search" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal - maklumat-->
+    <div class="modal fade" id="kt_modal_maklumat" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-750px">
             <!--begin::Modal content-->
@@ -662,7 +662,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('www.google.com'); !!}
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -672,7 +672,80 @@
         </div>
         <!--end::Modal dialog-->
     </div>
-    <!--end::Modal - Users Search-->
+
+    <script>
+
+    </script>
+    <!--end::Modal - maklumat-->
+
+    <!--begin::Modal - pengesahan-->
+    <div class="modal fade" id="kt_modal_pengesahan" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-750px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                    <!--begin::Content-->
+                    <!--begin::Image input-->
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    <!--end::Image input-->
+                    <!--end::Search-->
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - pengesahan-->
+
+    <!--begin::Modal - perekodan-->
+    <div class="modal fade" id="kt_modal_perekodan" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-750px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header pb-0 border-0 justify-content-end">
+                    <!--begin::Close-->
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <i class="ki-duotone ki-cross fs-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <!--begin::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                    <!--begin::Content-->
+                    <!--begin::Image input-->
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    <!--end::Image input-->
+                    <!--end::Search-->
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - perekodan-->
+
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
@@ -690,7 +763,20 @@
     <!-- Editor -->
     <script src="assets/js/custom/apps/ecommerce/catalog/save-product.js"></script>
     <!--end::Javascript-->
+    <script>
+        // Ensure the button does not trigger a form submission or page refresh
+        document.getElementById('modal_1').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
 
+        document.getElementById('modal_2').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
+        document.getElementById('modal_3').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+    </script>
     <script>
         $('#sortTable1').DataTable({
             ordering: true, // Enable manual sorting
