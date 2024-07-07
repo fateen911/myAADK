@@ -642,64 +642,21 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan_program.pegawai_aadk.senarai_prog') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" href="{{ url('/pengurusan_program/pegawai_aadk/senarai_prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan_program/pegawai_aadk/senarai_prog') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-calendar-add fs-2">
+                                <i class="ki-duotone ki-badge fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                     <span class="path4"></span>
                                     <span class="path5"></span>
-                                    <span class="path6"></span>
                                 </i>
                             </span>
                             <span class="menu-title">Program</span>
-                            <span class="menu-arrow"></span>
-                        </span>
+                        </a>
                         <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{url('/pengurusan_program/pentadbir_sistem/senarai_prog')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pendaftaran</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Hebahan</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div class="menu-item">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Kehadiran</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
 
