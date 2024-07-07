@@ -240,7 +240,7 @@
         <div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/categories.html">
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-600px">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
                     <!--begin::QR code settings-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -285,31 +285,6 @@
                         <!--end::Card body-->
                     </div>
                     <!--end::QR code settings-->
-                    <!--begin::Status-->
-                    <div class="card card-flush py-0">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Status</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Select2-->
-                            <select class="form-select" aria-label="Select example">
-                                <option></option>
-                                <option value="selesai" selected="selected">Belum Selesai</option>
-                                <option value="belum">Sudah Selesai</option>
-                                <option value="tangguh">Ditangguhkan</option>
-                            </select>
-                            <br>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Status-->
 
                 </div>
                 <!--end::Aside column-->
@@ -460,7 +435,7 @@
         <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/categories.html">
                 <!--begin::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-600px">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
                     <!--begin::QR code settings-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -505,32 +480,6 @@
                         <!--end::Card body-->
                     </div>
                     <!--end::QR code settings-->
-                    <!--begin::Status-->
-                    <div class="card card-flush py-0">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Status</h2>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Select2-->
-                            <select class="form-select" aria-label="Select example">
-                                <option></option>
-                                <option value="selesai" selected="selected">Belum Selesai</option>
-                                <option value="belum">Sudah Selesai</option>
-                                <option value="tangguh">Ditangguhkan</option>
-                            </select>
-                            <br>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Status-->
-
                 </div>
                 <!--end::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10">
