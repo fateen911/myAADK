@@ -112,12 +112,17 @@
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                            <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
+                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard1()">
+                                    <i class="bi bi-clipboard-fill fs-2"></i>
+                                </button>
+                            </div>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-0">
+                        <div class="card-body pt-4">
                             <!--begin::Share-->
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
@@ -267,12 +272,17 @@
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                            <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
+                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard2()">
+                                    <i class="bi bi-clipboard-fill fs-2"></i>
+                                </button>
+                            </div>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-0">
+                        <div class="card-body pt-4">
                             <!--begin::Share-->
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
@@ -462,12 +472,17 @@
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran" disabled/>
+                            <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
+                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran" disabled/>
+                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
+                                    <i class="bi bi-clipboard-fill fs-2"></i>
+                                </button>
+                            </div>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-0">
+                        <div class="card-body pt-4">
                             <!--begin::Share-->
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
@@ -776,6 +791,49 @@
         document.getElementById('modal_3').addEventListener('click', function(event) {
             event.preventDefault();
         });
+    </script>
+    <script>
+        function copyToClipboard1() {
+            const inputFieldValue = document.getElementById('link_1').value;
+            navigator.clipboard.writeText(inputFieldValue)
+                .then(() => {
+                    document.getElementById('message').innerText = 'Copied to clipboard!';
+                    setTimeout(() => {
+                        document.getElementById('message').innerText = '';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+
+        function copyToClipboard2() {
+            const inputFieldValue = document.getElementById('link_2').value;
+            navigator.clipboard.writeText(inputFieldValue)
+                .then(() => {
+                    document.getElementById('message').innerText = 'Copied to clipboard!';
+                    setTimeout(() => {
+                        document.getElementById('message').innerText = '';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+
+        function copyToClipboard3() {
+            const inputFieldValue = document.getElementById('link_3').value;
+            navigator.clipboard.writeText(inputFieldValue)
+                .then(() => {
+                    document.getElementById('message').innerText = 'Copied to clipboard!';
+                    setTimeout(() => {
+                        document.getElementById('message').innerText = '';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
     </script>
     <script>
         $('#sortTable1').DataTable({
