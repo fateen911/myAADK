@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Email</title>
+    <title>Hebahan</title>
 </head>
 <body>
-<h1>Your Custom Message</h1>
-<p>{{ $messageContent }}</p>
-<h2>Your QR Code</h2>
-<img src="data:image/png;base64,{{ $qrCode }}" alt="QR Code">
+<h1>Hebahan Program</h1>
+<p>Sila imbas kod qr berikut untuk pengesahan kehadiran anda:</p>
+<img src="{{ $message->embed(public_path('qr_codes/qrcode.png')) }}" alt="Logo">
 </body>
 </html>

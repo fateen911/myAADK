@@ -8,51 +8,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HebahanMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $messageContent;
-    public $qrCode;
-
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($messageContent)
+    public function build()
     {
-        $this->messageContent = $messageContent;
-        $this->qrCode = base64_encode(QrCode::format('png')->size(400)->generate('https://laravel.com/'));
-    }
-
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Hebahan Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'pengurusan_program.hebahan.emel',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->view('pengurusan_program.hebahan.emel')
+            ->attach(public_path('qr_codes/qrcode.png'), [
+                'as' => 'logo.png',
+                'mime' => 'image/png',
+            ]);
     }
 }

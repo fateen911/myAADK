@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\HebahanMail;
 use App\Models\Program;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
@@ -14,6 +15,8 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+
+
 
 class PengurusanProgController extends Controller
 {
@@ -240,15 +243,13 @@ class PengurusanProgController extends Controller
     }
 
     //HEBAHAN - EMEL
+
     public function hebahanEmel()
     {
+        $recipient = 'ziba0506@gmail.com';
+        Mail::to($recipient)->send(new HebahanMail());
 
-        $customMessage = "Habahan";
-        $recipientEmail = "ziba0506@gmail.com";
-
-        Mail::to($recipientEmail)->send(new HebahanMail($customMessage));
-
-        return back()->with('success', 'Email sent successfully!');
+        return redirect()->back()->with('status', 'Email sent successfully!');
     }
 
     //HEBAHAN - SMS
