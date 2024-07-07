@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HebahanMail;
 use App\Models\Program;
@@ -285,21 +286,36 @@ class PengurusanProgController extends Controller
     //HEBAHAN - TELEGRAM
     public function hebahanTelegram()
     {
-        // Generate program link (replace with your logic)
-        $programLink = url('www.google.com');
+        // Telegram Bot API endpoint
+        $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
+        $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
+        $chatId = 490430239;
 
-        // Generate QR code
-        $qrCode = $this->generateQrCode($programLink);
+        // Public path to the image file
+        $imagePath = public_path('qr_codes/qrcode.png');
 
-        // Message to send via Telegram
-        $message = "Check out this program: " . $programLink;
+        // Check if the image file exists
+        if (!file_exists($imagePath)) {
+            return "Image file not found.";
+        }
 
-        // Example: integrate with Telegram API to send message with QR code
-        // Here we're logging the message to simulate sending via Telegram API
-        Log::info("Sending program details via Telegram: {$message}");
+        // Send image file
+        $response = Http::attach(
+            'photo',
+            file_get_contents($imagePath),
+            'qrcode.png'
+        )->post($telegramEndpoint, [
+            'chat_id' => $chatId,
+            'caption' => 'Your QR code:',
+        ]);
 
-        // Redirect back or to another page
-        return redirect()->back()->with('success', 'Program shared via Telegram successfully.');
+        // Check response and handle accordingly
+        if ($response->successful()) {
+            redirect()->back()->with('status', 'Successfully!');
+        } else {
+            redirect()->back()->with('status', 'Fail!');
+        }
+
     }
 
     protected function generateQrCode($text)
