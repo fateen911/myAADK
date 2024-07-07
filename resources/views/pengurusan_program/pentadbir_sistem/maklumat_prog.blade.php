@@ -108,11 +108,11 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('www.google.com'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="www.google.com" disabled/>
+                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
@@ -263,11 +263,11 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('www.google.com'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="www.google.com" disabled/>
+                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
@@ -458,11 +458,11 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('www.google.com'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
-                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="www.google.com" disabled/>
+                            <input type="text" name="product_name" class="form-control mb-2" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran" disabled/>
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
