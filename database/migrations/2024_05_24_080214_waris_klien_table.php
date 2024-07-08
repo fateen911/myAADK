@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('poskod_waris');
             $table->string('daerah_waris');
             $table->string('negeri_waris');
+            $table->string('status_kemaskini');
             $table->timestamps();
         });
     }

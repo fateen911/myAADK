@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('poskod_kerja_pasangan');
             $table->string('daerah_kerja_pasangan');
             $table->string('negeri_kerja_pasangan');
+            $table->string('status_kemaskini');
             $table->timestamps();
         });
     }

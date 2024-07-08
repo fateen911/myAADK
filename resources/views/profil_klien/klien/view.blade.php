@@ -395,12 +395,18 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        @if ($resultRequestKlien->status != 'Dikemaskini')
+                                        @if($resultRequestKlien)
+                                            @if ($resultRequestKlien->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
+                                                <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
+                                                    Mohon Kemaskini
+                                                </button>                                            
+                                            @else
+                                                <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                            @endif
+                                        @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
                                                 Mohon Kemaskini
-                                            </button>                                            
-                                        @else
-                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                            </button> 
                                         @endif
                                     </div>
                                 </div>
@@ -758,12 +764,18 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        @if ($resultRequestPekerjaan->status != 'Dikemaskini')
+                                        @if($resultRequestPekerjaan)
+                                            @if ($resultRequestPekerjaan->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
+                                                <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
+                                                    Mohon Kemaskini
+                                                </button>
+                                            @else
+                                                <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                            @endif
+                                        @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
                                                 Mohon Kemaskini
                                             </button>
-                                        @else
-                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -1026,12 +1038,18 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        @if ($resultRequestWaris->status != 'Dikemaskini')
+                                        @if($resultRequestWaris)
+                                            @if ($resultRequestWaris->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
+                                                <button type="button" class="btn btn-primary modal-trigger" id="requestModalWarisKlien" data-target="#requestWarisKlien">
+                                                    Mohon Kemaskini
+                                                </button>
+                                            @else
+                                                <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                            @endif
+                                        @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalWarisKlien" data-target="#requestWarisKlien">
                                                 Mohon Kemaskini
                                             </button>
-                                        @else
-                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>
@@ -1362,12 +1380,18 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        @if ($resultRequestPasangan->status != 'Dikemaskini')
+                                        @if($resultRequestPasangan)
+                                            @if ($resultRequestPasangan->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
+                                                <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">
+                                                    Mohon Kemaskini
+                                                </button>
+                                            @else
+                                                <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                            @endif
+                                        @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">
                                                 Mohon Kemaskini
                                             </button>
-                                        @else
-                                            <div class="btn-light-warning">Permohonan Dikemaskini</div>
                                         @endif
                                     </div>
                                 </div>

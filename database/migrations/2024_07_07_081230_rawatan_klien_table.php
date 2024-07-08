@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rawatan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('status_kesihatan_mental')->unique();
+            $table->string('status_kesihatan_mental');
             $table->string('status_oku');
             $table->string('seksyen_okp');
             $table->date('tarikh_tamat_pengawasan');

@@ -1,5 +1,9 @@
 @extends('layouts._default')
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 @section('content')
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
@@ -50,6 +54,12 @@
                     <!--end::Title-->
                 </div>
                 <!--end::Heading-->
+                @php
+                    $tarikh_update_klien = Carbon::parse($klien->updated_at)->format('d-m-Y');
+                    $tarikh_update_waris = Carbon::parse($waris->updated_at)->format('d-m-Y');
+                    $tarikh_update_pekerjaan = Carbon::parse($pekerjaan->updated_at)->format('d-m-Y');
+                    $tarikh_update_pasangan = Carbon::parse($pasangan->updated_at)->format('d-m-Y');
+                @endphp
                 <!--begin::Body-->
                 <div class="card-body mt-n20">
                     <div class="mt-n20 position-relative">
@@ -78,8 +88,8 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Dikemaskini</span>
-                                        <span class="text-gray-400 fw-semibold fs-6">26/5/2024</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $klien->status_kemaskini }}</span>
+                                        <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -109,8 +119,8 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
-                                        <span class="text-gray-400 fw-semibold fs-6">25/6/2024</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $waris->status_kemaskini }}</span>
+                                        <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_waris }}</span>
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -146,8 +156,8 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Dikemaskini</span>
-                                        <span class="text-gray-400 fw-semibold fs-6">24/2/2024</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $pasangan->status_kemaskini }}</span>
+                                        <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pasangan }}</span>
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -174,8 +184,8 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
-                                        <span class="text-gray-400 fw-semibold fs-6">26/6/2024</span>
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $pekerjaan->status_kemaskini }}</span>
+                                        <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pekerjaan }}</span>
                                     </div>
                                     <!--end::Info-->
                                 </div>

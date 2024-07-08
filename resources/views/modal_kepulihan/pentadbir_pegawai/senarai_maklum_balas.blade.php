@@ -62,7 +62,9 @@
                                     <th class="min-w-100px">No. Kad Pengenalan</th>
                                     <th class="min-w-100px">Daerah</th>
                                     <th class="min-w-70px">Negeri</th>
-                                    <th class="min-w-50px">Status</th> 
+                                    <th class="min-w-50px">Status Menjawab</th> 
+                                    <th class="min-w-50px">Skor</th> 
+                                    <th class="min-w-50px">Tahap Kepulihan</th> 
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
@@ -81,10 +83,23 @@
                                     <td>{{ $daerah }}</td>
                                     <td>{{ $negeri }}</td>
                                     <td class="d-flex justify-content-center">
-                                        <button class="btn btn-sm bg-success text-white">{{ strtoupper($response->status) }}</button>
+                                        <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
+                                    </td>
+                                    <td>0.63</td>
+                                    <td class="d-flex justify-content-center">
+                                        <button class="btn btn-sm bg-warning text-white">KUNING</button>
                                     </td>
                                 </tr>
                             @endforeach
+                                <tr>
+                                    <td>MOHD DANIAL BIN IBRAHIM</td>
+                                    <td>030609110813</td>
+                                    <td>KUALA BESUT</td>
+                                    <td>TERENGGANU</td>
+                                    <td class="d-flex justify-content-center"><button class="btn btn-sm text-white" style="background-color:cornflowerblue"> BELUM SELESAI</button></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
 						<!--end::Table-->

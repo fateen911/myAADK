@@ -379,15 +379,14 @@ class ProfilKlienController extends Controller
             ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
             ->where('klien.id', $clientId)
             ->first();
-        
-        $resultRequestRawatan = RawatanKlienUpdateRequest::where('klien_id', $clientId)->first();
+                
         $resultRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestWaris = WarisKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestKlien = KlienUpdateRequest::where('klien_id', $clientId)->first();
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
-                                                        'butiranKlien','resultRequestRawatan','resultRequestPasangan','resultRequestWaris','resultRequestPekerjaan','resultRequestKlien'));
+                                                        'butiranKlien','resultRequestPasangan','resultRequestWaris','resultRequestPekerjaan','resultRequestKlien'));
     }
 
     public function muatTurunProfilDiri()

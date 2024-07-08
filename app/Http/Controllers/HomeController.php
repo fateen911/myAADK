@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Klien;
+use App\Models\PasanganKlien;
+use App\Models\PekerjaanKlien;
+use App\Models\WarisKlien;
 
 class HomeController extends Controller
 {
@@ -14,6 +17,14 @@ class HomeController extends Controller
         {
             $tahap = Auth()->user()->tahap_pengguna;
             $status = Auth()->user()->status;
+
+            // Retrieve the client's id based on their no_kp
+            $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+            $klien = Klien::where('id', $klienId)->first();
+            $pekerjaan = PekerjaanKlien::where('klien_id', $klienId)->first();
+            $waris = WarisKlien::where('klien_id',$klienId)->first();
+            $pasangan = PasanganKlien::where('klien_id',$klienId)->first();
 
             if ($status == 0)
             {
@@ -25,7 +36,7 @@ class HomeController extends Controller
                 if($tahap == 1)
                     return view('dashboard.pentadbir.dashboard');
                 else if($tahap == 2)
-                    return view('dashboard.klien.dashboard');
+                    return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan'));
                 else if($tahap == 3)
                     return view('dashboard.pegawai.dashboard_brpp');
                 else if($tahap == 4)
