@@ -95,15 +95,6 @@
                                         <td style="text-align: center;">PEGAWAI DAERAH</td>
                                     </tr>
                                 @endforeach
-
-                                <tr>
-                                    <td><a href="{{ url('maklumat-klien/'. $user['id']) }}" target="_blank">AMIR BIN HAKIM</a></td>
-                                    <td>011209130915</td>
-                                    <td>JOHOR BAHARU</td>
-                                    <td>JOHOR</td>
-                                    <td style="text-align: center;"><button class="btn btn-sm bg-info text-white">LULUS</button></td>
-                                    <td style="text-align: center;">PEGAWAI NEGERI</td>
-                                </tr>
                             </tbody>
                         </table>
 						<!--end::Table-->

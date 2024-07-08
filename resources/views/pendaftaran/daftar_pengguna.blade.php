@@ -236,7 +236,7 @@
 							<!--begin::Card title-->
 							<div class="col">
 								<h2>Senarai Keseluruhan Pegawai</h2>
-								<small>Sila klik pada butang "Tambah Pengguna" untuk mendaftarkan pegawai baharu dan klik pada ikon pensil untuk kemaskini akaun pegawai.</small>
+								<small>Sila klik pada butang "Tambah Pengguna" untuk mendaftar pegawai baharu dan klik pada ikon pensil untuk kemaskini akaun pegawai.</small>
 							</div>
 						
 							<!--begin::Card toolbar-->
