@@ -91,7 +91,17 @@
                                         <td>{{ $user->no_kp }}</td>
                                         <td>{{ $daerah }}</td>
                                         <td>{{ $negeri }}</td>
-                                        <td style="text-align: center;"><button class="btn btn-sm bg-info text-white">DIKEMASKINI</button></td>
+                                        <td style="text-align: center;">
+                                            @if($user->status_kemaskini == 'Dikemaskini')
+                                                <button class="btn btn-sm text-white" style="background-color:mediumvioletred">SEMAKAN</button>
+                                            @elseif($user->status_kemaskini == 'Baharu')
+                                                <button class="btn btn-sm text-white" style="background-color: #787878">BAHARU</button>
+                                            @elseif($user->status_kemaskini == 'Lulus')
+                                                <button class="btn btn-sm text-white" style="background-color:lightseagreen">DILULUSKAN</button>
+                                            @elseif($user->status_kemaskini == 'Ditolak')
+                                                <button class="btn btn-sm text-white bg-info">DITOLAK</button>
+                                            @endif
+                                        </td>
                                         <td style="text-align: center;">PEGAWAI DAERAH</td>
                                     </tr>
                                 @endforeach

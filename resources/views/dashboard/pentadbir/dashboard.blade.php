@@ -72,7 +72,7 @@
                                             <i class="fas fa-list-ol text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -92,7 +92,7 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:mediumvioletred">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
@@ -106,7 +106,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">2</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -123,7 +123,7 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:lightseagreen">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-list-ol text-light" style="font-size: 20px;">
@@ -149,7 +149,7 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
@@ -189,13 +189,13 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkgray">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-list-ol text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Jumlah Keseluruhan</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -215,14 +215,70 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">5</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+
+                        <!--begin::Second Row-->
+                        <div class="row g-3 g-lg-6  pt-5" style="text-align: center;">
+                            <!--begin::Col-->
+                            <div class="col-6">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-6">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cornflowerblue">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai Menjawab</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
