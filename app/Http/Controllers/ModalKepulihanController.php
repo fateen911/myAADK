@@ -163,15 +163,71 @@ class ModalKepulihanController extends Controller
     {
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
+        // Define the constants for the specific questions
+        $constants = [
+            5 => 0.103,
+            9 => 0.067,
+            24 => 0.172,
+            28 => 0.176,
+            49 => 0.120,
+            60 => 0.104,
+            62 => 0.223,
+            120 => 0.214
+        ];
+
+        $calculatedScore = -3.433;
+
         foreach ($request->input('answer') as $soalanId => $skalaId) {
             DB::table('respon_modal_kepulihan')->updateOrInsert(
                 ['klien_id' => $clientId, 'soalan_id' => $soalanId],
                 ['skala_id' => $skalaId, 'status' => 'Selesai', 'updated_at' => now()]
             );
+
+            // Calculate the score for the specific questions
+            if (array_key_exists($soalanId, $constants)) {
+                $calculatedScore += $constants[$soalanId] * $skalaId;
+            }
         }
+
+        // Determine the tahap_kepulihan_id based on the calculated score
+        $tahapKepulihanId = 0;
+        if ($calculatedScore >= 0.00 && $calculatedScore <= 0.25) {
+            $tahapKepulihanId = 1;
+        } elseif ($calculatedScore >= 0.26 && $calculatedScore <= 0.50) {
+            $tahapKepulihanId = 2;
+        } elseif ($calculatedScore >= 0.51 && $calculatedScore <= 0.75) {
+            $tahapKepulihanId = 3;
+        } elseif ($calculatedScore >= 0.76 && $calculatedScore <= 1.00) {
+            $tahapKepulihanId = 4;
+        }
+
+        // Store the result in the keputusan_kepulihan_klien table
+        DB::table('keputusan_kepulihan_klien')->updateOrInsert(
+            ['klien_id' => $clientId],
+            [
+                'tahap_kepulihan_id' => $tahapKepulihanId,
+                'skor' => $calculatedScore,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
 
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
+
+    // public function storeResponSoalanKepulihan(Request $request)
+    // {
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+    //     foreach ($request->input('answer') as $soalanId => $skalaId) {
+    //         DB::table('respon_modal_kepulihan')->updateOrInsert(
+    //             ['klien_id' => $clientId, 'soalan_id' => $soalanId],
+    //             ['skala_id' => $skalaId, 'status' => 'Selesai', 'updated_at' => now()]
+    //         );
+    //     }
+
+    //     return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
+    // }
 
     // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()

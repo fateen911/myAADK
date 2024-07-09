@@ -81,8 +81,6 @@ Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::c
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
 
 // PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
-// Route::get('/officer/view-requests/{id}', [ProfilKlienController::class, 'viewClientProfile'])->name('pegawai.viewUpdateRequest');
-// Route::patch('/pegawai/rejectUpdate/{id}', [ProfilKlienController::class, 'rejectProfileUpdate'])->name('pegawai.rejectUpdate');
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');
 Route::patch('/approve-update/pekerjaan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePekerjaan'])->name('approve.update.pekerjaan');
 Route::patch('/approve-update/waris-klien/{id}', [ProfilKlienController::class, 'approveUpdateWaris'])->name('approve.update.waris');

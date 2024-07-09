@@ -101,7 +101,7 @@
                                     <input type="radio" name="answer[{{ $question->id }}]" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
                                 </label>
                                 <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
                                 </label>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary text-center mt-5">Hantar</button>
                     </div>
-                </form>                                                        
+                </form>                                                                     
             </div>
         </div>
         <!--end::Card body-->

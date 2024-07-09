@@ -62,9 +62,9 @@
                                     <th class="min-w-100px">No. Kad Pengenalan</th>
                                     <th class="min-w-100px">Daerah</th>
                                     <th class="min-w-70px">Negeri</th>
-                                    <th class="min-w-50px">Status Menjawab</th> 
-                                    <th class="min-w-50px">Skor</th> 
-                                    <th class="min-w-50px">Tahap Kepulihan</th> 
+                                    <th class="min-w-50px" style="text-align: center;">Status Menjawab</th> 
+                                    <th class="min-w-50px" style="text-align: center;">Skor</th> 
+                                    <th class="min-w-50px" style="text-align: center;">Tahap Kepulihan</th> 
                                 </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
@@ -85,7 +85,7 @@
                                     <td class="d-flex justify-content-center">
                                         <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
                                     </td>
-                                    <td>0.63</td>
+                                    <td style="text-align: center">0.63</td>
                                     <td class="d-flex justify-content-center">
                                         <button class="btn btn-sm bg-warning text-white">KUNING</button>
                                     </td>

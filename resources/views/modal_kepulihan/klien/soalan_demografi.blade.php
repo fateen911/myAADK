@@ -279,9 +279,9 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label for="lama_tinggal_lokasi"><b>7) Berapa lamakah anda tinggal di lokasi terkini ?</b></label>
-                        <input type="text" class="form-control" id="lama_tinggal_lokasi" name="lama_tinggal_lokasi" placeholder="Tahun" 
-                            value="{{ isset($respon) ? $respon->lama_tinggal_lokasi : old('lama_tinggal_lokasi') }}" style="width: 30%;">
+                        <label for="tempoh_tinggal_lokasi_terkini"><b>7) Berapa lamakah anda tinggal di lokasi terkini ?</b></label>
+                        <input type="text" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
+                            value="{{ isset($respon) ? $respon->tempoh_tinggal_lokasi_terkini : old('tempoh_tinggal_lokasi_terkini') }}" style="width: 30%;">
                     </div>
                     
                     <div class="mb-4">
