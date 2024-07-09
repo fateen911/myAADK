@@ -70,7 +70,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                            <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
@@ -96,7 +96,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:mediumvioletred">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -127,7 +127,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:lightseagreen">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                            <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Lulus</span>
@@ -153,7 +153,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -193,7 +193,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkgray">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Jumlah Keseluruhan</span>
@@ -219,7 +219,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
@@ -249,7 +249,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-list-ol text-light" style="font-size: 20px;">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>

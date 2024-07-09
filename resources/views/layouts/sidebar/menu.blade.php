@@ -613,26 +613,14 @@
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum-balas') ? 'active' : '' }}">
+                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
-                                <span class="menu-link">
+                                <a class="menu-link" href={{route('maklum.balas.kepulihan')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Maklum Balas</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Senarai Soalan</span>
-                                </span>
+                                </a>
                                 <!--end:Menu link-->
                             </div>
                             <!--end:Menu item-->
