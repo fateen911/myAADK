@@ -289,7 +289,7 @@ class PengurusanProgController extends Controller
         // Telegram Bot API endpoint
         $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
         $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
-        $chatId = 490430239;
+        $chatId = 490430239; //618021127 - syafiqah
 
         // Public path to the image file
         $imagePath = public_path('qr_codes/qrcode.png');
