@@ -34,13 +34,11 @@
                 <div class="card-body py-15 py-lg-20">
                     <!--begin::Logo-->
                     <div class="mb-13">
-                        <a href="../../demo1/dist/index.html" class="">
-                            <img alt="Logo" src="logo/aadk.png" class="h-125px" />
-                        </a>
+                        <img alt="Logo" src="logo/aadk.png" class="h-125px" />
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder text-gray-900 mb-7">Program Pemulihan Bersepadu</h1>
+                    <h1 class="fw-bolder text-gray-900 mb-7">Pendaftaran Kehadiran</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
@@ -69,6 +67,7 @@
                     <!--end::Counter-->
                     <!--begin::Text-->
                     <div class="w-md-350px mb-2 mx-auto fw-semibold fs-6 mb-7 ">
+                        Nama Program: Program Pemulihan Bersepadu <br>
                         Tarikh/Masa: 17/06/2024, 9AM <br>
                         Tempat: Dewan Perdana <br>
                         Penganjur: En. Syafiq Rahman <br>
