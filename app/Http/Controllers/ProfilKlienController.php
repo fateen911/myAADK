@@ -45,45 +45,41 @@ class ProfilKlienController extends Controller
         $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
 
-
         // PERIBADI
         $klien = Klien::where('id', $id)->first();
         $requestKlien = KlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
         $updateRequestKlien = KlienUpdateRequest::where('klien_id', $id)->first();
-        // Decode the requested data updates
-        $requestedDataKlien = json_decode($updateRequestKlien->requested_data, true);
-                                  
+        $requestedDataKlien = $updateRequestKlien ? json_decode($updateRequestKlien->requested_data, true) : [];  // Decode the requested data updates                  
 
         // PEKERJAAN  
         $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
         $requestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
         $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->first();
-        $requestedDataPekerjaan = json_decode($updateRequestPekerjaan->requested_data, true);
+        $requestedDataPekerjaan = $updateRequestPekerjaan ? json_decode($updateRequestPekerjaan->requested_data, true) : [];
 
         // WARIS
         $waris = WarisKlien::where('klien_id',$id)->first();
         $requestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
         $updateRequestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->first();
-        $requestedDataWaris = json_decode($updateRequestWaris->requested_data, true);
+        $requestedDataWaris = $updateRequestWaris ? json_decode($updateRequestWaris->requested_data, true) : [];
 
         // PASANGAN
         $pasangan = PasanganKlien::where('klien_id',$id)->first();
         $requestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
         $updateRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->first();
-        $requestedDataPasangan = json_decode($updateRequestPasangan->requested_data, true);
+        $requestedDataPasangan = $updateRequestPasangan ? json_decode($updateRequestPasangan->requested_data, true) : [];
+
+        // dd($requestedDataPasangan);
 
         // RAWATAN
         $rawatan = RawatanKlien::where('klien_id',$id)->first();
-        $requestRawatan = RawatanKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
-        $updateRequestRawatan = RawatanKlienUpdateRequest::where('klien_id', $id)->first();
-        $requestedDataRawatan = json_decode($updateRequestRawatan->requested_data, true);
 
         return view('profil_klien.pentadbir_pegawai.kemaskini', compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                                         'klien', 'requestKlien', 'updateRequestKlien','requestedDataKlien',
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
                                                                         'waris', 'requestWaris', 'updateRequestWaris','requestedDataWaris',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan', 'requestRawatan', 'updateRequestRawatan','requestedDataRawatan',));
+                                                                        'rawatan'));
     }
 
     // CURRENT METHOD OF APPROVAL CLIENT'S REQUEST
