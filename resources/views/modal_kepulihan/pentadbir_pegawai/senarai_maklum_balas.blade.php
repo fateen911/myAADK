@@ -53,8 +53,8 @@
 					<!--end::Card header-->
 
 					<!--begin::Card body-->
-					<div class="body">
-						<!--begin::Table-->
+                    <div class="body">
+                        <!--begin::Table-->
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
                                 <tr class="text-gray-400 fw-bold fs-7 gs-0">
@@ -69,41 +69,49 @@
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach($responses as $response)
-                                @php
-                                    $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
-                                    $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
-                                @endphp
-                                <tr>
-                                    <td>
-                                        {{-- <a href="{{ route('admin.viewClient', $response->klien_id) }}"> --}}
-                                            {{ $response->nama }}
-                                        {{-- </a> --}}
-                                    </td>
-                                    <td>{{ $response->no_kp }}</td>
-                                    <td>{{ $daerah }}</td>
-                                    <td>{{ $negeri }}</td>
-                                    <td class="d-flex justify-content-center">
-                                        <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
-                                    </td>
-                                    <td style="text-align: center">0.63</td>
-                                    <td class="d-flex justify-content-center">
-                                        <button class="btn btn-sm bg-warning text-white">KUNING</button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                                <tr>
-                                    <td>MOHD DANIAL BIN IBRAHIM</td>
-                                    <td>030609110813</td>
-                                    <td>KUALA BESUT</td>
-                                    <td>TERENGGANU</td>
-                                    <td class="d-flex justify-content-center"><button class="btn btn-sm text-white" style="background-color:cornflowerblue"> BELUM SELESAI</button></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                    @php
+                                        $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
+                                        $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
+                                        $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
+                                        $statusMenjawab = ($response->selesai_count == 25) ? 'SELESAI' : 'BELUM SELESAI';
+                                    @endphp
+
+                                    <tr>
+                                        <td>{{ $response->nama }}</td>
+                                        <td>{{ $response->no_kp }}</td>
+                                        <td>{{ $daerah }}</td>
+                                        <td>{{ $negeri }}</td>
+                                        <td class="d-flex justify-content-center">
+                                            @if ($statusMenjawab == 'SELESAI')
+                                                <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
+                                            @else
+                                                <button class="btn btn-sm text-white" style="background-color:cornflowerblue">BELUM SELESAI</button>
+                                            @endif
+                                        </td>
+                                        <td style="text-align: center">
+                                            @if ($response->skor)
+                                                {{ $response->skor }}
+                                            @endif
+                                        </td>
+                                        <td style="text-align: center">                                        
+                                            @if ($response->tahap_kepulihan_id)
+                                                @if ($response->tahap_kepulihan_id == 1)
+                                                    <button class="btn btn-sm bg-danger text-white">{{ $tahap_kepulihan }}</button>
+                                                @elseif ($response->tahap_kepulihan_id == 2)
+                                                    <button class="btn btn-sm text-white" style="background-color: orange;">{{ $tahap_kepulihan }}</button>
+                                                @elseif ($response->tahap_kepulihan_id == 3)
+                                                    <button class="btn btn-sm text-white" style="background-color: yellow">{{ $tahap_kepulihan }}</button>   
+                                                @else
+                                                    <button class="btn btn-sm bg-success text-white">{{ $tahap_kepulihan }}</button>
+                                                @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-						<!--end::Table-->
-					</div>
+                        <!--end::Table-->
+                    </div>                    
 					<!--end::Card body-->
 				</div>
 				<!--end::Content container-->

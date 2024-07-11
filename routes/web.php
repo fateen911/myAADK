@@ -99,6 +99,7 @@ Route::post('/klien/maklumat-waris/request-update', [ProfilKlienController::clas
 Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'pasanganKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
 
 // KLIEN - MODUL KEPULIHAN
+Route::get('/klien/soal-selidik/kepulihan', [ModalKepulihanController::class, 'soalanKepulihanTest'])->middleware('auth')->name('klien.soalanKepulihan.test');
 Route::get('/klien/modul-kepulihan/soal-selidik', [ModalKepulihanController::class, 'soalSelidik'])->middleware('auth')->name('klien.soalSelidik');
 Route::get('/klien/modul-kepulihan/soalan-demografi', [ModalKepulihanController::class, 'soalanDemografi'])->middleware('auth')->name('klien.soalanDemografi');
 Route::post('/klien/autosave/demografi', [ModalKepulihanController::class, 'autosaveResponSoalanDemografi'])->name('klien.autosave.demografi');

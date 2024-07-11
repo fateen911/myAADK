@@ -90,6 +90,10 @@
                                     <div class="text-center mt-5">
                                         <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $klien->status_kemaskini }}</span>
                                         <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
+                                        {{-- @if ($klien->status_kemaskini != 'Baharu')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $klien->status_kemaskini }}</span>
+                                            <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
+                                        @endif                                         --}}
                                     </div>
                                     <!--end::Info-->
                                 </div>

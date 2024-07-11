@@ -449,69 +449,6 @@
                         </a>
                     </div>
                     <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pengurusan_program/pentadbir_sistem/senarai_prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan_program/pentadbir_sistem/senarai_prog') }}';">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Program</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    {{-- <div class="menu-item pt-5">
-                        <!--begin:Menu content-->
-                        <div class="menu-content">
-                            <span class="menu-heading fw-bold text-uppercase fs-7">PROGRAM</span>
-                        </div>
-                        <!--end:Menu content-->
-                    </div> --}}
-
-                    <!--begin:Menu sub-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-calendar-add fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Pengesahan Kehadiran</span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-calendar-add fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Perekodan Kehadiran </span>
-                        </span>
-                        <!--end:Menu link-->
-                    </div> --}}
-                    <!--end:Menu sub-->
                 </div>
                 <!--end::Menu-->
             </div>

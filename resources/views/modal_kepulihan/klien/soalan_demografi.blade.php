@@ -159,7 +159,7 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="rawatan"><b>1) Dimanakah anda pernah menerima rawatan ?</b></label><br>
+                        <label for="rawatan"><b>1) Di manakah anda pernah menerima rawatan ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN/CCRC" id="rawatan1" {{ isset($respon) && $respon->rawatan == 'PUSPEN/CCRC' ? 'checked' : '' }}>
                             <label class="form-check-label" for="rawatan1">PUSPEN/CCRC</label>
@@ -180,7 +180,7 @@
                     </div>
 
                     <div  class="mb-4">
-                        <label for="pusat_rawatan"><b>2) Dimanakah pusat rawatan terkini anda ?</b></label><br>
+                        <label for="pusat_rawatan"><b>2) Di manakah pusat rawatan terkini anda ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN/CCRC" id="pusat_rawatan1" {{ isset($respon) && $respon->pusat_rawatan == 'PUSPEN/CCRC' ? 'checked' : '' }}>
                             <label class="form-check-label" for="pusat_rawatan1">PUSPEN/CCRC</label>
@@ -208,11 +208,11 @@
                             <label class="form-check-label" for="kategori1">Pasca bebas (kali pertama)</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kategori" value="Pascabebas (relapse)" id="kategori2" 
-                                {{ (isset($respon) && $respon->kategori == 'Pascabebas (relapse)') || old('kategori') == 'Pascabebas (relapse)' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="kategori2">Pascabebas (relapse)</label>
+                            <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (relaps)" id="kategori2" 
+                                {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="kategori2">Pasca bebas (relaps)</label>
                         </div>
-                        <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pascabebas (relapse)') || old('kategori') == 'Pascabebas (relapse)' ? '' : 'd-none' }}" 
+                        <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" 
                             id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" 
                             value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%;">
                     </div>
@@ -285,7 +285,7 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label for="tinggal_dengan"><b>8) Dengan siapa anda tinggal dan hidup ?</b></label><br>
+                        <label for="tinggal_dengan"><b>8) Dengan siapa anda tinggal bersama ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="tinggal_dengan" value="Sendiri" id="tinggal_dengan1" 
                                 {{ (isset($respon) && $respon->tinggal_dengan == 'Sendiri') || old('tinggal_dengan') == 'Sendiri' ? 'checked' : '' }}>
@@ -408,7 +408,7 @@
 
             kategoriRadios.forEach(radio => {
                 radio.addEventListener('change', function () {
-                    if (this.value === 'Pascabebas (relapse)') {
+                    if (this.value === 'Pasca bebas (relaps)') {
                         jumlahRelapseField.classList.remove('d-none');
                     } else {
                         jumlahRelapseField.classList.add('d-none');

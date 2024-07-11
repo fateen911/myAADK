@@ -45,16 +45,14 @@
             flex-grow: 1;
         }
         .status {
-            /* background: #e0f8e0; */
-            /* color: #34c759; */
             color: white;
-            background-color: cornflowerblue;
+            background-color:cadetblue;
             padding: 5px 10px;
             border-radius: 15px;
             text-align: center;
             text-decoration: none; 
             display: inline-block; 
-            width: 80%;
+            width: 50%;
         }
     </style>
 </head>
@@ -103,9 +101,9 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body">
-                <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b> 16/01/2024</p>
-                <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI</p>
-                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULA MENJAWAB</a>
+                <p><b>TARIKH SELESAI MENJAWAB SOAL SELIDIK:</b> 11/07/2024</p>
+                <p><b>STATUS SOAL SELIDIK:</b> SELESAI MENJAWAB</p>
+                {{-- <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULA MENJAWAB</a> --}}
             </div>
             <!--end::Card body-->
         </div>

@@ -69,8 +69,6 @@ class ProfilKlienController extends Controller
         $updateRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataPasangan = $updateRequestPasangan ? json_decode($updateRequestPasangan->requested_data, true) : [];
 
-        // dd($requestedDataPasangan);
-
         // RAWATAN
         $rawatan = RawatanKlien::where('klien_id',$id)->first();
 

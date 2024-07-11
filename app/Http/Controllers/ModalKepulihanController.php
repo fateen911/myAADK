@@ -13,7 +13,9 @@ class ModalKepulihanController extends Controller
     // KLIEN
     public function soalSelidik()
     {
-        return view('modal_kepulihan.klien.soalan_selidik');
+        $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
+
+        return view('modal_kepulihan.klien.soalan_selidik', compact('klien'));
     }
 
     public function soalanDemografi()
@@ -175,7 +177,7 @@ class ModalKepulihanController extends Controller
             120 => 0.214
         ];
 
-        $calculatedScore = -3.433;
+        $kebarangkalian = -3.433;
 
         foreach ($request->input('answer') as $soalanId => $skalaId) {
             DB::table('respon_modal_kepulihan')->updateOrInsert(
@@ -185,19 +187,25 @@ class ModalKepulihanController extends Controller
 
             // Calculate the score for the specific questions
             if (array_key_exists($soalanId, $constants)) {
-                $calculatedScore += $constants[$soalanId] * $skalaId;
+                $kebarangkalian += $constants[$soalanId] * $skalaId;
             }
         }
 
+        // Calculate the formula
+        $skor = exp($kebarangkalian) / (1 + exp($kebarangkalian));
+
+        // Round the score to 3 decimal places
+        $skor = round($skor, 3);
+
         // Determine the tahap_kepulihan_id based on the calculated score
         $tahapKepulihanId = 0;
-        if ($calculatedScore >= 0.00 && $calculatedScore <= 0.25) {
+        if ($skor >= 0.00 && $skor <= 0.25) {
             $tahapKepulihanId = 1;
-        } elseif ($calculatedScore >= 0.26 && $calculatedScore <= 0.50) {
+        } elseif ($skor >= 0.26 && $skor <= 0.50) {
             $tahapKepulihanId = 2;
-        } elseif ($calculatedScore >= 0.51 && $calculatedScore <= 0.75) {
+        } elseif ($skor >= 0.51 && $skor <= 0.75) {
             $tahapKepulihanId = 3;
-        } elseif ($calculatedScore >= 0.76 && $calculatedScore <= 1.00) {
+        } elseif ($skor >= 0.76 && $skor <= 1.00) {
             $tahapKepulihanId = 4;
         }
 
@@ -206,39 +214,109 @@ class ModalKepulihanController extends Controller
             ['klien_id' => $clientId],
             [
                 'tahap_kepulihan_id' => $tahapKepulihanId,
-                'skor' => $calculatedScore,
+                'skor' => $skor,
                 'created_at' => now(),
                 'updated_at' => now()
             ]
         );
 
-        return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
+        $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
+
+        return view('modal_kepulihan.klien.selesai_menjawab',compact('klien'))->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
-
-    // public function storeResponSoalanKepulihan(Request $request)
-    // {
-    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-
-    //     foreach ($request->input('answer') as $soalanId => $skalaId) {
-    //         DB::table('respon_modal_kepulihan')->updateOrInsert(
-    //             ['klien_id' => $clientId, 'soalan_id' => $soalanId],
-    //             ['skala_id' => $skalaId, 'status' => 'Selesai', 'updated_at' => now()]
-    //         );
-    //     }
-
-    //     return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
-    // }
 
     // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()
     {
         $responses = DB::table('respon_modal_kepulihan as rm')
-        ->join('klien as u', 'rm.klien_id', '=', 'u.id')
-        ->select('u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', DB::raw('MAX(rm.status) as status'))
-        ->groupBy('rm.klien_id')
-        ->get();
+            ->join('klien as u', 'rm.klien_id', '=', 'u.id')
+            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+            ->select(
+                'u.id as klien_id',
+                'u.nama',
+                'u.no_kp',
+                'u.daerah',
+                'u.negeri',
+                DB::raw('SUM(case when rm.status = "Selesai" then 1 else 0 end) as selesai_count'),
+                DB::raw('COUNT(rm.id) as total_count'),
+                'kk.skor',
+                'kk.tahap_kepulihan_id'
+            )
+            ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id')
+            ->get();
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses'));
     }
 
+    // TEST
+    public function soalanKepulihanTest()
+    {
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+        // Check if the client has previously saved questions
+        $savedQuestions = DB::table('respon_modal_kepulihan')
+                            ->where('klien_id', $clientId)
+                            ->pluck('soalan_id')
+                            ->toArray();
+
+        if (!empty($savedQuestions)) {
+            // Fetch the questions in the order they were previously saved
+            $questions = DB::table('soalan_modal_kepulihan')
+                        ->whereIn('id', $savedQuestions)
+                        ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
+                        ->get();
+        } else {
+            // Fetch 8 fixed questions with specific IDs
+            $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
+            $fixedQuestions = DB::table('soalan_modal_kepulihan')
+                                ->whereIn('id', $fixedQuestionIds)
+                                ->get();
+
+            // Fetch 5 questions representing each recovery capital
+            $capitalQuestions = DB::table('soalan_modal_kepulihan')
+                                ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+                                ->whereNotIn('id', $fixedQuestionIds)
+                                ->inRandomOrder()
+                                ->limit(5)
+                                ->get();
+
+            // Merge the 13 fixed questions
+            $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
+
+            // Fetch remaining questions excluding the already selected ones
+            $remainingQuestions = DB::table('soalan_modal_kepulihan')
+                                    ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+                                    ->inRandomOrder()
+                                    ->limit(12)
+                                    ->get();
+
+            // Combine both sets of questions
+            $allQuestions = $fixedQuestions->merge($remainingQuestions);
+
+            // Shuffle the questions to ensure randomness for every client
+            $shuffledQuestions = $allQuestions->shuffle();
+
+            // Save the shuffled order for the first time with status as "Baharu"
+            foreach ($shuffledQuestions as $question) {
+                DB::table('respon_modal_kepulihan')->insert([
+                    'klien_id' => $clientId,
+                    'soalan_id' => $question->id,
+                    'skala_id' => null, // No answer yet
+                    'status' => 'Baharu', // Setting the status to Baharu
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+            
+            $questions = $shuffledQuestions;
+        }
+
+        // Fetch autosaved answers
+        $autosavedAnswers = DB::table('respon_modal_kepulihan')
+        ->where('klien_id', $clientId)
+        ->pluck('skala_id', 'soalan_id')
+        ->toArray();
+
+        return view('modal_kepulihan.klien.soalan_kepulihan_view_kedua', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
+    }
 }
