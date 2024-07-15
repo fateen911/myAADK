@@ -7,7 +7,34 @@
 </head>
 <body>
     <div class="m-5">
-        <br><h2 class="my-3 text-center">Senarai Pengesahan Kehadiran</h2><br>
+        <br><h2 class="my-3 text-center text-uppercase">Senarai Pengesahan Kehadiran</h2>
+
+        <hr class="border-0 h-1px bg-black mt-10 mb-8">
+
+        <div class="d-table w-100">
+            <div class="d-table-row">
+                <div class="d-table-cell text-left w-50">
+                    <p>Nama Program: Program Pemulihan Bersepadu</p>
+                </div>
+                <div class="d-table-cell text-right w-50">
+                    <p>Tarikh/Masa Mula: 1 Ogos 2024, 8:00 AM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-table w-100">
+            <div class="d-table-row">
+                <div class="d-table-cell text-left w-50">
+                    <p>Tempat: Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
+                </div>
+                <div class="d-table-cell text-right w-50">
+                    <p>Tarikh/Masa Mula: 3 Ogos 2024, 12:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-0 h-1px bg-black mb-10">
+
         <table class="table table-row-dashed fs-6 gy-5 my-0">
             <thead>
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
