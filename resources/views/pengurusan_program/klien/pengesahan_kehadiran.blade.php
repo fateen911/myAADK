@@ -70,9 +70,9 @@
                         Nama Program: Program Pemulihan Bersepadu <br>
                         Tarikh/Masa: 17/06/2024, 9AM <br>
                         Tempat: Dewan Perdana <br>
-                        Penganjur: En. Syafiq Rahman <br>
+                        Penganjur: Majlis Pemulihan Dadah Kebangsaan (MPDK) <br>
                         Pegawai AADK: En. Kairul Azizi <br>
-                        Sila Hubungi: 013-5728935 <br>
+                        Sila Hubungi: 0135728935 <br>
                         <br>
                         <hr>
                         <div class="fw-semibold fs-6 text-black mb-7">

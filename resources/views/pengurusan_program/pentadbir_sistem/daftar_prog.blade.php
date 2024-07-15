@@ -151,8 +151,8 @@
                                                 <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="required form-label">Penganjur Program</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="" required/>
+                                                <label class="form-label">Penganjur Program</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value=""/>
                                             </div>
                                         </div>
 
@@ -193,32 +193,6 @@
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div>
-                                        <!--begin::Label-->
-                                        <label class="form-label">Lampiran</label>
-                                        <!--end::Label-->
-                                        <!--begin::Dropzone-->
-                                        <div class="dropzone mb-2" id="kt_dropzonejs">
-                                            <!--begin::Message-->
-                                            <div class="dz-message needsclick">
-                                                <!--begin::Icon-->
-                                                <i class="ki-duotone ki-file-up text-primary fs-3x">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                                <!--end::Icon-->
-                                                <!--begin::Info-->
-                                                <div class="ms-4">
-                                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here or click to upload.</h3>
-                                                    <span class="fs-7 fw-semibold text-gray-400">Upload up to 10 files</span>
-                                                </div>
-                                                <!--end::Info-->
-                                            </div>
-                                        </div>
-                                        <!--end::Dropzone-->
                                     </div>
                                     <!--end::Input group-->
                                 </div>
