@@ -324,7 +324,6 @@
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
                                     <th class="min-w-175px">No. Kad Pengenalan</th>
-                                    <th class="min-w-175px">Alamat</th>
                                     <th class="min-w-175px">No. Telefon</th>
                                     <th class="min-w-175px">Pengesahan</th>
                                     <th class="min-w-175px">Catatan</th>
@@ -340,7 +339,6 @@
                                             890101011234
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 12, Jalan Merbuk, Taman Setia, 43000 Kajang, Selangor</td>
                                     <td class="text-gray-600 fw-bold">012-3456789</td>
                                     <td class="text-gray-600 fw-bold">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Tepat pada masanya</td>
@@ -354,7 +352,6 @@
                                             900202022345
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 34, Jalan Matahari, Taman Cahaya, 50450 Kuala Lumpur</td>
                                     <td class="text-gray-600 fw-bold">013-4567890</td>
                                     <td class="text-gray-600 fw-bold">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Cuti sakit</td>
@@ -368,7 +365,6 @@
                                             920303033456
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 56, Jalan Teratai, Taman Seri, 11600 Pulau Pinang</td>
                                     <td class="text-gray-600 fw-bold">014-5678901</td>
                                     <td class="text-gray-600 fw-bold">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Hadir lewat 10 minit</td>
@@ -382,7 +378,6 @@
                                             940404044567
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 78, Jalan Kenanga, Taman Melati, 81300 Skudai, Johor</td>
                                     <td class="text-gray-600 fw-bold">015-6789012</td>
                                     <td class="text-gray-600 fw-bold">Hadir</td>
                                     <td class="text-gray-600 fw-bold">-</td>
@@ -396,7 +391,6 @@
                                             970606066789
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 90, Jalan Dahlia, Taman Bunga, 75100 Melaka</td>
                                     <td class="text-gray-600 fw-bold">016-7890123</td>
                                     <td class="text-gray-600 fw-bold">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Urusan keluarga</td>
@@ -410,7 +404,6 @@
                                             980707077890
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 23, Jalan Anggerik, Taman Bukit, 70200 Seremban, Negeri Sembilan</td>
                                     <td class="text-gray-600 fw-bold">017-8901234</td>
                                     <td class="text-gray-600 fw-bold">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Akan menghadiri program</td>
@@ -424,7 +417,6 @@
                                             001010099012
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 45, Jalan Cempaka, Taman Sentosa, 40100 Shah Alam, Selangor</td>
                                     <td class="text-gray-600 fw-bold">018-9012345</td>
                                     <td class="text-gray-600 fw-bold">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Bercuti</td>

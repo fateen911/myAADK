@@ -72,10 +72,11 @@
                         Tempat: Dewan Perdana <br>
                         Penganjur: En. Syafiq Rahman <br>
                         Pegawai AADK: En. Kairul Azizi <br>
-                        Sila Dihubungi: 013-5728935 <br>
+                        Sila Hubungi: 013-5728935 <br>
                         <br>
-                        <div class="fw-semibold fs-6 text-gray-500 mb-7">
-                            Sila masukkan No. Kad Pengenalan anda.<br>
+                        <hr>
+                        <div class="fw-semibold fs-6 text-black mb-7">
+                            Lengkapkan maklumat berikut untuk mengesahkan kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
@@ -84,8 +85,13 @@
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::Input-->
+                            <label class="required form-label">No. Kad Pengenalan (Tanpa '-')</label>
                             <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" />
                             <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-8">
+                            <label class="form-label">Catatan (Jika ada):</label>
+                            <textarea class="form-control" name="catatan" id="" rows="5" placeholder="Berikan catatan anda."></textarea>
                         </div>
                         <!--begin::Actions-->
                         <div class="d-flex flex-wrap justify-content-center pb-lg-0">

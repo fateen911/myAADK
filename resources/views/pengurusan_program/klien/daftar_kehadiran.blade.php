@@ -72,10 +72,11 @@
                         Tempat: Dewan Perdana <br>
                         Penganjur: En. Syafiq Rahman <br>
                         Pegawai AADK: En. Kairul Azizi <br>
-                        Sila Dihubungi: 013-5728935 <br>
+                        Sila Hubungi: 013-5728935 <br>
                         <br>
-                        <div class="fw-semibold fs-6 text-gray-500 mb-7">
-                            Sila masukkan No. Kad Pengenalan anda.<br>
+                        <hr>
+                        <div class="fw-semibold fs-6 text-black mb-7">
+                            Masukkan No. Kad Pengenalan tanpa '-' untuk merekodkan kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
