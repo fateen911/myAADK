@@ -82,6 +82,21 @@
                                 <div class="card-body pt-0">
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
+                                        <label class="required form-label">Kategori Program</label>
+                                        <!--begin::Select2-->
+                                        <select class="form-select" aria-label="Select example">
+                                            <option >Sila Pilih</option>
+                                            <option value="SK" selected="selected">Kelompok Sokongan Keluarga Kepulihan</option>
+                                            <option value="PR">Pencegahan Relaps</option>
+                                            <option value="APC">Alumni - PCCP</option>
+                                            <option value="AMK">Alumni - Mentor Kepulihan</option>
+                                            <option value="ASB">Alumni - Kelompok Sokong Bantu</option>
+                                        </select>
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+                                    <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Program</label>
                                         <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="Program Pemulihan Bersepadu" required/>
                                         {{--                                                            <!--begin::Description-->--}}
@@ -92,8 +107,36 @@
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Objektif Program</label>
-                                        <input type="text" name="objektif" class="form-control mb-2" placeholder="Objektif Program" value="Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan" required/>
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Objektif</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <div id="kt_docs_quill_basic" name="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                                Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan
+                                            </div>
+                                            <!--end::Editor-->
+                                            {{--                                                            <!--begin::Description-->--}}
+                                            {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
+                                            {{--                                                            <!--end::Description-->--}}
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
+                                                <label class="required form-label">Tarikh & Masa Mula</label>
+                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
+                                                <label class="required form-label">Tarikh & Masa Tamat</label>
+                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
+                                            </div>
+                                        </div>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -102,53 +145,49 @@
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Tarikh Program</label>
-                                        <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
+                                                <label class="required form-label">Tempat Program</label>
+                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru" required/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
+                                                <label class="form-label">Penganjur Program (Jika Ada)</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="Majlis Pemulihan Dadah Kebangsaan (MPDK)"/>
+                                            </div>
+                                        </div>
+
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
                                     <!--end::Input group-->
+
+                                    <!--end::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                                <label class="required form-label">Nama Pegawai</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Nama Pegawai" value="En. Kairul Azizi" required/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
+                                                <label class="required form-label">No. Telefon Untuk Dihubungi (Tanpa '-')</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="0135728935" required/>
+                                            </div>
+                                        </div>
+
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Tempat Program</label>
-                                        <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru" required/>
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="mb-5 fv-row">
-                                        <label class="required form-label">Masa Program</label>
-                                        <input class="form-control form-control-solid" name="masa" placeholder="Pilih masa" id="kt_daterangepicker_2"/>
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="mb-5 fv-row">
-                                        <label class="required form-label">Penganjur Program</label>
-                                        <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="Badan Amal dan Kebajikan Rakyat Malaysia (BAKRM)" required/>
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div>
                                         <!--begin::Label-->
-                                        <label class="form-label">Catatan</label>
+                                        <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
-                                        <div id="kt_docs_quill_basic" name="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                        <div id="kt_docs_quill_basic_2" name="kt_docs_quill_basic" class="min-h-200px mb-2">
                                             Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran.
-                                            Semua peserta diminta untuk membawa dokumen pengenalan diri dan rekod perubatan.
                                         </div>
                                         <!--end::Editor-->
                                         {{--                                                            <!--begin::Description-->--}}
@@ -280,6 +319,20 @@
     <!--text editor-->
     <script>
         var quill = new Quill('#kt_docs_quill_basic', {
+            modules: {
+                toolbar: [
+                    [{
+                        header: [1, 2, false]
+                    }],
+                    ['bold', 'italic', 'underline'],
+                    ['image', 'code-block']
+                ]
+            },
+            placeholder: 'Type your text here...',
+            theme: 'snow' // or 'bubble'
+        });
+
+        var quill = new Quill('#kt_docs_quill_basic_2', {
             modules: {
                 toolbar: [
                     [{

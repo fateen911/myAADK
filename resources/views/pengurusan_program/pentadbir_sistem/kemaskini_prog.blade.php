@@ -151,7 +151,7 @@
                                                 <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Penganjur Program</label>
+                                                <label class="form-label">Penganjur Program (Jika Ada)</label>
                                                 <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="Majlis Pemulihan Dadah Kebangsaan (MPDK)"/>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                                 <input type="text" name="penganjur" class="form-control mb-2" placeholder="Nama Pegawai" value="En. Kairul Azizi" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
-                                                <label class="required form-label">No. Telefon Untuk Dihubungi</label>
+                                                <label class="required form-label">No. Telefon Untuk Dihubungi (Tanpa '-')</label>
                                                 <input type="text" name="penganjur" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="0135728935" required/>
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
                                         <!--begin::Label-->
-                                        <label class="form-label">Catatan</label>
+                                        <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
                                         <div id="kt_docs_quill_basic_2" name="kt_docs_quill_basic" class="min-h-200px mb-2">

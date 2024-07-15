@@ -127,9 +127,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -148,13 +148,7 @@
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                            <!--begin::Select2-->
-                            <select class="form-select" aria-label="Select example">
-                                <option></option>
-                                <option value="selesai" selected="selected">Belum Selesai</option>
-                                <option value="belum">Sudah Selesai</option>
-                                <option value="tangguh">Ditangguhkan</option>
-                            </select>
+                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">Belum Selesai</p>
                             <br>
                         </div>
                         <!--end::Card body-->
@@ -164,7 +158,7 @@
                 </div>
                 <!--end::Aside column-->
                 <!--begin::Main column-->
-                <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 w-820px">
                     <!--begin::Umum options-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -190,15 +184,34 @@
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Objektif Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
+                                <label class="form-label">Kategori:</label>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Kelompok Sokongan Keluarga Kepulihan</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Tarikh Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024</p>
+                                <label class="form-label">Objektif Program:</label>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
+                            </div>
+                            <!--end::Input group-->
+                            <div class="form d-flex flex-column flex-lg-row">
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">Tarikh & Masa Mula:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024, 8:00 AM</p>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">Tarikh & Masa Tamat:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">3 Ogos 2024, 2:00 PM</p>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
                             </div>
                             <!--end::Input group-->
 
@@ -211,15 +224,29 @@
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Masa Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">8:00 AM</p>
+                                <label class="form-label">Penganjur Program:</label>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
-                            <div class="mb-6 fv-row">
-                                <label class="form-label">Penganjur Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
+                            <div class="form d-flex flex-column flex-lg-row">
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">Nama Pegawai:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">En. Kairul Azizi</p>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">No. Telefon Untuk Dihubungi:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">0135728935</p>
+                                    </div>
+
+                                </div>
                             </div>
                             <!--end::Input group-->
 
@@ -287,9 +314,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -298,7 +325,7 @@
 
                 </div>
                 <!--end::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
                     <!--begin::Senarai Pengesahan-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -324,7 +351,6 @@
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
                                     <th class="min-w-175px">No. Kad Pengenalan</th>
-                                    <th class="min-w-175px">Alamat</th>
                                     <th class="min-w-175px">No. Telefon</th>
                                     <th class="min-w-175px">Pengesahan</th>
                                     <th class="min-w-175px">Catatan</th>
@@ -332,7 +358,7 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Ahmad Faizal bin Ahmad
                                     </td>
                                     <td>
@@ -340,41 +366,38 @@
                                             890101011234
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 12, Jalan Merbuk, Taman Setia, 43000 Kajang, Selangor</td>
                                     <td class="text-gray-600 fw-bold">012-3456789</td>
-                                    <td class="text-gray-600 fw-bold">Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Tepat pada masanya</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Siti Nurhaliza binti Abdul
+                                    <td class="text-uppercase">
+                                        Siti Nurhaliza binti Abdul Rahman
                                     </td>
                                     <td>
                                         <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
                                             900202022345
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 34, Jalan Matahari, Taman Cahaya, 50450 Kuala Lumpur</td>
                                     <td class="text-gray-600 fw-bold">013-4567890</td>
-                                    <td class="text-gray-600 fw-bold">Tidak Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Cuti sakit</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Mohd Faiz bin Mohd
+                                    <td class="text-uppercase">
+                                        Mohd Faiz bin Mohd Razi
                                     </td>
                                     <td>
                                         <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
                                             920303033456
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 56, Jalan Teratai, Taman Seri, 11600 Pulau Pinang</td>
                                     <td class="text-gray-600 fw-bold">014-5678901</td>
-                                    <td class="text-gray-600 fw-bold">Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Hadir lewat 10 minit</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Nurul Ain binti Razali
                                     </td>
                                     <td>
@@ -382,13 +405,12 @@
                                             940404044567
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 78, Jalan Kenanga, Taman Melati, 81300 Skudai, Johor</td>
                                     <td class="text-gray-600 fw-bold">015-6789012</td>
-                                    <td class="text-gray-600 fw-bold">Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
                                     <td class="text-gray-600 fw-bold">-</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Hafiz bin Hamid
                                     </td>
                                     <td>
@@ -396,13 +418,12 @@
                                             970606066789
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 90, Jalan Dahlia, Taman Bunga, 75100 Melaka</td>
                                     <td class="text-gray-600 fw-bold">016-7890123</td>
-                                    <td class="text-gray-600 fw-bold">Tidak Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Urusan keluarga</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Ahmad Faizal bin Ahmad
                                     </td>
                                     <td>
@@ -410,13 +431,12 @@
                                             980707077890
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 23, Jalan Anggerik, Taman Bukit, 70200 Seremban, Negeri Sembilan</td>
                                     <td class="text-gray-600 fw-bold">017-8901234</td>
-                                    <td class="text-gray-600 fw-bold">Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
                                     <td class="text-gray-600 fw-bold">Akan menghadiri program</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Syafiq bin Hassan
                                     </td>
                                     <td>
@@ -424,9 +444,8 @@
                                             001010099012
                                         </a>
                                     </td>
-                                    <td class="text-gray-600 fw-bold">No. 45, Jalan Cempaka, Taman Sentosa, 40100 Shah Alam, Selangor</td>
                                     <td class="text-gray-600 fw-bold">018-9012345</td>
-                                    <td class="text-gray-600 fw-bold">Tidak Hadir</td>
+                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
                                     <td class="text-gray-600 fw-bold">Bercuti</td>
                                 </tr>
                                 </tbody>
@@ -487,9 +506,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -497,7 +516,7 @@
                     <!--end::QR code settings-->
                 </div>
                 <!--end::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
                     <!--begin::Rekod Kehadiran-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -515,7 +534,7 @@
                                 <label class="form-label">No. Kad Pengenalan</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="011985001" />
+                                <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->
@@ -565,8 +584,8 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>
-                                        Ahmad Faizal bin Ahmad
+                                    <td class="text-uppercase">
+                                        Ahmad Faizal bin Ahmad Razali
                                     </td>
                                     <td>
                                         <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
@@ -576,8 +595,8 @@
                                     <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Siti Nurhaliza binti Abdul
+                                    <td class="text-uppercase">
+                                        Siti Nurhaliza binti Abdul Samad
                                     </td>
                                     <td>
                                         <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
@@ -587,8 +606,8 @@
                                     <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Mohd Faiz bin Mohd
+                                    <td class="text-uppercase">
+                                        Mohd Faiz bin Mohd Faisal
                                     </td>
                                     <td>
                                         <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
@@ -598,7 +617,7 @@
                                     <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Nurul Ain binti Razali
                                     </td>
                                     <td>
@@ -609,7 +628,7 @@
                                     <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Hafiz bin Hamid
                                     </td>
                                     <td>
@@ -620,7 +639,7 @@
                                     <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Ahmad Faizal bin Ahmad
                                     </td>
                                     <td>
@@ -631,7 +650,7 @@
                                     <td class="text-gray-600 fw-bold">2023-11-21 20:30:00</td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="text-uppercase">
                                         Syafiq bin Hassan
                                     </td>
                                     <td>
