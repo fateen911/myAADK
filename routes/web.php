@@ -30,6 +30,8 @@ Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgControl
 Route::get('/pengurusan_program/pegawai_aadk/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
 Route::get('/pengurusan_program/pegawai_aadk/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan_program/pegawai_aadk/senarai_prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
+Route::get('/pengurusan_program/pegawai_aadk/tambah_kategori',[PengurusanProgController::class, 'tambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.tambah_kategori');
+Route::get('/pengurusan_program/pegawai_aadk/kategori_prog',[PengurusanProgController::class, 'kategoriProgPA'])->name('pengurusan_program.pegawai_aadk.kategori_prog');
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM
 Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
@@ -37,6 +39,8 @@ Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgCon
 Route::get('/pengurusan_program/pentadbir_sistem/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
+Route::get('/pengurusan_program/pentadbir_sistem/tambah_kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');
+Route::get('/pengurusan_program/pentadbir_sistem/kategori_prog',[PengurusanProgController::class, 'kategoriProgPS'])->name('pengurusan_program.pentadbir_sistem.kategori_prog');
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan_program/klien/daftar_kehadiran',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');

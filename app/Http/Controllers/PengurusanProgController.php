@@ -146,6 +146,15 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pegawai_aadk.senarai_prog');
     }
 
+    public function tambahKategoriPA(){
+        return view('pengurusan_program.pegawai_aadk.tambah_kategori');
+    }
+
+    public function kategoriProgPA(){
+        return view('pengurusan_program.pegawai_aadk.tambah_kategori');
+    }
+
+
     //PEGAWAI SISTEM
     public function daftarProgPS()
     {
@@ -230,6 +239,13 @@ class PengurusanProgController extends Controller
     public function senaraiProgPS()
     {
         return view('pengurusan_program.pentadbir_sistem.senarai_prog');
+    }
+
+    public function tambahKategoriPS(){
+        return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
+    }
+    public function kategoriProgPS(){
+        return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
     }
 
     //KLIEN

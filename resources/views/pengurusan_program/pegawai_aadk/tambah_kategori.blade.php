@@ -62,7 +62,7 @@
     <!--begin::Content container-->
     <div id="kt_app_content_container">
         <!--begin::Form-->
-        <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pentadbir_sistem.kategori_prog') }}" method="GET">
+        <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pegawai_aadk.kategori_prog') }}" method="GET">
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-400px">
                 <!--begin::General options-->
@@ -121,7 +121,7 @@
                                     </td>
                                     <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
                                     <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
+                                        <a href="{{url('/pengurusan_program/pegawai_aadk/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
                                             <i class="bi bi-trash-fill fs-3"></i>
                                         </a>
                                     </td>
@@ -132,7 +132,7 @@
                                     </td>
                                     <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
                                     <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
+                                        <a href="{{url('/pengurusan_program/pegawai_aadk/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
                                             <i class="bi bi-trash-fill fs-3"></i>
                                         </a>
                                     </td>
@@ -143,7 +143,7 @@
                                     </td>
                                     <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
                                     <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
+                                        <a href="{{url('/pengurusan_program/pegawai_aadk/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
                                             <i class="bi bi-trash-fill fs-3"></i>
                                         </a>
                                     </td>
@@ -154,7 +154,7 @@
                                     </td>
                                     <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
                                     <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
+                                        <a href="{{url('/pengurusan_program/pegawai_aadk/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
                                             <i class="bi bi-trash-fill fs-3"></i>
                                         </a>
                                     </td>
@@ -165,7 +165,7 @@
                                     </td>
                                     <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
                                     <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
+                                        <a href="{{url('/pengurusan_program/pegawai_aadk/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
                                             <i class="bi bi-trash-fill fs-3"></i>
                                         </a>
                                     </td>
