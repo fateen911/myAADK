@@ -28,23 +28,29 @@ Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share
 Route::get('/pengurusan_program/pegawai_aadk/daftar_prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
 //Route::post('/pengurusan_program/pegawai_aadk/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
 Route::get('/pengurusan_program/pegawai_aadk/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
+//Route::post('/pengurusan_program/pegawai_aadk/post_kemaskini_prog',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
 Route::get('/pengurusan_program/pegawai_aadk/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan_program/pegawai_aadk/senarai_prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
 Route::get('/pengurusan_program/pegawai_aadk/tambah_kategori',[PengurusanProgController::class, 'tambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.tambah_kategori');
+//Route::post('/pengurusan_program/pegawai_aadk/post_tambah_kategori',[PengurusanProgController::class, 'postTambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.post_tambah_kategori');
 Route::get('/pengurusan_program/pegawai_aadk/kategori_prog',[PengurusanProgController::class, 'kategoriProgPA'])->name('pengurusan_program.pegawai_aadk.kategori_prog');
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM
 Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
 //Route::post('/pengurusan_program/pentadbir_sistem/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
+//Route::post('/pengurusan_program/pentadbir_sistem/post_kemaskini_prog',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/senarai_prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/tambah_kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');
+//Route::post('/pengurusan_program/pentadbir_sistem/post_tambah_kategori',[PengurusanProgController::class, 'postTambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_tambah_kategori');
 Route::get('/pengurusan_program/pentadbir_sistem/kategori_prog',[PengurusanProgController::class, 'kategoriProgPS'])->name('pengurusan_program.pentadbir_sistem.kategori_prog');
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan_program/klien/daftar_kehadiran',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
+//Route::post('/pengurusan_program/klien/post_daftar_kehadiran',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
 Route::get('/pengurusan_program/klien/pengesahan_kehadiran',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
+//Route::post('/pengurusan_program/klien/post_pengesahan_kehadiran',[PengurusanProgController::class, 'postPengesahanKehadiran'])->name('pengurusan_program.klien.post_pengesahan_kehadiran');
 
 // PENGURUSAN PROGRAM - HEBAHAN
 Route::get('/pengurusan_program/hebahan/emel', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan.emel');
