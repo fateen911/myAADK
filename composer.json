@@ -9,6 +9,7 @@
         "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^2.2",
         "guzzlehttp/guzzle": "^7.8",
+        "haruncpi/laravel-id-generator": "*",
         "intervention/image": "^3.7",
         "jorenvanhocht/laravel-share": "^4.2",
         "laravel/framework": "^11.0",

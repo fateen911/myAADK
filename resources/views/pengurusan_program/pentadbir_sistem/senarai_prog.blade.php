@@ -367,4 +367,39 @@
         });
     </script>
 
-@endsection
+{{--display data from database--}}
+{{--<script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/program',
+                method: 'GET',
+                success: function(data) {
+                    let tableBody = $('#sortTable1 tbody');
+                    tableBody.empty(); // Clear any existing data
+
+                    if (data.length === 0) {
+                        let noDataRow = `<tr id="no-data">
+                            <td colspan="5" class="text-center">No data available</td>
+                        </tr>`;
+                        tableBody.append(noDataRow);
+                    } else {
+                        data.forEach(course => {
+                            let row = `<tr>
+                                <td>${program.id}</td>
+                                <td>${program.title}</td>
+                                <td>${program.description}</td>
+                                <td>${program.category_id}</td>
+                                <td>${program.lecturer_id}</td>
+                            </tr>`;
+                            tableBody.append(row);
+                        });
+                    }
+                },
+                error: function() {
+                    alert('Failed to fetch program');
+                }
+            });
+        });
+    </script>
+--}}
+    @endsection

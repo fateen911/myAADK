@@ -12,24 +12,41 @@ class Program extends Model
     protected $table = 'program';
 
     protected $fillable = [
-        'penganjur_id',
+        'pegawai_id',
+        'kategori_id',
         'nama',
         'objektif',
+        'tarikh_mula',
+        'tarikh_tamat',
         'tempat',
-        'tarikh',
-        'masa',
+        'penganjur',
+        'nama_pegawai',
+        'no_tel_dihubungi',
         'catatan',
-        'pautan',
-        'status'
+        'pautan_pengesahan',
+        'qr_pengesahan',
+        'pautan_perekodan',
+        'qr_perekodan',
+        'status',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function kategori()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Kategori::class);
     }
 
-    public function programKehadiran()
+    public function pegawai()
     {
-        return $this->hasMany(ProgramKehadiran::class);
+        return $this->belongsTo(Pegawai::class);
+    }
+
+    public function pegesahanKehadiranProgram()
+    {
+        return $this->hasMany(PengesahanKehadiranProgram::class);
+    }
+
+    public function perekodanKehadiranProgram()
+    {
+        return $this->hasMany(PerekodanKehadiranProgram::class);
     }
 }
