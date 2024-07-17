@@ -84,7 +84,7 @@
                                 <div class="mb-5 fv-row">
                                     <label class="required form-label">Kategori Program</label>
                                     <!--begin::Select2-->
-                                    <select class="form-select" aria-label="Select example">
+                                    <select class="form-select" aria-label="Select example" required>
                                         <option selected="selected">Sila Pilih</option>
                                         <option value="SK">Kelompok Sokongan Keluarga Kepulihan</option>
                                         <option value="PR">Pencegahan Relaps</option>

@@ -66,7 +66,8 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pentadbir_sistem.maklumat_prog') }}" method="GET"">
+                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan_program/pentadbir_sistem/post_daftar_prog') }}" method="POST">
+                        @csrf
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                             <!--begin::General options-->
@@ -84,13 +85,13 @@
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Kategori Program</label>
                                         <!--begin::Select2-->
-                                        <select class="form-select" aria-label="Select example">
+                                        <select class="form-select" name="kategori" aria-label="Select example" required>
                                             <option selected="selected">Sila Pilih</option>
-                                            <option value="SK">Kelompok Sokongan Keluarga Kepulihan</option>
-                                            <option value="PR">Pencegahan Relaps</option>
-                                            <option value="APC">Alumni - PCCP</option>
-                                            <option value="AMK">Alumni - Mentor Kepulihan</option>
-                                            <option value="ASB">Alumni - Kelompok Sokong Bantu</option>
+                                            <option value="1">Kelompok Sokongan Keluarga Kepulihan</option>
+                                            <option value="2">Pencegahan Relaps</option>
+                                            <option value="3">Alumni - PCCP</option>
+                                            <option value="4">Alumni - Mentor Kepulihan</option>
+                                            <option value="5">Alumni - Kelompok Sokong Bantu</option>
                                         </select>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
@@ -113,9 +114,10 @@
                                             <label class="form-label required">Objektif</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_docs_quill_basic" name="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                            <div id="kt_docs_quill_basic" name="objektif" class="min-h-200px mb-2">
                                                 Sila berikan objektif program...
                                             </div>
+                                            <input type="hidden" name="objektif">
                                             <!--end::Editor-->
                                             {{--                                                            <!--begin::Description-->--}}
                                             {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
@@ -130,11 +132,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tarikh & Masa Mula</label>
-                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                                <input class="form-control form-control-solid" name="tarikh_mula" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="required form-label">Tarikh & Masa Tamat</label>
-                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
+                                                <input class="form-control form-control-solid" name="tarikh_tamat" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
                                             </div>
                                         </div>
                                         {{--                                                            <!--begin::Description-->--}}
@@ -167,11 +169,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
                                                 <label class="required form-label">Nama Pegawai</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Nama Pegawai" value="" required/>
+                                                <input type="text" name="nama_pegawai" class="form-control mb-2" placeholder="Nama Pegawai" value="" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">No. Telefon Untuk Dihubungi (Tanpa '-')</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="" required/>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="" required/>
                                             </div>
                                         </div>
 
@@ -186,7 +188,7 @@
                                         <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
-                                        <div id="kt_docs_quill_basic_2" name="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                        <div id="kt_docs_quill_basic_2" name="catatan" class="min-h-200px mb-2">
                                             Sila berikan catatan anda...
                                         </div>
                                         <!--end::Editor-->
@@ -194,6 +196,7 @@
                                         {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
+                                    <input type="hidden" name="catatan">
                                     <!--end::Input group-->
                                 </div>
                                 <!--end::Card header-->
@@ -204,7 +207,7 @@
                                 <a href="{{ url('pengurusan_program/pentadbir_sistem/senarai_prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                                <button type="submit"  class="btn btn-primary">
                                     <span class="indicator-label">Simpan</span>
                                     <span class="indicator-progress">Sila Tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -243,12 +246,14 @@
     <!--end::Javascript-->
 
     <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
+        document.getElementById('program_form').addEventListener('submit', function(event) {
+            // Get the HTML content inside the div
+            var quillHtml1 = document.getElementById('kt_docs_quill_basic').innerHTML;
+            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').innerHTML;
+
+            // Assign the content to a hidden input field
+            document.querySelector('input[name=objektif]').value = quillHtml1;
+            document.querySelector('input[name=catatan]').value = quillHtml2;
         });
     </script>
 
@@ -348,6 +353,8 @@
             theme: 'snow' // or 'bubble'
         });
     </script>
+
+
 
     <!--date-->
     <script src="/assets/plugins/global/plugins.bundle.js"></script>

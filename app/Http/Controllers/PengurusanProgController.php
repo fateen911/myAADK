@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\KategoriProgram;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HebahanMail;
@@ -97,6 +99,97 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pentadbir_sistem.daftar_prog');
     }
 
+    public function postDaftarProgPS(Request $request)
+    {
+//        $request->validate([
+//            'nama'              =>  'required|string|max:255',
+//            'objektif'          =>  'required|string|max:255',
+//            'tarikh_mula'       =>  'required|date_format:d/m/Y h:i A',
+//            'tarikh_tamat'      =>  'required|date_format:d/m/Y h:i A',
+//            'tempat'            =>  'required|string|max:255',
+//            'penganjur'         =>  'required|string|max:255',
+//            'nama_pegawai'      =>  'required|string|max:255',
+//            'no_tel_dihubungi'  =>  'required|integer',
+//            'catatan'           =>  'required|string|max:255',
+//        ]);
+
+        $program = new Program();
+
+        $pegawai_id = Auth::id();
+
+        //PENGESAHAN
+        $pautan_pengesahan = "http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran/".$program->id;
+
+        // Generate QR code
+        $generate_qr_1 = QrCode::size(300)->generate($pautan_pengesahan);
+
+        // Save QR code to public path (storage/app/public/qrcodes)
+        $path_1 = public_path('qr_codes/');
+        $file_name_1 = 'qr_pengesahan_' . $program->id . '.png';
+
+        // Ensure the directory exists
+        if (!file_exists($path_1)) {
+            mkdir($path_1, 0777, true);
+        }
+
+        // Save the QR code image to the public path
+        file_put_contents($path_1 . $file_name_1, $generate_qr_1);
+
+        $qr_pengesahan = $file_name_1;
+
+        //PEREKODAN
+        $pautan_perekodan = "http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran/".$program->id;
+
+        // Generate QR code
+        $generate_qr_2 = QrCode::size(300)->generate($pautan_perekodan);
+
+        // Save QR code to public path (storage/app/public/qrcodes)
+        $path_2 = public_path('qr_codes/');
+        $file_name_2 = 'qr_perekodan_' . $program->id . '.png';
+
+        // Ensure the directory exists
+        if (!file_exists($path_2)) {
+            mkdir($path_2, 0777, true);
+        }
+
+        // Save the QR code image to the public path
+        file_put_contents($path_2 . $file_name_2, $generate_qr_2);
+
+        $qr_perekodan = $file_name_2;
+
+        //GENERATE CUSTOM ID
+        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
+        $id_custom = [
+            'table'  => 'program',
+            'field'  => 'custom_id',
+            'length' => 9,
+            'prefix' => $kategori,
+            'reset_on_prefix_change'=>true
+        ];
+        $custom_id = IdGenerator::generate($id_custom);
+
+        $program->pegawai_id           =   $pegawai_id;
+        $program->kategori_id          =   $request->kategori;
+        $program->custom_id            =   $custom_id;
+        $program->nama                 =   $request->nama;
+        $program->objektif             =   $request->objektif;
+        $program->tarikh_mula          =   $request->tarikh_mula;
+        $program->tarikh_tamat         =   $request->tarikh_tamat;
+        $program->tempat               =   $request->tempat;
+        $program->penganjur            =   $request->penganjur;
+        $program->nama_pegawai         =   $request->nama_pegawai;
+        $program->no_tel_dihubungi     =   $request->no_tel_dihubungi;
+        $program->catatan              =   $request->catatan;
+        $program->pautan_pengesahan    =   $pautan_pengesahan;
+        $program->qr_pengesahan        =   $qr_pengesahan;
+        $program->pautan_perekodan     =   $pautan_perekodan;
+        $program->qr_perekodan         =   $qr_perekodan;
+        $program->status               =   "BELUM SELESAI";
+        $program->save();
+
+        return view('pengurusan_program.pentadbir_sistem.maklumat_prog')->with('success', 'User created successfully.');
+    }
+
     public function kemaskiniProgPS()
     {
         return view('pengurusan_program.pentadbir_sistem.kemaskini_prog');
@@ -118,13 +211,13 @@ class PengurusanProgController extends Controller
 
     public function postTambahKategoriPS(Request $request){
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'kod' => 'required|string|max:255',
+            'nama'  =>  'required|string|max:255',
+            'kod'   =>  'required|string|max:255',
         ]);
 
         $kategori = new KategoriProgram();
-        $kategori->nama = $request->nama;
-        $kategori->kod = $request->kod;
+        $kategori->nama =   $request->nama;
+        $kategori->kod  =   $request->kod;
         $kategori->save();
 
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori')->with('success', 'User created successfully.');

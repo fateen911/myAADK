@@ -36,7 +36,7 @@ Route::post('/pengurusan_program/pegawai_aadk/post_tambah_kategori',[PengurusanP
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM
 Route::get('/pengurusan_program/pentadbir_sistem/daftar_prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
-//Route::post('/pengurusan_program/pentadbir_sistem/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
+Route::post('/pengurusan_program/pentadbir_sistem/post_daftar_prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/kemaskini_prog',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
 //Route::post('/pengurusan_program/pentadbir_sistem/post_kemaskini_prog',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
 Route::get('/pengurusan_program/pentadbir_sistem/maklumat_prog',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');

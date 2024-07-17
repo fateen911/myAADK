@@ -14,6 +14,7 @@ class Program extends Model
     protected $fillable = [
         'pegawai_id',
         'kategori_id',
+        'custom_id',
         'nama',
         'objektif',
         'tarikh_mula',
