@@ -68,6 +68,24 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pegawai_aadk.tambah_kategori');
     }
 
+    public function postTambahKategoriPA(Request $request){
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kod' => 'required|string|max:255',
+        ]);
+
+        $kategori = new KategoriProgram();
+        $kategori->nama = $request->nama;
+        $kategori->kod = $request->kod;
+        $kategori->save();
+
+        return view('pengurusan_program.pegawai_aadk.tambah_kategori')->with('success', 'User created successfully.');
+    }
+
+    public function kategoriProgPS(){
+        return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
+    }
+
     public function kategoriProgPA(){
         return view('pengurusan_program.pegawai_aadk.tambah_kategori');
     }
@@ -110,10 +128,6 @@ class PengurusanProgController extends Controller
         $kategori->save();
 
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori')->with('success', 'User created successfully.');
-    }
-
-    public function kategoriProgPS(){
-        return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
     }
 
     //KLIEN
