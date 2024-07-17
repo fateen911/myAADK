@@ -62,7 +62,8 @@
     <!--begin::Content container-->
     <div id="kt_app_content_container">
         <!--begin::Form-->
-        <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pentadbir_sistem.kategori_prog') }}" method="GET">
+        <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan_program/pentadbir_sistem/post_tambah_kategori') }}" method="POST">
+            @csrf
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-400px">
                 <!--begin::General options-->
@@ -78,7 +79,11 @@
                     <div class="card-body pt-0">
                         <div class="mb-5 fv-row">
                             <label class="required form-label">Nama Kategori</label>
-                            <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="" required/>
+                            <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Kategori" value="" required/>
+                        </div>
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Kod Kategori</label>
+                            <input type="text" name="kod" class="form-control mb-2" placeholder="Kod Kategori" value="" required/>
                         </div>
                         <!--end::Input group-->
                         <div class="d-flex justify-content-end">
@@ -110,6 +115,7 @@
                                 <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
+                                    <th class="min-w-60px">Kod</th>
                                     <th class="min-w-175px">Tarikh Dicipta</th>
                                     <th class="min-w-50px">Tindakan</th>
                                 </tr>
@@ -119,6 +125,7 @@
                                     <td class="text-uppercase">
                                         Kelompok Sokongan Keluarga Kepulihan
                                     </td>
+                                    <td class="text-uppercase">SK</td>
                                     <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
                                     <td class="text-center">
                                         <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
@@ -130,6 +137,7 @@
                                     <td class="text-uppercase">
                                         Pencegahan Relaps
                                     </td>
+                                    <td class="text-uppercase">PR</td>
                                     <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
                                     <td class="text-center">
                                         <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
@@ -141,6 +149,7 @@
                                     <td class="text-uppercase">
                                         Alumni - PCCP
                                     </td>
+                                    <td class="text-uppercase">APC</td>
                                     <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
                                     <td class="text-center">
                                         <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
@@ -152,6 +161,7 @@
                                     <td class="text-uppercase">
                                         Alumni - Mentor Kepulihan
                                     </td>
+                                    <td class="text-uppercase">AMK</td>
                                     <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
                                     <td class="text-center">
                                         <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
@@ -163,6 +173,7 @@
                                     <td class="text-uppercase">
                                         Alumni - Kelompok Sokong Bantu
                                     </td>
+                                    <td class="text-uppercase">ASB</td>
                                     <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
                                     <td class="text-center">
                                         <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">

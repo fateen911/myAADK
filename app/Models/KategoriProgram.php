@@ -13,6 +13,7 @@ class KategoriProgram extends Model
 
     protected $fillable = [
         'nama',
+        'kod',
     ];
 
     public function program()

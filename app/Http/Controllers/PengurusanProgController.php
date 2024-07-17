@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\KategoriProgram;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HebahanMail;
@@ -96,6 +97,21 @@ class PengurusanProgController extends Controller
     public function tambahKategoriPS(){
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
     }
+
+    public function postTambahKategoriPS(Request $request){
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'kod' => 'required|string|max:255',
+        ]);
+
+        $kategori = new KategoriProgram();
+        $kategori->nama = $request->nama;
+        $kategori->kod = $request->kod;
+        $kategori->save();
+
+        return view('pengurusan_program.pentadbir_sistem.tambah_kategori')->with('success', 'User created successfully.');
+    }
+
     public function kategoriProgPS(){
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
     }
