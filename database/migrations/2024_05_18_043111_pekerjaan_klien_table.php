@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('negeri_kerja');
             $table->string('nama_majikan');
             $table->string('no_tel_majikan');
-            $table->string('status_kemaskini');
+            $table->enum('status_kemaskini', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Baharu');
             $table->timestamps();
         });
     }
