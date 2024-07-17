@@ -15,7 +15,7 @@ class KeluargaKlienUpdateRequest extends Model
         'status'
     ];
 
-    public function client()
+    public function keluargaKlien()
     {
         return $this->belongsTo(KeluargaKlien::class, 'klien_id');
     }
