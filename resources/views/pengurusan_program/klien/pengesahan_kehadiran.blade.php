@@ -75,18 +75,30 @@
                         Sila Hubungi: 0135728935 <br>
                         <br>
                         <hr>
+                        @if (session('success'))
+                            <div class="alert alert-success p-2" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger p-2" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="fw-semibold fs-6 text-black mb-7">
                             Lengkapkan maklumat berikut untuk mengesahkan kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="#">
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_pengesahan_kehadiran')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="program_id" value="1">
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::Input-->
                             <label class="required form-label">No. Kad Pengenalan (Tanpa '-')</label>
-                            <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" />
+                            <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-8">
@@ -95,8 +107,8 @@
                         </div>
                         <!--begin::Actions-->
                         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
-                            <button type="button" value="0" class="btn btn-secondary me-4">Tidak Hadir</button>
-                            <button type="button" id="kt_password_reset_submit" class="btn btn-primary me-4" value="1">
+                            <button type="submit" class="btn btn-secondary me-4" name="keputusan" value="TIDAK HADIR">Tidak Hadir</button>
+                            <button type="submit" class="btn btn-primary me-4" name="keputusan" value="HADIR">
                                 <!--begin::Indicator label-->
                                 <span class="indicator-label">Hadir</span>
                                 <!--end::Indicator label-->

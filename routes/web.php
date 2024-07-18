@@ -47,9 +47,9 @@ Route::get('/pengurusan_program/pentadbir_sistem/kategori_prog',[PengurusanProgC
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan_program/klien/daftar_kehadiran',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
-//Route::post('/pengurusan_program/klien/post_daftar_kehadiran',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
+Route::post('/pengurusan_program/klien/post_daftar_kehadiran',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
 Route::get('/pengurusan_program/klien/pengesahan_kehadiran',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
-//Route::post('/pengurusan_program/klien/post_pengesahan_kehadiran',[PengurusanProgController::class, 'postPengesahanKehadiran'])->name('pengurusan_program.klien.post_pengesahan_kehadiran');
+Route::post('/pengurusan_program/klien/post_pengesahan_kehadiran',[PengurusanProgController::class, 'postPengesahanKehadiran'])->name('pengurusan_program.klien.post_pengesahan_kehadiran');
 
 // PENGURUSAN PROGRAM - HEBAHAN
 Route::get('/pengurusan_program/hebahan/emel', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan.emel');

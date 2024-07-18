@@ -75,20 +75,32 @@
                         Sila Hubungi: 0135728935 <br>
                         <br>
                         <hr>
+                        @if (session('success'))
+                            <div class="alert alert-success p-2" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger p-2" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="fw-semibold fs-6 text-black mb-7">
                             Masukkan No. Kad Pengenalan tanpa '-' untuk merekodkan kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="#" id="kt_coming_soon_form">
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_daftar_kehadiran')}}" method="POST" >
+                        @csrf
+                        <input type="hidden" name="program_id" value="1">
                         <div class="fv-row text-start">
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
                                 <!--end::Input=-->
-                                <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" />
+                                <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
                                 <!--end::Input=-->
                                 <!--begin::Submit-->
-                                <button class="btn btn-primary text-nowrap" id="kt_coming_soon_submit">
+                                <button class="btn btn-primary text-nowrap" type="submit">
                                     <!--begin::Indicator label-->
                                     <span class="indicator-label">Hantar</span>
                                     <!--end::Indicator label-->
