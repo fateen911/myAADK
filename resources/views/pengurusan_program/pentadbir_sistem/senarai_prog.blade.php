@@ -101,21 +101,23 @@
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
-                                <th class="min-w-125px">Nama Program</th>
-                                <th class="min-w-175px">Kategori</th>
-                                <th class="min-w-175px">Status</th>
-                                <th class="min-w-175px">Hebahan</th>
-                                <th class="min-w-175px">QR Perekodan</th>
+                                <th class="min-w-50px">ID</th>
+                                <th class="min-w-175px">Nama Program</th>
+                                <th class="min-w-200px">Kategori</th>
+                                <th class="min-w-120px">Status</th>
+                                <th class="min-w-100px">Hebahan</th>
+                                <th class="min-w-100px">QR Perekodan</th>
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
                             <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0001 </a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Pemulihan Bersepadu </a>
+                                    Program Pemulihan Bersepadu
                                 </td>
                                 <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -125,17 +127,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0001</a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Sesi Terapi Pencegahan Relaps </a>
+                                    Sesi Terapi Pencegahan Relaps
                                 </td>
                                 <td class="text-uppercase">Pencegahan Relaps</td>
                                 <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -145,37 +148,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">AMK0001</a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Kepulihan Komuniti </a>
+                                    Program Kepulihan Komuniti
                                 </td>
-                                <td class="text-uppercase">Alumni</td>
+                                <td class="text-uppercase">Alumni - Mentor Kepulihan</td>
                                 <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Kelab Sokongan Pulih Diri </a>
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -185,17 +169,39 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
+                                <td> <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0002 </a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Bengkel Kesedaran Diri </a>
+                                   Kelab Sokongan Pulih Diri
+                                </td>
+                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
+                                <td class="text-uppercase">Selesai</td>
+                                <td class="text-uppercase text-center">
+                                    <div class="share-container">
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <div id="social-media-icons" class="social-media-icons hidden">
+                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-uppercase text-center">
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0002</a></td>
+                                <td class="text-uppercase">
+                                    Bengkel Kesedaran Diri
                                 </td>
                                 <td class="text-uppercase">Pencegahan Relaps</td>
                                 <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -205,17 +211,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0003</a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Program Motivasi Kepulihan </a>
+                                    Program Motivasi Kepulihan
                                 </td>
                                 <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -225,17 +232,18 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
+                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">APC0001</a></td>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">Rangkaian Alumni Pulih </a>
+                                    Rangkaian Alumni Pulih
                                 </td>
-                                <td class="text-uppercase">Alumni</td>
+                                <td class="text-uppercase">Alumni - PCCP</td>
                                 <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
@@ -245,7 +253,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-uppercase">
+                                <td class="text-uppercase text-center">
                                     <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>

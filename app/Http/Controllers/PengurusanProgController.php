@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\KategoriProgram;
+use App\Models\Klien;
+use App\Models\PengesahanKehadiranProgram;
+use App\Models\PerekodanKehadiranProgram;
+use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -229,9 +233,71 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.klien.daftar_kehadiran');
     }
 
+    public function postDaftarKehadiran(Request $request)
+    {
+        $request->validate([
+            'no_kp'  =>  'required|string|max:255'
+        ]);
+
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
+        $program = Program::where('id', $request->program_id)->first();
+        if (is_null($klien)){
+            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+        }
+
+        if (is_null($program)){
+            return redirect()->back()->with('error', 'Program tidak wujud.');
+        }
+
+        $klien_id = $klien->id;
+        $program_id = $program->id;
+
+        $tarikh_perekodan = Carbon::now();
+
+        $perekodan = new PerekodanKehadiranProgram();
+        $perekodan->program_id          =   $program_id;
+        $perekodan->klien_id            =   $klien_id;
+        $perekodan->tarikh_perekodan    =   $tarikh_perekodan;
+        $perekodan->save();
+        return redirect()->back()->with('success', 'Berjaya dihantar.');
+    }
+
     public function pengesahanKehadiran()
     {
         return view('pengurusan_program.klien.pengesahan_kehadiran');
+    }
+
+    public function postPengesahanKehadiran(Request $request)
+    {
+        $request->validate([
+            'no_kp'     =>  'required|string|max:255'
+        ]);
+
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
+        $program = Program::where('id', $request->program_id)->first();
+        if (is_null($klien)){
+            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+        }
+
+        if (is_null($program)){
+            return redirect()->back()->with('error', 'Program tidak wujud.');
+        }
+
+        $klien_id = $klien->id;
+        $program_id = $program->id;
+
+        $tarikh_pengesahan = Carbon::now();
+
+        $pengesahan = new PengesahanKehadiranProgram();
+        $pengesahan->program_id             =   $program_id;
+        $pengesahan->klien_id               =   $klien_id;
+        $pengesahan->tarikh_pengesahan      =   $tarikh_pengesahan;
+        $pengesahan->catatan                =   $request->catatan;
+        $pengesahan->keputusan              =   $request->keputusan;
+        $pengesahan->save();
+
+
+        return redirect()->back()->with('success', 'Berjaya dihantar.');
     }
 
     //HEBAHAN - EMEL
