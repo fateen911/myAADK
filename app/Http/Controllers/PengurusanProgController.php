@@ -121,52 +121,12 @@ class PengurusanProgController extends Controller
 
         $pegawai_id = Auth::id();
 
-        //PENGESAHAN
-        $pautan_pengesahan = "http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran/".$program->id;
-
-        // Generate QR code
-        $generate_qr_1 = QrCode::size(300)->generate($pautan_pengesahan);
-
-        // Save QR code to public path (storage/app/public/qrcodes)
-        $path_1 = public_path('qr_codes/');
-        $file_name_1 = 'qr_pengesahan_' . $program->id . '.png';
-
-        // Ensure the directory exists
-        if (!file_exists($path_1)) {
-            mkdir($path_1, 0777, true);
-        }
-
-        // Save the QR code image to the public path
-        file_put_contents($path_1 . $file_name_1, $generate_qr_1);
-
-        $qr_pengesahan = $file_name_1;
-
-        //PEREKODAN
-        $pautan_perekodan = "http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran/".$program->id;
-
-        // Generate QR code
-        $generate_qr_2 = QrCode::size(300)->generate($pautan_perekodan);
-
-        // Save QR code to public path (storage/app/public/qrcodes)
-        $path_2 = public_path('qr_codes/');
-        $file_name_2 = 'qr_perekodan_' . $program->id . '.png';
-
-        // Ensure the directory exists
-        if (!file_exists($path_2)) {
-            mkdir($path_2, 0777, true);
-        }
-
-        // Save the QR code image to the public path
-        file_put_contents($path_2 . $file_name_2, $generate_qr_2);
-
-        $qr_perekodan = $file_name_2;
-
         //GENERATE CUSTOM ID
         $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
         $id_custom = [
             'table'  => 'program',
             'field'  => 'custom_id',
-            'length' => 9,
+            'length' => 6,
             'prefix' => $kategori,
             'reset_on_prefix_change'=>true
         ];
@@ -188,12 +148,47 @@ class PengurusanProgController extends Controller
         $program->nama_pegawai         =   $request->nama_pegawai;
         $program->no_tel_dihubungi     =   $request->no_tel_dihubungi;
         $program->catatan              =   $request->catatan;
-        $program->pautan_pengesahan    =   $pautan_pengesahan;
-        $program->qr_pengesahan        =   $qr_pengesahan;
-        $program->pautan_perekodan     =   $pautan_perekodan;
-        $program->qr_perekodan         =   $qr_perekodan;
+        $program->pautan_pengesahan    =   "tiada";
+        $program->qr_pengesahan        =   "tiada";
+        $program->pautan_perekodan     =   "tiada";
+        $program->qr_perekodan         =   "tiada";
         $program->status               =   "BELUM SELESAI";
         $program->save();
+
+
+        //PENGESAHAN
+        // Generate the unique link with event ID
+        $pautan_pengesahan = url('/pengurusan_program/klien/pengesahan_kehadiran/', ['id' => $program->id]);
+
+        // Generate the QR code for the event link
+        $generate_qr_1 = QrCode::size(300)->generate($pautan_pengesahan);
+
+
+        // Save the QR code image to the public directory
+        $filePath = public_path('qr_codes/qr_pengesahan_' . $program->id . '.png');
+        file_put_contents($filePath, $generate_qr_1);
+
+        $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
+
+        //PEREKODAN
+        $pautan_perekodan = url('/pengurusan_program/klien/daftar_kehadiran/', ['id' => $program->id]);
+
+        // Generate the QR code for the event link
+        $generate_qr_2 = QrCode::size(300)->generate($pautan_perekodan);
+
+        // Save the QR code image to the public directory
+        $filePath = public_path('qr_codes/qr_perekodan_' . $program->id . '.png');
+        file_put_contents($filePath, $generate_qr_2);
+
+        $qr_perekodan = 'qr_perekodan_' . $program->id . '.png';
+
+        ///UPDATE
+        $program->update([
+            'pautan_pengesahan' =>  $pautan_pengesahan,
+            'qr_pengesahan'     =>  $qr_pengesahan,
+            'pautan_perekodan'  =>  $pautan_perekodan,
+            'qr_perekodan'      =>  $qr_perekodan,
+        ]);
 
         return view('pengurusan_program.pentadbir_sistem.maklumat_prog')->with('success', 'User created successfully.');
     }
