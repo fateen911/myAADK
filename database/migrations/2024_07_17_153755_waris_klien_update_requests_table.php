@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pasangan_klien_update_requests', function (Blueprint $table) {
+        Schema::create('waris_klien_update_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('klien_id')->constrained('pasangan_klien')->onDelete('cascade');
+            $table->foreignId('klien_id')->constrained('waris_klien')->onDelete('cascade');
             $table->json('requested_data'); // Store the requested updates in JSON format
             $table->enum('status', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Kemaskini');
             $table->timestamps();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pasangan_klien_update_requests');
+        Schema::dropIfExists('waris_klien_update_requests');
     }
 };

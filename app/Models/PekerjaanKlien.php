@@ -13,15 +13,17 @@ class PekerjaanKlien extends Model
 
     protected $fillable = [
         'klien_id',
-        'pekerjaan',
-        'pendapatan',
+        'status_kerja',
         'bidang_kerja',
+        'nama_kerja',
+        'pendapatan',
+        'kategori_majikan',
+        'nama_majikan',
+        'no_tel_majikan',
         'alamat_kerja',
         'poskod_kerja',
         'daerah_kerja',
-        'negeri_kerja',
-        'nama_majikan',
-        'no_tel_majikan',
+        'negeri_kerja',  
     ];
 
     public function pekerjaanProfileUpdateRequests()

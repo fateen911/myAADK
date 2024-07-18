@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('rawatan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('status_kesihatan_mental');
-            $table->string('status_oku');
-            $table->string('seksyen_okp');
-            $table->date('tarikh_tamat_pengawasan');
-            $table->double('skor_ccri');
+            $table->string('tkh_perintah');
+            $table->date('tkh_mula_pengawasan');
+            $table->date('tkh_tamat_pengawasan');
+            $table->string('seksyen');
+            $table->string('puspen');
+            $table->string('pejabat');
             $table->timestamps();
         });
     }
