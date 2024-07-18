@@ -13,21 +13,37 @@ class KeluargaKlien extends Model
 
     protected $fillable = [
         'klien_id',
-        'status_perkahwinan',
-        'nama_pasangan',
-        'no_tel_pasangan',
-        'bilangan_anak',
-        'alamat_pasangan',
-        'poskod_pasangan',
-        'daerah_pasangan',
-        'negeri_pasangan',
-        'alamat_kerja_pasangan',
-        'poskod_kerja_pasangan',
-        'daerah_kerja_pasangan',
-        'negeri_kerja_pasangan',
+        'status_kemaskini',
+
+        'nama_bapa',
+        'no_kp_bapa',
+        'no_tel_bapa',
+        'alamat_bapa',
+        'poskod_bapa',
+        'daerah_bapa',
+        'negeri_bapa',
+        'status_bapa',
+
+        'nama_ibu',
+        'no_kp_ibu',
+        'no_tel_ibu',
+        'alamat_ibu',
+        'poskod_ibu',
+        'daerah_ibu',
+        'negeri_ibu',
+        'status_ibu',
+
+        'nama_penjaga',
+        'no_kp_penjaga',
+        'no_tel_penjaga',
+        'alamat_penjaga',
+        'poskod_penjaga',
+        'daerah_penjaga',
+        'negeri_penjaga',
+        'status_penjaga'
     ];
 
-    public function keluargaProfileUpdateRequests()
+    public function warisProfileUpdateRequests()
     {
         return $this->hasMany(KeluargaKlienUpdateRequest::class, 'klien_id');
     }

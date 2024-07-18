@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WarisKlienUpdateRequest extends Model
+class PasanganKlienUpdateRequest extends Model
 {
     use HasFactory;
 
@@ -15,8 +15,8 @@ class WarisKlienUpdateRequest extends Model
         'status'
     ];
 
-    public function warisKlien()
+    public function client()
     {
-        return $this->belongsTo(WarisKlien::class, 'klien_id');
+        return $this->belongsTo(PasanganKlien::class, 'klien_id');
     }
 }

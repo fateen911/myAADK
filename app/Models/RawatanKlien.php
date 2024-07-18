@@ -13,12 +13,11 @@ class RawatanKlien extends Model
 
     protected $fillable = [
         'klien_id',
-        'tkh_perintah',
-        'tkh_mula_pengawasan',
-        'tkh_tamat_pengawasan',
-        'seksyen',
-        'puspen',
-        'pejabat',
+        'status_kesihatan_mental',
+        'status_oku',
+        'seksyen_okp',
+        'tarikh_tamat_pengawasan',
+        'skor_ccri',
     ];
 
     public function rawatanProfileUpdateRequests()
