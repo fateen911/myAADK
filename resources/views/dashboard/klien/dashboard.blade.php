@@ -88,17 +88,12 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        @if ($klien->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($klien->status_kemaskini == 'Dikemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
-                                        @elseif ($klien->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
-                                        @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
-                                        @endif
-
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $klien->status_kemaskini }}</span>
                                         <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
+                                        {{-- @if ($klien->status_kemaskini != 'Baharu')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $klien->status_kemaskini }}</span>
+                                            <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
+                                        @endif                                         --}}
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -122,22 +117,13 @@
                                         </div>
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
-                                        <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Keluarga</span>
+                                        <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Waris</span>
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        @if ($waris->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($waris->status_kemaskini == 'Dikemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
-                                        @elseif ($waris->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
-                                        @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
-                                        @endif
-
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $waris->status_kemaskini }}</span>
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_waris }}</span>
                                     </div>
                                     <!--end::Info-->
@@ -174,16 +160,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        @if ($pasangan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($pasangan->status_kemaskini == 'Dikemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
-                                        @elseif ($pasangan->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
-                                        @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
-                                        @endif
-
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $pasangan->status_kemaskini }}</span>
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pasangan }}</span>
                                     </div>
                                     <!--end::Info-->
@@ -211,16 +188,7 @@
                                     <!--end::Symbol and Text-->
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
-                                        @if ($pekerjaan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($pekerjaan->status_kemaskini == 'Dikemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
-                                        @elseif ($pekerjaan->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
-                                        @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
-                                        @endif
-
+                                        <span class="text-gray-600 fw-semibold fs-5 d-block">{{ $pekerjaan->status_kemaskini }}</span>
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pekerjaan }}</span>
                                     </div>
                                     <!--end::Info-->
@@ -300,10 +268,10 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
+                                                <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesaib</a>
+                                                <span class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -364,10 +332,10 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
+                                                <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</a>
+                                                <span class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</span>
                                             </td>
                                         </tr>
                                         <tr>

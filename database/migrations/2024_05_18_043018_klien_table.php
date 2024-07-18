@@ -26,10 +26,7 @@ return new class extends Migration
             $table->string('agama');
             $table->string('bangsa');
             $table->string('tahap_pendidikan');
-            $table->string('status_kesihatan_mental');
-            $table->string('status_oku');
-            $table->double('skor_ccri');
-            $table->enum('status_kemaskini', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Baharu');
+            $table->string('status_kemaskini');
             $table->timestamps();
         });
     }
