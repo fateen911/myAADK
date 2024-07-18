@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('no_kp')->unique();
             $table->string('nama');
             $table->string('no_tel');
-            $table->string('emel');
+            $table->string('emel')->nullable();
             $table->string('alamat_rumah');
             $table->integer('poskod');
             $table->string('daerah');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('jantina');
             $table->string('agama');
             $table->string('bangsa');
-            $table->string('tahap_pendidikan');
+            $table->string('tahap_pendidikan')->nullable();
             $table->string('status_kesihatan_mental');
             $table->string('status_oku');
             $table->double('skor_ccri');

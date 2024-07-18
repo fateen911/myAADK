@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('puspen');
             $table->string('pejabat');
             $table->timestamps();
+
+            $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');
         });
     }
 
