@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KeluargaKlien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Klien;
-use App\Models\PasanganKlien;
 use App\Models\PekerjaanKlien;
 use App\Models\WarisKlien;
 
@@ -24,7 +24,7 @@ class HomeController extends Controller
             $klien = Klien::where('id', $klienId)->first();
             $pekerjaan = PekerjaanKlien::where('klien_id', $klienId)->first();
             $waris = WarisKlien::where('klien_id',$klienId)->first();
-            $pasangan = PasanganKlien::where('klien_id',$klienId)->first();
+            $pasangan = KeluargaKlien::where('klien_id',$klienId)->first();
 
             if ($status == 0)
             {
