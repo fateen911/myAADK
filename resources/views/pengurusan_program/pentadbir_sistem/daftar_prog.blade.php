@@ -114,10 +114,10 @@
                                             <label class="form-label required">Objektif</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_docs_quill_basic" name="objektif" class="min-h-200px mb-2">
+                                            <div id="kt_docs_quill_basic" class="min-h-200px mb-2">
                                                 Sila berikan objektif program...
                                             </div>
-                                            <input type="hidden" name="objektif">
+                                            <input type="hidden" id="objektif" name="objektif">
                                             <!--end::Editor-->
                                             {{--                                                            <!--begin::Description-->--}}
                                             {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
@@ -188,7 +188,7 @@
                                         <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
-                                        <div id="kt_docs_quill_basic_2" name="catatan" class="min-h-200px mb-2">
+                                        <div id="kt_docs_quill_basic_2" class="min-h-200px mb-2">
                                             Sila berikan catatan anda...
                                         </div>
                                         <!--end::Editor-->
@@ -196,7 +196,7 @@
                                         {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
-                                    <input type="hidden" name="catatan">
+                                    <input type="hidden" id="catatan" name="catatan">
                                     <!--end::Input group-->
                                 </div>
                                 <!--end::Card header-->
@@ -248,13 +248,20 @@
     <script>
         document.getElementById('program_form').addEventListener('submit', function(event) {
             // Get the HTML content inside the div
-            var quillHtml1 = document.getElementById('kt_docs_quill_basic').innerHTML;
-            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').innerHTML;
+            var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
+            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
 
             // Assign the content to a hidden input field
             document.querySelector('input[name=objektif]').value = quillHtml1;
             document.querySelector('input[name=catatan]').value = quillHtml2;
         });
+        // document.getElementById('program_form').onsubmit = function() {
+        //     var content_1 = document.getElementById('ql-kt_docs_quill_basic').children[0].innerHTML;
+        //     document.getElementById('objektif').value = content_1;
+        //
+        //     var content_2 = document.getElementById('ql-kt_docs_quill_basic_2').children[0].innerHTML;
+        //     document.getElementById('catatan').value = content_2;
+        // };
     </script>
 
     <script>
@@ -379,21 +386,5 @@
             }
         );
 
-    </script>
-    <script >
-        var myDropzone = new Dropzone("#kt_dropzonejs", {
-            url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-            paramName: "file", // The name that will be used to transfer the file
-            maxFiles: 10,
-            maxFilesize: 10, // MB
-            addRemoveLinks: true,
-            accept: function(file, done) {
-                if (file.name == "wow.jpg") {
-                    done("Naha, you don't.");
-                } else {
-                    done();
-                }
-            }
-        });
     </script>
 @endsection

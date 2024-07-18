@@ -172,13 +172,17 @@ class PengurusanProgController extends Controller
         ];
         $custom_id = IdGenerator::generate($id_custom);
 
+        //Date format for database
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+
         $program->pegawai_id           =   $pegawai_id;
         $program->kategori_id          =   $request->kategori;
         $program->custom_id            =   $custom_id;
         $program->nama                 =   $request->nama;
         $program->objektif             =   $request->objektif;
-        $program->tarikh_mula          =   $request->tarikh_mula;
-        $program->tarikh_tamat         =   $request->tarikh_tamat;
+        $program->tarikh_mula          =   $tarikh_mula;
+        $program->tarikh_tamat         =   $tarikh_tamat;
         $program->tempat               =   $request->tempat;
         $program->penganjur            =   $request->penganjur;
         $program->nama_pegawai         =   $request->nama_pegawai;
