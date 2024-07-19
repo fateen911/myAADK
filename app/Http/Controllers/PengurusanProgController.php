@@ -31,6 +31,7 @@ class PengurusanProgController extends Controller
     //TRY
     public function tryQR()
     {
+        phpinfo();
         return view('pengurusan_program.tryQR');
     }
 
@@ -158,10 +159,10 @@ class PengurusanProgController extends Controller
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan_program/klien/pengesahan_kehadiran/', ['id' => $program->id]);
+        $pautan_pengesahan = url('/pengurusan_program/klien/pengesahan_kehadiran', ['id' => $program->id]);
 
         // Generate the QR code for the event link
-        $generate_qr_1 = QrCode::size(300)->generate($pautan_pengesahan);
+        $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
 
 
         // Save the QR code image to the public directory
@@ -171,10 +172,10 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan_program/klien/daftar_kehadiran/', ['id' => $program->id]);
+        $pautan_perekodan = url('/pengurusan_program/klien/daftar_kehadiran', ['id' => $program->id]);
 
         // Generate the QR code for the event link
-        $generate_qr_2 = QrCode::size(300)->generate($pautan_perekodan);
+        $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
 
         // Save the QR code image to the public directory
         $filePath = public_path('qr_codes/qr_perekodan_' . $program->id . '.png');
@@ -190,7 +191,7 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        return view('pengurusan_program.pentadbir_sistem.maklumat_prog')->with('success', 'User created successfully.');
+        return view('pengurusan_program.pentadbir_sistem.maklumat_prog')->with('success', 'Program berjaya didaftar.');
     }
 
     public function kemaskiniProgPS()

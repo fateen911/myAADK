@@ -59,6 +59,11 @@
     <!--begin::Body-->
     <div class="my-10">
         <!--begin:::Tabs-->
+        @if (session('success'))
+            <div class="alert alert-success p-2" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
             <!--begin:::Tab item-->
             <li class="nav-item">
@@ -78,6 +83,7 @@
         </ul>
         <!--end:::Tabs-->
     </div>
+
     <!--begin::Tab content-->
     <div class="tab-content">
         <!--begin::Tab pane-->
