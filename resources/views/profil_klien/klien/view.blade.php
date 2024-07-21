@@ -11,11 +11,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        body{
-            /* font-family: Arial, sans-serif; */
+        /* body{
             font-size: 12pt !important;
             margin: 0 auto;
-        }
+        } */
 
         /* Flexbox settings for the wrapper */
         .form-wrapper {
@@ -662,37 +661,30 @@
                         
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Status</span>
-                                            <span class="ms-1" data-bs-toggle="tooltip" title="Jawatan pekerjaan / Status pekerjaan">
-                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                    <span class="path3"></span>
-                                                </i>
-                                            </span>
+                                            <span>Status</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="pekerjaan" class="fs-6 form-control-plaintext">{{$butiranKlien->pekerjaan}}</span>
+                                        <span id="pekerjaan" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Bidang</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <span id="bidang_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->bidang_kerja}}</span>
                                         <!--end::Input-->
@@ -701,10 +693,58 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nama</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <span id="nama_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_kerja}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Pendapatan (RM)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <span id="pendapatan" class="fs-6 form-control-plaintext">{{$butiranKlien->pendapatan}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Kategori Majikan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <span id="kategori_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->kategori_majikan}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nama Majikan</span>
                                             <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                     <span class="path1"></span>
@@ -715,96 +755,7 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <span id="pendapatan" class="fs-6 form-control-plaintext">{{$butiranKlien->pendapatan}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Alamat</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <span id="alamat_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Poskod</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <span id="poskod_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja}}</span>
-                                            <!--end::Select2-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Daerah</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            @php
-                                                $daerahKerjaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja )->value('senarai_daerah.daerah');
-                                            @endphp
-                                            <span id="daerah_kerja" class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Negeri</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            @php
-                                                $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
-                                            @endphp
-                                            <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Nama Majikan</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <span id="nama_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_majikan}}</span>
                                         <!--end::Input-->
@@ -813,7 +764,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Nombor Telefon Majikan</span>
@@ -827,17 +778,90 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <span id="no_tel_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_majikan}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Alamat Tempat Kerja</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <span id="alamat_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Poskod</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <span id="poskod_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja}}</span>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                
+                                    <div class="col-md-8">
+                                        <div class="w-100">
+                                            @php
+                                                $daerahKerjaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja )->value('senarai_daerah.daerah');
+                                            @endphp
+                                            <span id="daerah_kerja" class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Negeri</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="w-100">
+                                            @php
+                                                $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
+                                            @endphp
+                                            <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
 
                                 <!--begin::Action buttons-->
                                 <div class="row py-5">
-                                    <div class="col-md-9 offset-md-3">
+                                    <div class="col-md-8 offset-md-4">
                                         <div class="d-flex">
                                             @if($resultRequestPekerjaan)
                                                 @if ($resultRequestPekerjaan->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
@@ -877,8 +901,11 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid" id="pekerjaan" name="pekerjaan" data-control="select2" data-hide-search="true">
-                                                            <option value="BEKERJA" {{ $butiranKlien->pekerjaan == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
-                                                            <option value="TIDAK BEKERJA" {{ $butiranKlien->pekerjaan == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
+                                                            <option>Pilih Status</option>
+                                                            <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
+                                                            <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
+                                                            <option value="MENGANGGUR" {{ $butiranKlien->status_kerja == 'MENGANGGUR' ? 'selected' : '' }}>MENGANGGUR</option>
+                                                            <option value="BELAJAR" {{ $butiranKlien->status_kerja == 'BELAJAR' ? 'selected' : '' }}>BELAJAR</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -892,15 +919,68 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Pendapatan (RM)</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="{{$butiranKlien->pendapatan}}"/>
+                                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}"/>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Pendapatan (RM)</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                                            <option>Pilih Julat Pendapatan</option>
+                                                            <option value="RM0-RM999" {{ $butiranKlien->pendapatan == 'RM0-RM999' ? 'selected' : '' }}>RM0-RM999</option>
+                                                            <option value="RM1000-RM1999" {{ $butiranKlien->pendapatan == 'RM1000-RM1999' ? 'selected' : '' }}>RM1000-RM1999</option>
+                                                            <option value="RM2000-RM2999" {{ $butiranKlien->pendapatan == 'RM2000-RM2999' ? 'selected' : '' }}>RM2000-RM2999</option>
+                                                            <option value="RM3000-RM3999" {{ $butiranKlien->pendapatan == 'RM3000-RM3999' ? 'selected' : '' }}>RM3000-RM3999</option>
+                                                            <option value="RM4000-RM4999" {{ $butiranKlien->pendapatan == 'RM4000-RM4999' ? 'selected' : '' }}>RM4000-RM4999</option>
+                                                            <option value="Lebih RM5000" {{ $butiranKlien->pendapatan == 'Lebih RM5000' ? 'selected' : '' }}>Lebih RM5000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Kategori Majikan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                                            <option>Pilih Kategori Majikan</option>
+                                                            <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                                            <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                                            <option value="LAIN-LAIN" {{ $butiranKlien->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama Majikan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Majikan
+                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                    <span class="path3"></span>
+                                                                </i>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Tempat Kerja</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$butiranKlien->alamat_kerja}}</textarea>
@@ -938,30 +1018,6 @@
                                                                 <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama Majikan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Majikan
-                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                </i>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
                                                     </div>
                                                 </div>
 
@@ -1004,7 +1060,7 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <span id="hubungan_waris" class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_waris}}</span>
                                     </div>
                                 </div>
@@ -1255,7 +1311,7 @@
                                 <!--begin::Heading-->
                                 <div class="row mb-7">
                                     <div class="col-md-9 offset-md-3">
-                                        <h2>Kemaskini Maklumat Pasangan</h2>
+                                        <h2>Kemaskini Maklumat Keluarga</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
@@ -1281,7 +1337,7 @@
                                         <div class="col-md-3 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Nama</span>
+                                                <span>Nama Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
@@ -1297,7 +1353,7 @@
                                         <div class="col-md-3 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Nombor Telefon</span>
+                                                <span>Nombor Telefon Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
@@ -1313,7 +1369,23 @@
                                         <div class="col-md-3 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Alamat</span>
+                                                <span>Bilangan Anak</span>
+                                            </label>
+                                            <!--end::Label-->
+                                        </div>
+                                        <div class="col-md-7">
+                                            <!--begin::Input-->
+                                            <span id="bilangan_anak" class="fs-6 form-control-plaintext">{{$butiranKlien->bilangan_anak}}</span>
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row fv-row mb-2">
+                                        <div class="col-md-3 text-md-start">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span>Alamat Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
@@ -1385,7 +1457,7 @@
                                         <div class="col-md-3 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Alamat Tempat Kerja</span>
+                                                <span>Alamat Tempat Kerja Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
@@ -1483,7 +1555,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="permohonanPasanganKlienLabel">Mohon Kemaskini Maklumat Pasangan Klien</h5>
+                                            <h5 class="modal-title" id="permohonanPasanganKlienLabel">Mohon Kemaskini Maklumat Keluarga Klien</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -1529,6 +1601,16 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{ $butiranKlien->no_tel_pasangan }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-5 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Bilangan Anak</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <div class="input-group">
+                                                            <input type="number" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{ $butiranKlien->bilangan_anak }}" min="0" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
