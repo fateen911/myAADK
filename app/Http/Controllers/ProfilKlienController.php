@@ -11,12 +11,11 @@ use App\Models\Daerah;
 use App\Models\KeluargaKlien;
 use App\Models\Negeri;
 use App\Models\Klien;
-use App\Models\PasanganKlien;
 use App\Models\PekerjaanKlien;
 use App\Models\RawatanKlien;
 use App\Models\WarisKlien;
 use App\Models\KlienUpdateRequest;
-use App\Models\PasanganKlienUpdateRequest;
+use App\Models\KeluargaKlienUpdateRequest;
 use App\Models\PekerjaanKlienUpdateRequest;
 use App\Models\RawatanKlienUpdateRequest;
 use App\Models\WarisKlienUpdateRequest;
@@ -64,9 +63,9 @@ class ProfilKlienController extends Controller
         $requestedDataWaris = $updateRequestWaris ? json_decode($updateRequestWaris->requested_data, true) : [];
 
         // PASANGAN
-        $pasangan = PasanganKlien::where('klien_id',$id)->first();
-        $requestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
-        $updateRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->first();
+        $pasangan = KeluargaKlien::where('klien_id',$id)->first();
+        $requestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
+        $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataPasangan = $updateRequestPasangan ? json_decode($updateRequestPasangan->requested_data, true) : [];
 
         // RAWATAN
@@ -161,15 +160,15 @@ class ProfilKlienController extends Controller
         }    
     }
 
-    public function approveUpdatePasangan(Request $request, $id)
+    public function approveUpdateKeluarga(Request $request, $id)
     {
-        $updateRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $id)->first();
-        $pasanganKlien = PasanganKlien::where('klien_id', $id)->first();
+        $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
+        $pasanganKlien = KeluargaKlien::where('klien_id', $id)->first();
 
         if ($request->status == 'Lulus') {
             $requestedDataPasangan = json_decode($updateRequestPasangan->requested_data, true);
 
-            // Update the Pasangan_klien with the requested data
+            // Update the keluarga_klien with the requested data
             $pasanganKlien->update($requestedDataPasangan);
             $updateRequestPasangan->update(['status' => $request->status]);
 
@@ -250,9 +249,9 @@ class ProfilKlienController extends Controller
         }
     }
 
-    public function kemaskiniMaklumatPasanganKlien(Request $request, $id)
+    public function kemaskiniMaklumatKeluargaKlien(Request $request, $id)
     {
-        $pasangan = PasanganKlien::where('id',$id)->first();
+        $pasangan = KeluargaKlien::where('id',$id)->first();
 
         if ($pasangan) {
             $pasangan->update([
@@ -296,59 +295,6 @@ class ProfilKlienController extends Controller
         }
     }
 
-    // QIV UPDATE WITH APPROVE THE CLIENT'S REQUEST
-    // public function approveClientProfileUpdate(Request $request, $id)
-    // {
-    //     $profileUpdateRequest = PasanganKlienUpdateRequest::findOrFail($id);
-    //     $requestedData = json_decode($profileUpdateRequest->requested_data, true);
-    //     $klien = PasanganKlien::findOrFail($profileUpdateRequest->klien_id);
-
-    //     if ($request->has('approve_field')) {
-    //         $field = $request->input('approve_field');
-    //         $klien->$field = $requestedData[$field];
-    //         $klien->save();
-
-    //         // Remove the approved field from the requested data
-    //         unset($requestedData[$field]);
-    //         if (empty($requestedData)) {
-    //             $profileUpdateRequest->status = 'Lulus';
-    //             $profileUpdateRequest->save();
-    //         } else {
-    //             $profileUpdateRequest->requested_data = json_encode($requestedData);
-    //             $profileUpdateRequest->save();
-    //         }
-    //     } elseif ($request->has('reject_field')) {
-    //         $field = $request->input('reject_field');
-
-    //         // Remove the rejected field from the requested data
-    //         unset($requestedData[$field]);
-    //         if (empty($requestedData)) {
-    //             $profileUpdateRequest->status = 'Ditolak';
-    //             $profileUpdateRequest->save();
-    //         } else {
-    //             $profileUpdateRequest->requested_data = json_encode($requestedData);
-    //             $profileUpdateRequest->save();
-    //         }
-    //     }
-
-    //     return redirect()->back()->with('success', 'Profile update processed successfully.');
-    // }
-
-    // public function rejectProfileUpdate(Request $request, $clientId)
-    // {
-    //     // Fetch the pending update request
-    //     $profileUpdateRequest = KlienUpdateRequest::where('klien_id', $clientId)
-    //                                                 ->where('status', 'Dikemaskini')
-    //                                                 ->firstOrFail();
-
-    //     // Mark the request as rejected
-    //     $profileUpdateRequest->status = 'Ditolak';
-    //     $profileUpdateRequest->save();
-
-    //     return redirect()->back()->with('success', 'Profile update request rejected.');
-    // }
-
-
     // KLIEN
     public function pengurusanProfil()
     {
@@ -369,12 +315,12 @@ class ProfilKlienController extends Controller
         // Join tables and get the client's details
         $butiranKlien = Klien::leftJoin('pekerjaan_klien', 'klien.id', '=', 'pekerjaan_klien.klien_id')
             ->leftJoin('waris_klien', 'klien.id', '=', 'waris_klien.klien_id')
-            ->leftJoin('pasangan_klien', 'klien.id', '=', 'pasangan_klien.klien_id')
+            ->leftJoin('keluarga_klien', 'klien.id', '=', 'keluarga_klien.klien_id')
             ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
             ->where('klien.id', $clientId)
             ->first();
                 
-        $resultRequestPasangan = PasanganKlienUpdateRequest::where('klien_id', $clientId)->first();
+        $resultRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestWaris = WarisKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestKlien = KlienUpdateRequest::where('klien_id', $clientId)->first();
@@ -390,7 +336,7 @@ class ProfilKlienController extends Controller
         $klien = Klien::where('id',$klien_id)->first();
         $pekerjaan = PekerjaanKlien::where('id',$klien_id)->first();
         $waris = WarisKlien::where('id',$klien_id)->first();
-        $pasangan = PasanganKlien::where('id',$klien_id)->first();
+        $pasangan = KeluargaKlien::where('id',$klien_id)->first();
         $rawatan = RawatanKlien::where('id',$klien_id)->first();
 
         $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
@@ -434,7 +380,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+        return redirect()->back()->with('success', 'Permohonan kemaskini profil diri telah dihantar untuk semakan.');
     }
 
     public function rawatanKlienRequestUpdate(Request $request)
@@ -466,7 +412,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat rawatan telah dihantar untuk semakan.');
     }
 
     public function pekerjaanKlienRequestUpdate(Request $request)
@@ -518,7 +464,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat pekerjaan telah dihantar untuk semakan.');
     }
 
     public function warisKlienRequestUpdate(Request $request)
@@ -552,10 +498,10 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat waris telah dihantar untuk semakan.');
     }
 
-    public function pasanganKlienRequestUpdate(Request $request)
+    public function keluargaKlienRequestUpdate(Request $request)
     {
         // Validate the incoming request
         $validatedData = $request->validate([
@@ -580,7 +526,7 @@ class ProfilKlienController extends Controller
 
         // Proceed with the existing logic
         $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
-        $updateRequest = PasanganKlienUpdateRequest::where('klien_id', $klienId)->first();
+        $updateRequest =KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
 
         if ($updateRequest) {
             // Update existing request
@@ -590,7 +536,7 @@ class ProfilKlienController extends Controller
             ]);
         } else {
             // Create new request
-            PasanganKlienUpdateRequest::create([
+           KeluargaKlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
                 'status' => 'Dikemaskini',

@@ -86,14 +86,14 @@ Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::cla
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
 Route::post('/kemaskini/maklumat/pekerjaan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPekerjaanKlien'])->middleware('auth')->name('kemaskini.maklumat.pekerjaan.klien');
 Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatWarisKlien'])->middleware('auth')->name('kemaskini.maklumat.waris.klien');
-Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPasanganKlien'])->middleware('auth')->name('kemaskini.maklumat.pasangan.klien');
+Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatKeluargaKlien'])->middleware('auth')->name('kemaskini.maklumat.pasangan.klien');
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
 
 // PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');
 Route::patch('/approve-update/pekerjaan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePekerjaan'])->name('approve.update.pekerjaan');
 Route::patch('/approve-update/waris-klien/{id}', [ProfilKlienController::class, 'approveUpdateWaris'])->name('approve.update.waris');
-Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePasangan'])->name('approve.update.pasangan');
+Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::class, 'approveUpdateKeluarga'])->name('approve.update.pasangan');
 Route::patch('/approve-update/rawatan-klien/{id}', [ProfilKlienController::class, 'approveUpdateRawatan'])->name('approve.update.rawatan');
 
 // KLIEN - PENGURUSAN PROFIL
@@ -105,7 +105,7 @@ Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::cla
 Route::post('/klien/maklumat-rawatan/request-update', [ProfilKlienController::class, 'rawatanKlienRequestUpdate'])->name('rawatanKlien.requestUpdate');
 Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController::class, 'pekerjaanKlienRequestUpdate'])->name('pekerjaanKlien.requestUpdate');
 Route::post('/klien/maklumat-waris/request-update', [ProfilKlienController::class, 'warisKlienRequestUpdate'])->name('warisKlien.requestUpdate');
-Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'pasanganKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
+Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'keluargaKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
 
 // KLIEN - MODUL KEPULIHAN
 Route::get('/klien/soal-selidik/kepulihan', [ModalKepulihanController::class, 'soalanKepulihanTest'])->middleware('auth')->name('klien.soalanKepulihan.test');
