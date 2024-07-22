@@ -369,7 +369,7 @@
                                     </div>
                                     <div class="col-md-7">
                                         <!--begin::Input-->
-                                        <input id="alamat_rumah" class="fs-6 form-control-plaintext" style="text-transform: uppercase;" value="{{$butiranKlien->alamat_rumah}}">
+                                        <span id="alamat_rumah" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_rumah}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -474,7 +474,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="permohonanPeribadiKlienLabel">Mohon Kemaskini Maklumat Peribadi Klien</h5>
+                                            <h3 class="modal-title" id="permohonanPeribadiKlienLabel">Mohon Kemaskini Maklumat Peribadi Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
 
@@ -484,7 +484,7 @@
 
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="nama" class="fs-6 form-control-plaintext">{{$butiranKlien->nama}}</span>
@@ -492,7 +492,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="no_kp" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
@@ -500,7 +500,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Umur</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Umur</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="modal_umur" class="fs-6 form-control-plaintext"></span>
@@ -508,7 +508,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Jantina</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="jantina" class="fs-6 form-control-plaintext">{{$butiranKlien->jantina}}</span>
@@ -516,7 +516,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Agama</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="agama" class="fs-6 form-control-plaintext">{{$butiranKlien->agama}}</span>
@@ -524,7 +524,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Bangsa</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="bangsa" class="fs-6 form-control-plaintext">{{$butiranKlien->bangsa}}</span>
@@ -893,7 +893,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h5>
+                                            <h3 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
 
@@ -949,7 +949,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Kategori Majikan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
@@ -962,7 +962,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama Majikan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" />
@@ -970,7 +970,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon Majikan
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Majikan
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -986,7 +986,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Tempat Kerja</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$butiranKlien->alamat_kerja}}</textarea>
@@ -994,7 +994,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid" maxlength="5" id="poskod_kerja" name="poskod_kerja" value="{{$butiranKlien->poskod_kerja}}"/>
@@ -1002,7 +1002,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
@@ -1015,7 +1015,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
@@ -1512,6 +1512,12 @@
                                                                 <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
                                                             </div>
                                                             <div class="col-md-9">
+                                                                <div class="d-flex flex-stack">
+                                                                    <div class="me-5">
+                                                                        <input class="form-check-input-sm" id="alamat_bapa_sama" name="alamat_bapa_sama" onclick="alamatBapa()" type="checkbox" value="1" />
+                                                                        <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                                    </div>
+                                                                </div>
                                                                 <textarea class="form-control form-control-solid" id="alamat_bapa" name="alamat_bapa">{{ $butiranKlien->alamat_bapa }}</textarea>
                                                             </div>
                                                         </div>
@@ -1569,7 +1575,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="permohonanIbuKlienLabel">Mohon Kemaskini Maklumat Ibu Klien</h5>
+                                                    <h3 class="modal-title" id="permohonanIbuKlienLabel">Mohon Kemaskini Maklumat Ibu Klien</h3>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -1622,6 +1628,12 @@
                                                                 <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
                                                             </div>
                                                             <div class="col-md-9">
+                                                                <div class="d-flex flex-stack">
+                                                                    <div class="me-5">
+                                                                        <input class="form-check-input-sm" id="alamat_ibu_sama" name="alamat_ibu_sama" onclick="alamatIbu()" type="checkbox" value="1" />
+                                                                        <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                                    </div>
+                                                                </div>
                                                                 <textarea class="form-control form-control-solid" id="alamat_ibu" name="alamat_ibu">{{ $butiranKlien->alamat_ibu }}</textarea>
                                                             </div>
                                                         </div>
@@ -1679,7 +1691,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="permohonanPenjagaKlienLabel">Mohon Kemaskini Maklumat Penjaga Klien</h5>
+                                                    <h3 class="modal-title" id="permohonanPenjagaKlienLabel">Mohon Kemaskini Maklumat Penjaga Klien</h3>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -1687,6 +1699,14 @@
                                                     <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
                                                         @csrf
 
+                                                        <div class="row fv-row mb-7">
+                                                            <div class="col-md-3 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Hubungan</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{ $butiranKlien->hubungan_penjaga }}" />
+                                                            </div>
+                                                        </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
@@ -1732,6 +1752,12 @@
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
                                                             </div>
                                                             <div class="col-md-9">
+                                                                <div class="d-flex flex-stack">
+                                                                    <div class="me-5">
+                                                                        <input class="form-check-input-sm" id="alamat_penjaga_sama" name="alamat_penjaga_sama" onclick="alamatPenjaga()" type="checkbox" value="1" />
+                                                                        <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                                    </div>
+                                                                </div>
                                                                 <textarea class="form-control form-control-solid" id="alamat_penjaga" name="alamat_penjaga">{{ $butiranKlien->alamat_penjaga }}</textarea>
                                                             </div>
                                                         </div>
@@ -2036,12 +2062,12 @@
                             </form>
                             <!--end::Form-->
 
-                            <!--begin::Modal PasanganKlien-->
+                            <!--begin::Modal KeluargaKlien-->
                             <div class="modal fade" id="requestPasanganKlien" tabindex="-1" aria-labelledby="permohonanPasanganKlienLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="permohonanPasanganKlienLabel">Mohon Kemaskini Maklumat Keluarga Klien</h5>
+                                            <h3 class="modal-title" id="permohonanPasanganKlienLabel">Mohon Kemaskini Maklumat Keluarga Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -2058,16 +2084,14 @@
                                                             <option>Pilih Status Perkahwinan</option>
                                                             <option value="BUJANG" {{ $butiranKlien->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                                             <option value="BERKAHWIN" {{ $butiranKlien->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
-                                                            <option value="BERCERAI" {{ $butiranKlien->status_perkahwinan == 'BERCERAI' ? 'selected' : '' }}>BERCERAI</option>
-                                                            <option value="JANDA" {{ $butiranKlien->status_perkahwinan == 'JANDA' ? 'selected' : '' }}>JANDA</option>
-                                                            <option value="DUDA" {{ $butiranKlien->status_perkahwinan == 'DUDA' ? 'selected' : '' }}>DUDA</option>
+                                                            <option value="DUDA/JANDA/BALU" {{ $butiranKlien->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>
                                                         </select>
                                                         <!--end::Select2-->
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nama Pasangan</label>
                                                     </div>
                                                     <div class="col-md-7">
                                                         <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" />
@@ -2101,9 +2125,15 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
                                                     </div>
                                                     <div class="col-md-7">
+                                                        <div class="d-flex flex-stack">
+                                                            <div class="me-5">
+                                                                <input class="form-check-input-sm" id="alamat_pasangan_sama" name="alamat_pasangan_sama" onclick="alamatPasangan()" type="checkbox" value="1" />
+                                                                <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                            </div>
+                                                        </div>
                                                         <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan">{{ $butiranKlien->alamat_pasangan }}</textarea>
                                                     </div>
                                                 </div>
@@ -2215,6 +2245,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     {{-- Success / Error Message --}}
     <script>
@@ -2294,6 +2326,134 @@
         });
     </script>
 
+    {{-- Checkbox alamat --}}
+    {{-- <script>
+        function alamatPasangan() {
+            var checkBox = document.getElementById("alamat_pasangan_sama");  
+            var alamat_klien = document.getElementById("alamat_rumah");
+            var klien_negeri = document.getElementById("negeri");
+            var klien_bandar = document.getElementById("daerah");
+            var klien_poskod = document.getElementById("poskod");
+
+            var alamat_pasangan = document.getElementById("alamat_pasangan");
+            var negeri_pasangan = document.getElementById("negeri_pasangan");
+            var daerah_pasangan = document.getElementById("daerah_pasangan");
+            var poskod_pasangan = document.getElementById("poskod_pasangan");
+
+            if (checkBox.checked == true){
+                alamat_pasangan.value = alamat_klien.value; 
+                negeri_pasangan.value = klien_negeri.value;
+                daerah_pasangan.value = klien_bandar.value;
+                poskod_pasangan.value = klien_poskod.value;
+                
+                // Trigger select2 update
+                $(negeri_pasangan).trigger('change.select2');
+                $(daerah_pasangan).trigger('change.select2');
+            } else {
+                alamat_pasangan.value = '';
+                negeri_pasangan.value = '';
+                daerah_pasangan.value = '';
+                poskod_pasangan.value = '';
+
+                // Trigger select2 update.
+                $(negeri_pasangan).trigger('change.select2');
+                $(daerah_pasangan).trigger('change.select2');
+            }
+        }	
+
+        function alamatBapa() {
+            var checkBox = document.getElementById("alamat_bapa_sama");  
+            var alamat_klien = document.getElementById("alamat_rumah");
+            var klien_negeri = document.getElementById("negeri");
+            var klien_bandar = document.getElementById("daerah");
+            var klien_poskod = document.getElementById("poskod");
+           
+            var alamat_bapa = document.getElementById("alamat_bapa");
+            var negeri_bapa = document.getElementById("negeri_bapa");
+            var daerah_bapa = document.getElementById("daerah_bapa");
+            var poskod_bapa = document.getElementById("poskod_bapa");
+
+            if (checkBox.checked == true){
+                alamat_bapa.value = alamat_klien.value; 
+                negeri_bapa.value = klien_negeri.value;
+                daerah_bapa.value = klien_bandar.value;
+                poskod_bapa.value = klien_poskod.value;
+                
+                // Trigger select2 update
+                $(negeri_bapa).trigger('change.select2');
+                $(daerah_bapa).trigger('change.select2');
+            } else {
+                alamat_bapa.value = '';
+                negeri_bapa.value = '';
+                daerah_bapa.value = '';
+                poskod_bapa.value = '';
+
+                // Trigger select2 update.
+                $(negeri_bapa).trigger('change.select2');
+                $(daerah_bapa).trigger('change.select2');
+            }
+        }	
+    </script> --}}
+    <script>
+        function alamatBapa() {
+            var checkBox = document.getElementById("alamat_bapa_sama");
+            var alamat_klien = document.getElementById("alamat_rumah").innerText;
+            var klien_negeri = document.getElementById("negeri").innerText;
+            var klien_daerah = document.getElementById("daerah").innerText;
+            var klien_poskod = document.getElementById("poskod").innerText;
+
+            var alamat_bapa = document.getElementById("alamat_bapa");
+            var negeri_bapa = document.getElementById("negeri_bapa");
+            var daerah_bapa = document.getElementById("daerah_bapa");
+            var poskod_bapa = document.getElementById("poskod_bapa");
+
+            console.log("Checkbox checked: ", checkBox.checked);
+            console.log("Client Address: ", alamat_klien);
+            console.log("Client State: ", klien_negeri);
+            console.log("Client District: ", klien_daerah);
+            console.log("Client Postcode: ", klien_poskod);
+
+            if (checkBox.checked) {
+                alamat_bapa.value = alamat_klien;
+                poskod_bapa.value = klien_poskod;
+                negeri_bapa.value = klien_negeri;
+                daerah_bapa.value = klien_daerah;
+
+                console.log("Father's Address set to: ", alamat_bapa.value);
+                console.log("Father's Postcode set to: ", poskod_bapa.value);
+                console.log("Father's Daerah set to: ", daerah_bapa.value);
+                console.log("Father's Negeri set to: ", negeri_bapa.value);
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).trigger('change.select2');
+                }
+            } else {
+                alamat_bapa.value = '';
+                poskod_bapa.value = '';
+                negeri_bapa.value = '';
+                daerah_bapa.value = '';
+
+                console.log("Father's Address cleared");
+                console.log("Father's Postcode cleared");
+                console.log("Father's State cleared");
+                console.log("Father's District cleared");
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).trigger('change.select2');
+                }
+            }
+        }
+    </script>
+    
+
     {{-- If status_perkahwinan is bujang, then block the other fields --}}
     {{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2321,10 +2481,22 @@
     </script>  --}}
 
     {{-- Transform input to uppercase --}}
-    <script>
-        document.getElementById('alamat_rumah').addEventListener('input', function() {
-            this.value = this.value.toUpperCase();
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal = document.getElementById('requestPeribadiKlien');
+            modal.addEventListener('shown.bs.modal', function() {
+                var inputField = document.getElementById('alamat_rumah');
+                if (inputField) {
+                    console.log("Input field found");
+                    inputField.addEventListener('input', function() {
+                        console.log("Input event triggered");
+                        inputField.value = inputField.value.toUpperCase();
+                    });
+                } else {
+                    console.log("Input field not found");
+                }
+            });
         });
-    </script>
+    </script> --}}
 </body>
 @endsection
