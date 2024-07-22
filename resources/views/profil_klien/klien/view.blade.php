@@ -288,54 +288,6 @@
                                 <!--begin::Input group-->
                                 <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Status Kesihatan Mental</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row">
-                                    <div class="col-md-5 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Status Orang Kurang Upaya (OKU)</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row">
-                                    <div class="col-md-5 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Skor CCRI</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row">
-                                    <div class="col-md-5 text-md-start">
                                         <label class="fs-6 fw-semibold form-label mt-3"><span>Nombor Telefon</span></label>
                                     </div>
                                     <div class="col-md-7">
@@ -441,6 +393,54 @@
                                     </div>
                                     <div class="col-md-7">
                                         <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">{{$butiranKlien->tahap_pendidikan}}</span>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row">
+                                    <div class="col-md-5 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Status Kesihatan Mental</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row">
+                                    <div class="col-md-5 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Status Orang Kurang Upaya (OKU)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row">
+                                    <div class="col-md-5 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Skor CCRI</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-7">
+                                        <!--begin::Input-->
+                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
+                                        <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -1897,7 +1897,7 @@
                                         <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Alamat Pasangan</span>
+                                                <span>Alamat Rumah Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
