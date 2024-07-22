@@ -69,7 +69,7 @@
         }
 
         .scrollable-container {
-            max-height: 400px; /* Adjust the height as needed */
+            max-height: 430px; /* Adjust the height as needed */
             overflow-y: auto;
         }
 
@@ -127,9 +127,9 @@
                 <!--begin::Card body-->
                 <div class="card-body" >
                     <!--begin:::Tabs-->
-                    <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-15">
+                    <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 10px; padding-left: 10px;">
+                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">
                                 <i class="ki-duotone ki-user-tick fs-2 me-2">
                                     <span class="path1"></span>
@@ -140,7 +140,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 10px; padding-left: 10px;">
+                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
                                 <i class="ki-duotone ki-people fs-2 me-2">
                                     <span class="path1"></span>
@@ -152,7 +152,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 10px; padding-left: 10px;">
+                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
                                 <i class="ki-duotone ki-profile-user fs-2 me-2">
                                     <span class="path1"></span>
@@ -163,7 +163,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 10px; padding-left: 10px;">
+                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
                                 <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                     <span class="path1"></span>
@@ -182,15 +182,15 @@
                         <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                             <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                 <!--begin::Heading-->
-                                <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-3">
+                                <div class="row mb-5">
+                                    <div class="col-md-7 offset-md-5">
                                         <h2>Kemaskini Maklumat Peribadi</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
                                 
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -206,7 +206,7 @@
                                 </div>
                                 <!--end::Input group--> 
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -222,10 +222,10 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-5 d-flex align-items-center">
+                                <div class="row fv-row">
+                                    <div class="col-md-5 text-md-startr">
                                         <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3 mb-0">
+                                        <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Umur</span>
                                         </label>
                                         <!--end::Label-->
@@ -238,7 +238,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -254,7 +254,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -270,7 +270,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -286,7 +286,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -302,7 +302,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -318,7 +318,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -334,7 +334,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <label class="fs-6 fw-semibold form-label mt-3"><span>Nombor Telefon</span></label>
                                     </div>
@@ -343,7 +343,7 @@
                                     </div>
                                 </div>
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -359,7 +359,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -369,13 +369,13 @@
                                     </div>
                                     <div class="col-md-7">
                                         <!--begin::Input-->
-                                        <span id="alamat_rumah" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_rumah}}</span>
+                                        <input id="alamat_rumah" class="fs-6 form-control-plaintext" style="text-transform: uppercase;" value="{{$butiranKlien->alamat_rumah}}">
                                         <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -393,7 +393,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -412,7 +412,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -431,7 +431,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -477,6 +477,7 @@
                                             <h5 class="modal-title" id="permohonanPeribadiKlienLabel">Mohon Kemaskini Maklumat Peribadi Klien</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+
                                         <div class="modal-body">
                                             <form method="POST" action="{{ route('klien.requestUpdate') }}">
                                                 @csrf
@@ -633,7 +634,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row fv-row mb-7">
+                                                <div class="row fv-row mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -656,15 +657,15 @@
                             <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="#">
                                 @csrf
                                 <!--begin::Heading-->
-                                <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-3">
+                                <div class="row mb-5">
+                                    <div class="col-md-8 offset-md-4">
                                         <h2>Kemaskini Maklumat Pekerjaan</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
                         
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -680,7 +681,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -696,7 +697,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -712,7 +713,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -728,7 +729,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -744,7 +745,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -767,7 +768,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -790,7 +791,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -806,7 +807,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -824,7 +825,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -844,7 +845,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
+                                <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
@@ -895,6 +896,7 @@
                                             <h5 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+
                                         <div class="modal-body">
                                             <form method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
                                                 @csrf
@@ -1025,7 +1027,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row fv-row mb-7">
+                                                <div class="row fv-row mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -1076,7 +1078,7 @@
                                             <div class="tab-pane active" id="maklumatBapa">
                                                 <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                                     @csrf
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-2">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Bapa</h2>
                                                         </div>
@@ -1202,7 +1204,7 @@
                                             <div class="tab-pane" id="maklumatIbu">
                                                 <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                                     @csrf
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-2">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Ibu</h2>
                                                         </div>
@@ -1328,7 +1330,7 @@
                                             <div class="tab-pane" id="maklumatPenjaga">
                                                 <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                                     @csrf
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-2">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Penjaga</h2>
                                                         </div>
@@ -1460,6 +1462,7 @@
                                                     <h5 class="modal-title" id="permohonanBapaKlienLabel">Mohon Kemaskini Maklumat Bapa Klien</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+
                                                 <div class="modal-body">
                                                     <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
                                                         @csrf
@@ -1547,7 +1550,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-7">
+                                                        <div class="row fv-row mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -1569,6 +1572,7 @@
                                                     <h5 class="modal-title" id="permohonanIbuKlienLabel">Mohon Kemaskini Maklumat Ibu Klien</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+
                                                 <div class="modal-body">
                                                     <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
                                                         @csrf
@@ -1656,7 +1660,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-7">
+                                                        <div class="row fv-row mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -1678,6 +1682,7 @@
                                                     <h5 class="modal-title" id="permohonanPenjagaKlienLabel">Mohon Kemaskini Maklumat Penjaga Klien</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+
                                                 <div class="modal-body">
                                                     <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
                                                         @csrf
@@ -1765,7 +1770,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-7">
+                                                        <div class="row fv-row mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -1790,23 +1795,23 @@
                             <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                 @csrf
                                 <!--begin::Heading-->
-                                <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-3">
+                                <div class="row mb-5">
+                                    <div class="col-md-8 offset-md-4">
                                         <h2>Kemaskini Maklumat Keluarga</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
 
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                <div class="row fv-row">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Status Perkahwinan</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <span id="status_perkahwinan" class="fs-6 form-control-plaintext">{{$butiranKlien->status_perkahwinan}}</span>
                                     </div>
                                 </div>
@@ -1814,15 +1819,15 @@
 
                                 <div id="pasangan-fields">
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Nama Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <span id="nama_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_pasangan}}</span>
                                             <!--end::Input-->
@@ -1830,15 +1835,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Nombor Telefon Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <span id="no_tel_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_pasangan}}</span>
                                             <!--end::Input-->
@@ -1846,15 +1851,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Bilangan Anak</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <span id="bilangan_anak" class="fs-6 form-control-plaintext">{{$butiranKlien->bilangan_anak}}</span>
                                             <!--end::Input-->
@@ -1862,15 +1867,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Alamat Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <span id="alamat_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_pasangan}}</span>
                                             <!--end::Input-->
@@ -1878,15 +1883,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Poskod</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <span id="poskod_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_pasangan}}</span>
@@ -1896,15 +1901,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Daerah</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 @php
                                                     $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
@@ -1915,15 +1920,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Negeri</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 @php
                                                     $negeriPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_pasangan )->value('senarai_negeri.negeri');
@@ -1934,15 +1939,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Alamat Tempat Kerja Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <span id="alamat_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja_pasangan}}</span>
                                             <!--end::Input-->
@@ -1950,15 +1955,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Poskod</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <span id="poskod_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja_pasangan}}</span>
@@ -1968,15 +1973,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Daerah</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 @php
                                                     $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
@@ -1987,15 +1992,15 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
-                                        <div class="col-md-3 text-md-start">
+                                    <div class="row fv-row">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Negeri</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 @php
                                                     $negeriKerjaPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja_pasangan )->value('senarai_negeri.negeri');
@@ -2009,7 +2014,7 @@
 
                                 <!--begin::Action buttons-->
                                 <div class="row py-5">
-                                    <div class="col-md-9 offset-md-3">
+                                    <div class="col-md-8 offset-md-4">
                                         <div class="d-flex">
                                             @if($resultRequestPasangan)
                                                 @if ($resultRequestPasangan->status != 'Dikemaskini' || $butiranKlien->status_kemaskini != 'Dikemaskini')
@@ -2179,7 +2184,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row fv-row mb-7">
+                                                <div class="row fv-row mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -2211,9 +2216,10 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    {{-- Success / Error Message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Check if there is a flash message
+            // Check if there is a flash success message
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
@@ -2235,12 +2241,14 @@
         });
     </script>
 
+    {{-- Search in dropdown button --}}
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
     </script>
 
+    {{-- Calculate umur based on IC --}}
     <script>
         function calculateAgeFromIC() {
             let icNumber = document.getElementById('no_kp').textContent.trim();
@@ -2275,6 +2283,7 @@
         });
     </script>
 
+    {{-- Open modal to update profile --}}
     <script>
         document.querySelectorAll('.modal-trigger').forEach(function(trigger) {
             trigger.addEventListener('click', function() {
@@ -2285,7 +2294,8 @@
         });
     </script>
 
-    <script>
+    {{-- If status_perkahwinan is bujang, then block the other fields --}}
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             var statusSelect = document.getElementById('status_perkahwinan');
             var pasanganFields = document.getElementById('pasangan-fields');
@@ -2308,6 +2318,13 @@
                 togglePasanganFields();
             });
         });
-    </script> 
+    </script>  --}}
+
+    {{-- Transform input to uppercase --}}
+    <script>
+        document.getElementById('alamat_rumah').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+    </script>
 </body>
 @endsection

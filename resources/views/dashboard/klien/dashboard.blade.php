@@ -303,7 +303,7 @@
                                                 <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesaib</a>
+                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
                                             </td>
                                         </tr>
                                         <tr>
