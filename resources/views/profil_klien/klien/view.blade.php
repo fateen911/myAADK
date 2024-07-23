@@ -675,7 +675,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="pekerjaan" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
+                                        <span id="status_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -906,7 +906,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="pekerjaan" name="pekerjaan" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status</option>
                                                             <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                                             <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>

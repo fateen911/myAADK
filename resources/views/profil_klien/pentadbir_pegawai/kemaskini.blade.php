@@ -30,6 +30,7 @@
         .centered-form {
             width: 100%;
             padding-left: 100px; /* Add some padding for better appearance */
+            padding-right: 100px;
             box-sizing: border-box; /* Ensure padding doesn't increase form size */
             flex-direction: column;
             align-items: center; /* Center contents horizontally */
@@ -114,7 +115,7 @@
                         <!--begin:::Tab item-->
                         <li class="nav-item">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
-                                <i class="ki-duotone ki-profile-user fs-2 me-2">
+                                <i class="ki-duotone ki-people fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -135,7 +136,7 @@
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
-                                </i>Maklumat Pasangan
+                                </i>Maklumat Keluarga
                                 @if($requestPasangan)
                                     <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                         <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -166,7 +167,7 @@
                                 <i class="ki-duotone ki-pulse fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
-                                </i>Maklumat Rawatan
+                                </i>Maklumat RPDK/RPDI
                             </a>
                         </li>
                         <!--end:::Tab item-->
@@ -182,7 +183,7 @@
                             @csrf
                                 <!--begin::Heading-->
                                 <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-3">
+                                    <div class="col-md-8 offset-md-4">
                                         <h2>Kemaskini Maklumat Peribadi</h2>
                                     </div>
                                 </div>
@@ -190,14 +191,14 @@
                                 
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Nama Penuh</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <span id="nama" class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
                                         <!--end::Input-->
@@ -206,7 +207,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Nombor Kad Pengenalan</span>
@@ -222,14 +223,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Umur</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <span id="umur" class="fs-6 form-control-plaintext"></span>
                                         <!--end::Input-->
@@ -238,14 +239,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Jantina</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina}}</span>
                                         </div>
@@ -254,14 +255,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Agama</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <span id="agama" class="fs-6 form-control-plaintext">{{$klien->agama}}</span>
                                         </div>
@@ -269,15 +270,15 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row fv-row mb-2">
-                                    <div class="col-md-3 text-md-start">
+                                <div class="row fv-row">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Bangsa</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
                                         </div>
@@ -285,8 +286,24 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
+                                <div class="row fv-row mb-2">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Skor CCRI</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Nombor Telefon</span>
@@ -300,7 +317,7 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="{{$klien->no_tel}}"/>
                                         <!--end::Input-->
@@ -309,7 +326,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Alamat E-mel</span>
@@ -323,7 +340,7 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{$klien->emel}}"/>
                                         <!--end::Input-->
@@ -332,14 +349,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Alamat Rumah</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <!--begin::Input-->
                                         <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah">{{$klien->alamat_rumah}}</textarea>
                                         <!--end::Input-->
@@ -348,14 +365,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Poskod</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
                                             <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="{{$klien->poskod}}" />
@@ -366,14 +383,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Daerah</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -389,14 +406,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Negeri</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -412,14 +429,14 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Tahap Pendidikan</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" data-placeholder="Pilih Tahap Pendidikan">
@@ -434,15 +451,50 @@
                                     </div>
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Status Kesihatan Mental</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$klien->status_kesihatan_mental}}"/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Status Orang Kurang Upaya (OKU)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8 position-relative">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" id="status_oku" name="status_oku" value="{{$klien->status_oku}}"/>
+                                        <!--end::Input-->
+                                        <div class="position-absolute top-10 end-0 mt-3 me-2">
+                                            <label class="form-label fs-6 mb-0 fst-italic">** Klik <a href="https://oku.jkm.gov.my/semakan_oku" class="text-primary">di sini</a> untuk semakan OKU</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
                                 
                                 <!--begin::Action buttons-->
                                 <div class="row py-5">
-                                    <div class="col-md-9 offset-md-3">
+                                    <div class="col-md-8 offset-md-4">
                                         <div class="d-flex">
                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                             @if($requestKlien)
                                                 <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPeribadiKlien" data-target="#approvalPeribadiKlien" style="background-color:#ffc107; color: white;">
-                                                    Luluskan Permohonan Kemaskini
+                                                    Permohonan Kemaskini
                                                 </button>
                                             @endif
                                         </div>
@@ -457,7 +509,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="luluskanPermohonanPeribadiKlienLabel">Luluskan Permintaan Kemaskini Maklumat Peribadi Klien</h5>
+                                            <h3 class="modal-title" id="luluskanPermohonanPeribadiKlienLabel">Luluskan Permohonan Kemaskini Maklumat Peribadi Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -521,6 +573,14 @@
                                                             <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
                                                         </div>
                                                     </div>
+                                                    <div class="row fv-row mb-2">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
+                                                        </div>
+                                                    </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
@@ -557,7 +617,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['emel'] != $klien->emel ? 'border-primary' : '' }}" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="emel" value="{{ $requestedDataKlien['emel'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -566,7 +625,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <textarea class="form-control form-control-solid {{ $requestedDataKlien['alamat_rumah'] != $klien->alamat_rumah ? 'border-primary' : '' }}" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea>
-                                                            {{-- <textarea class="form-control form-control-solid" name="alamat_rumah" readonly>{{ $requestedDataKlien['alamat_rumah'] }}</textarea> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -575,7 +633,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['poskod'] != $klien->poskod ? 'border-primary' : '' }}" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="poskod" value="{{ $requestedDataKlien['poskod'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -584,7 +641,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDaerahRumahKlien != $daerahRumahKlien ? 'border-primary' : '' }}" name="daerah" value="{{ $requestedDaerahRumahKlien }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahRumahKlien }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -593,7 +649,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedNegeriRumahKlien != $negeriRumahKlien ? 'border-primary' : '' }}" name="negeri" value="{{ $requestedNegeriRumahKlien }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriRumahKlien }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -602,17 +657,32 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['tahap_pendidikan'] != $klien->tahap_pendidikan ? 'border-primary' : '' }}" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
-
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Status Kesihatan Mental</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['status_kesihatan_mental'] != $klien->status_kesihatan_mental ? 'border-primary' : '' }}" name="status_kesihatan_mental" value="{{ $requestedDataKlien['status_kesihatan_mental'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Status Orang Kurang Upaya (OKU)</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['status_oku'] != $klien->status_oku ? 'border-primary' : '' }}" name="status_oku" value="{{ $requestedDataKlien['status_oku'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <div class="d-flex">
-                                                                <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
+                                                                <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Lulus</button>
                                                                 <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
                                                             </div>
                                                         </div>
@@ -661,11 +731,13 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-9">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="pekerjaan" name="pekerjaan" data-control="select2" data-hide-search="true">
-                                            <option value="BEKERJA" {{ $pekerjaan->pekerjaan == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
-                                            <option value="TIDAK BEKERJA" {{ $pekerjaan->pekerjaan == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
+                                        <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
+                                            <option value="BEKERJA" {{ $pekerjaan->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
+                                            <option value="TIDAK BEKERJA" {{ $pekerjaan->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
+                                            <option value="MENGANGGUR" {{ $pekerjaan->status_kerja == 'MENGANGGUR' ? 'selected' : '' }}>MENGANGGUR</option>
+                                            <option value="BELAJAR" {{ $pekerjaan->status_kerja == 'BELAJAR' ? 'selected' : '' }}>BELAJAR</option>
                                         </select>
                                         <!--end::Select2-->
                                     </div>
@@ -676,20 +748,49 @@
                                     <div class="col-md-3 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Pendapatan (RM)</span>
-                                            <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
-                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                    <span class="path3"></span>
-                                                </i>
-                                            </span>
+                                            <span class="required">Bidang</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}"/>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Nama</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}"/>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Pendapatan (RM)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <input type="number" class="form-control form-control-solid" id="pendapatan" name="pendapatan" value="{{$pekerjaan->pendapatan}}" />
+                                        <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                            <option>Pilih Julat Pendapatan</option>
+                                            <option value="RM0-RM999" {{ $pekerjaan->pendapatan == 'RM0-RM999' ? 'selected' : '' }}>RM0-RM999</option>
+                                            <option value="RM1000-RM1999" {{ $pekerjaan->pendapatan == 'RM1000-RM1999' ? 'selected' : '' }}>RM1000-RM1999</option>
+                                            <option value="RM2000-RM2999" {{ $pekerjaan->pendapatan == 'RM2000-RM2999' ? 'selected' : '' }}>RM2000-RM2999</option>
+                                            <option value="RM3000-RM3999" {{ $pekerjaan->pendapatan == 'RM3000-RM3999' ? 'selected' : '' }}>RM3000-RM3999</option>
+                                            <option value="RM4000-RM4999" {{ $pekerjaan->pendapatan == 'RM4000-RM4999' ? 'selected' : '' }}>RM4000-RM4999</option>
+                                            <option value="Lebih RM5000" {{ $pekerjaan->pendapatan == 'Lebih RM5000' ? 'selected' : '' }}>Lebih RM5000</option>
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -699,94 +800,19 @@
                                     <div class="col-md-3 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Bidang</span>
+                                            <span>Kategori Majikan</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" />
+                                        <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                            <option>Pilih Kategori Majikan</option>
+                                            <option value="KERAJAAN" {{ $pekerjaan->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                            <option value="SWASTA" {{ $pekerjaan->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                            <option value="LAIN-LAIN" {{ $pekerjaan->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                        </select>
                                         <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Alamat</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <!--begin::Input-->
-                                        <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$pekerjaan->alamat_kerja}}</textarea>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Poskod</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" />
-                                            <!--end::Select2-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Daerah</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                <option>Pilih daerah</option>
-                                                @foreach ($daerahKerja as $daerahK)
-                                                    <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
-                                                @endforeach
-                                            </select>
-                                            <!--end::Select2-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Negeri</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
-                                                <option>Pilih negeri</option>
-                                                @foreach ($negeriKerja as $negeriK)
-                                                    <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
-                                                @endforeach
-                                            </select>
-                                            <!--end::Select2-->
-                                        </div>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -799,7 +825,7 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-9">
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" />
                                         <!--end::Input-->
@@ -822,10 +848,90 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-9">
                                         <!--begin::Input-->
                                         <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" maxlength="11"/>
                                         <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Alamat</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$pekerjaan->alamat_kerja}}</textarea>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Poskod</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" />
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                                <option>Pilih daerah</option>
+                                                @foreach ($daerahKerja as $daerahK)
+                                                    <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Negeri</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                <option>Pilih negeri</option>
+                                                @foreach ($negeriKerja as $negeriK)
+                                                    <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Select2-->
+                                        </div>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -837,7 +943,7 @@
                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                             @if($requestPekerjaan)
                                                 <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPekerjaan" data-target="#approvalPekerjaan" style="background-color:#ffc107; color: white;">
-                                                    Luluskan Permohonan Kemaskini
+                                                    Permohonan Kemaskini
                                                 </button>
                                             @endif
                                         </div>
@@ -852,7 +958,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="luluskanPermohonanPekerjaanLabel">Luluskan Permintaan Kemaskini Maklumat Pekerjaan Klien</h5>
+                                            <h3 class="modal-title" id="luluskanPermohonanPekerjaanLabel">Luluskan Permohonan Kemaskini Maklumat Pekerjaan Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -876,62 +982,36 @@
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pekerjaan'] != $pekerjaan->pekerjaan ? 'border-primary' : '' }}" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
                                                         </div>
                                                     </div>
-                                            
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pendapatan'] != $pekerjaan->pendapatan ? 'border-primary' : '' }}" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly /> --}}
-                                                        </div>
-                                                    </div>
-                                            
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Bidang</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['bidang_kerja'] != $pekerjaan->bidang_kerja ? 'border-primary' : '' }}" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly /> --}}
-                                                        </div>
-                                                    </div>
-                                            
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $klien->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                            {{-- <textarea class="form-control form-control-solid" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea> --}}
-                                                        </div>
-                                                    </div>
-                                            
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['poskod_kerja'] != $pekerjaan->poskod_kerja ? 'border-primary' : '' }}" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerja != $daerahKerja ? 'border-primary' : '' }}" name="daerah_kerja" value="{{ $requestedDaerahKerja }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahKerja }}" readonly /> --}}
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_kerja'] != $pekerjaan->nama_kerja ? 'border-primary' : '' }}" name="nama_kerja" value="{{ $requestedDataPekerjaan['nama_kerja'] }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerja != $negeriKerja ? 'border-primary' : '' }}" name="negeri_kerja" value="{{ $requestedNegeriKerja }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriKerja }}" readonly /> --}}
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pendapatan'] != $pekerjaan->pendapatan ? 'border-primary' : '' }}" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['kategori_kerja'] != $pekerjaan->kategori_kerja ? 'border-primary' : '' }}" name="kategori_kerja" value="{{ $requestedDataPekerjaan['kategori_kerja'] }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -940,7 +1020,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_majikan'] != $pekerjaan->nama_majikan ? 'border-primary' : '' }}" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -949,7 +1028,38 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['no_tel_majikan'] != $pekerjaan->no_tel_majikan ? 'border-primary' : '' }}" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly /> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $klien->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['poskod_kerja'] != $pekerjaan->poskod_kerja ? 'border-primary' : '' }}" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerja != $daerahKerja ? 'border-primary' : '' }}" name="daerah_kerja" value="{{ $requestedDaerahKerja }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerja != $negeriKerja ? 'border-primary' : '' }}" name="negeri_kerja" value="{{ $requestedNegeriKerja }}" readonly />
                                                         </div>
                                                     </div>
 
@@ -1261,50 +1371,37 @@
                         <!--end:::Tab pane-->
 
 
-                        <!--begin:::Tab pane Pasangan-->
+                        <!--begin:::Tab pane Keluarga-->
                         <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
                             <!--begin::Form-->
                             <form method="post" id="kt_ecommerce_settings_general_products"  class="form centered-form" action="{{ route('kemaskini.maklumat.pasangan.klien', ['id' => $klien->id]) }}">
                                 <!--begin::Heading-->
                                 <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-3">
-                                        <h2>Kemaskini Maklumat Pasangan</h2>
+                                    <div class="col-md-8 offset-md-4">
+                                        <h2>Kemaskini Maklumat Keluarga</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
 
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
-                                    <div class="col-md-3 text-md-start">
+                                    <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Status Perkahwinan</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-7">
+                                    <div class="col-md-8">
                                         <div class="d-flex mt-3">
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
-                                                <option>Status Perkahwinan</option>
+                                                <option>Pilih Status Perkahwinan</option>
                                                 <option value="BUJANG" {{ $pasangan->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                                 <option value="BERKAHWIN" {{ $pasangan->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
-                                                <option value="BERCERAI" {{ $pasangan->status_perkahwinan == 'BERCERAI' ? 'selected' : '' }}>BERCERAI</option>
-                                                <option value="JANDA" {{ $pasangan->status_perkahwinan == 'JANDA' ? 'selected' : '' }}>JANDA</option>
-                                                <option value="DUDA" {{ $pasangan->status_perkahwinan == 'DUDA' ? 'selected' : '' }}>DUDA</option>
+                                                <option value="DUDA/JANDA/BALU" {{ $pasangan->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>
                                             </select>
                                             <!--end::Select2-->
-
-                                            <!--begin::Radio-->
-                                            {{-- <div class="form-check form-check-custom form-check-solid me-5">
-                                                <input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_yes" checked="checked" />
-                                                <label class="form-check-label" for="category_product_count_yes">Yes</label>
-                                            </div>
-                                            <div class="form-check form-check-custom form-check-solid">
-                                                <input class="form-check-input" type="radio" value="" name="category_product_count" id="category_product_count_no" />
-                                                <label class="form-check-label" for="category_product_count_no">No</label>
-                                            </div> --}}
-                                            <!--end::Radio-->
                                         </div>
                                     </div>
                                 </div>
@@ -1314,14 +1411,14 @@
                                 <div id="pasangan-fields">
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Nama</span>
+                                                <span>Nama Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{$pasangan->nama_pasangan}}" />
                                             <!--end::Input-->
@@ -1330,10 +1427,10 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Nombor Telefon</span>
+                                                <span>Nombor Telefon Pasangan</span>
                                                 <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                         <span class="path1"></span>
@@ -1344,24 +1441,44 @@
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{$pasangan->no_tel_pasangan}}" maxlength="11"/>
                                             <!--end::Input-->
                                         </div>
                                     </div>
                                     <!--end::Input group-->
-                                    <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Alamat Rumah</span>
+                                                <span>Bilangan Anak</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
+                                            <input type="text" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{$pasangan->bilangan_anak}}" />
+                                            <!--end::Input-->
+                                        </div>
+                                    </div>
+                                    <!--begin::Input group-->
+                                    <div class="row fv-row mb-7">
+                                        <div class="col-md-4 text-md-start">
+                                            <!--begin::Label-->
+                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                                <span>Alamat Rumah Pasangan</span>
+                                            </label>
+                                            <!--end::Label-->
+                                        </div>
+                                        <div class="col-md-8">
+                                            <!--begin::Input-->
+                                            <div class="d-flex flex-stack">
+                                                <div class="me-5">
+                                                    <input class="form-check-input-sm" id="alamat_pasangan_sama" name="alamat_pasangan_sama" onclick="alamatPasangan()" type="checkbox" value="1" />
+                                                    <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                </div>
+                                            </div>
                                             <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan">{{$pasangan->alamat_pasangan}}</textarea>
                                             <!--end::Input-->
                                         </div>
@@ -1369,14 +1486,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Poskod</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{$pasangan->poskod_pasangan}}" />
@@ -1387,14 +1504,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Daerah</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -1410,14 +1527,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Negeri</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -1433,14 +1550,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                <span>Alamat Tempat Kerja</span>
+                                                <span>Alamat Tempat Kerja Pasangan</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <!--begin::Input-->
                                             <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan">{{$pasangan->alamat_kerja_pasangan}}</textarea>
                                             <!--end::Input-->
@@ -1449,14 +1566,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Poskod</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{$pasangan->poskod_kerja_pasangan}}" />
@@ -1467,14 +1584,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Daerah</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -1490,14 +1607,14 @@
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row mb-7">
-                                        <div class="col-md-3 text-md-start">
+                                        <div class="col-md-4 text-md-start">
                                             <!--begin::Label-->
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Negeri</span>
                                             </label>
                                             <!--end::Label-->
                                         </div>
-                                        <div class="col-md-7">
+                                        <div class="col-md-8">
                                             <div class="w-100">
                                                 <!--begin::Select2-->
                                                 <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -1515,12 +1632,12 @@
                                 
                                 <!--begin::Action buttons-->
                                 <div class="row py-5">
-                                    <div class="col-md-9 offset-md-3">
+                                    <div class="col-md-8 offset-md-4">
                                         <div class="d-flex">
                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                             @if($requestPasangan)
                                                 <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPasangan" data-target="#approvalPasangan" style="background-color:#ffc107; color: white;">
-                                                    Luluskan Permohonan Kemaskini
+                                                    Permohonan Kemaskini
                                                 </button>
                                             @endif
                                         </div>
@@ -1535,7 +1652,7 @@
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="luluskanPermohonanPasanganLabel">Luluskan Permintaan Kemaskini Maklumat Pasangan Klien</h5>
+                                            <h3 class="modal-title" id="luluskanPermohonanPasanganLabel">Luluskan Permohonan Kemaskini Maklumat Pasangan Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -1564,33 +1681,36 @@
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['status_perkahwinan'] != $pasangan->status_perkahwinan ? 'border-primary' : '' }}" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
                                                         </div>
                                                     </div>
-                                            
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['nama_pasangan'] != $pasangan->nama_pasangan ? 'border-primary' : '' }}" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
-                                            
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Pasangan</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['no_tel_pasangan'] != $pasangan->no_tel_pasangan ? 'border-primary' : '' }}" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['bilangan_anak'] != $pasangan->bilangan_anak ? 'border-primary' : '' }}" name="bilangan_anak" value="{{ $requestedDataPasangan['bilangan_anak'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah Pasangan</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_pasangan'] != $pasangan->alamat_pasangan ? 'border-primary' : '' }}" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
-                                                            {{-- <textarea class="form-control form-control-solid" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1599,7 +1719,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['poskod_pasangan'] != $pasangan->poskod_pasangan ? 'border-primary' : '' }}" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1608,7 +1727,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDaerahPasangan != $daerahPasangan ? 'border-primary' : '' }}" name="daerah_pasangan" value="{{ $requestedDaerahPasangan }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahPasangan }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1617,16 +1735,14 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedNegeriPasangan != $negeriPasangan ? 'border-primary' : '' }}" name="negeri_pasangan" value="{{ $requestedNegeriPasangan }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriPasangan }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja Pasangan</label>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_kerja_pasangan'] != $pasangan->alamat_kerja_pasangan ? 'border-primary' : '' }}" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
-                                                            {{-- <textarea class="form-control form-control-solid" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1635,7 +1751,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1644,7 +1759,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerjaPasangan != $daerahKerjaPasangan ? 'border-primary' : '' }}" name="daerah_kerja_pasangan" value="{{ $requestedDaerahKerjaPasangan }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $daerahKerjaPasangan }}" readonly /> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1653,7 +1767,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerjaPasangan != $negeriKerjaPasangan ? 'border-primary' : '' }}" name="negeri_kerja_pasangan" value="{{ $requestedNegeriKerjaPasangan }}" readonly />
-                                                            {{-- <input type="text" class="form-control form-control-solid" value="{{ $negeriKerjaPasangan }}" readonly /> --}}
                                                         </div>
                                                     </div>
 
@@ -1686,11 +1799,11 @@
                         <!--begin:::Tab pane Rawatan-->
                         <div class="tab-pane fade" id="kt_ecommerce_settings_products" role="tabpanel">
                             <!--begin::Form-->
-                            <form method="post" id="kt_ecommerce_settings_general_store" class="form centered-form" style="margin-left: 100px;" action="{{ route('kemaskini.maklumat.rawatan.klien', ['id' => $klien->id]) }}">
+                            <form method="post" id="kt_ecommerce_settings_general_store" class="form centered-form" action="{{ route('kemaskini.maklumat.rawatan.klien', ['id' => $klien->id]) }}">
                                 <!--begin::Heading-->
                                 <div class="row mb-7">
-                                    <div class="col-md-9 offset-md-4">
-                                        <h2>Maklumat Rawatan</h2>
+                                    <div class="col-md-8 offset-md-4">
+                                        <h2>Maklumat Rawatan RPDK/RPDI</h2>
                                     </div>
                                 </div>
                                 <!--end::Heading-->
@@ -1700,45 +1813,83 @@
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Status Kesihatan Mental</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!--begin::Input-->
-                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$rawatan->status_kesihatan_mental}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-4">
-                                    <div class="col-md-4 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Status Orang Kurang Upaya (OKU)</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!--begin::Input-->
-                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$rawatan->status_oku}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-4">
-                                    <div class="col-md-4 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
                                             <span class="required">Seksyen (Perintah/Sukarela)</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <!--begin::Input-->
-                                        <span id="seksyen_okp" class="fs-6 form-control-plaintext">{{$rawatan->seksyen_okp}}</span>
+                                        <span id="seksyen_okp" class="fs-6 form-control-plaintext">{{$rawatan->seksyen}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-4">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Pusat Penjara (PUSPEN)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!--begin::Input-->
+                                        <span id="puspen" class="fs-6 form-control-plaintext">{{$rawatan->puspen}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-4">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Pejabat Pengawasan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!--begin::Input-->
+                                        <span id="pejabat" class="fs-6 form-control-plaintext">{{$rawatan->pejabat}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-4">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Tarikh Perintah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!--begin::Input-->
+                                        @php
+                                            $formattedDatePerintah = Carbon::parse($rawatan->tkh_perintah)->format('d-m-Y');
+                                        @endphp
+                                        <span id="tkh_perintah" class="fs-6 form-control-plaintext">{{$formattedDatePerintah}}</span>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-4">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span class="required">Tarikh Mula Pengawasan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!--begin::Input-->
+                                        @php
+                                            $formattedDateMula = Carbon::parse($rawatan->tkh_mula_pengawasan)->format('d-m-Y');
+                                        @endphp
+                                        <span id="tkh_mula_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDateMula}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -1752,33 +1903,17 @@
                                         </label>
                                         <!--end::Label-->
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <!--begin::Input-->
                                         @php
-                                            $formattedDate = Carbon::parse($rawatan->tarikh_tamat_pengawasan)->format('d-m-Y');
+                                            $formattedDateTamat = Carbon::parse($rawatan->tkh_tamat_pengawasan)->format('d-m-Y');
                                         @endphp
-                                        <span id="tarikh_tamat_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDate}}</span>
+                                        <span id="tkh_tamat_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDateTamat}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row mb-4">
-                                    <div class="col-md-4 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span class="required">Skor CCRI</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <!--begin::Input-->
-                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$rawatan->skor_ccri}}</span>
-                                        <!--end::Input-->
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-
+                                
                                 <!--begin::Action buttons-->
                                 {{-- <div class="row py-5">
                                     <div class="col-md-9 offset-md-4">
