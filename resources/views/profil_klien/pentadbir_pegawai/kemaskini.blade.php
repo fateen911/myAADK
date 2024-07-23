@@ -1131,7 +1131,7 @@
                                                 <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
                                                     @csrf
                                                     <!--begin::Heading-->
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-5">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Bapa</h2>
                                                         </div>
@@ -1139,7 +1139,7 @@
                                                     <!--end::Heading-->
                                                     
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1155,7 +1155,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1171,7 +1171,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1194,7 +1194,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1210,7 +1210,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1232,7 +1232,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1250,7 +1250,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1273,7 +1273,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1318,7 +1318,7 @@
                                                 <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
                                                     @csrf
                                                     <!--begin::Heading-->
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-5">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Ibu</h2>
                                                         </div>
@@ -1326,7 +1326,7 @@
                                                     <!--end::Heading-->
                                                     
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1342,7 +1342,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1358,7 +1358,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1381,7 +1381,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1397,7 +1397,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1419,7 +1419,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1437,7 +1437,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1460,7 +1460,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1505,7 +1505,7 @@
                                                 <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
                                                     @csrf
                                                     <!--begin::Heading-->
-                                                    <div class="row mb-7">
+                                                    <div class="row mb-5">
                                                         <div class="col-md-8 offset-md-4">
                                                             <h2>Kemaskini Maklumat Penjaga</h2>
                                                         </div>
@@ -1513,7 +1513,7 @@
                                                     <!--end::Heading-->
                                                     
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1529,7 +1529,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1545,7 +1545,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1561,7 +1561,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1584,7 +1584,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                      <!--begin::Input group-->
-                                                     <div class="row fv-row mb-7">
+                                                     <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1600,7 +1600,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1622,7 +1622,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1640,7 +1640,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row mb-5">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">
@@ -1663,7 +1663,7 @@
                                                     </div>
                                                     <!--end::Input group-->
                                                     <!--begin::Input group-->
-                                                    <div class="row fv-row mb-7">
+                                                    <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <!--begin::Label-->
                                                             <label class="fs-6 fw-semibold form-label mt-3">

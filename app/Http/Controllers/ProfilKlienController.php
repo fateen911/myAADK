@@ -46,25 +46,25 @@ class ProfilKlienController extends Controller
 
         // PERIBADI
         $klien = Klien::where('id', $id)->first();
-        $requestKlien = KlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
+        $requestKlien = KlienUpdateRequest::where('klien_id', $id)->where('status', 'Kemaskini')->first();
         $updateRequestKlien = KlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataKlien = $updateRequestKlien ? json_decode($updateRequestKlien->requested_data, true) : [];  // Decode the requested data updates                  
 
         // PEKERJAAN  
         $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
-        $requestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
+        $requestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->where('status', 'Kemaskini')->first();
         $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataPekerjaan = $updateRequestPekerjaan ? json_decode($updateRequestPekerjaan->requested_data, true) : [];
 
         // WARIS
         $waris = WarisKlien::where('klien_id',$id)->first();
-        $requestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
+        $requestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->where('status', 'Kemaskini')->first();
         $updateRequestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataWaris = $updateRequestWaris ? json_decode($updateRequestWaris->requested_data, true) : [];
 
         // PASANGAN
         $pasangan = KeluargaKlien::where('klien_id',$id)->first();
-        $requestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->where('status', 'Dikemaskini')->first();
+        $requestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->where('status', 'Kemaskini')->first();
         $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
         $requestedDataPasangan = $updateRequestPasangan ? json_decode($updateRequestPasangan->requested_data, true) : [];
 
@@ -348,15 +348,8 @@ class ProfilKlienController extends Controller
 
     public function KlienRequestUpdate(Request $request)
     {
+        // Validation rules for fields that users can update
         $validatedData = $request->validate([
-            'nama'                      => 'required|string|max:255',
-            'no_kp'                     => 'required|string|max:12',
-            'jantina'                   => 'required|string|max:255',
-            'agama'                     => 'required|string|max:255',
-            'bangsa'                    => 'required|string|max:255',
-            'status_kesihatan_mental'   => 'required|string|max:255',
-            'status_oku'                => 'required|string|max:255',
-            'skor_ccri'                 => 'required|numeric',
             'no_tel'                    => 'required|string|max:11',
             'emel'                      => 'required|email',
             'alamat_rumah'              => 'required|string|max:255',
@@ -365,25 +358,40 @@ class ProfilKlienController extends Controller
             'poskod'                    => 'required|string|max:5',
             'tahap_pendidikan'          => 'required|string|max:255',
         ]);
-        
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+
+        // Retrieve the existing data that cannot be updated by the user
+        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+        $existingData = Klien::where('id', $klienId)->first([
+            'nama', 
+            'no_kp', 
+            'jantina', 
+            'agama', 
+            'bangsa', 
+            'status_kesihatan_mental', 
+            'status_oku', 
+            'skor_ccri'
+        ])->toArray();
+
+        // Merge the existing data with the validated data from the request
+        $mergedData = array_merge($existingData, $validatedData);
+
+        // Check if there is an existing update request
         $updateRequest = KlienUpdateRequest::where('klien_id', $klienId)->first();
 
         if ($updateRequest) {
             // Update existing request
             $updateRequest->update([
-                'requested_data' => json_encode($validatedData),
-                'status' => 'Kemaskini', 
+                'requested_data' => json_encode($mergedData),
+                'status' => 'Kemaskini',
             ]);
 
             Klien::where('id', $klienId)
-                  ->update(['status_kemaskini' => 'Kemaskini']);
-        } 
-        else {
+                ->update(['status_kemaskini' => 'Kemaskini']);
+        } else {
             // Create new request
             KlienUpdateRequest::create([
                 'klien_id' => $klienId,
-                'requested_data' => json_encode($validatedData),
+                'requested_data' => json_encode($mergedData),
                 'status' => 'Kemaskini',
             ]);
         }
