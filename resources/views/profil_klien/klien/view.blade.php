@@ -557,9 +557,16 @@
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon</label>
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                                <span class="path3"></span>
+                                                            </i>
+                                                        </span>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{ old('no_tel', $butiranKlien->no_tel) }}" />
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" maxlength="11" value="{{ old('no_tel', $butiranKlien->no_tel) }}" />
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -981,7 +988,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
+                                                        <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -1477,10 +1484,10 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" value="{{ $butiranKlien->no_kp_bapa }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" maxlength="12" value="{{ $butiranKlien->no_kp_bapa }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -1496,7 +1503,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" value="{{ $butiranKlien->no_tel_bapa }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" maxlength="11" value="{{ $butiranKlien->no_tel_bapa }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -1509,7 +1516,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <div class="d-flex flex-stack">
@@ -1596,7 +1603,7 @@
                                                                 <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" value="{{ $butiranKlien->no_kp_ibu }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" maxlength="12" value="{{ $butiranKlien->no_kp_ibu }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -1612,7 +1619,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" value="{{ $butiranKlien->no_tel_ibu }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" maxlength="11" value="{{ $butiranKlien->no_tel_ibu }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -1720,7 +1727,7 @@
                                                                 <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" value="{{ $butiranKlien->no_kp_penjaga }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" maxlength="12" value="{{ $butiranKlien->no_kp_penjaga }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -1736,7 +1743,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" value="{{ $butiranKlien->no_tel_penjaga }}" />
+                                                                <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" maxlength="11" value="{{ $butiranKlien->no_tel_penjaga }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
@@ -2110,7 +2117,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{ $butiranKlien->no_tel_pasangan }}" />
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" maxlength="11" value="{{ $butiranKlien->no_tel_pasangan }}" />
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
