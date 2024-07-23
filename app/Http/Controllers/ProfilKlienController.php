@@ -181,7 +181,7 @@ class ProfilKlienController extends Controller
     }
 
 
-    // UPDATE WITHOUT REQUEST
+    // PENTADBIR/PEGAWAI : UPDATE WITHOUT REQUEST
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
     {
         $klien = Klien::find($id);
@@ -349,16 +349,21 @@ class ProfilKlienController extends Controller
     public function KlienRequestUpdate(Request $request)
     {
         $validatedData = $request->validate([
-            'emel' => 'required|email',
-            'nama' => 'required|string|max:255',
-            'umur' => 'required|integer',
-            'no_kp' => 'required|string|max:12',
-            'daerah' => 'required|string|max:255',
-            'negeri' => 'required|string|max:255',
-            'no_tel' => 'required|string|max:11',
-            'poskod' => 'required|string|max:5',
-            'alamat_rumah' => 'required|string|max:255',
-            'tahap_pendidikan' => 'required|string|max:255',
+            'nama'                      => 'required|string|max:255',
+            'no_kp'                     => 'required|string|max:12',
+            'jantina'                   => 'required|string|max:255',
+            'agama'                     => 'required|string|max:255',
+            'bangsa'                    => 'required|string|max:255',
+            'status_kesihatan_mental'   => 'required|string|max:255',
+            'status_oku'                => 'required|string|max:255',
+            'skor_ccri'                 => 'required|numeric',
+            'no_tel'                    => 'required|string|max:11',
+            'emel'                      => 'required|email',
+            'alamat_rumah'              => 'required|string|max:255',
+            'daerah'                    => 'required|string|max:255',
+            'negeri'                    => 'required|string|max:255',
+            'poskod'                    => 'required|string|max:5',
+            'tahap_pendidikan'          => 'required|string|max:255',
         ]);
         
         $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
@@ -368,15 +373,18 @@ class ProfilKlienController extends Controller
             // Update existing request
             $updateRequest->update([
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini', 
+                'status' => 'Kemaskini', 
             ]);
+
+            Klien::where('id', $klienId)
+                  ->update(['status_kemaskini' => 'Kemaskini']);
         } 
         else {
             // Create new request
             KlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini',
+                'status' => 'Kemaskini',
             ]);
         }
 

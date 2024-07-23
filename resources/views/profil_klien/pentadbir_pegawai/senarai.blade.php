@@ -92,8 +92,8 @@
                                         <td>{{ $daerah }}</td>
                                         <td>{{ $negeri }}</td>
                                         <td style="text-align: center;">
-                                            @if($user->status_kemaskini == 'Dikemaskini')
-                                                <button class="btn btn-sm text-white" style="background-color:mediumvioletred">SEMAKAN</button>
+                                            @if($user->status_kemaskini == 'Kemaskini')
+                                                <button class="btn btn-sm text-white" style="background-color:mediumvioletred">MOHON KEMASKINI</button>
                                             @elseif($user->status_kemaskini == 'Baharu')
                                                 <button class="btn btn-sm text-white" style="background-color: #787878">BAHARU</button>
                                             @elseif($user->status_kemaskini == 'Lulus')
