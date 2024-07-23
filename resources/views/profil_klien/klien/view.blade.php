@@ -1229,7 +1229,7 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>No Kad Pengenalan</span>
+                                                                <span>Nombor Kad Pengenalan</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-6">
@@ -1345,6 +1345,16 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
+                                                                <span>Hubungan</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <span id="hubungan_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_penjaga}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">
                                                                 <span>Nama</span>
                                                             </label>
                                                         </div>
@@ -1355,7 +1365,7 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>No Kad Pengenalan</span>
+                                                                <span>Nombor Kad Pengenalan</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-6">
