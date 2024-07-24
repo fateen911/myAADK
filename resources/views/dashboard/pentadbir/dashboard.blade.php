@@ -403,7 +403,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: lightslategrey">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Permohonan Pendaftaran</span>
@@ -429,7 +429,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -456,7 +456,7 @@
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:palevioletred">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Klien</span>
