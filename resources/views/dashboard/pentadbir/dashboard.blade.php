@@ -46,19 +46,111 @@
             {{-- top nav bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
+                    <button class="nav-link active" id="senaraiPengguna-tab" data-toggle="tab" data-target="#senaraiPengguna" type="button" role="tab" aria-controls="senaraiPengguna" aria-selected="true">Senarai Pengguna</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="soalSelidik-tab" data-toggle="tab" data-target="#soalSelidik" type="button" role="tab" aria-controls="soalSelidik" aria-selected="true">Soal Selidik</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="senaraiPengguna-tab" data-toggle="tab" data-target="#senaraiPengguna" type="button" role="tab" aria-controls="senaraiPengguna" aria-selected="true">Senarai Pengguna</button>
-                </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
+                {{-- Senarai Pengguna --}}
+                <div class="tab-pane fade  show active" id="senaraiPengguna" role="tabpanel" aria-labelledby="senaraiPengguna-tab">
+                    <!--Keputusan Senarai Pengguna-->
+                    <div class="header pt-10 mb-5">
+                        <h2>Senarai Pengguna Sistem i-Recover</h2>
+                    </div>
+                    <div class="body">
+                        <!--begin::First Row-->
+                        <div class="row g-3 g-lg-6" style="text-align: center;">
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: lightslategrey">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Permohonan Pendaftaran</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Pegawai</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:palevioletred">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Klien</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                </div>
+
                 {{-- Profil Klien --}}
-                <div class="tab-pane fade show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
+                <div class="tab-pane fade" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
                     <!--Permohonan-->
                     <div class="header pt-5 mb-5">
                         <h2>Status Permohonan Kemaskini Profil Klien</h2>
@@ -182,6 +274,95 @@
 
                 {{-- Soal Selidik --}}
                 <div class="tab-pane fade" id="soalSelidik" role="tabpanel" aria-labelledby="soalSelidik-tab">
+                     <!--Status Menjawab-->
+                     <div class="header pt-5 mb-5">
+                        <h2>Status Klien Menjawab Soal Selidik Kepulihan</h2>
+                    </div>
+                    <div class="body">
+                        <!--begin::First Row-->
+                        <div class="row g-3 g-lg-6" style="text-align: center;">
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cornflowerblue">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:maroon">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">5</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+
                     <!--Keputusan Soal Selidik-->
                     <div class="header pt-10 mb-5">
                         <h2>Keputusan Soal Selidik Kepulihan Klien</h2>
@@ -286,187 +467,6 @@
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-                    </div>
-
-                    <!--Status Menjawab-->
-                    <div class="header pt-5 mb-5">
-                        <h2>Status Klien Menjawab Soal Selidik Kepulihan</h2>
-                    </div>
-                    <div class="body">
-                        <!--begin::First Row-->
-                        <div class="row g-3 g-lg-6" style="text-align: center;">
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cornflowerblue">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai Menjawab</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:maroon">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">5</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                </div>
-
-                {{-- Senarai Pengguna --}}
-                <div class="tab-pane fade" id="senaraiPengguna" role="tabpanel" aria-labelledby="senaraiPengguna-tab">
-                    <!--Keputusan Senarai Pengguna-->
-                    <div class="header pt-10 mb-5">
-                        <h2>Senarai Pengguna Sistem i-Recover</h2>
-                    </div>
-                    <div class="body">
-                        <!--begin::First Row-->
-                        <div class="row g-3 g-lg-6" style="text-align: center;">
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: lightslategrey">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Permohonan Pendaftaran</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Pegawai</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-4">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:palevioletred">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-user-plus text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Klien</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
