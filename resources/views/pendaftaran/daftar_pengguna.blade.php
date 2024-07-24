@@ -14,7 +14,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="/assets/lang/Malay.json"></script>
-	<script src="/assets/lang/Malay.json"></script>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
@@ -29,11 +28,28 @@
 			justify-content: center;
 			align-items: center;
 		}
+
 		.d-none {
 			display: none;
 		}
+
 		.nav{
 			margin-left: 20px!important;
+		}
+
+		.input-group {
+			display: flex;
+			align-items: center;
+		}
+
+		.input-group-text {
+			background-color: #f3f3f3; 
+			padding: 0.75rem 0.75rem;
+			margin-left: -1px;
+		}
+
+		.form-control {
+			flex: 1;
 		}
 	</style>
 </head>
@@ -105,7 +121,7 @@
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($klien as $user1)
 										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('jawatan');
+											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
 											$tarikh_daftar1 = Carbon::parse($user1->created_at)->format('d-m-Y');
 										@endphp
 	
@@ -265,7 +281,7 @@
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($pegawai as $user2)
 										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('jawatan');
+											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('peranan');
 											$tarikh_daftar = Carbon::parse($user2->created_at)->format('d-m-Y');
 										@endphp
 	
@@ -331,7 +347,11 @@
 																		<label class="fs-6 fw-semibold mb-2">Emel</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="email" class="form-control form-control-solid" name="email" value="{{$user2->email}}" />
+																		<div class="input-group">
+																			<input type="text" class="form-control form-control-solid" id="email" name="email" value="{{$user2->email}}" />
+																			<span class="input-group-text">@adk.gov.my</span>
+																			<input type="hidden" id="emel" name="emel" />
+																		</div>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -346,6 +366,17 @@
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
+																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+																			<option value="">Pilih</option>
+																			@foreach ($jawatan as $j)
+																				<option value="{{ $j->id }}">{{ $j->jawatan_gred }}</option>
+																			@endforeach
+																		</select>
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
@@ -353,7 +384,7 @@
 																		<!--begin::Input-->
 																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
 																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
-																				<option value="{{$tahap1->id}}" {{$user2->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->jawatan}}</option>
+																				<option value="{{$tahap1->id}}" {{$user2->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
 																		</select>
 																		<!--end::Input-->
@@ -379,12 +410,6 @@
 																				<option value="{{ $item2->daerah}}" {{$user2->daerah == $item2->daerah  ? 'selected' : ''}}>{{$item2->daerah}}</option>
 																			@endforeach
 																		</select>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2">Jawatan</label>
-																		<input type="jawatan" class="form-control form-control-solid" name="jawatan" value="{{$user2->jawatan}}" />
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -479,7 +504,11 @@
 											<label class="fs-6 fw-semibold mb-2">Emel</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="email" class="form-control form-control-solid" placeholder="" id="email" name="email" value="" />
+											<div class="input-group">
+												<input type="text" class="form-control form-control-solid" placeholder="" id="email" name="email" required />
+												<span class="input-group-text">@adk.gov.my</span>
+												<input type="hidden" id="emel" name="emel" />
+											</div>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -495,11 +524,22 @@
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<label class="fs-6 fw-semibold mb-2">Bahagian</label>
+											<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
+											<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+												<option value="">Pilih</option>
+												@foreach ($jawatan as $j)
+													<option value="{{ $j->id }}">{{ $j->jawatan_gred }}</option>
+												@endforeach
+											</select>
+										</div>
+										<!--end::Input group-->
+										<!--begin::Input group-->
+										<div class="fv-row mb-5">
+											<label class="fs-6 fw-semibold mb-2">Peranan</label>
 											<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih</option>
 												@foreach ($tahap->sortBy('jawatan') as $t)
-													<option value="{{ $t->id }}">{{ $t->jawatan }}</option>
+													<option value="{{ $t->id }}">{{ $t->peranan }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -524,12 +564,6 @@
 													<option value="{{ $item2->daerah}}">{{ $item2->daerah}}</option>
 												@endforeach
 											</select>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="fv-row mb-5">
-											<label class="fs-6 fw-semibold mb-2">Jawatan</label>
-											<input type="text" class="form-control form-control-solid" id="jawatan" name="jawatan"/>
 										</div>
 										<!--end::Input group-->
 									</div>

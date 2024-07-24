@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Pegawai;
 use App\Models\Negeri;
 use App\Models\Daerah;
+use App\Models\JawatanAADK;
 use App\Models\TahapPengguna;
 
 class DaftarPenggunaController extends Controller
@@ -24,8 +25,9 @@ class DaftarPenggunaController extends Controller
         $daerah = Daerah::all()->sortBy('daerah');
 
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap', 'daerah', 'negeri'));
+        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function kemaskiniPengguna(Request $request)
