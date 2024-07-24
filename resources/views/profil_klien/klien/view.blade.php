@@ -935,7 +935,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}"/>
+                                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}"/>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">

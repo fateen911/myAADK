@@ -102,10 +102,11 @@ Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'mu
 
 // KLIEN - SEND REQUEST TO UPDATE PROFILE
 Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');
-Route::post('/klien/maklumat-rawatan/request-update', [ProfilKlienController::class, 'rawatanKlienRequestUpdate'])->name('rawatanKlien.requestUpdate');
 Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController::class, 'pekerjaanKlienRequestUpdate'])->name('pekerjaanKlien.requestUpdate');
-Route::post('/klien/maklumat-waris/request-update', [ProfilKlienController::class, 'warisKlienRequestUpdate'])->name('warisKlien.requestUpdate');
 Route::post('/klien/maklumat-pasangan/request-update', [ProfilKlienController::class, 'keluargaKlienRequestUpdate'])->name('pasanganKlien.requestUpdate');
+Route::post('/klien/maklumat-bapa/request-update', [ProfilKlienController::class, 'bapaKlienRequestUpdate'])->name('bapaKlien.requestUpdate');
+Route::post('/klien/maklumat-ibu/request-update', [ProfilKlienController::class, 'ibuKlienRequestUpdate'])->name('ibuKlien.requestUpdate');
+Route::post('/klien/maklumat-penjaga/request-update', [ProfilKlienController::class, 'penjagaKlienRequestUpdate'])->name('penjagaKlien.requestUpdate');
 
 // KLIEN - MODUL KEPULIHAN
 Route::get('/klien/soal-selidik/kepulihan', [ModalKepulihanController::class, 'soalanKepulihanTest'])->middleware('auth')->name('klien.soalanKepulihan.test');

@@ -89,8 +89,8 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($klien->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($klien->status_kemaskini == 'Dikemaskini')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Tidak Dikemaskini</span>
+                                        @elseif ($klien->status_kemaskini == 'Kemaskini')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
                                         @elseif ($klien->status_kemaskini == 'Lulus')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
@@ -129,8 +129,8 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($waris->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($waris->status_kemaskini == 'Dikemaskini')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Tidak Dikemaskini</span>
+                                        @elseif ($waris->status_kemaskini == 'Kemaskini')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
                                         @elseif ($waris->status_kemaskini == 'Lulus')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
@@ -175,8 +175,8 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($pasangan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($pasangan->status_kemaskini == 'Dikemaskini')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Tidak Dikemaskini</span>
+                                        @elseif ($pasangan->status_kemaskini == 'Kemaskini')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
                                         @elseif ($pasangan->status_kemaskini == 'Lulus')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
@@ -212,8 +212,8 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($pekerjaan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Mohon Kemaskini</span>
-                                        @elseif ($pekerjaan->status_kemaskini == 'Dikemaskini')
+                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Tidak Dikemaskini</span>
+                                        @elseif ($pekerjaan->status_kemaskini == 'Kemaskini')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
                                         @elseif ($pekerjaan->status_kemaskini == 'Lulus')
                                             <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>

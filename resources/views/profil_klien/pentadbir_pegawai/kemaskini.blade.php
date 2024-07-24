@@ -986,7 +986,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pekerjaan'] != $pekerjaan->pekerjaan ? 'border-primary' : '' }}" name="pekerjaan" value="{{ $requestedDataPekerjaan['pekerjaan'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['status_kerja'] != $pekerjaan->status_kerja ? 'border-primary' : '' }}" name="status_kerja" value="{{ $requestedDataPekerjaan['status_kerja'] }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1018,7 +1018,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['kategori_kerja'] != $pekerjaan->kategori_kerja ? 'border-primary' : '' }}" name="kategori_kerja" value="{{ $requestedDataPekerjaan['kategori_kerja'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['kategori_majikan'] != $pekerjaan->kategori_majikan ? 'border-primary' : '' }}" name="kategori_majikan" value="{{ $requestedDataPekerjaan['kategori_majikan'] }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1042,7 +1042,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $klien->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-primary' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">

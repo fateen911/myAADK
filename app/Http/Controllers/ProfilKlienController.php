@@ -385,73 +385,39 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            Klien::where('id', $klienId)
-                ->update(['status_kemaskini' => 'Kemaskini']);
-        } else {
+            Klien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        } 
+        else {
             // Create new request
             KlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($mergedData),
                 'status' => 'Kemaskini',
             ]);
+
+            Klien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini profil diri telah dihantar untuk semakan.');
     }
 
-    public function rawatanKlienRequestUpdate(Request $request)
-    {
-        $validatedData = $request->validate([
-            'status_kesihatan_mental' => 'required|string|max:255',
-            'status_oku' => 'required|string|max:255',
-            'seksyen_okp' => 'required|string|max:255',
-            'tarikh_tamat_pengawasan' => 'required|date',
-            'skor_ccri' => 'required|numeric',
-        ]);
-        
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
-        $updateRequest = RawatanKlienUpdateRequest::where('klien_id', $klienId)->first();
-
-        if ($updateRequest) {
-            // Update existing request
-            $updateRequest->update([
-                'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini', 
-            ]);
-        } 
-        else {
-            // Create new request
-            RawatanKlienUpdateRequest::create([
-                'klien_id' => $klienId,
-                'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini',
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat rawatan telah dihantar untuk semakan.');
-    }
-
     public function pekerjaanKlienRequestUpdate(Request $request)
     {
-        // dd($request->all());
-
         $validatedData = $request->validate([
-            'pekerjaan' => 'required|string|max:255',
-            'pendapatan' => 'nullable|string|max:255',
-            'bidang_kerja' => 'nullable|string|max:255',
-            'alamat_kerja' => 'nullable|string|max:255',
-            'poskod_kerja' => 'nullable|integer',
-            'daerah_kerja' => 'nullable|string|max:255',
-            'negeri_kerja' => 'nullable|string|max:255',
-            'nama_majikan' => 'nullable|string|max:255',
-            'no_tel_majikan' => 'nullable|string|max:11',
-        ]);        
-
-        // Temporarily bypass validation for testing
-        $validatedData = $request->all();
-
-        // Remove the CSRF token from the validated data
-        unset($validatedData['_token']);
+            'status_kerja'      => 'required|string|max:255',
+            'bidang_kerja'      => 'nullable|string|max:255',
+            'nama_kerja'        => 'nullable|string|max:255',
+            'pendapatan'        => 'nullable|string|max:255',
+            'kategori_majikan'  => 'nullable|string|max:255',
+            'nama_majikan'      => 'nullable|string|max:255',
+            'no_tel_majikan'    => 'nullable|string|max:11',
+            'alamat_kerja'      => 'nullable|string|max:255',
+            'poskod_kerja'      => 'nullable|integer',
+            'daerah_kerja'      => 'nullable|string|max:255',
+            'negeri_kerja'      => 'nullable|string|max:255',
+        ]);    
+        
+        // dd($validatedData);
 
         // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
         if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
@@ -468,19 +434,74 @@ class ProfilKlienController extends Controller
             // Update existing request
             $updateRequest->update([
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini', 
+                'status' => 'Kemaskini', 
             ]);
+
+            PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
         } 
         else {
             // Create new request
             PekerjaanKlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini',
+                'status' => 'Kemaskini',
             ]);
+
+            PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat pekerjaan telah dihantar untuk semakan.');
+    }
+
+    public function keluargaKlienRequestUpdate(Request $request)
+    {
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'status_perkahwinan'    => 'required|string|max:255',
+            'nama_pasangan'         => 'nullable|string|max:255',
+            'no_tel_pasangan'       => 'nullable|string|max:11',
+            'bilangan_anak'         => 'nullable|string|max:255',
+            'alamat_pasangan'       => 'nullable|string|max:255',
+            'poskod_pasangan'       => 'nullable|string|max:5',
+            'daerah_pasangan'       => 'nullable|string|max:255',
+            'negeri_pasangan'       => 'nullable|string|max:255',
+            'alamat_kerja_pasangan' => 'nullable|string|max:255',
+            'poskod_kerja_pasangan' => 'nullable|string|max:5',
+            'daerah_kerja_pasangan' => 'nullable|string|max:255',
+            'negeri_kerja_pasangan' => 'nullable|string|max:255',
+        ]);
+
+        // Check for default select values and set to null if needed
+        $validatedData['daerah_pasangan'] = $validatedData['daerah_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_pasangan'];
+        $validatedData['negeri_pasangan'] = $validatedData['negeri_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_pasangan'];
+        $validatedData['daerah_kerja_pasangan'] = $validatedData['daerah_kerja_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja_pasangan'];
+        $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
+
+        // Proceed with the existing logic
+        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+        $updateRequest =KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
+
+        if ($updateRequest) {
+            // Update existing request
+            $updateRequest->update([
+                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+                'status' => 'Kemaskini', 
+            ]);
+
+            KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        } 
+        else {
+            // Create new request
+           KeluargaKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
+                'status' => 'Kemaskini',
+            ]);
+
+            KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        }
+
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat keluarga telah dihantar untuk semakan.');
     }
 
     public function warisKlienRequestUpdate(Request $request)
@@ -515,51 +536,6 @@ class ProfilKlienController extends Controller
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat waris telah dihantar untuk semakan.');
-    }
-
-    public function keluargaKlienRequestUpdate(Request $request)
-    {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'status_perkahwinan' => 'required|string|max:255',
-            'nama_pasangan' => 'required|string|max:255',
-            'alamat_pasangan' => 'nullable|string|max:255',
-            'poskod_pasangan' => 'nullable|string|max:5',
-            'daerah_pasangan' => 'nullable|string|max:255',
-            'negeri_pasangan' => 'nullable|string|max:255',
-            'no_tel_pasangan' => 'nullable|string|max:11',
-            'alamat_kerja_pasangan' => 'nullable|string|max:255',
-            'poskod_kerja_pasangan' => 'nullable|string|max:5',
-            'daerah_kerja_pasangan' => 'nullable|string|max:255',
-            'negeri_kerja_pasangan' => 'nullable|string|max:255',
-        ]);
-
-        // Check for default select values and set to null if needed
-        $validatedData['daerah_pasangan'] = $validatedData['daerah_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_pasangan'];
-        $validatedData['negeri_pasangan'] = $validatedData['negeri_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_pasangan'];
-        $validatedData['daerah_kerja_pasangan'] = $validatedData['daerah_kerja_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja_pasangan'];
-        $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
-
-        // Proceed with the existing logic
-        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
-        $updateRequest =KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
-
-        if ($updateRequest) {
-            // Update existing request
-            $updateRequest->update([
-                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
-                'status' => 'Dikemaskini', // or any other status you prefer
-            ]);
-        } else {
-            // Create new request
-           KeluargaKlienUpdateRequest::create([
-                'klien_id' => $klienId,
-                'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
-                'status' => 'Dikemaskini',
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'Permintaan kemaskini telah dihantar.');
     }
 
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('waris_klien_update_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('klien_id')->constrained('waris_klien')->onDelete('cascade');
+            $table->integer('waris');
             $table->json('requested_data'); // Store the requested updates in JSON format
             $table->enum('status', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Kemaskini');
             $table->timestamps();
