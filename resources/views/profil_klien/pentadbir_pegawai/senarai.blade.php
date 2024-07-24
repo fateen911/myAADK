@@ -95,9 +95,9 @@
                                             @if($user->status_kemaskini == 'Kemaskini')
                                                 <button class="btn btn-sm text-white" style="background-color:mediumvioletred">MOHON KEMASKINI</button>
                                             @elseif($user->status_kemaskini == 'Baharu')
-                                                <button class="btn btn-sm text-white" style="background-color: #787878">BAHARU</button>
+                                                <button class="btn btn-sm text-white" style="background-color: #787878">BELUM KEMASKINI</button>
                                             @elseif($user->status_kemaskini == 'Lulus')
-                                                <button class="btn btn-sm text-white" style="background-color:lightseagreen">DILULUSKAN</button>
+                                                <button class="btn btn-sm text-white" style="background-color:lightseagreen">DIKEMASKINI</button>
                                             @elseif($user->status_kemaskini == 'Ditolak')
                                                 <button class="btn btn-sm text-white bg-info">DITOLAK</button>
                                             @endif
