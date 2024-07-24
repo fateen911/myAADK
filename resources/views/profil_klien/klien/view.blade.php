@@ -455,7 +455,7 @@
                                                         Mohon Kemaskini
                                                     </button>                                            
                                                 @else
-                                                    <div class="btn-light-warning">Permohonan Dikemaskini</div>
+                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                 @endif
                                             @else
                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
@@ -881,7 +881,7 @@
                                                         Mohon Kemaskini
                                                     </button>
                                                 @else
-                                                    <div class="btn-light-warning">Permohonan Kemaskini</div>
+                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                 @endif
                                             @else
                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
@@ -1187,13 +1187,13 @@
                                                     <div class="row py-5">
                                                         <div class="col-md-6 offset-md-4">
                                                             <div class="d-flex">
-                                                                @if($resultRequestWaris)
-                                                                    @if ($resultRequestWaris->status != "Kemaskini")
+                                                                @if($resultRequestBapa)
+                                                                    @if ($resultRequestBapa->status != "Kemaskini")
                                                                         <button type="button" class="btn btn-primary modal-trigger" id="requestModalBapaKlien" data-target="#requestBapaKlien">
                                                                             Mohon Kemaskini
                                                                         </button>
                                                                     @else
-                                                                        <div class="btn-light-warning">Permohonan Kemaskini</div>
+                                                                        <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                                     @endif
                                                                 @else
                                                                     <button type="button" class="btn btn-primary modal-trigger" id="requestModalBapaKlien" data-target="#requestBapaKlien">
@@ -1313,13 +1313,13 @@
                                                     <div class="row py-5">
                                                         <div class="col-md-6 offset-md-4">
                                                             <div class="d-flex">
-                                                                @if($resultRequestWaris)
-                                                                    @if ($resultRequestWaris->status != "Kemaskini")
+                                                                @if($resultRequestIbu)
+                                                                    @if ($resultRequestIbu->status != "Kemaskini")
                                                                         <button type="button" class="btn btn-primary modal-trigger" id="requestModalIbuKlien" data-target="#requestIbuKlien">
                                                                             Mohon Kemaskini
                                                                         </button>
                                                                     @else
-                                                                        <div class="btn-light-warning">Permohonan Kemaskini</div>
+                                                                        <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                                     @endif
                                                                 @else
                                                                     <button type="button" class="btn btn-primary modal-trigger" id="requestModalIbuKlien" data-target="#requestIbuKlien">
@@ -1449,13 +1449,13 @@
                                                     <div class="row py-5">
                                                         <div class="col-md-6 offset-md-4">
                                                             <div class="d-flex">
-                                                                @if($resultRequestWaris)
-                                                                    @if ($resultRequestWaris->status != "Kemaskini")
+                                                                @if($resultRequestPenjaga)
+                                                                    @if ($resultRequestPenjaga->status != "Kemaskini")
                                                                         <button type="button" class="btn btn-primary modal-trigger" id="requestModalPenjagaKlien" data-target="#requestPenjagaKlien">
                                                                             Mohon Kemaskini
                                                                         </button>
                                                                     @else
-                                                                        <div class="btn-light-warning">Permohonan Kemaskini</div>
+                                                                        <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                                     @endif
                                                                 @else
                                                                     <button type="button" class="btn btn-primary modal-trigger" id="requestModalPenjagaKlien" data-target="#requestPenjagaKlien">
@@ -1481,28 +1481,35 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
+                                                    <form method="POST" action="{{ route('bapaKlien.requestUpdate') }}">
                                                         @csrf
 
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid" id="nama_bapa" name="nama_bapa" value="{{ $butiranKlien->nama_bapa }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Kad Pengenalan</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                        <span class="path1"></span>
+                                                                        <span class="path2"></span>
+                                                                        <span class="path3"></span>
+                                                                    </i>
+                                                                </span>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" maxlength="12" value="{{ $butiranKlien->no_kp_bapa }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
                                                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                         <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                             <span class="path1"></span>
@@ -1512,23 +1519,28 @@
                                                                     </span>
                                                                 </label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" maxlength="11" value="{{ $butiranKlien->no_tel_bapa }}" />
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Status</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                             </div>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control form-control-solid" id="status_bapa" name="status_bapa" value="{{ $butiranKlien->status_bapa }}" />
+                                                            <div class="col-md-8">
+                                                                <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
+                                                                    <option>Pilih Status Bapa</option>
+                                                                    <option value="HIDUP" {{ $butiranKlien->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
+                                                                    <option value="MENINGGAL" {{ $butiranKlien->status_bapa == 'MENINGGAL' ? 'selected' : '' }}>MENINGGAL</option>
+                                                                    <option value="LAIN-LAIN" {{ $butiranKlien->status_bapa == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <div class="d-flex flex-stack">
                                                                     <div class="me-5">
                                                                         <input class="form-check-input-sm" id="alamat_bapa_sama" name="alamat_bapa_sama" onclick="alamatBapa()" type="checkbox" value="1" />
@@ -1539,18 +1551,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid" id="poskod_bapa" name="poskod_bapa" value="{{ $butiranKlien->poskod_bapa }}"/>
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <select class="form-select form-select-solid" id="daerah_bapa" name="daerah_bapa" data-control="select2" data-hide-search="true">
                                                                     <option>Pilih Daerah</option>
                                                                     @foreach ($daerahWaris as $item)
@@ -1560,10 +1572,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <select class="form-select form-select-solid" id="negeri_bapa" name="negeri_bapa" data-control="select2" data-hide-search="true">
                                                                     <option>Pilih Negeri</option>
                                                                     @foreach ($negeriWaris as $item)
@@ -1597,7 +1609,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
+                                                    <form method="POST" action="{{ route('ibuKlien.requestUpdate') }}">
                                                         @csrf
 
                                                         <div class="row fv-row mb-7">
@@ -1611,6 +1623,13 @@
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                        <span class="path1"></span>
+                                                                        <span class="path2"></span>
+                                                                        <span class="path3"></span>
+                                                                    </i>
+                                                                </span>
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" maxlength="12" value="{{ $butiranKlien->no_kp_ibu }}" />
@@ -1713,7 +1732,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form method="POST" action="{{ route('warisKlien.requestUpdate') }}">
+                                                    <form method="POST" action="{{ route('penjagaKlien.requestUpdate') }}">
                                                         @csrf
 
                                                         <div class="row fv-row mb-7">
@@ -1735,6 +1754,13 @@
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                        <span class="path1"></span>
+                                                                        <span class="path2"></span>
+                                                                        <span class="path3"></span>
+                                                                    </i>
+                                                                </span>
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" maxlength="12" value="{{ $butiranKlien->no_kp_penjaga }}" />
@@ -2065,7 +2091,7 @@
                                                         Mohon Kemaskini
                                                     </button>
                                                 @else
-                                                    <div class="btn-light-warning">Permohonan Kemaskini</div>
+                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
                                                 @endif
                                             @else
                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">

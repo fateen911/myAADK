@@ -321,12 +321,14 @@ class ProfilKlienController extends Controller
             ->first();
                 
         $resultRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $clientId)->first();
-        $resultRequestWaris = WarisKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestKlien = KlienUpdateRequest::where('klien_id', $clientId)->first();
+        $resultRequestBapa = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 1)->first();
+        $resultRequestIbu = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 2)->first();
+        $resultRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 3)->first();
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
-                                                        'butiranKlien','resultRequestPasangan','resultRequestWaris','resultRequestPekerjaan','resultRequestKlien'));
+                                                        'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga'));
     }
 
     public function muatTurunProfilDiri()
@@ -504,38 +506,125 @@ class ProfilKlienController extends Controller
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat keluarga telah dihantar untuk semakan.');
     }
 
-    public function warisKlienRequestUpdate(Request $request)
+    public function bapaKlienRequestUpdate(Request $request)
     {
         $validatedData = $request->validate([
-            'hubungan_waris' => 'required|string|max:255',
-            'nama_waris' => 'required|string|max:255',
-            'no_tel_waris' => 'required|string|max:11',
-            'alamat_waris' => 'required|string|max:255',
-            'poskod_waris' => 'required|string|max:5',
-            'daerah_waris' => 'required|string|max:255',
-            'negeri_waris' => 'required|string|max:255',
+            'nama_bapa'     => 'nullable|string|max:255',
+            'no_kp_bapa'    => 'nullable|string|max:255',
+            'no_tel_bapa'   => 'nullable|string|max:11',
+            'status_bapa'   => 'nullable|string|max:255',
+            'alamat_bapa'   => 'nullable|string|max:255',
+            'poskod_bapa'   => 'nullable|string|max:5',
+            'daerah_bapa'   => 'nullable|string|max:255',
+            'negeri_bapa'   => 'nullable|string|max:255',
         ]);
         
         $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
-        $updateRequest = WarisKlienUpdateRequest::where('klien_id', $klienId)->first();
+        $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','1')->first();
 
-        if ($updateRequest) {
+        if ($updateRequestBapa) {
             // Update existing request
-            $updateRequest->update([
+            $updateRequestBapa->update([
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini', // or any other status you prefer
+                'status' => 'Kemaskini', 
             ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
         } 
         else {
             // Create new request
             WarisKlienUpdateRequest::create([
                 'klien_id' => $klienId,
+                'waris' => 1,
                 'requested_data' => json_encode($validatedData),
-                'status' => 'Dikemaskini',
+                'status' => 'Kemaskini',
             ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
         }
 
-        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat waris telah dihantar untuk semakan.');
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat bapa telah dihantar untuk semakan.');
+    }
+
+    public function ibuKlienRequestUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nama_ibu'   => 'nullable|string|max:255',
+            'no_kp_ibu'  => 'nullable|string|max:255',
+            'no_tel_ibu' => 'nullable|string|max:11',
+            'status_ibu' => 'nullable|string|max:255',
+            'alamat_ibu' => 'nullable|string|max:255',
+            'poskod_ibu' => 'nullable|string|max:5',
+            'daerah_ibu' => 'nullable|string|max:255',
+            'negeri_ibu' => 'nullable|string|max:255',
+        ]);
+        
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','2')->first();
+
+        if ($updateRequestIbu) {
+            // Update existing request
+            $updateRequestIbu->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Kemaskini', 
+            ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        } 
+        else {
+            // Create new request
+            WarisKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'waris' => 2, 
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Kemaskini',
+            ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        }
+
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat ibu telah dihantar untuk semakan.');
+    }
+
+    public function penjagaKlienRequestUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'hubungan_penjaga'  => 'nullable|string|max:255',
+            'nama_penjaga'      => 'nullable|string|max:255',
+            'no_kp_penjaga'     => 'nullable|string|max:255',
+            'no_tel_penjaga'    => 'nullable|string|max:11',
+            'status_penjaga'    => 'nullable|string|max:255',
+            'alamat_penjaga'    => 'nullable|string|max:255',
+            'poskod_penjaga'    => 'nullable|string|max:5',
+            'daerah_penjaga'    => 'nullable|string|max:255',
+            'negeri_penjaga'    => 'nullable|string|max:255',
+        ]);
+        
+        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','3')->first();
+
+        if ($updateRequestPenjaga) {
+            // Update existing request
+            $updateRequestPenjaga->update([
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Kemaskini', 
+            ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        } 
+        else {
+            // Create new request
+            WarisKlienUpdateRequest::create([
+                'klien_id' => $klienId,
+                'waris' => 3,
+                'requested_data' => json_encode($validatedData),
+                'status' => 'Kemaskini',
+            ]);
+
+            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+        }
+
+        return redirect()->back()->with('success', 'Permohonan kemaskini maklumat penjaga telah dihantar untuk semakan.');
     }
 
 }
