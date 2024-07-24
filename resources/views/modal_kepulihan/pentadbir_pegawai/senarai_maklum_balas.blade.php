@@ -98,9 +98,9 @@
                                                 @if ($response->tahap_kepulihan_id == 1)
                                                     <button class="btn btn-sm bg-danger text-white">{{ $tahap_kepulihan }}</button>
                                                 @elseif ($response->tahap_kepulihan_id == 2)
-                                                    <button class="btn btn-sm text-white" style="background-color: orange;">{{ $tahap_kepulihan }}</button>
+                                                    <button class="btn btn-sm text-white" style="background-color: darkorange;">{{ $tahap_kepulihan }}</button>
                                                 @elseif ($response->tahap_kepulihan_id == 3)
-                                                    <button class="btn btn-sm text-white" style="background-color: yellow">{{ $tahap_kepulihan }}</button>   
+                                                    <button class="btn btn-sm text-white bg-warning">{{ $tahap_kepulihan }}</button>   
                                                 @else
                                                     <button class="btn btn-sm bg-success text-white">{{ $tahap_kepulihan }}</button>
                                                 @endif
@@ -108,6 +108,17 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                    <tr>
+                                        <td>AMIR BIN GHANI</td>
+                                        <td>950904063017</td>
+                                        <td>RAUB</td>
+                                        <td>PAHANG</td>
+                                        <td class="d-flex justify-content-center">
+                                            <button class="btn btn-sm text-white" style="background-color:cornflowerblue">BELUM SELESAI</button>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->

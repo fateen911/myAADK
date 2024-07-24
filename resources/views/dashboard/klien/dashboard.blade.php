@@ -89,13 +89,13 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($klien->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Belum Dikemaskini</span>
+                                            <span class="text-gray-600 fw-semibold fs-4d-block">Belum Dikemaskini</span>
                                         @elseif ($klien->status_kemaskini == 'Kemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
                                         @elseif ($klien->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
                                         @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
                                         @endif
 
                                         <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
@@ -129,13 +129,13 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($waris->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Belum Dikemaskini</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
                                         @elseif ($waris->status_kemaskini == 'Kemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
                                         @elseif ($waris->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
                                         @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
                                         @endif
 
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_waris }}</span>
@@ -175,13 +175,13 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($pasangan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Belum Dikemaskini</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
                                         @elseif ($pasangan->status_kemaskini == 'Kemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
                                         @elseif ($pasangan->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
                                         @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
                                         @endif
 
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pasangan }}</span>
@@ -212,13 +212,13 @@
                                     <!--begin::Info-->
                                     <div class="text-center mt-5">
                                         @if ($pekerjaan->status_kemaskini == 'Baharu')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Belum Dikemaskini</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
                                         @elseif ($pekerjaan->status_kemaskini == 'Kemaskini')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Sedang Disemak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
                                         @elseif ($pekerjaan->status_kemaskini == 'Lulus')
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Diluluskan</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
                                         @else
-                                            <span class="text-gray-600 fw-semibold fs-5 d-block">Ditolak</span>
+                                            <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
                                         @endif
 
                                         <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pekerjaan }}</span>
