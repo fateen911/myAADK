@@ -83,45 +83,30 @@ class ProfilKlienController extends Controller
                                                                         'rawatan'));
     }
 
-    // CURRENT METHOD OF APPROVAL CLIENT'S REQUEST
+    // PEGAWAI/PENTADBIR : APPROVAL CLIENT'S REQUEST
     public function approveUpdateKlien(Request $request, $id)
     {
         $updateRequest = KlienUpdateRequest::where('klien_id', $id)->first();
         $klien = Klien::where('id', $id)->first();
 
-        if ($request->status == 'Lulus') {
+        if ($request->status == 'Lulus') 
+        {
             $requestedDataKlien = json_decode($updateRequest->requested_data, true);
 
             // Update the _klien with the requested data
             $klien->update($requestedDataKlien);
             $updateRequest->update(['status' => $request->status]);
+            $klien->update(['status_kemaskini' => $request->status]);
 
             return redirect()->back()->with('success', 'Maklumat peribadi klien telah berjaya dikemaskini.');
         }
-        else{
+        else
+        {
             $updateRequest->update(['status' => $request->status]);
+            $klien->update(['status_kemaskini' => $request->status]);
+
             return redirect()->back()->with('error', 'Maklumat peribadi klien tidak berjaya dikemaskini.');
         }   
-    }
-
-    public function approveUpdateRawatan(Request $request, $id)
-    {
-        $updateRequestRawatan = RawatanKlienUpdateRequest::where('klien_id', $id)->first();
-        $rawatanKlien = RawatanKlien::where('klien_id', $id)->first();
-
-        if ($request->status == 'Lulus') {
-            $requestedDataRawatan = json_decode($updateRequestRawatan->requested_data, true);
-
-            // Update the Rawatan_klien with the requested data
-            $rawatanKlien->update($requestedDataRawatan);
-            $updateRequestRawatan->update(['status' => $request->status]);
-
-            return redirect()->back()->with('success', 'Maklumat rawatan klien telah berjaya dikemaskini.');
-        }
-        else{
-            $updateRequestRawatan->update(['status' => $request->status]);
-            return redirect()->back()->with('error', 'Maklumat rawatan klien tidak berjaya dikemaskini.');
-        }     
     }
 
     public function approveUpdatePekerjaan(Request $request, $id)
@@ -129,39 +114,24 @@ class ProfilKlienController extends Controller
         $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->first();
         $pekerjaanKlien = PekerjaanKlien::where('klien_id', $id)->first();
 
-        if ($request->status == 'Lulus') {
+        if ($request->status == 'Lulus') 
+        {
             $requestedData = json_decode($updateRequestPekerjaan->requested_data, true);
 
             // Update the pekerjaan_klien with the requested data
             $pekerjaanKlien->update($requestedData);
             $updateRequestPekerjaan->update(['status' => $request->status]);
+            $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
 
             return redirect()->back()->with('success', 'Maklumat pekerjaan klien telah berjaya dikemaskini.');
         }
-        else{
+        else
+        {
             $updateRequestPekerjaan->update(['status' => $request->status]);
+            $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
+
             return redirect()->back()->with('error', 'Maklumat pekerjaan klien tidak berjaya dikemaskini.');
         }   
-    }
-
-    public function approveUpdateWaris(Request $request, $id)
-    {
-        $updateRequestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->first();
-        $warisKlien = WarisKlien::where('klien_id', $id)->first();
-
-        if ($request->status == 'Lulus') {
-            $requestedDataWaris = json_decode($updateRequestWaris->requested_data, true);
-
-            // Update the Waris_klien with the requested data
-            $warisKlien->update($requestedDataWaris);
-            $updateRequestWaris->update(['status' => $request->status]);
-
-            return redirect()->back()->with('success', 'Maklumat waris klien telah berjaya dikemaskini.');
-        }
-        else{
-            $updateRequestWaris->update(['status' => $request->status]);
-            return redirect()->back()->with('error', 'Maklumat waris klien tidak berjaya dikemaskini.');
-        }    
     }
 
     public function approveUpdateKeluarga(Request $request, $id)
@@ -169,19 +139,99 @@ class ProfilKlienController extends Controller
         $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
         $pasanganKlien = KeluargaKlien::where('klien_id', $id)->first();
 
-        if ($request->status == 'Lulus') {
+        if ($request->status == 'Lulus') 
+        {
             $requestedDataPasangan = json_decode($updateRequestPasangan->requested_data, true);
 
             // Update the keluarga_klien with the requested data
             $pasanganKlien->update($requestedDataPasangan);
             $updateRequestPasangan->update(['status' => $request->status]);
+            $pasanganKlien->update(['status_kemaskini' => $request->status]);
 
             return redirect()->back()->with('success', 'Maklumat pasangan klien telah berjaya dikemaskini.');
         }
-        else{
+        else
+        {
             $updateRequestPasangan->update(['status' => $request->status]);
+            $pasanganKlien->update(['status_kemaskini' => $request->status]);
+
             return redirect()->back()->with('error', 'Maklumat pasangan klien tidak berjaya dikemaskini.');
         }   
+    }
+
+    public function approveUpdateBapa(Request $request, $id)
+    {
+        $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 1)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+
+        if ($request->status == 'Lulus') 
+        {
+            $requestedDataWaris = json_decode($updateRequestBapa->requested_data, true);
+
+            // Update the Waris_klien with the requested data
+            $warisKlien->update($requestedDataWaris);
+            $updateRequestBapa->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('success', 'Maklumat bapa klien telah berjaya dikemaskini.');
+        }
+        else
+        {
+            $updateRequestBapa->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('error', 'Maklumat bapa klien tidak berjaya dikemaskini.');
+        }    
+    }
+
+    public function approveUpdateIbu(Request $request, $id)
+    {
+        $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 2)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+
+        if ($request->status == 'Lulus') 
+        {
+            $requestedDataWaris = json_decode($updateRequestIbu->requested_data, true);
+
+            // Update the Waris_klien with the requested data
+            $warisKlien->update($requestedDataWaris);
+            $updateRequestIbu->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('success', 'Maklumat ibu klien telah berjaya dikemaskini.');
+        }
+        else
+        {
+            $updateRequestIbu->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('error', 'Maklumat ibu klien tidak berjaya dikemaskini.');
+        }    
+    }
+
+    public function approveUpdatePenjaga(Request $request, $id)
+    {
+        $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 3)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+
+        if ($request->status == 'Lulus') 
+        {
+            $requestedDataWaris = json_decode($updateRequestPenjaga->requested_data, true);
+
+            // Update the Waris_klien with the requested data
+            $warisKlien->update($requestedDataWaris);
+            $updateRequestPenjaga->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('success', 'Maklumat penjaga klien telah berjaya dikemaskini.');
+        }
+        else
+        {
+            $updateRequestPenjaga->update(['status' => $request->status]);
+            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            return redirect()->back()->with('error', 'Maklumat penjaga klien tidak berjaya dikemaskini.');
+        }    
     }
 
 

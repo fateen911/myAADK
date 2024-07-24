@@ -92,9 +92,11 @@ Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::cl
 // PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');
 Route::patch('/approve-update/pekerjaan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePekerjaan'])->name('approve.update.pekerjaan');
-Route::patch('/approve-update/waris-klien/{id}', [ProfilKlienController::class, 'approveUpdateWaris'])->name('approve.update.waris');
 Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::class, 'approveUpdateKeluarga'])->name('approve.update.pasangan');
 Route::patch('/approve-update/rawatan-klien/{id}', [ProfilKlienController::class, 'approveUpdateRawatan'])->name('approve.update.rawatan');
+Route::patch('/approve-update/bapa-klien/{id}', [ProfilKlienController::class, 'approveUpdateBapa'])->name('approve.update.bapa');
+Route::patch('/approve-update/ibu-klien/{id}', [ProfilKlienController::class, 'approveUpdateIbu'])->name('approve.update.ibu');
+Route::patch('/approve-update/penjaga-klien/{id}', [ProfilKlienController::class, 'approveUpdatePenjaga'])->name('approve.update.penjaga');
 
 // KLIEN - PENGURUSAN PROFIL
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');

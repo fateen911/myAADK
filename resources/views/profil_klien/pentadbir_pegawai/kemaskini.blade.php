@@ -1306,7 +1306,7 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($requestWaris)
+                                                            @if($updateRequestBapa->status == 'Kemaskini')
                                                                 <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
                                                                     Semak Permohonan Kemaskini
                                                                 </button>
@@ -1500,8 +1500,8 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($requestWaris)
-                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalWaris" data-target="#approvalWaris" style="background-color:#ffc107; color: white;">
+                                                            @if($updateRequestIbu->status == 'Kemaskini')
+                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalIbu" data-target="#approvalIbu" style="background-color:#ffc107; color: white;">
                                                                     Semak Permohonan Kemaskini
                                                                 </button>
                                                             @endif
@@ -1710,8 +1710,8 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($requestWaris)
-                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalWaris" data-target="#approvalWaris" style="background-color:#ffc107; color: white;">
+                                                            @if($updateRequestPenjaga->status == 'Kemaskini')
+                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPenjaga" data-target="#approvalPenjaga" style="background-color:#ffc107; color: white;">
                                                                     Semak Permohonan Kemaskini
                                                                 </button>
                                                             @endif
@@ -1734,7 +1734,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 @if($updateRequestBapa)
-                                                    <form method="post" action="{{ route('approve.update.waris', ['id' => $updateRequestBapa->klien_id]) }}">
+                                                    <form method="post" action="{{ route('approve.update.bapa', ['id' => $updateRequestBapa->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
     
@@ -1843,7 +1843,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 @if($updateRequestIbu)
-                                                    <form method="post" action="{{ route('approve.update.waris', ['id' => $updateRequestIbu->klien_id]) }}">
+                                                    <form method="post" action="{{ route('approve.update.ibu', ['id' => $updateRequestIbu->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
     
@@ -1952,7 +1952,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 @if($updateRequestPenjaga)
-                                                    <form method="post" action="{{ route('approve.update.waris', ['id' => $updateRequestPenjaga->klien_id]) }}">
+                                                    <form method="post" action="{{ route('approve.update.penjaga', ['id' => $updateRequestPenjaga->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
     
@@ -1964,10 +1964,10 @@
                                                         @endphp
                                                 
                                                         <div class="row fv-row mb-7">
-                                                            <div class="col-md-3 text-md-start">
+                                                            <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Hubungan</label>
                                                             </div>
-                                                            <div class="col-md-9">
+                                                            <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataPenjaga['hubungan_penjaga'] != $waris->hubungan_penjaga ? 'border-primary' : '' }}" name="hubungan_penjaga" value="{{ $requestedDataPenjaga['hubungan_penjaga'] }}" readonly />
                                                             </div>
                                                         </div>
