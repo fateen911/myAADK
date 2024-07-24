@@ -23,7 +23,8 @@ class PekerjaanKlien extends Model
         'alamat_kerja',
         'poskod_kerja',
         'daerah_kerja',
-        'negeri_kerja',  
+        'negeri_kerja', 
+        'status_kemaskini', 
     ];
 
     public function pekerjaanProfileUpdateRequests()

@@ -85,9 +85,11 @@ Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::cla
 // PENTADBIR UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
 Route::post('/kemaskini/maklumat/pekerjaan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPekerjaanKlien'])->middleware('auth')->name('kemaskini.maklumat.pekerjaan.klien');
-Route::post('/kemaskini/maklumat/waris-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatWarisKlien'])->middleware('auth')->name('kemaskini.maklumat.waris.klien');
 Route::post('/kemaskini/maklumat/pasangan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatKeluargaKlien'])->middleware('auth')->name('kemaskini.maklumat.pasangan.klien');
 Route::post('/kemaskini/maklumat/rawatan-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatRawatanKlien'])->middleware('auth')->name('kemaskini.maklumat.rawatan.klien');
+Route::post('/kemaskini/maklumat/bapa-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatBapaKlien'])->middleware('auth')->name('kemaskini.bapa.klien');
+Route::post('/kemaskini/maklumat/ibu-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatIbuKlien'])->middleware('auth')->name('kemaskini.ibu.klien');
+Route::post('/kemaskini/maklumat/penjaga-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPenjagaKlien'])->middleware('auth')->name('kemaskini.penjaga.klien');
 
 // PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');

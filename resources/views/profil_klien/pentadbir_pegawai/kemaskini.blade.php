@@ -461,7 +461,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status Kesihatan Mental</span>
+                                        <span class="required">Status Kesihatan Mental</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -477,7 +477,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status Orang Kurang Upaya (OKU)</span>
+                                        <span class="required">Status Orang Kurang Upaya (OKU)</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -1126,7 +1126,7 @@
                                     <div class="tab-content">
                                         <!-- Maklumat Bapa -->
                                         <div class="tab-pane active" id="maklumatBapa">
-                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
+                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.bapa.klien', ['id' => $klien->id]) }}">
                                                 @csrf
                                                 <!--begin::Heading-->
                                                 <div class="row mb-5">
@@ -1307,7 +1307,7 @@
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
                                                             @if($updateRequestBapa->status == 'Kemaskini')
-                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
+                                                                <button type="submit" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
                                                                     Semak Permohonan Kemaskini
                                                                 </button>
                                                             @endif
@@ -1320,7 +1320,7 @@
                     
                                         <!-- Maklumat Ibu -->
                                         <div class="tab-pane" id="maklumatIbu">
-                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
+                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.ibu.klien', ['id' => $klien->id]) }}">
                                                 @csrf
                                                 <!--begin::Heading-->
                                                 <div class="row mb-5">
@@ -1514,7 +1514,7 @@
                     
                                         <!-- Maklumat Penjaga -->
                                         <div class="tab-pane" id="maklumatPenjaga">
-                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.maklumat.waris.klien', ['id' => $klien->id]) }}">
+                                            <form method="post" style="padding-left: 50px;" action="{{ route('kemaskini.penjaga.klien', ['id' => $klien->id]) }}">
                                                 @csrf
                                                 <!--begin::Heading-->
                                                 <div class="row mb-5">
@@ -2068,6 +2068,7 @@
                     <div class="tab-pane fade" id="kt_ecommerce_settings_store" role="tabpanel">
                         <!--begin::Form-->
                         <form method="post" id="kt_ecommerce_settings_general_products"  class="form centered-form" action="{{ route('kemaskini.maklumat.pasangan.klien', ['id' => $klien->id]) }}">
+                            @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-8 offset-md-4">
@@ -2151,7 +2152,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{$pasangan->bilangan_anak}}" />
+                                        <input type="number" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{$pasangan->bilangan_anak}}" min="0"/>
                                         <!--end::Input-->
                                     </div>
                                 </div>

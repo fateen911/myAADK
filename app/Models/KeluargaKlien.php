@@ -25,6 +25,7 @@ class KeluargaKlien extends Model
         'poskod_kerja_pasangan',
         'daerah_kerja_pasangan',
         'negeri_kerja_pasangan',
+        'status_kemaskini',
     ];
 
     public function keluargaProfileUpdateRequests()
