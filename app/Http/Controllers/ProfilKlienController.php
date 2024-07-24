@@ -59,8 +59,12 @@ class ProfilKlienController extends Controller
         // WARIS
         $waris = WarisKlien::where('klien_id',$id)->first();
         $requestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->where('status', 'Kemaskini')->first();
-        $updateRequestWaris = WarisKlienUpdateRequest::where('klien_id', $id)->first();
-        $requestedDataWaris = $updateRequestWaris ? json_decode($updateRequestWaris->requested_data, true) : [];
+        $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 1)->first();
+        $requestedDataBapa = $updateRequestBapa ? json_decode($updateRequestBapa->requested_data, true) : [];
+        $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 2)->first();
+        $requestedDataIbu = $updateRequestIbu ? json_decode($updateRequestIbu->requested_data, true) : [];
+        $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 3)->first();
+        $requestedDataPenjaga = $updateRequestPenjaga ? json_decode($updateRequestPenjaga->requested_data, true) : [];
 
         // PASANGAN
         $pasangan = KeluargaKlien::where('klien_id',$id)->first();
@@ -74,7 +78,7 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.kemaskini', compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                                         'klien', 'requestKlien', 'updateRequestKlien','requestedDataKlien',
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
-                                                                        'waris', 'requestWaris', 'updateRequestWaris','requestedDataWaris',
+                                                                        'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa', 'updateRequestIbu','requestedDataIbu', 'updateRequestPenjaga','requestedDataPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
                                                                         'rawatan'));
     }
