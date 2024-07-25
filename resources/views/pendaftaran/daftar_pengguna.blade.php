@@ -132,7 +132,7 @@
 											<td>{{ $tarikh_daftar1}}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user1->id}}">
+													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
 														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
@@ -140,8 +140,8 @@
 												</div>                                                
 											</td>
 	
-											<!--begin::Modal - Customers - Edit-->
-											<div class="modal fade" id="kt_modal_new_card{{$user1->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal - Kemaskini Klien-->
+											<div class="modal fade" id="modal_kemaskini_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
 												<div class="modal-dialog modal-dialog-centered mw-650px">
 													<!--begin::Modal content-->
@@ -165,11 +165,11 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-klien') }}" method="post">
+															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('kemaskini-klien') }}" method="post">
 																@csrf
 	
 																<input type="hidden" name="id" value="{{ $user1->id }}">
-																<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
@@ -214,7 +214,6 @@
 																	</div>
 																	<!--end::Input group-->
 																</div>
-																<!--end::Scroll-->
 	
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
@@ -236,7 +235,7 @@
 												</div>
 												<!--end::Modal dialog-->
 											</div>
-											<!--end::Modal - Customers - Edit-->
+											<!--end::Modal - Kemaskini Klien-->
 										</tr>
 									@endforeach
 								</tbody>
@@ -293,15 +292,19 @@
 											<td>{{ $user2->no_kp }}</td>
 											<td>{{ $user2->email }}</td>
 											<td>{{ $peranan }}</td>
-											@if ($negeriB !== null || $daerahB !== null)
-        										<td>{{ $negeriB }} ({{ $daerahB }})</td>
-											@else
-												<td></td>
+											<td>
+												@if ($negeriB !== null)
+        											{{ $negeriB }} 
+													@if ($daerahB !== null)
+														({{ $daerahB }})
+													@endif
+												@else
+											</td>
 											@endif
 											<td>{{ $tarikh_daftar }}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_card{{$user2->id}}">
+													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_pegawai{{$user2->id}}">
 														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
@@ -309,8 +312,8 @@
 												</div>                                                
 											</td>
 	
-											<!--begin::Modal - Customers - Edit-->
-											<div class="modal fade" id="kt_modal_new_card{{$user2->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal - Kemaskini Pegawai-->
+											<div class="modal fade" id="modal_kemaskini_pegawai{{$user2->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
 												<div class="modal-dialog modal-dialog-centered mw-650px">
 													<!--begin::Modal content-->
@@ -334,32 +337,18 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pegawai') }}" method="post">
+															<form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">
 																@csrf
 	
 																<input type="hidden" name="id" value="{{ $user2->id }}">
-																<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+																<div class="scroll-y me-n7 pe-7" id="modal_kemaskini_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_kemaskini_pegawai_header" data-kt-scroll-wrappers="#modal_kemaskini_pegawai_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Nama</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="name" value="{{$user2->name}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Emel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="email" name="email" value="{{$user2->email}}" />
-																			<span class="input-group-text">@adk.gov.my</span>
-																			<input type="hidden" id="emel" name="emel" />
-																		</div>
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user2->name}}" />
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -374,12 +363,44 @@
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Emel</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<div class="input-group">
+																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user2->email)[0] }}" />
+																			<span class="input-group-text">@adk.gov.my</span>
+																			<input type="hidden" id="email" name="email" value="{{ $user2->email }}" />
+																		</div>
+																		<!--end::Input-->
+																	</div>																	
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Nombor Telefon
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user2->no_tel}}"/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
 																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
 																			<option value="">Pilih</option>
 																			@foreach ($jawatan as $j)
-																				<option value="{{ $j->id }}">{{ $j->jawatan_gred }}</option>
+																				<option value="{{ $j->id }}" {{$user2->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
 																			@endforeach
 																		</select>
 																	</div>
@@ -399,26 +420,30 @@
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
-																		<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
-																			<option value="">Pilih Negeri Bertugas</option>
-																			@foreach ($negeri as $item1)
-																				<option value="{{ $item1->id}}" {{$user2->negeri == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
-																			@endforeach
-																		</select>
-																	</div>
+																	@if ($user2->negeri_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Negeri Bertugas</option>
+																				@foreach ($negeri as $item1)
+																					<option value="{{ $item1->id}}" {{$user2->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																				@endforeach
+																			</select>
+																		</div>	
+																	@endif
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
-																		<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
-																			<option value="">Pilih Daerah Bertugas</option>
-																			@foreach ($daerah as $item2)
-																				<option value="{{ $item2->id}}" {{$user2->daerah == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
-																			@endforeach
-																		</select>
-																	</div>
+																	@if ($user2->daerah_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Daerah Bertugas</option>
+																				@foreach ($daerah as $item2)
+																					<option value="{{ $item2->id}}" {{$user2->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
+																				@endforeach
+																			</select>
+																		</div>
+																	@endif
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
@@ -456,7 +481,7 @@
 												</div>
 												<!--end::Modal dialog-->
 											</div>
-											<!--end::Modal - Customers - Edit-->
+											<!--end::Modal -  Kemaskini Pegawai-->
 										</tr>
 									@endforeach
 								</tbody>
@@ -467,7 +492,7 @@
 					</div> 
 				</div>
 
-				<!--begin::Modal - Pegawai - Add-->
+				<!--begin::Modal - Tambah Pegawai-->
 				<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
 					<!--begin::Modal dialog-->
 					<div class="modal-dialog modal-dialog-centered mw-650px">
@@ -612,7 +637,7 @@
 						</div>
 					</div>
 				</div>
-				<!--end::Modal - Pegawai - Add-->
+				<!--end::Modal - Tambah Pegawai-->
 			</div>
 			<!--end::Content container-->
 		</div>
@@ -734,14 +759,6 @@
 	</script>	
 
 	<script>
-		document.getElementById('emailPegawai').addEventListener('input', function() {
-			const emailName = this.value;
-			const emailField = document.getElementById('email');
-			emailField.value = emailName + '@adk.gov.my';
-		});
-	</script>
-
-	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			const perananField = document.getElementById('peranan_pegawai');
 			const negeriField = document.getElementById('daftar_negeri_field');
@@ -789,5 +806,16 @@
 			filterDaerahOptions();
 		});
 	</script>
+
+	<script>
+		document.getElementById('modal_kemaskini_pegawai_form').addEventListener('submit', function(event) {
+			var emailInput = document.getElementById('emel').value;
+			if (emailInput.includes('@')) {
+				alert('Sila masukkan hanya nama pengguna e-mel tanpa domain.');
+				event.preventDefault();
+			}
+		});
+	</script>
+	
 
 @endsection

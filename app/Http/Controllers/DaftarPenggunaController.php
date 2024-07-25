@@ -60,27 +60,47 @@ class DaftarPenggunaController extends Controller
 
     public function kemaskiniPegawai(Request $request)
     {
-        // Retrieve the user by their ID
-        $user = User::find($request->id);
+        // Combine email name and domain
+        $email = $request->emel . '@adk.gov.my';
 
-        if ($user) 
+        // Retrieve pegawai info
+        $pegawai = Pegawai::find($request->id);
+        $user = User::where('id', $pegawai->users_id)->first();
+
+        if ($user && $pegawai) 
         {
-            // Prepare the data for update
-            $updateData = [
-                'name' => strtoupper($request->name),
+            // Prepare the data for update in table users
+            $updateDataUsers = [
+                'name' => strtoupper($request->nama),
                 'no_kp' => $request->no_kp,
-                'email' => $request->email,
+                'email' => $email,
+                'tahap_pengguna' => $request->tahap_pengguna,
             ];
 
             // Check if a new password has been provided
             if ($request->filled('password')) {
-                $updateData['password'] = Hash::make($request->password);
+                $updateDataUsers['password'] = Hash::make($request->password);
             }
 
             // Update user details
-            $user->update($updateData);
+            $user->update($updateDataUsers);
 
-            return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
+            // Prepare the data for update in table pegawai
+            $updateDataPegawai = [
+                'nama' => strtoupper($request->nama),
+                'no_kp' => $request->no_kp,
+                'emel' => $email,
+                'no_tel' => $request->no_tel,
+                'jawatan' => $request->jawatan,
+                'peranan' => $request->tahap_pengguna,
+                'negeri_bertugas' => $request->negeri_bertugas,
+                'daerah_bertugas' => $request->daerah_bertugas,
+            ];
+
+            // Update pegawai details
+            $pegawai->update($updateDataPegawai);
+
+            return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->nama . ' telah dikemaskini.');
         } 
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
