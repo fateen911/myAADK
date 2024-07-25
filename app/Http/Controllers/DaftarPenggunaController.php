@@ -53,45 +53,96 @@ class DaftarPenggunaController extends Controller
 
     public function daftarPengguna(Request $request)
     {
+        // Combine email name and domain
+        $email = $request->emailPegawai . '@adk.gov.my';
+        
+        // Check if the user already exists
         $user = User::where('no_kp', '=', $request->no_kp)->first();
+        $pegawai = Pegawai::where('no_kp', '=', $request->no_kp)->first();
 
         $password_length = 12;
         $password = $this->generatePassword($password_length);
 
-        if ($user === null) {
+        if ($user === null || $pegawai === null) {
             $userData = [
                 'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
-                'email' => $request->email,
+                'email' => $email,
                 'tahap_pengguna' => $request->tahap_pengguna,
                 'password' => Hash::make($password),
                 'profil_pengguna' => null,
                 'status' => '0',
             ];
 
+            $user = User::create($userData);
+
             $pegawaiData = [
+                'users_id' => $user->id,
                 'nama' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
-                'emel' => $request->email,
-                'bahagian' => $request->tahap_pengguna,
-                'negeri' => $request->negeri_bertugas,
-                'daerah' => $request->daerah_bertugas,
+                'emel' => $email,
+                'no_tel' => $request->no_tel,
                 'jawatan' => $request->jawatan,
+                'peranan' => $request->tahap_pengguna,
+                'negeri_bertugas' => $request->negeri_bertugas,
+                'daerah_bertugas' => $request->daerah_bertugas,
             ];
 
-            $user = User::create($userData);
             $pegawai = Pegawai::create($pegawaiData);
+            $defaultEmail = 'fateenashuha2000@gmail.com';
 
-            $email = $request->email;
-            $no_kp = $request->no_kp;
-            Mail::to($email)->send(new DaftarPengguna($email, $password, $no_kp));
+            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp));
+            // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp));
 
-            return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
+            return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
         } 
         else {
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
         }
     }
+
+
+    // public function daftarPengguna(Request $request)
+    // {
+    //     $user = User::where('no_kp', '=', $request->no_kp)->first();
+
+    //     $password_length = 12;
+    //     $password = $this->generatePassword($password_length);
+
+    //     if ($user === null) {
+    //         $userData = [
+    //             'name' => strtoupper($request->name),
+    //             'no_kp' => $request->no_kp,
+    //             'email' => $request->email,
+    //             'tahap_pengguna' => $request->tahap_pengguna,
+    //             'password' => Hash::make($password),
+    //             'profil_pengguna' => null,
+    //             'status' => '0',
+    //         ];
+
+    //         $pegawaiData = [
+    //             'nama' => strtoupper($request->name),
+    //             'no_kp' => $request->no_kp,
+    //             'emel' => $request->email,
+    //             'bahagian' => $request->tahap_pengguna,
+    //             'negeri' => $request->negeri_bertugas,
+    //             'daerah' => $request->daerah_bertugas,
+    //             'jawatan' => $request->jawatan,
+    //         ];
+
+    //         $user = User::create($userData);
+    //         $pegawai = Pegawai::create($pegawaiData);
+
+    //         $email = $request->email;
+    //         $no_kp = $request->no_kp;
+    //         Mail::to($email)->send(new DaftarPengguna($email, $password, $no_kp));
+
+    //         return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
+    //     } 
+    //     else {
+    //         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
+    //     }
+    // }
 
     private function generatePassword($length)
     {

@@ -270,11 +270,12 @@
 							<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-275px">Nama</th>
+										<th class="min-w-175px">Nama</th>
 										<th class="min-w-125px">No. Kad Pengenalan</th>
 										<th class="min-w-125px">Emel</th>
 										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-75px">Tarikh Daftar</th>
+										<th class="min-w-150px">Negeri (Daerah)</th>
+										<th class="min-w-100px">Tarikh Daftar</th>
 										<th class="min-w-50px">Kemaskini</th>
 									</tr>
 								</thead>
@@ -283,6 +284,8 @@
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('peranan');
 											$tarikh_daftar = Carbon::parse($user2->created_at)->format('d-m-Y');
+											$negeriB = DB::table('senarai_negeri')->where('id', $user2['negeri_bertugas'])->value('negeri');
+											$daerahB = DB::table('senarai_daerah')->where('id', $user2['daerah_bertugas'])->value('daerah');
 										@endphp
 	
 										<tr>
@@ -290,6 +293,11 @@
 											<td>{{ $user2->no_kp }}</td>
 											<td>{{ $user2->email }}</td>
 											<td>{{ $peranan }}</td>
+											@if ($negeriB !== null || $daerahB !== null)
+        										<td>{{ $negeriB }} ({{ $daerahB }})</td>
+											@else
+												<td></td>
+											@endif
 											<td>{{ $tarikh_daftar }}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
@@ -396,7 +404,7 @@
 																		<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
 																			<option value="">Pilih Negeri Bertugas</option>
 																			@foreach ($negeri as $item1)
-																				<option value="{{ $item1->negeri}}" {{$user2->negeri == $item1->negeri  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																				<option value="{{ $item1->id}}" {{$user2->negeri == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
 																			@endforeach
 																		</select>
 																	</div>
@@ -407,7 +415,7 @@
 																		<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
 																			<option value="">Pilih Daerah Bertugas</option>
 																			@foreach ($daerah as $item2)
-																				<option value="{{ $item2->daerah}}" {{$user2->daerah == $item2->daerah  ? 'selected' : ''}}>{{$item2->daerah}}</option>
+																				<option value="{{ $item2->id}}" {{$user2->daerah == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
 																			@endforeach
 																		</select>
 																	</div>
@@ -491,7 +499,7 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<!--begin::Label-->
-											<label class="fs-6 fw-semibold mb-2">Nama</label>
+											<label class="fs-6 fw-semibold mb-2 required">Nama</label>
 											<!--end::Label-->
 											<!--begin::Input-->
 											<input type="text" class="form-control form-control-solid" placeholder="" id="name" name="name"/>
@@ -501,11 +509,21 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<!--begin::Label-->
-											<label class="fs-6 fw-semibold mb-2">Emel</label>
+											<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
+											<!--end::Label-->
+											<!--begin::Input-->
+											<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="no_kp" name="no_kp" />
+											<!--end::Input-->
+										</div>
+										<!--end::Input group-->
+										<!--begin::Input group-->
+										<div class="fv-row mb-5">
+											<!--begin::Label-->
+											<label class="fs-6 fw-semibold mb-2 required">Emel</label>
 											<!--end::Label-->
 											<!--begin::Input-->
 											<div class="input-group">
-												<input type="text" class="form-control form-control-solid" placeholder="" id="email" name="email" required />
+												<input type="text" class="form-control form-control-solid" placeholder="contoh12" id="emailPegawai" name="emailPegawai" required />
 												<span class="input-group-text">@adk.gov.my</span>
 												<input type="hidden" id="emel" name="emel" />
 											</div>
@@ -515,16 +533,24 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<!--begin::Label-->
-											<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+											<label class="fs-6 fw-semibold mb-2">Nombor Telefon
+												<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+													<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+													</i>
+												</span>
+											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="no_kp" name="no_kp" />
+											<input type="text" maxlength="11" class="form-control form-control-solid" placeholder="" id="no_tel" name="no_tel" />
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
+											<label class="fs-6 fw-semibold mb-2 required">Jawatan & Gred</label>
 											<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih</option>
 												@foreach ($jawatan as $j)
@@ -535,7 +561,7 @@
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<label class="fs-6 fw-semibold mb-2">Peranan</label>
+											<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
 											<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih</option>
 												@foreach ($tahap->sortBy('jawatan') as $t)
@@ -544,28 +570,47 @@
 											</select>
 										</div>
 										<!--end::Input group-->
-										<!--begin::Input group-->
 										<div class="fv-row mb-5" id="negeri_field">
-											<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+											<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
 											<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih Negeri Bertugas</option>
 												@foreach ($negeri as $item1)
-													<option value="{{ $item1->negeri }}">{{ $item1->negeri }}</option>
+													<option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="fv-row mb-5" id="daerah_field">
+											<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
+											<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+												<option value="">Pilih Daerah Bertugas</option>
+												@foreach ($daerah as $item2)
+													<option value="{{ $item2->id }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+												@endforeach
+											</select>
+										</div>
+										
+										{{-- <!--begin::Input group-->
+										<div class="fv-row mb-5" id="negeri_field">
+											<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
+											<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+												<option value="">Pilih Negeri Bertugas</option>
+												@foreach ($negeri as $item1)
+													<option value="{{ $item1->id }}">{{ $item1->negeri }}</option>
 												@endforeach
 											</select>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5" id="daerah_field">
-											<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+											<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
 											<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih Daerah Bertugas</option>
 												@foreach ($daerah as $item2)
-													<option value="{{ $item2->daerah}}">{{ $item2->daerah}}</option>
+													<option value="{{ $item2->id}}">{{ $item2->daerah}}</option>
 												@endforeach
 											</select>
 										</div>
-										<!--end::Input group-->
+										<!--end::Input group--> --}}
 									</div>
 									<!--end::Scroll-->
 								</div>
@@ -661,7 +706,6 @@
         });
     </script>
 
-	<!-- Add this script at the end of your HTML body -->
 	<script>
 		function generatePasswordPegawai(inputId) {
 			const length = 12;
@@ -717,4 +761,62 @@
 			document.getElementById(inputId).value = password;
 		}
 	</script>	
+
+	<script>
+		document.getElementById('emailPegawai').addEventListener('input', function() {
+			const emailName = this.value;
+			const emailField = document.getElementById('email');
+			emailField.value = emailName + '@adk.gov.my';
+		});
+	</script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const perananField = document.getElementById('tahap_pengguna');
+			const negeriField = document.getElementById('negeri_field');
+			const daerahField = document.getElementById('daerah_field');
+			const negeriSelect = document.getElementById('negeri_bertugas');
+			const daerahSelect = document.getElementById('daerah_bertugas');
+		
+			// Function to toggle visibility of fields based on peranan
+			function toggleFields() {
+				const peranan = parseInt(perananField.value);
+				if (peranan === 3) {
+					negeriField.style.display = 'none';
+					daerahField.style.display = 'none';
+				} else if (peranan === 4) {
+					negeriField.style.display = 'block';
+					daerahField.style.display = 'none';
+				} else if (peranan === 5) {
+					negeriField.style.display = 'block';
+					daerahField.style.display = 'block';
+				} else {
+					negeriField.style.display = 'none';
+					daerahField.style.display = 'none';
+				}
+			}
+		
+			// Function to filter daerah options based on selected negeri
+			function filterDaerahOptions() {
+				const selectedNegeriId = negeriSelect.options[negeriSelect.selectedIndex].getAttribute('data-id');
+				Array.from(daerahSelect.options).forEach(option => {
+					if (option.getAttribute('data-negeri-id') === selectedNegeriId) {
+						option.style.display = 'block';
+					} else {
+						option.style.display = 'none';
+					}
+				});
+				daerahSelect.value = ''; // Reset daerah selection
+			}
+		
+			// Event listeners
+			perananField.addEventListener('change', toggleFields);
+			negeriSelect.addEventListener('change', filterDaerahOptions);
+		
+			// Initial setup
+			toggleFields();
+			filterDaerahOptions();
+		});
+	</script>
+
 @endsection

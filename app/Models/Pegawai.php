@@ -12,14 +12,15 @@ class Pegawai extends Model
     protected $table = 'pegawai';
 
     protected $fillable = [
+        'users_id',
         'no_kp',
         'nama',
         'emel',
         'no_tel',
         'jawatan',
-        'bahagian',
-        'negeri',
-        'daerah',
+        'peranan',
+        'negeri_bertugas',
+        'daerah_bertugas',
     ];
 
     public function program()
