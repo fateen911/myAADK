@@ -499,7 +499,7 @@
 						<!--begin::Modal content-->
 						<div class="modal-content">
 							<!--begin::Form-->
-							<form class="form" action="{{ route('daftar-pengguna') }}" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
+							<form class="form" id="kt_modal_add_customer_form" action="{{ route('daftar-pengguna') }}" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
 								@csrf
 								<!--begin::Modal header-->
 								<div class="modal-header" id="kt_modal_add_customer_header">
@@ -648,9 +648,7 @@
     <!--begin::Javascript-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
 
@@ -808,14 +806,24 @@
 	</script>
 
 	<script>
-		document.getElementById('modal_kemaskini_pegawai_form').addEventListener('submit', function(event) {
-			var emailInput = document.getElementById('emel').value;
-			if (emailInput.includes('@')) {
-				alert('Sila masukkan hanya nama pengguna e-mel tanpa domain.');
-				event.preventDefault();
-			}
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('modal_kemaskini_pegawai_form').addEventListener('submit', function(event) {
+				var emailInput = document.getElementById('emel').value;
+				if (emailInput.includes('@')) {
+					alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
+					event.preventDefault();
+				}
+			});
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('kt_modal_add_customer_form').addEventListener('submit', function(event) {
+				var emailInput = document.getElementById('emailPegawai').value;
+				if (emailInput.includes('@')) {
+					alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
+					event.preventDefault();
+				}
+			});
 		});
 	</script>
-	
-
 @endsection
