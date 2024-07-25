@@ -40,7 +40,7 @@ class DaftarPengguna extends Mailable
         //                         ['id' => $userId, 'hash' => sha1($this->email)]
         //                     );
 
-        $subject = "DAFTAR PENGGUNA SISTEM MYAADK";
+        $subject = "DAFTAR PENGGUNA SISTEM i-Recover";
         return $this->subject($subject)
                     ->view('pendaftaran.emel_daftar_pengguna')
                     ->with([
