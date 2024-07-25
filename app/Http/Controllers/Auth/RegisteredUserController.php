@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Negeri;
+use App\Models\Daerah;
+use App\Models\TahapPengguna;
+use App\Models\JawatanAADK;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +23,13 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $negeri = Negeri::all()->sortBy('negeri');
+        $daerah = Daerah::all()->sortBy('daerah');
+
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        return view('auth.register', compact('tahap', 'daerah', 'negeri','jawatan'));
     }
 
     /**
