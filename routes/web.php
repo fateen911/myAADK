@@ -75,7 +75,8 @@ Route::middleware('auth')->group(function () {
 
 // PENTADBIR - DAFTAR PENGGUNA
 Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
-Route::post('pentadbir/kemaskini-pengguna', [DaftarPenggunaController::class, 'kemaskiniPengguna'])->name('kemaskini-pengguna');
+Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'kemaskiniKlien'])->name('kemaskini-klien');
+Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'kemaskiniPegawai'])->name('kemaskini-pegawai');
 Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
 
 // PENTADBIR - PENGURUSAN PROFIL

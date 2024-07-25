@@ -165,7 +165,7 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
+															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-klien') }}" method="post">
 																@csrf
 	
 																<input type="hidden" name="id" value="{{ $user1->id }}">
@@ -334,7 +334,7 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pengguna') }}" method="post">
+															<form class="form" id="kt_modal_new_card_form" action="{{ route('kemaskini-pegawai') }}" method="post">
 																@csrf
 	
 																<input type="hidden" name="id" value="{{ $user2->id }}">
@@ -399,7 +399,7 @@
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	<div class="fv-row mb-5" id="negeri_field">
+																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
 																		<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
 																			<option value="">Pilih Negeri Bertugas</option>
@@ -410,7 +410,7 @@
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	<div class="fv-row mb-5" id="daerah_field">
+																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
 																		<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
 																			<option value="">Pilih Daerah Bertugas</option>
@@ -562,7 +562,7 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-											<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid fw-bold">
+											<select name="peranan_pegawai" id="peranan_pegawai" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih</option>
 												@foreach ($tahap->sortBy('jawatan') as $t)
 													<option value="{{ $t->id }}">{{ $t->peranan }}</option>
@@ -570,47 +570,24 @@
 											</select>
 										</div>
 										<!--end::Input group-->
-										<div class="fv-row mb-5" id="negeri_field">
+										<div class="fv-row mb-5" id="daftar_negeri_field">
 											<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-											<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+											<select name="daftar_negeri_bertugas" id="daftar_negeri_bertugas" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih Negeri Bertugas</option>
 												@foreach ($negeri as $item1)
 													<option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
 												@endforeach
 											</select>
 										</div>
-										<div class="fv-row mb-5" id="daerah_field">
+										<div class="fv-row mb-5" id="daftar_daerah_field">
 											<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-											<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+											<select name="daftar_daerah_bertugas" id="daftar_daerah_bertugas" class="form-select form-select-solid fw-bold">
 												<option value="">Pilih Daerah Bertugas</option>
 												@foreach ($daerah as $item2)
 													<option value="{{ $item2->id }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
 												@endforeach
 											</select>
 										</div>
-										
-										{{-- <!--begin::Input group-->
-										<div class="fv-row mb-5" id="negeri_field">
-											<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-											<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
-												<option value="">Pilih Negeri Bertugas</option>
-												@foreach ($negeri as $item1)
-													<option value="{{ $item1->id }}">{{ $item1->negeri }}</option>
-												@endforeach
-											</select>
-										</div>
-										<!--end::Input group-->
-										<!--begin::Input group-->
-										<div class="fv-row mb-5" id="daerah_field">
-											<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-											<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
-												<option value="">Pilih Daerah Bertugas</option>
-												@foreach ($daerah as $item2)
-													<option value="{{ $item2->id}}">{{ $item2->daerah}}</option>
-												@endforeach
-											</select>
-										</div>
-										<!--end::Input group--> --}}
 									</div>
 									<!--end::Scroll-->
 								</div>
@@ -644,12 +621,6 @@
 </div>
 
     <!--begin::Javascript-->
-    <script src="/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/js/scripts.bundle.js"></script>
-    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="/assets/js/custom/apps/customers/add.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- DataTables CSS -->
@@ -772,11 +743,11 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			const perananField = document.getElementById('tahap_pengguna');
-			const negeriField = document.getElementById('negeri_field');
-			const daerahField = document.getElementById('daerah_field');
-			const negeriSelect = document.getElementById('negeri_bertugas');
-			const daerahSelect = document.getElementById('daerah_bertugas');
+			const perananField = document.getElementById('peranan_pegawai');
+			const negeriField = document.getElementById('daftar_negeri_field');
+			const daerahField = document.getElementById('daftar_daerah_field');
+			const negeriSelect = document.getElementById('daftar_negeri_bertugas');
+			const daerahSelect = document.getElementById('daftar_daerah_bertugas');
 		
 			// Function to toggle visibility of fields based on peranan
 			function toggleFields() {

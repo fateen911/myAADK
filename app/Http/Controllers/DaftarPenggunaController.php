@@ -30,25 +30,60 @@ class DaftarPenggunaController extends Controller
         return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
-    public function kemaskiniPengguna(Request $request)
-    {   
+    public function kemaskiniKlien(Request $request)
+    {
         // Retrieve the user by their ID
         $user = User::find($request->id);
 
-        // Check if the user exists
-        if ($user->id) 
+        if ($user) 
         {
-            // User exists, update their details
-            $user->update([
+            // Prepare the data for update
+            $updateData = [
                 'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
-                'tahap_pengguna' => $request->tahap_pengguna,
-                'password' => Hash::make($request->password),
-            ]);
+            ];
 
-            return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah ada dan telah dikemaskini.');
+            // Check if a new password has been provided
+            if ($request->filled('password')) {
+                $updateData['password'] = Hash::make($request->password);
+            }
+
+            // Update user details
+            $user->update($updateData);
+
+            return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
         } 
+
+        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
+    }
+
+    public function kemaskiniPegawai(Request $request)
+    {
+        // Retrieve the user by their ID
+        $user = User::find($request->id);
+
+        if ($user) 
+        {
+            // Prepare the data for update
+            $updateData = [
+                'name' => strtoupper($request->name),
+                'no_kp' => $request->no_kp,
+                'email' => $request->email,
+            ];
+
+            // Check if a new password has been provided
+            if ($request->filled('password')) {
+                $updateData['password'] = Hash::make($request->password);
+            }
+
+            // Update user details
+            $user->update($updateData);
+
+            return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
+        } 
+
+        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
     }
 
     public function daftarPengguna(Request $request)
@@ -68,7 +103,7 @@ class DaftarPenggunaController extends Controller
                 'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $email,
-                'tahap_pengguna' => $request->tahap_pengguna,
+                'tahap_pengguna' => $request->peranan_pegawai,
                 'password' => Hash::make($password),
                 'profil_pengguna' => null,
                 'status' => '0',
@@ -83,9 +118,9 @@ class DaftarPenggunaController extends Controller
                 'emel' => $email,
                 'no_tel' => $request->no_tel,
                 'jawatan' => $request->jawatan,
-                'peranan' => $request->tahap_pengguna,
-                'negeri_bertugas' => $request->negeri_bertugas,
-                'daerah_bertugas' => $request->daerah_bertugas,
+                'peranan' => $request->peranan_pegawai,
+                'negeri_bertugas' => $request->daftar_negeri_bertugas,
+                'daerah_bertugas' => $request->daftar_daerah_bertugas,
             ];
 
             $pegawai = Pegawai::create($pegawaiData);
@@ -100,49 +135,6 @@ class DaftarPenggunaController extends Controller
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
         }
     }
-
-
-    // public function daftarPengguna(Request $request)
-    // {
-    //     $user = User::where('no_kp', '=', $request->no_kp)->first();
-
-    //     $password_length = 12;
-    //     $password = $this->generatePassword($password_length);
-
-    //     if ($user === null) {
-    //         $userData = [
-    //             'name' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $request->email,
-    //             'tahap_pengguna' => $request->tahap_pengguna,
-    //             'password' => Hash::make($password),
-    //             'profil_pengguna' => null,
-    //             'status' => '0',
-    //         ];
-
-    //         $pegawaiData = [
-    //             'nama' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'emel' => $request->email,
-    //             'bahagian' => $request->tahap_pengguna,
-    //             'negeri' => $request->negeri_bertugas,
-    //             'daerah' => $request->daerah_bertugas,
-    //             'jawatan' => $request->jawatan,
-    //         ];
-
-    //         $user = User::create($userData);
-    //         $pegawai = Pegawai::create($pegawaiData);
-
-    //         $email = $request->email;
-    //         $no_kp = $request->no_kp;
-    //         Mail::to($email)->send(new DaftarPengguna($email, $password, $no_kp));
-
-    //         return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi telah dihantar kepada ' . $request->name);
-    //     } 
-    //     else {
-    //         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
-    //     }
-    // }
 
     private function generatePassword($length)
     {
