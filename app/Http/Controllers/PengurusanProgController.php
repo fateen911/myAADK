@@ -86,16 +86,9 @@ class PengurusanProgController extends Controller
         $kategori->kod = $request->kod;
         $kategori->save();
 
-        return view('pengurusan_program.pegawai_aadk.tambah_kategori')->with('success', 'User created successfully.');
+        return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
     }
 
-    public function kategoriProgPS(){
-        return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
-    }
-
-    public function kategoriProgPA(){
-        return view('pengurusan_program.pegawai_aadk.tambah_kategori');
-    }
 
 
     //PEGAWAI SISTEM
@@ -191,7 +184,7 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        return view('pengurusan_program.pentadbir_sistem.maklumat_prog')->with('success', 'Program berjaya didaftar.');
+        return redirect()->to('/pengurusan_program/pentadbir_sistem/maklumat_prog')->with('success', 'Program berjaya didaftar.');
     }
 
     public function kemaskiniProgPS()
@@ -209,6 +202,13 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pentadbir_sistem.senarai_prog');
     }
 
+    public function kategori()
+    {
+        $kategori = KategoriProgram::all();
+
+        return response()->json($kategori);
+    }
+
     public function tambahKategoriPS(){
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
     }
@@ -224,7 +224,18 @@ class PengurusanProgController extends Controller
         $kategori->kod  =   $request->kod;
         $kategori->save();
 
-        return view('pengurusan_program.pentadbir_sistem.tambah_kategori')->with('success', 'User created successfully.');
+        return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
+    }
+
+    public function padamKategoriPS($id){
+        $kategori = KategoriProgram::find($id);
+
+        if ($kategori) {
+            $kategori->delete();
+            return redirect()->back()->with('success2', 'Kategori program berjaya dipadam.');
+        } else {
+            return redirect()->back()->with('error2', 'Kategori program gagal dipadam.');
+        }
     }
 
     //KLIEN

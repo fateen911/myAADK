@@ -75,6 +75,11 @@
                         </div>
                     </div>
                     <!--end::Card header-->
+                    @if (session('success'))
+                        <div class="alert alert-success p-2 mx-8" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <!--begin::Card body-->
                     <div class="card-body pt-0">
                         <div class="mb-5 fv-row">
@@ -108,6 +113,16 @@
                         </div>
                     </div>
                     <!--end::Card header-->
+                    @if (session('success2'))
+                        <div class="alert alert-success p-2 mx-8" role="alert">
+                            {{ session('success2') }}
+                        </div>
+                    @endif
+                    @if (session('error2'))
+                        <div class="alert alert-danger p-2 mx-8" role="alert">
+                            {{ session('error2') }}
+                        </div>
+                    @endif
                     <div class="card-body pt-0">
                         <div class="pt-0 table-responsive">
                             <!--begin::Table-->
@@ -120,67 +135,68 @@
                                     <th class="min-w-50px">Tindakan</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Kelompok Sokongan Keluarga Kepulihan
-                                    </td>
-                                    <td class="text-uppercase">SK</td>
-                                    <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
-                                    <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
-                                            <i class="bi bi-trash-fill fs-3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Pencegahan Relaps
-                                    </td>
-                                    <td class="text-uppercase">PR</td>
-                                    <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
-                                    <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
-                                            <i class="bi bi-trash-fill fs-3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Alumni - PCCP
-                                    </td>
-                                    <td class="text-uppercase">APC</td>
-                                    <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
-                                    <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
-                                            <i class="bi bi-trash-fill fs-3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Alumni - Mentor Kepulihan
-                                    </td>
-                                    <td class="text-uppercase">AMK</td>
-                                    <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
-                                    <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
-                                            <i class="bi bi-trash-fill fs-3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Alumni - Kelompok Sokong Bantu
-                                    </td>
-                                    <td class="text-uppercase">ASB</td>
-                                    <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
-                                    <td class="text-center">
-                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">
-                                            <i class="bi bi-trash-fill fs-3"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                <tbody id="items-table-body">
+
+{{--                                <tr>--}}
+{{--                                    <td class="text-uppercase">--}}
+{{--                                        Kelompok Sokongan Keluarga Kepulihan--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-uppercase">SK</td>--}}
+{{--                                    <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>--}}
+{{--                                    <td class="text-center">--}}
+{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
+{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-uppercase">--}}
+{{--                                        Pencegahan Relaps--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-uppercase">PR</td>--}}
+{{--                                    <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>--}}
+{{--                                    <td class="text-center">--}}
+{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
+{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-uppercase">--}}
+{{--                                        Alumni - PCCP--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-uppercase">APC</td>--}}
+{{--                                    <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>--}}
+{{--                                    <td class="text-center">--}}
+{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
+{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-uppercase">--}}
+{{--                                        Alumni - Mentor Kepulihan--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-uppercase">AMK</td>--}}
+{{--                                    <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>--}}
+{{--                                    <td class="text-center">--}}
+{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
+{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-uppercase">--}}
+{{--                                        Alumni - Kelompok Sokong Bantu--}}
+{{--                                    </td>--}}
+{{--                                    <td class="text-uppercase">ASB</td>--}}
+{{--                                    <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>--}}
+{{--                                    <td class="text-center">--}}
+{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
+{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
                                 </tbody>
                             </table>
                             <!--end::Table-->
@@ -192,6 +208,7 @@
             </div>
             <!--end::Main column-->
         </form>
+
         <!--end::Form-->
     </div>
     <!--end::Content container-->
@@ -220,6 +237,33 @@
             order: [], // Disable initial sorting
             language: {
                 url: "/assets/lang/Malay.json"
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                $.ajax({
+                    url: '/kategori',
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, kategori) {
+                            let formattedDate = moment(kategori.created_at).format('DD-MM-YYYY HH:mm:ss');
+                            rows += '<tr>';
+                            rows += '<td class="text-uppercase">' + kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + kategori.kod + '</td>';
+                            rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
+                            rows += '<td><a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori/')}}/' + kategori.id + '" class="btn btn-sm btn-danger px-4"><i class="bi bi-trash-fill fs-3"></i></a></td>';
+                            rows += '</tr>';
+                        });
+                        $('#items-table-body').html(rows);
+                    }
+                });
             }
         });
     </script>

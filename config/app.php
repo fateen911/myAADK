@@ -64,7 +64,7 @@ return array(
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => env('APP_TIMEZONE','Asia/Kuala_Lumpur'),
 
     /*
     |--------------------------------------------------------------------------

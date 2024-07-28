@@ -60,7 +60,7 @@
     <div class="my-10">
         <!--begin:::Tabs-->
         @if (session('success'))
-            <div class="alert alert-success p-2" role="alert">
+            <div class="alert alert-success p-3" role="alert">
                 {{ session('success') }}
             </div>
         @endif
