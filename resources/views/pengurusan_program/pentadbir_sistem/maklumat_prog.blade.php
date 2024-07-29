@@ -690,10 +690,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -713,9 +710,6 @@
         <!--end::Modal dialog-->
     </div>
 
-    <script>
-
-    </script>
     <!--end::Modal - maklumat-->
 
     <!--begin::Modal - pengesahan-->
@@ -728,10 +722,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -762,10 +753,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>

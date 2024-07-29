@@ -119,7 +119,7 @@
                                 <td class="text-uppercase">Belum Selesai</td>
                                 <td class="text-uppercase text-center">
                                     <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
+                                        <a href="#" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
                                             <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
                                             <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
@@ -268,6 +268,87 @@
             <!--end::Content-->
         </div>
     </div>
+
+    <!--begin::Modal - hebahan-->
+
+    <!-- Button trigger modal-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+        Launch demo modal
+    </button>
+
+    <!-- Modal-->
+    <div class="modal fade modal-lg" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body h-500px">
+                    <p>NAMA PROGRAM: PROGRAM PEMULIHAN BERSEPADU</p>
+                    <p>DAERAH: PETALING JAYA</p>
+                    <br>
+                    <p>Sila pilih klien untuk hebahan program:</p>
+
+                    <!--begin::Table-->
+                    <table>
+                        <thead>
+                        <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
+                            <th class="min-w-50px">
+                                <input type="checkbox" id="pilihan">
+                            </th>
+                            <th class="min-w-300px">Nama</th>
+                            <th class="min-w-150px">No. Telefon</th>
+                            <th class="min-w-250px">Email</th>
+                        </tr>
+                        </thead>
+                        <tbody class="fw-semibold text-gray-600">
+                        <tr>
+                            <td class="text-center"><input type="checkbox" id="pilihan"></td>
+                            <td>Ahmad bin Ali</td>
+                            <td>012-3456789</td>
+                            <td>ahmad.ali@example.com</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" id="pilihan"></td>
+                            <td>Siti Nurhaliza binti Abdul Razak</td>
+                            <td>013-9876543</td>
+                            <td>siti.nurhaliza@example.com</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" id="pilihan"></td>
+                            <td>Muhammad Faizal bin Ismail</td>
+                            <td>014-2233445</td>
+                            <td>faizal.ismail@example.com</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" id="pilihan"></td>
+                            <td>Nurul Aisyah binti Zulkifli</td>
+                            <td>015-6677889</td>
+                            <td>nurul.aisyah@example.com</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><input type="checkbox" id="pilihan"></td>
+                            <td>Hafiz bin Ahmad</td>
+                            <td>016-1122334</td>
+                            <td>hafiz.ahmad@example.com</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!--end::Table-->
+                </div>
+
+                <div class="modal-footer">
+                    <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-2 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                    <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                    <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-2 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal - hebahan-->
 
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
