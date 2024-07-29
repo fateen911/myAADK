@@ -206,7 +206,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pengurusan_program/pentadbir_sistem/senarai_prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan_program/pentadbir_sistem/senarai_prog') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
+                                <i class="ki-duotone bi-activity fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -571,7 +571,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pengurusan_program/pegawai_aadk/senarai_prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan_program/pegawai_aadk/senarai_prog') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-badge fs-2">
+                                <i class="ki-duotone bi-activity fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>

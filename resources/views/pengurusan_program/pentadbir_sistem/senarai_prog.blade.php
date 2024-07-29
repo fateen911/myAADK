@@ -270,12 +270,6 @@
     </div>
 
     <!--begin::Modal - hebahan-->
-
-    <!-- Button trigger modal-->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-        Launch demo modal
-    </button>
-
     <!-- Modal-->
     <div class="modal fade modal-lg" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
