@@ -311,6 +311,55 @@ class PengurusanProgController extends Controller
         return redirect()->back()->with('success', 'Berjaya dihantar.');
     }
 
+    //HEBAHAN
+    public function jenisHebahan(Request $request)
+    {
+        $request->validate([
+            'pilihan.*' => 'int',
+        ]);
+        
+        $kaedah = $request->input('kaedah');
+        $pilihan = $request->input('pilihan', []);
+        $klien_id = Klien::whereIn('id', $pilihan)->get();
+
+        // Send communication based on the selected method
+        foreach ($klien_id as $klien) {
+            if ($kaedah == 'sms') {
+                $this->sendSms($klien->no_tel, 'Your message here');
+            }
+            elseif ($kaedah == 'emel') {
+                // Send SMS (assuming you have a service or API for SMS)
+                Mail::to($klien->emel)->send(new HebahanMail());
+            }
+            elseif ($kaedah == 'telegram') {
+                // Telegram Bot API endpoint
+                $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
+                $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
+                $chatId = 490430239; //618021127 - syafiqah
+
+                // Public path to the image file
+                $imagePath = public_path('qr_codes/qrcode.png');
+
+                // Check if the image file exists
+                if (!file_exists($imagePath)) {
+                    return "Image file not found.";
+                }
+
+                // Send image file
+                $response = Http::attach(
+                    'photo',
+                    file_get_contents($imagePath),
+                    'qrcode.png'
+                )->post($telegramEndpoint, [
+                    'chat_id' => $chatId,
+                    'caption' => 'Your QR code:',
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('status', 'Hebahan berjaya dihantar!');
+    }
+
     //HEBAHAN - EMEL
 
     public function hebahanEmel()
