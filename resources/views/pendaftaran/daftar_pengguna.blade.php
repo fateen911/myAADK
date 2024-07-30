@@ -13,12 +13,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-	<script src="/assets/lang/Malay.json"></script>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="/assets/lang/Malay.json"></script>
+
 	<!-- Custom AADK CSS -->
 	<link rel="stylesheet" href="/assets/css/customAADK.css">
 
