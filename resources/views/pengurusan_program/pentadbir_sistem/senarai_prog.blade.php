@@ -145,7 +145,7 @@
 
                     <!--begin::Table-->
 
-                    <table>
+                    <table id="modalHebahan">
                         <thead>
                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
                             <th class="min-w-50px">
