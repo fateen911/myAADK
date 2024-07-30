@@ -33,7 +33,7 @@ class Program extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(KategoriProgram::class);
     }
 
     public function pegawai()

@@ -65,6 +65,7 @@ Route::get('/pengurusan_program/excel_perekodan',[PengurusanProgController::clas
 
 // PENGURUSAN PROGRAM - JSON
 Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
+Route::get('/program', [PengurusanProgController::class, 'program']);
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');

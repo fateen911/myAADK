@@ -101,162 +101,162 @@
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
-                                <th class="min-w-50px">ID</th>
+                                <th class="min-w-40px">ID</th>
                                 <th class="min-w-175px">Nama Program</th>
                                 <th class="min-w-200px">Kategori</th>
-                                <th class="min-w-120px">Status</th>
-                                <th class="min-w-100px">Hebahan</th>
-                                <th class="min-w-100px">QR Perekodan</th>
+                                <th class="min-w-100px">Status</th>
+                                <th class="min-w-50px">Hebahan</th>
+                                <th class="min-w-50px">QR Perekodan</th>
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0001 </a></td>
-                                <td class="text-uppercase">
-                                    Program Pemulihan Bersepadu
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0001</a></td>
-                                <td class="text-uppercase">
-                                    Sesi Terapi Pencegahan Relaps
-                                </td>
-                                <td class="text-uppercase">Pencegahan Relaps</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">AMK0001</a></td>
-                                <td class="text-uppercase">
-                                    Program Kepulihan Komuniti
-                                </td>
-                                <td class="text-uppercase">Alumni - Mentor Kepulihan</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0002 </a></td>
-                                <td class="text-uppercase">
-                                   Kelab Sokongan Pulih Diri
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0002</a></td>
-                                <td class="text-uppercase">
-                                    Bengkel Kesedaran Diri
-                                </td>
-                                <td class="text-uppercase">Pencegahan Relaps</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0003</a></td>
-                                <td class="text-uppercase">
-                                    Program Motivasi Kepulihan
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">APC0001</a></td>
-                                <td class="text-uppercase">
-                                    Rangkaian Alumni Pulih
-                                </td>
-                                <td class="text-uppercase">Alumni - PCCP</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase text-center">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase text-center">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0001 </a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Program Pemulihan Bersepadu--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>--}}
+{{--                                <td class="text-uppercase">Belum Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0001</a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Sesi Terapi Pencegahan Relaps--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Pencegahan Relaps</td>--}}
+{{--                                <td class="text-uppercase">Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">AMK0001</a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Program Kepulihan Komuniti--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Alumni - Mentor Kepulihan</td>--}}
+{{--                                <td class="text-uppercase">Belum Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td> <a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0002 </a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                   Kelab Sokongan Pulih Diri--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>--}}
+{{--                                <td class="text-uppercase">Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">PR0002</a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Bengkel Kesedaran Diri--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Pencegahan Relaps</td>--}}
+{{--                                <td class="text-uppercase">Belum Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">SK0003</a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Program Motivasi Kepulihan--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>--}}
+{{--                                <td class="text-uppercase">Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            <tr>--}}
+{{--                                <td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}">APC0001</a></td>--}}
+{{--                                <td class="text-uppercase">--}}
+{{--                                    Rangkaian Alumni Pulih--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase">Alumni - PCCP</td>--}}
+{{--                                <td class="text-uppercase">Selesai</td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <div class="share-container">--}}
+{{--                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>--}}
+{{--                                        <div id="social-media-icons" class="social-media-icons hidden">--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </td>--}}
+{{--                                <td class="text-uppercase text-center">--}}
+{{--                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -376,6 +376,35 @@
             }
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                $.ajax({
+                    url: '/program',
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, program) {
+                            rows += '<tr>';
+                            rows += '<td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
+                            rows += '<td class="text-uppercase">' + program.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.status + '</td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable" value="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}}/' + program.id + '" ><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '</tr>';
+                        });
+                        $('#sortTable1 tbody').html(rows);
+                    }
+                });
+            }
+        });
+    </script>
+
     <script>
         // JavaScript function to select/deselect all checkboxes
         function toggleAll(source) {

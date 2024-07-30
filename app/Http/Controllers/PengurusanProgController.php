@@ -89,9 +89,13 @@ class PengurusanProgController extends Controller
         return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
     }
 
-
-
     //PEGAWAI SISTEM
+    public function program()
+    {
+        $program = Program::with('kategori')->get();
+        return response()->json($program);
+    }
+
     public function daftarProgPS()
     {
         return view('pengurusan_program.pentadbir_sistem.daftar_prog');
@@ -205,7 +209,6 @@ class PengurusanProgController extends Controller
     public function kategori()
     {
         $kategori = KategoriProgram::all();
-
         return response()->json($kategori);
     }
 
@@ -317,7 +320,7 @@ class PengurusanProgController extends Controller
         $request->validate([
             'pilihan.*' => 'int',
         ]);
-        
+
         $kaedah = $request->input('kaedah');
         $pilihan = $request->input('pilihan', []);
         $klien_id = Klien::whereIn('id', $pilihan)->get();
