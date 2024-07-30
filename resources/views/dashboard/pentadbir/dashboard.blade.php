@@ -81,7 +81,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{ route('senarai-pengguna') }}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -108,7 +108,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{ route('senarai-pengguna') }}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -134,7 +134,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{ route('senarai-pengguna') }}>
                                             <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>

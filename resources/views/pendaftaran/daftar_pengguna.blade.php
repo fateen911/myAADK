@@ -95,6 +95,9 @@
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="pegawai-tab" data-toggle="tab" data-target="#pegawai" type="button" role="tab" aria-controls="pegawai" aria-selected="true">Pegawai AADK</button>
 					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Pegawai Mohon Mendaftar</button>
+					</li>
 				</ul>			
 
 				{{-- Content Navigation Bar --}}
@@ -490,6 +493,224 @@
 							<!--end::Table-->
 						</div>
 						<!--end::Card body-->
+					</div>
+
+					{{-- PERMOHONAN DAFTAR PEGAWAI --}}
+					<div class="tab-pane fade" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
+						<div class="header row align-items-center">
+							<!--begin::Card title-->
+							<div class="col">
+								<h2>Permohonan Daftar Pegawai Baharu</h2>
+								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu baharu serta meluluskan permohonan pendaftaran sebagai pengguna sistem.</small>
+							</div>
+						</div>
+						
+						<!--begin::Card body-->
+						<div class="body">
+							<!--begin::Table-->
+							<table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
+								<thead>
+									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+										<th class="min-w-175px">Nama</th>
+										<th class="min-w-125px">No. Kad Pengenalan</th>
+										<th class="min-w-125px">Emel</th>
+										<th class="min-w-125px">Peranan</th>
+										<th class="min-w-150px">Negeri (Daerah)</th>
+										<th class="min-w-50px">Kemaskini</th>
+									</tr>
+								</thead>
+								<tbody class="fw-semibold text-gray-600">
+									@foreach ($permohonan_pegawai as $user3)
+										@php
+											$peranan = DB::table('tahap_pengguna')->where('id', $user3['tahap_pengguna'])->value('peranan');
+											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
+											$daerahB = DB::table('senarai_daerah')->where('id', $user3['daerah_bertugas'])->value('daerah');
+										@endphp
+	
+										<tr>
+											<td>{{ $user3->name }}</td>
+											<td>{{ $user3->no_kp }}</td>
+											<td>{{ $user3->email }}</td>
+											<td>{{ $peranan }}</td>
+											<td>
+												@if ($negeriB !== null)
+        											{{ $negeriB }} 
+													@if ($daerahB !== null)
+														({{ $daerahB }})
+													@endif
+												@else
+											</td>
+											@endif
+											<td>
+												<div class="d-flex justify-content-center align-items-center">
+													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_permohonan_pegawai{{$user3->id}}">
+														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Permohonan">
+															<i class="ki-duotone bi bi-pencil fs-3"></i>
+														</span>
+													</a>
+												</div>                                                     
+											</td>
+	
+											<!--begin::Modal - Permohonan Pegawai-->
+											<div class="modal fade" id="modal_permohonan_pegawai{{$user3->id}}" tabindex="-1" aria-hidden="true">
+												<!--begin::Modal dialog-->
+												<div class="modal-dialog modal-dialog-centered mw-650px">
+													<!--begin::Modal content-->
+													<div class="modal-content">
+														<!--begin::Modal header-->
+														<div class="modal-header">
+															<!--begin::Modal title-->
+															<h2>Kemaskini Maklumat Akaun Pegawai</h2>
+															<!--end::Modal title-->
+
+															<!--begin::Close-->
+															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+																<i class="ki-duotone ki-cross fs-1">
+																	<span class="path1"></span>
+																	<span class="path2"></span>
+																</i>
+															</div>
+															<!--end::Close-->
+														</div>
+														<!--end::Modal header-->
+	
+														<!--begin::Modal body-->
+														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+															<!--begin::Form-->
+															<form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">
+																@csrf
+	
+																<input type="hidden" name="id" value="{{ $user3->id }}">
+																<div class="scroll-y me-n7 pe-7" id="modal_kemaskini_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_kemaskini_pegawai_header" data-kt-scroll-wrappers="#modal_kemaskini_pegawai_scroll" data-kt-scroll-offset="300px">
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Nama</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->name}}" />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user3->no_kp}}"/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Emel</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<div class="input-group">
+																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user3->email)[0] }}" />
+																			<span class="input-group-text">@adk.gov.my</span>
+																			<input type="hidden" id="email" name="email" value="{{ $user3->email }}" />
+																		</div>
+																		<!--end::Input-->
+																	</div>																	
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Nombor Telefon
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user3->no_tel}}"/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
+																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+																			<option value="">Pilih</option>
+																			@foreach ($jawatan as $j)
+																				<option value="{{ $j->id }}" {{$user3->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
+																			@endforeach
+																		</select>
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
+																				<option value="{{$tahap1->id}}" {{$user3->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
+																			@endforeach
+																		</select>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	@if ($user3->negeri_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Negeri Bertugas</option>
+																				@foreach ($negeri as $item1)
+																					<option value="{{ $item1->id}}" {{$user3->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																				@endforeach
+																			</select>
+																		</div>	
+																	@endif
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	@if ($user3->daerah_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Daerah Bertugas</option>
+																				@foreach ($daerah as $item2)
+																					<option value="{{ $item2->id}}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
+																				@endforeach
+																			</select>
+																		</div>
+																	@endif
+																	<!--end::Input group-->
+																</div>
+																<!--end::Scroll-->
+
+																<!--begin::Actions-->
+																<div class="text-center pt-15">
+																	<button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
+                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+																</div>
+																<!--end::Actions-->
+															</form>
+															<!--end::Form-->
+														</div>
+														<!--end::Modal body-->
+													</div>
+													<!--end::Modal content-->
+												</div>
+												<!--end::Modal dialog-->
+											</div>
+											<!--end::Modal -  Kemaskini Pegawai-->
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
+							<!--end::Table-->
+						</div>
+						<!--end::Card body-->
 					</div> 
 				</div>
 
@@ -655,16 +876,24 @@
 
     <script>
         $('#sortTable1').DataTable({
-			ordering: true, // Enable manual sorting
-			order: [], // Disable initial sorting
+			ordering: true,
+			order: [],
 			language: {
 				url: "/assets/lang/Malay.json"
 			}
 		});
 
 		$('#sortTable2').DataTable({
-			ordering: true, // Enable manual sorting
-			order: [], // Disable initial sorting
+			ordering: true,
+			order: [],
+			language: {
+				url: "/assets/lang/Malay.json"
+			}
+		});
+
+		$('#sortTable3').DataTable({
+			ordering: true,
+			order: [],
 			language: {
 				url: "/assets/lang/Malay.json"
 			}

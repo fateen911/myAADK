@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Pegawai;
+use App\Models\PegawaiMohonDaftar;
 use App\Models\Negeri;
 use App\Models\Daerah;
 use App\Models\TahapPengguna;
@@ -39,25 +41,34 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        // Combine email name and domain
+        $email = $request->emelPegawai . '@adk.gov.my';
+        
+        // Check if the user already exists
+        $user = User::where('no_kp', '=', $request->no_kp)->first();
+        $pegawai = Pegawai::where('no_kp', '=', $request->no_kp)->first();
+        $permohonan_pegawai = PegawaiMohonDaftar::where('no_kp', '=', $request->no_kp)->first();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'no_kp' => $request->no_kp,
-            'password' => Hash::make($request->password),
-            'tahap_pengguna' => 1,
-            'status' => 0,
-        ]);
+        if ($user === null && $pegawai === null && $permohonan_pegawai === null ) 
+        {
+            $pegawaiData = [
+                'nama' => strtoupper($request->nama),
+                'no_kp' => $request->no_kp,
+                'emel' => $email,
+                'no_tel' => $request->no_tel,
+                'jawatan' => $request->jawatan,
+                'peranan' => $request->peranan,
+                'negeri_bertugas' => $request->negeri_bertugas,
+                'daerah_bertugas' => $request->daerah_bertugas,
+                'status' => 'Baharu',
+            ];
 
-        event(new Registered($user));
+            $pegawai = PegawaiMohonDaftar::create($pegawaiData);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+            return redirect()->route('login')->with('message', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar. Sila semak notifikasi emel jika permohonan anda berjaya diluluskan.');
+        } 
+        else {
+            return redirect()->route('login')->with('error', 'Pegawai ' . $request->nama . ' telah didaftarkan dalam sistem ini.');
+        }
     }
 }

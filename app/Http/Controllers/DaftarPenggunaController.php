@@ -11,6 +11,7 @@ use App\Models\Pegawai;
 use App\Models\Negeri;
 use App\Models\Daerah;
 use App\Models\JawatanAADK;
+use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
 
 class DaftarPenggunaController extends Controller
@@ -20,6 +21,7 @@ class DaftarPenggunaController extends Controller
         $klien = User::where('tahap_pengguna', '=' ,'2')->get();
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                         ->whereIn('tahap_pengguna', [3, 4, 5])->get();
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status','=','Baharu');
 
         $negeri = Negeri::all()->sortBy('negeri');
         $daerah = Daerah::all()->sortBy('daerah');
@@ -27,7 +29,7 @@ class DaftarPenggunaController extends Controller
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
+        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function kemaskiniKlien(Request $request)

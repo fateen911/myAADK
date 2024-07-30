@@ -97,7 +97,7 @@
             <!-- Negeri Bertugas -->
             <div class="mt-4" id="mohon_negeri_field">
                 <x-input-label for="negeri_bertugas" :value="__('Negeri Bertugas')" />
-                <select id="negeri_bertugas" name="negeri_bertugas" class="form-control w-full" required>
+                <select id="negeri_bertugas" name="negeri_bertugas" class="form-control w-full">
                     <option value="">{{ __('Pilih Negeri') }}</option>
                     @foreach ($negeri as $item1)
                         <option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
@@ -109,7 +109,7 @@
             <!-- Daerah Bertugas -->
             <div class="mt-4" id="mohon_daerah_field">
                 <x-input-label for="daerah_bertugas" :value="__('Daerah Bertugas')" />
-                <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full" required>
+                <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full">
                     <option value="">{{ __('Select Daerah') }}</option>
                     @foreach ($daerah as $item2)
                         <option value="{{ $item2->id }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
@@ -119,7 +119,7 @@
             </div>
     
             <div class="flex items-center justify-center mt-4">
-                <x-primary-button class="ms-4">
+                <x-primary-button type="submit" class="ms-4">
                     {{ __('DAFTAR') }}
                 </x-primary-button>
             </div>
@@ -132,6 +132,31 @@
         </form>
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Check if there is a flash message
+                @if(session('message'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berjaya!',
+                        text: '{!! session('message') !!}',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+    
+                // Check if there is a flash error message
+                @if(session('error'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Tidak Berjaya!',
+                        text: '{!! session('error') !!}',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+            });
+        </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
