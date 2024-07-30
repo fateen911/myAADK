@@ -23,7 +23,14 @@
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root" id="kt_app_root">
     <!--begin::Page bg image-->
-    <style>body { background-image: url('assets/media/auth/bg9.jpg'); } [data-bs-theme="dark"] body { background-image: url('assets/media/auth/bg9-dark.jpg'); }</style>
+    <style>
+        body { background-image: url('/assets/media/auth/bg9.jpg');
+        background-size: cover; /* Scale the image to cover the entire viewport */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent repeating the image */
+        background-attachment: fixed; /* Optional: Fix the background image during scrolling */}
+        [data-bs-theme="dark"] body { background-image: url('/assets/media/auth/bg9-dark.jpg'); }
+    </style>
     <!--end::Page bg image-->
     <!--begin::Authentication - Signup Welcome Message -->
     <div class="d-flex flex-column flex-center flex-column-fluid">
@@ -34,7 +41,7 @@
                 <div class="card-body py-15 py-lg-20">
                     <!--begin::Logo-->
                     <div class="mb-13">
-                        <img alt="Logo" src="logo/aadk.png" class="h-125px" />
+                        <img alt="Logo" src="/logo/aadk.png" class="h-125px" />
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->

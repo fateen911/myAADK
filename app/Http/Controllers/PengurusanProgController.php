@@ -195,7 +195,8 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        return redirect()->to('/pengurusan_program/pentadbir_sistem/maklumat_prog')->with('success', 'Program berjaya didaftar.');
+        $direct = "/pengurusan_program/pentadbir_sistem/maklumat_prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
     }
 
     public function kemaskiniProgPS()
