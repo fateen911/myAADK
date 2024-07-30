@@ -249,7 +249,7 @@
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.status + '</td>';
                             rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable" value="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
-                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}}/' + program.id + '" ><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#sortTable1 tbody').html(rows);

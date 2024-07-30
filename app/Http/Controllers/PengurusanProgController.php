@@ -41,11 +41,12 @@ class PengurusanProgController extends Controller
     }
 
     //QR CODE
-    public function qrCode()
+    public function qrCode($id)
     {
-        $qrCode = QrCode::size(400)->generate('https://laravel.com/'); // Replace with your URL or data
+        $program = Program::with('kategori')->find($id);
+        $qrCode = QrCode::size(400)->generate($program->pautan_perekodan); // Replace with your URL or data
 
-        $pdf = PDF::loadView('pengurusan_program.qr_code', ['qrCode' => $qrCode]);
+        $pdf = PDF::loadView('pengurusan_program.qr_code', ['qrCode' => $qrCode], ['program' => $program]);
 
         return $pdf->download('qr_code.pdf');
     }

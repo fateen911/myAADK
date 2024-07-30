@@ -21,7 +21,7 @@ Route::get('/pengurusan_program/tryQR',[PengurusanProgController::class, 'tryQR'
 Route::get('/pengurusan_program/try',[PengurusanProgController::class, 'try'])->name('pengurusan_program.try');
 
 // PENGURUSAN PROGRAM - QR CODE
-Route::get('/pengurusan_program/qr_code',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
+Route::get('/pengurusan_program/qr_code/{id}',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
 Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share']);
 
 // PENGURUSAN PROGRAM - PEGAWAI AADK
