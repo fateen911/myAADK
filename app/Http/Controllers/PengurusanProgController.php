@@ -37,7 +37,13 @@ class PengurusanProgController extends Controller
 
     public function try()
     {
-        return view('pengurusan_program.try');
+        $id =1;
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.try', compact('program'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 
     //QR CODE
@@ -325,7 +331,7 @@ class PengurusanProgController extends Controller
     {
         $program = Program::with('kategori')->find($id);
         if ($program) {
-            return view('pengurusan_program.pentadbir_sistem.papar_hebahan', compact('program'));
+            return view('pengurusan_program.hebahan.papar_hebahan', compact('program'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }

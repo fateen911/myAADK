@@ -125,8 +125,8 @@
 
     <!--begin::Modal - hebahan-->
     <!-- Modal-->
-    <div class="modal fade modal-lg" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal fade modal-lg" id="hebahanModal" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
@@ -135,71 +135,10 @@
                     </button>
                 </div>
 
-                <form method="post" action="{{url('')}}">
-                    @csrf
-                <div class="modal-body h-500px">
-                    <p>NAMA PROGRAM: PROGRAM PEMULIHAN BERSEPADU</p>
-                    <p>DAERAH: PETALING JAYA</p>
-                    <br>
-                    <p>Sila pilih klien untuk hebahan program:</p>
+                <div class="modal-body" id="modalBody">
 
-                    <!--begin::Table-->
-
-                    <table id="modalHebahan">
-                        <thead>
-                        <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
-                            <th class="min-w-50px">
-                                <input type="checkbox" id="selectAll" onclick="toggleAll(this)">
-                            </th>
-                            <th class="min-w-300px">Nama</th>
-                            <th class="min-w-150px">No. Telefon</th>
-                            <th class="min-w-250px">Email</th>
-                        </tr>
-                        </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                        <tr>
-                            <td class="text-center"><input type="checkbox" name="pilihan[]" value="1"></td>
-                            <td>Ahmad bin Ali</td>
-                            <td>012-3456789</td>
-                            <td>ahmad.ali@example.com</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center"><input type="checkbox" name="pilihan[]" value="2"></td>
-                            <td>Siti Nurhaliza binti Abdul Razak</td>
-                            <td>013-9876543</td>
-                            <td>siti.nurhaliza@example.com</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center"><input type="checkbox" name="pilihan[]" value="3"></td>
-                            <td>Muhammad Faizal bin Ismail</td>
-                            <td>014-2233445</td>
-                            <td>faizal.ismail@example.com</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center"><input type="checkbox" name="pilihan[]" value="4"></td>
-                            <td>Nurul Aisyah binti Zulkifli</td>
-                            <td>015-6677889</td>
-                            <td>nurul.aisyah@example.com</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center"><input type="checkbox" name="pilihan[]" value="5"></td>
-                            <td>Hafiz bin Ahmad</td>
-                            <td>016-1122334</td>
-                            <td>hafiz.ahmad@example.com</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <!--end::Table-->
                 </div>
 
-                <div class="modal-footer">
-                    <button type="submit" name="kaedah" value="sms" class="btn btn-icon btn-warning mx-2 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></button>
-                    <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></button>
-                    <button type="submit" name="kaedah" value="telegram" class="btn btn-icon btn-primary mx-2 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></button>
-                </div>
-
-                </form>
             </div>
         </div>
     </div>
@@ -248,7 +187,7 @@
                             rows += '<td class="text-uppercase">' + program.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.status + '</td>';
-                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#exampleModalScrollable" value="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
                             rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
@@ -256,6 +195,23 @@
                     }
                 });
             }
+        });
+    </script>
+
+    <!-- Modal Hebahan -->
+    <script>
+        $(document).on('click', '#program', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pengurusan_program/hebahan/papar_hebahan/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBody').html(response);
+                },
+                error: function() {
+                    $('#modalBody').html('Error loading content.');
+                }
+            });
         });
     </script>
 
