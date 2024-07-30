@@ -196,9 +196,14 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pentadbir_sistem.kemaskini_prog');
     }
 
-    public function maklumatProgPS()
+    public function maklumatProgPS($id)
     {
-        return view('pengurusan_program.pentadbir_sistem.maklumat_prog');
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 
     public function senaraiProgPS()

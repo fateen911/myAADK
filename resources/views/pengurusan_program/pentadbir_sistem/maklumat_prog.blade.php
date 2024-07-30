@@ -114,12 +114,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard1()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -173,7 +173,7 @@
                                 <h2>Maklumat Program</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pentadbir_sistem/kemaskini_prog')}}" class="btn btn-sm btn-primary btn-active-color-primary">
+                                <a href="{{url('/pengurusan_program/pentadbir_sistem/kemaskini_prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-color-primary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>
@@ -184,21 +184,21 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Nama Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Program Pemulihan Bersepadu</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Kategori:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Kelompok Sokongan Keluarga Kepulihan</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->kategori->nama}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Objektif Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
+                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->objektif!!}</div>
                             </div>
                             <!--end::Input group-->
                             <div class="form d-flex flex-column flex-lg-row">
@@ -206,7 +206,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Mula:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024, 8:00 AM</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -214,7 +214,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Tamat:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">3 Ogos 2024, 2:00 PM</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -224,14 +224,14 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Tempat Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->tempat}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Penganjur Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->penganjur}}</p>
                             </div>
                             <!--end::Input group-->
 
@@ -241,7 +241,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Nama Pegawai:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">En. Kairul Azizi</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama_pegawai}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -249,7 +249,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">No. Telefon Untuk Dihubungi:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">0135728935</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->no_tel_dihubungi}}</p>
                                     </div>
 
                                 </div>
@@ -261,7 +261,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label">Catatan:</label>
                                 <!--end::Label-->
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran.</p>
+                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->catatan!!}</div>
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -301,12 +301,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard2()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -493,12 +493,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_perekodan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran" disabled/>
+                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_perekodan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -699,7 +699,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -731,7 +731,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -762,7 +762,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_perekodan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>

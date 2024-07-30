@@ -136,67 +136,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="items-table-body">
-
-{{--                                <tr>--}}
-{{--                                    <td class="text-uppercase">--}}
-{{--                                        Kelompok Sokongan Keluarga Kepulihan--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-uppercase">SK</td>--}}
-{{--                                    <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
-{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-uppercase">--}}
-{{--                                        Pencegahan Relaps--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-uppercase">PR</td>--}}
-{{--                                    <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
-{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-uppercase">--}}
-{{--                                        Alumni - PCCP--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-uppercase">APC</td>--}}
-{{--                                    <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
-{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-uppercase">--}}
-{{--                                        Alumni - Mentor Kepulihan--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-uppercase">AMK</td>--}}
-{{--                                    <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
-{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-uppercase">--}}
-{{--                                        Alumni - Kelompok Sokong Bantu--}}
-{{--                                    </td>--}}
-{{--                                    <td class="text-uppercase">ASB</td>--}}
-{{--                                    <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>--}}
-{{--                                    <td class="text-center">--}}
-{{--                                        <a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori')}}" class="btn btn-sm btn-danger px-4">--}}
-{{--                                            <i class="bi bi-trash-fill fs-3"></i>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
+                                    <!--ajax-->
                                 </tbody>
                             </table>
                             <!--end::Table-->
