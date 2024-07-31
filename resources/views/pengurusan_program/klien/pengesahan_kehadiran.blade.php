@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Include Select2 JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -74,12 +75,15 @@
                     <!--end::Counter-->
                     <!--begin::Text-->
                     <div class="w-md-350px mb-2 mx-auto fw-semibold fs-6 mb-7 ">
-                        Nama Program: Program Pemulihan Bersepadu <br>
-                        Tarikh/Masa: 17/06/2024, 9AM <br>
-                        Tempat: Dewan Perdana <br>
-                        Penganjur: Majlis Pemulihan Dadah Kebangsaan (MPDK) <br>
-                        Pegawai AADK: En. Kairul Azizi <br>
-                        Sila Hubungi: 0135728935 <br>
+                        Nama Program: {{$program->nama}} <br>
+                        Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}} <br>
+                        Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}} <br>
+                        Tempat: {{$program->tempat}} <br>
+                        @if($program->penganjur!=null)
+                            Penganjur: {{$program->penganjur}} <br>
+                        @endif
+                        Pegawai AADK: {{$program->nama_pegawai}} <br>
+                        Sila Hubungi: {{$program->no_tel_dihubungi}} <br>
                         <br>
                         <hr>
                         @if (session('success'))
@@ -98,9 +102,8 @@
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_pengesahan_kehadiran')}}" method="POST">
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_pengesahan_kehadiran/'.$program->id)}}" method="POST">
                         @csrf
-                        <input type="hidden" name="program_id" value="1">
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::Input-->
@@ -115,9 +118,9 @@
                         <!--begin::Actions-->
                         <div class="d-flex flex-wrap justify-content-center pb-lg-0">
                             <button type="submit" class="btn btn-secondary me-4" name="keputusan" value="TIDAK HADIR">Tidak Hadir</button>
-                            <button type="submit" class="btn btn-primary me-4" name="keputusan" value="HADIR">
+                            <button type="submit" class="btn btn-primary btn-active-success me-4" name="keputusan" value="HADIR">
                                 <!--begin::Indicator label-->
-                                <span class="indicator-label">Hadir</span>
+                                <span class="indicator-label color-white">Hadir</span>
                                 <!--end::Indicator label-->
                                 <!--begin::Indicator progress-->
                                 <span class="indicator-progress">Please wait...
