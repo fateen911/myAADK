@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DaftarPengguna;
+use App\Mail\PegawaiApproved;
+use App\Mail\PegawaiRejected;
 use App\Models\User;
 use App\Models\Pegawai;
 use App\Models\Negeri;
@@ -157,6 +159,63 @@ class DaftarPenggunaController extends Controller
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
         }
     }
+
+    public function permohonanPegawai(Request $request, $id)
+    {
+        dd ($request->input('status'));
+
+        $status = $request->input('status');
+
+        // Fetch the staff request data
+        $pegawaiBaharu = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
+
+        if ($status == 'Lulus') {
+            // Generate a random password
+            $password_length = 12;
+            $password = $this->generatePassword($password_length);
+
+            // Store user information in users table
+            $user = new User();
+            $user->name = $pegawaiBaharu->nama;
+            $user->no_kp = $pegawaiBaharu->no_kp;
+            $user->email = $pegawaiBaharu->emel;
+            $user->password = bcrypt($password);
+            $user->tahap_pengguna = $pegawaiBaharu->peranan;
+            $user->status = '0';
+            $user->save();
+
+            // Store additional staff information in pegawai table
+            $pegawai = new Pegawai();
+            $pegawai->users_id = $user->id;
+            $pegawai->no_kp = $pegawaiBaharu->no_kp;
+            $pegawai->nama = $pegawaiBaharu->nama;
+            $pegawai->emel = $pegawaiBaharu->emel;
+            $pegawai->no_tel = $pegawaiBaharu->no_tel;
+            $pegawai->jawatan = $pegawaiBaharu->jawatan;
+            $pegawai->peranan = $pegawaiBaharu->peranan;
+            $pegawai->negeri_bertugas = $pegawaiBaharu->negeri_bertugas;
+            $pegawai->daerah_bertugas = $pegawaiBaharu->daerah_bertugas;
+            $pegawai->save();
+
+            // Update the status in pegawai_mohon_daftar table
+            $pegawaiBaharu->status = 'Lulus';
+            $pegawaiBaharu->save();
+
+            // Send notification email to the staff
+            Mail::to($pegawaiBaharu->emel)->send(new PegawaiApproved($pegawaiBaharu, $password));
+
+        } elseif ($status == 'Ditolak') {
+            // Update the status in pegawai_mohon_daftar table
+            $pegawaiBaharu->status = 'Ditolak';
+            $pegawaiBaharu->save();
+
+            // Send rejection email to the staff
+            Mail::to($pegawaiBaharu->emel)->send(new PegawaiRejected($pegawaiBaharu));
+        }
+
+        return redirect()->back()->with('success', 'Permohonan telah diproses.');
+    }
+
 
     private function generatePassword($length)
     {
