@@ -500,8 +500,8 @@
 						<div class="header row align-items-center">
 							<!--begin::Card title-->
 							<div class="col">
-								<h2>Permohonan Daftar Pegawai Baharu</h2>
-								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu baharu serta meluluskan permohonan pendaftaran sebagai pengguna sistem.</small>
+								<h2>Senarai Permohonan Pendaftaran Pegawai sebagai Pengguna Baharu Sistem</h2>
+								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu serta luluskan permohonan pendaftaran sebagai pengguna sistem.</small>
 							</div>
 						</div>
 						
@@ -516,21 +516,21 @@
 										<th class="min-w-125px">Emel</th>
 										<th class="min-w-125px">Peranan</th>
 										<th class="min-w-150px">Negeri (Daerah)</th>
-										<th class="min-w-50px">Kemaskini</th>
+										<th class="min-w-50px">Kelulusan</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($permohonan_pegawai as $user3)
 										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user3['tahap_pengguna'])->value('peranan');
+											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
 											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
 											$daerahB = DB::table('senarai_daerah')->where('id', $user3['daerah_bertugas'])->value('daerah');
 										@endphp
 	
 										<tr>
-											<td>{{ $user3->name }}</td>
+											<td>{{ $user3->nama }}</td>
 											<td>{{ $user3->no_kp }}</td>
-											<td>{{ $user3->email }}</td>
+											<td>{{ $user3->emel }}</td>
 											<td>{{ $peranan }}</td>
 											<td>
 												@if ($negeriB !== null)
@@ -560,7 +560,7 @@
 														<!--begin::Modal header-->
 														<div class="modal-header">
 															<!--begin::Modal title-->
-															<h2>Kemaskini Maklumat Akaun Pegawai</h2>
+															<h2>Luluskan Permohonan Pendaftaran Pegawai</h2>
 															<!--end::Modal title-->
 
 															<!--begin::Close-->
@@ -588,7 +588,7 @@
 																		<label class="fs-6 fw-semibold mb-2">Nama</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->name}}" />
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" />
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -609,9 +609,9 @@
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user3->email)[0] }}" />
+																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user3->emel)[0] }}" />
 																			<span class="input-group-text">@adk.gov.my</span>
-																			<input type="hidden" id="email" name="email" value="{{ $user3->email }}" />
+																			<input type="hidden" id="email" name="email" value="{{ $user3->emel }}" />
 																		</div>
 																		<!--end::Input-->
 																	</div>																	

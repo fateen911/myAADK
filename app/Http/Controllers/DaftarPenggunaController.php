@@ -21,7 +21,7 @@ class DaftarPenggunaController extends Controller
         $klien = User::where('tahap_pengguna', '=' ,'2')->get();
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                         ->whereIn('tahap_pengguna', [3, 4, 5])->get();
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status','=','Baharu');
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status','Baharu')->get();
 
         $negeri = Negeri::all()->sortBy('negeri');
         $daerah = Daerah::all()->sortBy('daerah');
