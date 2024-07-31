@@ -18,12 +18,14 @@ class DaftarPengguna extends Mailable
     public $email;
     public $no_kp;
     public $password;
+    public $verificationUrl;
 
-    public function __construct($email, $password, $no_kp)
+    public function __construct($email, $password, $no_kp, $verificationUrl)
     {
         $this->email = $email;
         $this->no_kp = $no_kp;
         $this->password = $password;
+        $this->verificationUrl = $verificationUrl;
     }
 
     /**
@@ -46,6 +48,7 @@ class DaftarPengguna extends Mailable
                     ->with([
                         'no_kp' => $this->no_kp,
                         'password' => $this->password,
+                        'verificationUrl' => $this->verificationUrl,
                         // 'verificationUrl' => $verificationUrl,
                     ]);
     }

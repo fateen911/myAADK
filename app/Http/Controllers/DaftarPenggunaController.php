@@ -150,9 +150,18 @@ class DaftarPenggunaController extends Controller
             ];
 
             $pegawai = Pegawai::create($pegawaiData);
+
+            // Generate the email verification URL
+            event(new Registered($user));
+            $verificationUrl = URL::temporarySignedRoute(
+                'verification.verify',
+                now()->addMinutes(60),
+                ['id' => $user->id, 'hash' => sha1($user->email)]
+            );
+
             $defaultEmail = 'fateenashuha2000@gmail.com';
 
-            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp));
+            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
             // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp));
 
             return redirect()->route('senarai-pengguna')->with('success', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
@@ -164,6 +173,10 @@ class DaftarPenggunaController extends Controller
 
     public function permohonanPegawai(Request $request, $id)
     {
+        // Combine email name and domain
+        $email = $request->emailPegawai . '@adk.gov.my';
+
+        // Fetch keputusan permohonan
         $keputusan = $request->input('status');
 
         // Fetch the staff request data
@@ -178,7 +191,7 @@ class DaftarPenggunaController extends Controller
             $user = new User();
             $user->name = $pegawaiBaharu->nama;
             $user->no_kp = $pegawaiBaharu->no_kp;
-            $user->email = $pegawaiBaharu->emel;
+            $user->email = $email;
             $user->password = bcrypt($password);
             $user->tahap_pengguna = $pegawaiBaharu->peranan;
             $user->status = '0';
@@ -189,7 +202,7 @@ class DaftarPenggunaController extends Controller
             $pegawai->users_id = $user->id;
             $pegawai->no_kp = $pegawaiBaharu->no_kp;
             $pegawai->nama = $pegawaiBaharu->nama;
-            $pegawai->emel = $pegawaiBaharu->emel;
+            $pegawai->emel = $email;
             $pegawai->no_tel = $pegawaiBaharu->no_tel;
             $pegawai->jawatan = $pegawaiBaharu->jawatan;
             $pegawai->peranan = $pegawaiBaharu->peranan;
@@ -210,7 +223,7 @@ class DaftarPenggunaController extends Controller
             );
 
             // Send notification email to the staff
-            Mail::to($pegawaiBaharu->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($email)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
             return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
         } 
         elseif ($keputusan == 'Ditolak') {
@@ -219,7 +232,7 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->save();
 
             // Send rejection email to the staff
-            Mail::to($pegawaiBaharu->emel)->send(new PegawaiRejected($pegawaiBaharu));
+            Mail::to($email)->send(new PegawaiRejected($pegawaiBaharu));
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiBaharu->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
         }
     }
