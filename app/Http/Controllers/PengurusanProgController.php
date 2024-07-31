@@ -46,6 +46,30 @@ class PengurusanProgController extends Controller
         }
     }
 
+    //JSON
+    public function kategori()
+    {
+        $kategori = KategoriProgram::all();
+        return response()->json($kategori);
+    }
+
+    public function program()
+    {
+        $program = Program::with('kategori')->get();
+        return response()->json($program);
+    }
+
+    public function pengesahan()
+    {
+        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->get();
+        return response()->json($pengesahan);
+    }
+
+    public function perekodan()
+    {
+        $perekodan = PerekodanKehadiranProgram::with('program','klien')->get();
+        return response()->json($perekodan);
+    }
     //QR CODE
     public function qrCode($id)
     {
@@ -97,12 +121,6 @@ class PengurusanProgController extends Controller
     }
 
     //PEGAWAI SISTEM
-    public function program()
-    {
-        $program = Program::with('kategori')->get();
-        return response()->json($program);
-    }
-
     public function daftarProgPS()
     {
         return view('pengurusan_program.pentadbir_sistem.daftar_prog');
@@ -163,7 +181,7 @@ class PengurusanProgController extends Controller
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan_program/klien/pengesahan_kehadiran', ['id' => $program->id]);
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran', ['id' => $program->id]);
 
         // Generate the QR code for the event link
         $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -176,7 +194,7 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan_program/klien/daftar_kehadiran', ['id' => $program->id]);
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran', ['id' => $program->id]);
 
         // Generate the QR code for the event link
         $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -195,7 +213,7 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        $direct = "/pengurusan_program/pentadbir_sistem/maklumat_prog/" . $program->id;
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
         return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
     }
 
@@ -219,11 +237,6 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pentadbir_sistem.senarai_prog');
     }
 
-    public function kategori()
-    {
-        $kategori = KategoriProgram::all();
-        return response()->json($kategori);
-    }
 
     public function tambahKategoriPS(){
         return view('pengurusan_program.pentadbir_sistem.tambah_kategori');
@@ -338,7 +351,7 @@ class PengurusanProgController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'Pengesahan telah dibuat sebeleum ini.');
+            return redirect()->back()->with('error', 'Pengesahan telah dibuat sebelum ini.');
         }
 
         $tarikh_pengesahan = Carbon::now();

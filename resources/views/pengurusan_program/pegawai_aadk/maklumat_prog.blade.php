@@ -108,12 +108,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard1()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -127,9 +127,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -167,7 +167,7 @@
                                 <h2>Maklumat Program</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pegawai_aadk/kemaskini_prog')}}" class="btn btn-sm btn-primary btn-active-color-primary">
+                                <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog')}}" class="btn btn-sm btn-primary btn-active-color-primary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>
@@ -295,12 +295,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran" disabled/>
+                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard2()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -314,9 +314,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -334,10 +334,10 @@
                                 <h2>Senarai Pengesahan Kehadiran</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pdf_pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan_program/excel_pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -487,12 +487,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran'); !!}
+                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/daftar-kehadiran'); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan_program/klien/daftar_kehadiran" disabled/>
+                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/daftar-kehadiran" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -506,9 +506,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -561,10 +561,10 @@
                                 <h2>Senarai Klien Yang Hadir</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pdf_perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan_program/excel_perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -696,7 +696,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -734,7 +734,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -768,7 +768,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan_program/klien/pengesahan_kehadiran'); !!}
+                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>

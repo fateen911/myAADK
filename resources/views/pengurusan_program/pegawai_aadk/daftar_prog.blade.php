@@ -201,7 +201,7 @@
                         <!--end::General options-->
                         <div class="d-flex justify-content-end">
                             <!--begin::Button-->
-                            <a href="{{ url('pengurusan_program/pegawai_aadk/senarai_prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                            <a href="{{ url('pengurusan-program/pegawai-aadk/senarai-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                             <!--end::Button-->
                             <!--begin::Button-->
                             <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">

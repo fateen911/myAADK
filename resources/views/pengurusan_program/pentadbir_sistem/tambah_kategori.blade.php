@@ -62,7 +62,7 @@
     <!--begin::Content container-->
     <div id="kt_app_content_container">
         <!--begin::Form-->
-        <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan_program/pentadbir_sistem/post_tambah_kategori') }}" method="POST">
+        <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-tambah-kategori') }}" method="POST">
             @csrf
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-400px">
@@ -198,7 +198,7 @@
                             rows += '<td class="text-uppercase">' + kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + kategori.kod + '</td>';
                             rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
-                            rows += '<td><a href="{{url('/pengurusan_program/pentadbir_sistem/padam_kategori/')}}/' + kategori.id + '" class="btn btn-sm btn-danger px-4"><i class="bi bi-trash-fill fs-3"></i></a></td>';
+                            rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-sm btn-danger px-4"><i class="bi bi-trash-fill fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#items-table-body').html(rows);

@@ -75,14 +75,14 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end gap-3" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add program-->
-                                <a href={{url('/pengurusan_program/pentadbir_sistem/daftar_prog')}}>
+                                <a href={{url('/pengurusan-program/pentadbir-sistem/daftar-prog')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Program &nbsp;
                                     </button>
                                 </a>
                                 <!--end::Add program-->
                                 <!--begin::Add category-->
-                                <a href={{url('/pengurusan_program/pentadbir_sistem/tambah_kategori')}}>
+                                <a href={{url('/pengurusan-program/pentadbir-sistem/tambah-kategori')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Kategori &nbsp;
                                     </button>
@@ -183,12 +183,12 @@
                         let rows = '';
                         $.each(response, function(index, program) {
                             rows += '<tr>';
-                            rows += '<td><a href="{{url('/pengurusan_program/pentadbir_sistem/maklumat_prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
+                            rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/maklumat-prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
                             rows += '<td class="text-uppercase">' + program.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.status + '</td>';
                             rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
-                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#sortTable1 tbody').html(rows);
@@ -203,7 +203,7 @@
         $(document).on('click', '#program', function() {
             var id = $(this).data('id');
             $.ajax({
-                url: '/pengurusan_program/hebahan/papar_hebahan/'+ id, // Laravel route with dynamic ID
+                url: '/pengurusan-program/hebahan/papar-hebahan/'+ id, // Laravel route with dynamic ID
                 method: 'GET',
                 success: function(response) {
                     $('#modalBody').html(response);

@@ -133,9 +133,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -173,7 +173,7 @@
                                 <h2>Maklumat Program</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pentadbir_sistem/kemaskini_prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-color-primary">
+                                <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-color-primary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                 </a>
                             </div>
@@ -320,9 +320,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -340,10 +340,10 @@
                                 <h2>Senarai Pengesahan Kehadiran</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pdf_pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan_program/excel_pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -512,9 +512,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -567,10 +567,10 @@
                                 <h2>Senarai Klien Yang Hadir</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan_program/pdf_perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan_program/excel_perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>

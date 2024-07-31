@@ -75,14 +75,14 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end gap-3" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add program-->
-                                <a href={{url('/pengurusan_program/pegawai_aadk/daftar_prog')}}>
+                                <a href={{url('/pengurusan-program/pegawa-aadk/daftar-prog')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Program &nbsp;
                                     </button>
                                 </a>
                                 <!--end::Add program-->
                                 <!--begin::Add category-->
-                                <a href={{url('/pengurusan_program/pegawai_aadk/tambah_kategori')}}>
+                                <a href={{url('/pengurusan-program/pegawai-aadk/tambah-kategori')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Kategori &nbsp;
                                     </button>
@@ -111,7 +111,7 @@
                             <tbody class="fw-semibold text-gray-600">
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Program Pemulihan Bersepadu </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Pemulihan Bersepadu </a>
                                 </td>
                                 <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td class="text-uppercase">Belum Selesai</td>
@@ -119,19 +119,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Sesi Terapi Pencegahan Relaps </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Sesi Terapi Pencegahan Relaps </a>
                                 </td>
                                 <td class="text-uppercase">Pencegahan Relaps</td>
                                 <td class="text-uppercase">Selesai</td>
@@ -139,19 +139,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Program Kepulihan Komuniti </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Kepulihan Komuniti </a>
                                 </td>
                                 <td class="text-uppercase">Alumni</td>
                                 <td class="text-uppercase">Belum Selesai</td>
@@ -159,19 +159,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Kelab Sokongan Pulih Diri </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Kelab Sokongan Pulih Diri </a>
                                 </td>
                                 <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td class="text-uppercase">Selesai</td>
@@ -179,19 +179,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Bengkel Kesedaran Diri </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Bengkel Kesedaran Diri </a>
                                 </td>
                                 <td class="text-uppercase">Pencegahan Relaps</td>
                                 <td class="text-uppercase">Belum Selesai</td>
@@ -199,19 +199,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Program Motivasi Kepulihan </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Motivasi Kepulihan </a>
                                 </td>
                                 <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
                                 <td class="text-uppercase">Selesai</td>
@@ -219,19 +219,19 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan_program/pegawai_aadk/maklumat_prog')}}">Rangkaian Alumni Pulih </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Rangkaian Alumni Pulih </a>
                                 </td>
                                 <td class="text-uppercase">Alumni</td>
                                 <td class="text-uppercase">Selesai</td>
@@ -239,14 +239,14 @@
                                     <div class="share-container">
                                         <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
                                         <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan_program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan_program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan_program/qr_code')}} ><i class="bi bi-qr-code fs-3"></i></a>
+                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
                                 </td>
                             </tr>
                             </tbody>

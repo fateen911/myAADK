@@ -62,7 +62,7 @@
     <!--begin::Content container-->
     <div id="kt_app_content_container">
         <!--begin::Form-->
-        <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan_program/pegawai_aadk/post_tambah_kategori') }}" method="POST">
+        <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pegawai-aadk/post-tambah-kategori') }}" method="POST">
             @csrf
             <!--begin::Main column-->
             <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-400px">
