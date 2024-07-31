@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Include Select2 JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -45,7 +46,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder text-gray-900 mb-7">Pendaftaran Kehadiran</h1>
+                    <h1 class="fw-bolder mb-7">Pendaftaran Kehadiran</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
@@ -74,12 +75,15 @@
                     <!--end::Counter-->
                     <!--begin::Text-->
                     <div class="w-md-350px mb-2 mx-auto fw-semibold fs-6 mb-7 ">
-                        Nama Program: Program Pemulihan Bersepadu <br>
-                        Tarikh/Masa: 17/06/2024, 9AM <br>
-                        Tempat: Dewan Perdana <br>
-                        Penganjur: Majlis Pemulihan Dadah Kebangsaan (MPDK) <br>
-                        Pegawai AADK: En. Kairul Azizi <br>
-                        Sila Hubungi: 0135728935 <br>
+                        Nama Program: {{$program->nama}} <br>
+                        Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}} <br>
+                        Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}} <br>
+                        Tempat: {{$program->tempat}} <br>
+                        @if($program->penganjur!=null)
+                            Penganjur: {{$program->penganjur}} <br>
+                        @endif
+                        Pegawai AADK: {{$program->nama_pegawai}} <br>
+                        Sila Hubungi: {{$program->no_tel_dihubungi}} <br>
                         <br>
                         <hr>
                         @if (session('success'))
@@ -92,24 +96,23 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <div class="fw-semibold fs-6 text-black mb-7">
+                        <div class="fw-semibold fs-6 mb-7">
                             Masukkan No. Kad Pengenalan tanpa '-' untuk merekodkan kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_daftar_kehadiran')}}" method="POST" >
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan_program/klien/post_daftar_kehadiran/'.$program->id)}}" method="POST" >
                         @csrf
-                        <input type="hidden" name="program_id" value="1">
                         <div class="fv-row text-start">
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
                                 <!--end::Input=-->
                                 <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
                                 <!--end::Input=-->
                                 <!--begin::Submit-->
-                                <button class="btn btn-primary text-nowrap" type="submit">
+                                <button class="btn btn-primary btn-active-success text-nowrap" type="submit">
                                     <!--begin::Indicator label-->
-                                    <span class="indicator-label">Hantar</span>
+                                    <span class="indicator-label color-white">Hantar</span>
                                     <!--end::Indicator label-->
                                     <!--begin::Indicator progress-->
                                     <span class="indicator-progress">Please wait...
