@@ -59,15 +59,15 @@ class PengurusanProgController extends Controller
         return response()->json($program);
     }
 
-    public function pengesahan()
+    public function pengesahan($id)
     {
-        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->get();
+        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
         return response()->json($pengesahan);
     }
 
-    public function perekodan()
+    public function perekodan($id)
     {
-        $perekodan = PerekodanKehadiranProgram::with('program','klien')->get();
+        $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
         return response()->json($perekodan);
     }
     //QR CODE

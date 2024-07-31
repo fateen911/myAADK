@@ -126,6 +126,7 @@
                             </div>
                             <!--end::Link-->
                         </div>
+                        <input type="hidden" id="programId" value="{{$program->id}}">
                         <!--end::Card body-->
                         <!--begin::Card body-->
                         <div class="card-body pt-4">
@@ -352,7 +353,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0 table-responsive mx-10">
                             <!--begin::Table-->
-                            <table class="table table-row-dashed fs-6 gy-5 my-0">
+                            <table class="table table-row-dashed fs-6 gy-5 my-0" id="pengesahanTable">
                                 <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
@@ -363,97 +364,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            890101011234
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">012-3456789</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Tepat pada masanya</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Siti Nurhaliza binti Abdul Rahman
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            900202022345
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">013-4567890</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Cuti sakit</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Mohd Faiz bin Mohd Razi
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            920303033456
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">014-5678901</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Hadir lewat 10 minit</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Nurul Ain binti Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            940404044567
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">015-6789012</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">-</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Hafiz bin Hamid
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            970606066789
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">016-7890123</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Urusan keluarga</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            980707077890
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">017-8901234</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Akan menghadiri program</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Syafiq bin Hassan
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            001010099012
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">018-9012345</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Bercuti</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                             <!--end::Table-->
@@ -580,7 +491,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0 table-responsive mx-10">
                             <!--begin::Table-->
-                            <table class="table table-row-dashed fs-6 gy-5 my-0" >
+                            <table class="table table-row-dashed fs-6 gy-5 my-0" id="perekodanTable">
                                 <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
@@ -589,83 +500,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            890101011234
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Siti Nurhaliza binti Abdul Samad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            900202022345
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Mohd Faiz bin Mohd Faisal
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            920303033456
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Nurul Ain binti Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            940404044567
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Hafiz bin Hamid
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            970606066789
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            980707077890
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-11-21 20:30:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Syafiq bin Hassan
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            001010099012
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2024-01-23 22:40:00</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                             <!--end::Table-->
@@ -847,6 +682,62 @@
                     console.error('Failed to copy: ', err);
                 });
         }
+    </script>
+
+    <!--pengesahan-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                var id = $('#programId').val();
+                $.ajax({
+                    url: '/pengesahan/' + id,
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, pengesahan) {
+                            rows += '<tr>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_kp + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_tel + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.keputusan + '</td>';
+                            rows += '<td>' + pengesahan.catatan + '</td>';
+                            rows += '</tr>';
+                        });
+                        $('#pengesahanTable tbody').html(rows);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!--perekodan-->
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                var id = $('#programId').val();
+                $.ajax({
+                    url: '/perekodan/' + id,
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, perekodan) {
+                            let formattedDate = moment(perekodan.tarikh_perekodan).format('DD-MM-YYYY HH:mm:ss');
+                            rows += '<tr>';
+                            rows += '<td class="text-uppercase">' + perekodan.klien.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + perekodan.klien.no_kp + '</td>';
+                            rows += '<td>' + formattedDate + '</td>';
+                            rows += '</tr>';
+                        });
+                        $('#perekodanTable tbody').html(rows);
+                    }
+                });
+            }
+        });
     </script>
     <script>
         $('#sortTable1').DataTable({
