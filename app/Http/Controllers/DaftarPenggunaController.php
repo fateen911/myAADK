@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\URL;
 use App\Mail\DaftarPengguna;
 use App\Mail\PegawaiApproved;
 use App\Mail\PegawaiRejected;
@@ -153,7 +155,7 @@ class DaftarPenggunaController extends Controller
             Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp));
             // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp));
 
-            return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
+            return redirect()->route('senarai-pengguna')->with('success', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
         } 
         else {
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
@@ -162,14 +164,12 @@ class DaftarPenggunaController extends Controller
 
     public function permohonanPegawai(Request $request, $id)
     {
-        dd ($request->input('status'));
-
-        $status = $request->input('status');
+        $keputusan = $request->input('status');
 
         // Fetch the staff request data
         $pegawaiBaharu = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
 
-        if ($status == 'Lulus') {
+        if ($keputusan == 'Lulus') {
             // Generate a random password
             $password_length = 12;
             $password = $this->generatePassword($password_length);
@@ -201,19 +201,27 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->status = 'Lulus';
             $pegawaiBaharu->save();
 
-            // Send notification email to the staff
-            Mail::to($pegawaiBaharu->emel)->send(new PegawaiApproved($pegawaiBaharu, $password));
+            // Generate the email verification URL
+            event(new Registered($user));
+            $verificationUrl = URL::temporarySignedRoute(
+                'verification.verify',
+                now()->addMinutes(60),
+                ['id' => $user->id, 'hash' => sha1($user->email)]
+            );
 
-        } elseif ($status == 'Ditolak') {
+            // Send notification email to the staff
+            Mail::to($pegawaiBaharu->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
+        } 
+        elseif ($keputusan == 'Ditolak') {
             // Update the status in pegawai_mohon_daftar table
             $pegawaiBaharu->status = 'Ditolak';
             $pegawaiBaharu->save();
 
             // Send rejection email to the staff
             Mail::to($pegawaiBaharu->emel)->send(new PegawaiRejected($pegawaiBaharu));
+            return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiBaharu->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
         }
-
-        return redirect()->back()->with('success', 'Permohonan telah diproses.');
     }
 
 

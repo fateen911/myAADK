@@ -86,7 +86,7 @@ Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'sena
 Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'kemaskiniKlien'])->name('kemaskini-klien');
 Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'kemaskiniPegawai'])->name('kemaskini-pegawai');
 Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
-Route::post('pentadbir/kelulusan/permohonan/penfataran-pegawai', [DaftarPenggunaController::class, 'permohonanPegawai'])->name('kelulusan-permohonan-pegawai');
+Route::post('/pentadbir/kelulusan-permohonan-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawai'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 
 // PENTADBIR - PENGURUSAN PROFIL
 Route::get('/pentadbir-pegawai/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');

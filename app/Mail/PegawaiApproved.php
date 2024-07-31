@@ -3,10 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class PegawaiApproved extends Mailable
@@ -15,14 +12,16 @@ class PegawaiApproved extends Mailable
 
     public $pegawaiBaharu;
     public $password;
+    public $verificationUrl;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($pegawaiBaharu, $password)
+    public function __construct($pegawaiBaharu, $password, $verificationUrl)
     {
         $this->pegawaiBaharu = $pegawaiBaharu;
         $this->password = $password;
+        $this->verificationUrl = $verificationUrl;
     }
 
     /**
@@ -37,6 +36,7 @@ class PegawaiApproved extends Mailable
                         'nama' => $this->pegawaiBaharu->nama,
                         'no_kp' => $this->pegawaiBaharu->no_kp,
                         'password' => $this->password,
+                        'verificationUrl' => $this->verificationUrl,
                     ]);
     }
 }

@@ -13,8 +13,9 @@
        Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
     <p>No Kad Pengenalan : {{$no_kp}}
     <p>Kata Laluan : {{$password}}
-    {{-- <br>
-    <p>Sila klik <a href="{{$verificationUrl}}">disini</a> untuk mengaktifkan akaun anda</p> --}}
+    <p>Sila klik pautan di bawah untuk mengesahkan emel anda dan log masuk ke dalam sistem.
+        @component('mail::button', ['url' => $verificationUrl])
+        @endcomponent
     <br><br>
     <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> di talian 1-800-22-2235 / 019 – 626 2233 atau e-mel ke webmaster@adk.gov.my </p>
    
