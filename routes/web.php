@@ -48,6 +48,7 @@ Route::get('/pengurusan-program/pentadbir-sistem/padam-kategori/{id}',[Pengurusa
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan-program/klien/daftar-kehadiran/{id}',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
 Route::post('/pengurusan-program/klien/post-daftar-kehadiran/{id}',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
+Route::post('/pengurusan-program/klien/post-daftar-kehadiran-2/{id}',[PengurusanProgController::class, 'postDaftarKehadiran2'])->name('pengurusan_program.klien.post_daftar_kehadiran2');
 Route::get('/pengurusan-program/klien/pengesahan-kehadiran/{id}',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
 Route::post('/pengurusan-program/klien/post-pengesahan-kehadiran/{id}',[PengurusanProgController::class, 'postPengesahanKehadiran'])->name('pengurusan_program.klien.post_pengesahan_kehadiran');
 

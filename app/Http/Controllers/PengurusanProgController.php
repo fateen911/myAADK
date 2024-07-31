@@ -316,6 +316,44 @@ class PengurusanProgController extends Controller
         return redirect()->back()->with('success', 'Berjaya dihantar.');
     }
 
+    public function postDaftarKehadiran2(Request $request, $id) //perekodan
+    {
+        $request->validate([
+            'no_kp'  =>  'required|string|max:255'
+        ]);
+
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
+        $program = Program::where('id', $id)->first();
+
+        if (is_null($klien)){
+            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+        }
+
+        if (is_null($program)){
+            return redirect()->back()->with('error', 'Program tidak wujud.');
+        }
+
+        $klien_id = $klien->id;
+        $program_id = $program->id;
+
+        $exists = PerekodanKehadiranProgram::where('program_id', $program_id)
+            ->where('klien_id', $klien_id)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'Kehadiran telah direkodkan sebelum ini.');
+        }
+
+        $tarikh_perekodan = Carbon::now();
+
+        $perekodan = new PerekodanKehadiranProgram();
+        $perekodan->program_id          =   $program_id;
+        $perekodan->klien_id            =   $klien_id;
+        $perekodan->tarikh_perekodan    =   $tarikh_perekodan;
+        $perekodan->save();
+        return redirect()->back()->with('success', 'Berjaya dihantar.');
+    }
+
     public function pengesahanKehadiran($id)
     {
         $program = Program::find($id);

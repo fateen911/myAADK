@@ -64,6 +64,12 @@
                 {{ session('success') }}
             </div>
         @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger p-3" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
             <!--begin:::Tab item-->
             <li class="nav-item">
@@ -379,8 +385,9 @@
 
         <!--begin::Tab pane perekodan-->
         <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
-            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/categories.html">
+            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
                 <!--begin::Aside column-->
+                @csrf
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
                     <!--begin::QR code settings-->
                     <div class="card card-flush py-4">
@@ -447,6 +454,7 @@
                         <div class="card-body pt-0">
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
+                                @csrf
                                 <!--begin::Label-->
                                 <label class="form-label">No. Kad Pengenalan</label>
                                 <!--end::Label-->
@@ -457,14 +465,13 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                                <button type="submit" id="perekodanBtn" class="btn btn-primary">
                                     <span class="indicator-label">Hadir</span>
                                     <span class="indicator-progress">Tunggu sebentar...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
                             <!--end::Input group-->
-
                         </div>
                         <!--end::Card header-->
                     </div>
@@ -739,6 +746,7 @@
             }
         });
     </script>
+
     <script>
         $('#sortTable1').DataTable({
             ordering: true, // Enable manual sorting
