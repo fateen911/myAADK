@@ -31,96 +31,7 @@
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="1"></td>
-                        <td>Ahmad bin Ali</td>
-                        <td>012-3456789</td>
-                        <td>ahmad.ali@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="2"></td>
-                        <td>Siti Nurhaliza binti Abdul Razak</td>
-                        <td>013-9876543</td>
-                        <td>siti.nurhaliza@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="3"></td>
-                        <td>Muhammad Faizal bin Ismail</td>
-                        <td>014-2233445</td>
-                        <td>faizal.ismail@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="4"></td>
-                        <td>Nurul Aisyah binti Zulkifli</td>
-                        <td>015-6677889</td>
-                        <td>nurul.aisyah@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="5"></td>
-                        <td>Hafiz bin Ahmad</td>
-                        <td>016-1122334</td>
-                        <td>hafiz.ahmad@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="1"></td>
-                        <td>Ahmad bin Ali</td>
-                        <td>012-3456789</td>
-                        <td>ahmad.ali@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="2"></td>
-                        <td>Siti Nurhaliza binti Abdul Razak</td>
-                        <td>013-9876543</td>
-                        <td>siti.nurhaliza@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="3"></td>
-                        <td>Muhammad Faizal bin Ismail</td>
-                        <td>014-2233445</td>
-                        <td>faizal.ismail@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="4"></td>
-                        <td>Nurul Aisyah binti Zulkifli</td>
-                        <td>015-6677889</td>
-                        <td>nurul.aisyah@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="5"></td>
-                        <td>Hafiz bin Ahmad</td>
-                        <td>016-1122334</td>
-                        <td>hafiz.ahmad@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="1"></td>
-                        <td>Ahmad bin Ali</td>
-                        <td>012-3456789</td>
-                        <td>ahmad.ali@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="2"></td>
-                        <td>Siti Nurhaliza binti Abdul Razak</td>
-                        <td>013-9876543</td>
-                        <td>siti.nurhaliza@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="3"></td>
-                        <td>Muhammad Faizal bin Ismail</td>
-                        <td>014-2233445</td>
-                        <td>faizal.ismail@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="4"></td>
-                        <td>Nurul Aisyah binti Zulkifli</td>
-                        <td>015-6677889</td>
-                        <td>nurul.aisyah@example.com</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><input type="checkbox" name="pilihan[]" value="5"></td>
-                        <td>Hafiz bin Ahmad</td>
-                        <td>016-1122334</td>
-                        <td>hafiz.ahmad@example.com</td>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -138,5 +49,31 @@
 </form>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        fetchItems();
+
+        function fetchItems() {
+            $.ajax({
+                url: '/klien',
+                method: 'GET',
+                success: function(response) {
+                    let rows = '';
+                    $.each(response, function(index, klien) {
+                        rows += '<tr>';
+                        rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + klien.id + '"></td>';
+                        rows += '<td class="text-uppercase">' + klien.nama + '</td>';
+                        rows += '<td class="text-uppercase">' + klien.no_tel + '</td>';
+                        rows += '<td>' + klien.emel + '</td>';
+                        rows += '</tr>';
+                    });
+                    $('#modalHebahan tbody').html(rows);
+                }
+            });
+        }
+    });
+</script>
 
 

@@ -47,6 +47,12 @@ class PengurusanProgController extends Controller
     }
 
     //JSON
+    public function klien()
+    {
+        $klien = Klien::all();
+        return response()->json($klien);
+    }
+
     public function kategori()
     {
         $kategori = KategoriProgram::all();
@@ -416,7 +422,7 @@ class PengurusanProgController extends Controller
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
     }
-    public function jenisHebahan(Request $request)
+    public function jenisHebahan(Request $request, $id)
     {
         $request->validate([
             'pilihan.*' => 'int',
@@ -432,8 +438,10 @@ class PengurusanProgController extends Controller
                 $this->sendSms($klien->no_tel, 'Your message here');
             }
             elseif ($kaedah == 'emel') {
-                // Send SMS (assuming you have a service or API for SMS)
-                Mail::to($klien->emel)->send(new HebahanMail());
+                $recipient = 'ziba0506@gmail.com';
+                Mail::to($recipient)->send(new HebahanMail($id));
+
+                return redirect()->back()->with('status', 'Email sent successfully!');
             }
             elseif ($kaedah == 'telegram') {
                 // Telegram Bot API endpoint
@@ -466,10 +474,10 @@ class PengurusanProgController extends Controller
 
     //HEBAHAN - EMEL
 
-    public function hebahanEmel()
+    public function hebahanEmel($id)
     {
         $recipient = 'ziba0506@gmail.com';
-        Mail::to($recipient)->send(new HebahanMail());
+        Mail::to($recipient)->send(new HebahanMail($id));
 
         return redirect()->back()->with('status', 'Email sent successfully!');
     }

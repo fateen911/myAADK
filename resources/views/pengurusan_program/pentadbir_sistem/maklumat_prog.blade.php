@@ -425,16 +425,16 @@
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-4">
-                            <!--begin::Share-->
-                            <b class="fs-5">Hebahan:</b> &nbsp;
-                            <!--end::Share-->
-                            <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                            <!--end::Share to-->
-                        </div>
+{{--                        <div class="card-body pt-4">--}}
+{{--                            <!--begin::Share-->--}}
+{{--                            <b class="fs-5">Hebahan:</b> &nbsp;--}}
+{{--                            <!--end::Share-->--}}
+{{--                            <!--begin::Share to-->--}}
+{{--                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+{{--                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+{{--                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+{{--                            <!--end::Share to-->--}}
+{{--                        </div>--}}
                         <!--end::Card body-->
                     </div>
                     <!--end::QR code settings-->
