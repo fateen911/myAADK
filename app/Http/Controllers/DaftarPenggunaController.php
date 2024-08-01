@@ -174,7 +174,7 @@ class DaftarPenggunaController extends Controller
     public function permohonanPegawai(Request $request, $id)
     {
         // Combine email name and domain
-        $email = $request->emailPegawai . '@adk.gov.my';
+        // $email = $request->emailPegawai . '@adk.gov.my';
 
         // Fetch keputusan permohonan
         $keputusan = $request->input('status');
@@ -191,7 +191,7 @@ class DaftarPenggunaController extends Controller
             $user = new User();
             $user->name = $pegawaiBaharu->nama;
             $user->no_kp = $pegawaiBaharu->no_kp;
-            $user->email = $email;
+            $user->email = $pegawaiBaharu->emel;
             $user->password = bcrypt($password);
             $user->tahap_pengguna = $pegawaiBaharu->peranan;
             $user->status = '0';
@@ -202,7 +202,7 @@ class DaftarPenggunaController extends Controller
             $pegawai->users_id = $user->id;
             $pegawai->no_kp = $pegawaiBaharu->no_kp;
             $pegawai->nama = $pegawaiBaharu->nama;
-            $pegawai->emel = $email;
+            $pegawai->emel = $pegawaiBaharu->emel;            ;
             $pegawai->no_tel = $pegawaiBaharu->no_tel;
             $pegawai->jawatan = $pegawaiBaharu->jawatan;
             $pegawai->peranan = $pegawaiBaharu->peranan;
@@ -222,8 +222,10 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
+            $defaultEmail = 'fateennashuha9@gmail.com';
+
             // Send notification email to the staff
-            Mail::to($email)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
             return redirect()->back()->with('message', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
         } 
         elseif ($keputusan == 'Ditolak') {
@@ -231,12 +233,13 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->status = 'Ditolak';
             $pegawaiBaharu->save();
 
+            $defaultEmail = 'fateennashuha9@gmail.com';
+
             // Send rejection email to the staff
-            Mail::to($email)->send(new PegawaiRejected($pegawaiBaharu));
+            Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiBaharu));
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiBaharu->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
         }
     }
-
 
     private function generatePassword($length)
     {

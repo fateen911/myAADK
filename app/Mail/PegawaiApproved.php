@@ -31,7 +31,10 @@ class PegawaiApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('pendaftaran.emel_daftar_pengguna')
+        $subject = "DAFTAR PENGGUNA SISTEM i-Recover";
+
+        return $this->subject($subject)
+                    ->view('pendaftaran.emel_daftar_pengguna')
                     ->with([
                         'nama' => $this->pegawaiBaharu->nama,
                         'no_kp' => $this->pegawaiBaharu->no_kp,

@@ -13,6 +13,7 @@ use App\Models\JawatanAADK;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -65,7 +66,8 @@ class RegisteredUserController extends Controller
 
             $pegawai = PegawaiMohonDaftar::create($pegawaiData);
 
-            return redirect()->route('login')->with('message', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar. Sila semak notifikasi emel jika permohonan anda berjaya diluluskan.');
+            return redirect()->route('login')->with('message', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar untuk semakan dan keputusan permohonan akan dihantar melalui notifikasi emel.');
+            dd(session()->all());
         } 
         else {
             return redirect()->route('login')->with('error', 'Pegawai ' . $request->nama . ' telah didaftarkan dalam sistem ini.');

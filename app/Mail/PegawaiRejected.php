@@ -32,7 +32,10 @@ class PegawaiRejected extends Mailable
      */
     public function build()
     {
-        return $this->view('pendaftaran.emel_daftar_pegawai_ditolak')
+        $subject = "DAFTAR PENGGUNA SISTEM i-Recover";
+
+        return $this->subject($subject)
+                    ->view('pendaftaran.emel_daftar_pegawai_ditolak')
                     ->with([
                         'nama' => $this->pegawaiBaharu->nama,
                     ]);

@@ -8,8 +8,7 @@
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <br>
     <p>Tuan/Puan,</p>
-    <br>
-    <p>Dukacita dimaklumkan bahawan permohonan anda untuk mendaftar sebagai pengguna sistem telah ditolak.
+    <p>Dukacita dimaklumkan bahawan permohonan anda untuk mendaftar sebagai pengguna sistem telah <b>ditolak.</b>
     <br><br>
     <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> di talian 1-800-22-2235 / 019 – 626 2233 atau e-mel ke webmaster@adk.gov.my </p>
    

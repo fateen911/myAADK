@@ -610,9 +610,9 @@
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user3->emel)[0] }}" />
+																			<input type="text" class="form-control form-control-solid" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" />
 																			<span class="input-group-text">@adk.gov.my</span>
-																			<input type="hidden" id="email" name="email" value="{{ $user3->emel }}" />
+																			<input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" />
 																		</div>
 																		<!--end::Input-->
 																	</div>																	
