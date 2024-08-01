@@ -164,7 +164,7 @@ class DaftarPenggunaController extends Controller
             Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
             // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp));
 
-            return redirect()->route('senarai-pengguna')->with('success', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
+            return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
         } 
         else {
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $request->name . ' telah didaftarkan dalam sistem ini.');
@@ -224,7 +224,7 @@ class DaftarPenggunaController extends Controller
 
             // Send notification email to the staff
             Mail::to($email)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
-            return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
+            return redirect()->back()->with('message', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
         } 
         elseif ($keputusan == 'Ditolak') {
             // Update the status in pegawai_mohon_daftar table
