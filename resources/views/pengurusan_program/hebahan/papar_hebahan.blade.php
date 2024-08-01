@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan_program/hebahan/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <p class="text-uppercase">NAMA PROGRAM: {{$program->nama}}</p>
