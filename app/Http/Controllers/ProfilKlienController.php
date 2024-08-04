@@ -244,27 +244,42 @@ class ProfilKlienController extends Controller
     // PENTADBIR/PEGAWAI : UPDATE WITHOUT REQUEST
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
     {
+        // Validate the request data
         $validatedData = $request->validate([
             'no_tel'                    => 'required|string|max:11',
             'emel'                      => 'required|email',
-            'alamat_rumah'              => 'required|string|max:255',
-            'poskod'                    => 'required|string|max:5',
-            'daerah'                    => 'required|string|max:255',
-            'negeri'                    => 'required|string|max:255',
+            'alamat_rumah_klien'        => 'required|string|max:255',
+            'poskod_klien'              => 'required|string|max:5',
+            'daerah_klien'              => 'required|string|max:255',
+            'negeri_klien'              => 'required|string|max:255',
             'tahap_pendidikan'          => 'required|string|max:255',
             'status_kesihatan_mental'   => 'required|string|max:255',
             'status_oku'                => 'required|string|max:255',
         ]);
 
+        // Map the validated data to the original field names
+        $updateData = [
+            'no_tel'                   => $validatedData['no_tel'],
+            'emel'                     => $validatedData['emel'],
+            'alamat_rumah'             => $validatedData['alamat_rumah_klien'],
+            'poskod'                   => $validatedData['poskod_klien'],
+            'daerah'                   => $validatedData['daerah_klien'],
+            'negeri'                   => $validatedData['negeri_klien'],
+            'tahap_pendidikan'         => $validatedData['tahap_pendidikan'],
+            'status_kesihatan_mental'  => $validatedData['status_kesihatan_mental'],
+            'status_oku'               => $validatedData['status_oku'],
+        ];
+
+        // Find the client
         $klien = Klien::find($id);
 
         if ($klien) {
-            $klien->update($validatedData);
+            // Update the client with the mapped data
+            $klien->update($updateData);
             $klien->update(['status_kemaskini' => 'Lulus']);
 
             return redirect()->back()->with('success', 'Maklumat profil telah berjaya dikemaskini.');
-        } 
-        else {
+        } else {
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
         }
     }

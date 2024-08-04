@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah">{{$klien->alamat_rumah}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_rumah_klien" name="alamat_rumah_klien">{{$klien->alamat_rumah}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -380,7 +380,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod" name="poskod" placeholder="" value="{{$klien->poskod}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_klien" name="poskod_klien" value="{{$klien->poskod}}" />
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -398,7 +398,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid" id="daerah_klien" name="daerah_klien" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                             <option>Pilih Daerah</option>
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -421,7 +421,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid" id="negeri_klien" name="negeri_klien" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                             <option>Pilih Negeri</option>
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2785,30 +2785,75 @@
         });
     </script>
 
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var statusSelect = document.getElementById('status_perkahwinan');
-            var pasanganFields = document.getElementById('pasangan-fields');
+    <script>
+        $(document).ready(function() {
+            // Get the client address fields
+            const clientAddress = $('#alamat_rumah_klien').text().trim();
+            const clientPoskod = $('#poskod_klien').text().trim();
+            const clientDaerah = $('#daerah_klien').text().trim();
+            const clientNegeri = $('#negeri_klien').text().trim();
+
+            console.log('Client Address:', clientAddress);
+            console.log('Client Poskod:', clientPoskod);
+            console.log('Client Daerah:', clientDaerah);
+            console.log('Client Negeri:', clientNegeri);
         
-            function togglePasanganFields() {
-                console.log('Status Perkahwinan changed to: ', statusSelect.value); // Debugging line
-                if (statusSelect.value === 'BERKAHWIN') {
-                    pasanganFields.style.display = 'block';
+            // Function to copy address fields for Bapa
+            function alamatBapa() {
+                const checkbox = $('#alamat_bapa_sama');
+                if (checkbox.is(':checked')) {
+                    $('#alamat_bapa').val(clientAddress);
+                    $('#poskod_bapa').val(clientPoskod);
+                    $('#daerah_bapa').val(clientDaerah);
+                    $('#negeri_bapa').val(clientNegeri);
                 } else {
-                    pasanganFields.style.display = 'none';
+                    // Clear the fields if the checkbox is unchecked
+                    $('#alamat_bapa').val('');
+                    $('#poskod_bapa').val('');
+                    $('#daerah_bapa').val('');
+                    $('#negeri_bapa').val('');
                 }
             }
         
-            // Initialize the visibility on page load
-            togglePasanganFields();
+            // Function to copy address fields for Ibu
+            function alamatIbu() {
+                const checkbox = $('#alamat_ibu_sama');
+                if (checkbox.is(':checked')) {
+                    $('#alamat_ibu').val(clientAddress);
+                    $('#poskod_ibu').val(clientPoskod);
+                    $('#daerah_ibu').val(clientDaerah);
+                    $('#negeri_ibu').val(clientNegeri);
+                } else {
+                    // Clear the fields if the checkbox is unchecked
+                    $('#alamat_ibu').val('');
+                    $('#poskod_ibu').val('');
+                    $('#daerah_ibu').val('');
+                    $('#negeri_ibu').val('');
+                }
+            }
         
-            // Listen for changes on the status select
-            statusSelect.addEventListener('change', function() {
-                console.log('Change event detected'); // Debugging line
-                togglePasanganFields();
-            });
+            // Function to copy address fields for Penjaga
+            function alamatPenjaga() {
+                const checkbox = $('#alamat_penjaga_sama');
+                if (checkbox.is(':checked')) {
+                    $('#alamat_penjaga').val(clientAddress);
+                    $('#poskod_penjaga').val(clientPoskod);
+                    $('#daerah_penjaga').val(clientDaerah);
+                    $('#negeri_penjaga').val(clientNegeri);
+                } else {
+                    // Clear the fields if the checkbox is unchecked
+                    $('#alamat_penjaga').val('');
+                    $('#poskod_penjaga').val('');
+                    $('#daerah_penjaga').val('');
+                    $('#negeri_penjaga').val('');
+                }
+            }
+        
+            // Add event listeners for the checkboxes
+            document.getElementById('alamat_bapa_sama').addEventListener('change', alamatBapa);
+            document.getElementById('alamat_ibu_sama').addEventListener('change', alamatIbu);
+            document.getElementById('alamat_penjaga_sama').addEventListener('change', alamatPenjaga);
         });
-    </script>  --}}
-</body>   
-        
+    </script>    
+</body>     
 @endsection
