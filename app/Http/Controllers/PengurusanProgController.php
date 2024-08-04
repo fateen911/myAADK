@@ -239,9 +239,30 @@ class PengurusanProgController extends Controller
         }
     }
 
-    public function postkemaskiniProgPS()
+    public function postkemaskiniProgPS(Request $request,$id)
     {
-        return view('pengurusan_program.pentadbir_sistem.kemaskini_prog');
+        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
+
+        //Date format for database
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+
+        $program = Program::find($id);
+        $program->update([
+        'kategori_id'          =>   $request->kategori,
+        'nama'                 =>   $request->nama,
+        'objektif'             =>   $request->objektif,
+        'tarikh_mula'          =>   $tarikh_mula,
+        'tarikh_tamat'         =>   $tarikh_tamat,
+        'tempat'               =>   $request->tempat,
+        'penganjur'            =>   $request->penganjur,
+        'nama_pegawai'         =>   $request->nama_pegawai,
+        'no_tel_dihubungi'     =>   $request->no_tel_dihubungi,
+        'catatan'              =>   $request->catatan,
+        ]);
+
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
     }
 
     public function maklumatProgPS($id)
