@@ -74,6 +74,7 @@ Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/status-counts', [HomeController::class, 'getStatusCounts'])->name('status.counts');
 
 // KEMASKINI PROFIL AKAUN PENGGUNA
 Route::middleware('auth')->group(function () {

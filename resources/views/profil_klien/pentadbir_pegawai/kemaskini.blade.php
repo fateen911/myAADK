@@ -1306,10 +1306,12 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($updateRequestBapa->status == 'Kemaskini')
-                                                                <button type="submit" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
-                                                                    Semak Permohonan Kemaskini
-                                                                </button>
+                                                            @if($requestedDataBapa)
+                                                                @if($statusBapa == 'Kemaskini')
+                                                                    <button type="submit" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
+                                                                        Semak Permohonan Kemaskini
+                                                                    </button>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -1500,10 +1502,12 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($updateRequestIbu->status == 'Kemaskini')
-                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalIbu" data-target="#approvalIbu" style="background-color:#ffc107; color: white;">
-                                                                    Semak Permohonan Kemaskini
-                                                                </button>
+                                                            @if($requestedDataIbu)
+                                                                @if($statusIbu == 'Kemaskini')
+                                                                    <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalIbu" data-target="#approvalIbu" style="background-color:#ffc107; color: white;">
+                                                                        Semak Permohonan Kemaskini
+                                                                    </button>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -1710,10 +1714,12 @@
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
-                                                            @if($updateRequestPenjaga->status == 'Kemaskini')
-                                                                <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPenjaga" data-target="#approvalPenjaga" style="background-color:#ffc107; color: white;">
-                                                                    Semak Permohonan Kemaskini
-                                                                </button>
+                                                            @if($requestedDataPenjaga)
+                                                                @if($statusPenjaga == 'Kemaskini')
+                                                                    <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPenjaga" data-target="#approvalPenjaga" style="background-color:#ffc107; color: white;">
+                                                                        Semak Permohonan Kemaskini
+                                                                    </button>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>

@@ -69,21 +69,20 @@
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach ($klien as $user)
                                     @php
-                                        $text = ucwords(strtolower($user->nama)); // Assuming you're sending the text as a POST parameter
-                                        $conjunctions = ['bin', 'binti'];
-                                        $words = explode(' ', $text);
-                                        $result = [];
-                                        foreach ($words as $word) {
-                                            if (in_array(Str::lower($word), $conjunctions)) {
-                                                $result[] = Str::lower($word);
-                                            } else {
-                                                $result[] = $word;
-                                            }
-                                        }
-                                        $nama_user = implode(' ', $result);
+                                        // $text = ucwords(strtolower($user->nama));
+                                        // $conjunctions = ['bin', 'binti'];
+                                        // $words = explode(' ', $text);
+                                        // $result = [];
+                                        // foreach ($words as $word) {
+                                        //     if (in_array(Str::lower($word), $conjunctions)) {
+                                        //         $result[] = Str::lower($word);
+                                        //     } else {
+                                        //         $result[] = $word;
+                                        //     }
+                                        // }
+                                        // $nama_user = implode(' ', $result);
                                         $daerah = DB::table('senarai_daerah')->where('id', $user['daerah'])->value('senarai_daerah.daerah');
                                         $negeri = DB::table('senarai_negeri')->where('id', $user['negeri'])->value('senarai_negeri.negeri');
-                                        // $user_id = DB::table('sejarah_permohonan')->where('permohonan_id', $item['id'])->where('status', $item['status'])->latest()->value('dilaksanakan_oleh');
                                     @endphp
 
                                     <tr>

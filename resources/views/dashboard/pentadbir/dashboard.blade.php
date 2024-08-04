@@ -58,7 +58,7 @@
 
             <div class="tab-content" id="myTabContent">
                 {{-- Senarai Pengguna --}}
-                <div class="tab-pane fade  show active" id="senaraiPengguna" role="tabpanel" aria-labelledby="senaraiPengguna-tab">
+                <div class="tab-pane fade show active" id="senaraiPengguna" role="tabpanel" aria-labelledby="senaraiPengguna-tab">
                     <!--Keputusan Senarai Pengguna-->
                     <div class="header pt-10 mb-5">
                         <h2>Senarai Pengguna Sistem i-Recover</h2>
@@ -153,7 +153,7 @@
                 <div class="tab-pane fade" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
                     <!--Permohonan-->
                     <div class="header pt-5 mb-5">
-                        <h2>Status Permohonan Kemaskini Profil Klien</h2>
+                        <h2>Status Kemaskini Profil Klien</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
