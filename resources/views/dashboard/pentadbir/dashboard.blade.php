@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/assets/css/sekretariat.css">
+    {{-- <link rel="stylesheet" href="/assets/css/sekretariat.css"> --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -82,7 +82,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="permohonanPendaftaranCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -109,7 +109,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span id="pegawaiCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -135,7 +135,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="klienCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -174,7 +174,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">3</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -201,7 +201,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">2</span>
+                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -231,7 +231,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">1</span>
+                                            <span id="dikemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -258,7 +258,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">0</span>
+                                            <span id="ditolakCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -297,7 +297,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -324,7 +324,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -350,7 +350,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">5</span>
+                                            <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -386,7 +386,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -413,7 +413,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -439,7 +439,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -466,7 +466,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -485,4 +485,33 @@
     </div>
     <!--end::Content-->
 </div>
+
+<script>
+    $(document).ready(function() {
+        function fetchStatusCounts() {
+            $.ajax({
+                url: "{{ route('status.counts') }}",
+                method: 'GET',
+                success: function(data) {
+                    $('#permohonanPendaftaranCount').text(data.permohonan_pendaftaran);
+                    $('#pegawaiCount').text(data.pegawai);
+                    $('#klienCount').text(data.klien);
+                    $('#belumKemaskiniCount').text(data.belum_kemaskini);
+                    $('#mohonKemaskiniCount').text(data.mohon_kemaskini);
+                    $('#dikemaskiniCount').text(data.dikemaskini);
+                    $('#ditolakCount').text(data.ditolak);
+                    $('#selesaiMenjawabCount').text(data.selesai_menjawab);
+                    $('#belumSelesaiMenjawabCount').text(data.belum_selesai_menjawab);
+                    $('#tidakMenjawabCount').text(data.tidak_menjawab);
+                    $('#cemerlangCount').text(data.cemerlang);
+                    $('#baikCount').text(data.baik);
+                    $('#memuaskanCount').text(data.memuaskan);
+                    $('#tidakMemuaskanCount').text(data.tidak_memuaskan);
+                }
+            });
+        }
+        fetchStatusCounts();
+    });
+</script>
+    
 @endsection
