@@ -339,6 +339,81 @@
                 </div>
                 <!--end::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                    <!--begin::Card-->
+                    <div class="row g-4 text-center mb-0">
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-steelblue">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-list-task text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-mediumseagreen">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-check-circle-fill text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Telah Menjawab</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-palevioletred">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-x-circle-fill text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Menjawab</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Card-->
                     <!--begin::Senarai Pengesahan-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
