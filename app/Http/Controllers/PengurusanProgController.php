@@ -129,7 +129,12 @@ class PengurusanProgController extends Controller
     //PEGAWAI SISTEM
     public function daftarProgPS()
     {
-        return view('pengurusan_program.pentadbir_sistem.daftar_prog');
+        $kategori = KategoriProgram::all();
+        if ($kategori) {
+            return view('pengurusan_program.pentadbir_sistem.daftar_prog', compact('kategori'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 
     public function postDaftarProgPS(Request $request)
@@ -223,7 +228,18 @@ class PengurusanProgController extends Controller
         return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
     }
 
-    public function kemaskiniProgPS()
+    public function kemaskiniProgPS($id)
+    {
+        $kategori = KategoriProgram::all();
+        $program = Program::with('kategori')->find($id);
+        if ($kategori || $program) {
+            return view('pengurusan_program.pentadbir_sistem.kemaskini_prog', compact('kategori','program'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
+    public function postkemaskiniProgPS()
     {
         return view('pengurusan_program.pentadbir_sistem.kemaskini_prog');
     }

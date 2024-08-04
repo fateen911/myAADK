@@ -87,11 +87,9 @@
                                         <!--begin::Select2-->
                                         <select class="form-select" name="kategori" aria-label="Select example" required>
                                             <option selected="selected">Sila Pilih</option>
-                                            <option value="1">Kelompok Sokongan Keluarga Kepulihan</option>
-                                            <option value="2">Pencegahan Relaps</option>
-                                            <option value="3">Alumni - PCCP</option>
-                                            <option value="4">Alumni - Mentor Kepulihan</option>
-                                            <option value="5">Alumni - Kelompok Sokong Bantu</option>
+                                            @foreach($kategori as $item)
+                                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                            @endforeach
                                         </select>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}

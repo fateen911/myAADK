@@ -66,7 +66,8 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pentadbir_sistem.maklumat_prog') }}" method="GET">
+                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-daftar-prog') }}" method="POST">
+                        @csrf
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                             <!--begin::General options-->
@@ -84,13 +85,15 @@
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Kategori Program</label>
                                         <!--begin::Select2-->
-                                        <select class="form-select" aria-label="Select example">
-                                            <option >Sila Pilih</option>
-                                            <option value="SK" selected="selected">Kelompok Sokongan Keluarga Kepulihan</option>
-                                            <option value="PR">Pencegahan Relaps</option>
-                                            <option value="APC">Alumni - PCCP</option>
-                                            <option value="AMK">Alumni - Mentor Kepulihan</option>
-                                            <option value="ASB">Alumni - Kelompok Sokong Bantu</option>
+                                        <select class="form-select" name="kategori" aria-label="Select example" required>
+                                            <option selected="selected">Sila Pilih</option>
+                                            @foreach($kategori as $item)
+                                                @if($program->kategori_id == $item->id)
+                                                    <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                                @else
+                                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
@@ -98,7 +101,7 @@
                                     </div>
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Program</label>
-                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="Program Pemulihan Bersepadu" required/>
+                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="{{$program->nama}}" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -113,9 +116,10 @@
                                             <label class="form-label required">Objektif</label>
                                             <!--end::Label-->
                                             <!--begin::Editor-->
-                                            <div id="kt_docs_quill_basic" name="kt_docs_quill_basic" class="min-h-200px mb-2">
-                                                Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan
+                                            <div id="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                                {!!$program->objektif!!}
                                             </div>
+                                            <input type="hidden" id="objektif" name="objektif">
                                             <!--end::Editor-->
                                             {{--                                                            <!--begin::Description-->--}}
                                             {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
@@ -130,11 +134,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tarikh & Masa Mula</label>
-                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                                <input class="form-control form-control-solid" name="tarikh_mula" placeholder="Pilih tarikh" id="kt_daterangepicker_1" value="{{date('d/m/Y gA', strtotime($program->tarikh_mula))}}"/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="required form-label">Tarikh & Masa Tamat</label>
-                                                <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
+                                                <input class="form-control form-control-solid" name="tarikh_tamat" placeholder="Pilih tarikh" id="kt_daterangepicker_2" value="{{date('d/m/Y gA', strtotime($program->tarikh_tamat))}}"/>
                                             </div>
                                         </div>
                                         {{--                                                            <!--begin::Description-->--}}
@@ -148,11 +152,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tempat Program</label>
-                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru" required/>
+                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="{{$program->tempat}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="form-label">Penganjur Program (Jika Ada)</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="Majlis Pemulihan Dadah Kebangsaan (MPDK)"/>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value="{{$program->penganjur}}"/>
                                             </div>
                                         </div>
 
@@ -167,11 +171,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
                                                 <label class="required form-label">Nama Pegawai</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Nama Pegawai" value="En. Kairul Azizi" required/>
+                                                <input type="text" name="nama_pegawai" class="form-control mb-2" placeholder="Nama Pegawai" value="{{$program->nama_pegawai}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
-                                                <label class="required form-label">No. Telefon Untuk Dihubungi (Tanpa '-')</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="0135728935" required/>
+                                                <label class="required form-label">No. Telefon Untuk Dihubungi</label>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="{{$program->no_tel_dihubungi}}" required/>
                                             </div>
                                         </div>
 
@@ -186,14 +190,15 @@
                                         <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
-                                        <div id="kt_docs_quill_basic_2" name="kt_docs_quill_basic" class="min-h-200px mb-2">
-                                            Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran.
+                                        <div id="kt_docs_quill_basic_2" class="min-h-200px mb-2">
+                                            {!!$program->catatan!!}
                                         </div>
                                         <!--end::Editor-->
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
+                                    <input type="hidden" id="catatan" name="catatan">
                                     <!--end::Input group-->
                                 </div>
                                 <!--end::Card header-->
@@ -201,10 +206,10 @@
                             <!--end::General options-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
-                                <a href="{{ url('pengurusan-program/pentadbir-sistem/maklumat-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                                <a href="{{ url('pengurusan-program/pentadbir-sistem/senarai-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                                <button type="submit"  class="btn btn-primary">
                                     <span class="indicator-label">Simpan</span>
                                     <span class="indicator-progress">Sila Tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -243,13 +248,22 @@
     <!--end::Javascript-->
 
     <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
+        document.getElementById('program_form').addEventListener('submit', function(event) {
+            // Get the HTML content inside the div
+            var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
+            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
+
+            // Assign the content to a hidden input field
+            document.querySelector('input[name=objektif]').value = quillHtml1;
+            document.querySelector('input[name=catatan]').value = quillHtml2;
         });
+        // document.getElementById('program_form').onsubmit = function() {
+        //     var content_1 = document.getElementById('ql-kt_docs_quill_basic').children[0].innerHTML;
+        //     document.getElementById('objektif').value = content_1;
+        //
+        //     var content_2 = document.getElementById('ql-kt_docs_quill_basic_2').children[0].innerHTML;
+        //     document.getElementById('catatan').value = content_2;
+        // };
     </script>
 
     <script>
@@ -331,7 +345,9 @@
             placeholder: 'Type your text here...',
             theme: 'snow' // or 'bubble'
         });
+    </script>
 
+    <script>
         var quill = new Quill('#kt_docs_quill_basic_2', {
             modules: {
                 toolbar: [
@@ -347,14 +363,17 @@
         });
     </script>
 
+
+
     <!--date-->
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script>
         $("#kt_daterangepicker_1").daterangepicker({
+                timePicker: true,
                 singleDatePicker: true,
                 showDropdowns: true,
                 locale: {
-                    format: "DD/MM/YYYY"
+                    format: "DD/MM/YYYY hh:mm A"
                 }
             }
         );
@@ -364,11 +383,10 @@
                 singleDatePicker: true,
                 showDropdowns: true,
                 locale: {
-                    format: "hh:mm A"
+                    format: "DD/MM/YYYY hh:mm A"
                 }
             }
         );
 
     </script>
-
 @endsection
