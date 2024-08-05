@@ -355,7 +355,7 @@
                                 <!--begin::Stats-->
                                 <div class="m-0">
                                     <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$keseluruhan}}</span>
                                         <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                     </a>
                                 </div>
@@ -372,14 +372,14 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-check-circle-fill text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Telah Menjawab</span>
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Hadir</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
                                     <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">{{$hadir}}</span>
                                         <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                     </a>
                                 </div>
@@ -396,14 +396,14 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-x-circle-fill text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Menjawab</span>
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Hadir</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
                                     <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$tdk_hadir}}</span>
                                         <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                     </a>
                                 </div>
@@ -422,10 +422,10 @@
                                 <h2>Senarai Pengesahan Kehadiran</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-pengesahan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/excel-pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-pengesahan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -560,10 +560,10 @@
                                 <h2>Senarai Klien Yang Hadir</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-perekodan/').$program->id}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/excel-perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-perekodan/').$program->id}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>

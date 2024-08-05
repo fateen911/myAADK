@@ -268,8 +268,12 @@ class PengurusanProgController extends Controller
     public function maklumatProgPS($id)
     {
         $program = Program::with('kategori')->find($id);
+        $pengesahan = PengesahanKehadiranProgram::all();
+        $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
+        $tdk_hadir = $pengesahan->where('program_id',$id)->where('keputusan','TIDAK HADIR')->count();
+        $keseluruhan = $hadir + $tdk_hadir;
         if ($program) {
-            return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program'));
+            return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -584,29 +588,35 @@ class PengurusanProgController extends Controller
     }
 
     //PDF
-    public function pdfPengesahan()
+    public function pdfPengesahan($id)
     {
-        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'date' => date('d/m/Y')];
+        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
+        $program = Program::with('kategori')->find($id);
+        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'pengesahan' => $pengesahan, 'program' => $program];
         $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data)->setPaper('a4', 'landscape');
 
         return $pdf->download('senarai_pengesahan_kehadiran.pdf');
     }
 
-    public function pdfPerekodan()
+    public function pdfPerekodan($id)
     {
-        $data = ['title' => 'Senarai Klien Yang Hadir', 'date' => date('d/m/Y')];
+        $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
+        $program = Program::with('kategori')->find($id);
+        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'perekodan' => $perekodan, 'program' => $program];
         $pdf = PDF::loadView('pengurusan_program.pdf_perekodan', $data)->setPaper('a4');
 
         return $pdf->download('senarai_perekodan_kehadiran.pdf');
     }
 
-    public function excelPengesahan()
+    public function excelPengesahan($id)
     {
+        $program = Program::with('kategori')->find($id);
         return Excel::download(new Program,'senarai_pengesahan_kehadiran.xlsx');
     }
 
-    public function excelPerekodan()
+    public function excelPerekodan($id)
     {
+        $program = Program::with('kategori')->find($id);
         return Excel::download(new Program,'senarai_perekodan_kehadiran.xlsx');
     }
 }

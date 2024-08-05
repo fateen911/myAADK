@@ -14,10 +14,10 @@
         <div class="d-table w-100">
             <div class="d-table-row">
                 <div class="d-table-cell text-left w-50">
-                    <p>Nama Program: Program Pemulihan Bersepadu</p>
+                    <p class="text-uppercase">Nama Program: {{$program->nama}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p>Tarikh/Masa Mula: 1 Ogos 2024, 8:00 AM</p>
+                    <p class="text-uppercase">Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
                 </div>
             </div>
         </div>
@@ -25,10 +25,10 @@
         <div class="d-table w-100">
             <div class="d-table-row">
                 <div class="d-table-cell text-left w-50">
-                    <p>Tempat: Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
+                    <p class="text-uppercase">Tempat: {{$program->tempat}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p>Tarikh/Masa Mula: 3 Ogos 2024, 12:00 PM</p>
+                    <p class="text-uppercase">Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
                 </div>
             </div>
         </div>
@@ -44,70 +44,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    Ahmad Faizal bin Ahmad
-                </td>
-                <td>
-                    890101011234
-                </td>
-                <td>2023-05-15 14:30:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Siti Nurhaliza binti Abdul
-                </td>
-                <td>
-                    900202022345
-                </td>
-                <td>2023-06-16 15:45:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Mohd Faiz bin Mohd
-                </td>
-                <td>
-                    920303033456
-                </td>
-                <td>2023-07-17 16:50:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Nurul Ain binti Razali
-                </td>
-                <td>
-                    940404044567
-                </td>
-                <td>2023-08-18 17:55:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Hafiz bin Hamid
-                </td>
-                <td>
-                    970606066789
-                </td>
-                <td>2023-10-20 19:25:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Ahmad Faizal bin Ahmad
-                </td>
-                <td>
-                    980707077890
-                </td>
-                <td>2023-11-21 20:30:00</td>
-            </tr>
-            <tr>
-                <td>
-                    Syafiq bin Hassan
-                </td>
-                <td>
-                    001010099012
-                </td>
-                <td>2024-01-23 22:40:00</td>
-            </tr>
-            </tbody>
+            @foreach($perekodan as $item)
+                <tr>';
+                    <td class="text-uppercase"> {{$item->klien->nama}} </td>
+                    <td class="text-uppercase"> {{$item->klien->no_kp}} </td>
+                    <td> {{date('d/m/Y H:i:s', strtotime($item->tarikh_perekodan))}} </td>
+                </tr>';
+            @endforeach
         </table>
     </div>
 </body>

@@ -60,10 +60,10 @@ Route::get('/pengurusan-program/hebahan/sms', [PengurusanProgController::class, 
 Route::get('/pengurusan-program/hebahan/telegram', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan.telegram');
 
 // PENGURUSAN PROGRAM - PDF/EXCEL
-Route::get('/pengurusan-program/pdf-pengesahan',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
-Route::get('/pengurusan-program/excel-pengesahan',[PengurusanProgController::class, 'excelPengesahan'])->name('pengurusan_program.excel_pengesahan');
-Route::get('/pengurusan-program/pdf-perekodan',[PengurusanProgController::class, 'pdfPerekodan'])->name('pengurusan_program.pdf_perekodan');
-Route::get('/pengurusan-program/excel-perekodan',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
+Route::get('/pengurusan-program/pdf-pengesahan/{id}',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
+Route::get('/pengurusan-program/excel-pengesahan/{id}',[PengurusanProgController::class, 'excelPengesahan'])->name('pengurusan_program.excel_pengesahan');
+Route::get('/pengurusan-program/pdf-perekodan/{id}',[PengurusanProgController::class, 'pdfPerekodan'])->name('pengurusan_program.pdf_perekodan');
+Route::get('/pengurusan-program/excel-perekodan/{id}',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
 
 // PENGURUSAN PROGRAM - JSON
 Route::get('/klien', [PengurusanProgController::class, 'klien']);

@@ -10,14 +10,14 @@
         <br><h2 class="my-3 text-center text-uppercase">Senarai Pengesahan Kehadiran</h2>
 
         <hr class="border-0 h-1px bg-black mt-10 mb-8">
-
+        <input type="hidden" id="programId" value="{{$program->id}}">
         <div class="d-table w-100">
             <div class="d-table-row">
                 <div class="d-table-cell text-left w-50">
-                    <p>Nama Program: Program Pemulihan Bersepadu</p>
+                    <p class="text-uppercase">Nama Program: {{$program->nama}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p>Tarikh/Masa Mula: 1 Ogos 2024, 8:00 AM</p>
+                    <p class="text-uppercase">Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
                 </div>
             </div>
         </div>
@@ -25,17 +25,17 @@
         <div class="d-table w-100">
             <div class="d-table-row">
                 <div class="d-table-cell text-left w-50">
-                    <p>Tempat: Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
+                    <p class="text-uppercase">Tempat: {{$program->tempat}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p>Tarikh/Masa Mula: 3 Ogos 2024, 12:00 PM</p>
+                    <p class="text-uppercase">Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
                 </div>
             </div>
         </div>
 
         <hr class="border-0 h-1px bg-black mb-10">
 
-        <table class="table table-row-dashed fs-6 gy-5 my-0">
+        <table class="table table-row-dashed fs-6 gy-5 my-0" id="pengesahanTable">
             <thead>
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                 <th class="min-w-125px">Nama</th>
@@ -47,90 +47,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    Ahmad Faizal bin Ahmad
-                </td>
-                <td>
-                    890101011234
-                </td>
-                <td>No. 12, Jalan Merbuk, Taman Setia, 43000 Kajang, Selangor</td>
-                <td>012-3456789</td>
-                <td>Hadir</td>
-                <td>Tepat pada masanya</td>
-            </tr>
-            <tr>
-                <td>
-                    Siti Nurhaliza binti Abdul
-                </td>
-                <td>
-                    900202022345
-                </td>
-                <td>No. 34, Jalan Matahari, Taman Cahaya, 50450 Kuala Lumpur</td>
-                <td>013-4567890</td>
-                <td>Tidak Hadir</td>
-                <td>Cuti sakit</td>
-            </tr>
-            <tr>
-                <td>
-                    Mohd Faiz bin Mohd
-                </td>
-                <td>
-                    920303033456
-                </td>
-                <td>No. 56, Jalan Teratai, Taman Seri, 11600 Pulau Pinang</td>
-                <td>014-5678901</td>
-                <td>Hadir</td>
-                <td>Hadir lewat 10 minit</td>
-            </tr>
-            <tr>
-                <td>
-                    Nurul Ain binti Razali
-                </td>
-                <td>
-                    940404044567
-                </td>
-                <td>No. 78, Jalan Kenanga, Taman Melati, 81300 Skudai, Johor</td>
-                <td>015-6789012</td>
-                <td>Hadir</td>
-                <td>-</td>
-            </tr>
-            <tr>
-                <td>
-                    Hafiz bin Hamid
-                </td>
-                <td>
-                    970606066789
-                </td>
-                <td>No. 90, Jalan Dahlia, Taman Bunga, 75100 Melaka</td>
-                <td>016-7890123</td>
-                <td>Tidak Hadir</td>
-                <td>Urusan keluarga</td>
-            </tr>
-            <tr>
-                <td>
-                    Ahmad Faizal bin Ahmad
-                </td>
-                <td>
-                    980707077890
-                </td>
-                <td>No. 23, Jalan Anggerik, Taman Bukit, 70200 Seremban, Negeri Sembilan</td>
-                <td>017-8901234</td>
-                <td>Hadir</td>
-                <td>Akan menghadiri program</td>
-            </tr>
-            <tr>
-                <td>
-                    Syafiq bin Hassan
-                </td>
-                <td>
-                    001010099012
-                </td>
-                <td>No. 45, Jalan Cempaka, Taman Sentosa, 40100 Shah Alam, Selangor</td>
-                <td>018-9012345</td>
-                <td>Tidak Hadir</td>
-                <td>Bercuti</td>
-            </tr>
+                @foreach($pengesahan as $item)
+                    <tr>';
+                        <td class="text-uppercase"> {{$item->klien->nama}} </td>
+                        <td class="text-uppercase"> {{$item->klien->no_kp}} </td>
+                        <td class="text-uppercase"> {{$item->klien->alamat_rumah}} </td>
+                        <td class="text-uppercase"> {{$item->klien->no_tel}} </td>
+                        <td class="text-uppercase"> {{$item->keputusan}} </td>
+                        <td> {{$item->catatan}} </td>
+                    </tr>';
+                @endforeach
             </tbody>
         </table>
     </div>
