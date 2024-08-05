@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('tempoh_tinggal_lokasi_terkini');
             $table->string('tinggal_dengan');
             $table->string('kawasan_tempat_tinggal');
+            $table->string('sesi');
             $table->timestamps();
 
             // Assuming you have a 'kliens' table with an 'id' column

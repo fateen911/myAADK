@@ -174,8 +174,8 @@
                     <div class="mb-4">
                         <label for="rawatan"><b>1) Di manakah anda pernah menerima rawatan ?</b></label><br>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN/CCRC" id="rawatan1" {{ isset($respon) && $respon->rawatan == 'PUSPEN/CCRC' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="rawatan1">PUSPEN/CCRC</label>
+                            <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN" id="rawatan1" {{ isset($respon) && $respon->rawatan == 'PUSPEN' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="rawatan1">PUSPEN</label>
                         </div>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="rawatan" value="PPDP" id="rawatan2" {{ isset($respon) && $respon->rawatan == 'PPDP' ? 'checked' : '' }}>
@@ -195,8 +195,8 @@
                     <div  class="mb-4">
                         <label for="pusat_rawatan"><b>2) Di manakah pusat rawatan terkini anda ?</b></label><br>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN/CCRC" id="pusat_rawatan1" {{ isset($respon) && $respon->pusat_rawatan == 'PUSPEN/CCRC' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="pusat_rawatan1">PUSPEN/CCRC</label>
+                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN" id="pusat_rawatan1" {{ isset($respon) && $respon->pusat_rawatan == 'PUSPEN' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="pusat_rawatan1">PUSPEN</label>
                         </div>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="pusat_rawatan" value="PPDP" id="pusat_rawatan2" {{ isset($respon) && $respon->pusat_rawatan == 'PPDP' ? 'checked' : '' }}>
@@ -217,6 +217,23 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="kategori"><b>4) Apakah kategori pembebasan anda?</b></label><br>
+                        <div class="radio-group">
+                            <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (kali pertama)" id="kategori1" {{ (isset($respon) && $respon->kategori == 'Pasca bebas (kali pertama)') || old('kategori') == 'Pasca bebas (kali pertama)' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="kategori1">Pasca bebas (kali pertama)</label>
+                        </div>
+                        <div class="radio-group">
+                            <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (relaps)" id="kategori2" {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="kategori2">Pasca bebas (relaps)</label>
+                        </div>
+                        @if ($respon->kategori == 'Pasca bebas (relaps)')
+                            <div class="input-tahun">
+                                <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
+                                <span>kali</span>
+                            </div>
+                        @endif
+                    </div>
+                    {{-- <div class="mb-4">
                         <label for="kategori"><b>4) Apakah kategori pembebasan anda ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (kali pertama)" id="kategori1" 
@@ -234,7 +251,7 @@
                                 value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
                                 <span>kali</span>
                         </div>
-                    </div>
+                    </div> --}}
                     
                     <div class="mb-4">
                         <label for="jenis_dadah"><b>5) Apakah jenis dadah yang pernah digunakan ?</b></label><br>
@@ -418,22 +435,24 @@
             const kategoriRadios = document.querySelectorAll('input[name="kategori"]');
             const jumlahRelapseField = document.getElementById('jumlah_relapse');
 
-            rawatanRadios.forEach(radio => {
-                radio.addEventListener('change', function () {
-                    if (this.value === 'Lain-lain') {
-                        lainLainRawatanField.classList.remove('d-none');
-                    } else {
-                        lainLainRawatanField.classList.add('d-none');
-                    }
-                });
-            });
-
             kategoriRadios.forEach(radio => {
                 radio.addEventListener('change', function () {
                     if (this.value === 'Pasca bebas (relaps)') {
                         jumlahRelapseField.classList.remove('d-none');
                     } else {
                         jumlahRelapseField.classList.add('d-none');
+                        jumlahRelapseField.value = ''; // Clear the value when hidden
+                    }
+                });
+            });
+
+            rawatanRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.value === 'Lain-lain') {
+                        lainLainRawatanField.classList.remove('d-none');
+                    } else {
+                        lainLainRawatanField.classList.add('d-none');
+                        lainLainRawatanField.value = '';
                     }
                 });
             });

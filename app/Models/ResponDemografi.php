@@ -24,5 +24,6 @@ class ResponDemografi extends Model
         'tempoh_tinggal_lokasi_terkini',
         'tinggal_dengan',
         'kawasan_tempat_tinggal',
+        'sesi',
     ];
 }

@@ -65,6 +65,16 @@ class ModalKepulihanController extends Controller
             $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
         }
 
+        // Set 'lain-lain rawatan' to null when rawatan not equal to null
+        if ($data['rawatan'] != 'Lain-lain') {
+            $data['rawatan'] = null;
+        }
+
+        // Set 'jumlah_relapse' to null if 'kategori' is 'Pasca bebas (kali pertama)'
+        if ($data['kategori'] == 'Pasca bebas (kali pertama)') {
+            $data['jumlah_relapse'] = null;
+        }
+
         // Update existing record or create a new one if it doesn't exist
         ResponDemografi::updateOrCreate(
             ['klien_id' => $clientId], // Condition to check for existing record
