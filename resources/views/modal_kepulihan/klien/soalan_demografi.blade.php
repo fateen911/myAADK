@@ -226,32 +226,19 @@
                             <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (relaps)" id="kategori2" {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? 'checked' : '' }}>
                             <label class="form-check-label" for="kategori2">Pasca bebas (relaps)</label>
                         </div>
-                        @if ($respon->kategori == 'Pasca bebas (relaps)')
+                    
+                        @if (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)')
                             <div class="input-tahun">
-                                <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
+                                <input type="text" class="form-control mt-2" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ $respon->jumlah_relapse }}" style="width: 40%; margin-bottom: 10px;">
+                                <span>kali</span>
+                            </div>
+                        @else
+                            <div class="input-tahun d-none">
+                                <input type="text" class="form-control mt-2" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
                                 <span>kali</span>
                             </div>
                         @endif
                     </div>
-                    {{-- <div class="mb-4">
-                        <label for="kategori"><b>4) Apakah kategori pembebasan anda ?</b></label><br>
-                        <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (kali pertama)" id="kategori1" 
-                                {{ (isset($respon) && $respon->kategori == 'Pasca bebas (kali pertama)') || old('kategori') == 'Pasca bebas (kali pertama)' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="kategori1">Pasca bebas (kali pertama)</label>
-                        </div>
-                        <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kategori" value="Pasca bebas (relaps)" id="kategori2" 
-                                {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="kategori2">Pasca bebas (relaps)</label>
-                        </div>
-                        <div class="input-tahun">
-                            <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" 
-                                id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" 
-                                value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
-                                <span>kali</span>
-                        </div>
-                    </div> --}}
                     
                     <div class="mb-4">
                         <label for="jenis_dadah"><b>5) Apakah jenis dadah yang pernah digunakan ?</b></label><br>

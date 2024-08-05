@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['Selesai', 'Belum Selesai'])->default('Belum Selesai');
             $table->timestamps();
 
-            $table->foreign('klien_id')->references('id')->on('kliens')->onDelete('cascade');
+            $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');
         });
     }
 
