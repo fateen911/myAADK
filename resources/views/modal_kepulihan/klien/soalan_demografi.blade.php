@@ -428,7 +428,7 @@
                         jumlahRelapseField.classList.remove('d-none');
                     } else {
                         jumlahRelapseField.classList.add('d-none');
-                        jumlahRelapseField.value = ''; // Clear the value when hidden
+                        jumlahRelapseField.value = '';
                     }
                 });
             });

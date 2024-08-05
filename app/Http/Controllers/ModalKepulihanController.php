@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ResponDemografi;
 use App\Models\Klien;
+use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
 {
@@ -31,18 +32,41 @@ class ModalKepulihanController extends Controller
         // Get the client ID from the authenticated user's 'no_kp'
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
+        // Get the latest session within the last 6 months
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $latestSession = ResponDemografi::where('klien_id', $clientId)
+            ->where('created_at', '>=', $sixMonthsAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if (!$latestSession || $latestSession->status == 'Selesai') {
+            // Calculate the new session number
+            $sessionCount = ResponDemografi::where('klien_id', $clientId)->count() + 1;
+            $sessionYear = Carbon::now()->year;
+            $sesi = "{$sessionCount}/{$sessionYear}";
+
+            // Create a new session with status 'Belum Selesai'
+            $latestSession = ResponDemografi::create([
+                'klien_id' => $clientId,
+                'sesi' => $sesi,
+                'status' => 'Belum Selesai'
+            ]);
+        }
+
         // Prepare data for insertion/updating
-        $data = $request->all();
+        $data = $request->except(['_token', '_method']);
         $data['klien_id'] = $clientId;
+        $data['sesi'] = $latestSession->sesi;
+        $data['status'] = 'Belum Selesai';
 
         // Ensure 'jenis_dadah' is converted to JSON if it's an array
         if (isset($data['jenis_dadah']) && is_array($data['jenis_dadah'])) {
             $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
         }
 
-        // Update existing record or create a new one if it doesn't exist
+        // Update the existing record or create a new one if it doesn't exist
         ResponDemografi::updateOrCreate(
-            ['klien_id' => $clientId], // Condition to check for existing record
+            ['klien_id' => $clientId, 'sesi' => $latestSession->sesi], // Condition to check for existing record
             $data // Data to update/create
         );
 
@@ -50,15 +74,22 @@ class ModalKepulihanController extends Controller
         return response()->json(['success' => 'Data autosaved successfully.']);
     }
 
-
     public function storeResponSoalanDemografi(Request $request)
     {
         // Get the client ID from the authenticated user's 'no_kp'
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
+        // Get the latest session within the last 6 months
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $latestSession = ResponDemografi::where('klien_id', $clientId)
+            ->where('created_at', '>=', $sixMonthsAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
         // Prepare data for insertion/updating
-        $data = $request->all();
+        $data = $request->except(['_token', '_method']);
         $data['klien_id'] = $clientId;
+        $data['sesi'] = $latestSession->sesi;
 
         // Ensure 'jenis_dadah' is converted to JSON if it's an array
         if (isset($data['jenis_dadah']) && is_array($data['jenis_dadah'])) {
@@ -75,15 +106,77 @@ class ModalKepulihanController extends Controller
             $data['jumlah_relapse'] = null;
         }
 
-        // Update existing record or create a new one if it doesn't exist
+        // Update the status to 'Selesai' if all questions are answered
+        $data['status'] = 'Selesai';
+
+        // Update the existing record or create a new one if it doesn't exist
         ResponDemografi::updateOrCreate(
-            ['klien_id' => $clientId], // Condition to check for existing record
+            ['klien_id' => $clientId, 'sesi' => $latestSession->sesi], // Condition to check for existing record
             $data // Data to update/create
         );
 
         // Redirect to the desired route with a success message
         return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah berjaya dihantar.');
     }
+
+    // public function autosaveResponSoalanDemografi(Request $request)
+    // {
+    //     // Get the client ID from the authenticated user's 'no_kp'
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+    //     // Prepare data for insertion/updating
+    //     $data = $request->all();
+    //     $data['klien_id'] = $clientId;
+
+    //     // Ensure 'jenis_dadah' is converted to JSON if it's an array
+    //     if (isset($data['jenis_dadah']) && is_array($data['jenis_dadah'])) {
+    //         $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
+    //     }
+
+    //     // Update existing record or create a new one if it doesn't exist
+    //     ResponDemografi::updateOrCreate(
+    //         ['klien_id' => $clientId], // Condition to check for existing record
+    //         $data // Data to update/create
+    //     );
+
+    //     // Return a JSON response
+    //     return response()->json(['success' => 'Data autosaved successfully.']);
+    // }
+
+
+    // public function storeResponSoalanDemografi(Request $request)
+    // {
+    //     // Get the client ID from the authenticated user's 'no_kp'
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+    //     // Prepare data for insertion/updating
+    //     $data = $request->all();
+    //     $data['klien_id'] = $clientId;
+
+    //     // Ensure 'jenis_dadah' is converted to JSON if it's an array
+    //     if (isset($data['jenis_dadah']) && is_array($data['jenis_dadah'])) {
+    //         $data['jenis_dadah'] = json_encode($data['jenis_dadah']);
+    //     }
+
+    //     // Set 'lain-lain rawatan' to null when rawatan not equal to null
+    //     if ($data['rawatan'] != 'Lain-lain') {
+    //         $data['rawatan'] = null;
+    //     }
+
+    //     // Set 'jumlah_relapse' to null if 'kategori' is 'Pasca bebas (kali pertama)'
+    //     if ($data['kategori'] == 'Pasca bebas (kali pertama)') {
+    //         $data['jumlah_relapse'] = null;
+    //     }
+
+    //     // Update existing record or create a new one if it doesn't exist
+    //     ResponDemografi::updateOrCreate(
+    //         ['klien_id' => $clientId], // Condition to check for existing record
+    //         $data // Data to update/create
+    //     );
+
+    //     // Redirect to the desired route with a success message
+    //     return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon demografi telah berjaya dihantar.');
+    // }
 
     public function soalanKepulihan()
     {

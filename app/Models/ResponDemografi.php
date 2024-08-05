@@ -25,5 +25,6 @@ class ResponDemografi extends Model
         'tinggal_dengan',
         'kawasan_tempat_tinggal',
         'sesi',
+        'status',
     ];
 }
