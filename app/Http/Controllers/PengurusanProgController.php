@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\PengesahanKehadiranExcel;
+use App\Exports\PerekodanKehadiranExcel;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
 use App\Models\PengesahanKehadiranProgram;
@@ -611,12 +613,15 @@ class PengurusanProgController extends Controller
     public function excelPengesahan($id)
     {
         $program = Program::with('kategori')->find($id);
-        return Excel::download(new Program,'senarai_pengesahan_kehadiran.xlsx');
+        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
+
+        return Excel::download(new PengesahanKehadiranExcel($program, $pengesahan), 'senarai_pengesahan_kehadiran.xlsx');
     }
 
     public function excelPerekodan($id)
     {
         $program = Program::with('kategori')->find($id);
-        return Excel::download(new Program,'senarai_perekodan_kehadiran.xlsx');
+        $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
+        return Excel::download(new PerekodanKehadiranExcel($program, $perekodan), 'senarai_perekodan_kehadiran.xlsx');
     }
 }

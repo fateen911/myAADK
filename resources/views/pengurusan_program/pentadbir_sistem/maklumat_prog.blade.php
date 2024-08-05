@@ -560,10 +560,10 @@
                                 <h2>Senarai Klien Yang Hadir</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-perekodan/').$program->id}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-perekodan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/excel-perekodan/').$program->id}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-perekodan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
