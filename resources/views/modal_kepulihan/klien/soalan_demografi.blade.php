@@ -109,6 +109,19 @@
             font-size: 15px;
             color: #999;
         }
+
+        .input-tahun {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-tahun input {
+            margin-right: 8px;
+        }
+
+        .input-tahun span{
+            font-size: 15px;
+        }
     </style>
 </head>
 
@@ -195,9 +208,12 @@
                         </div>
                     </div>
 
-                    <div  class="mb-4">
+                    <div class="mb-4">
                         <label for="tempoh_tidak_ambil_dadah"><b>3) Berapa lamakah anda sudah tidak mengambil dadah ?</b></label>
-                        <input type="text" class="form-control" id="tempoh_tidak_ambil_dadah" name="tempoh_tidak_ambil_dadah" placeholder="Nyatakan berapa tahun" style="width: 30%;" value="{{ $respon->tempoh_tidak_ambil_dadah ?? '' }}">
+                        <div class="input-tahun">
+                            <input type="text" class="form-control" id="tempoh_tidak_ambil_dadah" name="tempoh_tidak_ambil_dadah" placeholder="Nyatakan berapa tahun" value="{{ $respon->tempoh_tidak_ambil_dadah ?? '' }}" style="width: 20% !important;">
+                            <span style="margin-bottom:15px !important;">tahun</span>
+                        </div>
                     </div>
 
                     <div class="mb-4">
@@ -212,9 +228,12 @@
                                 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? 'checked' : '' }}>
                             <label class="form-check-label" for="kategori2">Pasca bebas (relaps)</label>
                         </div>
-                        <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" 
-                            id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" 
-                            value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%;">
+                        <div class="input-tahun">
+                            <input type="text" class="form-control mt-2 {{ (isset($respon) && $respon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" 
+                                id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" 
+                                value="{{ isset($respon) ? $respon->jumlah_relapse : old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
+                                <span>kali</span>
+                        </div>
                     </div>
                     
                     <div class="mb-4">
@@ -280,8 +299,11 @@
                     
                     <div class="mb-4">
                         <label for="tempoh_tinggal_lokasi_terkini"><b>7) Berapa lamakah anda tinggal di lokasi terkini ?</b></label>
-                        <input type="text" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
-                            value="{{ isset($respon) ? $respon->tempoh_tinggal_lokasi_terkini : old('tempoh_tinggal_lokasi_terkini') }}" style="width: 30%;">
+                        <div class="input-tahun">
+                            <input type="text" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
+                                value="{{ isset($respon) ? $respon->tempoh_tinggal_lokasi_terkini : old('tempoh_tinggal_lokasi_terkini') }}" style="width: 20%;">
+                            <span style="margin-bottom:15px !important;">tahun</span>
+                        </div>    
                     </div>
                     
                     <div class="mb-4">
