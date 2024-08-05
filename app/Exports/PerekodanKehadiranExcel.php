@@ -120,7 +120,7 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
         for ($row = 8; $row <= $highestRow; $row++) {
             $sheet->setCellValueExplicit($nationalIdColumn . $row, $sheet->getCell($nationalIdColumn . $row)->getValue(), DataType::TYPE_STRING);
         }
-        
+
         // Adjust column widths
         $sheet->getColumnDimension('A')->setWidth(40);
         $sheet->getColumnDimension('B')->setWidth(20);

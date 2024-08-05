@@ -267,6 +267,18 @@ class PengurusanProgController extends Controller
         return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
     }
 
+    public function padamProgPS($id){
+        $program = Program::find($id);
+
+        if ($program) {
+            $program->delete();
+            $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
+            return redirect()->to($direct)->with('success', 'Program berjaya dipadam.');
+        } else {
+            return redirect()->back()->with('error', 'Program gagal dipadam.');
+        }
+    }
+
     public function maklumatProgPS($id)
     {
         $program = Program::with('kategori')->find($id);

@@ -39,6 +39,7 @@ Route::get('/pengurusan-program/pentadbir-sistem/daftar-prog',[PengurusanProgCon
 Route::post('/pengurusan-program/pentadbir-sistem/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
 Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
+Route::get('/pengurusan-program/pentadbir-sistem/padam-prog/{id}',[PengurusanProgController::class, 'padamProgPS'])->name('pengurusan_program.pentadbir_sistem.padam_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/senarai-prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');

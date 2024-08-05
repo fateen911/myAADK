@@ -180,8 +180,11 @@
                                 <h2>Maklumat Program</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-color-primary">
+                                <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="{{url('/pengurusan-program/pentadbir-sistem/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                    Padam <i class="bi bi-trash-fill"></i>
                                 </a>
                             </div>
                         </div>
