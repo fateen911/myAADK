@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('keputusan_kepulihan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
+            $table->string('sesi');
             $table->unsignedBigInteger('tahap_kepulihan_id');
             $table->double('skor');
             $table->timestamps();

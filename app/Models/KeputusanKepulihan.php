@@ -13,6 +13,7 @@ class KeputusanKepulihan extends Model
 
     protected $fillable = [
         'klien_id',
+        'sesi',
         'tahap_kepulihan_id',
         'skor',
     ];
