@@ -36,8 +36,9 @@ class ModalKepulihanController extends Controller
         if (!$latestRecordKeputusan) {
             // If there is no record, the client can click the button
             $butangMula = true;
-        } else {
-            // Check if the current date is more than 6 months after the updated_at date of the latest record
+        } 
+        else {
+            // Check if the current date is more than 6 months after the updated_at date of $latestRecordKeputusan
             $updatedAt = Carbon::parse($latestRecordKeputusan->updated_at);
             $currentDate = Carbon::now();
             $monthsDifference = $updatedAt->diffInMonths($currentDate);
@@ -500,6 +501,7 @@ class ModalKepulihanController extends Controller
     //         // return view('modal_kepulihan.klien.selesai_menjawab',compact('klien'))->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     //     }
     // }
+
 
     // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()

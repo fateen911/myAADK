@@ -433,9 +433,6 @@
                         // Get the client's ID 
                         $clientId = DB::table('klien')->where('no_kp', Auth::user()->no_kp)->value('id');
 
-                        // Check if there is no record in KeputusanKepulihan
-                        $keputusanExists = DB::table('keputusan_kepulihan_klien')->where('klien_id', $clientId)->exists();
-
                         // Get the tkh_tamat_pengawasan date from RawatanKlien
                         $rawatanKlien = DB::table('rawatan_klien')->where('klien_id', $clientId)->first();
                         $tkhTamatPengawasan = $rawatanKlien ? $rawatanKlien->tkh_tamat_pengawasan : null;
@@ -446,7 +443,7 @@
                     @endphp
 
                     <!-- Check the conditions -->
-                    @if (!$keputusanExists && $afterTkhTamatPengawasan)
+                    @if ($afterTkhTamatPengawasan)
                         <!--begin:Menu item-->
                         <div class="menu-item pt-5">
                             <!--begin:Menu content-->
