@@ -107,7 +107,59 @@
             <header>SOAL SELIDIK MODAL KEPULIHAN</header>
 
             <div class="card-body">
-                <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">
+                <form action="{{ route('klien.submit.kepulihan') }}" method="POST" id="kepulihanForm">
+                    @csrf
+                
+                    <!-- Store answers from previous pages -->
+                    @foreach($questions as $page => $pageQuestions)
+                        @if($page != $currentPage - 1)
+                            @foreach($pageQuestions as $question)
+                                <input type="hidden" name="answer[{{ $question->id }}]" value="{{ $autosavedAnswers[$question->id] ?? '' }}">
+                            @endforeach
+                        @endif
+                    @endforeach
+                
+                    <!-- Display current page questions -->
+                    @foreach($questions[$currentPage - 1] as $question)
+                        <div class="question" style="font-size: 12pt;">
+                            <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
+                            <div class="options">
+                                @php
+                                    $savedAnswer = $autosavedAnswers[$question->id] ?? null;
+                                @endphp
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}> Sangat Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }}> Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]}" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                    @endforeach
+                
+                    <div class="pagination-buttons">
+                        @if ($currentPage > 1)
+                            <button type="button" onclick="changePage({{ $currentPage - 1 }})" style="margin-right: 10px;">Halaman Sebelum</button>
+                        @endif
+                        @if ($currentPage < 3)
+                            <button type="button" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
+                        @endif
+                    </div>
+                
+                    @if ($currentPage == 3)
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
+                        </div>
+                    @endif
+                </form>
+                {{-- <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">
                     @csrf
                     <input type="hidden" name="currentPage" id="currentPage" value="{{ $currentPage }}">
             
@@ -143,48 +195,17 @@
                             <button type="button" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
                         @endif
                     </div>
-                </form>
+                </form> --}}
 
                 <!-- Separate form for submission -->
-                @if ($currentPage == 3)
+                {{-- @if ($currentPage == 3)
                     <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
                         @csrf
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
                         </div>
                     </form>
-                @endif
-
-                {{-- <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
-                    @csrf
-                    @foreach($questions as $question)
-                        <div class="question" style="font-size: 12pt;">
-                            <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
-                            <div class="options">
-                                @php
-                                    $savedAnswer = isset($autosavedAnswers[$question->id]) ? $autosavedAnswers[$question->id] : null;
-                                @endphp
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}> Sangat Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }}> Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
-                                </label>
-                            </div>
-                        </div>
-                        <br>
-                    @endforeach
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
-                    </div>
-                </form>                                                                      --}}
+                @endif --}}
             </div>
         </div>
         <!--end::Card body-->
@@ -249,6 +270,55 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        let totalQuestions = 25;
+        let hantarBtn = document.getElementById('hantarBtn');
+
+        function checkAnswers() {
+            let answers = document.querySelectorAll('input[type=radio]:checked');
+            if (answers.length === totalQuestions) {
+                hantarBtn.disabled = false;
+            } else {
+                hantarBtn.disabled = true;
+            }
+        }
+
+        // Check on page load
+        checkAnswers();
+
+        // Check on change
+        document.querySelectorAll('input[type=radio]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                checkAnswers();
+            });
+        });
+    });
+
+    function changePage(page) {
+        let form = document.getElementById('kepulihanForm');
+
+        // Save current page answers to hidden inputs
+        let answers = document.querySelectorAll('input[type=radio]:checked');
+        answers.forEach(function(answer) {
+            let hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = answer.name;
+            hiddenInput.value = answer.value;
+            form.appendChild(hiddenInput);
+        });
+
+        // Change page and submit the form
+        let currentPageInput = document.createElement('input');
+        currentPageInput.type = 'hidden';
+        currentPageInput.name = 'currentPage';
+        currentPageInput.value = page;
+        form.appendChild(currentPageInput);
+
+        form.submit();
+    }
+</script>
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
         let hantarBtn = document.getElementById('hantarBtn');
         let totalQuestions = {{ count($questions[$currentPage - 1]) }};
         console.log('Total Questions: ' + totalQuestions); // Debugging statement
@@ -269,38 +339,6 @@
         // Check on change
         document.querySelectorAll('input[type=radio]').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                checkAnswers();
-            });
-        });
-    });
-
-    function changePage(page) {
-        document.getElementById('currentPage').value = page;
-        document.getElementById('paginationForm').submit();
-    }
-</script>
-
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let answers = document.querySelectorAll('input[type=radio]:checked');
-        let totalQuestions = 25;
-        let hantarBtn = document.getElementById('hantarBtn');
-
-        function checkAnswers() {
-            if (answers.length === totalQuestions) {
-                hantarBtn.disabled = false;
-            } else {
-                hantarBtn.disabled = true;
-            }
-        }
-
-        // Check on page load
-        checkAnswers();
-
-        // Check on change
-        document.querySelectorAll('input[type=radio]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                answers = document.querySelectorAll('input[type=radio]:checked');
                 checkAnswers();
             });
         });
