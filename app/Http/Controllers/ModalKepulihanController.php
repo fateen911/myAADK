@@ -67,7 +67,7 @@ class ModalKepulihanController extends Controller
         // Update the existing record or create a new one if it doesn't exist
         ResponDemografi::updateOrCreate(
             ['klien_id' => $clientId, 'sesi' => $latestSession->sesi], // Condition to check for existing record
-            $data // Data to update/create
+            $data // Data to update or create
         );
 
         // Return a JSON response
@@ -168,7 +168,7 @@ class ModalKepulihanController extends Controller
                     'klien_id' => $clientId,
                     'soalan_id' => $question->id,
                     'skala_id' => null, // No answer yet
-                    'status' => 'Selesai', 
+                    'status' => 'Baharu', 
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

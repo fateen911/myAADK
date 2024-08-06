@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('klien_id');
             $table->unsignedBigInteger('soalan_id'); 
             $table->unsignedBigInteger('skala_id')->nullable();
-            $table->enum('status', ['Selesai', 'Belum Selesai'])->default('Belum Selesai');
+            $table->enum('status', ['Baharu', 'Selesai', 'Belum Selesai'])->default('Baharu');
             $table->timestamps();
 
             $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');

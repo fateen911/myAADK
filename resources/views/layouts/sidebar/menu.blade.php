@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 <head>
     <style>
         a.logo-container {
@@ -425,18 +429,61 @@
                         <!--end:Menu link-->
                     </div>
 
+                    @php
+                        // Get the client's ID 
+                        $clientId = DB::table('klien')->where('no_kp', Auth::user()->no_kp)->value('id');
+
+                        // Check if there is no record in KeputusanKepulihan
+                        $keputusanExists = DB::table('keputusan_kepulihan_klien')->where('klien_id', $clientId)->exists();
+
+                        // Get the tkh_tamat_pengawasan date from RawatanKlien
+                        $rawatanKlien = DB::table('rawatan_klien')->where('klien_id', $clientId)->first();
+                        $tkhTamatPengawasan = $rawatanKlien ? $rawatanKlien->tkh_tamat_pengawasan : null;
+
+                        // Check if the current date is after tkh_tamat_pengawasan
+                        $currentDate = Carbon::now();
+                        $afterTkhTamatPengawasan = $tkhTamatPengawasan ? $currentDate->greaterThan(Carbon::parse($tkhTamatPengawasan)) : false;
+                    @endphp
+
+                    <!-- Check the conditions -->
+                    @if (!$keputusanExists && $afterTkhTamatPengawasan)
+                        <!--begin:Menu item-->
+                        <div class="menu-item pt-5">
+                            <!--begin:Menu content-->
+                            <div class="menu-content">
+                                <span class="menu-heading fw-bold text-uppercase fs-7">MODAL KEPULIHAN</span>
+                            </div>
+                            <!--end:Menu content-->
+                        </div>
+                        <!--end:Menu item-->
+
+                        <!--begin:Menu item-->
+                        <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien.soalSelidik') ? 'active' : '' }}">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('klien.soalSelidik') }}" onclick="event.preventDefault(); window.location.href='{{ route('klien.soalSelidik') }}';">
+                                <span class="menu-icon">
+                                    <i class="ki-duotone ki-questionnaire-tablet fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </span>
+                                <span class="menu-title">Soal Selidik</span>
+                            </a>
+                        </div>
+                        <!--end:Menu item-->
+                    @endif
 
                     <!--begin:Menu item-->
-                    <div class="menu-item pt-5">
+                    {{-- <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
                             <span class="menu-heading fw-bold text-uppercase fs-7">MODAL KEPULIHAN</span>
                         </div>
                         <!--end:Menu content-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien.soalSelidik') ? 'active' : '' }}">
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('klien.soalSelidik') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('klien.soalSelidik') }}" onclick="event.preventDefault(); window.location.href='{{ route('klien.soalSelidik') }}';">
                             <span class="menu-icon">
@@ -447,7 +494,7 @@
                             </span>
                             <span class="menu-title">Soal Selidik</span>
                         </a>
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
                 </div>
                 <!--end::Menu-->
