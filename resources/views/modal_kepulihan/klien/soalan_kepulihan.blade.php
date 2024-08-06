@@ -34,6 +34,31 @@
             text-align: center; /* Center the text inside the header */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a better look */
         }
+
+        .pagination-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination-buttons button {
+            margin: 0 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: none;
+            background-color: gray;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-buttons button:hover {
+            background-color: gray;
+        }
+
+        .pagination-buttons button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -82,7 +107,55 @@
             <header>SOAL SELIDIK MODAL KEPULIHAN</header>
 
             <div class="card-body">
-                <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
+                <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">
+                    @csrf
+                    <input type="hidden" name="currentPage" id="currentPage" value="{{ $currentPage }}">
+            
+                    @foreach($questions[$currentPage - 1] as $question)
+                        <div class="question" style="font-size: 12pt;">
+                            <p><b>{{ ($currentPage - 1) * 10 + $loop->iteration }}. {{ $question->soalan }}</b></p>
+                            <div class="options">
+                                @php
+                                    $savedAnswer = isset($autosavedAnswers[$question->id]) ? $autosavedAnswers[$question->id] : null;
+                                @endphp
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }} required> Sangat Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }} required> Tidak Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }} required> Setuju
+                                </label>
+                                <label>
+                                    <input type="radio" name="answer[{{ $question->id }}]" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }} required> Sangat Setuju
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                    @endforeach
+            
+                    <div class="pagination-buttons">
+                        @if ($currentPage > 1)
+                            <button type="button" onclick="changePage({{ $currentPage - 1 }})">Halaman Sebelum</button>
+                        @endif
+                        @if ($currentPage < 3)
+                            <button type="button" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
+                        @endif
+                    </div>
+                </form>
+
+                <!-- Separate form for submission -->
+                @if ($currentPage == 3)
+                    <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
+                        @csrf
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
+                        </div>
+                    </form>
+                @endif
+
+                {{-- <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
                     @csrf
                     @foreach($questions as $question)
                         <div class="question" style="font-size: 12pt;">
@@ -107,17 +180,17 @@
                         </div>
                         <br>
                     @endforeach
+
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-center mt-5">Hantar</button>
+                        <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
                     </div>
-                </form>                                                                     
+                </form>                                                                      --}}
             </div>
         </div>
         <!--end::Card body-->
     </div>
     <!--end::Content container-->
 </div>
-
 <!--end::Content-->
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -173,5 +246,70 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let hantarBtn = document.getElementById('hantarBtn');
+        let totalQuestions = {{ count($questions[$currentPage - 1]) }};
+        console.log('Total Questions: ' + totalQuestions); // Debugging statement
+
+        function checkAnswers() {
+            let answers = document.querySelectorAll('input[type=radio]:checked');
+            console.log('Checked Answers: ' + answers.length); // Debugging statement
+            if (answers.length === totalQuestions) {
+                hantarBtn.disabled = false;
+            } else {
+                hantarBtn.disabled = true;
+            }
+        }
+
+        // Check on page load
+        checkAnswers();
+
+        // Check on change
+        document.querySelectorAll('input[type=radio]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                checkAnswers();
+            });
+        });
+    });
+
+    function changePage(page) {
+        document.getElementById('currentPage').value = page;
+        document.getElementById('paginationForm').submit();
+    }
+</script>
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let answers = document.querySelectorAll('input[type=radio]:checked');
+        let totalQuestions = 25;
+        let hantarBtn = document.getElementById('hantarBtn');
+
+        function checkAnswers() {
+            if (answers.length === totalQuestions) {
+                hantarBtn.disabled = false;
+            } else {
+                hantarBtn.disabled = true;
+            }
+        }
+
+        // Check on page load
+        checkAnswers();
+
+        // Check on change
+        document.querySelectorAll('input[type=radio]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                answers = document.querySelectorAll('input[type=radio]:checked');
+                checkAnswers();
+            });
+        });
+    });
+
+    function changePage(page) {
+        document.getElementById('currentPage').value = page;
+        document.getElementById('paginationForm').submit();
+    }
+</script> --}}
 
 @endsection

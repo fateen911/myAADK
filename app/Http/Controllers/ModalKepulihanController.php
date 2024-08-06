@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KeputusanKepulihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\ResponDemografi;
 use App\Models\Klien;
+use App\Models\ResponModalKepulihan;
 use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
@@ -115,38 +117,150 @@ class ModalKepulihanController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
-        // If there is no existing session or the latest session is 'Selesai', create a new session
+        // Determine the session to use
         if (!$latestSession || $latestSession->status == 'Selesai') {
             $sessionCount = ResponDemografi::where('klien_id', $clientId)->count() + 1;
             $newSession = $sessionCount . '/' . Carbon::now()->format('Y');
         } else {
-            $newSession = $latestSession->session;
+            $newSession = $latestSession->sesi;
         }
 
-        // Store the response
-        $respon = new ResponDemografi();
-        $respon->klien_id = $clientId;
-        $respon->sesi = $newSession;
-        $respon->rawatan = $request->rawatan;
-        $respon->lain_lain_rawatan = $request->lain_lain_rawatan;
-        $respon->pusat_rawatan = $request->pusat_rawatan;
-        $respon->tempoh_tidak_ambil_dadah = $request->tempoh_tidak_ambil_dadah;
-        $respon->kategori = $request->kategori;
-        $respon->jumlah_relapse = $request->jumlah_relapse;
-        $respon->jenis_dadah = json_encode($request->jenis_dadah);
-        $respon->jenis_kediaman = $request->jenis_kediaman;
-        $respon->tempoh_tinggal_lokasi_terkini = $request->tempoh_tinggal_lokasi_terkini;
-        $respon->tinggal_dengan = $request->tinggal_dengan;
-        $respon->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
-        $respon->status = 'Selesai Menjawab';
-        $respon->save();
+        // Check if a response already exists for the current session
+        $existingResponse = ResponDemografi::where('klien_id', $clientId)
+            ->where('sesi', $newSession)
+            ->first();
+
+        if ($existingResponse) {
+            // Update the existing response
+            $existingResponse->rawatan = $request->rawatan;
+            $existingResponse->lain_lain_rawatan = $request->lain_lain_rawatan;
+            $existingResponse->pusat_rawatan = $request->pusat_rawatan;
+            $existingResponse->tempoh_tidak_ambil_dadah = $request->tempoh_tidak_ambil_dadah;
+            $existingResponse->kategori = $request->kategori;
+            $existingResponse->jumlah_relapse = $request->jumlah_relapse;
+            $existingResponse->jenis_dadah = json_encode($request->jenis_dadah);
+            $existingResponse->jenis_kediaman = $request->jenis_kediaman;
+            $existingResponse->tempoh_tinggal_lokasi_terkini = $request->tempoh_tinggal_lokasi_terkini;
+            $existingResponse->tinggal_dengan = $request->tinggal_dengan;
+            $existingResponse->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
+            $existingResponse->status = 'Selesai Menjawab';
+            $existingResponse->save();
+        } else {
+            // Store a new response
+            $respon = new ResponDemografi();
+            $respon->klien_id = $clientId;
+            $respon->sesi = $newSession;
+            $respon->rawatan = $request->rawatan;
+            $respon->lain_lain_rawatan = $request->lain_lain_rawatan;
+            $respon->pusat_rawatan = $request->pusat_rawatan;
+            $respon->tempoh_tidak_ambil_dadah = $request->tempoh_tidak_ambil_dadah;
+            $respon->kategori = $request->kategori;
+            $respon->jumlah_relapse = $request->jumlah_relapse;
+            $respon->jenis_dadah = json_encode($request->jenis_dadah);
+            $respon->jenis_kediaman = $request->jenis_kediaman;
+            $respon->tempoh_tinggal_lokasi_terkini = $request->tempoh_tinggal_lokasi_terkini;
+            $respon->tinggal_dengan = $request->tinggal_dengan;
+            $respon->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
+            $respon->status = 'Selesai Menjawab';
+            $respon->save();
+        }
 
         return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon berjaya disimpan.');
     }
 
-    public function soalanKepulihan()
+    // public function soalanKepulihan()
+    // {
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+    //     // Check if the client has previously saved questions
+    //     $savedQuestions = DB::table('respon_modal_kepulihan')
+    //                         ->where('klien_id', $clientId)
+    //                         ->pluck('soalan_id')
+    //                         ->toArray();
+
+    //     if (!empty($savedQuestions)) {
+    //         // Fetch the questions in the order they were previously saved
+    //         $questions = DB::table('soalan_modal_kepulihan')
+    //                     ->whereIn('id', $savedQuestions)
+    //                     ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
+    //                     ->get();
+    //     } else {
+    //         // Fetch 8 fixed questions with specific IDs
+    //         $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
+    //         $fixedQuestions = DB::table('soalan_modal_kepulihan')
+    //                             ->whereIn('id', $fixedQuestionIds)
+    //                             ->get();
+
+    //         // Fetch 5 questions representing each recovery capital
+    //         $capitalQuestions = DB::table('soalan_modal_kepulihan')
+    //                             ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+    //                             ->whereNotIn('id', $fixedQuestionIds)
+    //                             ->inRandomOrder()
+    //                             ->limit(5)
+    //                             ->get();
+
+    //         // Merge the 13 fixed questions
+    //         $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
+
+    //         // Fetch remaining questions excluding the already selected ones
+    //         $remainingQuestions = DB::table('soalan_modal_kepulihan')
+    //                                 ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+    //                                 ->inRandomOrder()
+    //                                 ->limit(12)
+    //                                 ->get();
+
+    //         // Combine both sets of questions
+    //         $allQuestions = $fixedQuestions->merge($remainingQuestions);
+
+    //         // Shuffle the questions to ensure randomness for every client
+    //         $shuffledQuestions = $allQuestions->shuffle();
+
+    //         // Save the shuffled order for the first time with status as "Baharu"
+    //         foreach ($shuffledQuestions as $question) {
+    //             DB::table('respon_modal_kepulihan')->insert([
+    //                 'klien_id' => $clientId,
+    //                 'soalan_id' => $question->id,
+    //                 'skala_id' => null, // No answer yet
+    //                 'status' => 'Baharu', 
+    //                 'created_at' => now(),
+    //                 'updated_at' => now(),
+    //             ]);
+    //         }
+            
+    //         $questions = $shuffledQuestions;
+    //     }
+
+    //     // Fetch autosaved answers
+    //     $autosavedAnswers = DB::table('respon_modal_kepulihan')
+    //     ->where('klien_id', $clientId)
+    //     ->pluck('skala_id', 'soalan_id')
+    //     ->toArray();
+
+    //     return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
+    // }
+
+    public function soalanKepulihan(Request $request)
     {
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $currentPage = (int) $request->input('currentPage', 1);
+
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $latestSessionRespon = ResponModalKepulihan::where('klien_id', $clientId)
+            ->where('created_at', '>=', $sixMonthsAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        $latestSessionKeputusan = KeputusanKepulihan::where('klien_id', $clientId)
+            ->where('created_at', '>=', $sixMonthsAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        // Determine the session to use
+        if (!$latestSessionRespon && !$latestSessionKeputusan) {
+            $sessionCount = ResponModalKepulihan::where('klien_id', $clientId)->count() + 1;
+            $newSession = $sessionCount . '/' . Carbon::now()->format('Y');
+        } else {
+            $newSession = $latestSessionRespon->sesi;
+        }
 
         // Check if the client has previously saved questions
         $savedQuestions = DB::table('respon_modal_kepulihan')
@@ -154,20 +268,20 @@ class ModalKepulihanController extends Controller
                             ->pluck('soalan_id')
                             ->toArray();
 
-        if (!empty($savedQuestions)) {
-            // Fetch the questions in the order they were previously saved
+        if (!empty($savedQuestions) && $latestSessionRespon) {
+            // Fetch questions based on saved order
             $questions = DB::table('soalan_modal_kepulihan')
                         ->whereIn('id', $savedQuestions)
                         ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
                         ->get();
-        } else {
-            // Fetch 8 fixed questions with specific IDs
+        } 
+        else {
+            // Fetch and shuffle new questions
             $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
             $fixedQuestions = DB::table('soalan_modal_kepulihan')
                                 ->whereIn('id', $fixedQuestionIds)
                                 ->get();
 
-            // Fetch 5 questions representing each recovery capital
             $capitalQuestions = DB::table('soalan_modal_kepulihan')
                                 ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
                                 ->whereNotIn('id', $fixedQuestionIds)
@@ -175,45 +289,43 @@ class ModalKepulihanController extends Controller
                                 ->limit(5)
                                 ->get();
 
-            // Merge the 13 fixed questions
             $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
-
-            // Fetch remaining questions excluding the already selected ones
             $remainingQuestions = DB::table('soalan_modal_kepulihan')
                                     ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
                                     ->inRandomOrder()
                                     ->limit(12)
                                     ->get();
 
-            // Combine both sets of questions
             $allQuestions = $fixedQuestions->merge($remainingQuestions);
-
-            // Shuffle the questions to ensure randomness for every client
             $shuffledQuestions = $allQuestions->shuffle();
 
-            // Save the shuffled order for the first time with status as "Baharu"
+            // Save the shuffled order for the client
             foreach ($shuffledQuestions as $question) {
-                DB::table('respon_modal_kepulihan')->insert([
-                    'klien_id' => $clientId,
-                    'soalan_id' => $question->id,
-                    'skala_id' => null, // No answer yet
-                    'status' => 'Baharu', 
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                DB::table('respon_modal_kepulihan')->updateOrInsert(
+                    ['klien_id' => $clientId, 'soalan_id' => $question->id],
+                    ['status' => 'Baharu', 'sesi' => $newSession, 'created_at' => now(), 'updated_at' => now()]
+                );
             }
-            
+
             $questions = $shuffledQuestions;
         }
 
+        // Paginate the questions
+        $questions = $questions->chunk(10);
+        
         // Fetch autosaved answers
         $autosavedAnswers = DB::table('respon_modal_kepulihan')
-        ->where('klien_id', $clientId)
-        ->pluck('skala_id', 'soalan_id')
-        ->toArray();
+                                ->where('klien_id', $clientId)
+                                ->pluck('skala_id', 'soalan_id')
+                                ->toArray();
 
-        return view('modal_kepulihan.klien.soalan_kepulihan', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
+        return view('modal_kepulihan.klien.soalan_kepulihan', [
+            'questions' => $questions,
+            'autosavedAnswers' => $autosavedAnswers,
+            'currentPage' => $currentPage
+        ]);
     }
+
 
     public function autosaveResponSoalanKepulihan(Request $request)
     {
@@ -234,6 +346,18 @@ class ModalKepulihanController extends Controller
     {
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $latestSessionKeputusan = KeputusanKepulihan::where('klien_id', $clientId)
+            ->where('created_at', '>=', $sixMonthsAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        // Determine the session to use
+        if (!$latestSessionKeputusan) {
+            $sessionCount = ResponModalKepulihan::where('klien_id', $clientId)->count() + 1;
+            $newSession = $sessionCount . '/' . Carbon::now()->format('Y');
+        } 
+
         // Define the constants for the specific questions
         $constants = [
             5 => 0.103,
@@ -251,7 +375,7 @@ class ModalKepulihanController extends Controller
         foreach ($request->input('answer') as $soalanId => $skalaId) {
             DB::table('respon_modal_kepulihan')->updateOrInsert(
                 ['klien_id' => $clientId, 'soalan_id' => $soalanId],
-                ['skala_id' => $skalaId, 'status' => 'Selesai', 'updated_at' => now()]
+                ['skala_id' => $skalaId, 'sesi' => $newSession, 'status' => 'Selesai', 'updated_at' => now()]
             );
 
             // Calculate the score for the specific questions
@@ -282,6 +406,7 @@ class ModalKepulihanController extends Controller
         DB::table('keputusan_kepulihan_klien')->updateOrInsert(
             ['klien_id' => $clientId],
             [
+                'sesi' => $newSession,
                 'tahap_kepulihan_id' => $tahapKepulihanId,
                 'skor' => $skor,
                 'created_at' => now(),

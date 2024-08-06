@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('klien_id');
             $table->unsignedBigInteger('soalan_id'); 
             $table->unsignedBigInteger('skala_id')->nullable();
+            $table->string('sesi');
             $table->enum('status', ['Baharu', 'Selesai', 'Belum Selesai'])->default('Baharu');
             $table->timestamps();
 
