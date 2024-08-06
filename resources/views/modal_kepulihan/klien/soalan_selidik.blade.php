@@ -90,7 +90,7 @@
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
     <div id="kt_app_content_container" class="app-container container-xxl">
-        <!--begin::Card body-->
+        <!--begin::Card flush-->
         <div class="card card-flush">
             <!--begin::Card header-->
             <div class="card-header">
@@ -126,25 +126,7 @@
             </div>
             <!--end::Card body-->
         </div>        
-        {{-- <div class="card card-flush">
-            <!--begin::Card header-->
-            <div class="card-header">
-                <i class="fas fa-user profile-icon"></i>
-                <div>
-                    <h3>NAMA PENUH: {{$klien->nama}} </h3>
-                    <p>NO KAD PENGENALAN: {{$klien->no_kp}}</p>
-                </div>
-            </div>
-            <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body">
-                <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b> 16/01/2024</p>
-                <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI</p>
-                <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULA MENJAWAB</a>
-            </div>
-            <!--end::Card body-->
-        </div> --}}
-        <!--end::Card body-->
+        <!--end::Card flush-->
     </div>
     <!--end::Content container-->
 </div>
