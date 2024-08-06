@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('tinggal_dengan');
             $table->string('kawasan_tempat_tinggal');
             $table->string('sesi');
-            $table->enum('status', ['Selesai', 'Belum Selesai'])->default('Belum Selesai');
+            $table->enum('status', ['Selesai Menjawab', 'Tidak Menjawab'])->default('Selesai Menjawab');
             $table->timestamps();
 
             // Assuming you have a 'kliens' table with an 'id' column
