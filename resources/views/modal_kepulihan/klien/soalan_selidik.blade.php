@@ -103,12 +103,47 @@
             <!--end::Card header-->
             <!--begin::Card body-->
             <div class="card-body">
+                @if(isset($latestRecord))
+                    <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b> {{ Carbon::parse($latestRecord->updated_at)->format('d/m/Y') }} </p>
+                    <p><b>STATUS SOAL SELIDIK TERAKHIR:</b> SELESAI MENJAWAB</p>
+                @else
+                    @if ($latestRecordDemografi)
+                        <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                        <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB </p> 
+                    @else
+                        <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b></p>
+                        <p><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB </p>
+                    @endif
+                @endif
+
+                <br>
+                
+                @if ($butangMula)
+                    <a href="{{ route('klien.soalanDemografi') }}" class="status">KLIK UNTUK MULA MENJAWAB</a>
+                @else
+                    <p>Anda tidak boleh menjawab soal selidik sekarang. Sila cuba lagi kemudian selepas 6 bulan tarikh terakhir menjawab.</p>
+                @endif
+            </div>
+            <!--end::Card body-->
+        </div>        
+        {{-- <div class="card card-flush">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <i class="fas fa-user profile-icon"></i>
+                <div>
+                    <h3>NAMA PENUH: {{$klien->nama}} </h3>
+                    <p>NO KAD PENGENALAN: {{$klien->no_kp}}</p>
+                </div>
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body">
                 <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b> 16/01/2024</p>
                 <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI</p>
                 <a href="{{route('klien.soalanDemografi')}}" class="status">KLIK UNTUK MULA MENJAWAB</a>
             </div>
             <!--end::Card body-->
-        </div>
+        </div> --}}
         <!--end::Card body-->
     </div>
     <!--end::Content container-->

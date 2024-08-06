@@ -15,8 +15,37 @@ class ModalKepulihanController extends Controller
     public function soalSelidik()
     {
         $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
+        $clientId = $klien->id;
 
-        return view('modal_kepulihan.klien.soalan_selidik', compact('klien'));
+        // Fetch the latest record from keputusan_kepulihan_klien for this client
+        $latestRecordKeputusan = DB::table('keputusan_kepulihan_klien')
+                        ->where('klien_id', $clientId)
+                        ->orderBy('updated_at', 'desc')
+                        ->first();
+
+        // Fetch the latest record from respon_soalan_demografi for this client
+        $latestRecordDemografi = DB::table('respon_soalan_demografi')
+                        ->where('klien_id', $clientId)
+                        ->orderBy('updated_at', 'desc')
+                        ->first();
+
+        $butangMula = false;
+
+        if (!$latestRecordKeputusan) {
+            // If there is no record, the client can click the button
+            $butangMula = true;
+        } else {
+            // Check if the current date is more than 6 months after the updated_at date of the latest record
+            $updatedAt = Carbon::parse($latestRecordKeputusan->updated_at);
+            $currentDate = Carbon::now();
+            $monthsDifference = $updatedAt->diffInMonths($currentDate);
+
+            if ($monthsDifference > 6) {
+                $butangMula = true;
+            }
+        }
+
+        return view('modal_kepulihan.klien.soalan_selidik', compact('klien', 'butangMula', 'latestRecordKeputusan', 'latestRecordDemografi'));
     }
 
     public function soalanDemografi()
