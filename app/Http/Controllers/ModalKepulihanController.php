@@ -354,7 +354,7 @@ class ModalKepulihanController extends Controller
 
         // Determine the session to use
         if (!$latestSessionKeputusan) {
-            $sessionCount = ResponModalKepulihan::where('klien_id', $clientId)->count() + 1;
+            $sessionCount = KeputusanKepulihan::where('klien_id', $clientId)->count() + 1;
             $newSession = $sessionCount . '/' . Carbon::now()->format('Y');
         }
 
