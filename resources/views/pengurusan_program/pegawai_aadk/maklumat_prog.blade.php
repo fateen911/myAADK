@@ -59,6 +59,17 @@
     <!--begin::Body-->
     <div class="my-10">
         <!--begin:::Tabs-->
+        @if (session('success'))
+            <div class="alert alert-success p-3" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger p-3" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
             <!--begin:::Tab item-->
             <li class="nav-item">
@@ -78,6 +89,7 @@
         </ul>
         <!--end:::Tabs-->
     </div>
+
     <!--begin::Tab content-->
     <div class="tab-content">
         <!--begin::Tab pane-->
@@ -108,18 +120,19 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran" disabled/>
+                                <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard1()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
                             </div>
                             <!--end::Link-->
                         </div>
+                        <input type="hidden" id="programId" value="{{$program->id}}">
                         <!--end::Card body-->
                         <!--begin::Card body-->
                         <div class="card-body pt-4">
@@ -167,8 +180,11 @@
                                 <h2>Maklumat Program</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog')}}" class="btn btn-sm btn-primary btn-active-color-primary">
+                                <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                    Padam <i class="bi bi-trash-fill"></i>
                                 </a>
                             </div>
                         </div>
@@ -178,21 +194,21 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Nama Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Program Pemulihan Bersepadu</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Kategori:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Kelompok Sokongan Keluarga Kepulihan</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->kategori->nama}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Objektif Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Meningkatkan kesedaran tentang kesan negatif dadah dan kepentingan pemulihan</p>
+                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->objektif!!}</div>
                             </div>
                             <!--end::Input group-->
                             <div class="form d-flex flex-column flex-lg-row">
@@ -200,7 +216,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Mula:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">1 Ogos 2024, 8:00 AM</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -208,7 +224,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Tamat:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">3 Ogos 2024, 2:00 PM</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -218,14 +234,14 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Tempat Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Pusat Pemulihan Komuniti, Taman Desa Harmoni, Johor Bahru</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->tempat}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Penganjur Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Majlis Pemulihan Dadah Kebangsaan (MPDK)</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->penganjur}}</p>
                             </div>
                             <!--end::Input group-->
 
@@ -235,7 +251,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Nama Pegawai:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">En. Kairul Azizi</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama_pegawai}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -243,7 +259,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">No. Telefon Untuk Dihubungi:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">0135728935</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->no_tel_dihubungi}}</p>
                                     </div>
 
                                 </div>
@@ -255,7 +271,7 @@
                                 <!--begin::Label-->
                                 <label class="form-label">Catatan:</label>
                                 <!--end::Label-->
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">Para peserta diminta hadir 15 minit lebih awal untuk proses pendaftaran.</p>
+                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->catatan!!}</div>
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -295,12 +311,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran" disabled/>
+                                <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard2()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -326,6 +342,81 @@
                 </div>
                 <!--end::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                    <!--begin::Card-->
+                    <div class="row g-4 text-center mb-0">
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-steelblue">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-list-task text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$keseluruhan}}</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-mediumseagreen">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-check-circle-fill text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Hadir</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">{{$hadir}}</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+
+                        <!--begin::Col-->
+                        <div class="col-4">
+                            <!--begin::Items-->
+                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-palevioletred">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-30px me-0 mb-5">
+                                    <i class="fas bi bi-x-circle-fill text-light" style="font-size: 20px;">
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Hadir</span>
+                                    </i>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Stats-->
+                                <div class="m-0">
+                                    <a href={{ route('senarai-pengguna') }}>
+                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$tdk_hadir}}</span>
+                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                    </a>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Items-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Card-->
                     <!--begin::Senarai Pengesahan-->
                     <div class="card card-flush py-4">
                         <!--begin::Card header-->
@@ -334,10 +425,10 @@
                                 <h2>Senarai Pengesahan Kehadiran</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-pengesahan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-pengesahan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/excel-pengesahan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-pengesahan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -346,7 +437,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0 table-responsive mx-10">
                             <!--begin::Table-->
-                            <table class="table table-row-dashed fs-6 gy-5 my-0">
+                            <table class="table table-row-dashed fs-6 gy-5 my-0" id="pengesahanTable">
                                 <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
@@ -357,97 +448,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            890101011234
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">012-3456789</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Tepat pada masanya</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Siti Nurhaliza binti Abdul Rahman
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            900202022345
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">013-4567890</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Cuti sakit</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Mohd Faiz bin Mohd Razi
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            920303033456
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">014-5678901</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Hadir lewat 10 minit</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Nurul Ain binti Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            940404044567
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">015-6789012</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">-</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Hafiz bin Hamid
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            970606066789
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">016-7890123</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Urusan keluarga</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            980707077890
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">017-8901234</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Akan menghadiri program</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Syafiq bin Hassan
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            001010099012
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">018-9012345</td>
-                                    <td class="text-gray-600 fw-bold text-uppercase">Tidak Hadir</td>
-                                    <td class="text-gray-600 fw-bold">Bercuti</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                             <!--end::Table-->
@@ -462,8 +463,9 @@
 
         <!--begin::Tab pane perekodan-->
         <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
-            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/categories.html">
+            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
                 <!--begin::Aside column-->
+                @csrf
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
                     <!--begin::QR code settings-->
                     <div class="card card-flush py-4">
@@ -487,12 +489,12 @@
                         <!--begin::Card body-->
                         <div class="card-body text-center pt-0">
                             <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate('http://127.0.0.1:8000/pengurusan-program/klien/daftar-kehadiran'); !!}
+                            {!! QrCode::size(200)->generate($program->pautan_perekodan); !!}
                             <!--end::Image input-->
                             <br><br>
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="http://127.0.0.1:8000/pengurusan-program/klien/daftar-kehadiran" disabled/>
+                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_perekodan}}" disabled/>
                                 <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
@@ -501,16 +503,16 @@
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-4">
-                            <!--begin::Share-->
-                            <b class="fs-5">Hebahan:</b> &nbsp;
-                            <!--end::Share-->
-                            <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                            <!--end::Share to-->
-                        </div>
+                        {{--                        <div class="card-body pt-4">--}}
+                        {{--                            <!--begin::Share-->--}}
+                        {{--                            <b class="fs-5">Hebahan:</b> &nbsp;--}}
+                        {{--                            <!--end::Share-->--}}
+                        {{--                            <!--begin::Share to-->--}}
+                        {{--                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+                        {{--                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+                        {{--                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+                        {{--                            <!--end::Share to-->--}}
+                        {{--                        </div>--}}
                         <!--end::Card body-->
                     </div>
                     <!--end::QR code settings-->
@@ -530,6 +532,7 @@
                         <div class="card-body pt-0">
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
+                                @csrf
                                 <!--begin::Label-->
                                 <label class="form-label">No. Kad Pengenalan</label>
                                 <!--end::Label-->
@@ -540,14 +543,13 @@
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                                <button type="submit" id="perekodanBtn" class="btn btn-primary">
                                     <span class="indicator-label">Hadir</span>
                                     <span class="indicator-progress">Tunggu sebentar...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
                             <!--end::Input group-->
-
                         </div>
                         <!--end::Card header-->
                     </div>
@@ -561,10 +563,10 @@
                                 <h2>Senarai Klien Yang Hadir</h2>
                             </div>
                             <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-perekodan')}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                <a href="{{url('/pengurusan-program/pdf-perekodan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                     PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/excel-perekodan')}}" class="btn btn-sm btn-success btn-active-color-success">
+                                <a href="{{url('/pengurusan-program/excel-perekodan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
                                     Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
                                 </a>
                             </div>
@@ -574,7 +576,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0 table-responsive mx-10">
                             <!--begin::Table-->
-                            <table class="table table-row-dashed fs-6 gy-5 my-0" >
+                            <table class="table table-row-dashed fs-6 gy-5 my-0" id="perekodanTable">
                                 <thead>
                                 <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                     <th class="min-w-125px">Nama</th>
@@ -583,83 +585,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            890101011234
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-05-15 14:30:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Siti Nurhaliza binti Abdul Samad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            900202022345
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-06-16 15:45:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Mohd Faiz bin Mohd Faisal
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            920303033456
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-07-17 16:50:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Nurul Ain binti Razali
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            940404044567
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-08-18 17:55:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Hafiz bin Hamid
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            970606066789
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-10-20 19:25:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Ahmad Faizal bin Ahmad
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            980707077890
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2023-11-21 20:30:00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-uppercase">
-                                        Syafiq bin Hassan
-                                    </td>
-                                    <td>
-                                        <a href="../../demo1/dist/apps/inbox/reply.html" class="d-flex text-dark text-gray-800 text-hover-primary">
-                                            001010099012
-                                        </a>
-                                    </td>
-                                    <td class="text-gray-600 fw-bold">2024-01-23 22:40:00</td>
-                                </tr>
+
                                 </tbody>
                             </table>
                             <!--end::Table-->
@@ -684,10 +610,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -696,7 +619,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -707,9 +630,6 @@
         <!--end::Modal dialog-->
     </div>
 
-    <script>
-
-    </script>
     <!--end::Modal - maklumat-->
 
     <!--begin::Modal - pengesahan-->
@@ -722,10 +642,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -734,7 +651,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -756,10 +673,7 @@
                 <div class="modal-header pb-0 border-0 justify-content-end">
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                        <i class="ki-duotone ki-cross fs-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
+                        <i class="ki-duotone bi bi-x-lg fs-1"></i>
                     </div>
                     <!--end::Close-->
                 </div>
@@ -768,7 +682,7 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
                     <!--begin::Content-->
                     <!--begin::Image input-->
-                    {!! QrCode::size(570)->generate('http://127.0.0.1:8000/pengurusan-program/klien/pengesahan-kehadiran'); !!}
+                    {!! QrCode::size(570)->generate($program->pautan_perekodan); !!}
                     <!--end::Image input-->
                     <!--end::Search-->
                 </div>
@@ -854,6 +768,63 @@
                 });
         }
     </script>
+
+    <!--pengesahan-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                var id = $('#programId').val();
+                $.ajax({
+                    url: '/pengesahan/' + id,
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, pengesahan) {
+                            rows += '<tr>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_kp + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_tel + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.keputusan + '</td>';
+                            rows += '<td>' + pengesahan.catatan + '</td>';
+                            rows += '</tr>';
+                        });
+                        $('#pengesahanTable tbody').html(rows);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!--perekodan-->
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                var id = $('#programId').val();
+                $.ajax({
+                    url: '/perekodan/' + id,
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, perekodan) {
+                            let formattedDate = moment(perekodan.tarikh_perekodan).format('DD-MM-YYYY HH:mm:ss');
+                            rows += '<tr>';
+                            rows += '<td class="text-uppercase">' + perekodan.klien.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + perekodan.klien.no_kp + '</td>';
+                            rows += '<td>' + formattedDate + '</td>';
+                            rows += '</tr>';
+                        });
+                        $('#perekodanTable tbody').html(rows);
+                    }
+                });
+            }
+        });
+    </script>
+
     <script>
         $('#sortTable1').DataTable({
             ordering: true, // Enable manual sorting

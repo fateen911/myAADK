@@ -5,6 +5,7 @@ use App\Exports\PengesahanKehadiranExcel;
 use App\Exports\PerekodanKehadiranExcel;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
+use App\Models\Negeri;
 use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
 use Carbon\Carbon;
@@ -92,17 +93,166 @@ class PengurusanProgController extends Controller
     //PEGAWAI AADK
     public function daftarProgPA()
     {
-        return view('pengurusan_program.pegawai_aadk.daftar_prog');
+        $kategori = KategoriProgram::all();
+        if ($kategori) {
+            return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 
-    public function kemaskiniProgPA()
+    public function postDaftarProgPA(Request $request)
     {
-        return view('pengurusan_program.pegawai_aadk.kemaskini_prog');
+//        $request->validate([
+//            'nama'              =>  'required|string|max:255',
+//            'objektif'          =>  'required|string|max:255',
+//            'tarikh_mula'       =>  'required|date_format:d/m/Y h:i A',
+//            'tarikh_tamat'      =>  'required|date_format:d/m/Y h:i A',
+//            'tempat'            =>  'required|string|max:255',
+//            'penganjur'         =>  'required|string|max:255',
+//            'nama_pegawai'      =>  'required|string|max:255',
+//            'no_tel_dihubungi'  =>  'required|integer',
+//            'catatan'           =>  'required|string|max:255',
+//        ]);
+
+        $program = new Program();
+
+        $pegawai_id = Auth::id();
+
+        //GENERATE CUSTOM ID
+        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
+        $id_custom = [
+            'table'  => 'program',
+            'field'  => 'custom_id',
+            'length' => 6,
+            'prefix' => $kategori,
+            'reset_on_prefix_change'=>true
+        ];
+        $custom_id = IdGenerator::generate($id_custom);
+
+        //Date format for database
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+
+        $program->pegawai_id           =   $pegawai_id;
+        $program->kategori_id          =   $request->kategori;
+        $program->custom_id            =   $custom_id;
+        $program->nama                 =   $request->nama;
+        $program->objektif             =   $request->objektif;
+        $program->tarikh_mula          =   $tarikh_mula;
+        $program->tarikh_tamat         =   $tarikh_tamat;
+        $program->tempat               =   $request->tempat;
+        $program->penganjur            =   $request->penganjur;
+        $program->nama_pegawai         =   $request->nama_pegawai;
+        $program->no_tel_dihubungi     =   $request->no_tel_dihubungi;
+        $program->catatan              =   $request->catatan;
+        $program->pautan_pengesahan    =   "tiada";
+        $program->qr_pengesahan        =   "tiada";
+        $program->pautan_perekodan     =   "tiada";
+        $program->qr_perekodan         =   "tiada";
+        $program->status               =   "BELUM SELESAI";
+        $program->save();
+
+
+        //PENGESAHAN
+        // Generate the unique link with event ID
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran', ['id' => $program->id]);
+
+        // Generate the QR code for the event link
+        $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
+
+
+        // Save the QR code image to the public directory
+        $filePath = public_path('qr_codes/qr_pengesahan_' . $program->id . '.png');
+        file_put_contents($filePath, $generate_qr_1);
+
+        $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
+
+        //PEREKODAN
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran', ['id' => $program->id]);
+
+        // Generate the QR code for the event link
+        $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
+
+        // Save the QR code image to the public directory
+        $filePath = public_path('qr_codes/qr_perekodan_' . $program->id . '.png');
+        file_put_contents($filePath, $generate_qr_2);
+
+        $qr_perekodan = 'qr_perekodan_' . $program->id . '.png';
+
+        ///UPDATE
+        $program->update([
+            'pautan_pengesahan' =>  $pautan_pengesahan,
+            'qr_pengesahan'     =>  $qr_pengesahan,
+            'pautan_perekodan'  =>  $pautan_perekodan,
+            'qr_perekodan'      =>  $qr_perekodan,
+        ]);
+
+        $direct = "/pengurusan-program/pegawai_aadk/maklumat-prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
     }
 
-    public function maklumatProgPA()
+    public function kemaskiniProgPA($id)
     {
-        return view('pengurusan_program.pegawai_aadk.maklumat_prog');
+        $kategori = KategoriProgram::all();
+        $program = Program::with('kategori')->find($id);
+        if ($kategori || $program) {
+            return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
+    public function postkemaskiniProgPA(Request $request,$id)
+    {
+        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
+
+        //Date format for database
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+
+        $program = Program::find($id);
+        $program->update([
+            'kategori_id'          =>   $request->kategori,
+            'nama'                 =>   $request->nama,
+            'objektif'             =>   $request->objektif,
+            'tarikh_mula'          =>   $tarikh_mula,
+            'tarikh_tamat'         =>   $tarikh_tamat,
+            'tempat'               =>   $request->tempat,
+            'penganjur'            =>   $request->penganjur,
+            'nama_pegawai'         =>   $request->nama_pegawai,
+            'no_tel_dihubungi'     =>   $request->no_tel_dihubungi,
+            'catatan'              =>   $request->catatan,
+        ]);
+
+        $direct = "/pengurusan-program/pegawai_aadk/maklumat-prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
+    }
+
+    public function padamProgPA($id){
+        $program = Program::find($id);
+
+        if ($program) {
+            $program->delete();
+            $direct = "/pengurusan-program/pegawai_aadk/senarai-prog/";
+            return redirect()->to($direct)->with('success', 'Program berjaya dipadam.');
+        } else {
+            return redirect()->back()->with('error', 'Program gagal dipadam.');
+        }
+    }
+
+    public function maklumatProgPA($id)
+    {
+        $program = Program::with('kategori')->find($id);
+        $pengesahan = PengesahanKehadiranProgram::all();
+        $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
+        $tdk_hadir = $pengesahan->where('program_id',$id)->where('keputusan','TIDAK HADIR')->count();
+        $keseluruhan = $hadir + $tdk_hadir;
+        if ($program) {
+            return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 
     public function senaraiProgPA()
@@ -110,23 +260,37 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.pegawai_aadk.senarai_prog');
     }
 
+
     public function tambahKategoriPA(){
         return view('pengurusan_program.pegawai_aadk.tambah_kategori');
     }
 
     public function postTambahKategoriPA(Request $request){
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'kod' => 'required|string|max:255',
+            'nama'  =>  'required|string|max:255',
+            'kod'   =>  'required|string|max:255',
         ]);
 
         $kategori = new KategoriProgram();
-        $kategori->nama = $request->nama;
-        $kategori->kod = $request->kod;
+        $kategori->nama =   $request->nama;
+        $kategori->kod  =   $request->kod;
         $kategori->save();
 
         return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
     }
+
+    public function padamKategoriPA($id){
+        $kategori = KategoriProgram::find($id);
+
+        if ($kategori) {
+            $kategori->delete();
+            return redirect()->back()->with('success2', 'Kategori program berjaya dipadam.');
+        } else {
+            return redirect()->back()->with('error2', 'Kategori program gagal dipadam.');
+        }
+    }
+
+
 
     //PEGAWAI SISTEM
     public function daftarProgPS()
@@ -486,6 +650,7 @@ class PengurusanProgController extends Controller
         $kaedah = $request->input('kaedah');
         $pilihan = $request->input('pilihan', []);
         $klien_id = Klien::whereIn('id', $pilihan)->get();
+        //$negeri = Negeri::with('daerah')->get();
 
         // Send communication based on the selected method
         foreach ($klien_id as $klien) {

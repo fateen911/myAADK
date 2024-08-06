@@ -75,7 +75,7 @@
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end gap-3" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add program-->
-                                <a href={{url('/pengurusan-program/pegawa-aadk/daftar-prog')}}>
+                                <a href={{url('/pengurusan-program/pegawai-aadk/daftar-prog')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Program &nbsp;
                                     </button>
@@ -101,154 +101,16 @@
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
-                                <th class="min-w-125px">Nama Program</th>
-                                <th class="min-w-175px">Kategori</th>
-                                <th class="min-w-175px">Status</th>
-                                <th class="min-w-175px">Hebahan</th>
-                                <th class="min-w-175px">QR Perekodan</th>
+                                <th class="min-w-40px">ID</th>
+                                <th class="min-w-175px">Nama Program</th>
+                                <th class="min-w-200px">Kategori</th>
+                                <th class="min-w-100px">Status</th>
+                                <th class="min-w-50px">Hebahan</th>
+                                <th class="min-w-50px">QR Perekodan</th>
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Pemulihan Bersepadu </a>
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Sesi Terapi Pencegahan Relaps </a>
-                                </td>
-                                <td class="text-uppercase">Pencegahan Relaps</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Kepulihan Komuniti </a>
-                                </td>
-                                <td class="text-uppercase">Alumni</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Kelab Sokongan Pulih Diri </a>
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Bengkel Kesedaran Diri </a>
-                                </td>
-                                <td class="text-uppercase">Pencegahan Relaps</td>
-                                <td class="text-uppercase">Belum Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Program Motivasi Kepulihan </a>
-                                </td>
-                                <td class="text-uppercase">Kelompok Sokongan Keluarga Kepulihan</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-info mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-uppercase">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">Rangkaian Alumni Pulih </a>
-                                </td>
-                                <td class="text-uppercase">Alumni</td>
-                                <td class="text-uppercase">Selesai</td>
-                                <td class="text-uppercase">
-                                    <div class="share-container">
-                                        <a href="#" class="btn btn-icon btn-info btn-sm" id="share-button"><i class="bi bi-share-fill fs-3"></i></a>
-                                        <div id="social-media-icons" class="social-media-icons hidden">
-                                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="text-uppercase">
-                                    <a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}} ><i class="bi bi-qr-code fs-3"></i></a>
-                                </td>
-                            </tr>
+                            <!--ajax-->
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -260,6 +122,27 @@
             <!--end::Content-->
         </div>
     </div>
+
+    <!--begin::Modal - hebahan-->
+    <!-- Modal-->
+    <div class="modal fade modal-lg" id="hebahanModal" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBody">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--end::Modal - hebahan-->
 
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
@@ -287,6 +170,60 @@
         });
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            fetchItems();
+
+            function fetchItems() {
+                $.ajax({
+                    url: '/program',
+                    method: 'GET',
+                    success: function(response) {
+                        let rows = '';
+                        $.each(response, function(index, program) {
+                            rows += '<tr>';
+                            rows += '<td><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
+                            rows += '<td class="text-uppercase">' + program.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.status + '</td>';
+                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '</tr>';
+                        });
+                        $('#sortTable1 tbody').html(rows);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Modal Hebahan -->
+    <script>
+        $(document).on('click', '#program', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pengurusan-program/hebahan/papar-hebahan/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBody').html(response);
+                },
+                error: function() {
+                    $('#modalBody').html('Error loading content.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // JavaScript function to select/deselect all checkboxes
+        function toggleAll(source) {
+            checkboxes = document.querySelectorAll('input[name="pilihan[]"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
@@ -367,4 +304,39 @@
         });
     </script>
 
+    {{--display data from database--}}
+    {{--<script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: '/program',
+                    method: 'GET',
+                    success: function(data) {
+                        let tableBody = $('#sortTable1 tbody');
+                        tableBody.empty(); // Clear any existing data
+
+                        if (data.length === 0) {
+                            let noDataRow = `<tr id="no-data">
+                                <td colspan="5" class="text-center">No data available</td>
+                            </tr>`;
+                            tableBody.append(noDataRow);
+                        } else {
+                            data.forEach(course => {
+                                let row = `<tr>
+                                    <td>${program.id}</td>
+                                    <td>${program.title}</td>
+                                    <td>${program.description}</td>
+                                    <td>${program.category_id}</td>
+                                    <td>${program.lecturer_id}</td>
+                                </tr>`;
+                                tableBody.append(row);
+                            });
+                        }
+                    },
+                    error: function() {
+                        alert('Failed to fetch program');
+                    }
+                });
+            });
+        </script>
+    --}}
 @endsection

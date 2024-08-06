@@ -66,153 +66,154 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" action="{{ route('pengurusan_program.pegawai_aadk.maklumat_prog') }}" method="GET"">
-                    <!--begin::Main column-->
-                    <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-                        <!--begin::General options-->
-                        <div class="card card-flush py-4">
-                            <!--begin::Card header-->
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Maklumat Program</h2>
+                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pegawai-aadk/post-daftar-prog') }}" method="POST">
+                        @csrf
+                        <!--begin::Main column-->
+                        <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                            <!--begin::General options-->
+                            <div class="card card-flush py-4">
+                                <!--begin::Card header-->
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <h2>Maklumat Program</h2>
+                                    </div>
                                 </div>
-                            </div>
-                            <!--end::Card header-->
-                            <!--begin::Card body-->
-                            <div class="card-body pt-0">
-                                <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <label class="required form-label">Kategori Program</label>
-                                    <!--begin::Select2-->
-                                    <select class="form-select" aria-label="Select example" required>
-                                        <option selected="selected">Sila Pilih</option>
-                                        <option value="SK">Kelompok Sokongan Keluarga Kepulihan</option>
-                                        <option value="PR">Pencegahan Relaps</option>
-                                        <option value="APC">Alumni - PCCP</option>
-                                        <option value="AMK">Alumni - Mentor Kepulihan</option>
-                                        <option value="ASB">Alumni - Kelompok Sokong Bantu</option>
-                                    </select>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-                                <div class="mb-5 fv-row">
-                                    <label class="required form-label">Nama Program</label>
-                                    <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="" required/>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
+                                <!--end::Card header-->
+                                <!--begin::Card body-->
+                                <div class="card-body pt-0">
                                     <!--begin::Input group-->
-                                    <div>
+                                    <div class="mb-5 fv-row">
+                                        <label class="required form-label">Kategori Program</label>
+                                        <!--begin::Select2-->
+                                        <select class="form-select" name="kategori" aria-label="Select example" required>
+                                            <option selected="selected">Sila Pilih</option>
+                                            @foreach($kategori as $item)
+                                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                            @endforeach
+                                        </select>
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+                                    <div class="mb-5 fv-row">
+                                        <label class="required form-label">Nama Program</label>
+                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="" required/>
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <!--begin::Input group-->
+                                        <div>
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Objektif</label>
+                                            <!--end::Label-->
+                                            <!--begin::Editor-->
+                                            <div id="kt_docs_quill_basic" class="min-h-200px mb-2">
+                                                Sila berikan objektif program...
+                                            </div>
+                                            <input type="hidden" id="objektif" name="objektif">
+                                            <!--end::Editor-->
+                                            {{--                                                            <!--begin::Description-->--}}
+                                            {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
+                                            {{--                                                            <!--end::Description-->--}}
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
+                                                <label class="required form-label">Tarikh & Masa Mula</label>
+                                                <input class="form-control form-control-solid" name="tarikh_mula" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
+                                                <label class="required form-label">Tarikh & Masa Tamat</label>
+                                                <input class="form-control form-control-solid" name="tarikh_tamat" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
+                                            </div>
+                                        </div>
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
+                                                <label class="required form-label">Tempat Program</label>
+                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
+                                                <label class="form-label">Penganjur Program (Jika Ada)</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value=""/>
+                                            </div>
+                                        </div>
+
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--end::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                                <label class="required form-label">Nama Pegawai</label>
+                                                <input type="text" name="nama_pegawai" class="form-control mb-2" placeholder="Nama Pegawai" value="" required/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
+                                                <label class="required form-label">No. Telefon Untuk Dihubungi</label>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="" required/>
+                                            </div>
+                                        </div>
+
+                                        {{--                                                            <!--begin::Description-->--}}
+                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
+                                        {{--                                                            <!--end::Description-->--}}
+                                    </div>
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
                                         <!--begin::Label-->
-                                        <label class="form-label required">Objektif</label>
+                                        <label class="form-label">Catatan (Jika Ada)</label>
                                         <!--end::Label-->
                                         <!--begin::Editor-->
-                                        <div id="kt_docs_quill_basic" name="kt_docs_quill_basic" class="min-h-200px mb-2">
-                                            Sila berikan objektif program...
+                                        <div id="kt_docs_quill_basic_2" class="min-h-200px mb-2">
+                                            Sila berikan catatan anda...
                                         </div>
                                         <!--end::Editor-->
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
+                                    <input type="hidden" id="catatan" name="catatan">
                                     <!--end::Input group-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <div class="form d-flex flex-column flex-lg-row mb-5">
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                            <label class="required form-label">Tarikh & Masa Mula</label>
-                                            <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_1"/>
-                                        </div>
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                            <label class="required form-label">Tarikh & Masa Tamat</label>
-                                            <input class="form-control form-control-solid" name="tarikh" placeholder="Pilih tarikh" id="kt_daterangepicker_2"/>
-                                        </div>
-                                    </div>
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <div class="form d-flex flex-column flex-lg-row mb-5">
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                            <label class="required form-label">Tempat Program</label>
-                                            <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
-                                        </div>
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                            <label class="form-label">Penganjur Program (Jika Ada)</label>
-                                            <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value=""/>
-                                        </div>
-                                    </div>
-
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--end::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <div class="form d-flex flex-column flex-lg-row mb-5">
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
-                                            <label class="required form-label">Nama Pegawai</label>
-                                            <input type="text" name="penganjur" class="form-control mb-2" placeholder="Nama Pegawai" value="" required/>
-                                        </div>
-                                        <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
-                                            <label class="required form-label">No. Telefon Untuk Dihubungi (Tanpa '-')</label>
-                                            <input type="text" name="penganjur" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="" required/>
-                                        </div>
-                                    </div>
-
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-
-                                <!--begin::Input group-->
-                                <div class="mb-5 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="form-label">Catatan (Jika Ada)</label>
-                                    <!--end::Label-->
-                                    <!--begin::Editor-->
-                                    <div id="kt_docs_quill_basic_2" name="kt_docs_quill_basic" class="min-h-200px mb-2">
-                                        Sila berikan catatan anda...
-                                    </div>
-                                    <!--end::Editor-->
-                                    {{--                                                            <!--begin::Description-->--}}
-                                    {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
-                                    {{--                                                            <!--end::Description-->--}}
-                                </div>
-                                <!--end::Input group-->
+                                <!--end::Card header-->
                             </div>
-                            <!--end::Card header-->
-                        </div>
-                        <!--end::General options-->
-                        <div class="d-flex justify-content-end">
-                            <!--begin::Button-->
-                            <a href="{{ url('pengurusan-program/pegawai-aadk/senarai-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
-                            <!--end::Button-->
-                            <!--begin::Button-->
-                            <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-                                <span class="indicator-label">Simpan</span>
-                                <span class="indicator-progress">Sila Tunggu...
+                            <!--end::General options-->
+                            <div class="d-flex justify-content-end">
+                                <!--begin::Button-->
+                                <a href="{{ url('pengurusan-program/pegawai-aadk/senarai-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit"  class="btn btn-primary">
+                                    <span class="indicator-label">Simpan</span>
+                                    <span class="indicator-progress">Sila Tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button>
-                            <!--end::Button-->
+                                </button>
+                                <!--end::Button-->
+                            </div>
                         </div>
-                    </div>
-                    <!--end::Main column-->
+                        <!--end::Main column-->
                     </form>
                     <!--end::Form-->
                 </div>
@@ -243,13 +244,22 @@
     <!--end::Javascript-->
 
     <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
+        document.getElementById('program_form').addEventListener('submit', function(event) {
+            // Get the HTML content inside the div
+            var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
+            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
+
+            // Assign the content to a hidden input field
+            document.querySelector('input[name=objektif]').value = quillHtml1;
+            document.querySelector('input[name=catatan]').value = quillHtml2;
         });
+        // document.getElementById('program_form').onsubmit = function() {
+        //     var content_1 = document.getElementById('ql-kt_docs_quill_basic').children[0].innerHTML;
+        //     document.getElementById('objektif').value = content_1;
+        //
+        //     var content_2 = document.getElementById('ql-kt_docs_quill_basic_2').children[0].innerHTML;
+        //     document.getElementById('catatan').value = content_2;
+        // };
     </script>
 
     <script>
@@ -349,6 +359,8 @@
         });
     </script>
 
+
+
     <!--date-->
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script>
@@ -372,21 +384,5 @@
             }
         );
 
-    </script>
-    <script >
-        var myDropzone = new Dropzone("#kt_dropzonejs", {
-            url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location
-            paramName: "file", // The name that will be used to transfer the file
-            maxFiles: 10,
-            maxFilesize: 10, // MB
-            addRemoveLinks: true,
-            accept: function(file, done) {
-                if (file.name == "wow.jpg") {
-                    done("Naha, you don't.");
-                } else {
-                    done();
-                }
-            }
-        });
     </script>
 @endsection

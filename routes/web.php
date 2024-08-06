@@ -25,14 +25,17 @@ Route::get('/pengurusan-program/qr-code/{id}',[PengurusanProgController::class, 
 Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share']);
 
 // PENGURUSAN PROGRAM - PEGAWAI AADK
-Route::get('/pengurusan-program/pegawa-aadk/daftar-prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
+Route::get('/pengurusan-program/pegawai-aadk/daftar-prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
 Route::post('/pengurusan-program/pegawai-aadk/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
-Route::get('/pengurusan-program/pegawai-aadk/kemaskini-prog',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
-//Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
-Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
+Route::get('/pengurusan-program/pegawai-aadk/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
+Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
+Route::get('/pengurusan-program/pegawai-aadk/padam-prog/{id}',[PengurusanProgController::class, 'padamProgPA'])->name('pengurusan_program.pegawai_aadk.padam_prog');
+Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan-program/pegawai-aadk/senarai-prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
 Route::get('/pengurusan-program/pegawai-aadk/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.tambah_kategori');
 Route::post('/pengurusan-program/pegawai-aadk/post-tambah-kategori',[PengurusanProgController::class, 'postTambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.post_tambah_kategori');
+Route::get('/pengurusan-program/pegawai-aadk/padam-kategori/{id}',[PengurusanProgController::class, 'padamKategoriPA'])->name('pengurusan_program.pegawai_aadk.padam_Kategori');
+
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM
 Route::get('/pengurusan-program/pentadbir-sistem/daftar-prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
