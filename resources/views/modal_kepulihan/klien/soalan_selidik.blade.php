@@ -121,7 +121,9 @@
                 @if ($butangMula)
                     <a href="{{ route('klien.soalanDemografi') }}" class="status">KLIK UNTUK MULA MENJAWAB</a>
                 @else
-                    <p>Anda tidak boleh menjawab soal selidik sekarang. Sila cuba lagi kemudian selepas 6 bulan tarikh terakhir menjawab.</p>
+                    <p style="color:crimson; font-size:14px;">
+                        Anda tidak dibenarkan untuk menjawab soal selidik sekarang.<br>Sila cuba selepas 6 bulan dari tarikh terakhir menjawab.
+                    </p>
                 @endif
             </div>
             <!--end::Card body-->

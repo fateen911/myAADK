@@ -345,7 +345,6 @@ class ModalKepulihanController extends Controller
     public function storeResponSoalanKepulihan(Request $request)
     {
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-
         $sixMonthsAgo = Carbon::now()->subMonths(6);
         $latestSessionKeputusan = KeputusanKepulihan::where('klien_id', $clientId)
             ->where('created_at', '>=', $sixMonthsAgo)
@@ -358,7 +357,17 @@ class ModalKepulihanController extends Controller
             $newSession = $sessionCount . '/' . Carbon::now()->format('Y');
         }
 
-        // Define the constants for the specific questions
+        // Retrieve the autosaved answers
+        $autosavedAnswers = DB::table('respon_modal_kepulihan')
+            ->where('klien_id', $clientId)
+            ->pluck('skala_id', 'soalan_id')
+            ->toArray();
+
+        if (count($autosavedAnswers) == 0) {
+            return redirect()->back()->with('error', 'Tiada jawapan yang diterima.');
+        }
+
+        // Process the autosaved answers
         $constants = [
             5 => 0.103,
             9 => 0.067,
@@ -372,59 +381,44 @@ class ModalKepulihanController extends Controller
 
         $kebarangkalian = -3.433;
 
-        // Check if 'answer' input exists and is not null
-        if ($request->has('answer')) {
-            foreach ($request->input('answer') as $soalanId => $skalaId) {
-                DB::table('respon_modal_kepulihan')->updateOrInsert(
-                    ['klien_id' => $clientId, 'soalan_id' => $soalanId],
-                    ['skala_id' => $skalaId, 'sesi' => $newSession, 'status' => 'Selesai', 'updated_at' => now()]
-                );
-
-                // Calculate the score for the specific questions
-                if (array_key_exists($soalanId, $constants)) {
-                    $kebarangkalian += $constants[$soalanId] * $skalaId;
-                }
-            }
-
-            // Calculate the formula
-            $skor = exp($kebarangkalian) / (1 + exp($kebarangkalian));
-
-            // Round the score to 3 decimal places
-            $skor = round($skor, 3);
-
-            // Determine the tahap_kepulihan_id based on the calculated score
-            $tahapKepulihanId = 0;
-            if ($skor >= 0.00 && $skor <= 0.25) {
-                $tahapKepulihanId = 1;
-            } elseif ($skor >= 0.26 && $skor <= 0.50) {
-                $tahapKepulihanId = 2;
-            } elseif ($skor >= 0.51 && $skor <= 0.75) {
-                $tahapKepulihanId = 3;
-            } elseif ($skor >= 0.76 && $skor <= 1.00) {
-                $tahapKepulihanId = 4;
-            }
-
-            // Store the result in the keputusan_kepulihan_klien table
-            DB::table('keputusan_kepulihan_klien')->updateOrInsert(
-                ['klien_id' => $clientId],
-                [
-                    'sesi' => $newSession,
-                    'tahap_kepulihan_id' => $tahapKepulihanId,
-                    'skor' => $skor,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]
+        foreach ($autosavedAnswers as $soalanId => $skalaId) {
+            DB::table('respon_modal_kepulihan')->updateOrInsert(
+                ['klien_id' => $clientId, 'soalan_id' => $soalanId],
+                ['skala_id' => $skalaId, 'sesi' => $newSession, 'status' => 'Selesai', 'updated_at' => now()]
             );
 
-            $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
-
-            return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
-        } 
-        else {
-            return redirect()->back()->with('error', 'Tiada jawapan yang diterima.');
+            if (array_key_exists($soalanId, $constants)) {
+                $kebarangkalian += $constants[$soalanId] * $skalaId;
+            }
         }
-    }
 
+        $skor = exp($kebarangkalian) / (1 + exp($kebarangkalian));
+        $skor = round($skor, 3);
+
+        $tahapKepulihanId = 0;
+        if ($skor >= 0.00 && $skor <= 0.25) {
+            $tahapKepulihanId = 1;
+        } elseif ($skor >= 0.26 && $skor <= 0.50) {
+            $tahapKepulihanId = 2;
+        } elseif ($skor >= 0.51 && $skor <= 0.75) {
+            $tahapKepulihanId = 3;
+        } elseif ($skor >= 0.76 && $skor <= 1.00) {
+            $tahapKepulihanId = 4;
+        }
+
+        DB::table('keputusan_kepulihan_klien')->updateOrInsert(
+            ['klien_id' => $clientId],
+            [
+                'sesi' => $newSession,
+                'tahap_kepulihan_id' => $tahapKepulihanId,
+                'skor' => $skor,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
+
+        return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
+    }
 
     // public function storeResponSoalanKepulihan(Request $request)
     // {

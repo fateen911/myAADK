@@ -62,212 +62,190 @@
     </style>
 </head>
 
-<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
-    <!--begin::Page title-->
-    <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
-        <!--begin::Title-->
-        <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Modal Kepulihan</h1>
-        <!--end::Title-->
-        <!--begin::Breadcrumb-->
-        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Modal Kepulihan</a>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soal Selidik</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soalan Kepulihan</li>
-            <!--end::Item-->
-        </ul>
-        <!--end::Breadcrumb-->
-    </div>
-    <!--end::Page title-->
-</div>
-    
-<!--begin::Content-->
-<div id="kt_app_content" class="app-content flex-column-fluid">
-    <!--begin::Content container-->
-    <div id="kt_app_content_container" class="app-container container-xxl">
-        <!--begin::Card body-->
-        <div class="card card-flush">
-            <br>
-            <header>SOAL SELIDIK MODAL KEPULIHAN</header>
-
-            <div class="card-body">
-                <form action="{{ route('klien.submit.kepulihan') }}" method="POST" id="kepulihanForm">
-                    @csrf
-                
-                    <!-- Store answers from previous pages -->
-                    @foreach($questions as $page => $pageQuestions)
-                        @if($page != $currentPage - 1)
-                            @foreach($pageQuestions as $question)
-                                <input type="hidden" name="answer[{{ $question->id }}]" value="{{ $autosavedAnswers[$question->id] ?? '' }}">
-                            @endforeach
-                        @endif
-                    @endforeach
-                
-                    <!-- Display current page questions -->
-                    @foreach($questions[$currentPage - 1] as $question)
-                        <div class="question" style="font-size: 12pt;">
-                            <p><b>{{ $loop->iteration }}. {{ $question->soalan }}</b></p>
-                            <div class="options">
-                                @php
-                                    $savedAnswer = $autosavedAnswers[$question->id] ?? null;
-                                @endphp
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}> Sangat Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }}> Tidak Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]}" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
-                                </label>
-                                <label>
-                                    <input type="radio" name="answer[{{ $question->id }}]}" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
-                                </label>
-                            </div>
-                        </div>
-                        <br>
-                    @endforeach
-                
-                    <div class="pagination-buttons">
-                        @if ($currentPage > 1)
-                            <button type="button" onclick="changePage({{ $currentPage - 1 }})" style="margin-right: 10px;">Halaman Sebelum</button>
-                        @endif
-                        @if ($currentPage < 3)
-                            <button type="button" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
-                        @endif
-                    </div>
-                
-                    @if ($currentPage == 3)
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
-                        </div>
-                    @endif
-                </form>
-            </div>
+<body>
+    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+        <!--begin::Page title-->
+        <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
+            <!--begin::Title-->
+            <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Modal Kepulihan</h1>
+            <!--end::Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Modal Kepulihan</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Soal Selidik</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">Soalan Kepulihan</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
         </div>
-        <!--end::Card body-->
+        <!--end::Page title-->
     </div>
-    <!--end::Content container-->
-</div>
-<!--end::Content-->
+        
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+        <!--begin::Content container-->
+        <div id="kt_app_content_container" class="app-container container-xxl">
+            <!--begin::Card body-->
+            <div class="card card-flush">
+                <br>
+                <header>SOAL SELIDIK MODAL KEPULIHAN</header>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <div class="card-body">
+                    <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">
+                        @csrf
+                        <input type="hidden" name="currentPage" id="currentPage" value="{{ $currentPage }}">
+                
+                        @foreach($questions[$currentPage - 1] as $question)
+                            <div class="question" style="font-size: 12pt;">
+                                <p><b>{{ ($currentPage - 1) * 10 + $loop->iteration }}. {{ $question->soalan }}</b></p>
+                                <div class="options">
+                                    @php
+                                        $savedAnswer = isset($autosavedAnswers[$question->id]) ? $autosavedAnswers[$question->id] : null;
+                                    @endphp
+                                    <label>
+                                        <input type="radio" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}> Sangat Tidak Setuju
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="answer[{{ $question->id }}]" value="2" {{ $savedAnswer == 2 ? 'checked' : '' }}> Tidak Setuju
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="answer[{{ $question->id }}]" value="3" {{ $savedAnswer == 3 ? 'checked' : '' }}> Setuju
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="answer[{{ $question->id }}]" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}> Sangat Setuju
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+                        @endforeach
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Check if there is a flash message
-        @if(session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Berjaya!',
-                text: '{!! session('success') !!}',
-                confirmButtonText: 'OK'
+                        <div class="pagination-buttons">
+                            @if ($currentPage > 1)
+                                <button type="button" onclick="changePage({{ $currentPage - 1 }})">Halaman Sebelum</button>
+                            @endif
+                            @if ($currentPage < 3)
+                                <button type="button" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
+                            @endif
+                        </div>
+                    </form>
+                
+                    <!-- Separate form for submission, only visible on the last page -->
+                    @if ($currentPage == 3)
+                        <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
+                            @csrf
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
+                            </div>
+                        </form>
+                    @endif
+                </div>
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Content container-->
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if there is a flash message
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: '{!! session('success') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // Check if there is a flash error message
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{!! session('error') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('input[type=radio]').change(function() {
+                var formData = {
+                    _token: '{{ csrf_token() }}',
+                    answer: {}
+                };
+                $('input[type=radio]:checked').each(function() {
+                    formData.answer[$(this).attr('name').replace('answer[', '').replace(']', '')] = $(this).val();
+                });
+
+                $.ajax({
+                    url: '{{ route("klien.autosave.kepulihan") }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log('Respon soal selidik kepulihan telah disimpan.');
+                    },
+                    error: function(response) {
+                        console.log('Respon soal selidik kepulihan gagal disimpan.');
+                    }
+                });
             });
-        @endif
+        });
+    </script>
 
-        // Check if there is a flash error message
-        @if(session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Tidak Berjaya!',
-                text: '{!! session('error') !!}',
-                confirmButtonText: 'OK'
-            });
-        @endif
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let hantarBtn = document.getElementById('hantarBtn');
+            let totalQuestions = {{ count($questions[$currentPage - 1]) }};
+            console.log('Total Questions: ' + totalQuestions); // Debugging statement
 
-<script>
-    $(document).ready(function() {
-        $('input[type=radio]').change(function() {
-            var formData = {
-                _token: '{{ csrf_token() }}',
-                answer: {}
-            };
-            $('input[type=radio]:checked').each(function() {
-                formData.answer[$(this).attr('name').replace('answer[', '').replace(']', '')] = $(this).val();
-            });
-
-            $.ajax({
-                url: '{{ route("klien.autosave.kepulihan") }}',
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    console.log('Respon soal selidik kepulihan telah disimpan.');
-                },
-                error: function(response) {
-                    console.log('Respon soal selidik kepulihan gagal disimpan.');
+            function checkAnswers() {
+                let answers = document.querySelectorAll('input[type=radio]:checked');
+                console.log('Checked Answers: ' + answers.length); // Debugging statement
+                if (answers.length === totalQuestions) {
+                    hantarBtn.disabled = false;
+                } else {
+                    hantarBtn.disabled = true;
                 }
-            });
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let totalQuestions = 25;
-        let hantarBtn = document.getElementById('hantarBtn');
-
-        function checkAnswers() {
-            let answers = document.querySelectorAll('input[type=radio]:checked');
-            if (answers.length === totalQuestions) {
-                hantarBtn.disabled = false;
-            } else {
-                hantarBtn.disabled = true;
             }
-        }
 
-        // Check on page load
-        checkAnswers();
+            // Check on page load
+            checkAnswers();
 
-        // Check on change
-        document.querySelectorAll('input[type=radio]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                checkAnswers();
+            // Check on change
+            document.querySelectorAll('input[type=radio]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    checkAnswers();
+                });
             });
         });
-    });
 
-    function changePage(page) {
-        let form = document.getElementById('kepulihanForm');
-
-        // Save current page answers to hidden inputs
-        let answers = document.querySelectorAll('input[type=radio]:checked');
-        answers.forEach(function(answer) {
-            let hiddenInput = document.createElement('input');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = answer.name;
-            hiddenInput.value = answer.value;
-            form.appendChild(hiddenInput);
-        });
-
-        // Change page and submit the form
-        let currentPageInput = document.createElement('input');
-        currentPageInput.type = 'hidden';
-        currentPageInput.name = 'currentPage';
-        currentPageInput.value = page;
-        form.appendChild(currentPageInput);
-
-        form.submit();
-    }
-</script>
-
+        function changePage(page) {
+            document.getElementById('currentPage').value = page;
+            document.getElementById('paginationForm').submit();
+        }
+    </script>
+</body>
 @endsection
