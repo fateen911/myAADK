@@ -634,9 +634,10 @@ class PengurusanProgController extends Controller
     //HEBAHAN
     public function paparHebahan($id)
     {
+        $negeri = Negeri::with('daerah')->get();
         $program = Program::with('kategori')->find($id);
         if ($program) {
-            return view('pengurusan_program.hebahan.papar_hebahan', compact('program'));
+            return view('pengurusan_program.hebahan.papar_hebahan', compact('program','negeri'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }

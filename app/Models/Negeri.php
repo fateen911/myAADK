@@ -16,4 +16,9 @@ class Negeri extends Model
         'kod_negeri',
         'negeri',
     ];
+
+    public function daerah()
+    {
+        return $this->hasMany(Daerah::class);
+    }
 }

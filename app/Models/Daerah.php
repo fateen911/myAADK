@@ -16,4 +16,9 @@ class Daerah extends Model
         'daerah',
         'negeri_id',
     ];
+
+    public function negeri()
+    {
+        return $this->belongsTo(Negeri::class);
+    }
 }
