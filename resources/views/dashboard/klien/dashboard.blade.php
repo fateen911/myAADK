@@ -258,8 +258,8 @@
                         <div class="card-header pt-5">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-dark fs-1">Soal Selidik</span>
-                                <span class="text-gray-500 pt-2 fw-semibold fs-6">Status terkini bahagian soal selidik</span>
+                                <span class="card-label fw-bold text-dark fs-1">Modal Kepulihan</span>
+                                <span class="text-gray-500 pt-2 fw-semibold fs-6">Status terkini bahagian soal selidik demografi dan soal selidik kepulihan.</span>
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -310,46 +310,22 @@
                                             <!--end::Table head-->
                                             <!--begin::Table body-->
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">21/12/2023</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">20/6/2023</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">25/12/2022</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">23/6/2022</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
+                                                @foreach ($responDemografi as $demografi)
+                                                    <tr class="fs-6 fw-bold text-gray-600">
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($demografi->updated_at)->format('d/m/Y')}}</a>
+                                                        </td>
+                                                        @if ($demografi->status == 'Selesai')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-success fs-7 fw-bold">{{$demografi->status}}</a>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-center">
+                                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">{{$demografi->status}}</a>
+                                                            </td>
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             <!--end::Table body-->
                                         </table>
@@ -358,6 +334,7 @@
                                     <!--end::Table container-->
                                 </div>
                                 <!--end::Tap pane-->
+
                                 <!--begin::Tap pane-->
                                 <div class="tab-pane fade" id="kt_stats_widget_1_tab_2">
                                     <!--begin::Table container-->
@@ -374,46 +351,54 @@
                                             <!--end::Table head-->
                                             <!--begin::Table body-->
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">28/6/2024</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">21/12/2023</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">20/6/2023</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">25/12/2022</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">23/6/2022</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success fs-7 fw-bold">Selesai</span>
-                                                    </td>
-                                                </tr>
+                                                @if ($tidakMenjawabKepulihan )
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($tarikhTidakMenjawabKepulihan)->format('d-m-Y')}}</a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($completedDifferentSesi)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($completedDifferentSesi->updated_at)->format('d-m-Y')}}</a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($incompletedDifferentSesi)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($incompletedDifferentSesi->updated_at)->format('d-m-Y')}}</a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($baharuDifferentSesi)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($baharuDifferentSesi->updated_at)->format('d-m-Y')}}</a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
+                                                @foreach ($keputusanKepulihan as $kepulihan)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($kepulihan->updated_at)->format('d-m-Y')}}</a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-success fs-7 fw-bold">Selesai</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             <!--end::Table body-->
                                         </table>

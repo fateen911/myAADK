@@ -152,7 +152,7 @@ class ModalKepulihanController extends Controller
             $existingResponse->tempoh_tinggal_lokasi_terkini = $request->tempoh_tinggal_lokasi_terkini;
             $existingResponse->tinggal_dengan = $request->tinggal_dengan;
             $existingResponse->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
-            $existingResponse->status = 'Selesai Menjawab';
+            $existingResponse->status = 'Belum Selesai';
             $existingResponse->save();
         } else {
             // Store a new response
@@ -170,7 +170,7 @@ class ModalKepulihanController extends Controller
             $respon->tempoh_tinggal_lokasi_terkini = $request->tempoh_tinggal_lokasi_terkini;
             $respon->tinggal_dengan = $request->tinggal_dengan;
             $respon->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
-            $respon->status = 'Selesai Menjawab';
+            $respon->status = 'Belum Selesai';
             $respon->save();
         }
 
@@ -372,7 +372,17 @@ class ModalKepulihanController extends Controller
             'skor' => $skor,
             'created_at' => now(),
             'updated_at' => now()
-        ]);    
+        ]); 
+        
+        // Check if a response demografi already exists for the current session
+        $existingResponseDemografi = ResponDemografi::where('klien_id', $clientId)
+                                    ->where('sesi', $newSession)
+                                    ->first();
+        
+        // If exists, update the status to 'Selesai'
+        if ($existingResponseDemografi) {
+            $existingResponseDemografi->update(['status' => 'Selesai']);
+        }
         
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
