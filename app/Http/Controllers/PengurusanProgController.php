@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Exports\PengesahanKehadiranExcel;
 use App\Exports\PerekodanKehadiranExcel;
+use App\Models\Daerah;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
 use App\Models\Negeri;
@@ -79,6 +80,13 @@ class PengurusanProgController extends Controller
         $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
         return response()->json($perekodan);
     }
+
+    public function daerah($id)
+    {
+        $daerah = Daerah::with('negeri')->where('negeri_id',$id)->get();
+        return response()->json($daerah);
+    }
+
     //QR CODE
     public function qrCode($id)
     {
@@ -634,7 +642,7 @@ class PengurusanProgController extends Controller
     //HEBAHAN
     public function paparHebahan($id)
     {
-        $negeri = Negeri::with('daerah')->get();
+        $negeri = Negeri::all();
         $program = Program::with('kategori')->find($id);
         if ($program) {
             return view('pengurusan_program.hebahan.papar_hebahan', compact('program','negeri'));

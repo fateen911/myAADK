@@ -75,6 +75,7 @@ Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
 Route::get('/program', [PengurusanProgController::class, 'program']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
+Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
