@@ -27,71 +27,6 @@ class HomeController extends Controller
             // Retrieve the client's id based on their no_kp
             $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-            // DASHBOARD KLIEN
-            $klien = Klien::where('id', $klienId)->first();
-            $pekerjaan = PekerjaanKlien::where('klien_id', $klienId)->first();
-            $waris = WarisKlien::where('klien_id',$klienId)->first();
-            $pasangan = KeluargaKlien::where('klien_id',$klienId)->first();
-
-            $responDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
-            $latestResponDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->first();
-            $keputusanKepulihan = KeputusanKepulihan::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
-            $latestKeputusanKepulihan = KeputusanKepulihan::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->first();
-            
-            // Retrieve the latest sesi from KeputusanKepulihan
-            $latestSesi = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->sesi : null;
-
-            // Check record if not answered more than 6 month
-            $sixMonthsAgo = Carbon::now()->subMonths(6);
-            $tidakMenjawabKepulihan = ResponModalKepulihan::where('klien_id', $klienId)
-                                    ->where('sesi', '=', $latestSesi)
-                                    ->where('updated_at', '<=', $sixMonthsAgo)
-                                    ->orderBy('updated_at', 'desc')
-                                    ->exists();
-            $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan->updated_at->addMonths(6);
-
-            // Check if there are any records in ResponModalKepulihan for a different sesi with any status not equal to 'Selesai'
-            $incompletedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                        ->where('sesi', '!=', $latestSesi)
-                                        ->where('status', '!=', 'Selesai')
-                                        ->first();
-            
-            // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Selesai' but the sesi is different
-            $completedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                    ->where('sesi', '!=', $latestSesi)
-                                    ->select('sesi')
-                                    ->distinct()
-                                    ->get()
-                                    ->map(function ($record) use ($klienId) {
-                                        $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
-                                                        ->where('sesi', $record->sesi)
-                                                        ->count();
-                                        $countSelesai = ResponModalKepulihan::where('klien_id', $klienId)
-                                                        ->where('sesi', $record->sesi)
-                                                        ->where('status', 'Selesai')
-                                                        ->count();
-                                        return $countTotal == $countSelesai;
-                                    })
-                                    ->contains(true);
-
-            // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Baharu' but the sesi is different
-            $baharuDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                    ->where('sesi', '!=', $latestSesi)
-                                    ->select('sesi')
-                                    ->distinct()
-                                    ->get()
-                                    ->map(function ($record) use ($klienId) {
-                                        $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
-                                                        ->where('sesi', $record->sesi)
-                                                        ->count();
-                                        $countBaharu = ResponModalKepulihan::where('klien_id', $klienId)
-                                                        ->where('sesi', $record->sesi)
-                                                        ->where('status', 'Baharu')
-                                                        ->count();
-                                        return $countTotal == $countBaharu;
-                                    })
-                                    ->contains(true);
-
             if ($status == 0)
             {
                 session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
@@ -100,9 +35,78 @@ class HomeController extends Controller
             else
             {
                 if($tahap == 1)
+                {
                     return view('dashboard.pentadbir.dashboard');
+                }
                 else if($tahap == 2)
+                {
+                    // DASHBOARD KLIEN
+                    $klien = Klien::where('id', $klienId)->first();
+                    $pekerjaan = PekerjaanKlien::where('klien_id', $klienId)->first();
+                    $waris = WarisKlien::where('klien_id',$klienId)->first();
+                    $pasangan = KeluargaKlien::where('klien_id',$klienId)->first();
+
+                    $responDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
+                    $latestResponDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->first();
+                    $keputusanKepulihan = KeputusanKepulihan::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
+                    $latestKeputusanKepulihan = KeputusanKepulihan::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->first();
+                    
+                    // Retrieve the latest sesi from KeputusanKepulihan
+                    $latestSesi = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->sesi : null;
+
+                    // Check record if not answered more than 6 month
+                    $sixMonthsAgo = Carbon::now()->subMonths(6);
+                    $tidakMenjawabKepulihan = ResponModalKepulihan::where('klien_id', $klienId)
+                                            ->where('sesi', '=', $latestSesi)
+                                            ->where('updated_at', '<=', $sixMonthsAgo)
+                                            ->orderBy('updated_at', 'desc')
+                                            ->exists();
+                    $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan->updated_at->addMonths(6);
+
+                    // Check if there are any records in ResponModalKepulihan for a different sesi with any status not equal to 'Selesai'
+                    $incompletedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
+                                                ->where('sesi', '!=', $latestSesi)
+                                                ->where('status', '!=', 'Selesai')
+                                                ->first();
+                    
+                    // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Selesai' but the sesi is different
+                    $completedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
+                                            ->where('sesi', '!=', $latestSesi)
+                                            ->select('sesi')
+                                            ->distinct()
+                                            ->get()
+                                            ->map(function ($record) use ($klienId) {
+                                                $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
+                                                                ->where('sesi', $record->sesi)
+                                                                ->count();
+                                                $countSelesai = ResponModalKepulihan::where('klien_id', $klienId)
+                                                                ->where('sesi', $record->sesi)
+                                                                ->where('status', 'Selesai')
+                                                                ->count();
+                                                return $countTotal == $countSelesai;
+                                            })
+                                            ->contains(true);
+
+                    // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Baharu' but the sesi is different
+                    $baharuDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
+                                            ->where('sesi', '!=', $latestSesi)
+                                            ->select('sesi')
+                                            ->distinct()
+                                            ->get()
+                                            ->map(function ($record) use ($klienId) {
+                                                $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
+                                                                ->where('sesi', $record->sesi)
+                                                                ->count();
+                                                $countBaharu = ResponModalKepulihan::where('klien_id', $klienId)
+                                                                ->where('sesi', $record->sesi)
+                                                                ->where('status', 'Baharu')
+                                                                ->count();
+                                                return $countTotal == $countBaharu;
+                                            })
+                                            ->contains(true);
+
                     return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan','responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','incompletedDifferentSesi','completedDifferentSesi','baharuDifferentSesi','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan'));
+                }
                 else if($tahap == 3)
                     return view('dashboard.pegawai.dashboard_brpp');
                 else if($tahap == 4)
