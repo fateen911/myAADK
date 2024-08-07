@@ -105,13 +105,13 @@
             <div class="card-body">
                 @if(isset($latestRecordKeputusan))
                     <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b> {{ Carbon::parse($latestRecordKeputusan->updated_at)->format('d/m/Y') }} </p>
-                    <p><b>STATUS SOAL SELIDIK TERAKHIR:</b> SELESAI MENJAWAB</p>
+                    <p><b>STATUS TERAKHIR SOAL SELIDIK:</b> SELESAI MENJAWAB</p>
                 @else
                     @if ($latestRecordDemografi)
-                        <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                        <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
                         <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB </p> 
                     @else
-                        <p><b>TARIKH TERAKHIR JAWAB SOAL SELIDIK:</b></p>
+                        <p><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
                         <p><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB </p>
                     @endif
                 @endif
