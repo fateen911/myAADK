@@ -658,16 +658,16 @@ class PengurusanProgController extends Controller
 
         $kaedah = $request->input('kaedah');
         $pilihan = $request->input('pilihan', []);
-        $klien_id = Klien::whereIn('id', $pilihan)->get();
+        $klien = Klien::where('id', $pilihan)->get();
         //$negeri = Negeri::with('daerah')->get();
 
         // Send communication based on the selected method
-        foreach ($klien_id as $klien) {
+        foreach ($klien as $item) {
             if ($kaedah == 'sms') {
-                $this->sendSms($klien->no_tel, 'Your message here');
+                $this->sendSms($item->no_tel, 'Your message here');
             }
             elseif ($kaedah == 'emel') {
-                $recipient = 'ziba0506@gmail.com';
+                $recipient = $item->emel;
                 Mail::to($recipient)->send(new HebahanMail($id));
 
                 return redirect()->back()->with('status', 'Email sent successfully!');
