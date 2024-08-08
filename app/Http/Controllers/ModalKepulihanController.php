@@ -23,7 +23,7 @@ class ModalKepulihanController extends Controller
         // Fetch the latest record from keputusan_kepulihan_klien for this client within 6 months
         $latestRecordKeputusan = DB::table('keputusan_kepulihan_klien')
                         ->where('klien_id', $clientId)
-                        ->where('updated_at', '>=', $sixMonthsAgo)
+                        // ->where('updated_at', '>=', $sixMonthsAgo)
                         ->orderBy('updated_at', 'desc')
                         ->first();
 
@@ -36,7 +36,7 @@ class ModalKepulihanController extends Controller
 
         $butangMula = false;
 
-        if (!$latestRecordKeputusan) {
+        if ($latestRecordKeputusan->status == 'Belum Selesai') {
             // If there is no record, the client can click the button
             $butangMula = true;
         } 
@@ -245,6 +245,17 @@ class ModalKepulihanController extends Controller
             }
 
             $questions = $shuffledQuestions;
+
+            // Create new row in table keputusan kepulihan
+            KeputusanKepulihan::create([
+                'klien_id' => $clientId,
+                'sesi' => $newSession,
+                'tahap_kepulihan_id' => null,
+                'skor' => null,
+                'status' => 'Belum Selesai',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]); 
         } 
         else {
             // Fetch questions based on saved order
@@ -365,14 +376,10 @@ class ModalKepulihanController extends Controller
             $tahapKepulihanId = 4;
         }
 
-        KeputusanKepulihan::create([
-            'klien_id' => $clientId,
-            'sesi' => $newSession,
-            'tahap_kepulihan_id' => $tahapKepulihanId,
-            'skor' => $skor,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]); 
+        DB::table('keputusan_kepulihan_klien')->updateOrInsert(
+            ['klien_id' => $clientId, 'sesi' => $newSession],
+            ['tahap_kepulihan_id' => $tahapKepulihanId, 'skor' => $skor, 'status' => 'Selesai', 'updated_at' => now()]
+        );
         
         // Check if a response demografi already exists for the current session
         $existingResponseDemografi = ResponDemografi::where('klien_id', $clientId)
@@ -402,83 +409,84 @@ class ModalKepulihanController extends Controller
                 DB::raw('SUM(case when rm.status = "Selesai" then 1 else 0 end) as selesai_count'),
                 DB::raw('COUNT(rm.id) as total_count'),
                 'kk.skor',
-                'kk.tahap_kepulihan_id'
+                'kk.tahap_kepulihan_id',
+                'kk.updated_at'
             )
-            ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id')
+            ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
             ->get();
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses'));
     }
 
     // TEST
-    public function soalanKepulihanTest()
-    {
-        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+    // public function soalanKepulihanTest()
+    // {
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-        // Check if the client has previously saved questions
-        $savedQuestions = DB::table('respon_modal_kepulihan')
-                            ->where('klien_id', $clientId)
-                            ->pluck('soalan_id')
-                            ->toArray();
+    //     // Check if the client has previously saved questions
+    //     $savedQuestions = DB::table('respon_modal_kepulihan')
+    //                         ->where('klien_id', $clientId)
+    //                         ->pluck('soalan_id')
+    //                         ->toArray();
 
-        if (!empty($savedQuestions)) {
-            // Fetch the questions in the order they were previously saved
-            $questions = DB::table('soalan_modal_kepulihan')
-                        ->whereIn('id', $savedQuestions)
-                        ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
-                        ->get();
-        } else {
-            // Fetch 8 fixed questions with specific IDs
-            $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
-            $fixedQuestions = DB::table('soalan_modal_kepulihan')
-                                ->whereIn('id', $fixedQuestionIds)
-                                ->get();
+    //     if (!empty($savedQuestions)) {
+    //         // Fetch the questions in the order they were previously saved
+    //         $questions = DB::table('soalan_modal_kepulihan')
+    //                     ->whereIn('id', $savedQuestions)
+    //                     ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
+    //                     ->get();
+    //     } else {
+    //         // Fetch 8 fixed questions with specific IDs
+    //         $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
+    //         $fixedQuestions = DB::table('soalan_modal_kepulihan')
+    //                             ->whereIn('id', $fixedQuestionIds)
+    //                             ->get();
 
-            // Fetch 5 questions representing each recovery capital
-            $capitalQuestions = DB::table('soalan_modal_kepulihan')
-                                ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-                                ->whereNotIn('id', $fixedQuestionIds)
-                                ->inRandomOrder()
-                                ->limit(5)
-                                ->get();
+    //         // Fetch 5 questions representing each recovery capital
+    //         $capitalQuestions = DB::table('soalan_modal_kepulihan')
+    //                             ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+    //                             ->whereNotIn('id', $fixedQuestionIds)
+    //                             ->inRandomOrder()
+    //                             ->limit(5)
+    //                             ->get();
 
-            // Merge the 13 fixed questions
-            $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
+    //         // Merge the 13 fixed questions
+    //         $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
 
-            // Fetch remaining questions excluding the already selected ones
-            $remainingQuestions = DB::table('soalan_modal_kepulihan')
-                                    ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-                                    ->inRandomOrder()
-                                    ->limit(12)
-                                    ->get();
+    //         // Fetch remaining questions excluding the already selected ones
+    //         $remainingQuestions = DB::table('soalan_modal_kepulihan')
+    //                                 ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+    //                                 ->inRandomOrder()
+    //                                 ->limit(12)
+    //                                 ->get();
 
-            // Combine both sets of questions
-            $allQuestions = $fixedQuestions->merge($remainingQuestions);
+    //         // Combine both sets of questions
+    //         $allQuestions = $fixedQuestions->merge($remainingQuestions);
 
-            // Shuffle the questions to ensure randomness for every client
-            $shuffledQuestions = $allQuestions->shuffle();
+    //         // Shuffle the questions to ensure randomness for every client
+    //         $shuffledQuestions = $allQuestions->shuffle();
 
-            // Save the shuffled order for the first time with status as "Baharu"
-            foreach ($shuffledQuestions as $question) {
-                DB::table('respon_modal_kepulihan')->insert([
-                    'klien_id' => $clientId,
-                    'soalan_id' => $question->id,
-                    'skala_id' => null, // No answer yet
-                    'status' => 'Baharu', // Setting the status to Baharu
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+    //         // Save the shuffled order for the first time with status as "Baharu"
+    //         foreach ($shuffledQuestions as $question) {
+    //             DB::table('respon_modal_kepulihan')->insert([
+    //                 'klien_id' => $clientId,
+    //                 'soalan_id' => $question->id,
+    //                 'skala_id' => null, // No answer yet
+    //                 'status' => 'Baharu', // Setting the status to Baharu
+    //                 'created_at' => now(),
+    //                 'updated_at' => now(),
+    //             ]);
+    //         }
             
-            $questions = $shuffledQuestions;
-        }
+    //         $questions = $shuffledQuestions;
+    //     }
 
-        // Fetch autosaved answers
-        $autosavedAnswers = DB::table('respon_modal_kepulihan')
-        ->where('klien_id', $clientId)
-        ->pluck('skala_id', 'soalan_id')
-        ->toArray();
+    //     // Fetch autosaved answers
+    //     $autosavedAnswers = DB::table('respon_modal_kepulihan')
+    //     ->where('klien_id', $clientId)
+    //     ->pluck('skala_id', 'soalan_id')
+    //     ->toArray();
 
-        return view('modal_kepulihan.klien.soalan_kepulihan_view_kedua', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
-    }
+    //     return view('modal_kepulihan.klien.soalan_kepulihan_view_kedua', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
+    // }
 }

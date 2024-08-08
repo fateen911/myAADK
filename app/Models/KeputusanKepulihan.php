@@ -16,5 +16,6 @@ class KeputusanKepulihan extends Model
         'sesi',
         'tahap_kepulihan_id',
         'skor',
+        'status',
     ];
 }

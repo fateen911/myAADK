@@ -63,49 +63,7 @@ class HomeController extends Controller
                                             ->exists();
                     $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan->updated_at->addMonths(6);
 
-                    // Check if there are any records in ResponModalKepulihan for a different sesi with any status not equal to 'Selesai'
-                    $incompletedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                                ->where('sesi', '!=', $latestSesi)
-                                                ->where('status', '!=', 'Selesai')
-                                                ->first();
-                    
-                    // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Selesai' but the sesi is different
-                    $completedDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                            ->where('sesi', '!=', $latestSesi)
-                                            ->select('sesi')
-                                            ->distinct()
-                                            ->get()
-                                            ->map(function ($record) use ($klienId) {
-                                                $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
-                                                                ->where('sesi', $record->sesi)
-                                                                ->count();
-                                                $countSelesai = ResponModalKepulihan::where('klien_id', $klienId)
-                                                                ->where('sesi', $record->sesi)
-                                                                ->where('status', 'Selesai')
-                                                                ->count();
-                                                return $countTotal == $countSelesai;
-                                            })
-                                            ->contains(true);
-
-                    // Check if all statuses for the 25 questions in ResponModalKepulihan are 'Baharu' but the sesi is different
-                    $baharuDifferentSesi = ResponModalKepulihan::where('klien_id', $klienId)
-                                            ->where('sesi', '!=', $latestSesi)
-                                            ->select('sesi')
-                                            ->distinct()
-                                            ->get()
-                                            ->map(function ($record) use ($klienId) {
-                                                $countTotal = ResponModalKepulihan::where('klien_id', $klienId)
-                                                                ->where('sesi', $record->sesi)
-                                                                ->count();
-                                                $countBaharu = ResponModalKepulihan::where('klien_id', $klienId)
-                                                                ->where('sesi', $record->sesi)
-                                                                ->where('status', 'Baharu')
-                                                                ->count();
-                                                return $countTotal == $countBaharu;
-                                            })
-                                            ->contains(true);
-
-                    return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan','responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','incompletedDifferentSesi','completedDifferentSesi','baharuDifferentSesi','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan'));
+                    return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan','responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan'));
                 }
                 else if($tahap == 3)
                     return view('dashboard.pegawai.dashboard_brpp');

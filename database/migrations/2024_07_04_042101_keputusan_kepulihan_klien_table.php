@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('klien_id');
             $table->string('sesi');
-            $table->unsignedBigInteger('tahap_kepulihan_id');
-            $table->double('skor');
+            $table->unsignedBigInteger('tahap_kepulihan_id')->nullable();
+            $table->double('skor')->nullable();
+            $table->enum('status', ['Belum Selesai', 'Selesai'])->default('Belum Selesai');
             $table->timestamps();
         });
     }

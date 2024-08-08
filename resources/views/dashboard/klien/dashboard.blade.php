@@ -354,37 +354,10 @@
                                                 @if ($tidakMenjawabKepulihan )
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($tarikhTidakMenjawabKepulihan)->format('d-m-Y')}}</a>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($tarikhTidakMenjawabKepulihan)->format('d/m/Y')}}</a>
                                                         </td>
                                                         <td class="text-center">
                                                             <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</a>
-                                                        </td>
-                                                    </tr>
-                                                @elseif ($completedDifferentSesi)
-                                                    <tr>
-                                                        <td>
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($completedDifferentSesi->updated_at)->format('d-m-Y')}}</a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
-                                                        </td>
-                                                    </tr>
-                                                @elseif ($incompletedDifferentSesi)
-                                                    <tr>
-                                                        <td>
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($incompletedDifferentSesi->updated_at)->format('d-m-Y')}}</a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
-                                                        </td>
-                                                    </tr>
-                                                @elseif ($baharuDifferentSesi)
-                                                    <tr>
-                                                        <td>
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($baharuDifferentSesi->updated_at)->format('d-m-Y')}}</a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">Belum Selesai</a>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -392,11 +365,17 @@
                                                 @foreach ($keputusanKepulihan as $kepulihan)
                                                     <tr>
                                                         <td>
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($kepulihan->updated_at)->format('d-m-Y')}}</a>
+                                                            <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($kepulihan->updated_at)->format('d/m/Y')}}</a>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-success fs-7 fw-bold">Selesai</a>
-                                                        </td>
+                                                        @if ($kepulihan->status == 'Selesai')
+                                                            <td class="text-center">
+                                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-success fs-7 fw-bold">{{$kepulihan->status}}</a>
+                                                            </td>
+                                                        @else
+                                                            <td class="text-center">
+                                                                <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">{{$kepulihan->status}}</a>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

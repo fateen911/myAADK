@@ -1,6 +1,10 @@
 @extends('layouts._default')
 
 @section('content')
+    @php
+        use Carbon\Carbon;
+    @endphp
+
     <head>
         <!--begin::Vendor Stylesheets(used for this page only)-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -77,7 +81,8 @@
                                             <th class="min-w-100px">No. Kad Pengenalan</th>
                                             <th class="min-w-100px">Daerah</th>
                                             <th class="min-w-70px">Negeri</th>
-                                            <th class="min-w-50px" style="text-align: center;">Status Menjawab</th> 
+                                            <th class="min-w-50px" style="text-align: center;">Tarikh Menjawab</th> 
+                                            <th class="min-w-50px" style="text-align: center;">Status</th> 
                                             <th class="min-w-50px" style="text-align: center;">Skor</th> 
                                             <th class="min-w-50px" style="text-align: center;">Tahap Kepulihan</th> 
                                         </tr>
@@ -96,6 +101,7 @@
                                                 <td>{{ $response->no_kp }}</td>
                                                 <td>{{ $daerah }}</td>
                                                 <td>{{ $negeri }}</td>
+                                                <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td class="d-flex justify-content-center">
                                                     @if ($statusMenjawab == 'SELESAI')
                                                         <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
@@ -123,17 +129,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                            <tr>
-                                                <td>AMIR BIN GHANI</td>
-                                                <td>950904063017</td>
-                                                <td>RAUB</td>
-                                                <td>PAHANG</td>
-                                                <td class="d-flex justify-content-center">
-                                                    <button class="btn btn-sm text-white" style="background-color:cornflowerblue">BELUM SELESAI</button>
-                                                </td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
