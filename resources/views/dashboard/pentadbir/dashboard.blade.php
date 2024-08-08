@@ -82,7 +82,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span id="permohonanPendaftaranCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="permohonanPendaftaranCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$permohonan_pendaftaran}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -109,7 +109,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span id="pegawaiCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="pegawaiCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$pegawai}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -135,7 +135,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{ route('senarai-pengguna') }}>
-                                            <span id="klienCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="klienCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$klien}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -297,7 +297,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesai_menjawab}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -324,7 +324,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belum_selesai_menjawab}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -350,7 +350,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_menjawab}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -386,7 +386,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$cemerlang}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -413,7 +413,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baik}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -439,7 +439,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -466,7 +466,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">0</span>
+                                            <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>

@@ -93,7 +93,7 @@
                                                 $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
                                                 $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
                                                 $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $statusMenjawab = ($response->selesai_count == 25) ? 'SELESAI' : 'BELUM SELESAI';
+                                                // $statusMenjawab = ($response->selesai_count == 25) ? 'SELESAI' : 'BELUM SELESAI';
                                             @endphp
 
                                             <tr>
@@ -103,10 +103,10 @@
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td class="d-flex justify-content-center">
-                                                    @if ($statusMenjawab == 'SELESAI')
-                                                        <button class="btn btn-sm text-white" style="background-color:cadetblue">SELESAI</button>
+                                                    @if ($response->status == 'Selesai')
+                                                        <button class="btn btn-sm text-white" style="background-color:cadetblue">{{ strtoupper($response->status) }}</button>
                                                     @else
-                                                        <button class="btn btn-sm text-white" style="background-color:cornflowerblue">BELUM SELESAI</button>
+                                                        <button class="btn btn-sm text-white" style="background-color:cornflowerblue">{{ strtoupper($response->status) }}</button>
                                                     @endif
                                                 </td>
                                                 <td style="text-align: center">

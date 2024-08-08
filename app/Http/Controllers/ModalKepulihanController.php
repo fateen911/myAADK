@@ -400,26 +400,27 @@ class ModalKepulihanController extends Controller
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         // Fetch clients who have responded within the last 6 months
-        $responses = DB::table('respon_modal_kepulihan as rm')
-                    ->join('klien as u', 'rm.klien_id', '=', 'u.id')
-                    ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                        $join->on('u.id', '=', 'kk.klien_id')
-                            ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
-                    })
+        $responses = DB::table('keputusan_kepulihan_klien as kk')
+                    ->join('klien as u', 'kk.klien_id', '=', 'u.id')
                     ->select(
                         'u.id as klien_id',
                         'u.nama',
                         'u.no_kp',
                         'u.daerah',
                         'u.negeri',
-                        DB::raw('SUM(case when rm.status = "Selesai" then 1 else 0 end) as selesai_count'),
-                        DB::raw('COUNT(rm.id) as total_count'),
-                        DB::raw('ROUND(kk.skor, 3) as skor'),
+                        DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
                         'kk.tahap_kepulihan_id',
+                        'kk.status',
                         'kk.updated_at'
                     )
                     ->where('kk.updated_at', '>=', $sixMonthsAgo)
-                    ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+                    ->whereIn('kk.updated_at', function ($query) {
+                        $query->select(DB::raw('MAX(updated_at)'))
+                            ->from('keputusan_kepulihan_klien')
+                            ->whereColumn('klien_id', 'kk.klien_id')
+                            ->groupBy('klien_id');
+                    })
+                    ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                     ->get();
         
         // Fetch clients who have not responded yet or their last response was over 6 months ago

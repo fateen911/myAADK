@@ -91,62 +91,76 @@
 				{{-- Nav Bar --}}
 				<ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Klien AADK</button>
+						<button class="nav-link active" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Pegawai Mohon Mendaftar</button>
 					</li>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="pegawai-tab" data-toggle="tab" data-target="#pegawai" type="button" role="tab" aria-controls="pegawai" aria-selected="true">Pegawai AADK</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Pegawai Mohon Mendaftar</button>
+						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Klien AADK</button>
 					</li>
 				</ul>			
 
 				{{-- Content Navigation Bar --}}
 				<div class="tab-content mt-0" id="myTabContent">
-					{{-- KLIEN --}}
-					<div class="tab-pane fade show active" id="klien" role="tabpanel" aria-labelledby="klien-tab">
-						<!--begin::Card title-->
-						<div class="header ml-5">
-							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk kemaskini maklumat akaun klien.</small></h2>	
+					{{-- PERMOHONAN DAFTAR PEGAWAI --}}
+					<div class="tab-pane fade" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
+						<div class="header row align-items-center">
+							<!--begin::Card title-->
+							<div class="col">
+								<h2>Senarai Permohonan Pendaftaran Pegawai sebagai Pengguna Baharu Sistem</h2>
+								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu serta luluskan permohonan pendaftaran sebagai pengguna sistem.</small>
+							</div>
 						</div>
-
+						
 						<!--begin::Card body-->
 						<div class="body">
 							<!--begin::Table-->
-							<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+							<table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th style="width: 40%;">Nama</th>
-										<th style="width: 15%;">No. Kad Pengenalan</th>
-										<th style="width: 25%;">Emel</th>
-										<th style="width: 10%;">Tarikh Daftar</th>
-										<th style="width: 10%;">Kemaskini</th>
+										<th class="min-w-175px">Nama</th>
+										<th class="min-w-125px">No. Kad Pengenalan</th>
+										<th class="min-w-125px">Emel</th>
+										<th class="min-w-125px">Peranan</th>
+										<th class="min-w-150px">Negeri (Daerah)</th>
+										<th class="min-w-50px">Kelulusan</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
-									@foreach ($klien as $user1)
+									@foreach ($permohonan_pegawai as $user3)
 										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-											$tarikh_daftar1 = Carbon::parse($user1->created_at)->format('d-m-Y');
+											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
+											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
+											$daerahB = DB::table('senarai_daerah')->where('id', $user3['daerah_bertugas'])->value('daerah');
 										@endphp
 	
 										<tr>
-											<td>{{ $user1->name }}</td>
-											<td>{{ $user1->no_kp }}</td>
-											<td>{{ $user1->email }}</td>
-											<td>{{ $tarikh_daftar1}}</td>
+											<td>{{ $user3->nama }}</td>
+											<td>{{ $user3->no_kp }}</td>
+											<td>{{ $user3->emel }}</td>
+											<td>{{ $peranan }}</td>
+											<td>
+												@if ($negeriB !== null)
+        											{{ $negeriB }} 
+													@if ($daerahB !== null)
+														({{ $daerahB }})
+													@endif
+												@else
+											</td>
+											@endif
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
-														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_permohonan_pegawai{{$user3->id}}">
+														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Permohonan">
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
 													</a>
-												</div>                                                
+												</div>                                                     
 											</td>
 	
-											<!--begin::Modal - Kemaskini Klien-->
-											<div class="modal fade" id="modal_kemaskini_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal - Permohonan Pegawai-->
+											<div class="modal fade" id="modal_permohonan_pegawai{{$user3->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
 												<div class="modal-dialog modal-dialog-centered mw-650px">
 													<!--begin::Modal content-->
@@ -154,8 +168,9 @@
 														<!--begin::Modal header-->
 														<div class="modal-header">
 															<!--begin::Modal title-->
-															<h2>Kemaskini Maklumat Akaun Klien</h2>
+															<h2>Luluskan Permohonan Pendaftaran Pegawai</h2>
 															<!--end::Modal title-->
+
 															<!--begin::Close-->
 															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
 																<i class="ki-duotone ki-cross fs-1">
@@ -170,28 +185,18 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('kemaskini-klien') }}" method="post">
+															<form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $user3->id]) }}" method="post">
 																@csrf
 	
-																<input type="hidden" name="id" value="{{ $user1->id }}">
-																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
+																<input type="hidden" name="id" value="{{ $user3->id }}">
+																<div class="scroll-y me-n7 pe-7" id="modal_permohonan_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_permohonan_pegawai_header" data-kt-scroll-wrappers="#modal_permohonan_pegawai_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Nama</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Emel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user1->email}}" />
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" />
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -201,34 +206,100 @@
 																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}"/>
+																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user3->no_kp}}"/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																		<label class="fs-6 fw-semibold mb-2">Emel</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user1->id}}" name="password" />
-																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('password{{$user1->id}}')">Jana Kata Laluan</button>
+																			<input type="text" class="form-control form-control-solid" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" />
+																			<span class="input-group-text">@adk.gov.my</span>
+																			<input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" />
 																		</div>
+																		<!--end::Input-->
+																	</div>																	
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Nombor Telefon
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user3->no_tel}}"/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
+																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+																			<option value="">Pilih</option>
+																			@foreach ($jawatan as $j)
+																				<option value="{{ $j->id }}" {{$user3->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
+																			@endforeach
+																		</select>
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
+																				<option value="{{$tahap1->id}}" {{$user3->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
+																			@endforeach
+																		</select>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	@if ($user3->negeri_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Negeri Bertugas</option>
+																				@foreach ($negeri as $item1)
+																					<option value="{{ $item1->id}}" {{$user3->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																				@endforeach
+																			</select>
+																		</div>	
+																	@endif
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	@if ($user3->daerah_bertugas != null)
+																		<div class="fv-row mb-5">
+																			<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																				<option value="">Pilih Daerah Bertugas</option>
+																				@foreach ($daerah as $item2)
+																					<option value="{{ $item2->id}}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
+																				@endforeach
+																			</select>
+																		</div>
+																	@endif
+																	<!--end::Input group-->
 																</div>
-	
+																<!--end::Scroll-->
+
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
-																	<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-
-																	<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-																		<span class="indicator-label">Simpan</span>
-																		<span class="indicator-progress">Sila tunggu...
-																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-																	</button>
+																	<button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
+                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
 																</div>
 																<!--end::Actions-->
 															</form>
@@ -240,7 +311,7 @@
 												</div>
 												<!--end::Modal dialog-->
 											</div>
-											<!--end::Modal - Kemaskini Klien-->
+											<!--end::Modal -  Kemaskini Pegawai-->
 										</tr>
 									@endforeach
 								</tbody>
@@ -496,64 +567,50 @@
 						<!--end::Card body-->
 					</div>
 
-					{{-- PERMOHONAN DAFTAR PEGAWAI --}}
-					<div class="tab-pane fade" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
-						<div class="header row align-items-center">
-							<!--begin::Card title-->
-							<div class="col">
-								<h2>Senarai Permohonan Pendaftaran Pegawai sebagai Pengguna Baharu Sistem</h2>
-								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu serta luluskan permohonan pendaftaran sebagai pengguna sistem.</small>
-							</div>
+					{{-- KLIEN --}}
+					<div class="tab-pane fade show active" id="klien" role="tabpanel" aria-labelledby="klien-tab">
+						<!--begin::Card title-->
+						<div class="header ml-5">
+							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk kemaskini maklumat akaun klien.</small></h2>	
 						</div>
-						
+
 						<!--begin::Card body-->
 						<div class="body">
 							<!--begin::Table-->
-							<table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
+							<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-175px">Nama</th>
-										<th class="min-w-125px">No. Kad Pengenalan</th>
-										<th class="min-w-125px">Emel</th>
-										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-150px">Negeri (Daerah)</th>
-										<th class="min-w-50px">Kelulusan</th>
+										<th style="width: 40%;">Nama</th>
+										<th style="width: 15%;">No. Kad Pengenalan</th>
+										<th style="width: 25%;">Emel</th>
+										<th style="width: 10%;">Tarikh Daftar</th>
+										<th style="width: 10%;">Kemaskini</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
-									@foreach ($permohonan_pegawai as $user3)
+									@foreach ($klien as $user1)
 										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
-											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
-											$daerahB = DB::table('senarai_daerah')->where('id', $user3['daerah_bertugas'])->value('daerah');
+											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
+											$tarikh_daftar1 = Carbon::parse($user1->created_at)->format('d-m-Y');
 										@endphp
 	
 										<tr>
-											<td>{{ $user3->nama }}</td>
-											<td>{{ $user3->no_kp }}</td>
-											<td>{{ $user3->emel }}</td>
-											<td>{{ $peranan }}</td>
-											<td>
-												@if ($negeriB !== null)
-        											{{ $negeriB }} 
-													@if ($daerahB !== null)
-														({{ $daerahB }})
-													@endif
-												@else
-											</td>
-											@endif
+											<td>{{ $user1->name }}</td>
+											<td>{{ $user1->no_kp }}</td>
+											<td>{{ $user1->email }}</td>
+											<td>{{ $tarikh_daftar1}}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_permohonan_pegawai{{$user3->id}}">
-														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Permohonan">
+													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
+														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
 													</a>
-												</div>                                                     
+												</div>                                                
 											</td>
 	
-											<!--begin::Modal - Permohonan Pegawai-->
-											<div class="modal fade" id="modal_permohonan_pegawai{{$user3->id}}" tabindex="-1" aria-hidden="true">
+											<!--begin::Modal - Kemaskini Klien-->
+											<div class="modal fade" id="modal_kemaskini_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
 												<div class="modal-dialog modal-dialog-centered mw-650px">
 													<!--begin::Modal content-->
@@ -561,9 +618,8 @@
 														<!--begin::Modal header-->
 														<div class="modal-header">
 															<!--begin::Modal title-->
-															<h2>Luluskan Permohonan Pendaftaran Pegawai</h2>
+															<h2>Kemaskini Maklumat Akaun Klien</h2>
 															<!--end::Modal title-->
-
 															<!--begin::Close-->
 															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
 																<i class="ki-duotone ki-cross fs-1">
@@ -578,28 +634,18 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $user3->id]) }}" method="post">
+															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('kemaskini-klien') }}" method="post">
 																@csrf
 	
-																<input type="hidden" name="id" value="{{ $user3->id }}">
-																<div class="scroll-y me-n7 pe-7" id="modal_permohonan_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_permohonan_pegawai_header" data-kt-scroll-wrappers="#modal_permohonan_pegawai_scroll" data-kt-scroll-offset="300px">
+																<input type="hidden" name="id" value="{{ $user1->id }}">
+																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Nama</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" />
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user3->no_kp}}"/>
+																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" />
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -609,90 +655,44 @@
 																		<label class="fs-6 fw-semibold mb-2">Emel</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" />
-																			<span class="input-group-text">@adk.gov.my</span>
-																			<input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" />
-																		</div>
+																		<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user1->email}}" />
 																		<!--end::Input-->
-																	</div>																	
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Nombor Telefon
-																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																					<span class="path3"></span>
-																				</i>
-																			</span>
-																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user3->no_tel}}"/>
-																		<!--end::Input-->
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2">Jawatan & Gred</label>
-																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
-																			<option value="">Pilih</option>
-																			@foreach ($jawatan as $j)
-																				<option value="{{ $j->id }}" {{$user3->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
-																			@endforeach
-																		</select>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
+																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
-																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
-																				<option value="{{$tahap1->id}}" {{$user3->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
-																			@endforeach
-																		</select>
+																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}"/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
-																	@if ($user3->negeri_bertugas != null)
-																		<div class="fv-row mb-5">
-																			<label class="fs-6 fw-semibold mb-2">Negeri Bertugas</label>
-																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
-																				<option value="">Pilih Negeri Bertugas</option>
-																				@foreach ($negeri as $item1)
-																					<option value="{{ $item1->id}}" {{$user3->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
-																				@endforeach
-																			</select>
-																		</div>	
-																	@endif
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	@if ($user3->daerah_bertugas != null)
-																		<div class="fv-row mb-5">
-																			<label class="fs-6 fw-semibold mb-2">Daerah Bertugas</label>
-																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
-																				<option value="">Pilih Daerah Bertugas</option>
-																				@foreach ($daerah as $item2)
-																					<option value="{{ $item2->id}}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option>
-																				@endforeach
-																			</select>
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<div class="input-group">
+																			<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user1->id}}" name="password" />
+																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('password{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
-																	@endif
+																		<!--end::Input-->
+																	</div>
 																	<!--end::Input group-->
 																</div>
-																<!--end::Scroll-->
-
+	
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
-																	<button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
-                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+																	<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+
+																	<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+																		<span class="indicator-label">Simpan</span>
+																		<span class="indicator-progress">Sila tunggu...
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
 																</div>
 																<!--end::Actions-->
 															</form>
@@ -704,7 +704,7 @@
 												</div>
 												<!--end::Modal dialog-->
 											</div>
-											<!--end::Modal -  Kemaskini Pegawai-->
+											<!--end::Modal - Kemaskini Klien-->
 										</tr>
 									@endforeach
 								</tbody>
