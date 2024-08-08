@@ -650,6 +650,20 @@ class PengurusanProgController extends Controller
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
     }
+
+    public function filterHebahan(Request $request)
+    {
+        $negeri_id = $request->input('negeri');
+        $daerah_id = $request->input('daerah');
+
+        $filter = Klien::where('negeri',$negeri_id)->where('daerah',$daerah_id)->get();
+
+        if ($filter) {
+            return response()->json($filter);
+        } else {
+            return redirect()->back()->with('error', 'Negeri/daerah tidak dijumpai');
+        }
+    }
     public function jenisHebahan(Request $request, $id)
     {
         $request->validate([

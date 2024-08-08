@@ -23,7 +23,7 @@
             <div class="d-flex flex-column flex-row-fluid mb-5">
                 <div class="d-flex flex-row flex-column-fluid gap-5">
                     <div class="d-flex flex-row-fluid w-40 flex-center">
-                        <select id="negeri" class="form-select">
+                        <select id="negeri" class="form-select" name="negeri">
                             <option value="">Sila Pilih Negeri</option>
                             @foreach($negeri as $item)
                                 <option value="{{$item->id}}">{{$item->negeri}}</option>
@@ -32,14 +32,14 @@
                     </div>
 
                     <div class="d-flex flex-row-auto w-40 flex-center">
-                        <select id="daerah" class="form-select">
+                        <select id="daerah" class="form-select" name="daerah">
                             <option value="">Sila Pilih Daerah</option>
                             <!--AJAX-->
                         </select>
                     </div>
 
                     <div class="d-flex flex-row-auto w-10 flex-center">
-                        <button class="btn btn-primary btn-icon" type="button"><i class="bi bi-funnel-fill fs-2"></i></button>
+                        <button class="btn btn-primary btn-icon" type="button" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
 </form>
 </body>
 </html>
-
+<!--generate table-->
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -106,6 +106,7 @@
     });
 </script>
 
+<!--filter-->
 <script>
     $(document).ready(function() {
         $('#negeri').change(function() {
@@ -129,3 +130,32 @@
         });
     });
 </script>
+
+<!--filter result-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '#filterBtn', function() {
+        $.ajax({
+            url: '/pengurusan-program/hebahan/filter-hebahan',
+            type: 'GET',
+            data: {
+                negeri: $('#negeri').val(),
+                daerah: $('#daerah').val()
+            },
+            success: function(response) {
+                let rows = '';
+                $.each(response, function(index, filter) {
+                    rows += '<tr>';
+                    rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + filter.id + '"></td>';
+                    rows += '<td class="text-uppercase">' + filter.nama + '</td>';
+                    rows += '<td class="text-uppercase">' + filter.no_tel + '</td>';
+                    rows += '<td>' + filter.emel + '</td>';
+                    rows += '</tr>';
+                });
+                $('#modalHebahan tbody').html(rows);
+            }
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+

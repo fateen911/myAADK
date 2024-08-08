@@ -58,6 +58,7 @@ Route::post('/pengurusan-program/klien/post-pengesahan-kehadiran/{id}',[Pengurus
 
 // PENGURUSAN PROGRAM - HEBAHAN
 Route::get('/pengurusan-program/hebahan/papar-hebahan/{id}', [PengurusanProgController::class, 'paparHebahan'])->name('pengurusan_program.papar.hebahan');
+Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter.hebahan');
 Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis.hebahan');
 Route::get('/pengurusan-program/hebahan/emel/{id}', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan.emel');
 Route::get('/pengurusan-program/hebahan/sms', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan.sms');
