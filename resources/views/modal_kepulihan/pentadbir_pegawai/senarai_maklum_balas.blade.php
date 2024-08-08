@@ -79,8 +79,8 @@
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-100px">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px">Daerah</th>
-                                            <th class="min-w-70px">Negeri</th>
+                                            <th class="min-w-100px" style="text-align: center;">Daerah</th>
+                                            <th class="min-w-70px" style="text-align: center;">Negeri</th>
                                             <th class="min-w-50px" style="text-align: center;">Tarikh Menjawab</th> 
                                             <th class="min-w-50px" style="text-align: center;">Status</th> 
                                             <th class="min-w-50px" style="text-align: center;">Skor</th> 
@@ -99,8 +99,8 @@
                                             <tr>
                                                 <td>{{ $response->nama }}</td>
                                                 <td>{{ $response->no_kp }}</td>
-                                                <td>{{ $daerah }}</td>
-                                                <td>{{ $negeri }}</td>
+                                                <td style="text-align: center;">{{ $daerah }}</td>
+                                                <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td class="d-flex justify-content-center">
                                                     @if ($statusMenjawab == 'SELESAI')
@@ -111,7 +111,7 @@
                                                 </td>
                                                 <td style="text-align: center">
                                                     @if ($response->skor)
-                                                        {{ $response->skor }}
+                                                        {{ number_format($response->skor, 3) }}
                                                     @endif
                                                 </td>
                                                 <td style="text-align: center">                                        
@@ -150,48 +150,27 @@
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-100px">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px">Daerah</th>
-                                            <th class="min-w-100px">Negeri</th>
-                                            <th class="min-w-150px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
+                                            <th class="min-w-50px">No. Kad Pengenalan</th>
+                                            <th class="min-w-70px" style="text-align: center;">Daerah</th>
+                                            <th class="min-w-50px" style="text-align: center;">Negeri</th>
+                                            <th class="min-w-80px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        {{-- @foreach($responses as $response)
+                                        @foreach($tidakMenjawab as $response2)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah')->where('id', $response2->daerah)->value('senarai_daerah.daerah');
+                                                $negeri = DB::table('senarai_negeri')->where('id', $response2->negeri)->value('senarai_negeri.negeri');
                                             @endphp
 
                                             <tr>
-                                                <td>{{ $response->nama }}</td>
-                                                <td>{{ $response->no_kp }}</td>
-                                                <td>{{ $daerah }}</td>
-                                                <td>{{ $negeri }}</td>
-                                                <td class="d-flex justify-content-center">12/3/2023</td>
+                                                <td>{{ $response2->nama }}</td>
+                                                <td>{{ $response2->no_kp }}</td>
+                                                <td style="text-align: center;">{{ $daerah }}</td>
+                                                <td style="text-align: center;">{{ $negeri }}</td>
+                                                <td style="text-align: center">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                             </tr>
-                                        @endforeach --}}
-                                            <tr>
-                                                <td>AMZAR BIN MOHD</td>
-                                                <td>950904063017</td>
-                                                <td>RAUB</td>
-                                                <td>PAHANG</td>
-                                                <td style="text-align: center;">12/6/2023</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MUHD HANIF BIN ASLAM</td>
-                                                <td>990904030923</td>
-                                                <td>KOTA BHARU</td>
-                                                <td>KELANTAN</td>
-                                                <td style="text-align: center;">13/8/2023</td>
-                                            </tr>
-                                            <tr>
-                                                <td>HAIRUL BIN SALLEH</td>
-                                                <td>021122090729</td>
-                                                <td>ARAU</td>
-                                                <td>PERLIS</td>
-                                                <td style="text-align: center;">27/12/2022</td>
-                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <!--end::Table-->

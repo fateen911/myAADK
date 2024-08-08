@@ -397,96 +397,59 @@ class ModalKepulihanController extends Controller
     // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan()
     {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        // Fetch clients who have responded within the last 6 months
         $responses = DB::table('respon_modal_kepulihan as rm')
-            ->join('klien as u', 'rm.klien_id', '=', 'u.id')
-            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah',
-                'u.negeri',
-                DB::raw('SUM(case when rm.status = "Selesai" then 1 else 0 end) as selesai_count'),
-                DB::raw('COUNT(rm.id) as total_count'),
-                'kk.skor',
-                'kk.tahap_kepulihan_id',
-                'kk.updated_at'
-            )
-            ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
-            ->get();
+                    ->join('klien as u', 'rm.klien_id', '=', 'u.id')
+                    ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+                        $join->on('u.id', '=', 'kk.klien_id')
+                            ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+                    })
+                    ->select(
+                        'u.id as klien_id',
+                        'u.nama',
+                        'u.no_kp',
+                        'u.daerah',
+                        'u.negeri',
+                        DB::raw('SUM(case when rm.status = "Selesai" then 1 else 0 end) as selesai_count'),
+                        DB::raw('COUNT(rm.id) as total_count'),
+                        DB::raw('ROUND(kk.skor, 3) as skor'),
+                        'kk.tahap_kepulihan_id',
+                        'kk.updated_at'
+                    )
+                    ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                    ->groupBy('rm.klien_id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+                    ->get();
+        
+        // Fetch clients who have not responded yet or their last response was over 6 months ago
+        $tidakMenjawab = DB::table('klien as u')
+                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+                            $join->on('u.id', '=', 'kk.klien_id')
+                                ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+                        })
+                        ->select(
+                            'u.id as klien_id',
+                            'u.nama',
+                            'u.no_kp',
+                            'u.daerah',
+                            'u.negeri',
+                            'rk.tkh_tamat_pengawasan',
+                            DB::raw('ROUND(kk.skor, 3) as skor'),
+                            'kk.tahap_kepulihan_id',
+                            'kk.updated_at'
+                        )
+                        ->where(function ($query) use ($sixMonthsAgo) {
+                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
+                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
+                                ->orWhere(function ($query) use ($sixMonthsAgo) {
+                                    $query->whereNotNull('kk.klien_id')
+                                            ->where('kk.updated_at', '<=', $sixMonthsAgo);
+                                });
+                        })
+                        ->get();
 
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses'));
+        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
     }
-
-    // TEST
-    // public function soalanKepulihanTest()
-    // {
-    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-
-    //     // Check if the client has previously saved questions
-    //     $savedQuestions = DB::table('respon_modal_kepulihan')
-    //                         ->where('klien_id', $clientId)
-    //                         ->pluck('soalan_id')
-    //                         ->toArray();
-
-    //     if (!empty($savedQuestions)) {
-    //         // Fetch the questions in the order they were previously saved
-    //         $questions = DB::table('soalan_modal_kepulihan')
-    //                     ->whereIn('id', $savedQuestions)
-    //                     ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
-    //                     ->get();
-    //     } else {
-    //         // Fetch 8 fixed questions with specific IDs
-    //         $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
-    //         $fixedQuestions = DB::table('soalan_modal_kepulihan')
-    //                             ->whereIn('id', $fixedQuestionIds)
-    //                             ->get();
-
-    //         // Fetch 5 questions representing each recovery capital
-    //         $capitalQuestions = DB::table('soalan_modal_kepulihan')
-    //                             ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    //                             ->whereNotIn('id', $fixedQuestionIds)
-    //                             ->inRandomOrder()
-    //                             ->limit(5)
-    //                             ->get();
-
-    //         // Merge the 13 fixed questions
-    //         $fixedQuestions = $fixedQuestions->merge($capitalQuestions);
-
-    //         // Fetch remaining questions excluding the already selected ones
-    //         $remainingQuestions = DB::table('soalan_modal_kepulihan')
-    //                                 ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-    //                                 ->inRandomOrder()
-    //                                 ->limit(12)
-    //                                 ->get();
-
-    //         // Combine both sets of questions
-    //         $allQuestions = $fixedQuestions->merge($remainingQuestions);
-
-    //         // Shuffle the questions to ensure randomness for every client
-    //         $shuffledQuestions = $allQuestions->shuffle();
-
-    //         // Save the shuffled order for the first time with status as "Baharu"
-    //         foreach ($shuffledQuestions as $question) {
-    //             DB::table('respon_modal_kepulihan')->insert([
-    //                 'klien_id' => $clientId,
-    //                 'soalan_id' => $question->id,
-    //                 'skala_id' => null, // No answer yet
-    //                 'status' => 'Baharu', // Setting the status to Baharu
-    //                 'created_at' => now(),
-    //                 'updated_at' => now(),
-    //             ]);
-    //         }
-            
-    //         $questions = $shuffledQuestions;
-    //     }
-
-    //     // Fetch autosaved answers
-    //     $autosavedAnswers = DB::table('respon_modal_kepulihan')
-    //     ->where('klien_id', $clientId)
-    //     ->pluck('skala_id', 'soalan_id')
-    //     ->toArray();
-
-    //     return view('modal_kepulihan.klien.soalan_kepulihan_view_kedua', ['questions' => $questions,'autosavedAnswers' => $autosavedAnswers]);
-    // }
 }
