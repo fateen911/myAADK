@@ -18,6 +18,7 @@ use App\Models\KlienUpdateRequest;
 use App\Models\KeluargaKlienUpdateRequest;
 use App\Models\PekerjaanKlienUpdateRequest;
 use App\Models\RawatanKlienUpdateRequest;
+use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -94,6 +95,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequest = KlienUpdateRequest::where('klien_id', $id)->first();
         $klien = Klien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klien->id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -104,12 +106,48 @@ class ProfilKlienController extends Controller
             $updateRequest->update(['status' => $request->status]);
             $klien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klien->id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat peribadi klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequest->update(['status' => $request->status]);
             $klien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klien->id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat peribadi klien tidak berjaya dikemaskini.');
         }   
@@ -119,6 +157,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->first();
         $pekerjaanKlien = PekerjaanKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -129,12 +168,48 @@ class ProfilKlienController extends Controller
             $updateRequestPekerjaan->update(['status' => $request->status]);
             $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pekerjaanKlien->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat pekerjaan klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequestPekerjaan->update(['status' => $request->status]);
             $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pekerjaanKlien->klien_id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat pekerjaan klien tidak berjaya dikemaskini.');
         }   
@@ -144,6 +219,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
         $pasanganKlien = KeluargaKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pasanganKlien->klien_id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -154,12 +230,48 @@ class ProfilKlienController extends Controller
             $updateRequestPasangan->update(['status' => $request->status]);
             $pasanganKlien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pasanganKlien->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat pasangan klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequestPasangan->update(['status' => $request->status]);
             $pasanganKlien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pasanganKlien->klien_id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat pasangan klien tidak berjaya dikemaskini.');
         }   
@@ -169,6 +281,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 1)->first();
         $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -179,12 +292,48 @@ class ProfilKlienController extends Controller
             $updateRequestBapa->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat bapa klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequestBapa->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat bapa klien tidak berjaya dikemaskini.');
         }    
@@ -194,6 +343,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 2)->first();
         $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -204,12 +354,48 @@ class ProfilKlienController extends Controller
             $updateRequestIbu->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat ibu klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequestIbu->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat ibu klien tidak berjaya dikemaskini.');
         }    
@@ -219,6 +405,7 @@ class ProfilKlienController extends Controller
     {
         $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 3)->first();
         $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
 
         if ($request->status == 'Lulus') 
         {
@@ -229,12 +416,48 @@ class ProfilKlienController extends Controller
             $updateRequestPenjaga->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
 
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Maklumat penjaga klien telah berjaya dikemaskini.');
         }
         else
         {
             $updateRequestPenjaga->update(['status' => $request->status]);
             $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $warisKlien->klien_id,
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Ditolak',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('error', 'Maklumat penjaga klien tidak berjaya dikemaskini.');
         }    
@@ -272,14 +495,34 @@ class ProfilKlienController extends Controller
 
         // Find the client
         $klien = Klien::find($id);
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klien->id)->first();
 
         if ($klien) {
             // Update the client with the mapped data
             $klien->update($updateData);
-            $klien->update(['status_kemaskini' => 'Lulus']);
+            $klien->update(['status_kemaskini' => 'Lulus','updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klien->id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Maklumat profil telah berjaya dikemaskini.');
-        } else {
+        } 
+        else {
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
         }
     }
@@ -301,10 +544,29 @@ class ProfilKlienController extends Controller
         ]);
 
         $pekerjaanKlien = PekerjaanKlien::where('klien_id',$id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
 
         if ($pekerjaanKlien) {
             $pekerjaanKlien->update($validatedData);
-            $pekerjaanKlien->update(['status_kemaskini' => 'Lulus']);
+            $pekerjaanKlien->update(['status_kemaskini' => 'Lulus','updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pekerjaanKlien->id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
     
             return redirect()->back()->with('success', 'Maklumat pekerjaan klien berjaya dikemaskini.');
         } 
@@ -345,10 +607,29 @@ class ProfilKlienController extends Controller
         }
 
         $pasangan = KeluargaKlien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pasangan->klien_id)->first();
 
         if ($pasangan) {
             $pasangan->update($validatedData);
-            $pasangan->update(['status_kemaskini' => 'Lulus']);
+            $pasangan->update(['status_kemaskini' => 'Lulus','updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $pasangan->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Maklumat pasangan klien berjaya dikemaskini.');
         } 
@@ -371,10 +652,29 @@ class ProfilKlienController extends Controller
         ]);
 
         $waris = WarisKlien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
 
         if ($waris) {
             $waris->update($validatedData);
-            $waris->update(['status_kemaskini' => 'Lulus']);
+            $waris->update(['status_kemaskini' => 'Lulus','updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $waris->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Maklumat bapa klien berjaya dikemaskini.');
         } 
@@ -397,10 +697,29 @@ class ProfilKlienController extends Controller
         ]);
 
         $waris = WarisKlien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
 
         if ($waris) {
             $waris->update($validatedData);
-            $waris->update(['status_kemaskini' => 'Lulus']);
+            $waris->update(['status_kemaskini' => 'Lulus', 'updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $waris->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Maklumat ibu klien berjaya dikemaskini.');
         } 
@@ -423,11 +742,32 @@ class ProfilKlienController extends Controller
             'negeri_penjaga' => 'nullable|string|max:255',
         ]);
 
+        // dd($validatedData);
+        
         $waris = WarisKlien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
 
         if ($waris) {
             $waris->update($validatedData);
-            $waris->update(['status_kemaskini' => 'Lulus']);
+            $waris->update(['status_kemaskini' => 'Lulus', 'updated_at' => now()]);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $waris->klien_id,
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
+            else{
+                $sejarahProfil->update([
+                    'status_kemaskini' => 'Lulus',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => Auth::id(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             return redirect()->back()->with('success', 'Maklumat penjaga klien berjaya dikemaskini.');
         } 
@@ -513,13 +853,13 @@ class ProfilKlienController extends Controller
     {
         // Validation rules for fields that users can update
         $validatedData = $request->validate([
-            'no_tel'                    => 'required|string|max:11',
-            'emel'                      => 'required|email',
-            'alamat_rumah'              => 'required|string|max:255',
-            'daerah'                    => 'required|string|max:255',
-            'negeri'                    => 'required|string|max:255',
-            'poskod'                    => 'required|string|max:5',
-            'tahap_pendidikan'          => 'required|string|max:255',
+            'no_tel'           => 'required|string|max:11',
+            'emel'             => 'required|email',
+            'alamat_rumah'     => 'required|string|max:255',
+            'daerah'           => 'required|string|max:255',
+            'negeri'           => 'required|string|max:255',
+            'poskod'           => 'required|string|max:5',
+            'tahap_pendidikan' => 'required|string|max:255',
         ]);
 
         // Retrieve the existing data that cannot be updated by the user
@@ -540,18 +880,27 @@ class ProfilKlienController extends Controller
 
         // Check if there is an existing update request
         $updateRequest = KlienUpdateRequest::where('klien_id', $klienId)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequest) {
-            // Update existing request
+        if ($updateRequest && $sejarahProfil) 
+        {
+            // Both $updateRequest and $sejarahProfil exist, update them
             $updateRequest->update([
                 'requested_data' => json_encode($mergedData),
                 'status' => 'Kemaskini',
+                'updated_at' => now(),
             ]);
 
             Klien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Klien',
+                'updated_at' => now(),
+            ]);
         } 
         else {
-            // Create new request
+            // If one or both do not exist, create new records
             KlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($mergedData),
@@ -559,6 +908,15 @@ class ProfilKlienController extends Controller
             ]);
 
             Klien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Klien',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini profil diri telah dihantar untuk semakan.');
@@ -580,8 +938,6 @@ class ProfilKlienController extends Controller
             'negeri_kerja'      => 'nullable|string|max:255',
         ]);    
         
-        // dd($validatedData);
-
         // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
         if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
             $validatedData['daerah_kerja'] = null;
@@ -592,15 +948,24 @@ class ProfilKlienController extends Controller
         
         $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequest = PekerjaanKlienUpdateRequest::where('klien_id', $klienId)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequest) {
+        if ($updateRequest && $sejarahProfil) 
+        {
             // Update existing request
             $updateRequest->update([
                 'requested_data' => json_encode($validatedData),
                 'status' => 'Kemaskini', 
+                'updated_at' => now(),
             ]);
 
             PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Pekerjaan',
+                'updated_at' => now(),
+            ]);
         } 
         else {
             // Create new request
@@ -611,6 +976,15 @@ class ProfilKlienController extends Controller
             ]);
 
             PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Pekerjaan',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat pekerjaan telah dihantar untuk semakan.');
@@ -642,16 +1016,24 @@ class ProfilKlienController extends Controller
 
         // Proceed with the existing logic
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-        $updateRequest =KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
+        $updateRequest = KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequest) {
+        if ($updateRequest && $sejarahProfil) {
             // Update existing request
             $updateRequest->update([
                 'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
                 'status' => 'Kemaskini', 
+                'updated_at' => now(),
             ]);
 
             KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Keluarga',
+                'updated_at' => now(),
+            ]);
         } 
         else {
             // Create new request
@@ -662,6 +1044,15 @@ class ProfilKlienController extends Controller
             ]);
 
             KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Keluarga',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat keluarga telah dihantar untuk semakan.');
@@ -682,15 +1073,23 @@ class ProfilKlienController extends Controller
         
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','1')->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequestBapa) {
+        if ($updateRequestBapa && $sejarahProfil) {
             // Update existing request
             $updateRequestBapa->update([
                 'requested_data' => json_encode($validatedData),
                 'status' => 'Kemaskini', 
+                'updated_at' => now(),
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Waris',
+                'updated_at' => now(),
+            ]);
         } 
         else {
             // Create new request
@@ -702,6 +1101,15 @@ class ProfilKlienController extends Controller
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat bapa telah dihantar untuk semakan.');
@@ -722,15 +1130,23 @@ class ProfilKlienController extends Controller
         
         $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','2')->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequestIbu) {
+        if ($updateRequestIbu && $sejarahProfil) {
             // Update existing request
             $updateRequestIbu->update([
                 'requested_data' => json_encode($validatedData),
                 'status' => 'Kemaskini', 
+                'updated_at' => now(),
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Waris',
+                'updated_at' => now(),
+            ]);
         } 
         else {
             // Create new request
@@ -742,6 +1158,15 @@ class ProfilKlienController extends Controller
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat ibu telah dihantar untuk semakan.');
@@ -763,15 +1188,23 @@ class ProfilKlienController extends Controller
 
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','3')->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
-        if ($updateRequestPenjaga) {
+        if ($updateRequestPenjaga && $sejarahProfil) {
             // Update existing request
             $updateRequestPenjaga->update([
                 'requested_data' => json_encode($validatedData),
                 'status' => 'Kemaskini', 
+                'updated_at' => now(),
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Kemaskini',
+                'bahagian_kemaskini' => 'Waris',
+                'updated_at' => now(),
+            ]);
         } 
         else {
             // Create new request
@@ -783,6 +1216,15 @@ class ProfilKlienController extends Controller
             ]);
 
             WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+
+            if (!$sejarahProfil) {
+                SejarahProfilKlien::create([
+                    'klien_id' => $klienId,
+                    'status_kemaskini' => 'Kemaskini',
+                    'bahagian_kemaskini' => 'Waris',
+                    'pengemaskini' => null, 
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Permohonan kemaskini maklumat penjaga telah dihantar untuk semakan.');

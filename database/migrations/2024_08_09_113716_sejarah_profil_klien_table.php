@@ -14,12 +14,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sejarah_pofil_klien', function (Blueprint $table) {
+        Schema::create('sejarah_profil_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
             $table->unsignedBigInteger('pengemaskini')->nullable();
-            $table->enum('status_kemaskini', ['Mohon Kemaskini', 'Lulus', 'Ditolak'])->default('Mohon Kemaskini');
-            $table->string('bahagian_kemaskini');
+            $table->enum('status_kemaskini', ['Kemaskini', 'Lulus', 'Ditolak'])->default('Kemaskini');
+            $table->enum('bahagian_kemaskini', ['Klien', 'Pekerjaan', 'Waris', 'Keluarga'])->default('Klien');
             $table->timestamps();
 
             $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sejarah_pofil_klien');
+        Schema::dropIfExists('sejarah_profil_klien');
     }
 };
