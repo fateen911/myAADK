@@ -78,7 +78,8 @@
                                         <td>{{ $user->no_kp }}</td>
                                         <td>{{ $daerah }}</td>
                                         <td>{{ $negeri }}</td>
-                                        <td style="text-align: center;">
+                                        <td></td>
+                                        {{-- <td style="text-align: center;">
                                             @if($user->status_kemaskini == 'Kemaskini')
                                                 <button class="btn btn-sm text-white" style="background-color:mediumvioletred">MOHON KEMASKINI</button>
                                             @elseif($user->status_kemaskini == 'Baharu')
@@ -88,7 +89,7 @@
                                             @elseif($user->status_kemaskini == 'Ditolak')
                                                 <button class="btn btn-sm text-white bg-info">DITOLAK</button>
                                             @endif
-                                        </td>
+                                        </td> --}}
                                         <td style="text-align: center;">{{ $user->pengemaskini_name ?? 'N/A' }}</td>
                                     </tr>
                                 @endforeach

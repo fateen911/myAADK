@@ -43,11 +43,17 @@ class HomeController extends Controller
                     $pegawai = User::whereIn('tahap_pengguna', [3, 4, 5])->count();
                     $klien = User::where('tahap_pengguna', 2)->count();
 
-                    // profil klien
-                    // 'belum_kemaskini' => 0,
-                    // 'mohon_kemaskini' => 0,
-                    // 'dikemaskini' => 0,
-                    // 'ditolak' => 0,
+                    // Count the number of clients who have updated their profile (Sedang Kemaskini)
+                    $sedangKemaskini = DB::table('klien')
+                        ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                        ->distinct('klien.id')
+                        ->count('klien.id');
+                
+                    // Count the number of clients who have never updated their profile (Belum Kemaskini)
+                    $belumKemaskini = DB::table('klien')
+                        ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                        ->whereNull('sejarah_profil_klien.klien_id')
+                        ->count('klien.id');
 
                     // modal kepulihan
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
@@ -129,7 +135,8 @@ class HomeController extends Controller
 
                     return view('dashboard.pentadbir.dashboard', compact('permohonan_pendaftaran','pegawai','klien',
                                                                         'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
-                                                                        'tidak_memuaskan','memuaskan','baik','cemerlang'));
+                                                                        'tidak_memuaskan','memuaskan','baik','cemerlang',
+                                                                        'belumKemaskini', 'sedangKemaskini'));
                 }
                 else if($tahap == 2)
                 {

@@ -28,12 +28,12 @@ class ProfilKlienController extends Controller
     public function senaraiKlien()
     {
         $klien = Klien::select('klien.*', 'users.name as pengemaskini_name')
-            ->leftJoin('sejarah_profil_klien', function($join) {
-                $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-                    ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-            })
-            ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-            ->get();
+                        ->leftJoin('sejarah_profil_klien', function($join) {
+                            $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
+                        })
+                        ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
+                        ->get();
 
         return view('profil_klien.pentadbir_pegawai.senarai', compact('klien'));
     }
