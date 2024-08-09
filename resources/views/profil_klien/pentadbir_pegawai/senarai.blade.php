@@ -69,18 +69,6 @@
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach ($klien as $user)
                                     @php
-                                        // $text = ucwords(strtolower($user->nama));
-                                        // $conjunctions = ['bin', 'binti'];
-                                        // $words = explode(' ', $text);
-                                        // $result = [];
-                                        // foreach ($words as $word) {
-                                        //     if (in_array(Str::lower($word), $conjunctions)) {
-                                        //         $result[] = Str::lower($word);
-                                        //     } else {
-                                        //         $result[] = $word;
-                                        //     }
-                                        // }
-                                        // $nama_user = implode(' ', $result);
                                         $daerah = DB::table('senarai_daerah')->where('id', $user['daerah'])->value('senarai_daerah.daerah');
                                         $negeri = DB::table('senarai_negeri')->where('id', $user['negeri'])->value('senarai_negeri.negeri');
                                     @endphp
@@ -101,7 +89,7 @@
                                                 <button class="btn btn-sm text-white bg-info">DITOLAK</button>
                                             @endif
                                         </td>
-                                        <td style="text-align: center;">PEGAWAI DAERAH</td>
+                                        <td style="text-align: center;">{{ $user->pengemaskini_name ?? 'N/A' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -117,13 +105,6 @@
 	</div>
 
     <!--begin::Javascript-->
-    <script>var hostUrl = "assets/";</script>
-    <script src="/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/js/scripts.bundle.js"></script>
-    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="/assets/js/custom/apps/customers/add.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -133,8 +114,8 @@
     
     <script>
         $('#sortTable1').DataTable({
-                ordering: true, // Enable manual sorting
-                order: [], // Disable initial sorting
+                ordering: true,
+                order: [],
                 language: {
                     url: "/assets/lang/Malay.json"
                 }

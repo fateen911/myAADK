@@ -33,6 +33,7 @@ class WarisKlien extends Model
         'negeri_ibu',
         'status_ibu',
 
+        'hubungan_penjaga',
         'nama_penjaga',
         'no_kp_penjaga',
         'no_tel_penjaga',
