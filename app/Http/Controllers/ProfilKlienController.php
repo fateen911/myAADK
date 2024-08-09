@@ -494,7 +494,7 @@ class ProfilKlienController extends Controller
 
     public function muatTurunProfilDiri()
     {
-        $klien_id = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $klien_id = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
         $klien = Klien::where('id',$klien_id)->first();
         $pekerjaan = PekerjaanKlien::where('id',$klien_id)->first();
@@ -504,7 +504,7 @@ class ProfilKlienController extends Controller
 
         $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
 
-        $no_kp = Auth()->user()->no_kp;
+        $no_kp = Auth::user()->no_kp;
 
         return $pdf->stream($no_kp . '-profil-peribadi.pdf');
     }
@@ -523,7 +523,7 @@ class ProfilKlienController extends Controller
         ]);
 
         // Retrieve the existing data that cannot be updated by the user
-        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $existingData = Klien::where('id', $klienId)->first([
             'nama', 
             'no_kp', 
@@ -590,7 +590,7 @@ class ProfilKlienController extends Controller
             $validatedData['negeri_kerja'] = null;
         }
         
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequest = PekerjaanKlienUpdateRequest::where('klien_id', $klienId)->first();
 
         if ($updateRequest) {
@@ -641,7 +641,7 @@ class ProfilKlienController extends Controller
         $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
 
         // Proceed with the existing logic
-        $klienId = Klien::where('no_kp', Auth()->user()->no_kp)->value('id');
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequest =KeluargaKlienUpdateRequest::where('klien_id', $klienId)->first();
 
         if ($updateRequest) {
@@ -680,7 +680,7 @@ class ProfilKlienController extends Controller
             'negeri_bapa'   => 'nullable|string|max:255',
         ]);
         
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','1')->first();
 
         if ($updateRequestBapa) {
@@ -720,7 +720,7 @@ class ProfilKlienController extends Controller
             'negeri_ibu' => 'nullable|string|max:255',
         ]);
         
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+        $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','2')->first();
 
         if ($updateRequestIbu) {
@@ -760,8 +760,8 @@ class ProfilKlienController extends Controller
             'daerah_penjaga'    => 'nullable|string|max:255',
             'negeri_penjaga'    => 'nullable|string|max:255',
         ]);
-        
-        $klienId = Klien::where('no_kp',Auth()->user()->no_kp)->value('id');
+
+        $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','3')->first();
 
         if ($updateRequestPenjaga) {

@@ -13,7 +13,13 @@ class SejarahProfilKlien extends Model
 
     protected $fillable = [
         'klien_id',
-        'status',
+        'status_kemaskini',
+        'bahagian_kemaskini',
         'pengemaskini',
     ];
+
+    public function pengemaskini()
+    {
+        return $this->belongsTo(User::class, 'pengemaskini');
+    }
 }

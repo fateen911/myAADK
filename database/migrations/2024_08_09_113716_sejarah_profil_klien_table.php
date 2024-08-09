@@ -9,19 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('sejarah_pofil_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->integer('status');
             $table->unsignedBigInteger('pengemaskini')->nullable();
-
-            $table->foreign('klien_id')
-              ->references('id')->on('klien')->onDelete('cascade');
-            $table->foreign('pengemaskini')
-              ->references('id')->on('users')->onDelete('cascade');     
+            $table->enum('status_kemaskini', ['Mohon Kemaskini', 'Lulus', 'Ditolak'])->default('Mohon Kemaskini');
+            $table->string('bahagian_kemaskini');
             $table->timestamps();
+
+            $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');
+            $table->foreign('pengemaskini')->references('id')->on('users')->onDelete('cascade');     
         });
     }
 

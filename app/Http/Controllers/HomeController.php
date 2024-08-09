@@ -21,8 +21,8 @@ class HomeController extends Controller
     {
         if(Auth::id())
         {
-            $tahap = Auth()->user()->tahap_pengguna;
-            $status = Auth()->user()->status;
+            $tahap = Auth::user()->tahap_pengguna;
+            $status = Auth::user()->status;
 
             // Retrieve the client's id based on their no_kp
             $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
