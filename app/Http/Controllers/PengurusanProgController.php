@@ -672,8 +672,20 @@ class PengurusanProgController extends Controller
 
         $kaedah = $request->input('kaedah');
         $pilihan = $request->input('pilihan', []);
-        $klien = Klien::where('id', $pilihan)->get();
+        //$klien = Klien::where('id', $pilihan)->get();
         //$negeri = Negeri::with('daerah')->get();
+
+        // Validate that the participants array is required and must have at least one selected value.
+        $validatedData = $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:participants,id',
+        ], [
+            'pilihan.required' => 'You must select at least one participant.',
+            'pilihan.min' => 'You must select at least one participant.',
+        ]);
+
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
 
         // Send communication based on the selected method
         foreach ($klien as $item) {
