@@ -690,7 +690,16 @@ class PengurusanProgController extends Controller
         // Send communication based on the selected method
         foreach ($klien as $item) {
             if ($kaedah == 'sms') {
-                $this->sendSms($item->no_tel, 'Your message here');
+
+                $message = "Salam Sejahtera,\n\n" .
+                    "Anda dijemput untuk menyertai program\n\n" .
+                    "NAMA PROGRAM: " . strtoupper($program->nama) . "\n" .
+                    "TARIKH MULA: " . date('d/m/Y, gA', strtotime($program->tarikh_mula)) . "\n" .
+                    "TARIKH TAMAT: " . date('d/m/Y, gA', strtotime($program->tarikh_tamat)) . "\n" .
+                    "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
+                    "Sila layari pautan berikut untuk maklumat lanjut dan pendaftaran: " . $program->pautan_pengesahan;
+
+                $this->sendSms($item->no_tel, 'Sila klik link berikut untuk pengesahan kehadiran program');
             }
             elseif ($kaedah == 'emel') {
                 $recipient = $item->emel;
