@@ -670,6 +670,7 @@ class PengurusanProgController extends Controller
             'pilihan.*' => 'int',
         ]);
 
+        $program = Program::with('kategori')->find($id);
         $kaedah = $request->input('kaedah');
         $pilihan = $request->input('pilihan', []);
         //$klien = Klien::where('id', $pilihan)->get();
@@ -697,7 +698,7 @@ class PengurusanProgController extends Controller
                     "TARIKH MULA: " . date('d/m/Y, gA', strtotime($program->tarikh_mula)) . "\n" .
                     "TARIKH TAMAT: " . date('d/m/Y, gA', strtotime($program->tarikh_tamat)) . "\n" .
                     "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
-                    "Sila layari pautan berikut untuk maklumat lanjut dan pendaftaran: " . $program->pautan_pengesahan;
+                    "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
 
                 $this->sendSms($item->no_tel, 'Sila klik link berikut untuk pengesahan kehadiran program');
             }
