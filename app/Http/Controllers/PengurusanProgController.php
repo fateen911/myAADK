@@ -700,7 +700,7 @@ class PengurusanProgController extends Controller
                     "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
                     "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
 
-                $this->sendSms($item->no_tel, 'Sila klik link berikut untuk pengesahan kehadiran program');
+                $this->sendSms($item->no_tel, $message);
             }
             elseif ($kaedah == 'emel') {
                 $recipient = $item->emel;

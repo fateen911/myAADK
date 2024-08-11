@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
@@ -16,9 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //TRY
 Route::get('/pengurusan-program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
 Route::get('/pengurusan-program/try',[PengurusanProgController::class, 'try'])->name('pengurusan_program.try');
+
+//LANDING PAGE
+Route::get('/landing-page/version-1', [LandingPageController::class, 'landingV1'])->name('landing_page.version_1');
+Route::get('/landing-page/version-2', [LandingPageController::class, 'landingV2'])->name('landing_page.version_2');
 
 // PENGURUSAN PROGRAM - QR CODE
 Route::get('/pengurusan-program/qr-code/{id}',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
