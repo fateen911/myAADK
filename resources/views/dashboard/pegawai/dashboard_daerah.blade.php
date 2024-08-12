@@ -79,7 +79,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
+                                        <a href="{{ route('senarai-klien-daerah') }}">
                                             <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskiniDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -106,7 +106,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
+                                        <a href="{{ route('senarai-klien-daerah') }}">
                                             <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskiniDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -145,7 +145,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesai_menjawab_daerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -172,7 +172,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belum_selesai_menjawab_daerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -198,7 +198,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_menjawab_daerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -234,7 +234,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$cemerlang}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -261,7 +261,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baik}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -287,7 +287,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -314,7 +314,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href={{route('maklum.balas.kepulihan.daerah')}}>
                                             <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
