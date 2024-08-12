@@ -104,7 +104,10 @@ Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daft
 Route::post('/pentadbir/kelulusan-permohonan-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawai'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 
 // PENTADBIR - PENGURUSAN PROFIL
-Route::get('/pentadbir-pegawai/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
+Route::get('/pentadbir/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
+Route::get('/pegawai-brpp/senarai-klien',[ProfilKlienController::class, 'senaraiKlienBrpp'])->middleware('auth')->name('senarai-klien-brpp');
+Route::get('/pegawai-negeri/senarai-klien',[ProfilKlienController::class, 'senaraiKlienNegeri'])->middleware('auth')->name('senarai-klien-negeri');
+Route::get('/pegawai-daerah/senarai-klien',[ProfilKlienController::class, 'senaraiKlienDaerah'])->middleware('auth')->name('senarai-klien-daerah');
 Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
 
 // PENTADBIR UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST

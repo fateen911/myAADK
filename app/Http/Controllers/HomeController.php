@@ -372,6 +372,7 @@ class HomeController extends Controller
                 }
                 else if($tahap == 5)
                 {
+                    $pegawai = Auth::user();
                     $pegawaiDaerah = DB::table('pegawai')->where('users_id',$pegawai->id)->first();
 
                     // Filter clients based on daerah_bertugas and negeri_bertugas
