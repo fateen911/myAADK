@@ -264,9 +264,11 @@ class HomeController extends Controller
                 }
                 else if($tahap == 4)
                 {
-                    // Filter clients based on negeri_bertugas
+                    $pegawaiNegeri = DB::table('pegawai')->where('users_id',$pegawai->id)->first();
+
+                    // Filter clients based on daerah_bertugas and negeri_bertugas
                     $clients = DB::table('klien')
-                                ->where('negeri', $pegawai->negeri_bertugas)
+                                ->where('negeri', $pegawaiNegeri->negeri_bertugas)
                                 ->get();
 
                     // Count profile update statuses
@@ -285,7 +287,7 @@ class HomeController extends Controller
                     // Count kepulihan statuses
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
                         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-                        ->where('u.negeri', $pegawai->negeri_bertugas)
+                        ->where('u.negeri', $pegawaiNegeri->negeri_bertugas)
                         ->get();
 
                     // Start building the query
@@ -312,7 +314,7 @@ class HomeController extends Controller
                             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status');
 
                             // Filter by negeri_bertugas for tahap 4 (pegawai negeri)
-                            $query->where('u.negeri', $pegawai->negeri_bertugas);
+                            $query->where('u.negeri', $pegawaiNegeri->negeri_bertugas);
 
                     // Execute the query and get the results
                     $responses = $query->get();
@@ -342,7 +344,7 @@ class HomeController extends Controller
                             });
                     });
 
-                    $tidak_menjawab_negeri = $tidak_menjawab->where('u.negeri', $pegawai->negeri_bertugas)->count();
+                    $tidak_menjawab_negeri = $tidak_menjawab->where('u.negeri', $pegawaiNegeri->negeri_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -356,7 +358,7 @@ class HomeController extends Controller
                             ->groupBy('klien_id');
                     });
 
-                    $latestTahapKepulihan = $latestTahapKepulihan->where('u.negeri', $pegawai->negeri_bertugas)->get();
+                    $latestTahapKepulihan = $latestTahapKepulihan->where('u.negeri', $pegawaiNegeri->negeri_bertugas)->get();
 
                     // Count the number of clients in each tahap kepulihan
                     $cemerlang = $latestTahapKepulihan->where('tahap_kepulihan_id', 4)->count();
@@ -370,10 +372,12 @@ class HomeController extends Controller
                 }
                 else if($tahap == 5)
                 {
+                    $pegawaiDaerah = DB::table('pegawai')->where('users_id',$pegawai->id)->first();
+
                     // Filter clients based on daerah_bertugas and negeri_bertugas
                     $clients = DB::table('klien')
-                                ->where('negeri', $pegawai->negeri_bertugas)
-                                ->where('daerah', $pegawai->daerah_bertugas)
+                                ->where('negeri', $pegawaiDaerah->negeri_bertugas)
+                                ->where('daerah', $pegawaiDaerah->daerah_bertugas)
                                 ->get();
 
                     // Count profile update statuses
@@ -413,7 +417,7 @@ class HomeController extends Controller
                             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status');
 
                     // Filter by daerah_bertugas and negeri_bertugas for tahap 5 (pegawai daerah)
-                    $query->where('u.negeri', $pegawai->negeri_bertugas)->where('u.daerah', $pegawai->daerah_bertugas);
+                    $query->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas);
 
                     // Execute the query and get the results
                     $responses = $query->get();
@@ -443,7 +447,7 @@ class HomeController extends Controller
                             });
                     });
 
-                    $tidak_menjawab_daerah = $tidak_menjawab->where('u.negeri', $pegawai->negeri_bertugas)->where('u.daerah', $pegawai->daerah_bertugas)->count();
+                    $tidak_menjawab_daerah = $tidak_menjawab->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -457,7 +461,7 @@ class HomeController extends Controller
                             ->groupBy('klien_id');
                     });
 
-                    $latestTahapKepulihan =  $latestTahapKepulihan->where('u.negeri', $pegawai->negeri_bertugas)->where('u.daerah', $pegawai->daerah_bertugas)->get();
+                    $latestTahapKepulihan =  $latestTahapKepulihan->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas)->get();
 
                     // Count the number of clients in each tahap kepulihan
                     $cemerlang = $latestTahapKepulihan->where('tahap_kepulihan_id', 4)->count();
