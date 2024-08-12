@@ -68,27 +68,6 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
     }
 
-    // public function senaraiKlienNegeri()
-    // {
-    //     // Clients who have updated their profile (sedangKemaskini)
-    //     $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
-    //         ->leftJoin('sejarah_profil_klien', function($join) {
-    //             $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-    //                 ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-    //         })
-    //         ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-    //         ->whereNotNull('sejarah_profil_klien.klien_id')
-    //         ->get();
-
-    //     // Clients who have never updated their profile (belumKemaskini)
-    //     $belumKemaskini = Klien::select('klien.*')
-    //         ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-    //         ->whereNull('sejarah_profil_klien.klien_id')
-    //         ->get();
-
-    //     return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
-    // }
-
     public function senaraiKlienNegeri()
     {
         $pegawai = Auth::user();
@@ -142,28 +121,6 @@ class ProfilKlienController extends Controller
 
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
     }
-
-
-    // public function senaraiKlienDaerah()
-    // {
-    //     // Clients who have updated their profile (sedangKemaskini)
-    //     $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
-    //         ->leftJoin('sejarah_profil_klien', function($join) {
-    //             $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-    //                 ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-    //         })
-    //         ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-    //         ->whereNotNull('sejarah_profil_klien.klien_id')
-    //         ->get();
-
-    //     // Clients who have never updated their profile (belumKemaskini)
-    //     $belumKemaskini = Klien::select('klien.*')
-    //         ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-    //         ->whereNull('sejarah_profil_klien.klien_id')
-    //         ->get();
-
-    //     return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
-    // }
 
     public function maklumatKlien($id)
     {

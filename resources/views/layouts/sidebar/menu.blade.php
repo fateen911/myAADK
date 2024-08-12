@@ -570,9 +570,9 @@
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
+                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.brpp') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan')}}>
+                                <a class="menu-link" href={{route('maklum.balas.kepulihan.brpp')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -766,9 +766,9 @@
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
+                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan')}}>
+                                <a class="menu-link" href={{route('maklum.balas.kepulihan.negeri')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -962,9 +962,9 @@
                         <!--begin:Menu sub-->
                         <div class="menu-sub menu-sub-accordion">
                             <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
+                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') ? 'active' : '' }}">
                                 <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan')}}>
+                                <a class="menu-link" href={{route('maklum.balas.kepulihan.daerah')}}>
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
