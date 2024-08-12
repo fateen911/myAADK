@@ -47,7 +47,7 @@
             {{-- top nav bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
+                    <button class="nav-link" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="soalSelidik-tab" data-toggle="tab" data-target="#soalSelidik" type="button" role="tab" aria-controls="soalSelidik" aria-selected="true">Soal Selidik</button>
@@ -56,10 +56,10 @@
 
             <div class="tab-content" id="myTabContent">
                 {{-- Profil Klien --}}
-                <div class="tab-pane fade show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
+                <div class="tab-pane fade  show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
                     <!--Permohonan-->
                     <div class="header pt-5 mb-5">
-                        <h2>Status Permohonan Kemaskini Profil Klien</h2>
+                        <h2>Status Kemaskini Profil Klien</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
@@ -67,20 +67,20 @@
                             <!--begin::Col-->
                             <div class="col-6">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #787878">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baharu</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Belum Kemaskini</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">3</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskiniNegeri}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -100,71 +100,14 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Semakan</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Telah Kemaskini</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">2</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-
-                        <!--begin::Second Row-->
-                        <div class="row g-3 g-lg-6 pt-5" style="text-align: center;">
-                            <!--begin::Col-->
-                            <div class="col-6">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:lightseagreen">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-users text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Lulus</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">1</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-6">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Ditolak</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">0</span>
+                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskiniNegeri}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -180,71 +123,15 @@
 
                 {{-- Soal Selidik --}}
                 <div class="tab-pane fade" id="soalSelidik" role="tabpanel" aria-labelledby="soalSelidik-tab">
-                    <!--Permohonan-->
-                    <div class="header pt-5 mb-5">
-                        <h2>Status Soal Selidik Kepulihan Klien</h2>
+                     <!--Status Menjawab-->
+                     <div class="header pt-5 mb-5">
+                        <h2>Status Klien Menjawab Soal Selidik Kepulihan</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
                         <div class="row g-3 g-lg-6" style="text-align: center;">
                             <!--begin::Col-->
-                            <div class="col-6">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkgray">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Jumlah Keseluruhan</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">10</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-
-                            <!--begin::Col-->
-                            <div class="col-6">
-                                <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:indianred">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
-                                            </i>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Stats-->
-                                    <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">5</span>
-                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                        </a>
-                                    </div>
-                                    <!--end::Stats-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Row-->
-
-                        <!--begin::Second Row-->
-                        <div class="row g-3 g-lg-6  pt-5" style="text-align: center;">
-                            <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-4">
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
                                     <!--begin::Symbol-->
@@ -259,7 +146,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">4</span>
+                                            <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesai_menjawab_negeri}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -270,7 +157,7 @@
                             <!--end::Col-->
 
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-4">
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cornflowerblue">
                                     <!--begin::Symbol-->
@@ -286,7 +173,149 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href={{route('maklum.balas.kepulihan')}}>
-                                            <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">1</span>
+                                            <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belum_selesai_menjawab_negeri}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:maroon">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_menjawab_negeri}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+
+                    <!--Keputusan Soal Selidik-->
+                    <div class="header pt-10 mb-5">
+                        <h2>Keputusan Soal Selidik Kepulihan Klien</h2>
+                    </div>
+                    <div class="body">
+                        <!--begin::First Row-->
+                        <div class="row g-3 g-lg-6" style="text-align: center;">
+                            <!--begin::Col-->
+                            <div class="col-3">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Cemerlang</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$cemerlang}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-3">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-warning">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baik</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baik}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-3">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkorange">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Memuaskan</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$memuaskan}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-3">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Memuaskan</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
