@@ -27,6 +27,8 @@ use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Telegram\Bot\Api;
+use Telegram\Bot\Objects\Update;
 
 
 
@@ -699,13 +701,13 @@ class PengurusanProgController extends Controller
     }
     public function jenisHebahan(Request $request, $id)
     {
-        // Validate that the participants array is required and must have at least one selected value.
+        // Validate that the choices array is required and must have at least one selected value.
         $request->validate([
             'pilihan' => 'required|array|min:1',
             'pilihan.*' => 'exists:klien,id',
         ], [
-            'pilihan.required' => 'You must select at least one participant.',
-            'pilihan.min' => 'You must select at least one participant.',
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
         ]);
 
         $program = Program::with('kategori')->find($id);
@@ -766,13 +768,13 @@ class PengurusanProgController extends Controller
 
     public function hebahanEmel(Request $request, $id)
     {
-        // Validate that the participants array is required and must have at least one selected value.
+        // Validate that the choices array is required and must have at least one selected value.
         $request->validate([
             'pilihan' => 'required|array|min:1',
             'pilihan.*' => 'exists:klien,id',
         ], [
-            'pilihan.required' => 'You must select at least one participant.',
-            'pilihan.min' => 'You must select at least one participant.',
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
         ]);
 
         $klien = Klien::whereIn('id', $request->pilihan)->get();
@@ -790,13 +792,13 @@ class PengurusanProgController extends Controller
     //HEBAHAN - SMS
     public function hebahanSMS(Request $request, $id)
     {
-        // Validate that the participants array is required and must have at least one selected value.
+        // Validate that the choices array is required and must have at least one selected value.
         $request->validate([
             'pilihan' => 'required|array|min:1',
             'pilihan.*' => 'exists:klien,id',
         ], [
-            'pilihan.required' => 'You must select at least one participant.',
-            'pilihan.min' => 'You must select at least one participant.',
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
         ]);
 
         $program = Program::with('kategori')->find($id);
@@ -814,7 +816,7 @@ class PengurusanProgController extends Controller
                 "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
                 "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
 
-            $this->sendSms($item->no_tel, $message);
+            return redirect("https://wa.me/{$item->no_tel}?text=try");
         }
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
@@ -825,13 +827,13 @@ class PengurusanProgController extends Controller
     //HEBAHAN - TELEGRAM
     public function hebahanTelegram(Request $request, $id)
     {
-        // Validate that the participants array is required and must have at least one selected value.
+        // Validate that the choices array is required and must have at least one selected value.
         $request->validate([
             'pilihan' => 'required|array|min:1',
             'pilihan.*' => 'exists:klien,id',
         ], [
-            'pilihan.required' => 'You must select at least one participant.',
-            'pilihan.min' => 'You must select at least one participant.',
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
         ]);
 
         $program = Program::with('kategori')->find($id);
@@ -867,6 +869,67 @@ class PengurusanProgController extends Controller
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
+    }
+
+    public function handleWebhook(Request $request) //TELEGRAM
+    {
+        $telegram = new Api(env('7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk'));
+        $update = $telegram->getWebhookUpdates();
+
+        $chatId = $update->getMessage()->getChat()->getId();
+        $text = $update->getMessage()->getText();
+
+        // Example handling logic
+        $this->handleUserResponse($chatId, $text);
+
+        return response('OK');
+    }
+
+    private function handleUserResponse($chatId, $text) //TELEGRAM
+    {
+        $telegram = new Api(env('7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk'));
+
+        // Fetch user data from database or create new
+        $user = \DB::table('users')->where('chat_id', $chatId)->first();
+
+        if (!$user) {
+            // Start conversation
+            $telegram->sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'Please select your country:',
+                'reply_markup' => json_encode([
+                    'keyboard' => [
+                        ['Country1', 'Country2'],
+                        ['Country3', 'Country4']
+                    ],
+                    'one_time_keyboard' => true
+                ])
+            ]);
+            \DB::table('users')->insert([
+                'chat_id' => $chatId,
+                'state' => 'awaiting_country',
+            ]);
+        } elseif ($user->state === 'awaiting_country') {
+            // Save country and ask for street
+            \DB::table('users')->where('chat_id', $chatId)->update([
+                'country' => $text,
+                'state' => 'awaiting_street'
+            ]);
+            $telegram->sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'Please provide your street address:',
+            ]);
+        } elseif ($user->state === 'awaiting_street') {
+            // Save street and complete
+            \DB::table('users')->where('chat_id', $chatId)->update([
+                'street' => $text,
+                'state' => 'completed'
+            ]);
+            $telegram->sendMessage([
+                'chat_id' => $chatId,
+                'text' => 'Thank you! Your information has been saved.',
+            ]);
+        }
     }
 
     public function pdfPerekodan($id)

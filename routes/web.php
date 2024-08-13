@@ -72,6 +72,10 @@ Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgCon
 Route::post('/pengurusan-program/hebahan/emel/{id}', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan_emel');
 Route::post('/pengurusan-program/hebahan/sms/{id}', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan_sms');
 Route::post('/pengurusan-program/hebahan/telegram/{id}', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan_telegram');
+Route::post('/pengurusan-program/hebahan/telegram/webhook', [PengurusanProgController::class, 'handleWebhook']);
+
+Route::post('/telegram-webhook', [TelegramBotController::class, 'handle']);
+Route::post('/telegram-webhook', [TelegramBotController::class, 'handle']);
 
 // PENGURUSAN PROGRAM - PDF/EXCEL
 Route::get('/pengurusan-program/pdf-pengesahan/{id}',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
