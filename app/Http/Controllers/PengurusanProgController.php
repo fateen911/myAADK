@@ -651,6 +651,39 @@ class PengurusanProgController extends Controller
         }
     }
 
+    public function paparSms($id)
+    {
+        $negeri = Negeri::all();
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.hebahan.papar_sms', compact('program','negeri'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
+    public function paparEmel($id)
+    {
+        $negeri = Negeri::all();
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.hebahan.papar_emel', compact('program','negeri'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
+    public function paparTelegram($id)
+    {
+        $negeri = Negeri::all();
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.hebahan.papar_telegram', compact('program','negeri'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
     public function filterHebahan(Request $request)
     {
         $negeri_id = $request->input('negeri');
@@ -666,7 +699,6 @@ class PengurusanProgController extends Controller
     }
     public function jenisHebahan(Request $request, $id)
     {
-
         // Validate that the participants array is required and must have at least one selected value.
         $request->validate([
             'pilihan' => 'required|array|min:1',
@@ -726,93 +758,115 @@ class PengurusanProgController extends Controller
             }
         }
 
-        $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog";
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
 
     //HEBAHAN - EMEL
 
-    public function hebahanEmel($id)
+    public function hebahanEmel(Request $request, $id)
     {
-        $recipient = 'ziba0506@gmail.com';
-        Mail::to($recipient)->send(new HebahanMail($id));
+        // Validate that the participants array is required and must have at least one selected value.
+        $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:klien,id',
+        ], [
+            'pilihan.required' => 'You must select at least one participant.',
+            'pilihan.min' => 'You must select at least one participant.',
+        ]);
 
-        return redirect()->back()->with('status', 'Email sent successfully!');
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            $recipient = $item->emel;
+            Mail::to($recipient)->send(new HebahanMail($id));
+        }
+
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
 
     //HEBAHAN - SMS
-    public function hebahanSMS()
+    public function hebahanSMS(Request $request, $id)
     {
-        // Get the program and registration link
-        $program = Program::findOrFail(1); //program_id
-        $registrationLink = $program->registration_link;
-
-        // Create the message
-        $message = "Register for the program {$program->name} using this link: {$registrationLink}";
-
-        // Send the SMS
-        $this->sendTwilioSms("+601135679794", $message);
-
-        return redirect()->route('programs.show', $program->id)
-            ->with('success', 'SMS sent successfully.');
-    }
-
-    protected function sendTwilioSms($to, $message)
-    {
-        $sid = config('services.twilio.sid');
-        $token = config('services.twilio.token');
-        $from = config('services.twilio.from');
-
-        $client = new Client($sid, $token);
-        $client->messages->create($to, [
-            'from' => $from,
-            'body' => $message,
+        // Validate that the participants array is required and must have at least one selected value.
+        $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:klien,id',
+        ], [
+            'pilihan.required' => 'You must select at least one participant.',
+            'pilihan.min' => 'You must select at least one participant.',
         ]);
+
+        $program = Program::with('kategori')->find($id);
+
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            $message = "Salam Sejahtera,\n\n" .
+                "Anda dijemput untuk menyertai program\n\n" .
+                "NAMA PROGRAM: " . strtoupper($program->nama) . "\n" .
+                "TARIKH MULA: " . date('d/m/Y, gA', strtotime($program->tarikh_mula)) . "\n" .
+                "TARIKH TAMAT: " . date('d/m/Y, gA', strtotime($program->tarikh_tamat)) . "\n" .
+                "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
+                "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
+
+            $this->sendSms($item->no_tel, $message);
+        }
+
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
+
 
     //HEBAHAN - TELEGRAM
-    public function hebahanTelegram()
+    public function hebahanTelegram(Request $request, $id)
     {
-        // Telegram Bot API endpoint
-        $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
-        $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
-        $chatId = 490430239; //618021127 - syafiqah
-
-        // Public path to the image file
-        $imagePath = public_path('qr_codes/qrcode.png');
-
-        // Check if the image file exists
-        if (!file_exists($imagePath)) {
-            return "Image file not found.";
-        }
-
-        // Send image file
-        $response = Http::attach(
-            'photo',
-            file_get_contents($imagePath),
-            'qrcode.png'
-        )->post($telegramEndpoint, [
-            'chat_id' => $chatId,
-            'caption' => 'Your QR code:',
+        // Validate that the participants array is required and must have at least one selected value.
+        $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:klien,id',
+        ], [
+            'pilihan.required' => 'You must select at least one participant.',
+            'pilihan.min' => 'You must select at least one participant.',
         ]);
 
-        // Check response and handle accordingly
-        if ($response->successful()) {
-            return redirect()->back()->with('status', 'Successfully!');
-        } else {
-            return redirect()->back()->with('status', 'Fail!');
-        }
-    }
-
-    //PDF
-    public function pdfPengesahan($id)
-    {
-        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
         $program = Program::with('kategori')->find($id);
-        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'pengesahan' => $pengesahan, 'program' => $program];
-        $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data)->setPaper('a4', 'landscape');
 
-        return $pdf->download('senarai_pengesahan_kehadiran.pdf');
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            // Telegram Bot API endpoint
+            $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
+            $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
+            $chatId = 490430239; //618021127 - syafiqah
+
+            // Public path to the image file
+            $imagePath = public_path('qr_codes/qrcode.png');
+
+            // Check if the image file exists
+            if (!file_exists($imagePath)) {
+                return "Image file not found.";
+            }
+
+            // Send image file
+            $response = Http::attach(
+                'photo',
+                file_get_contents($imagePath),
+                'qrcode.png'
+            )->post($telegramEndpoint, [
+                'chat_id' => $chatId,
+                'caption' => 'Your QR code:',
+            ]);
+        }
+
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
 
     public function pdfPerekodan($id)
