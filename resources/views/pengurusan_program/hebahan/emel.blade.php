@@ -12,5 +12,7 @@
 <br>
 <p>Sila imbas kod qr berikut untuk pengesahan kehadiran anda:</p>
 <img src="{{ $message->embed(public_path('qr_codes/qr_pengesahan_'.$program->id.'.png')) }}" alt="Logo">
+<br>
+<p>Pautan:{{$program->pautan_pengesahan}}</p>
 </body>
 </html>

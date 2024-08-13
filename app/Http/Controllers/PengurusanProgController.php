@@ -233,7 +233,7 @@ class PengurusanProgController extends Controller
             'catatan'              =>   $request->catatan,
         ]);
 
-        $direct = "/pengurusan-program/pegawai_aadk/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
         return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
     }
 
@@ -242,7 +242,7 @@ class PengurusanProgController extends Controller
 
         if ($program) {
             $program->delete();
-            $direct = "/pengurusan-program/pegawai_aadk/senarai-prog/";
+            $direct = "/pengurusan-program/pegawai-aadk/senarai-prog/";
             return redirect()->to($direct)->with('success', 'Program berjaya dipadam.');
         } else {
             return redirect()->back()->with('error', 'Program gagal dipadam.');
@@ -666,24 +666,18 @@ class PengurusanProgController extends Controller
     }
     public function jenisHebahan(Request $request, $id)
     {
-        $request->validate([
-            'pilihan.*' => 'int',
-        ]);
-
-        $program = Program::with('kategori')->find($id);
-        $kaedah = $request->input('kaedah');
-        $pilihan = $request->input('pilihan', []);
-        //$klien = Klien::where('id', $pilihan)->get();
-        //$negeri = Negeri::with('daerah')->get();
 
         // Validate that the participants array is required and must have at least one selected value.
-        $validatedData = $request->validate([
+        $request->validate([
             'pilihan' => 'required|array|min:1',
-            'pilihan.*' => 'exists:participants,id',
+            'pilihan.*' => 'exists:klien,id',
         ], [
             'pilihan.required' => 'You must select at least one participant.',
             'pilihan.min' => 'You must select at least one participant.',
         ]);
+
+        $program = Program::with('kategori')->find($id);
+        $kaedah = $request->input('kaedah');
 
         $klien = Klien::whereIn('id', $request->pilihan)->get();
 
@@ -705,8 +699,6 @@ class PengurusanProgController extends Controller
             elseif ($kaedah == 'emel') {
                 $recipient = $item->emel;
                 Mail::to($recipient)->send(new HebahanMail($id));
-
-                return redirect()->back()->with('status', 'Email sent successfully!');
             }
             elseif ($kaedah == 'telegram') {
                 // Telegram Bot API endpoint
@@ -734,7 +726,8 @@ class PengurusanProgController extends Controller
             }
         }
 
-        return redirect()->back()->with('status', 'Hebahan berjaya dihantar!');
+        $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog";
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
 
     //HEBAHAN - EMEL

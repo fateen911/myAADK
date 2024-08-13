@@ -55,7 +55,17 @@
         <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
+    @if (session('success'))
+        <div class="alert alert-success p-3 my-3" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger p-3 my-3" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <!--begin::Body-->
     <div class="card shadow-sm">
         <div class="table-responsive">

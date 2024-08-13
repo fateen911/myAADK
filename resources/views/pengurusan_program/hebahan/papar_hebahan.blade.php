@@ -93,7 +93,7 @@
                     let rows = '';
                     $.each(response, function(index, klien) {
                         rows += '<tr>';
-                        rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + klien.id + '"></td>';
+                        rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + klien.id + '" multiple></td>';
                         rows += '<td class="text-uppercase">' + klien.nama + '</td>';
                         rows += '<td class="text-uppercase">' + klien.no_tel + '</td>';
                         rows += '<td>' + klien.emel + '</td>';
