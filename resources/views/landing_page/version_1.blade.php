@@ -13,13 +13,13 @@
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="Keenthemes | Metronic" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 </head>
@@ -54,8 +54,8 @@
                             <!--end::Mobile menu toggle-->
                             <!--begin::Logo image-->
                             <a href="../../demo1/dist/landing.html">
-                                <img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-25px h-lg-50px" />
-                                <img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-20px h-lg-50px" />
+                                <img alt="Logo" src="/logo/aadk.png" class="logo-default h-25px h-lg-50px" />
+                                <img alt="Logo" src="/logo/aadk.png" class="logo-sticky h-20px h-lg-50px" />
                             </a>
                             <!--end::Logo image-->
                         </div>
@@ -158,7 +158,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -184,7 +184,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -209,7 +209,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -234,7 +234,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -259,7 +259,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -284,7 +284,7 @@
                     <!--begin::Story-->
                     <div class="text-center mb-10 mb-md-0">
                         <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
+                        <img src="/assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
                         <!--end::Illustration-->
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
@@ -570,7 +570,7 @@
                     <div class="d-flex align-items-center order-2 order-md-1">
                         <!--begin::Logo-->
                         <a href="../../demo1/dist/landing.html">
-                            <img alt="Logo" src="assets/media/logos/bkoku.svg" class="h-15px h-md-25px" />
+                            <img alt="Logo" src="/logo/aadk.png" class="h-15px h-md-25px" />
                         </a>
                         <!--end::Logo image-->
                         <!--begin::Logo image-->
@@ -605,18 +605,18 @@
 </div>
 <!--end::Scrolltop-->
 <!--begin::Javascript-->
-<script>var hostUrl = "assets/";</script>
+<script>var hostUrl = "/assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Vendors Javascript(used for this page only)-->
-<script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
-<script src="assets/plugins/custom/typedjs/typedjs.bundle.js"></script>
+<script src="/assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+<script src="/assets/plugins/custom/typedjs/typedjs.bundle.js"></script>
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/landing.js"></script>
-<script src="assets/js/custom/pages/pricing/general.js"></script>
+<script src="/assets/js/custom/landing.js"></script>
+<script src="/assets/js/custom/pages/pricing/general.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

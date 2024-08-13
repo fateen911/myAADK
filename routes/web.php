@@ -7,6 +7,7 @@ use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
 use App\Http\Controllers\ModalKepulihanController;
+use App\Http\Controllers\TelegramBotController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -74,7 +75,6 @@ Route::post('/pengurusan-program/hebahan/sms/{id}', [PengurusanProgController::c
 Route::post('/pengurusan-program/hebahan/telegram/{id}', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan_telegram');
 Route::post('/pengurusan-program/hebahan/telegram/webhook', [PengurusanProgController::class, 'handleWebhook']);
 
-Route::post('/telegram-webhook', [TelegramBotController::class, 'handle']);
 Route::post('/telegram-webhook', [TelegramBotController::class, 'handle']);
 
 // PENGURUSAN PROGRAM - PDF/EXCEL
