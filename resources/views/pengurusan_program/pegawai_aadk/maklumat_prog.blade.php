@@ -18,6 +18,10 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <!-- Custom AADK CSS -->
         <link rel="stylesheet" href="/assets/css/customAADK.css">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
         <style>
             .btn-icon {
@@ -140,9 +144,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <button type="button" id="sms" class="btn btn-icon btn-warning mx-1 btn-sm" data-toggle="modal" data-target="#hebahanSms" data-id="{{$program->id}}"><i class="bi bi-chat-dots-fill fs-3"></i></button>
+                            <button type="button" id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></button>
+                            <button type="button" id="telegram" class="btn btn-icon btn-primary mx-1 btn-sm" data-toggle="modal" data-target="#hebahanTelegram" data-id="{{$program->id}}"><i class="bi bi-telegram fs-3"></i></button>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -330,9 +334,9 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>
+                            <a id="sms" class="btn btn-icon btn-warning mx-1 btn-sm" data-toggle="modal" data-target="#hebahanSms" data-id="{{$program->id}}"><i class="bi bi-chat-dots-fill fs-3"></i></a>
+                            <a id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></a>
+                            <a id="telegram" class="btn btn-icon btn-primary mx-1 btn-sm" data-toggle="modal" data-target="#hebahanTelegram" data-id="{{$program->id}}"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -694,6 +698,65 @@
     </div>
     <!--end::Modal - perekodan-->
 
+    <!--begin::Modal - hebahan-->
+    <!--SMS-->
+    <div class="modal fade modal-lg" id="hebahanSms" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBodySms">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Email-->
+    <div class="modal fade modal-lg" id="hebahanEmel" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBodyEmel">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Telegram-->
+    <div class="modal fade modal-lg" id="hebahanTelegram" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modalBodyTelegram">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--end::Modal - hebahan-->
+
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
@@ -724,6 +787,7 @@
         document.getElementById('modal_3').addEventListener('click', function(event) {
             event.preventDefault();
         });
+
     </script>
     <script>
         function copyToClipboard1() {
@@ -766,6 +830,64 @@
                 .catch(err => {
                     console.error('Failed to copy: ', err);
                 });
+        }
+    </script>
+
+    <!-- Modal Hebahan -->
+    <script>
+        <!-- SMS -->
+        $(document).on('click', '#sms', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pengurusan-program/hebahan/papar-sms/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodySms').html(response);
+                },
+                error: function() {
+                    $('#modalBodySms').html('Error loading content.');
+                }
+            });
+        });
+
+        <!-- Emel -->
+        $(document).on('click', '#emel', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pengurusan-program/hebahan/papar-emel/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyEmel').html(response);
+                },
+                error: function() {
+                    $('#modalBodyEmel').html('Error loading content.');
+                }
+            });
+        });
+
+        <!-- Telegram -->
+        $(document).on('click', '#telegram', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/pengurusan-program/hebahan/papar-telegram/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyTelegram').html(response);
+                },
+                error: function() {
+                    $('#modalBodyTelegram').html('Error loading content.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // JavaScript function to select/deselect all checkboxes
+        function toggleAll(source) {
+            checkboxes = document.querySelectorAll('input[name="pilihan[]"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = source.checked;
+            }
         }
     </script>
 
@@ -824,6 +946,7 @@
             }
         });
     </script>
+
 
     <script>
         $('#sortTable1').DataTable({
