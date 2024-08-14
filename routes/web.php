@@ -138,6 +138,7 @@ Route::patch('/approve-update/penjaga-klien/{id}', [ProfilKlienController::class
 // KLIEN - PENGURUSAN PROFIL
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
 Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
+Route::get('muat-turun/profil-klien/{id}', [ProfilKlienController::class, 'muatTurunProfilKlien'])->name('export.profil.klien');
 
 // KLIEN - SEND REQUEST TO UPDATE PROFILE
 Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');

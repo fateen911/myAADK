@@ -122,6 +122,21 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
     }
 
+    public function muatTurunProfilKlien($id)
+    {
+        $klien = Klien::where('id',$id)->first();
+        $pekerjaan = PekerjaanKlien::where('id',$id)->first();
+        $waris = WarisKlien::where('id',$id)->first();
+        $pasangan = KeluargaKlien::where('id',$id)->first();
+        $rawatan = RawatanKlien::where('id',$id)->first();
+
+        $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
+
+        $no_kp = $klien->no_kp;
+
+        return $pdf->stream($no_kp . '-profil-peribadi.pdf');
+    }
+
     public function maklumatKlien($id)
     {
         $negeri = Negeri::all()->sortBy('negeri');
