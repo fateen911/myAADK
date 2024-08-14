@@ -79,6 +79,7 @@
                                             <th class="min-w-100px">Daerah</th>
                                             <th class="min-w-70px">Negeri</th>
                                             <th class="min-w-100px" style="text-align: center;">Pengemaskini</th> 
+                                            <th class="min-w-50px" style="text-align: center;">Muat Turun</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -105,6 +106,11 @@
                                                     @endif
                                                 </td> --}}
                                                 <td style="text-align: center;">{{ $user1->pengemaskini_name ?? 'N/A' }}</td>
+                                                <td style="text-align: center;">
+                                                    <a href="{{ url('muat-turun/profil-klien/'. $user1['id']) }}" class="btn btn-sm fw-bold btn-primary">
+                                                        <i class="fas fa-download" style="color: white !important;"></i> Muat Turun
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -131,7 +137,7 @@
                                             <th class="min-w-80px">No. Kad Pengenalan</th>
                                             <th class="min-w-100px">Daerah</th>
                                             <th class="min-w-70px">Negeri</th>
-                                            {{-- <th class="min-w-100px" style="text-align: center;">Pengemaskini</th>  --}}
+                                            <th class="min-w-50px" style="text-align: center;">Muat Turun</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -146,18 +152,11 @@
                                                 <td>{{ $user2->no_kp }}</td>
                                                 <td>{{ $daerah }}</td>
                                                 <td>{{ $negeri }}</td>
-                                                {{-- <td style="text-align: center;">
-                                                    @if($user2->status_kemaskini == 'Kemaskini')
-                                                        <button class="btn btn-sm text-white" style="background-color:mediumvioletred">MOHON KEMASKINI</button>
-                                                    @elseif($user2->status_kemaskini == 'Baharu')
-                                                        <button class="btn btn-sm text-white" style="background-color: #787878">BELUM KEMASKINI</button>
-                                                    @elseif($user2->status_kemaskini == 'Lulus')
-                                                        <button class="btn btn-sm text-white" style="background-color:lightseagreen">DIKEMASKINI</button>
-                                                    @elseif($user2->status_kemaskini == 'Ditolak')
-                                                        <button class="btn btn-sm text-white bg-info">DITOLAK</button>
-                                                    @endif
-                                                </td> --}}
-                                                {{-- <td style="text-align: center;">{{ $user2->pengemaskini_name ?? 'N/A' }}</td> --}}
+                                                <td style="text-align: center;">
+                                                    <a href="{{ url('muat-turun/profil-klien/'. $user2['id']) }}" class="btn btn-sm fw-bold btn-primary">
+                                                        <i class="fas fa-download" style="color: white !important;"></i> Muat Turun
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
