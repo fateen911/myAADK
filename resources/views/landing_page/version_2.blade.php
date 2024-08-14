@@ -1,624 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--begin::Head-->
-<head><base href=""/>
-    <title>Selamat Datang - Sistem BKOKU</title>
-    <meta charset="utf-8" />
-    <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
-    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Metronic - Bootstrap Admin Template, HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express.js, Node.js, Flask Admin Dashboard Theme & Template" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Keenthemes | Metronic" />
-    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-    <!--begin::Fonts(mandatory for all pages)-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    <!--end::Fonts-->
-    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <!--end::Global Stylesheets Bundle-->
-    <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+
+<head>
+    <meta charset="utf-8">
+    <title>Selamat Datang ke Sistem AADK</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/landingv2/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/landingv2/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/landingv2/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/landingv2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/landingv2/css/style.css" rel="stylesheet">
 </head>
-<!--end::Head-->
-<!--begin::Body-->
-<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
-<!--begin::Theme mode setup on page load-->
-<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
-<!--end::Theme mode setup on page load-->
-<!--begin::Root-->
-<div class="d-flex flex-column flex-root" id="kt_app_root">
-    <!--begin::Header Section-->
-    <div class="mb-0" id="home">
-        <!--begin::Wrapper-->
-        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(assets/media/svg/illustrations/landing.svg)">
-            <!--begin::Header-->
-            <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 
-                <!--begin::Container-->
-                <div class="container">
-                    <!--begin::Wrapper-->
-                    <div class="d-flex align-items-center justify-content-between">
-                        <!--begin::Logo-->
-                        <div class="d-flex align-items-center flex-equal">
-                            <!--begin::Mobile menu toggle-->
-                            <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
-                                <i class="ki-duotone ki-abstract-14 fs-2hx">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
+<body>
+
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+
+<!-- Navbar & Hero Start -->
+<div class="container-fluid header position-relative overflow-hidden p-0">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="{{url('/landing-page/version-2')}}" class="navbar-brand p-0">
+            <img class="v-align" src="/logo/aadk.png" alt="Logo">&nbsp;<b class="fs-2 v-align">AADK</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Services</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="feature.html" class="dropdown-item">Features</a>
+                        <a href="pricing.html" class="dropdown-item">Pricing</a>
+                        <a href="blog.html" class="dropdown-item">Blog</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="404.html" class="dropdown-item">404 Page</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+            </div>
+            <a href="#" class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log In</a>
+            <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Sign Up</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero Header Start -->
+    <div class="hero-header overflow-hidden px-5">
+        <div class="rotate-img">
+            <img src="/landingv2/img/sty-1.png" class="/landingv2/img-fluid w-100" alt="">
+            <div class="rotate-sty-2"></div>
+        </div>
+        <div class="row gy-5 align-items-center">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Turn Emails into Revenue</h1>
+                <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Win new customers with the #1 email marketing and automations brand* that recommends ways to get more opens, clicks, and sales.</p>
+                <a href="#" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">Get Started</a>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
+                <img src="/landingv2/img/hero-img-1.png" class="/landingv2/img-fluid w-100 h-100" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Hero Header End -->
+</div>
+<!-- Navbar & Hero End -->
+
+
+<!-- About Start -->
+<div class="container-fluid overflow-hidden py-5"  style="margin-top: 6rem;">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="RotateMoveLeft">
+                    <img src="/landingv2/img/about-1.png" class="/landingv2/img-fluid w-100" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h4 class="mb-1 text-primary">About Us</h4>
+                <h1 class="display-5 mb-4">Get Started Easily With a Personalized Product Tour</h1>
+                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, suscipit itaque quaerat dicta porro illum, autem, molestias ut animi ab aspernatur dolorum officia nam dolore. Voluptatibus aliquam earum labore atque.
+                </p>
+                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">About More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- Service Start -->
+<div class="container-fluid service py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+            <h4 class="mb-1 text-primary">Our Service</h4>
+            <h1 class="display-5 mb-4">What We Can Do For You</h1>
+            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Email Newsletters</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-thumbs-up fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Acquistion Emails </h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fa fa-subway fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Retention Emails</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Promotional Emails</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Email Newsletters</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-thumbs-up fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Acquistion Emails </h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fa fa-subway fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Retention Emails</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item text-center rounded p-4">
+                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
+                    <div class="service-content">
+                        <h4 class="mb-4">Promotional Emails</h4>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+
+
+<!-- Feature Start -->
+<div class="container-fluid feature overflow-hidden py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+            <h4 class="text-primary">Our Feature</h4>
+            <h1 class="display-5 mb-4">Important Features For Email Marketing</h1>
+            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center text-center mb-5">
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="text-center p-4">
+                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-envelope fa-5x text-secondary"></i></div>
+                    <div class="feature-content">
+                        <a href="#" class="h4">Email Marketing <i class="fa fa-long-arrow-alt-right"></i></a>
+                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="text-center p-4">
+                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
+                    <div class="feature-content">
+                        <a href="#" class="h4">Email Builder <i class="fa fa-long-arrow-alt-right"></i></a>
+                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="text-center rounded p-4">
+                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
+                    <div class="feature-content">
+                        <a href="#" class="h4">Customer Builder <i class="fa fa-long-arrow-alt-right"></i></a>
+                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="text-center rounded p-4">
+                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-tasks fa-5x text-secondary"></i></div>
+                    <div class="feature-content">
+                        <a href="#" class="h4">Campaign Manager <i class="fa fa-long-arrow-alt-right"></i></a>
+                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="my-3">
+                    <a href="#" class="btn btn-primary d-inline rounded-pill px-5 py-3">More Features</a>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5 pt-5" style="margin-top: 6rem;">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <div class="feature-img RotateMoveLeft h-100" style="object-fit: cover;">
+                    <img src="/landingv2/img/features-1.png" class="/landingv2/img-fluid w-100 h-100" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.1s">
+                <h4 class="text-primary">Fearutes</h4>
+                <h1 class="display-5 mb-4">Push Your Visitors Into Happy Customers</h1>
+                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, suscipit itaque quaerat dicta porro illum, autem, molestias ut animi ab aspernatur dolorum officia nam dolore. Voluptatibus aliquam earum labore atque.
+                </p>
+                <div class="row g-4">
+                    <div class="col-6">
+                        <div class="d-flex">
+                            <i class="fas fa-newspaper fa-4x text-secondary"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h2 class="mb-0 fw-bold">285</h2>
+                                <small class="text-dark">Created Projects</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex">
+                            <i class="fas fa-users fa-4x text-secondary"></i>
+                            <div class="d-flex flex-column ms-3">
+                                <h2 class="mb-0 fw-bold">6560</h2>
+                                <small class="text-dark">Happy Clients</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-4">
+                    <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+
+<!-- FAQ Start -->
+<div class="container-fluid FAQ bg-light overflow-hidden py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item border-0 mb-4">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseTOne">
+                                Why did you choose Our Email Services?
                             </button>
-                            <!--end::Mobile menu toggle-->
-                            <!--begin::Logo image-->
-                            <a href="../../demo1/dist/landing.html">
-                                <img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-default h-25px h-lg-50px" />
-                                <img alt="Logo" src="assets/media/logos/bkoku.svg" class="logo-sticky h-20px h-lg-50px" />
-                            </a>
-                            <!--end::Logo image-->
-                        </div>
-                        <!--end::Logo-->
-                        <!--begin::Menu wrapper-->
-                        <div class="d-lg-block" id="kt_header_nav_wrapper">
-                            <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
-                                <!--begin::Menu-->
-                                <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Laman Utama</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#info" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Info</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#syarat" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Syarat-syarat</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="http://bkokudev.mohe.gov.my/login" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Permohonan</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#hubungi" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-
-                                </div>
-                                <!--end::Menu-->
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body my-2">
+                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
                             </div>
                         </div>
-                        <!--end::Menu wrapper-->
-                        <!--begin::Toolbar-->
-                        <div class="flex-equal text-end ms-1">
-
-                        </div>
-                        <!--end::Toolbar-->
                     </div>
-                    <!--end::Wrapper-->
-                </div>
-                <!--end::Container-->
-
-
-            </div>
-            <!--end::Header-->
-            <!--begin::Landing hero-->
-            <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-400px">
-
-
-            </div>
-            <!--end::Landing hero-->
-        </div>
-        <!--end::Wrapper-->
-        <!--begin::Curve bottom-->
-        <div class="landing-curve landing-dark-color mb-10 mb-lg-20">
-            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-            </svg>
-        </div>
-        <!--end::Curve bottom-->
-    </div>
-    <!--end::Header Section-->
-    <!--begin::How It Works Section-->
-    <div class="mb-n10 mb-lg-n20 z-index-2">
-        <!--begin::Container-->
-        <div class="container">
-            <!--begin::Heading-->
-            <div class="text-center mb-10">
-                <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-2" id="info" data-kt-scroll-offset="{default: 100, lg: 150}">TEMPOH PEMBIAYAAN</h3>
-                <!--end::Title-->
-                <!--begin::Text-->
-                <div class="fs-5 text-muted fw-bold">Tempoh tajaan ini adalah tertakluk kepada surat tawaran asal institusi pengajian
-                    <br />dan tidak melebihi tempoh maksimum penajaan seperti berikut :</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Heading-->
-            <!--begin::Row-->
-            <div class="row w-100 gy-10 mb-md-20">
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Sijil</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun (Kolej Komuniti dan Politeknik Sahaja)
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)
-                        </div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">3 Tahun
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM15,000.00)</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana Muda</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM20,000.00)</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/17.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">4</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Diploma Lepasan Ijazah</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/10.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">5</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Sarjana</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">2 Tahun
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM10,000.00)</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-2 px-1">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="assets/media/illustrations/sketchy-1/4.png" class="mh-125px mb-9" alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">6</span>
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Ph.D</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-6 text-muted">4 Tahun
-                            <br />(Had Pembiayaan RM5,000.00 sehingga RM20,000.00)</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Row-->
-
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::How It Works Section-->
-    <!--begin::Syarat Section-->
-    <div class="py-10 py-lg-20">
-        <!--begin::Curve top-->
-        <div class="landing-curve landing-dark-color">
-            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-            </svg>
-        </div>
-        <!--end::Curve top-->
-        <!--begin::Wrapper-->
-        <div class="py-1 landing-dark-bg">
-            <!--begin::Container-->
-            <div class="container">
-                <!--begin::Plans-->
-                <div class="d-flex flex-column container pt-lg-20">
-                    <!--begin::Heading-->
-                    <div class="mb-13 text-center">
-                        <h1 class="fs-2hx fw-bold text-white mb-5" id="syarat" data-kt-scroll-offset="{default: 100, lg: 150}">SYARAT-SYARAT BANTUAN KEWANGAN PELAJAR OKU</h1>
-                    </div>
-                    <!--end::Heading-->
-                    <!--begin::Syarat-->
-                    <div class="text-center" id="kt_pricing">
-                        <!--begin::Row-->
-                        <div class="row g-10">
-                            <!--begin::Col-->
-                            <div class="col-xl-12">
-                                <div class="d-flex h-100 align-items-center">
-                                    <!--begin::Option-->
-                                    <div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
-                                        <!--begin::Features-->
-                                        <div class="w-100 mb-10">
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">i. Pelajar warganegara Malaysia;</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">ii. Pelajar berdaftar dengan Jabatan Kebajikan Masyarakat (JKM) dan telah mempunyai kad OKU;</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iii. Kursus yang diikuti hendaklah diiktiraf oleh Agensi Kelayakan Malaysia (MQA) atau Jabatan Perkhidmatan Awam (JPA).</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">iv. Pelajar OKU yang menerima pinjaman pelajaran atau pembiayaan sendiri adalah layak menerima elemen wangsaku dan yuran pengajian. Penerima biasiswa pula layak mendapat wang saku sahaja;</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">v. Pelajar hendaklah sedang melanjutkan pengajian di mana-mana universiti awam atau IPTS (bawah seliaan KPT) atau Kolej Komuniti dan Politeknik;</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">vi. Pelajar yang mengikuti kursus separuh masa atau pengajian jarak jauh layak menerima bantuan kewangan ini;dan</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack mb-5">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">vii. Pelajar OKU hendaklah bukan dalam tempoh cuti belajar bergaji (penuh/sebahagian).</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                            <!--begin::Item-->
-                                            <div class="d-flex flex-stack">
-                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">viii. Bagi pelajar yang ingin memohon perlanjutan tempoh pengajian adalah tidak layak mendapat bantuan dalam proses perlanjutan tersebut. Hal ini kerana tempoh tajaan Bantuan kewangan ini adalah mengikut tempoh surat tawaran asal. Pelajar yang ingin menukar tempat pengajian dalam tempoh pembiayaan BKOKU, hendaklah maklum kepada pihak kementerian secara bertulis dan juga kepada pihak institusi pengajian sebelum dari tempoh lapor diri di tempat pengajian baru</span>
-                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
-                                                    <span class="path1"></span>
-                                                    <span class="path2"></span>
-                                                </i>
-                                            </div>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Features-->
-
-                                    </div>
-                                    <!--end::Option-->
-                                </div>
+                    <div class="accordion-item border-0 mb-4">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Are there any hidden charges?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body my-2">
+                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
                             </div>
-                            <!--end::Col-->
                         </div>
-                        <!--end::Row-->
                     </div>
-                    <!--end::Syarat-->
-                </div>
-                <!--end::Plans-->
-            </div>
-            <!--end::Container-->
-        </div>
-        <!--end::Wrapper-->
-        <!--begin::Curve bottom-->
-        <div class="landing-curve landing-dark-color">
-            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
-            </svg>
-        </div>
-        <!--end::Curve bottom-->
-    </div>
-    <!--end::Syarat Section-->
-    <!--begin::Hubungi Section-->
-    <div class="mt-20 mb-n20 position-relative z-index-2">
-        <!--begin::Container-->
-        <div class="container">
-            <!--begin::Heading-->
-            <div class="text-center mb-17">
-                <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="hubungi" data-kt-scroll-offset="{default: 125, lg: 150}">PERMOHONAN / PERTANYAAN</h3>
-                <!--end::Title-->
-                <!--begin::Description-->
-                <div class="fs-5 text-muted fw-bold">Untuk sebarang pertanyaan, sila hubungi:</div>
-                <!--end::Description-->
-            </div>
-            <!--end::Heading-->
-            <!--begin::Row-->
-            <div class="row g-lg-10 mb-10 mb-lg-20">
-                <!--begin::Col-->
-                <div class="col-lg-4">
-                    <!--begin::Hubungi-->
-                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                        <!--begin::Wrapper-->
-                        <div class="mb-7">
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Alamat :</div>
-                            <!--end::Title-->
-                            <!--begin::Alamat-->
-                            <div class="text-gray-500 fw-semibold fs-4">Kementerian Pendidikan Tinggi,
-                                <br /> Bahagian Biasiswa,
-                                <br /> Unit Pra Perkhidmatan,
-                                <br /> Aras 2, No. 2, Menara 2,
-                                <br /> Jalan P5/6, Presint 5,
-                                <br /> 62200 Wilayah Persekutuan Putrajaya.
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What are the key challenges of email marketing?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body my-2">
+                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
                             </div>
-                            <!--end::Alamat-->
                         </div>
-                        <!--end::Wrapper-->
                     </div>
-                    <!--end::Hubungi-->
                 </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-lg-4">
-                    <!--begin::Testimonial-->
-                    <div class="d-flex flex-column justify-content-between h-lg-200 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                        <!--begin::Wrapper-->
-                        <div class="mb-7">
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
-                            <!--end::Title-->
-                            <!--begin::Telefon-->
-                            <div class="text-gray-500 fw-semibold fs-4">Encik Yusri Bin Yusuf : 03-8870 6373
-                                <br />Cik Nur Dayana Binti Rozaini : 03-8870 6347</div>
-                            <!--end::Telefon-->
-                            <br />
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Emel :</div>
-                            <!--end::Title-->
-                            <!--begin::Emel-->
-                            <div class="text-gray-500 fw-semibold fs-4">Unit BKOKU : bkoku@mohe.gov.my
-                            </div>
-                            <!--end::Emel-->
-                        </div>
-                        <!--end::Wrapper-->
-
-                    </div>
-                    <!--end::Testimonial-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-lg-4">
-                    <!--begin::Testimonial-->
-                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
-                        <!--begin::Wrapper-->
-                        <div class="mb-7">
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Waktu pejabat SAHAJA</div>
-                            <!--end::Title-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Isnin hingga Jumaat
-                                <br /> 9.00 pagi - 4.30 petang</div>
-                            <!--end::Waktu-->
-                            <br />
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat</div>
-                            <!--end::Title-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Isnin hingga Khamis
-                                <br /> (1.00 tengah hari - 2.00 petang)</div>
-                            <!--end::Waktu-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Jumaat
-                                <br /> (12.15 tengah hari - 2.45 petang)</div>
-                            <!--end::Waktu-->
-                        </div>
-                        <!--end::Wrapper-->
-
-                    </div>
-                    <!--end::Testimonial-->
-                </div>
-                <!--end::Col-->
             </div>
-            <!--end::Row-->
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Hubungi Section-->
-    <!--begin::Footer Section-->
-    <div class="mb-0">
-        <!--begin::Curve top-->
-        <div class="landing-curve landing-dark-color">
-            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
-            </svg>
-        </div>
-        <!--end::Curve top-->
-        <!--begin::Wrapper-->
-        <div class="landing-dark-bg pt-20">
-
-            <!--begin::Separator-->
-            <div class="landing-dark-separator"></div>
-            <!--end::Separator-->
-            <!--begin::Container-->
-            <div class="container">
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
-                    <!--begin::Copyright-->
-                    <div class="d-flex align-items-center order-2 order-md-1">
-                        <!--begin::Logo-->
-                        <a href="../../demo1/dist/landing.html">
-                            <img alt="Logo" src="assets/media/logos/bkoku.svg" class="h-15px h-md-25px" />
-                        </a>
-                        <!--end::Logo image-->
-                        <!--begin::Logo image-->
-                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="http://bkokudev.mohe.gov.my/login">&copy; Sistem BKOKU, Kementerian Pendidikan Tinggi 2023© Hak Cipta Terpelihara.</span>
-                        <!--end::Logo image-->
-                    </div>
-                    <!--end::Copyright-->
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <div class="FAQ-img RotateMoveRight rounded">
+                    <img src="/landingv2/img/about-1.png" class="/landingv2/img-fluid w-100" alt="">
                 </div>
-                <!--end::Wrapper-->
             </div>
-            <!--end::Container-->
         </div>
-        <!--end::Wrapper-->
     </div>
-    <!--end::Footer Section-->
-    <!--begin::Scrolltop-->
-    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-        <i class="ki-duotone ki-arrow-up">
-            <span class="path1"></span>
-            <span class="path2"></span>
-        </i>
-    </div>
-    <!--end::Scrolltop-->
 </div>
-<!--end::Root-->
-<!--begin::Scrolltop-->
-<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-    <i class="ki-duotone ki-arrow-up">
-        <span class="path1"></span>
-        <span class="path2"></span>
-    </i>
+<!-- FAQ End -->
+
+
+<!-- Pricing Start -->
+<div class="container-fluid price py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+            <h4 class="text-primary">Pricing Plan</h4>
+            <h1 class="display-5 mb-4">Not Sure Which Plan Is For You?</h1>
+            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
+            </p>
+        </div>
+        <div class="row g-5 justify-content-center">
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="price-item bg-light rounded text-center">
+                    <div class="text-center text-dark border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
+                        <p class="fs-2 fw-bold text-uppercase mb-0">BASIC</p>
+                        <div class="d-flex justify-content-center">
+                            <strong class="align-self-start">$</strong>
+                            <p class="mb-0"><span class="display-5">00</span>/mo</p>
+                        </div>
+                    </div>
+                    <div class="text-start p-5">
+                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
+                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
+                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
+                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
+                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="price-item bg-light rounded text-center">
+                    <div class="pice-item-offer">Popular</div>
+                    <div class="text-center text-primary border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
+                        <p class="fs-2 fw-bold text-uppercase mb-0">Standard</p>
+                        <div class="d-flex justify-content-center">
+                            <strong class="align-self-start">$</strong>
+                            <p class="mb-0"><span class="display-5">23</span>/mo</p>
+                        </div>
+                    </div>
+                    <div class="text-start p-5">
+                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
+                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
+                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
+                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
+                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="price-item bg-light rounded text-center">
+                    <div class="text-center text-secondary border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
+                        <p class="fs-2 fw-bold text-uppercase mb-0">Premium</p>
+                        <div class="d-flex justify-content-center">
+                            <strong class="align-self-start">$</strong>
+                            <p class="mb-0"><span class="display-5">49</span>/mo</p>
+                        </div>
+                    </div>
+                    <div class="text-start p-5">
+                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
+                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
+                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
+                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
+                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
+                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!--end::Scrolltop-->
-<!--begin::Javascript-->
-<script>var hostUrl = "assets/";</script>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
-<script src="assets/plugins/custom/typedjs/typedjs.bundle.js"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/custom/landing.js"></script>
-<script src="assets/js/custom/pages/pricing/general.js"></script>
-<!--end::Custom Javascript-->
-<!--end::Javascript-->
+<!-- Pricing End -->
+
+
+<!-- Blog Start -->
+<div class="container-fluid blog py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+            <h4 class="text-primary">Our Blog</h4>
+            <h1 class="display-5 mb-4">Join Us For New Blog</h1>
+            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="/landingv2/img/blog-1.png" class="/landingv2/img-fluid w-100" alt="">
+                        <div class="blog-info">
+                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                            <div class="d-flex">
+                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-content text-dark border p-4 ">
+                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
+                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="/landingv2/img/blog-2.png" class="/landingv2/img-fluid w-100" alt="">
+                        <div class="blog-info">
+                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                            <div class="d-flex">
+                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-content text-dark border p-4 ">
+                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
+                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="/landingv2/img/blog-3.png" class="/landingv2/img-fluid w-100" alt="">
+                        <div class="blog-info">
+                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                            <div class="d-flex">
+                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-content text-dark border p-4 ">
+                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
+                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="blog-item">
+                    <div class="blog-img">
+                        <img src="/landingv2/img/blog-4.png" class="/landingv2/img-fluid w-100" alt="">
+                        <div class="blog-info">
+                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
+                            <div class="d-flex">
+                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
+                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-content text-dark border p-4 ">
+                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
+                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
+                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+
+<!-- Testimonial Start -->
+<div class="container-fluid testimonial py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
+            <h4 class="text-primary">Testimonial</h4>
+            <h1 class="display-5 mb-4">What Our Client Say About Us</h1>
+            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
+            </p>
+        </div>
+        <div class="testimonial-carousel owl-carousel wow zoomInDown" data-wow-delay="0.2s">
+            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-1.jpg' alt=''>">
+                <div class="testimonial-inner text-center p-5">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
+                            <img src="/landingv2/img/testimonial-img-1.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
+                        </div>
+                        <div>
+                            <h5 class="mb-2">John Abraham</h5>
+                            <p class="mb-0">New York, USA</p>
+                        </div>
+                    </div>
+                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
+                    </p>
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-2.jpg' alt=''>">
+                <div class="testimonial-inner text-center p-5">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
+                            <img src="/landingv2/img/testimonial-img-2.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
+                        </div>
+                        <div>
+                            <h5 class="mb-2">John Abraham</h5>
+                            <p class="mb-0">New York, USA</p>
+                        </div>
+                    </div>
+                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
+                    </p>
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-3.jpg' alt=''>">
+                <div class="testimonial-inner text-center p-5">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
+                            <img src="/landingv2/img/testimonial-img-3.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
+                        </div>
+                        <div>
+                            <h5 class="mb-2">John Abraham</h5>
+                            <p class="mb-0">New York, USA</p>
+                        </div>
+                    </div>
+                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
+                    </p>
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+
+<!-- Footer Start -->
+<div class="container-fluid footer py-5 wow fadeIn bg-secondary text-white" data-wow-delay="0.2s">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="mb-4 text-white">Company</h4>
+                    <a class="text-white" href=""> Why Mailler?</a>
+                    <a class="text-white" href=""> Our Features</a>
+                    <a class="text-white" href=""> Our Portfolio</a>
+                    <a class="text-white" href=""> About Us</a>
+                    <a class="text-white" href=""> Our Blog & News</a>
+                    <a class="text-white" href=""> Get In Touch</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="mb-4 text-white">Quick Links</h4>
+                    <a class="text-white" href=""> About Us</a>
+                    <a class="text-white" href=""> Contact Us</a>
+                    <a class="text-white" href=""> Privacy Policy</a>
+                    <a class="text-white" href=""> Terms & Conditions</a>
+                    <a class="text-white" href=""> Our Blog & News</a>
+                    <a class="text-white" href=""> Our Team</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="mb-4 text-white">Services</h4>
+                    <a class="text-white" href=""> All Services</a>
+                    <a class="text-white" href=""> Promotional Emails</a>
+                    <a class="text-white" href=""> Product Updates</a>
+                    <a class="text-white" href=""> Email Marketing</a>
+                    <a class="text-white" href=""> Acquistion Emails</a>
+                    <a class="text-white" href=""> Retention Emails</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-item d-flex flex-column">
+                    <h4 class="mb-4 text-white">Contact Info</h4>
+                    <a class="text-white" href=""><i class="fa fa-map-marker-alt me-2"></i> 123 Street, New York, USA</a>
+                    <a class="text-white" href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                    <a class="text-white" href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
+                    <a class="text-white" href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
+                    <div class="d-flex align-items-center mt-3">
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Copyright End -->
+
+
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/landingv2/lib/wow/wow.min.js"></script>
+<script src="/landingv2/lib/easing/easing.min.js"></script>
+<script src="/landingv2/lib/waypoints/waypoints.min.js"></script>
+<script src="/landingv2/lib/counterup/counterup.min.js"></script>
+<script src="/landingv2/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/landingv2/lib/lightbox/js/lightbox.min.js"></script>
+
+
+<!-- Template Javascript -->
+<script src="/landingv2/js/main.js"></script>
 </body>
-<!--end::Body-->
+
 </html>
