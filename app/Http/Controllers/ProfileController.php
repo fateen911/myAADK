@@ -75,7 +75,7 @@ class ProfileController extends Controller
                 ->update([
                     'name' => $request->name,
                     'no_kp' => $request->no_kp,
-                    $user->email => $request->email,
+                    'email' => $request->email,
                 ]);
             }
             else{
