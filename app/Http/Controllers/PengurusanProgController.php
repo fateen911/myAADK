@@ -7,8 +7,10 @@ use App\Models\Daerah;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
 use App\Models\Negeri;
+use App\Models\Pegawai;
 use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
+use App\Models\User;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -127,8 +129,6 @@ class PengurusanProgController extends Controller
 
         $program = new Program();
 
-        $pegawai_id = Auth::id();
-
         //GENERATE CUSTOM ID
         $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
         $id_custom = [
@@ -144,7 +144,7 @@ class PengurusanProgController extends Controller
         $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
         $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
 
-        $program->pegawai_id           =   $pegawai_id;
+        $program->pegawai_id           =   Auth::id();
         $program->kategori_id          =   $request->kategori;
         $program->custom_id            =   $custom_id;
         $program->nama                 =   $request->nama;
@@ -198,7 +198,7 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        $direct = "/pengurusan-program/pegawai_aadk/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
         return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
     }
 
