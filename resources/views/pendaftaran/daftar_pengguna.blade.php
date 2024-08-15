@@ -91,13 +91,13 @@
 				{{-- Nav Bar --}}
 				<ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Pegawai Mohon Mendaftar</button>
+						<button class="nav-link active" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Klien AADK</button>
 					</li>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="pegawai-tab" data-toggle="tab" data-target="#pegawai" type="button" role="tab" aria-controls="pegawai" aria-selected="true">Pegawai AADK</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Klien AADK</button>
+						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Pegawai Mohon Mendaftar</button>
 					</li>
 				</ul>			
 
