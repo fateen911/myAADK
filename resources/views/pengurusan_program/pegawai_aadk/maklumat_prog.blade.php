@@ -146,9 +146,7 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <button type="button" id="sms" class="btn btn-icon btn-warning mx-1 btn-sm" data-toggle="modal" data-target="#hebahanSms" data-id="{{$program->id}}"><i class="bi bi-chat-dots-fill fs-3"></i></button>
-                            <button type="button" id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></button>
-                            <button type="button" id="telegram" class="btn btn-icon btn-primary mx-1 btn-sm" data-toggle="modal" data-target="#hebahanTelegram" data-id="{{$program->id}}"><i class="bi bi-telegram fs-3"></i></button>
+                                <button type="button" id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></button>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
@@ -353,9 +351,7 @@
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
                             <!--begin::Share to-->
-                            <a id="sms" class="btn btn-icon btn-warning mx-1 btn-sm" data-toggle="modal" data-target="#hebahanSms" data-id="{{$program->id}}"><i class="bi bi-chat-dots-fill fs-3"></i></a>
                             <a id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <a id="telegram" class="btn btn-icon btn-primary mx-1 btn-sm" data-toggle="modal" data-target="#hebahanTelegram" data-id="{{$program->id}}"><i class="bi bi-telegram fs-3"></i></a>
                             <!--end::Share to-->
                         </div>
                         <!--end::Card body-->
