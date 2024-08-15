@@ -245,7 +245,13 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Penganjur Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->penganjur}}</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">
+                                    @if($program->penganjur!=null)
+                                        {{$program->penganjur}}
+                                    @else
+                                        TIADA
+                                    @endif
+                                </p>
                             </div>
                             <!--end::Input group-->
 
@@ -275,7 +281,18 @@
                                 <!--begin::Label-->
                                 <label class="form-label">Catatan:</label>
                                 <!--end::Label-->
-                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->catatan!!}</div>
+                                <div class="text-bg-light p-3 rounded border-bottom border-secondary">
+                                    @php
+                                        // Strip HTML tags and trim whitespace
+                                        $cleanMessage = trim(strip_tags($program->catatan));
+                                    @endphp
+
+                                    @if($cleanMessage === "")
+                                        TIADA
+                                    @else
+                                        {!!$program->catatan!!}
+                                    @endif
+                                </div>
                             </div>
                             <!--end::Input group-->
                         </div>
