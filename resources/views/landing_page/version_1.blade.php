@@ -2,7 +2,7 @@
 <html lang="en">
 <!--begin::Head-->
 <head><base href=""/>
-    <title>Selamat Datang - Sistem BKOKU</title>
+    <title>Selamat Datang - Sistem AADK</title>
     <meta charset="utf-8" />
     <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
     <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -448,11 +448,8 @@
             <!--begin::Heading-->
             <div class="text-center mb-17">
                 <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="hubungi" data-kt-scroll-offset="{default: 125, lg: 150}">PERMOHONAN / PERTANYAAN</h3>
+                <h3 class="fs-2hx text-dark mb-5" id="hubungi" data-kt-scroll-offset="{default: 125, lg: 150}">INFO LANJUT</h3>
                 <!--end::Title-->
-                <!--begin::Description-->
-                <div class="fs-5 text-muted fw-bold">Untuk sebarang pertanyaan, sila hubungi:</div>
-                <!--end::Description-->
             </div>
             <!--end::Heading-->
             <!--begin::Row-->
@@ -467,12 +464,11 @@
                             <div class="fs-4 fw-bold text-dark mb-3">Alamat :</div>
                             <!--end::Title-->
                             <!--begin::Alamat-->
-                            <div class="text-gray-500 fw-semibold fs-4">Kementerian Pendidikan Tinggi,
-                                <br /> Bahagian Biasiswa,
-                                <br /> Unit Pra Perkhidmatan,
-                                <br /> Aras 2, No. 2, Menara 2,
-                                <br /> Jalan P5/6, Presint 5,
-                                <br /> 62200 Wilayah Persekutuan Putrajaya.
+                            <div class="text-gray-500 fw-semibold fs-4">
+                                AGENSI ANTIDADAH KEBANGSAAN (AADK)
+                                <br/>Kementerian Dalam Negeri
+                                <br/>Jalan Maktab Perguruan Islam
+                                <br/>43000 Kajang, Selangor
                             </div>
                             <!--end::Alamat-->
                         </div>
@@ -491,15 +487,17 @@
                             <div class="fs-4 fw-bold text-dark mb-3">No. Untuk Dihubungi :</div>
                             <!--end::Title-->
                             <!--begin::Telefon-->
-                            <div class="text-gray-500 fw-semibold fs-4">Encik Yusri Bin Yusuf : 03-8870 6373
-                                <br />Cik Nur Dayana Binti Rozaini : 03-8870 6347</div>
+                            <div class="text-gray-500 fw-semibold fs-4">
+                                <i class="bi bi-whatsapp fs-2"></i> &nbsp; 019–626 2233
+                                <br><i class="bi bi-telephone-fill fs-2"></i> &nbsp; 1800-22-2235
+                            </div>
                             <!--end::Telefon-->
                             <br />
                             <!--begin::Title-->
                             <div class="fs-4 fw-bold text-dark mb-3">Emel :</div>
                             <!--end::Title-->
                             <!--begin::Emel-->
-                            <div class="text-gray-500 fw-semibold fs-4">Unit BKOKU : bkoku@mohe.gov.my
+                            <div class="text-gray-500 fw-semibold fs-4">webmaster@adk.gov.my
                             </div>
                             <!--end::Emel-->
                         </div>
@@ -516,27 +514,21 @@
                         <!--begin::Wrapper-->
                         <div class="mb-7">
                             <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Waktu pejabat SAHAJA</div>
+                            <div class="fs-4 fw-bold text-dark mb-3">Sosial Media</div>
                             <!--end::Title-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Isnin hingga Jumaat
-                                <br /> 9.00 pagi - 4.30 petang</div>
-                            <!--end::Waktu-->
-                            <br />
-                            <!--begin::Title-->
-                            <div class="fs-4 fw-bold text-dark mb-3">Waktu Rehat</div>
-                            <!--end::Title-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Isnin hingga Khamis
-                                <br /> (1.00 tengah hari - 2.00 petang)</div>
-                            <!--end::Waktu-->
-                            <!--begin::Waktu-->
-                            <div class="text-gray-500 fw-semibold fs-4">Jumaat
-                                <br /> (12.15 tengah hari - 2.45 petang)</div>
-                            <!--end::Waktu-->
+                            <div class="text-gray-500 fw-semibold fs-4">
+                                <i class="bi bi-globe fs-2"></i> &nbsp; www.adk.gov.my
+                                <br><i class="bi bi-facebook fs-2"></i> &nbsp; AgensiAntidadahKebangsaanMalaysia
+                                <br><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                </svg> &nbsp; aadk.malaysia
+                                <br><i class="bi bi-instagram fs-2"></i> &nbsp; aadkmalaysia
+                                <br><i class="bi bi-youtube fs-2"></i> &nbsp; aadkTV
+                                <br><i class="bi bi-tiktok fs-2"></i> &nbsp; aadk.tv
+                                <br><i class="bi bi-telegram fs-2"></i> &nbsp; AADKOfficial
+                            </div>
                         </div>
                         <!--end::Wrapper-->
-
                     </div>
                     <!--end::Testimonial-->
                 </div>
@@ -574,7 +566,7 @@
                         </a>
                         <!--end::Logo image-->
                         <!--begin::Logo image-->
-                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="http://bkokudev.mohe.gov.my/login">&copy; Sistem BKOKU, Kementerian Pendidikan Tinggi 2023© Hak Cipta Terpelihara.</span>
+                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="http://bkokudev.mohe.gov.my/login">© 2024 Agensi Antidadah Kebangsaan (AADK), Hak Cipta Terpelihara.</span>
                         <!--end::Logo image-->
                     </div>
                     <!--end::Copyright-->
