@@ -85,11 +85,13 @@
                 <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Pengesahan</a>
             </li>
             <!--end:::Tab item-->
+            @if($program->status != "BELUM SELESAI")
             <!--begin:::Tab item-->
             <li class="nav-item">
                 <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan</a>
             </li>
             <!--end:::Tab item-->
+            @endif
         </ul>
         <!--end:::Tabs-->
     </div>
@@ -165,7 +167,7 @@
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">Belum Selesai</p>
+                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">{{$program->status}}</p>
                             <br>
                         </div>
                         <!--end::Card body-->
@@ -482,6 +484,7 @@
         </div>
         <!--end::Tab pane pengesahan-->
 
+        @if($program->status != "BELUM SELESAI")
         <!--begin::Tab pane perekodan-->
         <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
             <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
@@ -557,11 +560,18 @@
                                 <!--begin::Label-->
                                 <label class="form-label">No. Kad Pengenalan</label>
                                 <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
-                                <!--end::Input-->
+                                @if($program->status == "SEDANG DIJALANKAN")
+                                    <!--begin::Input-->
+                                    <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
+                                    <!--end::Input-->
+                                @else
+                                    <!--begin::Input-->
+                                    <input type="text" name="no_kp" class="form-control mb-2" placeholder="Program sudah tamat" value="" disabled/>
+                                    <!--end::Input-->
+                                @endif
                             </div>
                             <!--end::Input group-->
+                            @if($program->status == "SEDANG DIJALANKAN")
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <button type="submit" id="perekodanBtn" class="btn btn-primary">
@@ -570,6 +580,15 @@
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
+                            @else
+                                <div class="mb-6 fv-row">
+                                    <button type="submit" id="perekodanBtn" class="btn btn-primary" disabled>
+                                        <span class="indicator-label">Hadir</span>
+                                        <span class="indicator-progress">Tunggu sebentar...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
+                            @endif
                             <!--end::Input group-->
                         </div>
                         <!--end::Card header-->
@@ -617,6 +636,7 @@
                 </div>
             </form>
         </div>
+        @endif
         <!--end::Tab pane perekodan-->
     </div>
     <!--end::Main column-->
