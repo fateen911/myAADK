@@ -14,7 +14,7 @@
             @csrf
             <!-- Nama -->
             <div>
-                <x-input-label for="nama" :value="__('Nama')" />
+                <x-input-label for="nama" :value="__('Nama Penuh')" />
                 <input type="text" class="form-control w-full" placeholder="" id="nama" name="nama" required/>
                 <x-input-error :messages="$errors->get('nama')" class="mt-2" />
             </div>
@@ -22,7 +22,7 @@
             {{-- No Kad Pengenalan --}}
             <div class="mt-4">
                 <x-input-label for="no_kp" :value="__('No Kad Pengenalan')"/>
-                <input type="text" maxlength="12" class="form-control w-full" placeholder="" id="no_kp" name="no_kp" required/>
+                <input type="text" maxlength="12" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" required/>
                 <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
             </div>
       
@@ -40,7 +40,7 @@
             {{-- No Telefon --}}
             <div class="mt-4">
                 <x-input-label for="no_tel" :value="__('Nombor Telefon')"/>
-                <input type="text" maxlength="11" class="form-control w-full" placeholder="" id="no_tel" name="no_tel" required />
+                <input type="text" maxlength="11" class="form-control w-full" placeholder="0109002100" id="no_tel" name="no_tel" required />
                 <x-input-error :messages="$errors->get('no_tel')" class="mt-2" />
             </div>
     

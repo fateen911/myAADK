@@ -73,7 +73,7 @@
                                             <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Belum Kemaskini</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Belum Mengemaskini Profil</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -100,7 +100,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Telah Kemaskini</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Telah Mengemaskini Profil</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -222,7 +222,7 @@
                             <!--begin::Col-->
                             <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: green;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
@@ -275,7 +275,7 @@
                             <!--begin::Col-->
                             <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkorange">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:darkorange;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
@@ -301,7 +301,7 @@
                             <!--begin::Col-->
                             <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: red;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
