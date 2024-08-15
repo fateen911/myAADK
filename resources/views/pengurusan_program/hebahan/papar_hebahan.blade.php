@@ -12,7 +12,7 @@
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
         <b class="text-uppercase fw-medium">TARIKH/MASA MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b><br>
-        <b class="text-uppercase fw-medium">TARIKH/MASA TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_TAMAT))}}</b><br>
+        <b class="text-uppercase fw-medium">TARIKH/MASA TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</b><br>
         <b class="text-uppercase fw-medium">TEMPAT: {{$program->tempat}}</b><br>
         <br>
         <hr>
