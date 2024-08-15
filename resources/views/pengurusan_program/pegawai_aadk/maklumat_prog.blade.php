@@ -220,7 +220,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Mula:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>
@@ -228,7 +228,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Tarikh & Masa Tamat:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>

@@ -735,8 +735,8 @@ class PengurusanProgController extends Controller
                 $message = "Salam Sejahtera,\n\n" .
                     "Anda dijemput untuk menyertai program\n\n" .
                     "NAMA PROGRAM: " . strtoupper($program->nama) . "\n" .
-                    "TARIKH MULA: " . date('d/m/Y, gA', strtotime($program->tarikh_mula)) . "\n" .
-                    "TARIKH TAMAT: " . date('d/m/Y, gA', strtotime($program->tarikh_tamat)) . "\n" .
+                    "TARIKH MULA: " . date('d/m/Y, h:iA', strtotime($program->tarikh_mula)) . "\n" .
+                    "TARIKH TAMAT: " . date('d/m/Y, h:iA', strtotime($program->tarikh_tamat)) . "\n" .
                     "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
                     "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
 
@@ -823,8 +823,8 @@ class PengurusanProgController extends Controller
             $message = "Salam Sejahtera,\n\n" .
                 "Anda dijemput untuk menyertai program\n\n" .
                 "NAMA PROGRAM: " . strtoupper($program->nama) . "\n" .
-                "TARIKH MULA: " . date('d/m/Y, gA', strtotime($program->tarikh_mula)) . "\n" .
-                "TARIKH TAMAT: " . date('d/m/Y, gA', strtotime($program->tarikh_tamat)) . "\n" .
+                "TARIKH MULA: " . date('d/m/Y, h:iA', strtotime($program->tarikh_mula)) . "\n" .
+                "TARIKH TAMAT: " . date('d/m/Y, h:iA', strtotime($program->tarikh_tamat)) . "\n" .
                 "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
                 "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
 

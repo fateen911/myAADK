@@ -24,8 +24,8 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
     public function __construct($program, $perekodan)
     {
         $this->nama = strtoupper($program->nama);
-        $this->tarikh_mula = Carbon::parse($program->tarikh_mula)->format('d/m/Y, gA');
-        $this->tarikh_tamat = Carbon::parse($program->tarikh_tamat)->format('d/m/Y, gA');
+        $this->tarikh_mula = Carbon::parse($program->tarikh_mula)->format('d/m/Y, h:iA');
+        $this->tarikh_tamat = Carbon::parse($program->tarikh_tamat)->format('d/m/Y, h:iA');
         $this->tempat = strtoupper($program->tempat);
         $this->perekodan = $perekodan;
     }

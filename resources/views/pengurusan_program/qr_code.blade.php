@@ -21,8 +21,8 @@
     <br>
     <br>
     <h3>Nama Program: {{$program->nama}}</h3>
-    <h3>Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</h3>
-    <h3>Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</h3>
+    <h3>Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</h3>
+    <h3>Tarikh/Masa Tamat: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</h3>
     <h3>Tempat: {{$program->nama}}</h3>
     <h3>Pautan: <a href="{{$program->pautan_perekodan}}">{{$program->pautan_perekodan}}</a></h3>
 </div>

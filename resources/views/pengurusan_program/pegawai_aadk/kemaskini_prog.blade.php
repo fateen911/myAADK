@@ -134,11 +134,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tarikh & Masa Mula</label>
-                                                <input class="form-control form-control-solid" name="tarikh_mula" placeholder="Pilih tarikh" id="kt_daterangepicker_1" value="{{date('d/m/Y gA', strtotime($program->tarikh_mula))}}"/>
+                                                <input class="form-control form-control-solid" name="tarikh_mula" placeholder="Pilih tarikh" id="kt_daterangepicker_1" value="{{date('d/m/Y h:iA', strtotime($program->tarikh_mula))}}"/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="required form-label">Tarikh & Masa Tamat</label>
-                                                <input class="form-control form-control-solid" name="tarikh_tamat" placeholder="Pilih tarikh" id="kt_daterangepicker_2" value="{{date('d/m/Y gA', strtotime($program->tarikh_tamat))}}"/>
+                                                <input class="form-control form-control-solid" name="tarikh_tamat" placeholder="Pilih tarikh" id="kt_daterangepicker_2" value="{{date('d/m/Y h:iA', strtotime($program->tarikh_tamat))}}"/>
                                             </div>
                                         </div>
                                         {{--                                                            <!--begin::Description-->--}}

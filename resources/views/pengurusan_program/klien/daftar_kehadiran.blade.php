@@ -76,8 +76,8 @@
                     <!--begin::Text-->
                     <div class="w-md-350px mb-2 mx-auto fw-semibold fs-6 mb-7 ">
                         Nama Program: {{$program->nama}} <br>
-                        Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}} <br>
-                        Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}} <br>
+                        Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}} <br>
+                        Tarikh/Masa Tamat: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}} <br>
                         Tempat: {{$program->tempat}} <br>
                         @if($program->penganjur!=null)
                             Penganjur: {{$program->penganjur}} <br>

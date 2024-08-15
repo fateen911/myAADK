@@ -23,8 +23,8 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
     public function __construct($program, $pengesahan)
     {
         $this->nama = strtoupper($program->nama);
-        $this->tarikh_mula = Carbon::parse($program->tarikh_mula)->format('d/m/Y, gA');
-        $this->tarikh_tamat = Carbon::parse($program->tarikh_tamat)->format('d/m/Y, gA');
+        $this->tarikh_mula = Carbon::parse($program->tarikh_mula)->format('d/m/Y, h:iA');
+        $this->tarikh_tamat = Carbon::parse($program->tarikh_tamat)->format('d/m/Y, h:iA');
         $this->tempat = strtoupper($program->tempat);
         $this->pengesahan = $pengesahan;
     }

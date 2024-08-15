@@ -17,7 +17,7 @@
                     <p class="text-uppercase">Nama Program: {{$program->nama}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p class="text-uppercase">Tarikh/Masa Mula: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</p>
+                    <p class="text-uppercase">Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</p>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <p class="text-uppercase">Tempat: {{$program->tempat}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
-                    <p class="text-uppercase">Tarikh/Masa Tamat: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</p>
+                    <p class="text-uppercase">Tarikh/Masa Tamat: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</p>
                 </div>
             </div>
         </div>

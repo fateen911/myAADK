@@ -6,8 +6,8 @@
 <body>
 <h1>HEBAHAN PROGRAM</h1>
 <h4>NAMA PROGRAM: {{strtoupper($program->nama)}}</h4>
-<h4>TARIKH MULA: {{date('d/m/Y, gA', strtotime($program->tarikh_mula))}}</h4>
-<h4>TARIKH TAMAT: {{date('d/m/Y, gA', strtotime($program->tarikh_tamat))}}</h4>
+<h4>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</h4>
+<h4>TARIKH TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</h4>
 <h4>TEMPAT: {{strtoupper($program->tempat)}}</h4>
 <br>
 <p>Sila imbas kod qr berikut untuk pengesahan kehadiran anda:</p>
