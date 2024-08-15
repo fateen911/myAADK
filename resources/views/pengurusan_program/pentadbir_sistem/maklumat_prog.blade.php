@@ -85,11 +85,13 @@
                 <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Pengesahan</a>
             </li>
             <!--end:::Tab item-->
-            <!--begin:::Tab item-->
-            <li class="nav-item">
-                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan</a>
-            </li>
-            <!--end:::Tab item-->
+            @if($program->status != "BELUM SELESAI")
+                <!--begin:::Tab item-->
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan</a>
+                </li>
+                <!--end:::Tab item-->
+            @endif
         </ul>
         <!--end:::Tabs-->
     </div>
@@ -165,7 +167,7 @@
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">Belum Selesai</p>
+                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">{{$program->status}}</p>
                             <br>
                         </div>
                         <!--end::Card body-->
@@ -482,141 +484,159 @@
         </div>
         <!--end::Tab pane pengesahan-->
 
-        <!--begin::Tab pane perekodan-->
-        <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
-            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
-                <!--begin::Aside column-->
-                @csrf
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
-                    <!--begin::QR code settings-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            {{--                    <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Zoom</a>--}}
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Kod QR</h2>
+        @if($program->status != "BELUM SELESAI")
+            <!--begin::Tab pane perekodan-->
+            <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
+                <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
+                    <!--begin::Aside column-->
+                    @csrf
+                    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">
+                        <!--begin::QR code settings-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                {{--                    <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Zoom</a>--}}
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Kod QR</h2>
+                                </div>
+                                <!--end::Card title-->
+                                <!--begin::Big QR-->
+                                <div class="card-title">
+                                    <button type="button" id="modal_3" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_perekodan">
+                                        <i class="ki-solid bi-arrows-angle-expand"></i>
+                                    </button>
+                                </div>
+                                <!--end::Big QR-->
                             </div>
-                            <!--end::Card title-->
-                            <!--begin::Big QR-->
-                            <div class="card-title">
-                                <button type="button" id="modal_3" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_perekodan">
-                                    <i class="ki-solid bi-arrows-angle-expand"></i>
-                                </button>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body text-center pt-0">
+                                <!--begin::Image input-->
+                                {!! QrCode::size(200)->generate($program->pautan_perekodan); !!}
+                                <!--end::Image input-->
+                                <br><br>
+                                <!--begin::Link-->
+                                <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
+                                    <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_perekodan}}" disabled/>
+                                    <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
+                                        <i class="bi bi-clipboard-fill fs-2"></i>
+                                    </button>
+                                </div>
+                                <!--end::Link-->
                             </div>
-                            <!--end::Big QR-->
+                            <!--end::Card body-->
+                            <!--begin::Card body-->
+                            {{--                        <div class="card-body pt-4">--}}
+                            {{--                            <!--begin::Share-->--}}
+                            {{--                            <b class="fs-5">Hebahan:</b> &nbsp;--}}
+                            {{--                            <!--end::Share-->--}}
+                            {{--                            <!--begin::Share to-->--}}
+                            {{--                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
+                            {{--                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
+                            {{--                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
+                            {{--                            <!--end::Share to-->--}}
+                            {{--                        </div>--}}
+                            <!--end::Card body-->
                         </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body text-center pt-0">
-                            <!--begin::Image input-->
-                            {!! QrCode::size(200)->generate($program->pautan_perekodan); !!}
-                            <!--end::Image input-->
-                            <br><br>
-                            <!--begin::Link-->
-                            <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
-                                <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_perekodan}}" disabled/>
-                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
-                                    <i class="bi bi-clipboard-fill fs-2"></i>
-                                </button>
-                            </div>
-                            <!--end::Link-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--begin::Card body-->
-{{--                        <div class="card-body pt-4">--}}
-{{--                            <!--begin::Share-->--}}
-{{--                            <b class="fs-5">Hebahan:</b> &nbsp;--}}
-{{--                            <!--end::Share-->--}}
-{{--                            <!--begin::Share to-->--}}
-{{--                            <a href="{{ url('/pengurusan-program/hebahan/sms') }}" class="btn btn-icon btn-warning mx-1 btn-sm" id="share-button"><i class="bi bi-chat-dots-fill fs-3"></i></a>--}}
-{{--                            <a href="{{ url('/pengurusan-program/hebahan/emel') }}" class="btn btn-icon btn-danger mx-1 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3"></i></a>--}}
-{{--                            <a href="{{ url('/pengurusan-program/hebahan/telegram') }}" class="btn btn-icon btn-primary mx-1 btn-sm" id="share-button"><i class="bi bi-telegram fs-3"></i></a>--}}
-{{--                            <!--end::Share to-->--}}
-{{--                        </div>--}}
-                        <!--end::Card body-->
+                        <!--end::QR code settings-->
                     </div>
-                    <!--end::QR code settings-->
-                </div>
-                <!--end::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
-                    <!--begin::Rekod Kehadiran-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>Rekod Kehadiran</h2>
+                    <!--end::Aside column-->
+                    <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                        <!--begin::Rekod Kehadiran-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h2>Rekod Kehadiran</h2>
+                                </div>
                             </div>
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-                            <!--begin::Input group-->
-                            <div class="mb-6 fv-row">
-                                @csrf
-                                <!--begin::Label-->
-                                <label class="form-label">No. Kad Pengenalan</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-6 fv-row">
-                                <button type="submit" id="perekodanBtn" class="btn btn-primary">
-                                    <span class="indicator-label">Hadir</span>
-                                    <span class="indicator-progress">Tunggu sebentar...
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
+                                <!--begin::Input group-->
+                                <div class="mb-6 fv-row">
+                                    @csrf
+                                    <!--begin::Label-->
+                                    <label class="form-label">No. Kad Pengenalan</label>
+                                    <!--end::Label-->
+                                    @if($program->status == "SEDANG DIJALANKAN")
+                                        <!--begin::Input-->
+                                        <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
+                                        <!--end::Input-->
+                                    @else
+                                        <!--begin::Input-->
+                                        <input type="text" name="no_kp" class="form-control mb-2" placeholder="Program sudah tamat" value="" disabled/>
+                                        <!--end::Input-->
+                                    @endif
+                                </div>
+                                <!--end::Input group-->
+                                @if($program->status == "SEDANG DIJALANKAN")
+                                    <!--begin::Input group-->
+                                    <div class="mb-6 fv-row">
+                                        <button type="submit" id="perekodanBtn" class="btn btn-primary">
+                                            <span class="indicator-label">Hadir</span>
+                                            <span class="indicator-progress">Tunggu sebentar...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                </button>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div class="mb-6 fv-row">
+                                        <button type="submit" id="perekodanBtn" class="btn btn-primary" disabled>
+                                            <span class="indicator-label">Hadir</span>
+                                            <span class="indicator-progress">Tunggu sebentar...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <!--end::Input group-->
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Card header-->
                         </div>
-                        <!--end::Card header-->
-                    </div>
-                    <!--end::Rekod Kehadiran-->
-                    <!--begin::Senarai kehadiran-->
-                    <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2>Senarai Klien Yang Hadir</h2>
+                        <!--end::Rekod Kehadiran-->
+                        <!--begin::Senarai kehadiran-->
+                        <div class="card card-flush py-4">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Senarai Klien Yang Hadir</h2>
+                                </div>
+                                <div class="card-title">
+                                    <a href="{{url('/pengurusan-program/pdf-perekodan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
+                                        PDF &nbsp; <i class="bi bi-file-pdf"></i>
+                                    </a>
+                                    <a href="{{url('/pengurusan-program/excel-perekodan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
+                                        Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </a>
+                                </div>
+                                <!--end::Card title-->
                             </div>
-                            <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pdf-perekodan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
-                                    PDF &nbsp; <i class="bi bi-file-pdf"></i>
-                                </a>
-                                <a href="{{url('/pengurusan-program/excel-perekodan/'.$program->id)}}" class="btn btn-sm btn-success btn-active-color-success">
-                                    Excel &nbsp; <i class="bi bi-file-earmark-spreadsheet"></i>
-                                </a>
-                            </div>
-                            <!--end::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0 table-responsive mx-10">
-                            <!--begin::Table-->
-                            <table class="table table-row-dashed fs-6 gy-5 my-0" id="perekodanTable">
-                                <thead>
-                                <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                    <th class="min-w-125px">Nama</th>
-                                    <th class="min-w-175px">No. Kad Pengenalan</th>
-                                    <th class="min-w-175px">Tarikh/Masa</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0 table-responsive mx-10">
+                                <!--begin::Table-->
+                                <table class="table table-row-dashed fs-6 gy-5 my-0" id="perekodanTable">
+                                    <thead>
+                                    <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                                        <th class="min-w-125px">Nama</th>
+                                        <th class="min-w-175px">No. Kad Pengenalan</th>
+                                        <th class="min-w-175px">Tarikh/Masa</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                </tbody>
-                            </table>
-                            <!--end::Table-->
+                                    </tbody>
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Card body-->
                         </div>
-                        <!--end::Card body-->
+                        <!--end::Senarai kehadiran-->
                     </div>
-                    <!--end::Senarai kehadiran-->
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        @endif
         <!--end::Tab pane perekodan-->
     </div>
     <!--end::Main column-->
