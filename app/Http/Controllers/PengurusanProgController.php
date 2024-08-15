@@ -141,8 +141,11 @@ class PengurusanProgController extends Controller
         $custom_id = IdGenerator::generate($id_custom);
 
         //Date format for database
-        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
-        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+        $format_1 = str_replace("/", "-", $request->tarikh_mula);
+        $format_2 = str_replace("/", "-", $request->tarikh_tamat);
+
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
 
         $program->pegawai_id           =   Auth::id();
         $program->kategori_id          =   $request->kategori;
@@ -218,9 +221,12 @@ class PengurusanProgController extends Controller
         $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
 
         //Date format for database
-        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
-        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
-        dd($tarikh_mula);
+        $format_1 = str_replace("/", "-", $request->tarikh_mula);
+        $format_2 = str_replace("/", "-", $request->tarikh_tamat);
+
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
+
         $program = Program::find($id);
         $program->update([
             'kategori_id'          =>   $request->kategori,
@@ -343,8 +349,11 @@ class PengurusanProgController extends Controller
         $custom_id = IdGenerator::generate($id_custom);
 
         //Date format for database
-        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
-        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+        $format_1 = str_replace("/", "-", $request->tarikh_mula);
+        $format_2 = str_replace("/", "-", $request->tarikh_tamat);
+
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
 
         $program->pegawai_id           =   $pegawai_id;
         $program->kategori_id          =   $request->kategori;
@@ -420,8 +429,11 @@ class PengurusanProgController extends Controller
         $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
 
         //Date format for database
-        $tarikh_mula = date('Y-m-d H:i:s', strtotime($request->tarikh_mula));
-        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($request->tarikh_tamat));
+        $format_1 = str_replace("/", "-", $request->tarikh_mula);
+        $format_2 = str_replace("/", "-", $request->tarikh_tamat);
+
+        $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
+        $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
 
         $program = Program::find($id);
         $program->update([
