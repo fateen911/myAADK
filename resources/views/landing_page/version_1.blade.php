@@ -34,7 +34,7 @@
     <!--begin::Header Section-->
     <div class="mb-0" id="home">
         <!--begin::Wrapper-->
-        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(assets/media/svg/illustrations/landing.svg)">
+        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(/assets/media/svg/illustrations/landing.svg)">
             <!--begin::Header-->
             <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '10px', lg: '10px'}">
 
@@ -492,7 +492,7 @@
                                 <br><i class="bi bi-telephone-fill fs-2"></i> &nbsp; 1800-22-2235
                             </div>
                             <!--end::Telefon-->
-                            <br />
+                            <br/>
                             <!--begin::Title-->
                             <div class="fs-4 fw-bold text-dark mb-3">Emel :</div>
                             <!--end::Title-->

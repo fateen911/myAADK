@@ -65,8 +65,8 @@
                 </div>
                 <a href="contact.html" class="nav-item nav-link">Contact Us</a>
             </div>
-            <a href="#" class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log In</a>
-            <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Sign Up</a>
+            <a href="#" class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log Masuk</a>
+            <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Daftar</a>
         </div>
     </nav>
 
@@ -79,9 +79,12 @@
         </div>
         <div class="row gy-5 align-items-center">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Turn Emails into Revenue</h1>
-                <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Win new customers with the #1 email marketing and automations brand* that recommends ways to get more opens, clicks, and sales.</p>
-                <a href="#" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">Get Started</a>
+                <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Maklamat</h1>
+                <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">
+                    Sistem ini dibangunkan untuk menyokong proses kemajuan kepulihan dan
+                    kecenderungan penagihan relaps Klien Pasca RPDK pasca RPDK dapat dipantau secara
+                    berterusan oleh Bahagian Rawatan, Perubatan dan Pemulihan.
+                </p>
             </div>
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
                 <img src="/landingv2/img/hero-img-1.png" class="/landingv2/img-fluid w-100 h-100" alt="">
@@ -652,35 +655,23 @@
         <div class="row g-5">
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Company</h4>
-                    <a class="text-white" href=""> Why Mailler?</a>
-                    <a class="text-white" href=""> Our Features</a>
-                    <a class="text-white" href=""> Our Portfolio</a>
-                    <a class="text-white" href=""> About Us</a>
-                    <a class="text-white" href=""> Our Blog & News</a>
-                    <a class="text-white" href=""> Get In Touch</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Quick Links</h4>
-                    <a class="text-white" href=""> About Us</a>
-                    <a class="text-white" href=""> Contact Us</a>
-                    <a class="text-white" href=""> Privacy Policy</a>
-                    <a class="text-white" href=""> Terms & Conditions</a>
-                    <a class="text-white" href=""> Our Blog & News</a>
-                    <a class="text-white" href=""> Our Team</a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Services</h4>
-                    <a class="text-white" href=""> All Services</a>
-                    <a class="text-white" href=""> Promotional Emails</a>
-                    <a class="text-white" href=""> Product Updates</a>
-                    <a class="text-white" href=""> Email Marketing</a>
-                    <a class="text-white" href=""> Acquistion Emails</a>
-                    <a class="text-white" href=""> Retention Emails</a>
+                    <h4 class="mb-4 text-white">Contact Info</h4>
+                    <a class="text-white" href="">
+                        <i class="fa fa-map-marker-alt me-2"></i>
+                        AGENSI ANTIDADAH KEBANGSAAN (AADK)
+                        <br/>Kementerian Dalam Negeri
+                        <br/>Jalan Maktab Perguruan Islam
+                        <br/>43000 Kajang, Selangor
+                    </a>
+                    <a class="text-white" href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
+                    <a class="text-white" href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
+                    <a class="text-white" href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
+                    <div class="d-flex align-items-center mt-3">
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
@@ -709,7 +700,7 @@
     <div class="container">
         <div class="row g-4 align-items-center">
             <div class="col-md-6 text-center text-md-start mb-md-0">
-                <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>© 2024 Agensi Antidadah Kebangsaan (AADK)</a>, Hak Cipta Terpelihara.</span>
             </div>
         </div>
     </div>
