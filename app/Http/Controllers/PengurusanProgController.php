@@ -560,7 +560,7 @@ class PengurusanProgController extends Controller
         $perekodan->klien_id            =   $klien_id;
         $perekodan->tarikh_perekodan    =   $tarikh_perekodan;
         $perekodan->save();
-        return redirect()->back()->with('success', 'Berjaya dihantar.');
+        return redirect()->back()->with('success', 'Kehadiran berjaya direkodkan.');
     }
 
     public function postDaftarKehadiran2(Request $request, $id) //perekodan
@@ -573,11 +573,11 @@ class PengurusanProgController extends Controller
         $program = Program::where('id', $id)->first();
 
         if (is_null($klien)){
-            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+            return redirect()->back()->with('error2', 'No Kad Pengenalan tidak sah.');
         }
 
         if (is_null($program)){
-            return redirect()->back()->with('error', 'Program tidak wujud.');
+            return redirect()->back()->with('error2', 'Program tidak wujud.');
         }
 
         $klien_id = $klien->id;
@@ -588,7 +588,7 @@ class PengurusanProgController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'Kehadiran telah direkodkan sebelum ini.');
+            return redirect()->back()->with('error2', 'Kehadiran telah direkodkan sebelum ini.');
         }
 
         $tarikh_perekodan = Carbon::now();
@@ -598,7 +598,7 @@ class PengurusanProgController extends Controller
         $perekodan->klien_id            =   $klien_id;
         $perekodan->tarikh_perekodan    =   $tarikh_perekodan;
         $perekodan->save();
-        return redirect()->back()->with('success', 'Berjaya dihantar.');
+        return redirect()->back()->with('success2', 'Kehadiran berjaya direkodkan.');
     }
 
     public function pengesahanKehadiran($id)

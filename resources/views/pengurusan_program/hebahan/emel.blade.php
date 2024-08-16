@@ -4,15 +4,25 @@
     <title>Hebahan</title>
 </head>
 <body>
-<h1>HEBAHAN PROGRAM</h1>
-<h4>NAMA PROGRAM: {{strtoupper($program->nama)}}</h4>
-<h4>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</h4>
-<h4>TARIKH TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</h4>
-<h4>TEMPAT: {{strtoupper($program->tempat)}}</h4>
+<p>Assalamualaikum dan Salam Sejahtera,<br>
+<p>Dengan segala hormatnya, kami ingin menjemput pihak tuan/puan untuk menghadiri program berikut:</p> <br>
+<p><b>NAMA PROGRAM: {{strtoupper($program->nama)}}</b></p>
+<p><b>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b></p>
+<p><b>TARIKH TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</b></p>
+<p><b>TEMPAT: {{strtoupper($program->tempat)}}</b></p>
 <br>
-<p>Sila imbas kod qr berikut untuk pengesahan kehadiran anda:</p>
+<p>Sila imbas kod QR atau klik pautan berikut untuk pengesahan kehadiran anda:</p>
 <img src="{{ $message->embed(public_path('qr_codes/qr_pengesahan_'.$program->id.'.png')) }}" alt="Logo">
 <br>
-<p>Pautan:{{$program->pautan_pengesahan}}</p>
+<p>Pautan: <a href="{{$program->pautan_pengesahan}}">sila klik sini</a></p>
+<br>
+<p>Kami amat menghargai kehadiran tuan/puan ke program ini.
+Untuk sebarang pertanyaan atau maklumat lanjut, sila hubungi <b>{{$program->no_tel_dihubungi}}</b>.
+Kerjasama dan keprihatinan tuan/puan amat kami hargai.</p><br>
+<p>Sekian, terima kasih.</p><br>
+
+<p>Yang Benar,</p><br>
+<p><b>{{$pendaftar_prog->name}}</b></p>
+<p><b>Pegawai Agensi Antidadah Kebangsaan (AADK)</b></p><br>
 </body>
 </html>

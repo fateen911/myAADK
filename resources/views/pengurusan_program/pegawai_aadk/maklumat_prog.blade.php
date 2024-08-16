@@ -585,6 +585,18 @@
                                     </button>
                                 </div>
                             @endif
+
+                            @if (session('success2'))
+                                <div class="alert alert-success p-3" role="alert">
+                                    {{ session('success2') }}
+                                </div>
+                            @endif
+
+                            @if (session('error2'))
+                                <div class="alert alert-danger p-3" role="alert">
+                                    {{ session('error2') }}
+                                </div>
+                            @endif
                             <!--end::Input group-->
                         </div>
                         <!--end::Card header-->
