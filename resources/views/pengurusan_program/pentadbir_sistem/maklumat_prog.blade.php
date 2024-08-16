@@ -165,7 +165,13 @@
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                            <p class="fs-6 px-4 py-3 border rounded border-secondary fw-medium">{{$program->status}}</p>
+                            @if($program->status == 'BELUM SELESAI')
+                                <p class="badge badge-light-primary text-royalblue fs-6 fw-bold">{{$program->status}}</p>
+                            @elseif($program->status == 'SEDANG DIJALANKAN')
+                                <p class="badge badge-light-warning text-darkorange fs-6 fw-bold">{{$program->status}}</p>
+                            @elseif($program->status == 'SELESAI')
+                                <p class="badge badge-light-success text-seagreen fs-6 fw-bold">{{$program->status}}</p>
+                            @endif
                             <br>
                         </div>
                         <!--end::Card body-->

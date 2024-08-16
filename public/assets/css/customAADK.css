@@ -142,6 +142,18 @@
     background-color: #468eb4 !important;
 }
 
+.text-seagreen{
+    color: seagreen!important;
+}
+
+.text-darkorange{
+    color: darkorange !important;
+}
+
+.text-royalblue{
+    color: royalblue !important;
+}
+
 .col-lg-3{
     -ms-flex:0 0 25%;
     flex:0 0 25%;
