@@ -954,6 +954,16 @@ class PengurusanProgController extends Controller
         return $pdf->download('senarai_perekodan_kehadiran.pdf');
     }
 
+    public function pdfPengesahan($id)
+    {
+        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
+        $program = Program::with('kategori')->find($id);
+        $data = ['title' => 'Senarai Pengesahan Kehadiran', 'pengesahan' => $pengesahan, 'program' => $program];
+        $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data)->setPaper('a4','landscape');
+
+        return $pdf->download('senarai_perekodan_kehadiran.pdf');
+    }
+
     public function excelPengesahan($id)
     {
         $program = Program::with('kategori')->find($id);

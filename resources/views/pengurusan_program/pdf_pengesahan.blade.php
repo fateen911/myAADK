@@ -42,7 +42,7 @@
                 <th class="min-w-175px">No. Kad Pengenalan</th>
                 <th class="min-w-175px">Alamat</th>
                 <th class="min-w-175px">No. Telefon</th>
-                <th class="min-w-175px">Pengesahan</th>
+                <th class="min-w-150px">Pengesahan</th>
                 <th class="min-w-175px">Catatan</th>
             </tr>
             </thead>
