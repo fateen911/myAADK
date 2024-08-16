@@ -32,7 +32,6 @@
                 <div class="input-group">
                     <input type="text" class="form-control w-full" placeholder="contoh12" id="emelPegawai" name="emelPegawai" required />
                     <span class="input-group-text">@adk.gov.my</span>
-                    <input type="hidden" id="emelPegawai" name="emelPegawai" />
                 </div>
                 <x-input-error :messages="$errors->get('emelPegawai')" class="mt-2" />
             </div>

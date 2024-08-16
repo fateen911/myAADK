@@ -9,7 +9,7 @@
     <head>
         <style>
             .scrollable-container {
-                max-height: 390px;
+                max-height: 400px;
                 overflow-y: auto;
                 margin-right: 10px;
             }
@@ -56,7 +56,7 @@
                             <h3 class="card-title align-items-start flex-column text-white pt-10">
                                 <span class="fw-bold fs-2x mb-3">Profil Peribadi</span>
                                 <div class="fs-4 text-white">
-                                    <span class="opacity-75">Status terikini</span>
+                                    <span class="opacity-75">Status terkini</span>
                                     <span class="position-relative d-inline-block">
                                         <a href="{{ route('pengurusan-profil') }}" class="link-white opacity-75-hover fw-bold d-block mb-1" style="color: darkblue;">profil peribadi</a>
                                     </span>
@@ -253,20 +253,68 @@
 
                 <!--begin::Col-->
                 <div class="col-xl-5">
-                    <div class="card card-flush">
+                    <div class="card card-flush h-xl-100">
                         <!--begin::Header-->
                         <div class="card-header pt-5">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold text-dark fs-1">Modal Kepulihan</span>
-                                <span class="text-gray-500 pt-2 fw-semibold fs-6">Status terkini bahagian soal selidik demografi dan soal selidik kepulihan.</span>
+                                <span class="card-label fw-bold text-dark fs-1">Soal Selidik Modal Kepulihan</span>
+                                <span class="text-gray-500 pt-2 fw-semibold fs-6">Status terkini bahagian soal selidik kepulihan.</span>
                             </h3>
                             <!--end::Title-->
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
-                        <div class="card-body  scrollable-container">
-                            <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
+                        <div class="card-body scrollable-container">
+                            <!--begin::Table container-->
+                            <div class="table-responsive">
+                                <!--begin::Table-->
+                                <table class="table align-middle gs-0 gy-4 my-0">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                        <tr class="fs-6 fw-bold text-gray-600">
+                                            <th class="p-0 min-w-150px d-block pt-3">TARIKH</th>
+                                            <th class="text-center min-w-140px pt-3">STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody>
+                                        @if ($tidakMenjawabKepulihan )
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($tarikhTidakMenjawabKepulihan)->format('d/m/Y')}}</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-danger fs-7 fw-bold">Belum Menjawab</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+
+                                        @foreach ($keputusanKepulihan as $kepulihan)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('klien.soalSelidik') }}" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{Carbon::parse($kepulihan->updated_at)->format('d/m/Y')}}</a>
+                                                </td>
+                                                @if ($kepulihan->status == 'Selesai')
+                                                    <td class="text-center">
+                                                        <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-success fs-7 fw-bold">{{$kepulihan->status}}</a>
+                                                    </td>
+                                                @else
+                                                    <td class="text-center">
+                                                        <a href="{{ route('klien.soalSelidik') }}" class="badge badge-light-warning fs-7 fw-bold">{{$kepulihan->status}}</a>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                            <!--end::Table container-->
+
+                            {{-- <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
                                 <!--begin:::Tab item-->
                                 <li class="nav-item">
                                     <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_stats_widget_1_tab_1">
@@ -290,10 +338,10 @@
                                     </a>
                                 </li>
                                 <!--end:::Tab item-->
-                            </ul>
+                            </ul> --}}
 
                             <!--begin::Tab Content-->
-                            <div class="tab-content">
+                            {{-- <div class="tab-content">
                                 <!--begin::Tap pane-->
                                 <div class="tab-pane fade show active" id="kt_stats_widget_1_tab_1">
                                     <!--begin::Table container-->
@@ -386,7 +434,7 @@
                                     <!--end::Table container-->
                                 </div>
                                 <!--end::Tap pane-->
-                            </div>
+                            </div> --}}
                             <!--end::Tab Content-->
                         </div>
                         <!--end: Card Body-->

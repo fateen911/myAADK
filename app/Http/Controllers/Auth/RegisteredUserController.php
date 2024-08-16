@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
             $pegawaiData = [
                 'nama' => strtoupper($request->nama),
                 'no_kp' => $request->no_kp,
-                'emelPegawai' => $email,
+                'emel' => $email,
                 'no_tel' => $request->no_tel,
                 'jawatan' => $request->jawatan,
                 'peranan' => $request->peranan,

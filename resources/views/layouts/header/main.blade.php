@@ -79,7 +79,7 @@
 
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('profile.edit')}}" class="menu-link px-5">Profil Diri</a>
+                            <a href="{{route('profile.edit')}}" class="menu-link px-5">Profil Pengguna</a>
                         </div>
                         <!--end::Menu item-->
 

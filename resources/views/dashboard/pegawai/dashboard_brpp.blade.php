@@ -222,7 +222,7 @@
                             <!--begin::Col-->
                             <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-success">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: green !important;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
@@ -301,7 +301,7 @@
                             <!--begin::Col-->
                             <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-danger">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: red;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
