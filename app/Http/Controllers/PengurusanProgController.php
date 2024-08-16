@@ -687,6 +687,17 @@ class PengurusanProgController extends Controller
         }
     }
 
+    public function paparEmel2($id)
+    {
+        $negeri = Negeri::all();
+        $program = Program::with('kategori')->find($id);
+        if ($program) {
+            return view('pengurusan_program.hebahan.papar_emel2', compact('program','negeri'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
+    }
+
     public function paparTelegram($id)
     {
         $negeri = Negeri::all();
@@ -778,7 +789,7 @@ class PengurusanProgController extends Controller
 
     //HEBAHAN - EMEL
 
-    public function hebahanEmel(Request $request, $id)
+    public function hebahanEmel(Request $request, $id) //pentadbir
     {
         // Validate that the choices array is required and must have at least one selected value.
         $request->validate([
@@ -798,6 +809,29 @@ class PengurusanProgController extends Controller
         }
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
+    }
+
+    public function hebahanEmel2(Request $request, $id) //pegawai
+    {
+        // Validate that the choices array is required and must have at least one selected value.
+        $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:klien,id',
+        ], [
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
+        ]);
+
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            $recipient = $item->emel;
+            Mail::to($recipient)->send(new HebahanMail($id));
+        }
+
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
 

@@ -198,7 +198,7 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Nama Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama}}</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->nama}}</p>
                             </div>
                             <!--end::Input group-->
 
@@ -238,14 +238,14 @@
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Tempat Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->tempat}}</p>
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->tempat}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Penganjur Program:</label>
-                                <p class="text-bg-light p-3 rounded border-bottom border-secondary">
+                                <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">
                                     @if($program->penganjur!=null)
                                         {{$program->penganjur}}
                                     @else
@@ -261,7 +261,7 @@
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
                                         <label class="form-label">Nama Pegawai:</label>
-                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{$program->nama_pegawai}}</p>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->nama_pegawai}}</p>
                                     </div>
                                     <!--end::Input group-->
                                 </div>

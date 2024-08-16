@@ -67,10 +67,12 @@ Route::post('/pengurusan-program/klien/post-pengesahan-kehadiran/{id}',[Pengurus
 Route::get('/pengurusan-program/hebahan/papar-hebahan/{id}', [PengurusanProgController::class, 'paparHebahan'])->name('pengurusan_program.papar_hebahan');
 Route::get('/pengurusan-program/hebahan/papar-sms/{id}', [PengurusanProgController::class, 'paparSms'])->name('pengurusan_program.papar_sms');
 Route::get('/pengurusan-program/hebahan/papar-emel/{id}', [PengurusanProgController::class, 'paparEmel'])->name('pengurusan_program.papar_emel');
+Route::get('/pengurusan-program/hebahan/papar-emel2/{id}', [PengurusanProgController::class, 'paparEmel2'])->name('pengurusan_program.papar_emel2');
 Route::get('/pengurusan-program/hebahan/papar-telegram/{id}', [PengurusanProgController::class, 'paparTelegram'])->name('pengurusan_program.papar_telegram');
 Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter_hebahan');
 Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis_hebahan');
-Route::post('/pengurusan-program/hebahan/emel/{id}', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan_emel');
+Route::post('/pengurusan-program/hebahan/emel/{id}', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan_emel'); //pentadbir
+Route::post('/pengurusan-program/hebahan/emel2/{id}', [PengurusanProgController::class, 'hebahanEmel2'])->name('pengurusan_program.hebahan_emel2'); //pegawai aadk
 Route::post('/pengurusan-program/hebahan/sms/{id}', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan_sms');
 Route::post('/pengurusan-program/hebahan/telegram/{id}', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan_telegram');
 Route::post('/pengurusan-program/hebahan/telegram/webhook', [PengurusanProgController::class, 'handleWebhook']);
