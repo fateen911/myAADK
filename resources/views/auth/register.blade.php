@@ -85,7 +85,7 @@
                 <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full">
                     <option value="">{{ __('Select Daerah') }}</option>
                     @foreach ($daerah as $item2)
-                        <option value="{{ $item2->id }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+                        <option value="{{ $item2->kod_daerah_pejabat }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('daerah_bertugas')" class="mt-2" />
@@ -136,7 +136,7 @@
                 const daerahField = document.getElementById('mohon_daerah_field');
                 const negeriSelect = document.getElementById('negeri_bertugas');
                 const daerahSelect = document.getElementById('daerah_bertugas');
-            
+
                 // Function to toggle visibility of fields based on peranan
                 function toggleFields() {
                     const peranan = parseInt(perananField.value);
@@ -154,24 +154,24 @@
                         daerahField.style.display = 'none';
                     }
                 }
-            
-                // Function to filter daerah options based on selected negeri
+
+                // Function to filter daerah options based on selected negeri and kod_daerah_pejabat
                 function filterDaerahOptions() {
                     const selectedNegeriId = negeriSelect.options[negeriSelect.selectedIndex].getAttribute('data-id');
                     Array.from(daerahSelect.options).forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId) {
+                        if (option.getAttribute('data-negeri-id') === selectedNegeriId && option.value !== '') {
                             option.style.display = 'block';
                         } else {
                             option.style.display = 'none';
                         }
                     });
-                    daerahSelect.value = ''; // Reset daerah selection
+                    daerahSelect.value = ''; 
                 }
-            
+
                 // Event listeners
                 perananField.addEventListener('change', toggleFields);
                 negeriSelect.addEventListener('change', filterDaerahOptions);
-            
+
                 // Initial setup
                 toggleFields();
                 filterDaerahOptions();

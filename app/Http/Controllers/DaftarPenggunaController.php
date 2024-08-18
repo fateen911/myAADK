@@ -22,30 +22,7 @@ use App\Models\TahapPengguna;
 
 class DaftarPenggunaController extends Controller
 {
-    public function senaraiPengguna()
-    {
-        $klien = User::where('tahap_pengguna', '=', '2')
-                 ->orderBy('updated_at', 'desc')
-                 ->get();
-
-        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
-                    ->whereIn('tahap_pengguna', [3, 4, 5])
-                    ->orderBy('users.updated_at', 'desc')
-                    ->get();
-
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
-                                                ->orderBy('updated_at', 'desc')
-                                             ->get();
-
-        $negeri = Negeri::all()->sortBy('negeri');
-        $daerah = Daerah::all()->sortBy('daerah');
-
-        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
-        $jawatan = JawatanAADK::all();
-
-        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
-    }
-
+    // PEGAWAI DAERAH
     public function senaraiDaftarKlien()
     {
         $pegawai = Auth::user();
@@ -93,6 +70,31 @@ class DaftarPenggunaController extends Controller
         } 
 
         return redirect()->route('daftar-klien')->with('error', 'Sila semak maklumat yang dimasukkan.');
+    }
+
+    // PENTADBIR
+    public function senaraiPengguna()
+    {
+        $klien = User::where('tahap_pengguna', '=', '2')
+                 ->orderBy('updated_at', 'desc')
+                 ->get();
+
+        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
+                    ->whereIn('tahap_pengguna', [3, 4, 5])
+                    ->orderBy('users.updated_at', 'desc')
+                    ->get();
+
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
+                                                ->orderBy('updated_at', 'desc')
+                                             ->get();
+
+        $negeri = Negeri::all()->sortBy('negeri');
+        $daerah = Daerah::all()->sortBy('daerah');
+
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function kemaskiniKlien(Request $request)
