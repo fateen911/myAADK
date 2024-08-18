@@ -905,7 +905,7 @@
         $(document).on('click', '#emel', function() {
             var id = $(this).data('id');
             $.ajax({
-                url: '/pengurusan-program/hebahan/papar-emel2/'+ id, // Laravel route with dynamic ID
+                url: '/pengurusan-program/hebahan/papar-emel/'+ id, // Laravel route with dynamic ID
                 method: 'GET',
                 success: function(response) {
                     $('#modalBodyEmel').html(response);

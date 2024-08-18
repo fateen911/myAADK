@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/emel/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
@@ -24,12 +24,9 @@
                 <div class="d-flex flex-row flex-column-fluid gap-5">
                     <div class="d-flex flex-row-auto w-40 flex-center">
 
-                        <input type="hidden" name="negeri" id="negeri" value="{{$negeri}}">
+                        <input type="hidden" name="negeri" id="negeri" value="11">
 
                         <select id="daerah" class="form-select" name="daerah">
-                            <option value="">Sila Pilih Daerah</option>
-                            <option value="all">Sila Pilih Daerah</option>
-
                             <!--AJAX-->
                         </select>
                     </div>
@@ -66,7 +63,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
+        <button type="submit" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
     </div>
 
 </form>
@@ -77,8 +74,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function(){
+        var negeriId = $('#negeri').val();
         fetchItems();
-
         function fetchItems() {
             $.ajax({
                 url: '/klien-negeri/' + negeriId,
@@ -102,26 +99,22 @@
 
 <!--filter-->
 <script>
-    $(document).ready(function() {
-        $('#negeri').change(function() {
-            var negeriId = $(this).val();
-            if (negeriId) {
-                $.ajax({
-                    url: '/daerah/' + negeriId,
-                    type: 'GET',
-                    success: function(response) {
-                        $('#daerah').empty();
-                        $('#daerah').append('<option value="">Pilih Daerah</option>');
-                        $.each(response, function(key, daerah) {
-                            $('#daerah').append('<option value="' + daerah.id + '">' + daerah.daerah + '</option>');
-                        });
-                    }
-                });
-            } else {
-                $('#daerah').empty();
-                $('#daerah').append('<option value="">Pilih Daerah</option>');
-            }
-        });
+    $(document).ready(function(){
+        var negeriId = $('#negeri').val();
+        fetchItems();
+        function fetchItems() {
+            $.ajax({
+                url: '/daerah/' + negeriId,
+                method: 'GET',
+                success: function(response) {
+                    let rows = '<option value="">Pilih Daerah</option>';
+                    $.each(response, function(index, daerah) {
+                        rows += '<option value="' + daerah.id + '">' + daerah.daerah + '</option>';
+                    });
+                    $('#daerah').html(rows);
+                }
+            });
+        }
     });
 </script>
 
