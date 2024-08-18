@@ -670,7 +670,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status</span>
+                                        <span>Status Kerja</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -686,7 +686,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Bidang</span>
+                                        <span>Bidang Pekerjaan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -702,7 +702,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nama</span>
+                                        <span>Nama Pekerjaan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -904,7 +904,7 @@
 
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Status</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
@@ -918,7 +918,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Bidang</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Bidang Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}"/>
@@ -926,7 +926,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nama Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}"/>
@@ -1525,7 +1525,7 @@
                                                             <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Status Bapa</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
-                                                                <option value="MENINGGAL" {{ $butiranKlien->status_bapa == 'MENINGGAL' ? 'selected' : '' }}>MENINGGAL</option>
+                                                                <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_bapa == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
                                                                 <option value="LAIN-LAIN" {{ $butiranKlien->status_bapa == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                             </select>
                                                         </div>
@@ -1650,7 +1650,12 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3 required">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="status_ibu" name="status_ibu" value="{{ $butiranKlien->status_ibu }}" />
+                                                            <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
+                                                                <option>Pilih Status Ibu</option>
+                                                                <option value="HIDUP" {{ $butiranKlien->status_ibu == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
+                                                                <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_ibu == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
+                                                                <option value="LAIN-LAIN" {{ $butiranKlien->status_ibu == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1781,7 +1786,12 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="status_penjaga" name="status_penjaga" value="{{ $butiranKlien->status_penjaga }}" />
+                                                            <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
+                                                                <option>Pilih Status Penjaga</option>
+                                                                <option value="HIDUP" {{ $butiranKlien->status_penjaga == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
+                                                                <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_penjaga == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
+                                                                <option value="LAIN-LAIN" {{ $butiranKlien->status_penjaga == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">

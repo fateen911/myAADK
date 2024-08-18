@@ -34,9 +34,9 @@
         <br>
 
         <div>
-            <x-input-label for="nama_waris" :value="__('Apakah Nama Penuh Waris Anda ?')" />
-            <x-text-input id="nama_waris" class="block w-full pr-10" type="text" name="nama_waris" :value="old('nama_waris')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('nama_waris')" class="mt-2" />
+            <x-input-label for="nama_ibu" :value="__('Apakah Nama Penuh Ibu Anda ?')" />
+            <x-text-input id="nama_ibu" class="block w-full pr-10" type="text" name="nama_ibu" :value="old('nama_ibu')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('nama_ibu')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-center mt-3">
