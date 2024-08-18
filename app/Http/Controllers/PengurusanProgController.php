@@ -55,9 +55,21 @@ class PengurusanProgController extends Controller
     }
 
     //JSON
-    public function klien()
+    public function klienSemua()//semua
     {
         $klien = Klien::all();
+        return response()->json($klien);
+    }
+
+    public function klienNegeri($id)//negeri
+    {
+        $klien = Klien::where('negeri',$id)->get();
+        return response()->json($klien);
+    }
+
+    public function klienDaerah($id)//daerah
+    {
+        $klien = Klien::where('daerah',$id)->get();
         return response()->json($klien);
     }
 
@@ -656,13 +668,26 @@ class PengurusanProgController extends Controller
     //HEBAHAN
     public function paparHebahan($id)
     {
-        $negeri = Negeri::all();
+
+        $user_id = Auth::id();
+        $user = User::find($user_id);
         $program = Program::with('kategori')->find($id);
+
         if ($program) {
-            return view('pengurusan_program.hebahan.papar_hebahan', compact('program','negeri'));
-        } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $negeri = Negeri::all();
+                return view('pengurusan_program.hebahan.papar_hebahan_semua', compact('program','negeri'));
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $negeri = Pegawai::where('users_id', $user_id)->first()->negeri_bertugas;
+                return view('pengurusan_program.hebahan.papar_hebahan_negeri', compact('program','negeri'));
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $daerah = Pegawai::where('users_id', $user_id)->first()->daerah_bertugas;
+                return view('pengurusan_program.hebahan.papar_hebahan_daerah', compact('program','daerah'));
+            }
         }
+        return redirect()->back()->with('error', $try);
     }
 
     public function paparSms($id)
@@ -679,20 +704,21 @@ class PengurusanProgController extends Controller
     public function paparEmel($id)
     {
         $negeri = Negeri::all();
+        $user_id = Auth::id();
+        $user = User::find($user_id);
         $program = Program::with('kategori')->find($id);
         if ($program) {
-            return view('pengurusan_program.hebahan.papar_emel', compact('program','negeri'));
-        } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
-        }
-    }
-
-    public function paparEmel2($id)
-    {
-        $negeri = Negeri::all();
-        $program = Program::with('kategori')->find($id);
-        if ($program) {
-            return view('pengurusan_program.hebahan.papar_emel2', compact('program','negeri'));
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                return view('pengurusan_program.hebahan.papar_emel_semua', compact('program','negeri'));
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $negeri = Pegawai::where('users_id', $user_id)->first()->negeri_bertugas;
+                return view('pengurusan_program.hebahan.papar_emel_negeri', compact('program','negeri'));
+            }
+            elseif ($user->tahap_pengguna == '5') {//pegawai daerah
+                $daerah = Pegawai::where('users_id', $user_id)->first()->daerah_bertugas;
+                return view('pengurusan_program.hebahan.papar_emel_daerah', compact('program','daerah'));
+            }
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }

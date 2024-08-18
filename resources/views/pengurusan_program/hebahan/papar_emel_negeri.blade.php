@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan-program/hebahan/emel/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
@@ -22,18 +22,14 @@
 
             <div class="d-flex flex-column flex-row-fluid mb-5">
                 <div class="d-flex flex-row flex-column-fluid gap-5">
-                    <div class="d-flex flex-row-fluid w-40 flex-center">
-                        <select id="negeri" class="form-select" name="negeri">
-                            <option value="">Sila Pilih Negeri</option>
-                            @foreach($negeri as $item)
-                                <option value="{{$item->id}}">{{$item->negeri}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
                     <div class="d-flex flex-row-auto w-40 flex-center">
+
+                        <input type="hidden" name="negeri" id="negeri" value="{{$negeri}}">
+
                         <select id="daerah" class="form-select" name="daerah">
                             <option value="">Sila Pilih Daerah</option>
+                            <option value="all">Sila Pilih Daerah</option>
+
                             <!--AJAX-->
                         </select>
                     </div>
@@ -70,7 +66,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
+        <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
     </div>
 
 </form>
@@ -85,7 +81,7 @@
 
         function fetchItems() {
             $.ajax({
-                url: '/klien',
+                url: '/klien-negeri/' + negeriId,
                 method: 'GET',
                 success: function(response) {
                     let rows = '';
@@ -155,5 +151,4 @@
         });
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

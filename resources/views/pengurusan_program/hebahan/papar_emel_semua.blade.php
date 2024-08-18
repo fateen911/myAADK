@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan-program/hebahan/emel2/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
+        <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
     </div>
 
 </form>
@@ -85,7 +85,7 @@
 
         function fetchItems() {
             $.ajax({
-                url: '/klien',
+                url: '/klien-semua',
                 method: 'GET',
                 success: function(response) {
                     let rows = '';

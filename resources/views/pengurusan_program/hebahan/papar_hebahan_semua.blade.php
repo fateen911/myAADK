@@ -85,7 +85,7 @@
 
         function fetchItems() {
             $.ajax({
-                url: '/klien',
+                url: '/klien-semua',
                 method: 'GET',
                 success: function(response) {
                     let rows = '';

@@ -1,726 +1,1727 @@
 <!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Metronic
+Product Version: 8.2.0
+Purchase: https://1.envato.market/EA4JP
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>Selamat Datang ke Sistem AADK</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="/landingv2/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="/landingv2/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/landingv2/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/landingv2/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="/landingv2/css/style.css" rel="stylesheet">
+<!--begin::Head-->
+<head><base href=""/>
+    <title>Metronic - The World's #1 Selling Bootstrap Admin Template by Keenthemes</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
+    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Metronic - Bootstrap Admin Template, HTML, VueJS, React, Angular. Laravel, Asp.Net Core, Ruby on Rails, Spring Boot, Blazor, Django, Express.js, Node.js, Flask Admin Dashboard Theme & Template" />
+    <meta property="og:url" content="https://keenthemes.com/metronic" />
+    <meta property="og:site_name" content="Keenthemes | Metronic" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 </head>
-
-<body>
-
-<!-- Spinner Start -->
-<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
-<!-- Spinner End -->
-
-
-<!-- Navbar & Hero Start -->
-<div class="container-fluid header position-relative overflow-hidden p-0">
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
-        <a href="{{url('/landing-page/version-2')}}" class="navbar-brand p-0">
-            <img class="v-align" src="/logo/aadk.png" alt="Logo">&nbsp;<b class="fs-2 v-align">AADK</b>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="fa fa-bars"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Services</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="pricing.html" class="dropdown-item">Pricing</a>
-                        <a href="blog.html" class="dropdown-item">Blog</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
-                <a href="contact.html" class="nav-item nav-link">Contact Us</a>
-            </div>
-            <a href="#" class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log Masuk</a>
-            <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Daftar</a>
-        </div>
-    </nav>
-
-
-    <!-- Hero Header Start -->
-    <div class="hero-header overflow-hidden px-5">
-        <div class="rotate-img">
-            <img src="/landingv2/img/sty-1.png" class="/landingv2/img-fluid w-100" alt="">
-            <div class="rotate-sty-2"></div>
-        </div>
-        <div class="row gy-5 align-items-center">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Maklamat</h1>
-                <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">
-                    Sistem ini dibangunkan untuk menyokong proses kemajuan kepulihan dan
-                    kecenderungan penagihan relaps Klien Pasca RPDK pasca RPDK dapat dipantau secara
-                    berterusan oleh Bahagian Rawatan, Perubatan dan Pemulihan.
-                </p>
-            </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                <img src="/landingv2/img/hero-img-1.png" class="/landingv2/img-fluid w-100 h-100" alt="">
-            </div>
-        </div>
-    </div>
-    <!-- Hero Header End -->
-</div>
-<!-- Navbar & Hero End -->
-
-
-<!-- About Start -->
-<div class="container-fluid overflow-hidden py-5"  style="margin-top: 6rem;">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="RotateMoveLeft">
-                    <img src="/landingv2/img/about-1.png" class="/landingv2/img-fluid w-100" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h4 class="mb-1 text-primary">About Us</h4>
-                <h1 class="display-5 mb-4">Get Started Easily With a Personalized Product Tour</h1>
-                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, suscipit itaque quaerat dicta porro illum, autem, molestias ut animi ab aspernatur dolorum officia nam dolore. Voluptatibus aliquam earum labore atque.
-                </p>
-                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">About More</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- About End -->
-
-
-<!-- Service Start -->
-<div class="container-fluid service py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
-            <h4 class="mb-1 text-primary">Our Service</h4>
-            <h1 class="display-5 mb-4">What We Can Do For You</h1>
-            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
-            </p>
-        </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Email Newsletters</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-thumbs-up fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Acquistion Emails </h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fa fa-subway fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Retention Emails</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Promotional Emails</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Email Newsletters</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-thumbs-up fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Acquistion Emails </h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fa fa-subway fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Retention Emails</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="service-item text-center rounded p-4">
-                    <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
-                    <div class="service-content">
-                        <h4 class="mb-4">Promotional Emails</h4>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                        <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Service End -->
-
-
-<!-- Feature Start -->
-<div class="container-fluid feature overflow-hidden py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
-            <h4 class="text-primary">Our Feature</h4>
-            <h1 class="display-5 mb-4">Important Features For Email Marketing</h1>
-            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
-            </p>
-        </div>
-        <div class="row g-4 justify-content-center text-center mb-5">
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="text-center p-4">
-                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-envelope fa-5x text-secondary"></i></div>
-                    <div class="feature-content">
-                        <a href="#" class="h4">Email Marketing <i class="fa fa-long-arrow-alt-right"></i></a>
-                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="text-center p-4">
-                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-mail-bulk fa-5x text-secondary"></i></div>
-                    <div class="feature-content">
-                        <a href="#" class="h4">Email Builder <i class="fa fa-long-arrow-alt-right"></i></a>
-                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="text-center rounded p-4">
-                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-sitemap fa-5x text-secondary"></i></div>
-                    <div class="feature-content">
-                        <a href="#" class="h4">Customer Builder <i class="fa fa-long-arrow-alt-right"></i></a>
-                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="text-center rounded p-4">
-                    <div class="d-inline-block rounded bg-light p-4 mb-4"><i class="fas fa-tasks fa-5x text-secondary"></i></div>
-                    <div class="feature-content">
-                        <a href="#" class="h4">Campaign Manager <i class="fa fa-long-arrow-alt-right"></i></a>
-                        <p class="mt-4 mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.consectetur adipisicing elit
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="my-3">
-                    <a href="#" class="btn btn-primary d-inline rounded-pill px-5 py-3">More Features</a>
-                </div>
-            </div>
-        </div>
-        <div class="row g-5 pt-5" style="margin-top: 6rem;">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <div class="feature-img RotateMoveLeft h-100" style="object-fit: cover;">
-                    <img src="/landingv2/img/features-1.png" class="/landingv2/img-fluid w-100 h-100" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.1s">
-                <h4 class="text-primary">Fearutes</h4>
-                <h1 class="display-5 mb-4">Push Your Visitors Into Happy Customers</h1>
-                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, suscipit itaque quaerat dicta porro illum, autem, molestias ut animi ab aspernatur dolorum officia nam dolore. Voluptatibus aliquam earum labore atque.
-                </p>
-                <div class="row g-4">
-                    <div class="col-6">
-                        <div class="d-flex">
-                            <i class="fas fa-newspaper fa-4x text-secondary"></i>
-                            <div class="d-flex flex-column ms-3">
-                                <h2 class="mb-0 fw-bold">285</h2>
-                                <small class="text-dark">Created Projects</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex">
-                            <i class="fas fa-users fa-4x text-secondary"></i>
-                            <div class="d-flex flex-column ms-3">
-                                <h2 class="mb-0 fw-bold">6560</h2>
-                                <small class="text-dark">Happy Clients</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-4">
-                    <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Feature End -->
-
-
-<!-- FAQ Start -->
-<div class="container-fluid FAQ bg-light overflow-hidden py-5">
-    <div class="container py-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item border-0 mb-4">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseTOne">
-                                Why did you choose Our Email Services?
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
+<!--begin::Theme mode setup on page load-->
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+<!--end::Theme mode setup on page load-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Header Section-->
+    <div class="mb-0" id="home">
+        <!--begin::Wrapper-->
+        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(/assets/media/svg/illustrations/landing.svg)">
+            <!--begin::Header-->
+            <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                <!--begin::Container-->
+                <div class="container">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!--begin::Logo-->
+                        <div class="d-flex align-items-center flex-equal">
+                            <!--begin::Mobile menu toggle-->
+                            <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+                                <i class="ki-duotone ki-abstract-14 fs-2hx">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
                             </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body my-2">
-                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
+                            <!--end::Mobile menu toggle-->
+                            <!--begin::Logo image-->
+                            <a href="../../demo1/dist/landing.html">
+                                <img alt="Logo" src="/assets/media/logos/landing.svg" class="logo-default h-25px h-lg-30px" />
+                                <img alt="Logo" src="/assets/media/logos/landing-dark.svg" class="logo-sticky h-20px h-lg-25px" />
+                            </a>
+                            <!--end::Logo image-->
+                        </div>
+                        <!--end::Logo-->
+                        <!--begin::Menu wrapper-->
+                        <div class="d-lg-block" id="kt_header_nav_wrapper">
+                            <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+                                <!--begin::Menu-->
+                                <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Home</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it Works</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#achievements" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Achievements</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#team" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#portfolio" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Portfolio</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu-->
                             </div>
                         </div>
-                    </div>
-                    <div class="accordion-item border-0 mb-4">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Are there any hidden charges?
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body my-2">
-                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
-                            </div>
+                        <!--end::Menu wrapper-->
+                        <!--begin::Toolbar-->
+                        <div class="flex-equal text-end ms-1">
+                            <a href="../../demo1/dist/authentication/layouts/corporate/sign-in.html" class="btn btn-success">Sign In</a>
                         </div>
+                        <!--end::Toolbar-->
                     </div>
-                    <div class="accordion-item border-0">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                What are the key challenges of email marketing?
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body my-2">
-                                <h5>Dolor sit amet consectetur adipisicing elit.</h5>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nemo impedit, sapiente quis illo quia nulla atque maxime fuga minima ipsa quae cum consequatur, sit, delectus exercitationem odit officiis maiores! Neque, quidem corrupti modi architecto eos saepe incidunt dignissimos rerum.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta distinctio hic fuga odio excepturi ducimus sequi at. Doloribus, non aspernatur.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!--end::Wrapper-->
                 </div>
+                <!--end::Container-->
             </div>
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
-                <div class="FAQ-img RotateMoveRight rounded">
-                    <img src="/landingv2/img/about-1.png" class="/landingv2/img-fluid w-100" alt="">
+            <!--end::Header-->
+            <!--begin::Landing hero-->
+            <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <!--begin::Heading-->
+                <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
+                    <!--begin::Title-->
+                    <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">Build An Outstanding Solutions
+                        <br />with
+                        <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+								<span id="kt_landing_hero_text">The Best Theme Ever</span>
+							</span></h1>
+                    <!--end::Title-->
+                    <!--begin::Action-->
+                    <a href="../../demo1/dist/index.html" class="btn btn-primary">Try Metronic</a>
+                    <!--end::Action-->
                 </div>
+                <!--end::Heading-->
+                <!--begin::Clients-->
+                <div class="d-flex flex-center flex-wrap position-relative px-5">
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Fujifilm">
+                        <img src="/assets/media/svg/brand-logos/fujifilm.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Vodafone">
+                        <img src="/assets/media/svg/brand-logos/vodafone.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="KPMG International">
+                        <img src="/assets/media/svg/brand-logos/kpmg.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Nasa">
+                        <img src="/assets/media/svg/brand-logos/nasa.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Aspnetzero">
+                        <img src="/assets/media/svg/brand-logos/aspnetzero.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="AON - Empower Results">
+                        <img src="/assets/media/svg/brand-logos/aon.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Hewlett-Packard">
+                        <img src="/assets/media/svg/brand-logos/hp-3.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Truman">
+                        <img src="/assets/media/svg/brand-logos/truman.svg" class="mh-30px mh-lg-40px" alt="" />
+                    </div>
+                    <!--end::Client-->
+                </div>
+                <!--end::Clients-->
             </div>
+            <!--end::Landing hero-->
         </div>
+        <!--end::Wrapper-->
+        <!--begin::Curve bottom-->
+        <div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve bottom-->
     </div>
-</div>
-<!-- FAQ End -->
-
-
-<!-- Pricing Start -->
-<div class="container-fluid price py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
-            <h4 class="text-primary">Pricing Plan</h4>
-            <h1 class="display-5 mb-4">Not Sure Which Plan Is For You?</h1>
-            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
-            </p>
+    <!--end::Header Section-->
+    <!--begin::How It Works Section-->
+    <div class="mb-n10 mb-lg-n20 z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-17">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">How it Works</h3>
+                <!--end::Title-->
+                <!--begin::Text-->
+                <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
+                    <br />for different amazing and great useful admin</div>
+                <!--end::Text-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Row-->
+            <div class="row w-100 gy-10 mb-md-20">
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="/assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">1</span>
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Jane Miller</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
+                            <br />by using single tool for different
+                            <br />amazing and great</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="/assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">2</span>
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Setup Your App</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
+                            <br />by using single tool for different
+                            <br />amazing and great</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="/assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            <span class="badge badge-circle badge-light-success fw-bold p-5 me-3 fs-3">3</span>
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Enjoy Nautica App</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
+                            <br />by using single tool for different
+                            <br />amazing and great</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Product slider-->
+            <div class="tns tns-default">
+                <!--begin::Slider-->
+                <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000" data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true" data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false" data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1">
+                    <!--begin::Item-->
+                    <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
+                        <img src="/assets/media/preview/demos/demo1/light-ltr.png" class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
+                        <img src="/assets/media/preview/demos/demo2/light-ltr.png" class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
+                        <img src="/assets/media/preview/demos/demo4/light-ltr.png" class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
+                        <img src="/assets/media/preview/demos/demo5/light-ltr.png" class="card-rounded shadow mh-lg-650px mw-100" alt="" />
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <!--end::Slider-->
+                <!--begin::Slider button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev1">
+                    <i class="ki-duotone ki-left fs-2x"></i>
+                </button>
+                <!--end::Slider button-->
+                <!--begin::Slider button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next1">
+                    <i class="ki-duotone ki-right fs-2x"></i>
+                </button>
+                <!--end::Slider button-->
+            </div>
+            <!--end::Product slider-->
         </div>
-        <div class="row g-5 justify-content-center">
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="price-item bg-light rounded text-center">
-                    <div class="text-center text-dark border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
-                        <p class="fs-2 fw-bold text-uppercase mb-0">BASIC</p>
-                        <div class="d-flex justify-content-center">
-                            <strong class="align-self-start">$</strong>
-                            <p class="mb-0"><span class="display-5">00</span>/mo</p>
-                        </div>
-                    </div>
-                    <div class="text-start p-5">
-                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
-                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
-                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
-                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="price-item bg-light rounded text-center">
-                    <div class="pice-item-offer">Popular</div>
-                    <div class="text-center text-primary border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
-                        <p class="fs-2 fw-bold text-uppercase mb-0">Standard</p>
-                        <div class="d-flex justify-content-center">
-                            <strong class="align-self-start">$</strong>
-                            <p class="mb-0"><span class="display-5">23</span>/mo</p>
-                        </div>
-                    </div>
-                    <div class="text-start p-5">
-                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
-                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
-                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
-                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="price-item bg-light rounded text-center">
-                    <div class="text-center text-secondary border-bottom d-flex flex-column justify-content-center p-4" style="width: 100%; height: 160px;">
-                        <p class="fs-2 fw-bold text-uppercase mb-0">Premium</p>
-                        <div class="d-flex justify-content-center">
-                            <strong class="align-self-start">$</strong>
-                            <p class="mb-0"><span class="display-5">49</span>/mo</p>
-                        </div>
-                    </div>
-                    <div class="text-start p-5">
-                        <p><i class="fas fa-check text-success me-1"></i> Limited Acess Library</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Customer Support</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Pre-built Email Templates</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Reporting & Analytics</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Forms & Landing Pages</p>
-                        <p><i class="fas fa-check text-success me-1"></i> A/B Testing</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Email Scheduling</p>
-                        <p><i class="fas fa-check text-success me-1"></i> Automated Customer Journeys</p>
-                        <p><i class="fas fa-times text-danger me-1"></i> Creative Assistant</p>
-                        <p class="mb-4"><i class="fas fa-times text-danger me-1"></i> Role-based Access</p>
-                        <button class="btn btn-light rounded-pill py-2 px-5" type="button">Get Started</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--end::Container-->
     </div>
-</div>
-<!-- Pricing End -->
-
-
-<!-- Blog Start -->
-<div class="container-fluid blog py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
-            <h4 class="text-primary">Our Blog</h4>
-            <h1 class="display-5 mb-4">Join Us For New Blog</h1>
-            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
-            </p>
+    <!--end::How It Works Section-->
+    <!--begin::Statistics Section-->
+    <div class="mt-sm-n10">
+        <!--begin::Curve top-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+            </svg>
         </div>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="/landingv2/img/blog-1.png" class="/landingv2/img-fluid w-100" alt="">
-                        <div class="blog-info">
-                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                            <div class="d-flex">
-                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-content text-dark border p-4 ">
-                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
-                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
-                    </div>
+        <!--end::Curve top-->
+        <!--begin::Wrapper-->
+        <div class="pb-15 pt-18 landing-dark-bg">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Heading-->
+                <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
+                    <!--begin::Title-->
+                    <h3 class="fs-2hx text-white fw-bold mb-5">We Make Things Better</h3>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <div class="fs-5 text-gray-700 fw-bold">Save thousands to millions of bucks by using single tool
+                        <br />for different amazing and great useful admin</div>
+                    <!--end::Description-->
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="/landingv2/img/blog-2.png" class="/landingv2/img-fluid w-100" alt="">
-                        <div class="blog-info">
-                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                            <div class="d-flex">
-                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                <!--end::Heading-->
+                <!--begin::Statistics-->
+                <div class="d-flex flex-center">
+                    <!--begin::Items-->
+                    <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-element-11 fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700" data-kt-countup-suffix="+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">Known Companies</span>
+                                <!--end::Label-->
                             </div>
+                            <!--end::Info-->
                         </div>
-                    </div>
-                    <div class="blog-content text-dark border p-4 ">
-                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
-                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="/landingv2/img/blog-3.png" class="/landingv2/img-fluid w-100" alt="">
-                        <div class="blog-info">
-                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                            <div class="d-flex">
-                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-chart-pie-4 fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80" data-kt-countup-suffix="K+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">Statistic Reports</span>
+                                <!--end::Label-->
                             </div>
+                            <!--end::Info-->
                         </div>
-                    </div>
-                    <div class="blog-content text-dark border p-4 ">
-                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
-                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="blog-item">
-                    <div class="blog-img">
-                        <img src="/landingv2/img/blog-4.png" class="/landingv2/img-fluid w-100" alt="">
-                        <div class="blog-info">
-                            <span><i class="fa fa-clock"></i> Dec 01.2024</span>
-                            <div class="d-flex">
-                                <span class="me-3"> 3 <i class="fa fa-heart"></i></span>
-                                <a href="#" class="text-white">0 <i class="fa fa-comment"></i></a>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('/assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-basket fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35" data-kt-countup-suffix="M+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-gray-600 fw-semibold fs-5 lh-0">Secure Payments</span>
+                                <!--end::Label-->
                             </div>
+                            <!--end::Info-->
                         </div>
+                        <!--end::Item-->
                     </div>
-                    <div class="blog-content text-dark border p-4 ">
-                        <h5 class="mb-4">Dolor, sit amet consectetur adipisicing</h5>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectur adip sed eiusmod amet consectur adip.</p>
-                        <a class="btn btn-light rounded-pill py-2 px-4" href="#">Read More</a>
-                    </div>
+                    <!--end::Items-->
                 </div>
+                <!--end::Statistics-->
+                <!--begin::Testimonial-->
+                <div class="fs-2 fw-semibold text-muted text-center mb-3">
+                    <span class="fs-1 lh-1 text-gray-700">“</span>When you care about your topic, you’ll write about it in a
+                    <br />
+                    <span class="text-gray-700 me-1">more powerful</span>, emotionally expressive way
+                    <span class="fs-1 lh-1 text-gray-700">“</span></div>
+                <!--end::Testimonial-->
+                <!--begin::Author-->
+                <div class="fs-2 fw-semibold text-muted text-center">
+                    <a href="../../demo1/dist/account/security.html" class="link-primary fs-4 fw-bold">Marcus Levy,</a>
+                    <span class="fs-4 fw-bold text-gray-600">KeenThemes CEO</span>
+                </div>
+                <!--end::Author-->
             </div>
+            <!--end::Container-->
         </div>
+        <!--end::Wrapper-->
+        <!--begin::Curve bottom-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve bottom-->
     </div>
-</div>
-<!-- Blog End -->
-
-
-<!-- Testimonial Start -->
-<div class="container-fluid testimonial py-5">
-    <div class="container py-5">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
-            <h4 class="text-primary">Testimonial</h4>
-            <h1 class="display-5 mb-4">What Our Client Say About Us</h1>
-            <p class="mb-0">Dolor sit amet consectetur, adipisicing elit. Ipsam, beatae maxime. Vel animi eveniet doloremque reiciendis soluta iste provident non rerum illum perferendis earum est architecto dolores vitae quia vero quod incidunt culpa corporis, porro doloribus. Voluptates nemo doloremque cum.
-            </p>
-        </div>
-        <div class="testimonial-carousel owl-carousel wow zoomInDown" data-wow-delay="0.2s">
-            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-1.jpg' alt=''>">
-                <div class="testimonial-inner text-center p-5">
-                    <div class="d-flex align-items-center justify-content-center mb-4">
-                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
-                            <img src="/landingv2/img/testimonial-img-1.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
-                        </div>
-                        <div>
-                            <h5 class="mb-2">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                        </div>
-                    </div>
-                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
-                    </p>
+    <!--end::Statistics Section-->
+    <!--begin::Team Section-->
+    <div class="py-10 py-lg-20">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-12">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">Our Great Team</h3>
+                <!--end::Title-->
+                <!--begin::Sub-title-->
+                <div class="fs-5 text-muted fw-bold">It’s no doubt that when a development takes longer to complete, additional costs to
+                    <br />integrate and test each extra feature creeps up and haunts most of us.</div>
+                <!--end::Sub-title=-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Slider-->
+            <div class="tns tns-default" style="direction: ltr">
+                <!--begin::Wrapper-->
+                <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000" data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true" data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false" data-tns-prev-button="#kt_team_slider_prev" data-tns-next-button="#kt_team_slider_next" data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}">
+                    <!--begin::Item-->
                     <div class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-1.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Paul Miles</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Development Lead</div>
+                            <!--begin::Position-->
                         </div>
+                        <!--end::Person-->
                     </div>
-                </div>
-            </div>
-            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-2.jpg' alt=''>">
-                <div class="testimonial-inner text-center p-5">
-                    <div class="d-flex align-items-center justify-content-center mb-4">
-                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
-                            <img src="/landingv2/img/testimonial-img-2.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
-                        </div>
-                        <div>
-                            <h5 class="mb-2">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                        </div>
-                    </div>
-                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
-                    </p>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <div class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-2.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Melisa Marcus</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Creative Director</div>
+                            <!--begin::Position-->
                         </div>
+                        <!--end::Person-->
                     </div>
-                </div>
-            </div>
-            <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-3.jpg' alt=''>">
-                <div class="testimonial-inner text-center p-5">
-                    <div class="d-flex align-items-center justify-content-center mb-4">
-                        <div class="testimonial-inner-img border border-primary border-3 me-4" style="width: 100px; height: 100px; border-radius: 50%;">
-                            <img src="/landingv2/img/testimonial-img-3.jpg" class="/landingv2/img-fluid rounded-circle" alt="">
-                        </div>
-                        <div>
-                            <h5 class="mb-2">John Abraham</h5>
-                            <p class="mb-0">New York, USA</p>
-                        </div>
-                    </div>
-                    <p class="fs-7">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo facilis tempora esse explicabo sed! Dignissimos quia ullam pariatur blanditiis sed voluptatum. Totam aut quidem laudantium tempora. Minima, saepe earum!
-                    </p>
+                    <!--end::Item-->
+                    <!--begin::Item-->
                     <div class="text-center">
-                        <div class="d-flex justify-content-center">
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
-                            <i class="fas fa-star text-primary"></i>
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-5.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">David Nilson</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Python Expert</div>
+                            <!--begin::Position-->
                         </div>
+                        <!--end::Person-->
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Testimonial End -->
-
-
-<!-- Footer Start -->
-<div class="container-fluid footer py-5 wow fadeIn bg-secondary text-white" data-wow-delay="0.2s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Contact Info</h4>
-                    <a class="text-white" href="">
-                        <i class="fa fa-map-marker-alt me-2"></i>
-                        AGENSI ANTIDADAH KEBANGSAAN (AADK)
-                        <br/>Kementerian Dalam Negeri
-                        <br/>Jalan Maktab Perguruan Islam
-                        <br/>43000 Kajang, Selangor
-                    </a>
-                    <a class="text-white" href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                    <a class="text-white" href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
-                    <a class="text-white" href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
-                    <div class="d-flex align-items-center mt-3">
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-20.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Anne Clarc</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Project Manager</div>
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="mb-4 text-white">Contact Info</h4>
-                    <a class="text-white" href=""><i class="fa fa-map-marker-alt me-2"></i> 123 Street, New York, USA</a>
-                    <a class="text-white" href=""><i class="fas fa-envelope me-2"></i> info@example.com</a>
-                    <a class="text-white" href=""><i class="fas fa-phone me-2"></i> +012 345 67890</a>
-                    <a class="text-white" href="" class="mb-3"><i class="fas fa-print me-2"></i> +012 345 67890</a>
-                    <div class="d-flex align-items-center mt-3">
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-23.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Ricky Hunt</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Art Director</div>
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
                     </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-12.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Alice Wayde</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">Marketing Manager</div>
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('/assets/media/avatars/300-9.jpg')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Carles Puyol</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-semibold mt-1">QA Managers</div>
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
                 </div>
+                <!--end::Wrapper-->
+                <!--begin::Button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev">
+                    <i class="ki-duotone ki-left fs-2x"></i>
+                </button>
+                <!--end::Button-->
+                <!--begin::Button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next">
+                    <i class="ki-duotone ki-right fs-2x"></i>
+                </button>
+                <!--end::Button-->
             </div>
+            <!--end::Slider-->
         </div>
+        <!--end::Container-->
     </div>
-</div>
-<!-- Footer End -->
-
-
-<!-- Copyright Start -->
-<div class="container-fluid copyright py-4">
-    <div class="container">
-        <div class="row g-4 align-items-center">
-            <div class="col-md-6 text-center text-md-start mb-md-0">
-                <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>© 2024 Agensi Antidadah Kebangsaan (AADK)</a>, Hak Cipta Terpelihara.</span>
+    <!--end::Team Section-->
+    <!--begin::Projects Section-->
+    <div class="mb-lg-n15 position-relative z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card" style="filter: drop-shadow(0px 0px 40px rgba(68, 81, 96, 0.08))">
+                <!--begin::Card body-->
+                <div class="card-body p-lg-20">
+                    <!--begin::Heading-->
+                    <div class="text-center mb-5 mb-lg-10">
+                        <!--begin::Title-->
+                        <h3 class="fs-2hx text-dark mb-5" id="portfolio" data-kt-scroll-offset="{default: 100, lg: 250}">Our Projects</h3>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Tabs wrapper-->
+                    <div class="d-flex flex-center mb-5 mb-lg-15">
+                        <!--begin::Tabs-->
+                        <ul class="nav border-transparent flex-center fs-5 fw-bold">
+                            <li class="nav-item">
+                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#" data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">Latest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#" data-bs-toggle="tab" data-bs-target="#kt_landing_projects_web_design">Web Design</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#" data-bs-toggle="tab" data-bs-target="#kt_landing_projects_mobile_apps">Mobile Apps</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#" data-bs-toggle="tab" data-bs-target="#kt_landing_projects_development">Development</a>
+                            </li>
+                        </ul>
+                        <!--end::Tabs-->
+                    </div>
+                    <!--end::Tabs wrapper-->
+                    <!--begin::Tabs content-->
+                    <div class="tab-content">
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade show active" id="kt_landing_projects_latest">
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-23.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px" style="background-image:url('/assets/media/stock/600x600/img-23.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Row-->
+                                    <div class="row g-10 mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-22.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-22.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-21.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-21.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x400/img-20.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-20.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_web_design">
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-11.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px" style="background-image:url('/assets/media/stock/600x600/img-11.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Row-->
+                                    <div class="row g-10 mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-12.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-12.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-21.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-21.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x400/img-20.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-20.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_mobile_apps">
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Row-->
+                                    <div class="row g-10 mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-16.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-16.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-12.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-12.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x400/img-15.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-15.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-23.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px" style="background-image:url('/assets/media/stock/600x600/img-23.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_development">
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-15.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px" style="background-image:url('/assets/media/stock/600x600/img-15.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-lg-6">
+                                    <!--begin::Row-->
+                                    <div class="row g-10 mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-22.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-22.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6">
+                                            <!--begin::Item-->
+                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x600/img-21.jpg">
+                                                <!--begin::Image-->
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-21.jpg')"></div>
+                                                <!--end::Image-->
+                                                <!--begin::Action-->
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="ki-duotone ki-eye fs-3x text-white">
+                                                        <span class="path1"></span>
+                                                        <span class="path2"></span>
+                                                        <span class="path3"></span>
+                                                    </i>
+                                                </div>
+                                                <!--end::Action-->
+                                            </a>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                    <!--begin::Item-->
+                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects" href="/assets/media/stock/600x400/img-14.jpg">
+                                        <!--begin::Image-->
+                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px" style="background-image:url('/assets/media/stock/600x600/img-14.jpg')"></div>
+                                        <!--end::Image-->
+                                        <!--begin::Action-->
+                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                            <i class="ki-duotone ki-eye fs-3x text-white">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </div>
+                                        <!--end::Action-->
+                                    </a>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                    </div>
+                    <!--end::Tabs content-->
+                </div>
+                <!--end::Card body-->
             </div>
+            <!--end::Card-->
         </div>
+        <!--end::Container-->
     </div>
+    <!--end::Projects Section-->
+    <!--begin::Pricing Section-->
+    <div class="mt-sm-n20">
+        <!--begin::Curve top-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve top-->
+        <!--begin::Wrapper-->
+        <div class="py-20 landing-dark-bg">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Plans-->
+                <div class="d-flex flex-column container pt-lg-20">
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <h1 class="fs-2hx fw-bold text-white mb-5" id="pricing" data-kt-scroll-offset="{default: 100, lg: 150}">Clear Pricing Makes it Easy</h1>
+                        <div class="text-gray-600 fw-semibold fs-5">Save thousands to millions of bucks by using single tool for different
+                            <br />amazing and outstanding cool and great useful admin</div>
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Pricing-->
+                    <div class="text-center" id="kt_pricing">
+                        <!--begin::Nav group-->
+                        <div class="nav-group landing-dark-bg d-inline-flex mb-15" data-kt-buttons="true" style="border: 1px dashed #2B4666;">
+                            <a href="#" class="btn btn-color-gray-600 btn-active btn-active-success px-6 py-3 me-2 active" data-kt-plan="month">Monthly</a>
+                            <a href="#" class="btn btn-color-gray-600 btn-active btn-active-success px-6 py-3" data-kt-plan="annual">Annual</a>
+                        </div>
+                        <!--end::Nav group-->
+                        <!--begin::Row-->
+                        <div class="row g-10">
+                            <!--begin::Col-->
+                            <div class="col-xl-4">
+                                <div class="d-flex h-100 align-items-center">
+                                    <!--begin::Option-->
+                                    <div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+                                        <!--begin::Heading-->
+                                        <div class="mb-7 text-center">
+                                            <!--begin::Title-->
+                                            <h1 class="text-dark mb-5 fw-boldest">Startup</h1>
+                                            <!--end::Title-->
+                                            <!--begin::Description-->
+                                            <div class="text-gray-400 fw-semibold mb-5">Best Settings for Startups</div>
+                                            <!--end::Description-->
+                                            <!--begin::Price-->
+                                            <div class="text-center">
+                                                <span class="mb-2 text-primary">$</span>
+                                                <span class="fs-3x fw-bold text-primary" data-kt-plan-price-month="99" data-kt-plan-price-annual="999">99</span>
+                                                <span class="fs-7 fw-semibold opacity-50" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">/ Mon</span>
+                                            </div>
+                                            <!--end::Price-->
+                                        </div>
+                                        <!--end::Heading-->
+                                        <!--begin::Features-->
+                                        <div class="w-100 mb-10">
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Up to 10 Active Users</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Up to 30 Project Integrations</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800">Keen Analytics Platform</span>
+                                                <i class="ki-duotone ki-cross-circle fs-1">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800">Targets Timelines & Files</span>
+                                                <i class="ki-duotone ki-cross-circle fs-1">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack">
+                                                <span class="fw-semibold fs-6 text-gray-800">Unlimited Projects</span>
+                                                <i class="ki-duotone ki-cross-circle fs-1">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Features-->
+                                        <!--begin::Select-->
+                                        <a href="#" class="btn btn-primary">Select</a>
+                                        <!--end::Select-->
+                                    </div>
+                                    <!--end::Option-->
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-4">
+                                <div class="d-flex h-100 align-items-center">
+                                    <!--begin::Option-->
+                                    <div class="w-100 d-flex flex-column flex-center rounded-3 bg-primary py-20 px-10">
+                                        <!--begin::Heading-->
+                                        <div class="mb-7 text-center">
+                                            <!--begin::Title-->
+                                            <h1 class="text-white mb-5 fw-boldest">Business</h1>
+                                            <!--end::Title-->
+                                            <!--begin::Description-->
+                                            <div class="text-white opacity-75 fw-semibold mb-5">Best Settings for Business</div>
+                                            <!--end::Description-->
+                                            <!--begin::Price-->
+                                            <div class="text-center">
+                                                <span class="mb-2 text-white">$</span>
+                                                <span class="fs-3x fw-bold text-white" data-kt-plan-price-month="199" data-kt-plan-price-annual="1999">199</span>
+                                                <span class="fs-7 fw-semibold text-white opacity-75" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">/ Mon</span>
+                                            </div>
+                                            <!--end::Price-->
+                                        </div>
+                                        <!--end::Heading-->
+                                        <!--begin::Features-->
+                                        <div class="w-100 mb-10">
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">Up to 10 Active Users</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-white">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">Up to 30 Project Integrations</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-white">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">Keen Analytics Platform</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-white">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-white opacity-75 text-start pe-3">Targets Timelines & Files</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-white">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack">
+                                                <span class="fw-semibold fs-6 text-white opacity-75">Unlimited Projects</span>
+                                                <i class="ki-duotone ki-cross-circle fs-1 text-white">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Features-->
+                                        <!--begin::Select-->
+                                        <a href="#" class="btn btn-color-primary btn-active-light-primary btn-light">Select</a>
+                                        <!--end::Select-->
+                                    </div>
+                                    <!--end::Option-->
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-4">
+                                <div class="d-flex h-100 align-items-center">
+                                    <!--begin::Option-->
+                                    <div class="w-100 d-flex flex-column flex-center rounded-3 bg-body py-15 px-10">
+                                        <!--begin::Heading-->
+                                        <div class="mb-7 text-center">
+                                            <!--begin::Title-->
+                                            <h1 class="text-dark mb-5 fw-boldest">Enterprise</h1>
+                                            <!--end::Title-->
+                                            <!--begin::Description-->
+                                            <div class="text-gray-400 fw-semibold mb-5">Best Settings for Enterprise</div>
+                                            <!--end::Description-->
+                                            <!--begin::Price-->
+                                            <div class="text-center">
+                                                <span class="mb-2 text-primary">$</span>
+                                                <span class="fs-3x fw-bold text-primary" data-kt-plan-price-month="999" data-kt-plan-price-annual="9999">999</span>
+                                                <span class="fs-7 fw-semibold opacity-50" data-kt-plan-price-month="/ Mon" data-kt-plan-price-annual="/ Ann">/ Mon</span>
+                                            </div>
+                                            <!--end::Price-->
+                                        </div>
+                                        <!--end::Heading-->
+                                        <!--begin::Features-->
+                                        <div class="w-100 mb-10">
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Up to 10 Active Users</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Up to 30 Project Integrations</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Keen Analytics Platform</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-5">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Targets Timelines & Files</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack">
+                                                <span class="fw-semibold fs-6 text-gray-800 text-start pe-3">Unlimited Projects</span>
+                                                <i class="ki-duotone ki-check-circle fs-1 text-success">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </div>
+                                            <!--end::Item-->
+                                        </div>
+                                        <!--end::Features-->
+                                        <!--begin::Select-->
+                                        <a href="#" class="btn btn-primary">Select</a>
+                                        <!--end::Select-->
+                                    </div>
+                                    <!--end::Option-->
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Pricing-->
+                </div>
+                <!--end::Plans-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Curve bottom-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve bottom-->
+    </div>
+    <!--end::Pricing Section-->
+    <!--begin::Testimonials Section-->
+    <div class="mt-20 mb-n20 position-relative z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-17">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What Our Clients Say</h3>
+                <!--end::Title-->
+                <!--begin::Description-->
+                <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
+                    <br />for different amazing and great useful admin</div>
+                <!--end::Description-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Row-->
+            <div class="row g-lg-10 mb-10 mb-lg-20">
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">This is by far the cleanest template
+                                <br />and the most well structured</div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="/assets/media/avatars/300-1.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Paul Miles</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">This is by far the cleanest template
+                                <br />and the most well structured</div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="/assets/media/avatars/300-2.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Janya Clebert</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">This is by far the cleanest template
+                                <br />and the most well structured</div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="/assets/media/avatars/300-16.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Steave Brown</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Highlight-->
+            <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
+                <!--begin::Content-->
+                <div class="my-2 me-5">
+                    <!--begin::Title-->
+                    <div class="fs-1 fs-lg-2qx fw-bold text-white mb-2">Start With Metronic Today,
+                        <span class="fw-normal">Speed Up Development!</span></div>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <div class="fs-6 fs-lg-5 text-white fw-semibold opacity-75">Join over 100,000 Professionals Community to Stay Ahead</div>
+                    <!--end::Description-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Link-->
+                <a href="https://1.envato.market/EA4JP" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Purchase on Themeforest</a>
+                <!--end::Link-->
+            </div>
+            <!--end::Highlight-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Testimonials Section-->
+    <!--begin::Footer Section-->
+    <div class="mb-0">
+        <!--begin::Curve top-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve top-->
+        <!--begin::Wrapper-->
+        <div class="landing-dark-bg pt-20">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Row-->
+                <div class="row py-10 py-lg-20">
+                    <!--begin::Col-->
+                    <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
+                        <!--begin::Block-->
+                        <div class="rounded landing-dark-border p-9 mb-10">
+                            <!--begin::Title-->
+                            <h2 class="text-white">Would you need a Custom License?</h2>
+                            <!--end::Title-->
+                            <!--begin::Text-->
+                            <span class="fw-normal fs-4 text-gray-700">Email us to
+									<a href="https://keenthemes.com/support" class="text-white opacity-50 text-hover-primary">support@keenthemes.com</a></span>
+                            <!--end::Text-->
+                        </div>
+                        <!--end::Block-->
+                        <!--begin::Block-->
+                        <div class="rounded landing-dark-border p-9">
+                            <!--begin::Title-->
+                            <h2 class="text-white">How About a Custom Project?</h2>
+                            <!--end::Title-->
+                            <!--begin::Text-->
+                            <span class="fw-normal fs-4 text-gray-700">Use Our Custom Development Service.
+									<a href="../../demo1/dist/pages/user-profile/overview.html" class="text-white opacity-50 text-hover-primary">Click to Get a Quote</a></span>
+                            <!--end::Text-->
+                        </div>
+                        <!--end::Block-->
+                    </div>
+                    <!--end::Col-->
+                    <!--begin::Col-->
+                    <div class="col-lg-6 ps-lg-16">
+                        <!--begin::Navs-->
+                        <div class="d-flex justify-content-center">
+                            <!--begin::Links-->
+                            <div class="d-flex fw-semibold flex-column me-20">
+                                <!--begin::Subtitle-->
+                                <h4 class="fw-bold text-gray-400 mb-6">More for Metronic</h4>
+                                <!--end::Subtitle-->
+                                <!--begin::Link-->
+                                <a href="https://keenthemes.com/faqs" class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://preview.keenthemes.com/html/metronic/docs" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentaions</a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://www.youtube.com/c/KeenThemesTuts/videos" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video Tuts</a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://preview.keenthemes.com/html/metronic/docs/getting-started/changelog" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Changelog</a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://devs.keenthemes.com/" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Support Forum</a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://keenthemes.com/blog" class="text-white opacity-50 text-hover-primary fs-5">Blog</a>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Links-->
+                            <!--begin::Links-->
+                            <div class="d-flex fw-semibold flex-column ms-lg-20">
+                                <!--begin::Subtitle-->
+                                <h4 class="fw-bold text-gray-400 mb-6">Stay Connected</h4>
+                                <!--end::Subtitle-->
+                                <!--begin::Link-->
+                                <a href="https://www.facebook.com/keenthemes" class="mb-6">
+                                    <img src="/assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2" alt="" />
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
+                                </a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://github.com/KeenthemesHub" class="mb-6">
+                                    <img src="/assets/media/svg/brand-logos/github.svg" class="h-20px me-2" alt="" />
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
+                                </a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://twitter.com/keenthemes" class="mb-6">
+                                    <img src="/assets/media/svg/brand-logos/twitter.svg" class="h-20px me-2" alt="" />
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
+                                </a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://dribbble.com/keenthemes" class="mb-6">
+                                    <img src="/assets/media/svg/brand-logos/dribbble-icon-1.svg" class="h-20px me-2" alt="" />
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dribbble</span>
+                                </a>
+                                <!--end::Link-->
+                                <!--begin::Link-->
+                                <a href="https://www.instagram.com/keenthemes" class="mb-6">
+                                    <img src="/assets/media/svg/brand-logos/instagram-2-1.svg" class="h-20px me-2" alt="" />
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
+                                </a>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Links-->
+                        </div>
+                        <!--end::Navs-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+            <!--begin::Separator-->
+            <div class="landing-dark-separator"></div>
+            <!--end::Separator-->
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
+                    <!--begin::Copyright-->
+                    <div class="d-flex align-items-center order-2 order-md-1">
+                        <!--begin::Logo-->
+                        <a href="../../demo1/dist/landing.html">
+                            <img alt="Logo" src="/assets/media/logos/landing.svg" class="h-15px h-md-20px" />
+                        </a>
+                        <!--end::Logo image-->
+                        <!--begin::Logo image-->
+                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="https://keenthemes.com">&copy; 2023 Keenthemes Inc.</span>
+                        <!--end::Logo image-->
+                    </div>
+                    <!--end::Copyright-->
+                    <!--begin::Menu-->
+                    <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
+                        <li class="menu-item">
+                            <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+                        </li>
+                        <li class="menu-item mx-5">
+                            <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="" target="_blank" class="menu-link px-2">Purchase</a>
+                        </li>
+                    </ul>
+                    <!--end::Menu-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Footer Section-->
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+        <i class="ki-duotone ki-arrow-up">
+            <span class="path1"></span>
+            <span class="path2"></span>
+        </i>
+    </div>
+    <!--end::Scrolltop-->
 </div>
-<!-- Copyright End -->
-
-
-<!-- JavaScript Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/landingv2/lib/wow/wow.min.js"></script>
-<script src="/landingv2/lib/easing/easing.min.js"></script>
-<script src="/landingv2/lib/waypoints/waypoints.min.js"></script>
-<script src="/landingv2/lib/counterup/counterup.min.js"></script>
-<script src="/landingv2/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="/landingv2/lib/lightbox/js/lightbox.min.js"></script>
-
-
-<!-- Template Javascript -->
-<script src="/landingv2/js/main.js"></script>
+<!--end::Root-->
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+    <i class="ki-duotone ki-arrow-up">
+        <span class="path1"></span>
+        <span class="path2"></span>
+    </i>
+</div>
+<!--end::Scrolltop-->
+<!--begin::Javascript-->
+<script>var hostUrl = "/assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="/assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+<script src="/assets/plugins/custom/typedjs/typedjs.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="/assets/js/custom/landing.js"></script>
+<script src="/assets/js/custom/pages/pricing/general.js"></script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
 </body>
-
+<!--end::Body-->
 </html>

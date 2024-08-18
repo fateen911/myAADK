@@ -67,7 +67,6 @@ Route::post('/pengurusan-program/klien/post-pengesahan-kehadiran/{id}',[Pengurus
 Route::get('/pengurusan-program/hebahan/papar-hebahan/{id}', [PengurusanProgController::class, 'paparHebahan'])->name('pengurusan_program.papar_hebahan');
 Route::get('/pengurusan-program/hebahan/papar-sms/{id}', [PengurusanProgController::class, 'paparSms'])->name('pengurusan_program.papar_sms');
 Route::get('/pengurusan-program/hebahan/papar-emel/{id}', [PengurusanProgController::class, 'paparEmel'])->name('pengurusan_program.papar_emel');
-Route::get('/pengurusan-program/hebahan/papar-emel2/{id}', [PengurusanProgController::class, 'paparEmel2'])->name('pengurusan_program.papar_emel2');
 Route::get('/pengurusan-program/hebahan/papar-telegram/{id}', [PengurusanProgController::class, 'paparTelegram'])->name('pengurusan_program.papar_telegram');
 Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter_hebahan');
 Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis_hebahan');
@@ -86,7 +85,9 @@ Route::get('/pengurusan-program/pdf-perekodan/{id}',[PengurusanProgController::c
 Route::get('/pengurusan-program/excel-perekodan/{id}',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
 
 // PENGURUSAN PROGRAM - JSON
-Route::get('/klien', [PengurusanProgController::class, 'klien']);
+Route::get('/klien-semua', [PengurusanProgController::class, 'klienSemua']);
+Route::get('/klien-negeri/{id}', [PengurusanProgController::class, 'klienNegeri']);
+Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah']);
 Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
 Route::get('/program', [PengurusanProgController::class, 'program']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
