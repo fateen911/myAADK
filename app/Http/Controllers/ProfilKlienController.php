@@ -81,14 +81,14 @@ class ProfilKlienController extends Controller
             })
             ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
             ->whereNotNull('sejarah_profil_klien.klien_id')
-            ->where('klien.negeri', $pegawaiNegeri->negeri_bertugas)
+            ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->get();
 
         // Clients who have never updated their profile (belumKemaskini)
         $belumKemaskini = Klien::select('klien.*')
             ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
             ->whereNull('sejarah_profil_klien.klien_id')
-            ->where('klien.negeri', $pegawaiNegeri->negeri_bertugas)
+            ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->get();
 
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
@@ -107,16 +107,16 @@ class ProfilKlienController extends Controller
             })
             ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
             ->whereNotNull('sejarah_profil_klien.klien_id')
-            ->where('klien.negeri', $pegawaiDaerah->negeri_bertugas)
-            ->where('klien.daerah', $pegawaiDaerah->daerah_bertugas)
+            ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->get();
 
         // Clients who have never updated their profile (belumKemaskini)
         $belumKemaskini = Klien::select('klien.*')
             ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
             ->whereNull('sejarah_profil_klien.klien_id')
-            ->where('klien.negeri', $pegawaiDaerah->negeri_bertugas)
-            ->where('klien.daerah', $pegawaiDaerah->daerah_bertugas)
+            ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->get();
 
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
