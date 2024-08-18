@@ -206,7 +206,7 @@
                             <!--end::General options-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
-                                <a href="{{ url('pengurusan-program/pentadbir-sistem/senarai-prog') }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                                <a href="{{ url('pengurusan-program/pentadbir-sistem/maklumat-prog/'.$program->id) }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit"  class="btn btn-primary">

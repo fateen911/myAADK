@@ -545,6 +545,7 @@
                     </div>
                     <!--end::Aside column-->
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                        @if($program->status == "SEDANG DIJALANKAN")
                         <!--begin::Rekod Kehadiran-->
                         <div class="card card-flush py-4">
                             <!--begin::Card header-->
@@ -562,35 +563,19 @@
                                     <!--begin::Label-->
                                     <label class="form-label">No. Kad Pengenalan</label>
                                     <!--end::Label-->
-                                    @if($program->status == "SEDANG DIJALANKAN")
-                                        <!--begin::Input-->
-                                        <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
-                                        <!--end::Input-->
-                                    @else
-                                        <!--begin::Input-->
-                                        <input type="text" name="no_kp" class="form-control mb-2" placeholder="Program sudah tamat" value="" disabled/>
-                                        <!--end::Input-->
-                                    @endif
+                                    <!--begin::Input-->
+                                    <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
+                                    <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
-                                @if($program->status == "SEDANG DIJALANKAN")
-                                    <!--begin::Input group-->
-                                    <div class="mb-6 fv-row">
-                                        <button type="submit" id="perekodanBtn" class="btn btn-primary">
-                                            <span class="indicator-label">Hadir</span>
-                                            <span class="indicator-progress">Tunggu sebentar...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                @else
-                                    <div class="mb-6 fv-row">
-                                        <button type="submit" id="perekodanBtn" class="btn btn-primary" disabled>
-                                            <span class="indicator-label">Hadir</span>
-                                            <span class="indicator-progress">Tunggu sebentar...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                @endif
+                                <!--begin::Input group-->
+                                <div class="mb-6 fv-row">
+                                    <button type="submit" id="perekodanBtn" class="btn btn-primary">
+                                        <span class="indicator-label">Hadir</span>
+                                        <span class="indicator-progress">Tunggu sebentar...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                    </button>
+                                </div>
 
                                 @if (session('success2'))
                                     <div class="alert alert-success p-3" role="alert">
@@ -608,6 +593,7 @@
                             <!--end::Card header-->
                         </div>
                         <!--end::Rekod Kehadiran-->
+                        @endif
                         <!--begin::Senarai kehadiran-->
                         <div class="card card-flush py-4">
                             <!--begin::Card header-->

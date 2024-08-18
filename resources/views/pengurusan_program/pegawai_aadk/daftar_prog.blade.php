@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Program</label>
-                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Program" value="" required/>
+                                        <input type="text" name="nama" class="form-control mb-2" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -148,11 +148,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tempat Program</label>
-                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Program" value="" required/>
+                                                <input type="text" name="tempat" class="form-control mb-2" value="" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="form-label">Penganjur Program (Jika Ada)</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Program" value=""/>
+                                                <input type="text" name="penganjur" class="form-control mb-2" value=""/>
                                             </div>
                                         </div>
 
@@ -167,11 +167,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
                                                 <label class="required form-label">Nama Pegawai</label>
-                                                <input type="text" name="nama_pegawai" class="form-control mb-2" placeholder="Nama Pegawai" value="" required/>
+                                                <input type="text" name="nama_pegawai" class="form-control mb-2" value="" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="" required/>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="601135678794" value="" required/>
                                             </div>
                                         </div>
 
