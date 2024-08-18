@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_kp')->unique();
             $table->string('nama');
-            $table->string('no_tel');
+            $table->string('no_tel')->nullable();
             $table->string('emel')->nullable();
             $table->string('alamat_rumah');
             $table->integer('poskod');
@@ -25,9 +25,11 @@ return new class extends Migration
             $table->string('agama');
             $table->string('bangsa');
             $table->string('tahap_pendidikan')->nullable();
-            $table->string('status_kesihatan_mental');
-            $table->string('status_oku');
-            $table->double('skor_ccri');
+            $table->string('status_kesihatan_mental')->nullable();
+            $table->string('status_oku')->nullable();
+            $table->double('skor_ccri')->nullable();
+            $table->integer('daerah_pejabat');
+            $table->integer('negeri_pejabat');
             $table->enum('status_kemaskini', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Baharu');
             $table->timestamps();
         });
