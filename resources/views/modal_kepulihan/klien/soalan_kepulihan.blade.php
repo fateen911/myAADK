@@ -106,7 +106,7 @@
                 <br>
                 <header>SOAL SELIDIK MODAL KEPULIHAN</header>
 
-                <p style="font-style: italic;">Nota : Soal selidik ini mengandungi 25 soalan. Sila jawab semua soalan.</p>
+                <p style="font-style: italic; padding-left:30px; padding-top:30px;">Nota : Soal selidik ini mengandungi 25 soalan. Sila jawab semua soalan.</p>
 
                 <div class="card-body">
                     <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">

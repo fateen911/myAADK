@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// DASHBOARD
+Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
 //TRY
 Route::get('/pengurusan-program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
@@ -93,10 +95,6 @@ Route::get('/program', [PengurusanProgController::class, 'program']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
-
-// DASHBOARD
-Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('/status-counts', [HomeController::class, 'getStatusCounts'])->name('status.counts');
 
 // KEMASKINI PROFIL AKAUN PENGGUNA
 Route::middleware('auth')->group(function () {

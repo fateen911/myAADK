@@ -56,6 +56,32 @@ class HomeController extends Controller
                         ->whereNull('sejarah_profil_klien.klien_id')
                         ->count('klien.id');
 
+                    $jumlah1 = $sedangKemaskini + $belumKemaskini;
+
+                    // Situation 1: Jumlah Keseluruhan
+                    // $jumlah2 = Klien::whereIn('id', function ($query) {
+                    //     $query->select('klien_id')->from('klien_update_requests')
+                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests'))
+                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests'))
+                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests'));
+                    // })->count();
+
+                    // // Situation 2: Belum Selesai
+                    // $belumSelesai = Klien::whereIn('id', function ($query) {
+                    //     $query->select('klien_id')->from('klien_update_requests')->where('status', 'Kemaskini')
+                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests')->where('status', 'Kemaskini'))
+                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests')->where('status', 'Kemaskini'))
+                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests')->where('status', 'Kemaskini'));
+                    // })->count();
+
+                    // // Situation 3: Selesai
+                    // $selesai = Klien::whereIn('id', function ($query) {
+                    //     $query->select('klien_id')->from('klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak'])
+                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']))
+                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']))
+                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']));
+                    // })->count();
+        
                     // modal kepulihan
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
                         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
@@ -137,7 +163,7 @@ class HomeController extends Controller
                     return view('dashboard.pentadbir.dashboard', compact('permohonan_pendaftaran','pegawai','klien',
                                                                         'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
                                                                         'tidak_memuaskan','memuaskan','baik','cemerlang',
-                                                                        'belumKemaskini', 'sedangKemaskini'));
+                                                                        'belumKemaskini', 'sedangKemaskini', 'jumlah1'));
                 }
                 else if($tahap == 2)
                 {
@@ -485,58 +511,6 @@ class HomeController extends Controller
         }
     }
 
-    public function getStatusCounts()
-    {
-        dd('Step 1: Method reached'); // Check if method is called
     
-        $clients = Klien::all();
-        dd('Step 2: Clients retrieved', $clients); // Check if clients are retrieved
-
-        $counts = [
-            // users
-            'permohonan_pendaftaran' => PegawaiMohonDaftar::where('status', 'Baharu')->count(),
-            'pegawai' => User::where('tahap_pengguna', [3, 4, 5])->count(),
-            'klien' => User::where('tahap_pengguna', 2)->count(),
-
-            // profil klien
-            'belum_kemaskini' => 0,
-            'mohon_kemaskini' => 0,
-            'dikemaskini' => 0,
-            'ditolak' => 0,
-
-            // modal kepulihan
-            'selesai_menjawab' => ResponModalKepulihan::where('status', 'selesai')->count(),
-            'belum_selesai_menjawab' => ResponModalKepulihan::where('status', 'belum_selesai')->count(),
-            'tidak_menjawab' => ResponModalKepulihan::where('status', 'tidak_menjawab')->count(),
-            'cemerlang' => KeputusanKepulihan::where('tahap_kepulihan_id', 4)->count(),
-            'baik' => KeputusanKepulihan::where('tahap_kepulihan_id', 3)->count(),
-            'memuaskan' => KeputusanKepulihan::where('tahap_kepulihan_id', 2)->count(),
-            'tidak_memuaskan' => KeputusanKepulihan::where('tahap_kepulihan_id', 1)->count(),
-        ];
-
-        foreach ($clients as $client) {
-            $keluargaStatus = KeluargaKlien::where('klien_id', $client->id)->pluck('status_kemaskini');
-            $pekerjaanStatus = PekerjaanKlien::where('klien_id', $client->id)->pluck('status_kemaskini');
-            $warisStatus = WarisKlien::where('klien_id', $client->id)->pluck('status_kemaskini');
-    
-            $statuses = array_merge([$client->status_kemaskini], $keluargaStatus->toArray(), $pekerjaanStatus->toArray(), $warisStatus->toArray());
-    
-            if (count(array_unique($statuses)) === 1) {
-                if ($statuses[0] === 'Baharu') {
-                    $counts['belum_kemaskini']++;
-                } elseif ($statuses[0] === 'Lulus') {
-                    $counts['dikemaskini']++;
-                } elseif ($statuses[0] === 'Ditolak') {
-                    $counts['ditolak']++;
-                }
-            } elseif (in_array('Kemaskini', $statuses)) {
-                $counts['mohon_kemaskini']++;
-            }
-        }
-
-        dd ($counts);
-
-        return response()->json($counts);
-    }
 
 }
