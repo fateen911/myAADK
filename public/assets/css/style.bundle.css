@@ -47380,12 +47380,37 @@ a:hover {
   --bs-stepper-line-border: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
-.landing-dark-bg {
-  background-color: #13263C;
+.landing-light {
+    background-color: white!important;
 }
 
-.landing-dark-color {
-  color: #13263C;
+.landing-darkblue {
+    background-color: #333367!important;
+    color:white!important;
+}
+
+.landing-blue {
+    background-color: #1E40AF!important;
+    color:white!important;
+}
+
+.landing-lightblue {
+    background-color: #1E7AB9!important;
+    color:white!important;
+}
+
+.landing-red {
+    background-color: #9A1B1D!important;
+    color:white!important;
+}
+
+
+.landing-hr-top {
+    border-top: 10px solid #9A1B1D!important;
+}
+
+.landing-hr-bottom {
+    border-bottom: 10px solid #9A1B1D!important;
 }
 
 .landing-dark-border {
