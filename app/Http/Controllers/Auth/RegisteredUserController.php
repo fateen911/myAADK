@@ -66,8 +66,7 @@ class RegisteredUserController extends Controller
 
             $pegawai = PegawaiMohonDaftar::create($pegawaiData);
 
-            return redirect()->route('login')->with('message', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar untuk semakan dan keputusan permohonan akan dihantar melalui notifikasi emel.');
-            // dd(session()->all());
+            return redirect()->route('login')->with('success', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar untuk semakan dan keputusan permohonan akan dihantar melalui notifikasi emel.');
         } 
         else {
             return redirect()->route('login')->with('error', 'Pegawai ' . $request->nama . ' telah didaftarkan dalam sistem ini.');

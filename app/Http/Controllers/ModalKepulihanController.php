@@ -23,7 +23,6 @@ class ModalKepulihanController extends Controller
         // Fetch the latest record from keputusan_kepulihan_klien for this client within 6 months
         $latestRecordKeputusan = DB::table('keputusan_kepulihan_klien')
                         ->where('klien_id', $clientId)
-                        // ->where('updated_at', '>=', $sixMonthsAgo)
                         ->orderBy('updated_at', 'desc')
                         ->first();
 
@@ -36,8 +35,8 @@ class ModalKepulihanController extends Controller
 
         $butangMula = false;
 
-        if ($latestRecordKeputusan->status == 'Belum Selesai') {
-            // If there is no record, the client can click the button
+        if (!$latestRecordKeputusan || $latestRecordKeputusan->status == 'Belum Selesai') {
+            // If there is no record, the client can click the button or status is Belum Selesai 
             $butangMula = true;
         } 
         else {

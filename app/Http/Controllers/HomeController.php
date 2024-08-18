@@ -157,12 +157,19 @@ class HomeController extends Controller
 
                     // Check record if not answered more than 6 month
                     $sixMonthsAgo = Carbon::now()->subMonths(6);
-                    $tidakMenjawabKepulihan = ResponModalKepulihan::where('klien_id', $klienId)
-                                            ->where('sesi', '=', $latestSesi)
-                                            ->where('updated_at', '<=', $sixMonthsAgo)
-                                            ->orderBy('updated_at', 'desc')
-                                            ->exists();
-                    $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan->updated_at->addMonths(6);
+                    $tidakMenjawabKepulihan = false;
+
+                    if ($latestSesi) 
+                    {
+                        $tidakMenjawabKepulihan = ResponModalKepulihan::where('klien_id', $klienId)
+                                                ->where('sesi', '=', $latestSesi)
+                                                ->where('updated_at', '<=', $sixMonthsAgo)
+                                                ->orderBy('updated_at', 'desc')
+                                                ->exists();
+                    }
+
+                    // Handle the case where no KeputusanKepulihan record exists
+                    $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->updated_at->addMonths(6) : null;
 
                     return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan','responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan'));
                 }

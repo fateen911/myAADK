@@ -148,6 +148,31 @@
     </div>
     <!--end::Content-->
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
     <script>
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
@@ -162,19 +187,5 @@
                 icon.classList.add('fa-eye-slash');
             }
         }
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check if there is a flash message
-            @if(session('message'))
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Kemaskini Kata Laluan!',
-                    text: '{!! session('message') !!}',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-        });
     </script>
 @endsection

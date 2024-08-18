@@ -109,11 +109,11 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                @if(session('message'))
+                @if(session('success'))
                     Swal.fire({
                         icon: 'success',
                         title: 'Berjaya!',
-                        text: '{{ session('message') }}',
+                        text: '{{ session('success') }}',
                         confirmButtonText: 'OK'
                     });
                 @endif

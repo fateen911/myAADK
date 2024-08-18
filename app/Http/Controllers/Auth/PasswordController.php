@@ -25,6 +25,6 @@ class PasswordController extends Controller
             'status' => 1,
         ]);
 
-        return back()->with('status', 'password-updated');
+        return back()->with('success', 'Kata Laluan Anda telah Berjaya Dikemaskini!');
     }
 }
