@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan-program/hebahan/papar-emel/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/emel/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
@@ -55,8 +55,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function(){
-        fetchItems();
         var daerahId = $('#daerah').val();
+        fetchItems();
         function fetchItems() {
             $.ajax({
                 url: '/klien-daerah/' + daerahId,

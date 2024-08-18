@@ -687,7 +687,7 @@ class PengurusanProgController extends Controller
                 return view('pengurusan_program.hebahan.papar_hebahan_daerah', compact('program','daerah'));
             }
         }
-        return redirect()->back()->with('error', $try);
+        return redirect()->back()->with('error');
     }
 
     public function paparSms($id)

@@ -44,7 +44,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="submit" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
+        <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
     </div>
 
 </form>
@@ -55,8 +55,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(document).ready(function(){
-        fetchItems();
         var daerahId = $('#daerah').val();
+        fetchItems();
         function fetchItems() {
             $.ajax({
                 url: '/klien-daerah/' + daerahId,
