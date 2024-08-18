@@ -154,7 +154,8 @@ class ModalKepulihanController extends Controller
             $existingResponse->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
             $existingResponse->status = 'Belum Selesai';
             $existingResponse->save();
-        } else {
+        } 
+        else {
             // Store a new response
             $respon = new ResponDemografi();
             $respon->klien_id = $clientId;
@@ -174,7 +175,7 @@ class ModalKepulihanController extends Controller
             $respon->save();
         }
 
-        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon berjaya disimpan.');
+        return redirect()->route('klien.soalanKepulihan')->with('success', 'Respon soalan demografi berjaya disimpan.');
     }
 
     public function soalanKepulihan(Request $request)

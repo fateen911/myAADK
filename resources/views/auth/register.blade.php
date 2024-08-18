@@ -28,7 +28,7 @@
       
             <!-- Email Address -->
             <div class="mt-4">
-                <x-input-label for="emelPegawai" :value="__('Emel')" />
+                <x-input-label for="emelPegawai" :value="__('E-mel')" />
                 <div class="input-group">
                     <input type="text" class="form-control w-full" placeholder="contoh12" id="emelPegawai" name="emelPegawai" required />
                     <span class="input-group-text">@adk.gov.my</span>

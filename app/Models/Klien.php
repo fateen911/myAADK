@@ -27,6 +27,8 @@ class Klien extends Model
         'status_kesihatan_mental',
         'status_oku',
         'skor_ccri',
+        'daerah_pejabat',
+        'negeri_pejabat',
         'status_kemaskini',
     ];
 
