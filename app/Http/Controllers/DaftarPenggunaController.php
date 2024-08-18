@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use App\Mail\DaftarPengguna;
 use App\Mail\PegawaiApproved;
 use App\Mail\PegawaiRejected;
+use App\Mail\KemaskiniKataLaluan;
 use App\Models\User;
 use App\Models\Pegawai;
 use App\Models\Negeri;
@@ -44,7 +46,23 @@ class DaftarPenggunaController extends Controller
         return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
-    public function kemaskiniKlien(Request $request)
+    public function senaraiDaftarKlien()
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+        if ($pegawaiDaerah) {
+            $klien = User::where('tahap_pengguna', '=', '2')
+                        ->join('klien', 'users.no_kp', '=', 'klien.no_kp')
+                        ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                        ->orderBy('users.updated_at', 'desc')
+                        ->get(['users.*']);
+
+            return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien'));
+        }
+    }
+
+    public function pegawaiKemaskiniKlien(Request $request)
     {
         // Retrieve the user by their ID
         $user = User::find($request->id);
@@ -53,7 +71,7 @@ class DaftarPenggunaController extends Controller
         {
             // Prepare the data for update
             $updateData = [
-                'name' => strtoupper($request->name),
+                'name'  => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
             ];
@@ -65,6 +83,44 @@ class DaftarPenggunaController extends Controller
 
             // Update user details
             $user->update($updateData);
+
+            // Send email notification if password was updated and user has an email
+            if ($request->filled('password') && $user->email) {
+                Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+            }
+
+            return redirect()->route('daftar-klien')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
+        } 
+
+        return redirect()->route('daftar-klien')->with('error', 'Sila semak maklumat yang dimasukkan.');
+    }
+
+    public function kemaskiniKlien(Request $request)
+    {
+        // Retrieve the user by their ID
+        $user = User::find($request->id);
+
+        if ($user) 
+        {
+            // Prepare the data for update
+            $updateData = [
+                'name'  => strtoupper($request->name),
+                'no_kp' => $request->no_kp,
+                'email' => $request->email,
+            ];
+
+            // Check if a new password has been provided
+            if ($request->filled('password')) {
+                $updateData['password'] = Hash::make($request->password);
+            }
+
+            // Update user details
+            $user->update($updateData);
+
+            // Send email notification if password was updated and user has an email
+            if ($request->filled('password') && $user->email) {
+                Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+            }
 
             return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
         } 
@@ -98,6 +154,11 @@ class DaftarPenggunaController extends Controller
 
             // Update user details
             $user->update($updateDataUsers);
+
+            // Send email notification if password was updated and user has an email
+            if ($request->filled('password') && $user->email) {
+                Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+            }
 
             // Prepare the data for update in table pegawai
             $updateDataPegawai = [

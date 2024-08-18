@@ -64,4 +64,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function pegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'users_id');
+    }
+
+    // public function klien()
+    // {
+    //     return $this->hasOne(Klien::class, 'users_id'); 
+    // }
 }

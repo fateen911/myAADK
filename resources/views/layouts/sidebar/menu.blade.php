@@ -99,7 +99,7 @@
                     </div>
                     <!--end:Menu item-->
 
-                    <!--begin:Menu item-->
+                    <!--begin:Menu item AKAUN PENGGUNA-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -911,6 +911,36 @@
                             </span>
                             <span class="menu-title">Laman Utama</span>
                         </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+
+                    <!--begin:Menu item AKAUN KLIEN-->
+                    <div class="menu-item pt-5">
+                        <!--begin:Menu content-->
+                        <div class="menu-content">
+                            <span class="menu-heading fw-bold text-uppercase fs-7">AKAUN KLIEN</span>
+                        </div>
+                        <!--end:Menu content-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('daftar-klien') ? 'active' : '' }}">
+                        <!--begin:Menu link-->
+                        <span>
+                            <a class="menu-link" href="{{ route('daftar-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('daftar-klien') }}';">
+                                <span class="menu-icon">
+                                    <i class="ki-duotone ki-user-edit fs-2">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                                <span class="menu-title">Senarai Klien</span>
+                            </a>
+                        </span>
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->

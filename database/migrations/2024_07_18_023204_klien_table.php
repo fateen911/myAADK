@@ -28,8 +28,8 @@ return new class extends Migration
             $table->string('status_kesihatan_mental')->nullable();
             $table->string('status_oku')->nullable();
             $table->double('skor_ccri')->nullable();
-            $table->integer('daerah_pejabat');
-            $table->integer('negeri_pejabat');
+            $table->string('daerah_pejabat')->nullable();
+            $table->string('negeri_pejabat')->nullable();
             $table->enum('status_kemaskini', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Baharu');
             $table->timestamps();
         });
