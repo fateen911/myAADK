@@ -22,10 +22,18 @@ class DaftarPenggunaController extends Controller
 {
     public function senaraiPengguna()
     {
-        $klien = User::where('tahap_pengguna', '=' ,'2')->get();
+        $klien = User::where('tahap_pengguna', '=', '2')
+                 ->orderBy('updated_at', 'desc')
+                 ->get();
+
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
-                        ->whereIn('tahap_pengguna', [3, 4, 5])->get();
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status','Baharu')->get();
+                    ->whereIn('tahap_pengguna', [3, 4, 5])
+                    ->orderBy('users.updated_at', 'desc')
+                    ->get();
+
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
+                                                ->orderBy('updated_at', 'desc')
+                                             ->get();
 
         $negeri = Negeri::all()->sortBy('negeri');
         $daerah = Daerah::all()->sortBy('daerah');
@@ -189,25 +197,25 @@ class DaftarPenggunaController extends Controller
 
             // Store user information in users table
             $user = new User();
-            $user->name = $pegawaiBaharu->nama;
-            $user->no_kp = $pegawaiBaharu->no_kp;
-            $user->email = $pegawaiBaharu->emel;
+            $user->name = $request->nama;
+            $user->no_kp = $request->no_kp;
+            $user->email = $request->emelPegawai;
             $user->password = bcrypt($password);
-            $user->tahap_pengguna = $pegawaiBaharu->peranan;
+            $user->tahap_pengguna = $request->peranan_pengguna;
             $user->status = '0';
             $user->save();
 
             // Store additional staff information in pegawai table
             $pegawai = new Pegawai();
             $pegawai->users_id = $user->id;
-            $pegawai->no_kp = $pegawaiBaharu->no_kp;
-            $pegawai->nama = $pegawaiBaharu->nama;
-            $pegawai->emel = $pegawaiBaharu->emel;            ;
-            $pegawai->no_tel = $pegawaiBaharu->no_tel;
-            $pegawai->jawatan = $pegawaiBaharu->jawatan;
-            $pegawai->peranan = $pegawaiBaharu->peranan;
-            $pegawai->negeri_bertugas = $pegawaiBaharu->negeri_bertugas;
-            $pegawai->daerah_bertugas = $pegawaiBaharu->daerah_bertugas;
+            $pegawai->no_kp = $request->no_kp;
+            $pegawai->nama = $request->nama;
+            $pegawai->emel = $request->emelPegawai;            ;
+            $pegawai->no_tel = $request->no_tel;
+            $pegawai->jawatan = $request->jawatan;
+            $pegawai->peranan = $request->peranan_pengguna;
+            $pegawai->negeri_bertugas = $request->negeri_bertugas;
+            $pegawai->daerah_bertugas = $request->daerah_bertugas;
             $pegawai->save();
 
             // Update the status in pegawai_mohon_daftar table

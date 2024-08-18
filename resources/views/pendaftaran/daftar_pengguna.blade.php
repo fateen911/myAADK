@@ -91,20 +91,20 @@
 				{{-- Nav Bar --}}
 				<ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Klien AADK</button>
+						<button class="nav-link active" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Pegawai Mohon Mendaftar</button>
 					</li>
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="pegawai-tab" data-toggle="tab" data-target="#pegawai" type="button" role="tab" aria-controls="pegawai" aria-selected="true">Pegawai AADK</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="permohonan-pegawai-tab" data-toggle="tab" data-target="#permohonan-pegawai" type="button" role="tab" aria-controls="permohonan-pegawai" aria-selected="true">Pegawai Mohon Mendaftar</button>
+						<button class="nav-link" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Klien AADK</button>
 					</li>
 				</ul>			
 
 				{{-- Content Navigation Bar --}}
 				<div class="tab-content mt-0" id="myTabContent">
 					{{-- PERMOHONAN DAFTAR PEGAWAI --}}
-					<div class="tab-pane fade" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
+					<div class="tab-pane fade show active" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
 						<div class="header row align-items-center">
 							<!--begin::Card title-->
 							<div class="col">
@@ -259,9 +259,9 @@
 																		<label class="fs-6 fw-semibold mb-2">Peranan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
-																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
-																				<option value="{{$tahap1->id}}" {{$user3->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
+																		<select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																			@foreach ($tahap as $tahap1)
+																				<option value="{{$tahap1->id}}" {{$user3->peranan == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
 																		</select>
 																		<!--end::Input-->
@@ -568,7 +568,7 @@
 					</div>
 
 					{{-- KLIEN --}}
-					<div class="tab-pane fade show active" id="klien" role="tabpanel" aria-labelledby="klien-tab">
+					<div class="tab-pane fade" id="klien" role="tabpanel" aria-labelledby="klien-tab">
 						<!--begin::Card title-->
 						<div class="header ml-5">
 							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk kemaskini maklumat akaun klien.</small></h2>	
@@ -580,11 +580,11 @@
 							<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th style="width: 40%;">Nama</th>
-										<th style="width: 15%;">No. Kad Pengenalan</th>
-										<th style="width: 25%;">Emel</th>
-										<th style="width: 10%;">Tarikh Daftar</th>
-										<th style="width: 10%;">Kemaskini</th>
+										<th class="min-w-250px">Nama</th>
+										<th class="min-w-50px">No. Kad Pengenalan</th>
+										<th class="min-w-50px">Emel</th>
+										<th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
+										<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
@@ -598,8 +598,8 @@
 											<td>{{ $user1->name }}</td>
 											<td>{{ $user1->no_kp }}</td>
 											<td>{{ $user1->email }}</td>
-											<td>{{ $tarikh_daftar1}}</td>
-											<td>
+											<td style="text-align: center;">{{ $tarikh_daftar1}}</td>
+											<td style="text-align: center;">
 												<div class="d-flex justify-content-center align-items-center">
 													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
 														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
