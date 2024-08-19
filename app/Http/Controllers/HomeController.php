@@ -44,51 +44,52 @@ class HomeController extends Controller
                     $pegawai = User::whereIn('tahap_pengguna', [3, 4, 5])->count();
                     $klien = User::where('tahap_pengguna', 2)->count();
 
+                    // jumlah keseluruhan klien
+                    $jumlah1 = Klien::all()->count();
+
                     // Count the number of clients who have updated their profile (Sedang Kemaskini)
                     $sedangKemaskini = DB::table('klien')
-                        ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-                        ->distinct('klien.id')
-                        ->count('klien.id');
+                                        ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->distinct('klien.id')
+                                        ->count('klien.id');
                 
                     // Count the number of clients who have never updated their profile (Belum Kemaskini)
                     $belumKemaskini = DB::table('klien')
-                        ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-                        ->whereNull('sejarah_profil_klien.klien_id')
-                        ->count('klien.id');
-
-                    $jumlah1 = $sedangKemaskini + $belumKemaskini;
+                                        ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->whereNull('sejarah_profil_klien.klien_id')
+                                        ->count('klien.id');
                     
                     // Count the number of clients in "Belum Selesai"
                     $belumSelesai = DB::table('klien')
-                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                    ->select('klien.id')
-                    ->where(function ($query) {
-                        $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                            ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                            ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                            ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
-                    })
-                    ->distinct()
-                    ->count('klien.id');
+                                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                    ->select('klien.id')
+                                    ->where(function ($query) {
+                                        $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                    })
+                                    ->distinct()
+                                    ->count('klien.id');
 
                     // Count the number of clients in "Selesai"
                     $selesai = DB::table('klien')
-                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                    ->select('klien.id')
-                    ->where(function ($query) {
-                        $query->where('klien_update_requests.status', '!=', 'Kemaskini')
-                            ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
-                            ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
-                            ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
-                    })
-                    ->distinct()
-                    ->count('klien.id');
+                                ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->select('klien.id')
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->count('klien.id');
 
                     $jumlah2 = $belumSelesai + $selesai;
         
@@ -211,17 +212,54 @@ class HomeController extends Controller
                 }
                 else if($tahap == 3)
                 {
+                    // jumlah keseluruhan klien
+                    $jumlah1 = Klien::all()->count();
+
                     // Count the number of clients who have updated their profile (Sedang Kemaskini)
                     $sedangKemaskini = DB::table('klien')
-                        ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-                        ->distinct('klien.id')
-                        ->count('klien.id');
+                                        ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->distinct('klien.id')
+                                        ->count('klien.id');
                 
                     // Count the number of clients who have never updated their profile (Belum Kemaskini)
                     $belumKemaskini = DB::table('klien')
-                        ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-                        ->whereNull('sejarah_profil_klien.klien_id')
-                        ->count('klien.id');
+                                        ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->whereNull('sejarah_profil_klien.klien_id')
+                                        ->count('klien.id');
+                    
+                    // Count the number of clients in "Belum Selesai"
+                    $belumSelesai = DB::table('klien')
+                                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                    ->select('klien.id')
+                                    ->where(function ($query) {
+                                        $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                                            ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                    })
+                                    ->distinct()
+                                    ->count('klien.id');
+
+                    // Count the number of clients in "Selesai"
+                    $selesai = DB::table('klien')
+                                ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->select('klien.id')
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
+                                        ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->count('klien.id');
+
+                    $jumlah2 = $belumSelesai + $selesai;
 
                     // modal kepulihan
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
@@ -301,36 +339,84 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
-                    return view('dashboard.pegawai.dashboard_brpp', compact('belumKemaskini', 'sedangKemaskini',
+                    return view('dashboard.pegawai.dashboard_brpp', compact('belumKemaskini', 'sedangKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai',
                                                                             'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
                                                                             'tidak_memuaskan','memuaskan','baik','cemerlang'));
                 }
                 else if($tahap == 4)
                 {
+                    // Fetch pegawai (user) infp
                     $pegawaiNegeri = DB::table('pegawai')->where('users_id',$pegawai->id)->first();
 
                     // Filter clients based on daerah_bertugas and negeri_bertugas
-                    $clients = DB::table('klien')
-                                ->where('negeri', $pegawaiNegeri->negeri_bertugas)
-                                ->get();
+                    $clients = DB::table('klien')->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->get();
 
                     // Count profile update statuses
                     $sedangKemaskiniNegeri = $clients->filter(function ($client) {
-                        return DB::table('sejarah_profil_klien')
-                            ->where('klien_id', $client->id)
-                            ->exists();
-                    })->count();
+                                                return DB::table('sejarah_profil_klien')
+                                                    ->where('klien_id', $client->id)
+                                                    ->exists();
+                                            })->count();
 
                     $belumKemaskiniNegeri = $clients->filter(function ($client) {
-                        return !DB::table('sejarah_profil_klien')
-                            ->where('klien_id', $client->id)
-                            ->exists();
-                    })->count();
+                                                return !DB::table('sejarah_profil_klien')
+                                                    ->where('klien_id', $client->id)
+                                                    ->exists();
+                                            })->count();
+
+                    $jumlahKlienNegeri = $sedangKemaskiniNegeri + $belumKemaskiniNegeri;
+
+                    // Count the number of clients in "Belum Selesai"
+                    // A client is "Belum Selesai" if at least one of the statuses in the 4 tables is "Kemaskini"
+                    $belumSelesaiNegeri = DB::table('klien')
+                                        ->join('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                        ->join('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                        ->join('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                        ->join('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                        ->select('klien.id')
+                                        ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                        ->where(function ($query) {
+                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                        })
+                                        ->distinct()
+                                        ->count('klien.id');
+
+                    // Count the number of clients in "Selesai"
+                    // A client is "Selesai" only if all statuses in the 4 tables are either "Lulus" or "Ditolak"
+                    $selesaiNegeri = DB::table('klien')
+                                    ->join('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                    ->join('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                    ->join('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                    ->join('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                    ->select('klien.id')
+                                    ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                    ->where(function ($query) {
+                                        $query->where(function ($subQuery) {
+                                            $subQuery->where('klien_update_requests.status', '=', 'Lulus')
+                                                ->orWhere('klien_update_requests.status', '=', 'Ditolak');
+                                        })->where(function ($subQuery) {
+                                            $subQuery->where('pekerjaan_klien_update_requests.status', '=', 'Lulus')
+                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Ditolak');
+                                        })->where(function ($subQuery) {
+                                            $subQuery->where('keluarga_klien_update_requests.status', '=', 'Lulus')
+                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Ditolak');
+                                        })->where(function ($subQuery) {
+                                            $subQuery->where('waris_klien_update_requests.status', '=', 'Lulus')
+                                                ->orWhere('waris_klien_update_requests.status', '=', 'Ditolak');
+                                        });
+                                    })
+                                    ->distinct()
+                                    ->count('klien.id');
+
+                    $jumlahPermohonanNegeri = $belumSelesaiNegeri + $selesaiNegeri;
 
                     // Count kepulihan statuses
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
                         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-                        ->where('u.negeri', $pegawaiNegeri->negeri_bertugas)
+                        ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                         ->get();
 
                     // Start building the query
@@ -357,7 +443,7 @@ class HomeController extends Controller
                             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status');
 
                             // Filter by negeri_bertugas for tahap 4 (pegawai negeri)
-                            $query->where('u.negeri', $pegawaiNegeri->negeri_bertugas);
+                            $query->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
 
                     // Execute the query and get the results
                     $responses = $query->get();
@@ -373,35 +459,35 @@ class HomeController extends Controller
 
                     // Count clients who didn't answer
                     $tidak_menjawab = DB::table('klien as u')
-                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                    ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                        $join->on('u.id', '=', 'kk.klien_id')
-                            ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
-                    })
-                    ->where(function ($query) use ($sixMonthsAgo) {
-                        $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                            ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
-                            ->orWhere(function ($query) use ($sixMonthsAgo) {
-                                $query->whereNotNull('kk.klien_id')
-                                    ->where('kk.updated_at', '<=', $sixMonthsAgo);
-                            });
-                    });
+                                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+                                            $join->on('u.id', '=', 'kk.klien_id')
+                                                ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+                                        })
+                                        ->where(function ($query) use ($sixMonthsAgo) {
+                                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
+                                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
+                                                ->orWhere(function ($query) use ($sixMonthsAgo) {
+                                                    $query->whereNotNull('kk.klien_id')
+                                                        ->where('kk.updated_at', '<=', $sixMonthsAgo);
+                                                });
+                                        });
 
-                    $tidak_menjawab_negeri = $tidak_menjawab->where('u.negeri', $pegawaiNegeri->negeri_bertugas)->count();
+                    $tidak_menjawab_negeri = $tidak_menjawab->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
-                    ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-                    ->select('kk.klien_id', 'kk.tahap_kepulihan_id')
-                    ->where('kk.updated_at', '>=', $sixMonthsAgo)
-                    ->whereIn('kk.updated_at', function ($query) {
-                        $query->select(DB::raw('MAX(updated_at)'))
-                            ->from('keputusan_kepulihan_klien')
-                            ->whereColumn('klien_id', 'kk.klien_id')
-                            ->groupBy('klien_id');
-                    });
+                                                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                                                ->select('kk.klien_id', 'kk.tahap_kepulihan_id')
+                                                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                                                ->whereIn('kk.updated_at', function ($query) {
+                                                    $query->select(DB::raw('MAX(updated_at)'))
+                                                        ->from('keputusan_kepulihan_klien')
+                                                        ->whereColumn('klien_id', 'kk.klien_id')
+                                                        ->groupBy('klien_id');
+                                                });
 
-                    $latestTahapKepulihan = $latestTahapKepulihan->where('u.negeri', $pegawaiNegeri->negeri_bertugas)->get();
+                    $latestTahapKepulihan = $latestTahapKepulihan->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->get();
 
                     // Count the number of clients in each tahap kepulihan
                     $cemerlang = $latestTahapKepulihan->where('tahap_kepulihan_id', 4)->count();
@@ -409,7 +495,7 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
-                    return view('dashboard.pegawai.dashboard_negeri', compact('sedangKemaskiniNegeri','belumKemaskiniNegeri', 
+                    return view('dashboard.pegawai.dashboard_negeri', compact('sedangKemaskiniNegeri','belumKemaskiniNegeri', 'jumlahKlienNegeri', 'jumlahPermohonanNegeri', 'selesaiNegeri', 'belumSelesaiNegeri',
                                                                               'selesai_menjawab_negeri','belum_selesai_menjawab_negeri','tidak_menjawab_negeri',
                                                                               'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan'));
                 }
@@ -420,8 +506,8 @@ class HomeController extends Controller
 
                     // Filter clients based on daerah_bertugas and negeri_bertugas
                     $clients = DB::table('klien')
-                                ->where('negeri', $pegawaiDaerah->negeri_bertugas)
-                                ->where('daerah', $pegawaiDaerah->daerah_bertugas)
+                                ->where('negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                ->where('daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                 ->get();
 
                     // Count profile update statuses
@@ -437,7 +523,58 @@ class HomeController extends Controller
                             ->exists();
                     })->count();
 
-                    // Start building the query
+                    $jumlahKlienDaerah = $sedangKemaskiniDaerah + $belumKemaskiniDaerah;
+                    
+                    // Count the number of clients in "Belum Selesai"
+                    // A client is "Belum Selesai" if at least one of the statuses in the 4 tables is "Kemaskini"
+                    $belumSelesaiDaerah = DB::table('klien')
+                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                    ->select('klien.id')
+                    ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                    ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                    ->where(function ($query) {
+                        $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                    })
+                    ->distinct()
+                    ->count('klien.id');
+
+                    // Count the number of clients in "Selesai"
+                    // A client is "Selesai" only if all statuses in the 4 tables are either "Lulus" or "Ditolak"
+                    $selesaiDaerah = DB::table('klien')
+                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                    ->select('klien.id')
+                    ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                    ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                    ->where(function ($query) {
+                        $query->where(function ($subQuery) {
+                            $subQuery->where('klien_update_requests.status', '=', 'Lulus')
+                                ->orWhere('klien_update_requests.status', '=', 'Ditolak');
+                        })->where(function ($subQuery) {
+                            $subQuery->where('pekerjaan_klien_update_requests.status', '=', 'Lulus')
+                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Ditolak');
+                        })->where(function ($subQuery) {
+                            $subQuery->where('keluarga_klien_update_requests.status', '=', 'Lulus')
+                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Ditolak');
+                        })->where(function ($subQuery) {
+                            $subQuery->where('waris_klien_update_requests.status', '=', 'Lulus')
+                                ->orWhere('waris_klien_update_requests.status', '=', 'Ditolak');
+                        });
+                    })
+                    ->distinct()
+                    ->count('klien.id');
+                                        
+                    $jumlahPermohonanDaerah = $belumSelesaiDaerah + $selesaiDaerah;
+
+                    // Start building the query for Keputusan Kepulihan
                     $query = DB::table('keputusan_kepulihan_klien as kk')
                             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
                             ->select(
@@ -461,7 +598,7 @@ class HomeController extends Controller
                             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status');
 
                     // Filter by daerah_bertugas and negeri_bertugas for tahap 5 (pegawai daerah)
-                    $query->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas);
+                    $query->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas);
 
                     // Execute the query and get the results
                     $responses = $query->get();
@@ -491,7 +628,7 @@ class HomeController extends Controller
                             });
                     });
 
-                    $tidak_menjawab_daerah = $tidak_menjawab->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas)->count();
+                    $tidak_menjawab_daerah = $tidak_menjawab->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -505,7 +642,7 @@ class HomeController extends Controller
                             ->groupBy('klien_id');
                     });
 
-                    $latestTahapKepulihan =  $latestTahapKepulihan->where('u.negeri', $pegawaiDaerah->negeri_bertugas)->where('u.daerah', $pegawaiDaerah->daerah_bertugas)->get();
+                    $latestTahapKepulihan =  $latestTahapKepulihan->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)->get();
 
                     // Count the number of clients in each tahap kepulihan
                     $cemerlang = $latestTahapKepulihan->where('tahap_kepulihan_id', 4)->count();
@@ -513,7 +650,7 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
-                    return view('dashboard.pegawai.dashboard_daerah', compact('sedangKemaskiniDaerah','belumKemaskiniDaerah', 
+                    return view('dashboard.pegawai.dashboard_daerah', compact('sedangKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
                                                                               'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
                                                                               'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan'));
                 }

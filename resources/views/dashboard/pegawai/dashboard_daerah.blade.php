@@ -47,7 +47,7 @@
             {{-- top nav bar --}}
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
+                    <button class="nav-link active" id="profilKlien-tab" data-toggle="tab" data-target="#profilKlien" type="button" role="tab" aria-controls="profilKlien" aria-selected="true">Profil Klien</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="soalSelidik-tab" data-toggle="tab" data-target="#soalSelidik" type="button" role="tab" aria-controls="soalSelidik" aria-selected="true">Soal Selidik</button>
@@ -56,31 +56,31 @@
 
             <div class="tab-content" id="myTabContent">
                 {{-- Profil Klien --}}
-                <div class="tab-pane fade  show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
-                    <!--Permohonan-->
+                <div class="tab-pane fade show active" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
+                    <!--Keseluruhan-->
                     <div class="header pt-5 mb-5">
-                        <h2>Status Kemaskini Profil Klien</h2>
+                        <h2>Bilangan Klien yang Mengemaskini Profil</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
                         <div class="row g-3 g-lg-6" style="text-align: center;">
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-4">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-info">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #1b4268;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
                                             <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Belum Mengemaskini Profil</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Jumlah Klien</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien-daerah') }}">
-                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskiniDaerah}}</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$jumlahKlienDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -91,23 +91,137 @@
                             <!--end::Col-->
 
                             <!--begin::Col-->
-                            <div class="col-6">
+                            <div class="col-4">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:mediumvioletred">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #581378;">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
+                                            <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Bilangan Klien yang Telah Mengemaskini Profil</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Telah Kemaskini</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien-daerah') }}">
-                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskiniDaerah}}</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskiniDaerah}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #be0991;">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Kemaskini</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href="{{ route('senarai-klien-daerah') }}">
+                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskiniDaerah}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+
+                    <div class="header pt-10 mb-5">
+                        <h2>Bilangan Status Permohonan Kemaskini Profil</h2>
+                    </div>
+                    <div class="body">
+                        <!--begin::First Row-->
+                        <div class="row g-3 g-lg-6" style="text-align: center;">
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #138aca;">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-users text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Jumlah Permohonan</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href="{{ route('senarai-klien') }}">
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$jumlahPermohonanDaerah}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #a013ca;">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-users text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href="{{ route('senarai-klien') }}">
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesaiDaerah}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-4">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: #df1bba;">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-users text-light" style="font-size: 20px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href="{{ route('senarai-klien') }}">
+                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumSelesaiDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
