@@ -465,8 +465,8 @@ class ModalKepulihanController extends Controller
                         'u.id as klien_id',
                         'u.nama',
                         'u.no_kp',
-                        'u.daerah',
-                        'u.negeri',
+                        'u.daerah_pejabat',
+                        'u.negeri_pejabat',
                         DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
                         'kk.tahap_kepulihan_id',
                         'kk.status',
@@ -479,7 +479,7 @@ class ModalKepulihanController extends Controller
                             ->whereColumn('klien_id', 'kk.klien_id')
                             ->groupBy('klien_id');
                     })
-                    ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+                    ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                     ->get();
         
         // Fetch clients who have not responded yet or their last response was over 6 months ago
@@ -493,8 +493,8 @@ class ModalKepulihanController extends Controller
                             'u.id as klien_id',
                             'u.nama',
                             'u.no_kp',
-                            'u.daerah',
-                            'u.negeri',
+                            'u.daerah_pejabat',
+                            'u.negeri_pejabat',
                             'rk.tkh_tamat_pengawasan',
                             DB::raw('ROUND(kk.skor, 3) as skor'),
                             'kk.tahap_kepulihan_id',
@@ -526,8 +526,8 @@ class ModalKepulihanController extends Controller
                 'u.id as klien_id',
                 'u.nama',
                 'u.no_kp',
-                'u.daerah',
-                'u.negeri',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
                 DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
                 'kk.tahap_kepulihan_id',
                 'kk.status',
@@ -540,8 +540,8 @@ class ModalKepulihanController extends Controller
                     ->whereColumn('klien_id', 'kk.klien_id')
                     ->groupBy('klien_id');
             })
-            ->where('u.negeri', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
             ->get();
 
         // Fetch clients who have not responded yet or their last response was over 6 months ago
@@ -555,8 +555,8 @@ class ModalKepulihanController extends Controller
                 'u.id as klien_id',
                 'u.nama',
                 'u.no_kp',
-                'u.daerah',
-                'u.negeri',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
                 'rk.tkh_tamat_pengawasan',
                 DB::raw('ROUND(kk.skor, 3) as skor'),
                 'kk.tahap_kepulihan_id',
@@ -570,7 +570,7 @@ class ModalKepulihanController extends Controller
                             ->where('kk.updated_at', '<=', $sixMonthsAgo);
                     });
             })
-            ->where('u.negeri', $pegawaiNegeri->negeri_bertugas)
+            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->get();
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
@@ -589,8 +589,8 @@ class ModalKepulihanController extends Controller
                 'u.id as klien_id',
                 'u.nama',
                 'u.no_kp',
-                'u.daerah',
-                'u.negeri',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
                 DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
                 'kk.tahap_kepulihan_id',
                 'kk.status',
@@ -603,9 +603,9 @@ class ModalKepulihanController extends Controller
                     ->whereColumn('klien_id', 'kk.klien_id')
                     ->groupBy('klien_id');
             })
-            ->where('u.negeri', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
             ->get();
 
         // Fetch clients who have not responded yet or their last response was over 6 months ago
@@ -619,8 +619,8 @@ class ModalKepulihanController extends Controller
                 'u.id as klien_id',
                 'u.nama',
                 'u.no_kp',
-                'u.daerah',
-                'u.negeri',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
                 'rk.tkh_tamat_pengawasan',
                 DB::raw('ROUND(kk.skor, 3) as skor'),
                 'kk.tahap_kepulihan_id',
@@ -634,8 +634,8 @@ class ModalKepulihanController extends Controller
                             ->where('kk.updated_at', '<=', $sixMonthsAgo);
                     });
             })
-            ->where('u.negeri', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah', $pegawaiDaerah->daerah_bertugas)
+            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->get();
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
