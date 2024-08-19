@@ -17,18 +17,17 @@ class PasswordController extends Controller
     {
         $tahapPengguna = $request->user()->tahap_pengguna;
 
-        // dd($tahapPengguna);
-
         // Define password validation rules based on tahap pengguna
         $passwordRules = ['required', 'confirmed'];
 
-        if ($tahapPengguna === 2) {
+        if ($tahapPengguna == 2) {
             $passwordRules[] = Password::min(6)
                 ->mixedCase()
                 ->letters()
                 ->numbers()
                 ->symbols();
-        } else {
+        } 
+        else {
             $passwordRules[] = Password::min(12)
                 ->mixedCase()
                 ->letters()
@@ -36,7 +35,7 @@ class PasswordController extends Controller
                 ->symbols();
         }
 
-        dd($passwordRules);
+        // dd($passwordRules);
 
         // Validate the request
         $validated = $request->validateWithBag('updatePassword', [
