@@ -1593,7 +1593,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_bapa" name="alamat_bapa">{{ $butiranKlien->alamat_bapa }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa">{{ $butiranKlien->alamat_bapa }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1601,7 +1601,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_bapa" name="poskod_bapa" value="{{ $butiranKlien->poskod_bapa }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{ $butiranKlien->poskod_bapa }}"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1609,7 +1609,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="negeri_bapa" name="negeri_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_bapa == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1622,7 +1622,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="daerah_bapa" name="daerah_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_bapa == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -2370,6 +2370,69 @@
     </script>
 
     {{-- Display daerah based on negeri --}}
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri').val();
+            // alert(previousIdNegeri);
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri').on('change', function () {
+                var idnegeri = $(this).val();
+                // alert(idnegeri);
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah").empty();
+                $('#poskod').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // $("#alamat_tetap_bandar").empty();
+
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah").val();
+                            // alert(selectedValue);
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('tak keluar daerah punn');
+                    }
+                });
+            }
+        });
+    </script>
+    
     {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const negeriSelect = document.getElementById('negeri');
@@ -2457,62 +2520,57 @@
 
     {{-- Checkbox alamat --}}
     <script>
+        // Store initial values in variables
+        var initialAlamatBapa = document.getElementById("alamat_b").value;
+        var initialNegeriBapa = document.getElementById("negeri_b").value;
+        var initialDaerahBapa = document.getElementById("daerah_b").value;
+        var initialPoskodBapa = document.getElementById("poskod_b").value;
+
         function alamatBapa() {
+            
             var checkBox = document.getElementById("alamat_bapa_sama");
-            var alamat_klien = document.getElementById("alamat_rumah").innerText;
-            var klien_negeri = document.getElementById("negeri").innerText;
-            var klien_daerah = document.getElementById("daerah").innerText;
-            var klien_poskod = document.getElementById("poskod").innerText;
+            var alamat_klien = document.getElementById("alamat_rumah");
+            var klien_negeri = document.getElementById("negeri");
+            var klien_daerah = document.getElementById("daerah");
+            var klien_poskod = document.getElementById("poskod");
 
-            var alamat_bapa = document.getElementById("alamat_bapa");
-            var negeri_bapa = document.getElementById("negeri_bapa");
-            var daerah_bapa = document.getElementById("daerah_bapa");
-            var poskod_bapa = document.getElementById("poskod_bapa");
-
-            console.log("Checkbox checked: ", checkBox.checked);
-            console.log("Client Address: ", alamat_klien);
-            console.log("Client State: ", klien_negeri);
-            console.log("Client District: ", klien_daerah);
-            console.log("Client Postcode: ", klien_poskod);
+            var alamat_bapa = document.getElementById("alamat_b");
+            var negeri_bapa = document.getElementById("negeri_b");
+            var daerah_bapa = document.getElementById("daerah_b");
+            var poskod_bapa = document.getElementById("poskod_b");
 
             if (checkBox.checked) {
-                alamat_bapa.value = alamat_klien;
-                poskod_bapa.value = klien_poskod;
-                negeri_bapa.value = klien_negeri;
-                daerah_bapa.value = klien_daerah;
-
-                console.log("Father's Address set to: ", alamat_bapa.value);
-                console.log("Father's Postcode set to: ", poskod_bapa.value);
-                console.log("Father's Daerah set to: ", daerah_bapa.value);
-                console.log("Father's Negeri set to: ", negeri_bapa.value);
+                // Copy values
+                alamat_bapa.value = alamat_klien.innerText;
+                poskod_bapa.value = klien_poskod.innerText;
+                negeri_bapa.value = klien_negeri.innerText;
+                daerah_bapa.value = klien_daerah.innerText;
 
                 // Trigger select2 update if using select2
                 if ($(negeri_bapa).data('select2')) {
-                    $(negeri_bapa).trigger('change.select2');
+                    $(negeri_bapa).val(klien_negeri.value).trigger('change.select2');
                 }
                 if ($(daerah_bapa).data('select2')) {
-                    $(daerah_bapa).trigger('change.select2');
+                    $(daerah_bapa).val(klien_daerah.value).trigger('change.select2');
                 }
             } else {
-                alamat_bapa.value = '';
-                poskod_bapa.value = '';
-                negeri_bapa.value = '';
-                daerah_bapa.value = '';
-
-                console.log("Father's Address cleared");
-                console.log("Father's Postcode cleared");
-                console.log("Father's State cleared");
-                console.log("Father's District cleared");
+                // Back Initial Value
+                alamat_bapa.value = initialAlamatBapa;
+                poskod_bapa.value = initialPoskodBapa;
+                negeri_bapa.value = initialNegeriBapa;
+                daerah_bapa.value = initialDaerahBapa;
 
                 // Trigger select2 update if using select2
                 if ($(negeri_bapa).data('select2')) {
-                    $(negeri_bapa).trigger('change.select2');
+                    $(negeri_bapa).val(initialNegeriBapa).trigger('change.select2');
                 }
                 if ($(daerah_bapa).data('select2')) {
-                    $(daerah_bapa).trigger('change.select2');
+                    $(daerah_bapa).val(initialDaerahBapa).trigger('change.select2');
                 }
+
             }
         }
+
     </script>
     {{-- <script>
         function alamatPasangan() {

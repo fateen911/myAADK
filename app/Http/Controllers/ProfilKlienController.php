@@ -25,6 +25,19 @@ use Illuminate\Support\Facades\Log;
 
 class ProfilKlienController extends Controller
 {
+
+    public function getDaerah($idnegeri=0)
+    {
+
+        $daerahList['data'] = Daerah::orderby("daerah","asc")
+         ->select('id','daerah','negeri_id')
+         ->where('negeri_id',$idnegeri)
+         ->get();
+
+         return response()->json($daerahList);
+
+    }
+
     // PENTADBIR & STAF
     public function senaraiKlien()
     {
