@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exports\PengesahanKehadiranExcel;
 use App\Exports\PerekodanKehadiranExcel;
 use App\Models\Daerah;
+use App\Models\DaerahPejabat;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
 use App\Models\Negeri;
@@ -63,13 +64,13 @@ class PengurusanProgController extends Controller
 
     public function klienNegeri($id)//negeri
     {
-        $klien = Klien::where('negeri',$id)->get();
+        $klien = Klien::where('negeri_pejabat',$id)->get();
         return response()->json($klien);
     }
 
     public function klienDaerah($id)//daerah
     {
-        $klien = Klien::where('daerah',$id)->get();
+        $klien = Klien::where('daerah_pejabat',$id)->get();
         return response()->json($klien);
     }
 
@@ -79,10 +80,31 @@ class PengurusanProgController extends Controller
         return response()->json($kategori);
     }
 
-    public function program()
+    public function program($id)
     {
-        $program = Program::with('kategori')->get();
-        return response()->json($program);
+        $user = User::find($id);
+        $pegawai = Pegawai::where('users_id',$id)->first();
+
+        if($user){
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $program = Program::with('kategori')->get();
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $program = Program::with('kategori')
+                            ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                            ->get();
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $program = Program::with('kategori')
+                            ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                            ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                            ->get();
+                return response()->json($program);
+            }
+        }
+        return redirect()->back()->with('error', 'User tidak dijumpai');
     }
 
     public function pengesahan($id)
@@ -99,7 +121,7 @@ class PengurusanProgController extends Controller
 
     public function daerah($id)
     {
-        $daerah = Daerah::with('negeri')->where('negeri_id',$id)->get();
+        $daerah = DaerahPejabat::where('negeri_id',$id)->get();
         return response()->json($daerah);
     }
 
@@ -159,7 +181,23 @@ class PengurusanProgController extends Controller
         $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
         $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
 
-        $program->pegawai_id           =   Auth::id();
+        $pegawai = Pegawai::where('users_id', Auth::id())->first();
+        $user = User::find(Auth::id());
+
+        if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+            $program->negeri_pejabat       =   'semua';
+            $program->daerah_pejabat       =   'semua';
+        }
+        else if ($user->tahap_pengguna == '4') {//pegawai negeri
+            $program->negeri_pejabat       =   $pegawai->negeri_bertugas;
+            $program->daerah_pejabat       =   'semua';
+        }
+        else if ($user->tahap_pengguna == '5') {//pegawai daerah
+            $program->negeri_pejabat       =   $pegawai->negeri_bertugas;
+            $program->daerah_pejabat       =   $pegawai->daerah_bertugas;
+        }
+
+        $program->user_id              =   $user->id;
         $program->kategori_id          =   $request->kategori;
         $program->custom_id            =   $custom_id;
         $program->nama                 =   $request->nama;
@@ -285,7 +323,8 @@ class PengurusanProgController extends Controller
 
     public function senaraiProgPA()
     {
-        return view('pengurusan_program.pegawai_aadk.senarai_prog');
+        $user_id = Auth::id();
+        return view('pengurusan_program.pegawai_aadk.senarai_prog',compact('user_id'));
     }
 
 
@@ -367,7 +406,23 @@ class PengurusanProgController extends Controller
         $tarikh_mula = date('Y-m-d H:i:s', strtotime($format_1));
         $tarikh_tamat = date('Y-m-d H:i:s', strtotime($format_2));
 
-        $program->pegawai_id           =   $pegawai_id;
+        $pegawai = Pegawai::where('users_id', Auth::id())->first();
+        $user = User::find(Auth::id());
+
+        if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+            $program->negeri_pejabat       =   'semua';
+            $program->daerah_pejabat       =   'semua';
+        }
+        else if ($user->tahap_pengguna == '4') {//pegawai negeri
+            $program->negeri_pejabat       =   $pegawai->negeri_bertugas;
+            $program->daerah_pejabat       =   'semua';
+        }
+        else if ($user->tahap_pengguna == '5') {//pegawai daerah
+            $program->negeri_pejabat       =   $pegawai->negeri_bertugas;
+            $program->daerah_pejabat       =   $pegawai->daerah_bertugas;
+        }
+
+        $program->user_id              =   $user->id;
         $program->kategori_id          =   $request->kategori;
         $program->custom_id            =   $custom_id;
         $program->nama                 =   $request->nama;
@@ -493,7 +548,8 @@ class PengurusanProgController extends Controller
 
     public function senaraiProgPS()
     {
-        return view('pengurusan_program.pentadbir_sistem.senarai_prog');
+        $user_id = Auth::id();
+        return view('pengurusan_program.pentadbir_sistem.senarai_prog',compact('user_id'));
     }
 
 
@@ -740,7 +796,7 @@ class PengurusanProgController extends Controller
         $negeri_id = $request->input('negeri');
         $daerah_id = $request->input('daerah');
 
-        $filter = Klien::where('negeri',$negeri_id)->where('daerah',$daerah_id)->get();
+        $filter = Klien::where('negeri_pejabat',$negeri_id)->where('daerah_pejabat',$daerah_id)->get();
 
         if ($filter) {
             return response()->json($filter);

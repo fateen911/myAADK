@@ -12,8 +12,10 @@ class Program extends Model
     protected $table = 'program';
 
     protected $fillable = [
-        'pegawai_id',
         'kategori_id',
+        'user_id',
+        'negeri_pejabat',
+        'daerah_pejabat',
         'custom_id',
         'nama',
         'objektif',

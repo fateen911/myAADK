@@ -91,7 +91,7 @@ Route::get('/klien-semua', [PengurusanProgController::class, 'klienSemua']);
 Route::get('/klien-negeri/{id}', [PengurusanProgController::class, 'klienNegeri']);
 Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah']);
 Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
-Route::get('/program', [PengurusanProgController::class, 'program']);
+Route::get('/program/{id}', [PengurusanProgController::class, 'program']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
@@ -111,7 +111,7 @@ Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'ke
 Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
 Route::post('/pentadbir/kelulusan-permohonan-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawai'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 
-// PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN 
+// PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
 Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class, 'pegawaiKemaskiniKlien'])->name('pegawai-kemaskini-klien');
 

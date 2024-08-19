@@ -79,7 +79,7 @@
                         <div class="header p-0 m-0">
                             <h2>Senarai Program<br><small>Sila klik pada butang "Tambah Program" untuk mendaftarkan program baharu.</small></h2>
                         </div>
-
+                        <input type="hidden" name="pegawai_id" id="pegawaiId" value="{{$user_id}}">
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <!--begin::Toolbar-->
@@ -183,11 +183,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function(){
+            var pegawaiId = $('#pegawaiId').val();
             fetchItems();
-
             function fetchItems() {
                 $.ajax({
-                    url: '/program',
+                    url: '/program/' + pegawaiId,
                     method: 'GET',
                     success: function(response) {
                         let rows = '';

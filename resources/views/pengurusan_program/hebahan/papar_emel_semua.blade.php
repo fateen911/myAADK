@@ -117,7 +117,7 @@
                         $('#daerah').empty();
                         $('#daerah').append('<option value="">Pilih Daerah</option>');
                         $.each(response, function(key, daerah) {
-                            $('#daerah').append('<option value="' + daerah.id + '">' + daerah.daerah + '</option>');
+                            $('#daerah').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
                         });
                     }
                 });

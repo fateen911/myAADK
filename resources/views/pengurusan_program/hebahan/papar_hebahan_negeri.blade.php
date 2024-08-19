@@ -24,7 +24,7 @@
                 <div class="d-flex flex-row flex-column-fluid gap-5">
                     <div class="d-flex flex-row-auto w-40 flex-center">
 
-                        <input type="hidden" name="negeri" id="negeri" value="11">
+                        <input type="hidden" name="negeri" id="negeri" value="{{$negeri}}">
 
                         <select id="daerah" class="form-select" name="daerah">
                             <!--AJAX-->
@@ -109,7 +109,7 @@
                 success: function(response) {
                     let rows = '<option value="">Pilih Daerah</option>';
                     $.each(response, function(index, daerah) {
-                        rows += '<option value="' + daerah.id + '">' + daerah.daerah + '</option>';
+                        rows += '<option value="' + daerah.kod + '">' + daerah.daerah + '</option>';
                     });
                     $('#daerah').html(rows);
                 }
