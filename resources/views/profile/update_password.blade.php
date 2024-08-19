@@ -50,11 +50,11 @@
         <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
-    
+
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-xxl" style="width: 80%;">
+        <div id="kt_app_content_container" class="app-container container-xxl" style="width: 80%; margin-top: 40px;">
             <!--begin::Sign-in Method-->
             <div class="card mb-5 mb-xl-10">
                 <!--begin::Card header-->
@@ -64,6 +64,7 @@
                     </div>
                 </div>
                 <!--end::Card header-->
+
                 <!--begin::Content-->
                 <div id="kt_account_settings_signin_method" class="collapse show">
                     <form method="post" action="{{ route('password.update') }}" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
@@ -75,7 +76,7 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Terkini</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -95,7 +96,7 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -115,7 +116,7 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Sahkan Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -161,15 +162,24 @@
                     confirmButtonText: 'OK'
                 });
             @endif
-        
-            @if(session('error'))
+
+            @if(session('message'))
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Tidak Berjaya!',
-                    text: '{{ session('error') }}',
+                    icon: 'warning',
+                    title: 'Kemaskini Kata Laluan!',
+                    text: '{{ session('message') }}',
                     confirmButtonText: 'OK'
                 });
             @endif
+        
+            @if(session('passwordUpdateError'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: '{{ session('passwordUpdateError') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
         });
     </script>
 
@@ -187,5 +197,32 @@
                 icon.classList.add('fa-eye-slash');
             }
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
+            var tooltips = [
+                document.getElementById("tooltip1"),
+                document.getElementById("tooltip2"),
+                document.getElementById("tooltip3")
+            ];
+            
+            if (tahapPengguna === 2) {
+                tooltips.forEach(function(tooltip) {
+                    tooltip.setAttribute("title", "Minimum 6 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
+                });
+            } else {
+                tooltips.forEach(function(tooltip) {
+                    tooltip.setAttribute("title", "Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
+                });
+            }
+
+            // Reinitialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
     </script>
 @endsection

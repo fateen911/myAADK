@@ -446,5 +446,30 @@
         </div>
         <!--end::Content-->
     </body>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        
+            @if(session('passwordUpdateError'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: '{{ session('passwordUpdateError') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        });
+    </script>
 @endsection
 

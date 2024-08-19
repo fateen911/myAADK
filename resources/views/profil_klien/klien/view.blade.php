@@ -289,7 +289,7 @@
                                 </div>
                             </div>
                             <!--begin::Input group-->
-                            <div class="row fv-row">
+                            <div class="row fv-row mb-3">
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -343,25 +343,6 @@
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Daerah</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="w-100">
-                                        @php
-                                            $daerahKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah)->value('senarai_daerah.daerah');
-                                        @endphp
-                                        <span id="daerah" class="fs-6 form-control-plaintext">{{$daerahKlien}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row">
-                                <div class="col-md-5 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Negeri</span>
                                     </label>
                                     <!--end::Label-->
@@ -371,7 +352,26 @@
                                         @php
                                             $negeriKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri)->value('senarai_negeri.negeri');
                                         @endphp
-                                        <span id="negeri" class="fs-6 form-control-plaintext">{{$negeriKlien}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$negeriKlien}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-5 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Daerah</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="w-100">
+                                        @php
+                                            $daerahKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah)->value('senarai_daerah.daerah');
+                                        @endphp
+                                        <span class="fs-6 form-control-plaintext">{{$daerahKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -596,18 +596,58 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
+                                                        <option value="">Pilih Negeri</option>
+                                                        @foreach ($negeri as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerah as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            {{-- <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
+                                                        <option value="">Pilih Negeri</option>
+                                                        @foreach ($negeri as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }} data-id="{{ $item->id }}">{{ $item->negeri }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
+                                                        <option value="">Pilih Daerah</option>
+                                                        @foreach ($daerah as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>                                             --}}
+                                            {{-- <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
@@ -615,11 +655,24 @@
                                                     <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeri as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }} data-id="{{ $item->id }}">{{ $item->negeri }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
+                                                        <option>Pilih Daerah</option>
+                                                        @foreach ($daerah as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div> --}}
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
@@ -830,6 +883,25 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Negeri</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="w-100">
+                                        @php
+                                            $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
+                                        @endphp
+                                        <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-4 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Daerah</span>
                                     </label>
                                     <!--end::Label-->
@@ -841,25 +913,6 @@
                                             $daerahKerjaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja )->value('senarai_daerah.daerah');
                                         @endphp
                                         <span id="daerah_kerja" class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row">
-                                <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Negeri</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="w-100">
-                                        @php
-                                            $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
-                                        @endphp
-                                        <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1003,19 +1056,6 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                        <option>Pilih Daerah</option>
-                                                        @foreach ($daerahKerja as $daerahK)
-                                                            <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
@@ -1023,6 +1063,19 @@
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriKerja as $negeriK)
                                                             <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                                        <option>Pilih Daerah</option>
+                                                        @foreach ($daerahKerja as $daerahK)
+                                                            <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -1149,21 +1202,6 @@
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>Daerah</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="w-100">
-                                                            @php
-                                                                $daerahBapaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_bapa )->value('senarai_daerah.daerah');
-                                                            @endphp
-                                                            <span id="daerah_bapa" class="fs-6 form-control-plaintext">{{ $daerahBapaKlien }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
@@ -1173,6 +1211,21 @@
                                                                 $negeriBapaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_bapa )->value('senarai_negeri.negeri');
                                                             @endphp
                                                             <span id="negeri_bapa" class="fs-6 form-control-plaintext">{{ $negeriBapaKlien }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                                            <span>Daerah</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="w-100">
+                                                            @php
+                                                                $daerahBapaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_bapa )->value('senarai_daerah.daerah');
+                                                            @endphp
+                                                            <span id="daerah_bapa" class="fs-6 form-control-plaintext">{{ $daerahBapaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1275,21 +1328,6 @@
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>Daerah</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="w-100">
-                                                            @php
-                                                                $daerahIbuKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_ibu )->value('senarai_daerah.daerah');
-                                                            @endphp
-                                                            <span id="daerah_ibu" class="fs-6 form-control-plaintext">{{ $daerahIbuKlien }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
@@ -1299,6 +1337,21 @@
                                                                 $negeriIbuKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_ibu )->value('senarai_negeri.negeri');
                                                             @endphp
                                                             <span id="negeri_ibu" class="fs-6 form-control-plaintext">{{ $negeriIbuKlien }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                                            <span>Daerah</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="w-100">
+                                                            @php
+                                                                $daerahIbuKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_ibu )->value('senarai_daerah.daerah');
+                                                            @endphp
+                                                            <span id="daerah_ibu" class="fs-6 form-control-plaintext">{{ $daerahIbuKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1411,21 +1464,6 @@
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span>Daerah</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="w-100">
-                                                            @php
-                                                                $daerahPenjagaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_penjaga )->value('senarai_daerah.daerah');
-                                                            @endphp
-                                                            <span id="daerah_penjaga" class="fs-6 form-control-plaintext">{{ $daerahPenjagaKlien }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
@@ -1435,6 +1473,21 @@
                                                                 $negeriPenjagaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_penjaga )->value('senarai_negeri.negeri');
                                                             @endphp
                                                             <span id="negeri_penjaga" class="fs-6 form-control-plaintext">{{ $negeriPenjagaKlien }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                                            <span>Daerah</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="w-100">
+                                                            @php
+                                                                $daerahPenjagaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_penjaga )->value('senarai_daerah.daerah');
+                                                            @endphp
+                                                            <span id="daerah_penjaga" class="fs-6 form-control-plaintext">{{ $daerahPenjagaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1526,7 +1579,6 @@
                                                                 <option>Pilih Status Bapa</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_bapa == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
-                                                                <option value="LAIN-LAIN" {{ $butiranKlien->status_bapa == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1554,19 +1606,6 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="daerah_bapa" name="daerah_bapa" data-control="select2" data-hide-search="true">
-                                                                <option>Pilih Daerah</option>
-                                                                @foreach ($daerahWaris as $item)
-                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_bapa == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-8">
@@ -1574,6 +1613,19 @@
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_bapa == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <select class="form-select form-select-solid" id="daerah_bapa" name="daerah_bapa" data-control="select2" data-hide-search="true">
+                                                                <option>Pilih Daerah</option>
+                                                                @foreach ($daerahWaris as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_bapa == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -1654,7 +1706,6 @@
                                                                 <option>Pilih Status Ibu</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_ibu == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_ibu == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
-                                                                <option value="LAIN-LAIN" {{ $butiranKlien->status_ibu == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1682,19 +1733,6 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_ibu" data-control="select2" data-hide-search="true">
-                                                                <option>Pilih Daerah</option>
-                                                                @foreach ($daerahWaris as $item)
-                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_ibu == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-3 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
@@ -1702,6 +1740,19 @@
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_ibu == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-3 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_ibu" data-control="select2" data-hide-search="true">
+                                                                <option>Pilih Daerah</option>
+                                                                @foreach ($daerahWaris as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_ibu == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -1790,7 +1841,6 @@
                                                                 <option>Pilih Status Penjaga</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_penjaga == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_penjaga == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
-                                                                <option value="LAIN-LAIN" {{ $butiranKlien->status_penjaga == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -1818,19 +1868,6 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_penjaga" name="daerah_penjaga" data-control="select2" data-hide-search="true">
-                                                                <option>Pilih Daerah</option>
-                                                                @foreach ($daerahWaris as $item)
-                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_penjaga == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row fv-row mb-7">
-                                                        <div class="col-md-3 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
@@ -1838,6 +1875,19 @@
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_penjaga == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-3 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <select class="form-select form-select-solid" id="daerah_penjaga" name="daerah_penjaga" data-control="select2" data-hide-search="true">
+                                                                <option>Pilih Daerah</option>
+                                                                @foreach ($daerahWaris as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_penjaga == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -1978,25 +2028,6 @@
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Daerah</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="w-100">
-                                            @php
-                                                $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
-                                            @endphp
-                                            <span id="daerah_waris" class="fs-6 form-control-plaintext">{{ $daerahPasanganKlien }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row">
-                                    <div class="col-md-4 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Negeri</span>
                                         </label>
                                         <!--end::Label-->
@@ -2006,11 +2037,31 @@
                                             @php
                                                 $negeriPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_pasangan )->value('senarai_negeri.negeri');
                                             @endphp
-                                            <span id="negeri_waris" class="fs-6 form-control-plaintext">{{ $negeriPasanganKlien }}</span>
+                                            <span id="negeri_pasagan" class="fs-6 form-control-plaintext">{{ $negeriPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="w-100">
+                                            @php
+                                                $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
+                                            @endphp
+                                            <span id="daerah_pasangan" class="fs-6 form-control-plaintext">{{ $daerahPasanganKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                
                                 <!--begin::Input group-->
                                 <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
@@ -2050,25 +2101,6 @@
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Daerah</span>
-                                        </label>
-                                        <!--end::Label-->
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="w-100">
-                                            @php
-                                                $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
-                                            @endphp
-                                            <span id="daerah_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $daerahKerjaPasanganKlien }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row fv-row">
-                                    <div class="col-md-4 text-md-start">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold form-label mt-3">
                                             <span>Negeri</span>
                                         </label>
                                         <!--end::Label-->
@@ -2079,6 +2111,25 @@
                                                 $negeriKerjaPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja_pasangan )->value('senarai_negeri.negeri');
                                             @endphp
                                             <span id="negeri_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $negeriKerjaPasanganKlien }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row">
+                                    <div class="col-md-4 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="w-100">
+                                            @php
+                                                $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
+                                            @endphp
+                                            <span id="daerah_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $daerahKerjaPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -2194,19 +2245,6 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true">
-                                                        <option>Pilih Daerah</option>
-                                                        @foreach ($daerahPasangan as $daerahP)
-                                                            <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
@@ -2214,6 +2252,19 @@
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true">
+                                                        <option>Pilih Daerah</option>
+                                                        @foreach ($daerahPasangan as $daerahP)
+                                                            <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -2236,19 +2287,6 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
-                                                        <option>Pilih Daerah</option>
-                                                        @foreach ($daerahKerjaPasangan as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-5 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
@@ -2256,6 +2294,19 @@
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriKerjaPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-5 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
+                                                        <option>Pilih Daerah</option>
+                                                        @foreach ($daerahKerjaPasangan as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -2318,6 +2369,39 @@
         });
     </script>
 
+    {{-- Display daerah based on negeri --}}
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const negeriSelect = document.getElementById('negeri');
+            const daerahSelect = document.getElementById('daerah');
+
+            // Function to filter daerah options based on selected negeri
+            function filterDaerahOptions() {
+                const selectedNegeriId = negeriSelect.value;
+                
+                // Show or hide options based on the selected negeri
+                Array.from(daerahSelect.options).forEach(option => {
+                    const optionNegeriId = option.getAttribute('data-negeri-id');
+                    
+                    if (optionNegeriId === selectedNegeriId) {
+                        option.style.display = 'block'; // Show matching options
+                    } else {
+                        option.style.display = 'none';  // Hide non-matching options
+                    }
+                });
+                
+                // Reset the daerah selection
+                daerahSelect.value = ''; 
+            }
+
+            // Event listener for negeri dropdown
+            negeriSelect.addEventListener('change', filterDaerahOptions);
+
+            // Initial filtering on page load
+            filterDaerahOptions();
+        });
+    </script> --}}
+
     {{-- Search in dropdown button --}}
     <script>
         $(document).ready(function() {
@@ -2372,6 +2456,64 @@
     </script>
 
     {{-- Checkbox alamat --}}
+    <script>
+        function alamatBapa() {
+            var checkBox = document.getElementById("alamat_bapa_sama");
+            var alamat_klien = document.getElementById("alamat_rumah").innerText;
+            var klien_negeri = document.getElementById("negeri").innerText;
+            var klien_daerah = document.getElementById("daerah").innerText;
+            var klien_poskod = document.getElementById("poskod").innerText;
+
+            var alamat_bapa = document.getElementById("alamat_bapa");
+            var negeri_bapa = document.getElementById("negeri_bapa");
+            var daerah_bapa = document.getElementById("daerah_bapa");
+            var poskod_bapa = document.getElementById("poskod_bapa");
+
+            console.log("Checkbox checked: ", checkBox.checked);
+            console.log("Client Address: ", alamat_klien);
+            console.log("Client State: ", klien_negeri);
+            console.log("Client District: ", klien_daerah);
+            console.log("Client Postcode: ", klien_poskod);
+
+            if (checkBox.checked) {
+                alamat_bapa.value = alamat_klien;
+                poskod_bapa.value = klien_poskod;
+                negeri_bapa.value = klien_negeri;
+                daerah_bapa.value = klien_daerah;
+
+                console.log("Father's Address set to: ", alamat_bapa.value);
+                console.log("Father's Postcode set to: ", poskod_bapa.value);
+                console.log("Father's Daerah set to: ", daerah_bapa.value);
+                console.log("Father's Negeri set to: ", negeri_bapa.value);
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).trigger('change.select2');
+                }
+            } else {
+                alamat_bapa.value = '';
+                poskod_bapa.value = '';
+                negeri_bapa.value = '';
+                daerah_bapa.value = '';
+
+                console.log("Father's Address cleared");
+                console.log("Father's Postcode cleared");
+                console.log("Father's State cleared");
+                console.log("Father's District cleared");
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).trigger('change.select2');
+                }
+            }
+        }
+    </script>
     {{-- <script>
         function alamatPasangan() {
             var checkBox = document.getElementById("alamat_pasangan_sama");  
@@ -2439,65 +2581,6 @@
             }
         }	
     </script> --}}
-    <script>
-        function alamatBapa() {
-            var checkBox = document.getElementById("alamat_bapa_sama");
-            var alamat_klien = document.getElementById("alamat_rumah").innerText;
-            var klien_negeri = document.getElementById("negeri").innerText;
-            var klien_daerah = document.getElementById("daerah").innerText;
-            var klien_poskod = document.getElementById("poskod").innerText;
-
-            var alamat_bapa = document.getElementById("alamat_bapa");
-            var negeri_bapa = document.getElementById("negeri_bapa");
-            var daerah_bapa = document.getElementById("daerah_bapa");
-            var poskod_bapa = document.getElementById("poskod_bapa");
-
-            console.log("Checkbox checked: ", checkBox.checked);
-            console.log("Client Address: ", alamat_klien);
-            console.log("Client State: ", klien_negeri);
-            console.log("Client District: ", klien_daerah);
-            console.log("Client Postcode: ", klien_poskod);
-
-            if (checkBox.checked) {
-                alamat_bapa.value = alamat_klien;
-                poskod_bapa.value = klien_poskod;
-                negeri_bapa.value = klien_negeri;
-                daerah_bapa.value = klien_daerah;
-
-                console.log("Father's Address set to: ", alamat_bapa.value);
-                console.log("Father's Postcode set to: ", poskod_bapa.value);
-                console.log("Father's Daerah set to: ", daerah_bapa.value);
-                console.log("Father's Negeri set to: ", negeri_bapa.value);
-
-                // Trigger select2 update if using select2
-                if ($(negeri_bapa).data('select2')) {
-                    $(negeri_bapa).trigger('change.select2');
-                }
-                if ($(daerah_bapa).data('select2')) {
-                    $(daerah_bapa).trigger('change.select2');
-                }
-            } else {
-                alamat_bapa.value = '';
-                poskod_bapa.value = '';
-                negeri_bapa.value = '';
-                daerah_bapa.value = '';
-
-                console.log("Father's Address cleared");
-                console.log("Father's Postcode cleared");
-                console.log("Father's State cleared");
-                console.log("Father's District cleared");
-
-                // Trigger select2 update if using select2
-                if ($(negeri_bapa).data('select2')) {
-                    $(negeri_bapa).trigger('change.select2');
-                }
-                if ($(daerah_bapa).data('select2')) {
-                    $(daerah_bapa).trigger('change.select2');
-                }
-            }
-        }
-    </script>
-    
 
     {{-- If status_perkahwinan is bujang, then block the other fields --}}
     {{-- <script>
