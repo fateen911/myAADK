@@ -47380,6 +47380,13 @@ a:hover {
   --bs-stepper-line-border: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
+.landing-img{
+    background-image: url('/assets/media/illustrations/therapy/therapy-4.png');
+    width:100%;
+    height:800px!important;
+    object-fit: fill!important;
+}
+
 .landing-light {
     background-color: white!important;
 }
@@ -47400,17 +47407,29 @@ a:hover {
 }
 
 .landing-red {
-    background-color: #9A1B1D!important;
+    background-color: #991b1e!important;
     color:white!important;
 }
 
+.btn-active-red:hover {
+    background-color: #a63335 !important;
+    color:white!important;
+}
+
+.color-red-landing{
+    color: #a63335 !important;
+}
+
+.color-gray-landing{
+    color: #485462 !important;
+}
 
 .landing-hr-top {
-    border-top: 10px solid #9A1B1D!important;
+    border-top: 10px solid #991b1e!important;
 }
 
 .landing-hr-bottom {
-    border-bottom: 10px solid #9A1B1D!important;
+    border-bottom: 10px solid #991b1e!important;
 }
 
 .landing-dark-border {
