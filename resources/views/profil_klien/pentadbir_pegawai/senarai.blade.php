@@ -53,7 +53,7 @@
 				<div id="kt_app_content_container" class="app-container container-xxl">
                     <ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="dikemaskini-tab" data-toggle="tab" data-target="#dikemaskini" type="button" role="tab" aria-controls="dikemaskini" aria-selected="true">Dikemaskini</button>
+                            <button class="nav-link active" id="dikemaskini-tab" data-toggle="tab" data-target="#dikemaskini" type="button" role="tab" aria-controls="dikemaskini" aria-selected="true">Telah Kemaskini</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="belumDikemaskini-tab" data-toggle="tab" data-target="#belumDikemaskini" type="button" role="tab" aria-controls="belumDikemaskini" aria-selected="true">Belum Kemaskini</button>

@@ -193,14 +193,14 @@
                                             <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Kemaskini</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Telah Kemaskini</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskini}}</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskini}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -220,14 +220,14 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Telah Kemaskini</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Kemaskini</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskini}}</span>
+                                            <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumKemaskini}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
@@ -281,7 +281,7 @@
                                             <i class="fas fa-users text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -308,7 +308,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Belum Selesai</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -542,33 +542,5 @@
     </div>
     <!--end::Content-->
 </div>
-
-<script>
-    $(document).ready(function() {
-        function fetchStatusCounts() {
-            $.ajax({
-                url: "{{ route('status.counts') }}",
-                method: 'GET',
-                success: function(data) {
-                    $('#permohonanPendaftaranCount').text(data.permohonan_pendaftaran);
-                    $('#pegawaiCount').text(data.pegawai);
-                    $('#klienCount').text(data.klien);
-                    $('#belumKemaskiniCount').text(data.belum_kemaskini);
-                    $('#mohonKemaskiniCount').text(data.mohon_kemaskini);
-                    $('#dikemaskiniCount').text(data.dikemaskini);
-                    $('#ditolakCount').text(data.ditolak);
-                    $('#selesaiMenjawabCount').text(data.selesai_menjawab);
-                    $('#belumSelesaiMenjawabCount').text(data.belum_selesai_menjawab);
-                    $('#tidakMenjawabCount').text(data.tidak_menjawab);
-                    $('#cemerlangCount').text(data.cemerlang);
-                    $('#baikCount').text(data.baik);
-                    $('#memuaskanCount').text(data.memuaskan);
-                    $('#tidakMemuaskanCount').text(data.tidak_memuaskan);
-                }
-            });
-        }
-        fetchStatusCounts();
-    });
-</script>
     
 @endsection
