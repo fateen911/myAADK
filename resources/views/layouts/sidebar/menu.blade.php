@@ -590,8 +590,46 @@
                     </div>
                     <!--end:Menu item-->
 
+                     <!--begin:Menu item-->
+                     <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-permohonan-klien-brpp') ? 'active' : '' }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('senarai-permohonan-klien-brpp') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-permohonan-klien-brpp') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-badge fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Permohonan Kemaskini Profil Klien</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.brpp') }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan.brpp') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.brpp') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Maklum Balas Soal Selidik</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -620,7 +658,7 @@
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -787,7 +825,45 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-permohonan-klien-negeri') ? 'active' : '' }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('senarai-permohonan-klien-negeri') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-permohonan-klien-negeri') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-badge fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Permohonan Kemaskini Profil Klien</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan.negeri') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.negeri') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Maklum Balas Soal Selidik</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -816,7 +892,7 @@
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -1013,7 +1089,45 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('senarai-permohonan-klien-daerah') ? 'active' : '' }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('senarai-permohonan-klien-daerah') }}" onclick="event.preventDefault(); window.location.href='{{ route('senarai-permohonan-klien-daerah') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-badge fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Permohonan Kemaskini Profil Klien</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') }}">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan.daerah') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.daerah') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Maklum Balas Soal Selidik</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
                             <span class="menu-icon">
@@ -1042,7 +1156,7 @@
                             <!--end:Menu item-->
                         </div>
                         <!--end:Menu sub-->
-                    </div>
+                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
