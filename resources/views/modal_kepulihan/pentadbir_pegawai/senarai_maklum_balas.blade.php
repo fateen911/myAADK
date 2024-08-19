@@ -20,6 +20,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <!-- Custom AADK CSS -->
         <link rel="stylesheet" href="/assets/css/customAADK.css">
+
+        <style>
+            .scrollable-container {
+                max-width: 1100px; /* Adjust the height as needed */
+                overflow-x: auto;
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
@@ -64,7 +71,7 @@
                     </ul>	
 
                     <div class="tab-content mt-0" id="myTabContent">
-                        <div class="tab-pane fade show active" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
+                        <div class="tab-pane fade show active scrollable-container" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
                             <!--begin::Card header-->
                             <div class="header">
                                 <h2>Senarai Keputusan Klien Menjawab Soal Selidik Modal Kepulihan
@@ -76,17 +83,17 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout:fixed;">
                                     <thead>
-                                        <tr class="text-gray-400 fw-bold fs-7 gs-0">
-                                            <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-100px">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
-                                            <th class="min-w-70px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Tarikh Menjawab</th> 
-                                            <th class="min-w-50px" style="text-align: center;">Status</th> 
-                                            <th class="min-w-50px" style="text-align: center;">Skor</th> 
-                                            <th class="min-w-50px" style="text-align: center;">Tahap Kepulihan</th> 
+                                        <tr class="text-gray-400 fw-bold fs-7">
+                                            <th style="width: 15%;">Nama</th>
+                                            <th style="text-align: center; width: 9%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 10%;">Daerah Pejabat Pengawasan</th>
+                                            <th style="text-align: center; width: 10%;">Negeri Pejabat Pengawasan</th>
+                                            <th style="text-align: center; width: 10%;">Tarikh Menjawab</th> 
+                                            <th style="text-align: center; width: 10%;">Status</th> 
+                                            <th style="text-align: center; width: 5%;">Skor</th> 
+                                            <th style="text-align: center; width: 11%;">Tahap Kepulihan</th> 
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -99,7 +106,7 @@
 
                                             <tr>
                                                 <td>{{ $response->nama }}</td>
-                                                <td>{{ $response->no_kp }}</td>
+                                                <td style="text-align: center;">{{ $response->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
