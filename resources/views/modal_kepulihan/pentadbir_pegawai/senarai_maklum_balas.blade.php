@@ -81,8 +81,8 @@
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-100px">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">Daerah</th>
-                                            <th class="min-w-70px" style="text-align: center;">Negeri</th>
+                                            <th class="min-w-100px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
+                                            <th class="min-w-70px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Tarikh Menjawab</th> 
                                             <th class="min-w-50px" style="text-align: center;">Status</th> 
                                             <th class="min-w-50px" style="text-align: center;">Skor</th> 
@@ -92,10 +92,9 @@
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($responses as $response)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('id', $response->daerah)->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $response->negeri)->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $response->daerah_pejabat)->value('senarai_daerah.daerah');
+                                                $negeri = DB::table('senarai_negeri')->where('id', $response->negeri_pejabat)->value('senarai_negeri.negeri');
                                                 $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                // $statusMenjawab = ($response->selesai_count == 25) ? 'SELESAI' : 'BELUM SELESAI';
                                             @endphp
 
                                             <tr>
@@ -154,17 +153,17 @@
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-50px">No. Kad Pengenalan</th>
-                                            <th class="min-w-70px" style="text-align: center;">Daerah</th>
-                                            <th class="min-w-50px" style="text-align: center;">Negeri</th>
-                                            <th class="min-w-80px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
+                                            <th class="min-w-30px">No. Kad Pengenalan</th>
+                                            <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
+                                            <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
+                                            <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($tidakMenjawab as $response2)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('id', $response2->daerah)->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $response2->negeri)->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $response2->daerah_pejabat)->value('senarai_daerah.daerah');
+                                                $negeri = DB::table('senarai_negeri')->where('id', $response2->negeri_pejabat)->value('senarai_negeri.negeri');
                                             @endphp
 
                                             <tr>
@@ -181,7 +180,7 @@
                             </div>                    
                             <!--end::Card body-->
 
-                            <p style="font-style: italic; padding-left: 30px; padding-bottom: 15px; font-size: 12px; color: #ff0000;">
+                            <p style="font-style: italic; padding-left: 30px; padding-bottom: 30px; font-size: 12px; color: #ff0000;">
                                 Nota : Tarikh Terakhir Menjawab = N/A - Klien yang tidak pernah menjawab soal selidik selepas tamat pengawasan.
                             </p>                            
                         </div>
