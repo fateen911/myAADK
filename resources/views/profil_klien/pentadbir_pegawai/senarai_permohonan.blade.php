@@ -9,12 +9,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <!-- Custom AADK CSS -->
 		<link rel="stylesheet" href="/assets/css/customAADK.css">
     </head>
@@ -37,7 +31,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Senarai Klien</li>
+            <li class="breadcrumb-item text-muted">Senarai Permohonan Kemaskini Profil Klien</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -53,18 +47,18 @@
 				<div id="kt_app_content_container" class="app-container container-xxl">
                     <ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="dikemaskini-tab" data-toggle="tab" data-target="#dikemaskini" type="button" role="tab" aria-controls="dikemaskini" aria-selected="true">Telah Kemaskini</button>
+                            <button class="nav-link active" id="selesai-tab" data-toggle="tab" data-target="#selesai" type="button" role="tab" aria-controls="selesai" aria-selected="true">Permohonan Kemaskini Selesai</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="belumDikemaskini-tab" data-toggle="tab" data-target="#belumDikemaskini" type="button" role="tab" aria-controls="belumDikemaskini" aria-selected="true">Belum Kemaskini</button>
+                            <button class="nav-link" id="belumSelesai-tab" data-toggle="tab" data-target="#belumSelesai" type="button" role="tab" aria-controls="belumSelesai" aria-selected="true">Permohonan Kemaskini Belum Selesai</button>
                         </li>
                     </ul>	
 
                     <div class="tab-content mt-0" id="myTabContent">
-                        <div class="tab-pane fade show active" id="dikemaskini" role="tabpanel" aria-labelledby="dikemaskini-tab">
+                        <div class="tab-pane fade show active" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Klien yang Telah Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
                             </div>
                             <!--end::Card header-->
 
@@ -83,7 +77,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($sedangKemaskini as $user1)
+                                        @foreach ($permohonanSelesai as $user1)
                                             @php
                                                 $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user1['daerah_pejabat'])->value('senarai_daerah.daerah');
                                                 $negeri = DB::table('senarai_negeri')->where('id', $user1['negeri_pejabat'])->value('senarai_negeri.negeri');
@@ -109,10 +103,10 @@
                             <!--end::Card body-->
                         </div>
 
-                        <div class="tab-pane fade" id="belumDikemaskini" role="tabpanel" aria-labelledby="belumDikemaskini-tab">
+                        <div class="tab-pane fade" id="belumSelesai" role="tabpanel" aria-labelledby="belumSelesai-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Klien yang Belum Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
                             </div>
                             <!--end::Card header-->
 
@@ -130,7 +124,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($belumKemaskini as $user2)
+                                        @foreach ($permohonanBelumSelesai as $user2)
                                             @php
                                                 $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user2['daerah_pejabat'])->value('senarai_daerah.daerah');
                                                 $negeri = DB::table('senarai_negeri')->where('id', $user2['negeri_pejabat'])->value('senarai_negeri.negeri');

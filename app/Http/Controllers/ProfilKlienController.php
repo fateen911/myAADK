@@ -60,6 +60,39 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
     }
 
+    public function senaraiPermohonanKlien()
+    {
+        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                        ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                        ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                        ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                        ->select('klien.*') // Fetch all columns of the klien table
+                                        ->where(function ($query) {
+                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                        })
+                                        ->distinct()
+                                        ->get(); // Fetch the result as a collection
+
+        $permohonanSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                    ->select('klien.*') // Fetch all columns of the klien table
+                                    ->where(function ($query) {
+                                        $query->where('klien_update_requests.status', '!=', 'Kemaskini')
+                                            ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
+                                            ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
+                                            ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
+                                    })
+                                    ->distinct()
+                                    ->get(); // Fetch the result as a collection
+                            
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai'));
+    }
+
     public function senaraiKlienBrpp()
     {
         // Clients who have updated their profile (sedangKemaskini)

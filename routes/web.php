@@ -115,12 +115,18 @@ Route::post('/pentadbir/kelulusan-permohonan-pegawai/{id}', [DaftarPenggunaContr
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
 Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class, 'pegawaiKemaskiniKlien'])->name('pegawai-kemaskini-klien');
 
-// PENTADBIR - PENGURUSAN PROFIL
+// PENTADBIR - PENGURUSAN PROFIL KLIEN
 Route::get('/pentadbir/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
 Route::get('/pegawai-brpp/senarai-klien',[ProfilKlienController::class, 'senaraiKlienBrpp'])->middleware('auth')->name('senarai-klien-brpp');
 Route::get('/pegawai-negeri/senarai-klien',[ProfilKlienController::class, 'senaraiKlienNegeri'])->middleware('auth')->name('senarai-klien-negeri');
 Route::get('/pegawai-daerah/senarai-klien',[ProfilKlienController::class, 'senaraiKlienDaerah'])->middleware('auth')->name('senarai-klien-daerah');
 Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+
+// PENTADBIR - PENGURUSAN PERMOHONAN KEMASKINI PROFIL KLIEN
+Route::get('/pentadbir/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlien'])->middleware('auth')->name('senarai-permohonan-klien');
+Route::get('/pegawai-brpp/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienBrpp'])->middleware('auth')->name('senarai-permohonan-klien-brpp');
+Route::get('/pegawai-negeri/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienNegeri'])->middleware('auth')->name('senarai-permohonan-klien-negeri');
+Route::get('/pegawai-daerah/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienDaerah'])->middleware('auth')->name('senarai-permohonan-klien-daerah');
 
 // PENTADBIR UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');
