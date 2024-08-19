@@ -67,7 +67,9 @@
                         <div class="tab-pane fade show active" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Keputusan Klien Menjawab Soal Selidik Modal Kepulihan</h2>
+                                <h2>Senarai Keputusan Klien Menjawab Soal Selidik Modal Kepulihan
+                                    <br><small>Senarai keputusan kepulihan klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
+                                </h2>
                             </div>
                             <!--end::Card header-->
 
@@ -139,7 +141,9 @@
                         <div class="tab-pane fade" id="tidakMenjawab" role="tabpanel" aria-labelledby="tidakMenjawab-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Klien Tidak Menjawab Soal Selidik Modal Kepulihan</h2>
+                                <h2>Senarai Klien Tidak Menjawab Soal Selidik Modal Kepulihan
+                                    <br><small>Senarai klien menjawab soal selidik pada kali terakhir telah melebihi tempoh enam (6) bulan.</small>
+                                </h2>
                             </div>
                             <!--end::Card header-->
 
@@ -176,6 +180,10 @@
                                 <!--end::Table-->
                             </div>                    
                             <!--end::Card body-->
+
+                            <p style="font-style: italic; padding-left: 30px; padding-bottom: 15px; font-size: 12px; color: #ff0000;">
+                                Nota : Tarikh Terakhir Menjawab = N/A - Klien yang tidak pernah menjawab soal selidik selepas tamat pengawasan.
+                            </p>                            
                         </div>
                     </div>
 				</div>

@@ -293,7 +293,7 @@
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Alamat E-mel</span>
+                                        <span>E-mel</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -565,7 +565,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Alamat E-mel</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">E-mel</label>
                                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
                                                         <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                             <span class="path1"></span>
@@ -971,7 +971,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Bidang Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}"/>
@@ -979,7 +979,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nama Pekerjaan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}"/>
@@ -987,7 +987,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Pendapatan (RM)</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
@@ -1660,7 +1660,7 @@
 
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Nama</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{ $butiranKlien->nama_ibu }}" />
@@ -1668,7 +1668,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">No Kad Pengenalan</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1683,7 +1683,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
                                                                 <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                         <span class="path1"></span>
@@ -1699,7 +1699,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Status</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
@@ -1711,7 +1711,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Alamat</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="d-flex flex-stack">
@@ -1725,7 +1725,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <input type="text" class="form-control form-control-solid" id="poskod_ibu" name="poskod_ibu" value="{{ $butiranKlien->poskod_ibu }}"/>
@@ -1733,7 +1733,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <select class="form-select form-select-solid" id="negeri_ibu" name="negeri_ibu" data-control="select2" data-hide-search="true">
@@ -1746,7 +1746,7 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-3 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
                                                             <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_ibu" data-control="select2" data-hide-search="true">
@@ -2189,7 +2189,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nama Pasangan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" />
@@ -2197,7 +2197,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                             <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                 <span class="path1"></span>
@@ -2213,7 +2213,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Bilangan Anak</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="input-group">
@@ -2223,7 +2223,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <div class="d-flex flex-stack">
@@ -2237,7 +2237,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <input type="text" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}"/>
@@ -2245,7 +2245,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true">
@@ -2258,7 +2258,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
                                                     <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true">
