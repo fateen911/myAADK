@@ -57,30 +57,40 @@ class HomeController extends Controller
                         ->count('klien.id');
 
                     $jumlah1 = $sedangKemaskini + $belumKemaskini;
+                    
+                    // Count the number of clients in "Belum Selesai"
+                    $belumSelesai = DB::table('klien')
+                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                    ->select('klien.id')
+                    ->where(function ($query) {
+                        $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                            ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                    })
+                    ->distinct()
+                    ->count('klien.id');
 
-                    // Situation 1: Jumlah Keseluruhan
-                    // $jumlah2 = Klien::whereIn('id', function ($query) {
-                    //     $query->select('klien_id')->from('klien_update_requests')
-                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests'))
-                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests'))
-                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests'));
-                    // })->count();
+                    // Count the number of clients in "Selesai"
+                    $selesai = DB::table('klien')
+                    ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                    ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                    ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                    ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                    ->select('klien.id')
+                    ->where(function ($query) {
+                        $query->where('klien_update_requests.status', '!=', 'Kemaskini')
+                            ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
+                            ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
+                            ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
+                    })
+                    ->distinct()
+                    ->count('klien.id');
 
-                    // // Situation 2: Belum Selesai
-                    // $belumSelesai = Klien::whereIn('id', function ($query) {
-                    //     $query->select('klien_id')->from('klien_update_requests')->where('status', 'Kemaskini')
-                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests')->where('status', 'Kemaskini'))
-                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests')->where('status', 'Kemaskini'))
-                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests')->where('status', 'Kemaskini'));
-                    // })->count();
-
-                    // // Situation 3: Selesai
-                    // $selesai = Klien::whereIn('id', function ($query) {
-                    //     $query->select('klien_id')->from('klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak'])
-                    //         ->union($query->select('klien_id')->from('keluarga_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']))
-                    //         ->union($query->select('klien_id')->from('waris_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']))
-                    //         ->union($query->select('klien_id')->from('pekerjaan_klien_update_requests')->whereIn('status', ['Lulus', 'Ditolak']));
-                    // })->count();
+                    $jumlah2 = $belumSelesai + $selesai;
         
                     // modal kepulihan
                     $responses = DB::table('keputusan_kepulihan_klien as kk')
@@ -163,7 +173,7 @@ class HomeController extends Controller
                     return view('dashboard.pentadbir.dashboard', compact('permohonan_pendaftaran','pegawai','klien',
                                                                         'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
                                                                         'tidak_memuaskan','memuaskan','baik','cemerlang',
-                                                                        'belumKemaskini', 'sedangKemaskini', 'jumlah1'));
+                                                                        'belumKemaskini', 'sedangKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai'));
                 }
                 else if($tahap == 2)
                 {
