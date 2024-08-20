@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing_page.version_1');
 });
 
 // DASHBOARD
