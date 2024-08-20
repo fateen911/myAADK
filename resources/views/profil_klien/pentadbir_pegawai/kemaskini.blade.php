@@ -1461,7 +1461,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_ibu" name="negeri_i" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_ibu == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1484,7 +1484,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_i" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_ibu == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
