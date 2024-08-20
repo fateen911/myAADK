@@ -131,8 +131,8 @@
 									@foreach ($permohonan_pegawai as $user3)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
-											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
-											$daerahB = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user3['daerah_bertugas'])->value('daerah');
+											$negeriB = $user3['negeri_bertugas'] ? DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri') : null;
+											$daerahB = $user3['daerah_bertugas'] ? DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user3['daerah_bertugas'])->value('daerah') : null;
 										@endphp
 	
 										<tr>
@@ -367,8 +367,8 @@
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('peranan');
 											$tarikh_daftar = Carbon::parse($user2->created_at)->format('d-m-Y');
-											$negeriB = DB::table('senarai_negeri')->where('id', $user2['negeri_bertugas'])->value('negeri');
-											$daerahB = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user2['daerah_bertugas'])->value('daerah');
+											$negeriB = $user2['negeri_bertugas'] ? DB::table('senarai_negeri')->where('id', $user2['negeri_bertugas'])->value('negeri') : null;
+											$daerahB = $user2['daerah_bertugas'] ? DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user2['daerah_bertugas'])->value('daerah') : null;
 										@endphp
 	
 										<tr>
