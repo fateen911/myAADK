@@ -29,7 +29,7 @@ class HebahanMail extends Mailable
         $this->id = $id;
         $this->program = Program::where('id', $id)->first();
         $this->subject = 'JEMPUTAN KE '.strtoupper($this->program->nama);
-        $this->pendaftar_prog = User::where('id',$this->program->pegawai_id)->first();
+        $this->pendaftar_prog = User::where('id',$this->program->user_id)->first();
     }
 
     public function build()

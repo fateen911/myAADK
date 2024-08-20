@@ -167,7 +167,7 @@
                         <div class="card-body pt-0">
                             @if($program->status == 'BELUM SELESAI')
                                 <p class="badge badge-light-primary text-royalblue fs-6 fw-bold">{{$program->status}}</p>
-                            @elseif($program->status == 'SEDANG DIJALANKAN')
+                            @elseif($program->status == 'SEDANG BERLANGSUNG')
                                 <p class="badge badge-light-warning text-darkorange fs-6 fw-bold">{{$program->status}}</p>
                             @elseif($program->status == 'SELESAI')
                                 <p class="badge badge-light-success text-seagreen fs-6 fw-bold">{{$program->status}}</p>
@@ -545,7 +545,7 @@
                     </div>
                     <!--end::Aside column-->
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
-                        @if($program->status == "SEDANG DIJALANKAN")
+                        @if($program->status == "SEDANG BERLANGSUNG")
                         <!--begin::Rekod Kehadiran-->
                         <div class="card card-flush py-4">
                             <!--begin::Card header-->

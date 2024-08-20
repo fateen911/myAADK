@@ -194,7 +194,7 @@
                             if(program.status=='SELESAI')
                                 color = "badge-light-success text-seagreen";
 
-                            else if(program.status=='SEDANG DIJALANKAN')
+                            else if(program.status=='SEDANG BERLANGSUNG')
                                 color = "badge-light-warning text-darkorange";
 
                             else if(program.status=='BELUM SELESAI')
