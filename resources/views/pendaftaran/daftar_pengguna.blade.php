@@ -287,7 +287,7 @@
 																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
-																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
+																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user3->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
 																					{{-- <option value="{{ $item2->id}}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option> --}}
 																				@endforeach
 																			</select>
