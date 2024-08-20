@@ -24,11 +24,11 @@ class KemaskiniStatusProg extends Command
             ->get();
 
         $program_tamat = Program::where('tarikh_tamat', '<', $currentTime)
-            ->where('status', '=', 'SEDANG DIJALANKAN')
+            ->where('status', '=', 'SEDANG BERLANGSUNG')
             ->get();
 
         foreach ($program_mula as $program) {
-            $program->status = 'SEDANG DIJALANKAN';
+            $program->status = 'SEDANG BERLANGSUNG';
             $program->save();
         }
 

@@ -47463,6 +47463,20 @@ a:hover {
 .landing-header .menu .menu-link.active {
   color: #ffffff;
 }
+
+/* Length change dropdown customization */
+
+.page select {
+    border-radius: 0.25rem!important;
+    border: 1px solid #ced4da!important;
+    padding: 5px 20px!important;
+}
+
+.page button:hover{
+    color: white!important;
+    background-color: #3E97FF!important;
+}
+
 [data-kt-sticky-landing-header=on] .landing-header .menu .menu-link.active {
   color: #3E97FF;
   background-color: rgba(239, 242, 245, 0.4);

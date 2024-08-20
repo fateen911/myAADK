@@ -120,7 +120,14 @@
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
-                                <!--ajax-->
+                                <tr>
+                                    <td><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">null</a></td>
+                                    <td class="text-uppercase">null</td>
+                                    <td class="text-uppercase">null</td>
+                                    <td class="text-uppercase"><span class="badge fs-7 fw-bold"></span>null</td>
+                                    <td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id=""><i class="bi bi-share-fill fs-3"></i></a></td>
+                                    <td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href="{{url('/pengurusan-program/qr-code')}}"><i class="bi bi-qr-code fs-3"></i></a></td>
+                                </tr>
                             </tbody>
                         </table>
                         <!--end::Table-->
@@ -170,16 +177,6 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <!--end::Javascript-->
 
-    <script>
-        $('#sortTable1').DataTable({
-            ordering: true, // Enable manual sorting
-            order: [], // Disable initial sorting
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
-        });
-    </script>
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -190,6 +187,7 @@
                     url: '/program/' + pegawaiId,
                     method: 'GET',
                     success: function(response) {
+                        $('#sortTable1').DataTable().destroy();
                         let rows = '';
                         let color = '';
                         $.each(response, function(index, program) {
@@ -212,6 +210,18 @@
                             rows += '</tr>';
                         });
                         $('#sortTable1 tbody').html(rows);
+                        // Reinitialize DataTable if necessary
+                        $('#sortTable1').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
                     }
                 });
             }
