@@ -828,7 +828,12 @@
     </script>
     <script>
         function copyToClipboard1() {
-            const inputFieldValue = document.getElementById('link_1').value;
+            const inputField = document.getElementById('link_1');
+            // Temporarily enable the input field to access its value
+            inputField.disabled = false;
+            const inputFieldValue = inputField.value;
+            inputField.disabled = true;
+
             navigator.clipboard.writeText(inputFieldValue)
                 .then(() => {
                     document.getElementById('message').innerText = 'Copied to clipboard!';
@@ -842,7 +847,12 @@
         }
 
         function copyToClipboard2() {
-            const inputFieldValue = document.getElementById('link_2').value;
+            const inputField = document.getElementById('link_2');
+            // Temporarily enable the input field to access its value
+            inputField.disabled = false;
+            const inputFieldValue = inputField.value;
+            inputField.disabled = true;
+
             navigator.clipboard.writeText(inputFieldValue)
                 .then(() => {
                     document.getElementById('message').innerText = 'Copied to clipboard!';
@@ -856,7 +866,12 @@
         }
 
         function copyToClipboard3() {
-            const inputFieldValue = document.getElementById('link_3').value;
+            const inputField = document.getElementById('link_3');
+            // Temporarily enable the input field to access its value
+            inputField.disabled = false;
+            const inputFieldValue = inputField.value;
+            inputField.disabled = true;
+
             navigator.clipboard.writeText(inputFieldValue)
                 .then(() => {
                     document.getElementById('message').innerText = 'Copied to clipboard!';
