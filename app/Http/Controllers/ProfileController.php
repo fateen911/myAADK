@@ -79,6 +79,7 @@ class ProfileController extends Controller
                 ]);
             }
             else{
+
                 User::where('no_kp',Auth::user()->no_kp)
                 ->update([
                     'name' => $request->name,
