@@ -167,7 +167,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
+                                        <a href="{{ route('senarai-permohonan-klien-daerah') }}">
                                             <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$jumlahPermohonanDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -193,7 +193,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
+                                        <a href="{{ route('senarai-permohonan-klien-daerah') }}">
                                             <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesaiDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -220,7 +220,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href="{{ route('senarai-klien') }}">
+                                        <a href="{{ route('senarai-permohonan-klien-daerah') }}">
                                             <span id="mohonKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belumSelesaiDaerah}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
