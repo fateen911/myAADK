@@ -2803,7 +2803,7 @@
             var klien_negeri = document.getElementById("negeri_klien");
             var klien_daerah = document.getElementById("daerah_klien");
             var klien_poskod = document.getElementById("poskod_k");
-            // alert(klien_poskod.innerText);
+            // alert(klien_poskod.value);
 
             var alamat_bapa = document.getElementById("alamat_b");
             var negeri_bapa = document.getElementById("negeri_b");
@@ -2813,7 +2813,7 @@
             if (checkBox.checked) {
                 // Copy values
                 alamat_bapa.value = alamat_klien.innerText;
-                poskod_bapa.value = klien_poskod.innerText;
+                poskod_bapa.value = klien_poskod.value;
                 negeri_bapa.value = klien_negeri.innerText;
                 daerah_bapa.value = klien_daerah.innerText;
 
@@ -2866,7 +2866,7 @@
             if (checkBox.checked) {
                 // Copy values
                 alamat_ibu.value = alamat_klien.innerText;
-                poskod_ibu.value = klien_poskod.innerText;
+                poskod_ibu.value = klien_poskod.value;
                 negeri_ibu.value = klien_negeri.innerText;
                 daerah_ibu.value = klien_daerah.innerText;
 
@@ -2919,7 +2919,7 @@
             if (checkBox.checked) {
                 // Copy values
                 alamat_penjaga.value = alamat_klien.innerText;
-                poskod_penjaga.value = klien_poskod.innerText;
+                poskod_penjaga.value = klien_poskod.value;
                 negeri_penjaga.value = klien_negeri.innerText;
                 daerah_penjaga.value = klien_daerah.innerText;
 
@@ -2972,7 +2972,7 @@
             if (checkBox.checked) {
                 // Copy values
                 alamat_partner.value = alamat_klien.innerText;
-                poskod_partner.value = klien_poskod.innerText;
+                poskod_partner.value = klien_poskod.value;
                 negeri_partner.value = klien_negeri.innerText;
                 daerah_partner.value = klien_daerah.innerText;
 
