@@ -203,7 +203,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Col-->
                     <!--begin::Col-->
-                    <div class="col-lg-2 pe-lg-5 mb-5 mb-lg-0">
+                    <div class="col-lg-4 pe-lg-5 mb-5 mb-lg-0">
                         <!--begin::Navs-->
                         <div class="d-flex justify-content-center">
                             <!--begin::Links-->

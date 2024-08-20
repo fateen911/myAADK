@@ -47382,9 +47382,9 @@ a:hover {
 
 .landing-img{
     background-image: url('/assets/media/illustrations/therapy/therapy-4.png');
-    width:100%;
-    height:800px!important;
-    object-fit: fill!important;
+    background-size: cover!important; /* Scale the image to cover the entire viewport */
+    background-position: center!important; /* Center the image */
+    background-repeat: no-repeat!important; /* Prevent repeating the image */
 }
 
 .landing-light {
