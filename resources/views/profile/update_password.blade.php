@@ -75,7 +75,7 @@
                             <!-- Current Password -->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                    <span class="required">Kata Laluan Terkini</span>
+                                    <span class="required">Kata Laluan Semasa</span>
                                     <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>

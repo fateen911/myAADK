@@ -194,8 +194,8 @@
                             <!-- Current Password -->
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                    <span class="required">Kata Laluan Terkini</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="required">Kata Laluan Semasa</span>
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -215,7 +215,7 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -235,7 +235,7 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Sahkan Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.">
+                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
@@ -367,6 +367,33 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
+            var tooltips = [
+                document.getElementById("tooltip1"),
+                document.getElementById("tooltip2"),
+                document.getElementById("tooltip3")
+            ];
+            
+            if (tahapPengguna === 2) {
+                tooltips.forEach(function(tooltip) {
+                    tooltip.setAttribute("title", "Minimum 6 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
+                });
+            } else {
+                tooltips.forEach(function(tooltip) {
+                    tooltip.setAttribute("title", "Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
+                });
+            }
+
+            // Reinitialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
         });
     </script>
 @endsection
