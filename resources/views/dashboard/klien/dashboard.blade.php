@@ -66,12 +66,25 @@
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
+
                         @php
-                            $tarikh_update_klien = Carbon::parse($klien->updated_at)->format('d-m-Y');
-                            $tarikh_update_waris = Carbon::parse($waris->updated_at)->format('d-m-Y');
-                            $tarikh_update_pekerjaan = Carbon::parse($pekerjaan->updated_at)->format('d-m-Y');
-                            $tarikh_update_pasangan = Carbon::parse($pasangan->updated_at)->format('d-m-Y');
+                            $tarikh_update_klien = $klien->updated_at 
+                                                    ? Carbon::parse($klien->updated_at)->format('d-m-Y') 
+                                                    : Carbon::parse($klien->created_at)->format('d-m-Y');
+                            
+                            $tarikh_update_waris = $waris->updated_at 
+                                                    ? Carbon::parse($waris->updated_at)->format('d-m-Y') 
+                                                    : Carbon::parse($waris->created_at)->format('d-m-Y');
+                            
+                            $tarikh_update_pekerjaan = $pekerjaan->updated_at 
+                                                    ? Carbon::parse($pekerjaan->updated_at)->format('d-m-Y') 
+                                                    : Carbon::parse($pekerjaan->created_at)->format('d-m-Y');
+                            
+                            $tarikh_update_pasangan = $pasangan->updated_at 
+                                                    ? Carbon::parse($pasangan->updated_at)->format('d-m-Y') 
+                                                    : Carbon::parse($pasangan->created_at)->format('d-m-Y');
                         @endphp
+
                         <!--begin::Body-->
                         <div class="card-body mt-n20">
                             <div class="mt-n20 position-relative">
@@ -101,13 +114,13 @@
                                             <!--begin::Info-->
                                             <div class="text-center mt-5">
                                                 @if ($klien->status_kemaskini == 'Baharu')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @elseif ($klien->status_kemaskini == 'Kemaskini')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dalam Semakan</span>
                                                 @elseif ($klien->status_kemaskini == 'Lulus')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @else
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @endif
 
                                                 <span class="text-gray-400 fw-semibold fs-6">{{  $tarikh_update_klien }}</span>
@@ -141,13 +154,13 @@
                                             <!--begin::Info-->
                                             <div class="text-center mt-5">
                                                 @if ($waris->status_kemaskini == 'Baharu')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @elseif ($waris->status_kemaskini == 'Kemaskini')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dalam Semakan</span>
                                                 @elseif ($waris->status_kemaskini == 'Lulus')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @else
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @endif
 
                                                 <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_waris }}</span>
@@ -187,13 +200,13 @@
                                             <!--begin::Info-->
                                             <div class="text-center mt-5">
                                                 @if ($pasangan->status_kemaskini == 'Baharu')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @elseif ($pasangan->status_kemaskini == 'Kemaskini')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dalam Semakan</span>
                                                 @elseif ($pasangan->status_kemaskini == 'Lulus')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @else
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @endif
 
                                                 <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pasangan }}</span>
@@ -224,13 +237,13 @@
                                             <!--begin::Info-->
                                             <div class="text-center mt-5">
                                                 @if ($pekerjaan->status_kemaskini == 'Baharu')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Belum Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @elseif ($pekerjaan->status_kemaskini == 'Kemaskini')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Mohon Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dalam Semakan</span>
                                                 @elseif ($pekerjaan->status_kemaskini == 'Lulus')
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Dikemaskini</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @else
-                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Ditolak</span>
+                                                    <span class="text-gray-600 fw-semibold fs-4 d-block">Kemaskini Terakhir</span>
                                                 @endif
 
                                                 <span class="text-gray-400 fw-semibold fs-6">{{ $tarikh_update_pekerjaan }}</span>

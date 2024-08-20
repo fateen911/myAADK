@@ -45,17 +45,17 @@
 			<div id="kt_app_content" class="app-content flex-column-fluid">
 				<!--begin::Content container-->
 				<div id="kt_app_content_container" class="app-container container-xxl">
-                    <ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs pt-5" id="myTab" role="tablist" style="margin-left: 20px;">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="selesai-tab" data-toggle="tab" data-target="#selesai" type="button" role="tab" aria-controls="selesai" aria-selected="true">Permohonan Kemaskini Selesai</button>
+                            <button class="nav-link active" id="belumSelesai-tab" data-toggle="tab" data-target="#belumSelesai" type="button" role="tab" aria-controls="belumSelesai" aria-selected="true">Permohonan Kemaskini Belum Selesai</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="belumSelesai-tab" data-toggle="tab" data-target="#belumSelesai" type="button" role="tab" aria-controls="belumSelesai" aria-selected="true">Permohonan Kemaskini Belum Selesai</button>
+                            <button class="nav-link" id="selesai-tab" data-toggle="tab" data-target="#selesai" type="button" role="tab" aria-controls="selesai" aria-selected="true">Permohonan Kemaskini Selesai</button>
                         </li>
                     </ul>	
 
                     <div class="tab-content mt-0" id="myTabContent">
-                        <div class="tab-pane fade show active" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
+                        <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                             <!--begin::Card header-->
                             <div class="header">
                                 <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
@@ -103,10 +103,10 @@
                             <!--end::Card body-->
                         </div>
 
-                        <div class="tab-pane fade" id="belumSelesai" role="tabpanel" aria-labelledby="belumSelesai-tab">
+                        <div class="tab-pane fade show active" id="belumSelesai" role="tabpanel" aria-labelledby="belumSelesai-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                <h2>Senarai Permohonan Klien yang Belum Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
                             </div>
                             <!--end::Card header-->
 

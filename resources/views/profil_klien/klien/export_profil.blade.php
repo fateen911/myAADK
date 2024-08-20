@@ -82,20 +82,61 @@
 
 <body>
     @php
-        $daerahKlien = DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah');
-        $negeriKlien = DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri');
-        $daerahKerja = DB::table('senarai_daerah')->where('id', $pekerjaan['daerah_kerja'])->value('senarai_daerah.daerah');
-        $negeriKerja = DB::table('senarai_negeri')->where('id', $pekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
-        $daerahBapa = DB::table('senarai_daerah')->where('id', $waris['daerah_bapa'])->value('senarai_daerah.daerah');
-        $negeriBapa = DB::table('senarai_negeri')->where('id', $waris['negeri_bapa'])->value('senarai_negeri.negeri');
-        $daerahIbu = DB::table('senarai_daerah')->where('id', $waris['daerah_ibu'])->value('senarai_daerah.daerah');
-        $negeriIbu = DB::table('senarai_negeri')->where('id', $waris['negeri_ibu'])->value('senarai_negeri.negeri');
-        $daerahPenjaga = DB::table('senarai_daerah')->where('id', $waris['daerah_penjaga'])->value('senarai_daerah.daerah');
-        $negeriPenjaga = DB::table('senarai_negeri')->where('id', $waris['negeri_penjaga'])->value('senarai_negeri.negeri');
-        $daerahPasangan = DB::table('senarai_daerah')->where('id', $pasangan['daerah_pasangan'])->value('senarai_daerah.daerah');
-        $negeriPasangan = DB::table('senarai_negeri')->where('id', $pasangan['negeri_pasangan'])->value('senarai_negeri.negeri');
-        $daerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $pasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah');
-        $negeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $pasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri');
+        $daerahKlien = $klien && isset($klien['daerah']) 
+                        ? DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah') 
+                        : null;
+        
+        $negeriKlien = $klien && isset($klien['negeri']) 
+                        ? DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri') 
+                        : null;
+        
+        $daerahKerja = $pekerjaan && isset($pekerjaan['daerah_kerja']) 
+                        ? DB::table('senarai_daerah')->where('id', $pekerjaan['daerah_kerja'])->value('senarai_daerah.daerah') 
+                        : null;
+        
+        $negeriKerja = $pekerjaan && isset($pekerjaan['negeri_kerja']) 
+                        ? DB::table('senarai_negeri')->where('id', $pekerjaan['negeri_kerja'])->value('senarai_negeri.negeri') 
+                        : null;
+        
+        $daerahBapa = $waris && isset($waris['daerah_bapa']) 
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_bapa'])->value('senarai_daerah.daerah') 
+                        : null;
+        
+        $negeriBapa = $waris && isset($waris['negeri_bapa']) 
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_bapa'])->value('senarai_negeri.negeri') 
+                        : null;
+        
+        $daerahIbu = $waris && isset($waris['daerah_ibu']) 
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_ibu'])->value('senarai_daerah.daerah') 
+                        : null;
+        
+        $negeriIbu = $waris && isset($waris['negeri_ibu']) 
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_ibu'])->value('senarai_negeri.negeri') 
+                        : null;
+        
+        $daerahPenjaga = $waris && isset($waris['daerah_penjaga']) 
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_penjaga'])->value('senarai_daerah.daerah') 
+                        : null;
+        
+        $negeriPenjaga = $waris && isset($waris['negeri_penjaga']) 
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_penjaga'])->value('senarai_negeri.negeri') 
+                        : null;
+        
+        $daerahPasangan = $pasangan && isset($pasangan['daerah_pasangan']) 
+                            ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_pasangan'])->value('senarai_daerah.daerah') 
+                            : null;
+        
+        $negeriPasangan = $pasangan && isset($pasangan['negeri_pasangan']) 
+                            ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_pasangan'])->value('senarai_negeri.negeri') 
+                            : null;
+        
+        $daerahKerjaPasangan = $pasangan && isset($pasangan['daerah_kerja_pasangan']) 
+                                ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah') 
+                                : null;
+        
+        $negeriKerjaPasangan = $pasangan && isset($pasangan['negeri_kerja_pasangan']) 
+                                ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri') 
+                                : null;
     @endphp
 
     <table class="profile-form no-break">
@@ -400,47 +441,47 @@
             <tr class="gap-left">
                 <td style="width: 35%" class="gap-top">Status</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->status_kerja}}</td>
+                <td class="gap-top">{{$pekerjaan->status_kerja ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%" class="gap-top">Bidang</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->bidang_kerja}}</td>
+                <td class="gap-top">{{$pekerjaan->bidang_kerja ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%" class="gap-top">Nama</td>
                 <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->nama_kerja}}</td>
+                <td class="gap-top">{{$pekerjaan->nama_kerja ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Pendapatan Bulanan (RM)</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->pendapatan}}</td>
+                <td>{{$pekerjaan->pendapatan ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Kategori Majikan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->kategori_majikan}}</td>
+                <td>{{$pekerjaan->kategori_majikan ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Nama Majikan</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->nama_majikan}}</td>
+                <td>{{$pekerjaan->nama_majikan ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Nombor Telefon Majikan</td>
                 <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{$pekerjaan->no_tel_majikan}}</td>
+                <td class="gap-bottom">{{$pekerjaan->no_tel_majikan ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Alamat Tempat Bekerja</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->alamat_kerja}}</td>
+                <td>{{$pekerjaan->alamat_kerja ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Poskod Tempat Bekerja</td>
                 <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->poskod_kerja}}</td>
+                <td>{{$pekerjaan->poskod_kerja ?? ''}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Daerah Tempat Bekerja</td>

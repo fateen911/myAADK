@@ -449,7 +449,7 @@
                                                     Mohon Kemaskini
                                                 </button>                                            
                                             @else
-                                                <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
@@ -928,7 +928,7 @@
                                                     Mohon Kemaskini
                                                 </button>
                                             @else
-                                                <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPekerjaanKlien" data-target="#requestPekerjaanKlien">
@@ -1240,7 +1240,7 @@
                                                                         Mohon Kemaskini
                                                                     </button>
                                                                 @else
-                                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                                    <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                                                 @endif
                                                             @else
                                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalBapaKlien" data-target="#requestBapaKlien">
@@ -1366,7 +1366,7 @@
                                                                         Mohon Kemaskini
                                                                     </button>
                                                                 @else
-                                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                                    <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                                                 @endif
                                                             @else
                                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalIbuKlien" data-target="#requestIbuKlien">
@@ -1502,7 +1502,7 @@
                                                                         Mohon Kemaskini
                                                                     </button>
                                                                 @else
-                                                                    <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                                    <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                                                 @endif
                                                             @else
                                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalPenjagaKlien" data-target="#requestPenjagaKlien">
@@ -2146,7 +2146,7 @@
                                                     Mohon Kemaskini
                                                 </button>
                                             @else
-                                                <div class="btn-light-warning">Permohonan Kemaskini Disemak</div>
+                                                <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                             @endif
                                         @else
                                             <button type="button" class="btn btn-primary modal-trigger" id="requestModalPasanganKlien" data-target="#requestPasanganKlien">

@@ -84,9 +84,9 @@ class DaftarPenggunaController extends Controller
                     ->orderBy('users.updated_at', 'desc')
                     ->get();
 
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
-                                                ->orderBy('updated_at', 'desc')
-                                             ->get();
+        // dd($pegawai);
+
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')->orderBy('updated_at', 'desc')->get();
 
         $negeri = Negeri::all()->sortBy('negeri');
         $daerah = Daerah::all()->sortBy('daerah');
