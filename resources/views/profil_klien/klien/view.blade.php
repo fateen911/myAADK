@@ -171,7 +171,7 @@
                 <!--end:::Tabs-->
                 
                 <!--begin:::Tab content-->
-                <div class="tab-content scrollable-container" id="myTabContent">
+                <div class="tab-content" id="myTabContent">
                     <!--begin:::Tab pane-->
                     <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                         <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
@@ -550,7 +550,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
                                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                         <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                             <span class="path1"></span>
@@ -565,7 +565,7 @@
                                             </div>
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">E-mel</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">E-mel</label>
                                                     <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
                                                         <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                             <span class="path1"></span>

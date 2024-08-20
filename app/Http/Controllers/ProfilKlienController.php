@@ -1131,10 +1131,11 @@ class ProfilKlienController extends Controller
 
     public function KlienRequestUpdate(Request $request)
     {
+        // dd($request->all());
         // Validation rules for fields that users can update
         $validatedData = $request->validate([
-            'no_tel'           => 'required|string|max:11',
-            'emel'             => 'required|email',
+            'no_tel'           => 'nullable|string|max:11',
+            'emel'             => 'nullable|email',
             'alamat_rumah'     => 'required|string|max:255',
             'daerah'           => 'required|string|max:255',
             'negeri'           => 'required|string|max:255',
@@ -1154,6 +1155,15 @@ class ProfilKlienController extends Controller
             'status_oku', 
             'skor_ccri'
         ])->toArray();
+
+        // Check if no_tel and emel are null, if so, remove them from validatedData
+        if (is_null($request->input('no_tel'))) {
+            unset($validatedData['no_tel']);
+        }
+
+        if (is_null($request->input('emel'))) {
+            unset($validatedData['emel']);
+        }
 
         // Merge the existing data with the validated data from the request
         $mergedData = array_merge($existingData, $validatedData);
