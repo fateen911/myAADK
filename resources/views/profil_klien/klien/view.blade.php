@@ -1720,7 +1720,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_ibu" name="alamat_ibu">{{ $butiranKlien->alamat_ibu }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu">{{ $butiranKlien->alamat_ibu }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1728,7 +1728,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_ibu" name="poskod_ibu" value="{{ $butiranKlien->poskod_ibu }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{ $butiranKlien->poskod_ibu }}"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1736,7 +1736,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_ibu" name="negeri_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_ibu == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1749,7 +1749,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_ibu == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -1855,7 +1855,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_penjaga" name="alamat_penjaga">{{ $butiranKlien->alamat_penjaga }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga">{{ $butiranKlien->alamat_penjaga }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1863,7 +1863,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_penjaga" name="poskod_penjaga" value="{{ $butiranKlien->poskod_penjaga }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{ $butiranKlien->poskod_penjaga }}"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1871,7 +1871,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_penjaga" name="negeri_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_penjaga == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1884,7 +1884,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_penjaga" name="daerah_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_penjaga == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -2232,7 +2232,7 @@
                                                             <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                         </div>
                                                     </div>
-                                                    <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan">{{ $butiranKlien->alamat_pasangan }}</textarea>
+                                                    <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan">{{ $butiranKlien->alamat_pasangan }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2240,7 +2240,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2248,7 +2248,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2261,7 +2261,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahPasangan as $daerahP)
                                                             <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2373,14 +2373,12 @@
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri').val();
-            // alert(previousIdNegeri);
 
             // Initial AJAX request
             getBandarData(previousIdNegeri);
 
             $('#negeri').on('change', function () {
                 var idnegeri = $(this).val();
-                // alert(idnegeri);
 
                 // Update the previous value
                 previousIdNegeri = idnegeri;
@@ -2570,75 +2568,165 @@
 
             }
         }
-
     </script>
-    {{-- <script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatIbu = document.getElementById("alamat_i").value;
+        var initialNegeriIbu = document.getElementById("negeri_i").value;
+        var initialDaerahIbu = document.getElementById("daerah_i").value;
+        var initialPoskodIbu = document.getElementById("poskod_i").value;
+
+        function alamatIbu() {
+            
+            var checkBox = document.getElementById("alamat_ibu_sama");
+            var alamat_klien = document.getElementById("alamat_rumah");
+            var klien_negeri = document.getElementById("negeri");
+            var klien_daerah = document.getElementById("daerah");
+            var klien_poskod = document.getElementById("poskod");
+
+            var alamat_ibu = document.getElementById("alamat_i");
+            var negeri_ibu = document.getElementById("negeri_i");
+            var daerah_ibu = document.getElementById("daerah_i");
+            var poskod_ibu = document.getElementById("poskod_i");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_ibu.value = alamat_klien.innerText;
+                poskod_ibu.value = klien_poskod.innerText;
+                negeri_ibu.value = klien_negeri.innerText;
+                daerah_ibu.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_ibu).data('select2')) {
+                    $(negeri_ibu).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_ibu).data('select2')) {
+                    $(daerah_ibu).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_ibu.value = initialAlamatIbu;
+                poskod_ibu.value = initialPoskodIbu;
+                negeri_ibu.value = initialNegeriIbu;
+                daerah_ibu.value = initialDaerahIbu;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_ibu).data('select2')) {
+                    $(negeri_ibu).val(initialNegeriIbu).trigger('change.select2');
+                }
+                if ($(daerah_ibu).data('select2')) {
+                    $(daerah_ibu).val(initialDaerahIbu).trigger('change.select2');
+                }
+
+            }
+        }
+    </script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatPenjaga = document.getElementById("alamat_p").value;
+        var initialNegeriPenjaga = document.getElementById("negeri_p").value;
+        var initialDaerahPenjaga = document.getElementById("daerah_p").value;
+        var initialPoskodPenjaga = document.getElementById("poskod_p").value;
+
+        function alamatPenjaga() {
+            
+            var checkBox = document.getElementById("alamat_penjaga_sama");
+            var alamat_klien = document.getElementById("alamat_rumah");
+            var klien_negeri = document.getElementById("negeri");
+            var klien_daerah = document.getElementById("daerah");
+            var klien_poskod = document.getElementById("poskod");
+
+            var alamat_penjaga = document.getElementById("alamat_p");
+            var negeri_penjaga = document.getElementById("negeri_p");
+            var daerah_penjaga = document.getElementById("daerah_p");
+            var poskod_penjaga = document.getElementById("poskod_p");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_penjaga.value = alamat_klien.innerText;
+                poskod_penjaga.value = klien_poskod.innerText;
+                negeri_penjaga.value = klien_negeri.innerText;
+                daerah_penjaga.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_penjaga).data('select2')) {
+                    $(negeri_penjaga).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_penjaga).data('select2')) {
+                    $(daerah_penjaga).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_penjaga.value = initialAlamatPenjaga;
+                poskod_penjaga.value = initialPoskodPenjaga;
+                negeri_penjaga.value = initialNegeriPenjaga;
+                daerah_penjaga.value = initialDaerahPenjaga;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_penjaga).data('select2')) {
+                    $(negeri_penjaga).val(initialNegeriaPenjaga).trigger('change.select2');
+                }
+                if ($(daerah_penjaga).data('select2')) {
+                    $(daerah_penjaga).val(initialDaerahPenjaga).trigger('change.select2');
+                }
+
+            }
+        }
+    </script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatPasangan = document.getElementById("alamat_partner").value;
+        var initialNegeriPasangan = document.getElementById("negeri_partner").value;
+        var initialDaerahPasangan = document.getElementById("daerah_partner").value;
+        var initialPoskodPasangan = document.getElementById("poskod_partner").value;
+
         function alamatPasangan() {
-            var checkBox = document.getElementById("alamat_pasangan_sama");  
+            
+            var checkBox = document.getElementById("alamat_pasangan_sama");
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
-            var klien_bandar = document.getElementById("daerah");
+            var klien_daerah = document.getElementById("daerah");
             var klien_poskod = document.getElementById("poskod");
 
-            var alamat_pasangan = document.getElementById("alamat_pasangan");
-            var negeri_pasangan = document.getElementById("negeri_pasangan");
-            var daerah_pasangan = document.getElementById("daerah_pasangan");
-            var poskod_pasangan = document.getElementById("poskod_pasangan");
+            var alamat_partner = document.getElementById("alamat_partner");
+            var negeri_partner = document.getElementById("negeri_partner");
+            var daerah_partner = document.getElementById("daerah_partner");
+            var poskod_partner = document.getElementById("poskod_partner");
 
-            if (checkBox.checked == true){
-                alamat_pasangan.value = alamat_klien.value; 
-                negeri_pasangan.value = klien_negeri.value;
-                daerah_pasangan.value = klien_bandar.value;
-                poskod_pasangan.value = klien_poskod.value;
-                
-                // Trigger select2 update
-                $(negeri_pasangan).trigger('change.select2');
-                $(daerah_pasangan).trigger('change.select2');
+            if (checkBox.checked) {
+                // Copy values
+                alamat_partner.value = alamat_klien.innerText;
+                poskod_partner.value = klien_poskod.innerText;
+                negeri_partner.value = klien_negeri.innerText;
+                daerah_partner.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_partner).data('select2')) {
+                    $(negeri_partner).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_partner).data('select2')) {
+                    $(daerah_partner).val(klien_daerah.value).trigger('change.select2');
+                }
             } else {
-                alamat_pasangan.value = '';
-                negeri_pasangan.value = '';
-                daerah_pasangan.value = '';
-                poskod_pasangan.value = '';
+                // Back Initial Value
+                alamat_partner.value = initialAlamatPasangan;
+                poskod_partner.value = initialPoskodPasangan;
+                negeri_partner.value = initialNegeriPasangan;
+                daerah_partner.value = initialDaerahPasangan;
 
-                // Trigger select2 update.
-                $(negeri_pasangan).trigger('change.select2');
-                $(daerah_pasangan).trigger('change.select2');
+                // Trigger select2 update if using select2
+                if ($(negeri_partner).data('select2')) {
+                    $(negeri_partner).val(initialNegeriPasangan).trigger('change.select2');
+                }
+                if ($(daerah_partner).data('select2')) {
+                    $(daerah_partner).val(initialDaerahPasangan).trigger('change.select2');
+                }
             }
-        }	
-
-        function alamatBapa() {
-            var checkBox = document.getElementById("alamat_bapa_sama");  
-            var alamat_klien = document.getElementById("alamat_rumah");
-            var klien_negeri = document.getElementById("negeri");
-            var klien_bandar = document.getElementById("daerah");
-            var klien_poskod = document.getElementById("poskod");
-           
-            var alamat_bapa = document.getElementById("alamat_bapa");
-            var negeri_bapa = document.getElementById("negeri_bapa");
-            var daerah_bapa = document.getElementById("daerah_bapa");
-            var poskod_bapa = document.getElementById("poskod_bapa");
-
-            if (checkBox.checked == true){
-                alamat_bapa.value = alamat_klien.value; 
-                negeri_bapa.value = klien_negeri.value;
-                daerah_bapa.value = klien_bandar.value;
-                poskod_bapa.value = klien_poskod.value;
-                
-                // Trigger select2 update
-                $(negeri_bapa).trigger('change.select2');
-                $(daerah_bapa).trigger('change.select2');
-            } else {
-                alamat_bapa.value = '';
-                negeri_bapa.value = '';
-                daerah_bapa.value = '';
-                poskod_bapa.value = '';
-
-                // Trigger select2 update.
-                $(negeri_bapa).trigger('change.select2');
-                $(daerah_bapa).trigger('change.select2');
-            }
-        }	
-    </script> --}}
+        }
+    </script>
 
     {{-- If status_perkahwinan is bujang, then block the other fields --}}
     {{-- <script>
