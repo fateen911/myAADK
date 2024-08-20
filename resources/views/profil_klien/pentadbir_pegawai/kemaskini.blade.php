@@ -311,7 +311,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nombor Telefon</span>
+                                        <span>Nombor Telefon</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                             <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -334,7 +334,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">E-mel</span>
+                                        <span>E-mel</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
                                             <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -380,7 +380,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_klien" name="poskod_klien" value="{{$klien->poskod}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_k" name="poskod_klien" value="{{$klien->poskod}}" />
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -588,7 +588,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Nombor Telefon
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -599,18 +599,16 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <!-- Use a conditional class to highlight changes -->
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['no_tel'] != $klien->no_tel ? 'border-primary' : '' }}" name="no_tel" value="{{ $requestedDataKlien['no_tel'] }}" readonly />
-                                                        
-                                                        <!-- Add an icon to indicate change if there's a discrepancy -->
-                                                        @if ($requestedDataKlien['no_tel'] != $klien->no_tel)
+                                                        <input type="text" class="form-control form-control-solid {{ ($requestedDataKlien['no_tel'] ?? '') != $klien->no_tel ? 'border-primary' : '' }}" name="no_tel" value="{{ $requestedDataKlien['no_tel'] ?? '' }}" readonly />
+
+                                                        @if (($requestedDataKlien['no_tel'] ?? '') != $klien->no_tel)
                                                             <i class="ki-duotone ki-warning-2 text-danger fs-6 position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);" data-bs-toggle="tooltip" title="This field has been modified by the client."></i>
                                                         @endif
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">E-mel
+                                                        <label class="fs-6 fw-semibold form-label mt-3">E-mel
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1228,7 +1226,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_bapa" name="alamat_bapa">{{$waris->alamat_bapa}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa">{{$waris->alamat_bapa}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1245,7 +1243,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_bapa" name="poskod_bapa" value="{{$waris->poskod_bapa}}" />
+                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{$waris->poskod_bapa}}" />
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -1263,7 +1261,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_bapa" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_bapa == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1286,7 +1284,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_bapa" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_bapa == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1428,7 +1426,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_ibu" name="alamat_ibu">{{$waris->alamat_ibu}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu">{{$waris->alamat_ibu}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1445,7 +1443,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_ibu" name="poskod_ibu" value="{{$waris->poskod_ibu}}" />
+                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{$waris->poskod_ibu}}" />
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -1463,7 +1461,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_ibu" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid" id="negeri_ibu" name="negeri_i" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_ibu == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1486,7 +1484,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid" id="daerah_ibu" name="daerah_i" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_ibu == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1644,7 +1642,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_penjaga" name="alamat_penjaga">{{$waris->alamat_penjaga}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga">{{$waris->alamat_penjaga}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1661,7 +1659,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_penjaga" name="poskod_penjaga" value="{{$waris->poskod_penjaga}}" />
+                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{$waris->poskod_penjaga}}" />
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -1679,7 +1677,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_penjaga" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_penjaga == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1702,7 +1700,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_penjaga" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_penjaga == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -2184,7 +2182,7 @@
                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                             </div>
                                         </div>
-                                        <textarea class="form-control form-control-solid" id="alamat_pasangan" name="alamat_pasangan">{{$pasangan->alamat_pasangan}}</textarea>
+                                        <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan">{{$pasangan->alamat_pasangan}}</textarea>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2201,7 +2199,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_pasangan" name="poskod_pasangan" value="{{$pasangan->poskod_pasangan}}" />
+                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{$pasangan->poskod_pasangan}}" />
                                             <!--end::Select2-->
                                         </div>
                                     </div>
@@ -2219,7 +2217,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="negeri_pasangan" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                 <option>Pilih Negeri</option>
                                                 @foreach ($negeriPasangan as $negeriP)
                                                     <option value="{{ $negeriP->id }}" {{ $pasangan->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->negeri }}</option>
@@ -2242,7 +2240,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="daerah_pasangan" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                 <option>Pilih Daerah</option>
                                                 @foreach ($daerahPasangan as $daerahP)
                                                     <option value="{{ $daerahP->id }}" {{ $pasangan->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2792,74 +2790,215 @@
     </script>
 
     <script>
-        $(document).ready(function() {
-            // Get the client address fields
-            const clientAddress = $('#alamat_rumah_klien').text().trim();
-            const clientPoskod = $('#poskod_klien').text().trim();
-            const clientDaerah = $('#daerah_klien').text().trim();
-            const clientNegeri = $('#negeri_klien').text().trim();
+        // Store initial values in variables
+        var initialAlamatBapa = document.getElementById("alamat_b").value;
+        var initialNegeriBapa = document.getElementById("negeri_b").value;
+        var initialDaerahBapa = document.getElementById("daerah_b").value;
+        var initialPoskodBapa = document.getElementById("poskod_b").value;
 
-            console.log('Client Address:', clientAddress);
-            console.log('Client Poskod:', clientPoskod);
-            console.log('Client Daerah:', clientDaerah);
-            console.log('Client Negeri:', clientNegeri);
-        
-            // Function to copy address fields for Bapa
-            function alamatBapa() {
-                const checkbox = $('#alamat_bapa_sama');
-                if (checkbox.is(':checked')) {
-                    $('#alamat_bapa').val(clientAddress);
-                    $('#poskod_bapa').val(clientPoskod);
-                    $('#daerah_bapa').val(clientDaerah);
-                    $('#negeri_bapa').val(clientNegeri);
-                } else {
-                    // Clear the fields if the checkbox is unchecked
-                    $('#alamat_bapa').val('');
-                    $('#poskod_bapa').val('');
-                    $('#daerah_bapa').val('');
-                    $('#negeri_bapa').val('');
+        function alamatBapa() {
+            
+            var checkBox = document.getElementById("alamat_bapa_sama");
+            var alamat_klien = document.getElementById("alamat_rumah_klien");
+            var klien_negeri = document.getElementById("negeri_klien");
+            var klien_daerah = document.getElementById("daerah_klien");
+            var klien_poskod = document.getElementById("poskod_k");
+            // alert(klien_poskod.innerText);
+
+            var alamat_bapa = document.getElementById("alamat_b");
+            var negeri_bapa = document.getElementById("negeri_b");
+            var daerah_bapa = document.getElementById("daerah_b");
+            var poskod_bapa = document.getElementById("poskod_b");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_bapa.value = alamat_klien.innerText;
+                poskod_bapa.value = klien_poskod.innerText;
+                negeri_bapa.value = klien_negeri.innerText;
+                daerah_bapa.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_bapa.value = initialAlamatBapa;
+                poskod_bapa.value = initialPoskodBapa;
+                negeri_bapa.value = initialNegeriBapa;
+                daerah_bapa.value = initialDaerahBapa;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_bapa).data('select2')) {
+                    $(negeri_bapa).val(initialNegeriBapa).trigger('change.select2');
+                }
+                if ($(daerah_bapa).data('select2')) {
+                    $(daerah_bapa).val(initialDaerahBapa).trigger('change.select2');
+                }
+
+            }
+        }
+    </script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatIbu = document.getElementById("alamat_i").value;
+        var initialNegeriIbu = document.getElementById("negeri_i").value;
+        var initialDaerahIbu = document.getElementById("daerah_i").value;
+        var initialPoskodIbu = document.getElementById("poskod_i").value;
+
+        function alamatIbu() {
+            
+            var checkBox = document.getElementById("alamat_ibu_sama");
+            var alamat_klien = document.getElementById("alamat_rumah_klien");
+            var klien_negeri = document.getElementById("negeri_klien");
+            var klien_daerah = document.getElementById("daerah_klien");
+            var klien_poskod = document.getElementById("poskod_k");
+
+            var alamat_ibu = document.getElementById("alamat_i");
+            var negeri_ibu = document.getElementById("negeri_i");
+            var daerah_ibu = document.getElementById("daerah_i");
+            var poskod_ibu = document.getElementById("poskod_i");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_ibu.value = alamat_klien.innerText;
+                poskod_ibu.value = klien_poskod.innerText;
+                negeri_ibu.value = klien_negeri.innerText;
+                daerah_ibu.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_ibu).data('select2')) {
+                    $(negeri_ibu).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_ibu).data('select2')) {
+                    $(daerah_ibu).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_ibu.value = initialAlamatIbu;
+                poskod_ibu.value = initialPoskodIbu;
+                negeri_ibu.value = initialNegeriIbu;
+                daerah_ibu.value = initialDaerahIbu;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_ibu).data('select2')) {
+                    $(negeri_ibu).val(initialNegeriIbu).trigger('change.select2');
+                }
+                if ($(daerah_ibu).data('select2')) {
+                    $(daerah_ibu).val(initialDaerahIbu).trigger('change.select2');
+                }
+
+            }
+        }
+    </script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatPenjaga = document.getElementById("alamat_p").value;
+        var initialNegeriPenjaga = document.getElementById("negeri_p").value;
+        var initialDaerahPenjaga = document.getElementById("daerah_p").value;
+        var initialPoskodPenjaga = document.getElementById("poskod_p").value;
+
+        function alamatPenjaga() {
+            
+            var checkBox = document.getElementById("alamat_penjaga_sama");
+            var alamat_klien = document.getElementById("alamat_rumah_klien");
+            var klien_negeri = document.getElementById("negeri_klien");
+            var klien_daerah = document.getElementById("daerah_klien");
+            var klien_poskod = document.getElementById("poskod_k");
+
+            var alamat_penjaga = document.getElementById("alamat_p");
+            var negeri_penjaga = document.getElementById("negeri_p");
+            var daerah_penjaga = document.getElementById("daerah_p");
+            var poskod_penjaga = document.getElementById("poskod_p");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_penjaga.value = alamat_klien.innerText;
+                poskod_penjaga.value = klien_poskod.innerText;
+                negeri_penjaga.value = klien_negeri.innerText;
+                daerah_penjaga.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_penjaga).data('select2')) {
+                    $(negeri_penjaga).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_penjaga).data('select2')) {
+                    $(daerah_penjaga).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_penjaga.value = initialAlamatPenjaga;
+                poskod_penjaga.value = initialPoskodPenjaga;
+                negeri_penjaga.value = initialNegeriPenjaga;
+                daerah_penjaga.value = initialDaerahPenjaga;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_penjaga).data('select2')) {
+                    $(negeri_penjaga).val(initialNegeriaPenjaga).trigger('change.select2');
+                }
+                if ($(daerah_penjaga).data('select2')) {
+                    $(daerah_penjaga).val(initialDaerahPenjaga).trigger('change.select2');
+                }
+
+            }
+        }
+    </script>
+
+    <script>
+        // Store initial values in variables
+        var initialAlamatPasangan = document.getElementById("alamat_partner").value;
+        var initialNegeriPasangan = document.getElementById("negeri_partner").value;
+        var initialDaerahPasangan = document.getElementById("daerah_partner").value;
+        var initialPoskodPasangan = document.getElementById("poskod_partner").value;
+
+        function alamatPasangan() {
+            
+            var checkBox = document.getElementById("alamat_pasangan_sama");
+            var alamat_klien = document.getElementById("alamat_rumah_klien");
+            var klien_negeri = document.getElementById("negeri_klien");
+            var klien_daerah = document.getElementById("daerah_klien");
+            var klien_poskod = document.getElementById("poskod_k");
+
+            var alamat_partner = document.getElementById("alamat_partner");
+            var negeri_partner = document.getElementById("negeri_partner");
+            var daerah_partner = document.getElementById("daerah_partner");
+            var poskod_partner = document.getElementById("poskod_partner");
+
+            if (checkBox.checked) {
+                // Copy values
+                alamat_partner.value = alamat_klien.innerText;
+                poskod_partner.value = klien_poskod.innerText;
+                negeri_partner.value = klien_negeri.innerText;
+                daerah_partner.value = klien_daerah.innerText;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_partner).data('select2')) {
+                    $(negeri_partner).val(klien_negeri.value).trigger('change.select2');
+                }
+                if ($(daerah_partner).data('select2')) {
+                    $(daerah_partner).val(klien_daerah.value).trigger('change.select2');
+                }
+            } else {
+                // Back Initial Value
+                alamat_partner.value = initialAlamatPasangan;
+                poskod_partner.value = initialPoskodPasangan;
+                negeri_partner.value = initialNegeriPasangan;
+                daerah_partner.value = initialDaerahPasangan;
+
+                // Trigger select2 update if using select2
+                if ($(negeri_partner).data('select2')) {
+                    $(negeri_partner).val(initialNegeriPasangan).trigger('change.select2');
+                }
+                if ($(daerah_partner).data('select2')) {
+                    $(daerah_partner).val(initialDaerahPasangan).trigger('change.select2');
                 }
             }
-        
-            // Function to copy address fields for Ibu
-            function alamatIbu() {
-                const checkbox = $('#alamat_ibu_sama');
-                if (checkbox.is(':checked')) {
-                    $('#alamat_ibu').val(clientAddress);
-                    $('#poskod_ibu').val(clientPoskod);
-                    $('#daerah_ibu').val(clientDaerah);
-                    $('#negeri_ibu').val(clientNegeri);
-                } else {
-                    // Clear the fields if the checkbox is unchecked
-                    $('#alamat_ibu').val('');
-                    $('#poskod_ibu').val('');
-                    $('#daerah_ibu').val('');
-                    $('#negeri_ibu').val('');
-                }
-            }
-        
-            // Function to copy address fields for Penjaga
-            function alamatPenjaga() {
-                const checkbox = $('#alamat_penjaga_sama');
-                if (checkbox.is(':checked')) {
-                    $('#alamat_penjaga').val(clientAddress);
-                    $('#poskod_penjaga').val(clientPoskod);
-                    $('#daerah_penjaga').val(clientDaerah);
-                    $('#negeri_penjaga').val(clientNegeri);
-                } else {
-                    // Clear the fields if the checkbox is unchecked
-                    $('#alamat_penjaga').val('');
-                    $('#poskod_penjaga').val('');
-                    $('#daerah_penjaga').val('');
-                    $('#negeri_penjaga').val('');
-                }
-            }
-        
-            // Add event listeners for the checkboxes
-            document.getElementById('alamat_bapa_sama').addEventListener('change', alamatBapa);
-            document.getElementById('alamat_ibu_sama').addEventListener('change', alamatIbu);
-            document.getElementById('alamat_penjaga_sama').addEventListener('change', alamatPenjaga);
-        });
-    </script>    
+        }
+    </script>
 </body>     
 @endsection
