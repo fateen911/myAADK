@@ -230,9 +230,10 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            $defaultEmail = 'fateenashuha2000@gmail.com';
+            // $defaultEmail = 'fateenashuha2000@gmail.com';
 
-            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
+            Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp, $verificationUrl));
+            // Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
             // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp));
 
             return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
@@ -293,10 +294,12 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            $defaultEmail = 'fateennashuha9@gmail.com';
+            // $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send notification email to the staff
-            Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            // Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($request->emelPegawai)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+
             return redirect()->back()->with('message', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
         } 
         elseif ($keputusan == 'Ditolak') {
@@ -304,10 +307,10 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->status = 'Ditolak';
             $pegawaiBaharu->save();
 
-            $defaultEmail = 'fateennashuha9@gmail.com';
+            // $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send rejection email to the staff
-            Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiBaharu));
+            Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiBaharu));
             return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiBaharu->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
         }
     }
