@@ -68,12 +68,12 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-                                            <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-50px">No. Kad Pengenalan</th>
+                                            <th class="min-w-100px">Nama</th>
+                                            <th class="min-w-70px">No. Kad Pengenalan</th>
                                             <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Pengemaskini</th> 
-                                            <th class="min-w-50px" style="text-align: center;">Muat Turun</th>
+                                            <th class="min-w-30px" style="text-align: center;">Muat Turun</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">

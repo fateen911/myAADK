@@ -2430,38 +2430,6 @@
             }
         });
     </script>
-    
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const negeriSelect = document.getElementById('negeri');
-            const daerahSelect = document.getElementById('daerah');
-
-            // Function to filter daerah options based on selected negeri
-            function filterDaerahOptions() {
-                const selectedNegeriId = negeriSelect.value;
-                
-                // Show or hide options based on the selected negeri
-                Array.from(daerahSelect.options).forEach(option => {
-                    const optionNegeriId = option.getAttribute('data-negeri-id');
-                    
-                    if (optionNegeriId === selectedNegeriId) {
-                        option.style.display = 'block'; // Show matching options
-                    } else {
-                        option.style.display = 'none';  // Hide non-matching options
-                    }
-                });
-                
-                // Reset the daerah selection
-                daerahSelect.value = ''; 
-            }
-
-            // Event listener for negeri dropdown
-            negeriSelect.addEventListener('change', filterDaerahOptions);
-
-            // Initial filtering on page load
-            filterDaerahOptions();
-        });
-    </script> --}}
 
     {{-- Search in dropdown button --}}
     <script>

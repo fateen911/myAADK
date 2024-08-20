@@ -300,10 +300,10 @@ class ProfilKlienController extends Controller
     public function muatTurunProfilKlien($id)
     {
         $klien = Klien::where('id',$id)->first();
-        $pekerjaan = PekerjaanKlien::where('id',$id)->first();
-        $waris = WarisKlien::where('id',$id)->first();
-        $pasangan = KeluargaKlien::where('id',$id)->first();
-        $rawatan = RawatanKlien::where('id',$id)->first();
+        $pekerjaan = PekerjaanKlien::where('klien_id',$id)->first();
+        $waris = WarisKlien::where('klien_id',$id)->first();
+        $pasangan = KeluargaKlien::where('klien_id',$id)->first();
+        $rawatan = RawatanKlien::where('klien_id',$id)->first();
 
         $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
 
@@ -1117,10 +1117,10 @@ class ProfilKlienController extends Controller
         $klien_id = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
         $klien = Klien::where('id',$klien_id)->first();
-        $pekerjaan = PekerjaanKlien::where('id',$klien_id)->first();
-        $waris = WarisKlien::where('id',$klien_id)->first();
-        $pasangan = KeluargaKlien::where('id',$klien_id)->first();
-        $rawatan = RawatanKlien::where('id',$klien_id)->first();
+        $pekerjaan = PekerjaanKlien::where('klien_id',$klien_id)->first();
+        $waris = WarisKlien::where('klien_id',$klien_id)->first();
+        $pasangan = KeluargaKlien::where('klien_id',$klien_id)->first();
+        $rawatan = RawatanKlien::where('klien_id',$klien_id)->first();
 
         $pdf = PDF::loadView('profil_klien.klien.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan'));
 
@@ -1131,7 +1131,6 @@ class ProfilKlienController extends Controller
 
     public function KlienRequestUpdate(Request $request)
     {
-        // dd($request->all());
         // Validation rules for fields that users can update
         $validatedData = $request->validate([
             'no_tel'           => 'nullable|string|max:11',
