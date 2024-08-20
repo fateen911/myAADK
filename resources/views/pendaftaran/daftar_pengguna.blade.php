@@ -132,7 +132,7 @@
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
 											$negeriB = DB::table('senarai_negeri')->where('id', $user3['negeri_bertugas'])->value('negeri');
-											$daerahB = DB::table('senarai_daerah')->where('id', $user3['daerah_bertugas'])->value('daerah');
+											$daerahB = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user3['daerah_bertugas'])->value('daerah');
 										@endphp
 	
 										<tr>
@@ -203,7 +203,15 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user3->no_kp}}"/>
@@ -288,7 +296,6 @@
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
 																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user3->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
-																					{{-- <option value="{{ $item2->id}}" {{$user3->daerah_bertugas == $item2->id  ? 'selected' : ''}}>{{$item2->daerah}}</option> --}}
 																				@endforeach
 																			</select>
 																		</div>
@@ -361,7 +368,7 @@
 											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('peranan');
 											$tarikh_daftar = Carbon::parse($user2->created_at)->format('d-m-Y');
 											$negeriB = DB::table('senarai_negeri')->where('id', $user2['negeri_bertugas'])->value('negeri');
-											$daerahB = DB::table('senarai_daerah')->where('id', $user2['daerah_bertugas'])->value('daerah');
+											$daerahB = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user2['daerah_bertugas'])->value('daerah');
 										@endphp
 	
 										<tr>
@@ -432,7 +439,15 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user2->no_kp}}"/>
@@ -664,7 +679,15 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
+																		<label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}"/>
@@ -759,7 +782,15 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<!--begin::Label-->
-											<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
+											<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
+												<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+													<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+														<span class="path1"></span>
+														<span class="path2"></span>
+														<span class="path3"></span>
+													</i>
+												</span>
+											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
 											<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="no_kp" name="no_kp" />
