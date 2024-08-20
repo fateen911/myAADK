@@ -16,11 +16,19 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <style>
+            body { background-image: url('/assets/media/auth/bg13.jpg')!important;
+                background-size: cover!important; /* Scale the image to cover the entire viewport */
+                background-position: center!important; /* Center the image */
+                background-repeat: no-repeat!important; /* Prevent repeating the image */
+                background-attachment: fixed!important; /* Optional: Fix the background image during scrolling */}
+            [data-bs-theme="dark"] body { background-image: url('/assets/media/auth/bg9-dark.jpg')!important; }
+        </style>
     </head>
-    
+
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div class="w-full sm:max-w-md px-6 py-4 dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg" style="background:lightgrey; margin-top: 20px !important; margin-bottom: 20px !important;">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div class="w-full sm:max-w-md px-6 py-4 dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg" style="background:white; margin-top: 20px !important; margin-bottom: 20px !important;">
                 {{ $slot }}
             </div>
         </div>
