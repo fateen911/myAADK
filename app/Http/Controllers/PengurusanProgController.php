@@ -836,8 +836,10 @@ class PengurusanProgController extends Controller
                 $this->sendSms($item->no_tel, $message);
             }
             elseif ($kaedah == 'emel') {
-                $recipient = $item->emel;
-                Mail::to($recipient)->send(new HebahanMail($id));
+                if($item->emel != null){
+                    $recipient = $item->emel;
+                    Mail::to($recipient)->send(new HebahanMail($id));
+                }
             }
             elseif ($kaedah == 'telegram') {
                 // Telegram Bot API endpoint
@@ -886,8 +888,10 @@ class PengurusanProgController extends Controller
 
         // Send communication based on the selected method
         foreach ($klien as $item) {
-            $recipient = $item->emel;
-            Mail::to($recipient)->send(new HebahanMail($id));
+            if($item->emel != null){
+                $recipient = $item->emel;
+                Mail::to($recipient)->send(new HebahanMail($id));
+            }
         }
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
@@ -909,8 +913,10 @@ class PengurusanProgController extends Controller
 
         // Send communication based on the selected method
         foreach ($klien as $item) {
-            $recipient = $item->emel;
-            Mail::to($recipient)->send(new HebahanMail($id));
+            if($item->emel != null){
+                $recipient = $item->emel;
+                Mail::to($recipient)->send(new HebahanMail($id));
+            }
         }
 
         $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
