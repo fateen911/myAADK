@@ -153,7 +153,7 @@
                 <div class="tab-pane fade" id="profilKlien" role="tabpanel" aria-labelledby="profilKlien-tab">
                     <!--Keseluruhan-->
                     <div class="header pt-5 mb-5">
-                        <h2>Bilangan Klien yang Mengemaskini Profil</h2>
+                        <h2>Bilangan Profil Klien</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->
@@ -241,7 +241,7 @@
                     </div>
 
                     <div class="header pt-10 mb-5">
-                        <h2>Bilangan Status Permohonan Kemaskini Profil</h2>
+                        <h2>Bilangan Status Permohonan Kemaskini Profil Klien</h2>
                     </div>
                     <div class="body">
                         <!--begin::First Row-->

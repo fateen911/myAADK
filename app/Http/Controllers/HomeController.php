@@ -47,11 +47,18 @@ class HomeController extends Controller
                     // jumlah keseluruhan klien
                     $jumlah1 = Klien::all()->count();
 
-                    // Count the number of clients who have updated their profile (Sedang Kemaskini)
+                    // Count the number of clients who have updated their profile (Telah Kemaskini)
                     $sedangKemaskini = DB::table('klien')
                                         ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->where('sejarah_profil_klien.status_kemaskini', 'Lulus')
+                                        ->whereNotNull('sejarah_profil_klien.pengemaskini')
                                         ->distinct('klien.id')
                                         ->count('klien.id');
+
+                    // $sedangKemaskini = DB::table('klien')
+                    //                     ->join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                    //                     ->distinct('klien.id')
+                    //                     ->count('klien.id');
                 
                     // Count the number of clients who have never updated their profile (Belum Kemaskini)
                     $belumKemaskini = DB::table('klien')
