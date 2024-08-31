@@ -17,11 +17,26 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            body { background-image: url('/assets/media/auth/bg13.jpg')!important;
+            body { 
+                background-image: url('/assets/media/auth/bg13.jpg')!important;
                 background-size: cover!important; /* Scale the image to cover the entire viewport */
                 background-position: center!important; /* Center the image */
                 background-repeat: no-repeat!important; /* Prevent repeating the image */
-                background-attachment: fixed!important; /* Optional: Fix the background image during scrolling */}
+                background-attachment: fixed!important; /* Optional: Fix the background image during scrolling */
+                position: relative; /* Required for pseudo-element positioning */
+                margin: 0; /* Ensure no margin interferes with positioning */
+            }
+            body::before {
+                content: '';
+                position: fixed; /* Change to fixed to cover the whole viewport */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Adjust color and opacity */
+                z-index: -1; /* Place it behind the content of the body */
+                pointer-events: none; /* Ensures the overlay does not interfere with interactions */
+            }
             [data-bs-theme="dark"] body { background-image: url('/assets/media/auth/bg9-dark.jpg')!important; }
         </style>
     </head>
