@@ -747,7 +747,7 @@
 						<!--begin::Modal content-->
 						<div class="modal-content">
 							<!--begin::Form-->
-							<form class="form" id="kt_modal_add_customer_form" action="{{ route('daftar-pengguna') }}" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
+							<form class="form" id="kt_modal_add_customer_form" action="{{ route('daftar-pegawai') }}" method="post" data-kt-redirect="{{ route('senarai-pengguna') }}">
 								@csrf
 								<!--begin::Modal header-->
 								<div class="modal-header" id="kt_modal_add_customer_header">

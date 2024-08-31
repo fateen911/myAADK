@@ -1,6 +1,10 @@
 <x-guest-layout>
     <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap JS (including Popper.js for tooltips) -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body>
@@ -13,22 +17,29 @@
         <form method="POST" action="{{ route('register') }}" id="pegawai_mohon_daftar_form">
             @csrf
             <!-- Nama -->
-            <div>
-                <x-input-label for="nama" :value="__('Nama Penuh')" />
-                <input type="text" class="form-control w-full" placeholder="" id="nama" name="nama" required/>
+            <div class="mt-4">
+                <x-input-label for="nama" :value="__('Nama Penuh')" :required="true" />
+                <input type="text" class="form-control w-full" placeholder="" id="nama" name="nama" style="text-transform: uppercase;" required/>
                 <x-input-error :messages="$errors->get('nama')" class="mt-2" />
             </div>
     
             {{-- No Kad Pengenalan --}}
             <div class="mt-4">
-                <x-input-label for="no_kp" :value="__('No Kad Pengenalan')"/>
-                <input type="text" maxlength="12" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" required/>
+                <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" :required="true"/>
+                {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
+                </span> --}}
+                <input type="number" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" maxlength="12" required/>
                 <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
             </div>
       
             <!-- Email Address -->
             <div class="mt-4">
-                <x-input-label for="emelPegawai" :value="__('E-mel')" />
+                <x-input-label for="emelPegawai" :value="__('E-mel')" :required="true"/>
                 <div class="input-group">
                     <input type="text" class="form-control w-full" placeholder="contoh12" id="emelPegawai" name="emelPegawai" required />
                     <span class="input-group-text">@adk.gov.my</span>
@@ -38,14 +49,21 @@
     
             {{-- No Telefon --}}
             <div class="mt-4">
-                <x-input-label for="no_tel" :value="__('Nombor Telefon')"/>
-                <input type="text" maxlength="11" class="form-control w-full" placeholder="0109002100" id="no_tel" name="no_tel" required />
+                <x-input-label for="no_tel" :value="__('Nombor Telefon')" :required="true"/>
+                {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
+                </span> --}}
+                <input type="number" class="form-control w-full" placeholder="0109000000" id="no_tel" name="no_tel" inputmode="numeric" pattern="\d{10,11}" maxlength="11" required />
                 <x-input-error :messages="$errors->get('no_tel')" class="mt-2" />
             </div>
     
             <!-- Jawatan -->
             <div class="mt-4">
-                <x-input-label for="jawatan" :value="__('Jawatan')" />
+                <x-input-label for="jawatan" :value="__('Jawatan')" :required="true"/>
                 <select id="jawatan" name="jawatan" class="form-control w-full" required>
                     <option value="">{{ __('Pilih Jawatan') }}</option>
                     @foreach ($jawatan as $j)
@@ -57,7 +75,7 @@
     
             <!-- Peranan -->
             <div class="mt-4">
-                <x-input-label for="peranan" :value="__('Peranan')" />
+                <x-input-label for="peranan" :value="__('Peranan')" :required="true"/>
                 <select id="peranan" name="peranan" class="form-control w-full" required>
                     <option value="">{{ __('Pilih Peranan') }}</option>
                     @foreach ($tahap->sortBy('jawatan') as $t)
@@ -187,5 +205,34 @@
                 });
             });
         </script>
+
+        <script>
+            document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
+                const noKp = document.getElementById('no_kp').value;
+                const noTel = document.getElementById('no_tel').value;
+                
+                // Check if no_kp is exactly 12 digits
+                if (!/^\d{12}$/.test(noKp)) {
+                    alert('No Kad Pengenalan mesti tepat 12 digit.');
+                    e.preventDefault();
+                }
+            
+                // Check if no_tel is between 10 to 11 digits
+                if (!/^\d{10,11}$/.test(noTel)) {
+                    alert('Nombor Telefon mesti antara 10 hingga 11 digit.');
+                    e.preventDefault();
+                }
+            });
+        </script>  
+        
+        {{-- <script>
+            // Initialize Bootstrap tooltips
+            document.addEventListener('DOMContentLoaded', function () {
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            });
+        </script> --}}
     </body>
 </x-guest-layout>

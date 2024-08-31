@@ -108,7 +108,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
 Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'kemaskiniKlien'])->name('kemaskini-klien');
 Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'kemaskiniPegawai'])->name('kemaskini-pegawai');
-Route::post('pentadbir/daftar-pengguna', [DaftarPenggunaController::class, 'daftarPengguna'])->name('daftar-pengguna');
+Route::post('pentadbir/daftar/pegawai', [DaftarPenggunaController::class, 'daftarPegawai'])->name('daftar-pegawai');
 Route::post('/pentadbir/kelulusan-permohonan-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawai'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
