@@ -41,9 +41,6 @@ Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/{id}',[Penguru
 Route::get('/pengurusan-program/pegawai-aadk/padam-prog/{id}',[PengurusanProgController::class, 'padamProgPA'])->name('pengurusan_program.pegawai_aadk.padam_prog');
 Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan-program/pegawai-aadk/senarai-prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
-Route::get('/pengurusan-program/pegawai-aadk/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.tambah_kategori');
-Route::post('/pengurusan-program/pegawai-aadk/post-tambah-kategori',[PengurusanProgController::class, 'postTambahKategoriPA'])->name('pengurusan_program.pegawai_aadk.post_tambah_kategori');
-Route::get('/pengurusan-program/pegawai-aadk/padam-kategori/{id}',[PengurusanProgController::class, 'padamKategoriPA'])->name('pengurusan_program.pegawai_aadk.padam_Kategori');
 
 
 // PENGURUSAN PROGRAM - PENRADBIR SISTEM

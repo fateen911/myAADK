@@ -40,7 +40,7 @@
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Program</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Aktiviti</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -49,7 +49,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Daftar Program</li>
+            <li class="breadcrumb-item text-muted">Daftar Aktiviti</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -75,7 +75,7 @@
                                 <!--begin::Card header-->
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Maklumat Program</h2>
+                                        <h2>Maklumat Aktiviti</h2>
                                     </div>
                                 </div>
                                 <!--end::Card header-->
@@ -83,7 +83,7 @@
                                 <div class="card-body pt-0">
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Kategori Program</label>
+                                        <label class="required form-label">Kategori Aktiviti</label>
                                         <!--begin::Select2-->
                                         <select class="form-select" name="kategori" aria-label="Select example" required>
                                             <option selected="selected">Sila Pilih</option>
@@ -96,7 +96,7 @@
                                         {{--                                                            <!--end::Description-->--}}
                                     </div>
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Nama Program</label>
+                                        <label class="required form-label">Nama Aktiviti</label>
                                         <input type="text" name="nama" class="form-control mb-2" value="" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
@@ -113,7 +113,7 @@
                                             <!--end::Label-->
                                             <!--begin::Editor-->
                                             <div id="kt_docs_quill_basic" class="min-h-200px mb-2">
-                                                Sila berikan objektif program...
+                                                Sila berikan objektif aktiviti...
                                             </div>
                                             <input type="hidden" id="objektif" name="objektif">
                                             <!--end::Editor-->
@@ -147,11 +147,11 @@
                                     <div class="mb-5 fv-row">
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                                <label class="required form-label">Tempat Program</label>
+                                                <label class="required form-label">Tempat Aktiviti</label>
                                                 <input type="text" name="tempat" class="form-control mb-2" value="" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Penganjur Program (Jika Ada)</label>
+                                                <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
                                                 <input type="text" name="penganjur" class="form-control mb-2" value=""/>
                                             </div>
                                         </div>
