@@ -13,6 +13,7 @@ use App\Mail\PegawaiApproved;
 use App\Mail\PegawaiRejected;
 use App\Mail\KemaskiniKataLaluan;
 use App\Models\User;
+use App\Models\Klien;
 use App\Models\Pegawai;
 use App\Models\Negeri;
 use App\Models\Daerah;
@@ -33,7 +34,7 @@ class DaftarPenggunaController extends Controller
                         ->join('klien', 'users.no_kp', '=', 'klien.no_kp')
                         ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                         ->orderBy('users.updated_at', 'desc')
-                        ->get(['users.*']);
+                        ->get(['users.*', 'klien.no_tel', 'klien.emel']);
 
             return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien'));
         }
@@ -44,6 +45,9 @@ class DaftarPenggunaController extends Controller
         // Retrieve the user by their ID
         $user = User::find($request->id);
 
+        // Retrieve the corresponding Klien record by no_kp
+        $klien = Klien::where('no_kp', $user->no_kp)->first();
+
         if ($user) 
         {
             // Prepare the data for update
@@ -51,6 +55,7 @@ class DaftarPenggunaController extends Controller
                 'name'  => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
+                'updated_at' => now(),
             ];
 
             // Check if a new password has been provided
@@ -66,6 +71,15 @@ class DaftarPenggunaController extends Controller
                 Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
             }
 
+            // Check if the Klien exists and update the no_tel and email
+            if ($klien) {
+                $klien->update([
+                    'no_tel' => $request->no_tel,
+                    'emel' => $request->email,
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->route('daftar-klien')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
         } 
 
@@ -75,9 +89,10 @@ class DaftarPenggunaController extends Controller
     // PENTADBIR
     public function senaraiPengguna()
     {
-        $klien = User::where('tahap_pengguna', '=', '2')
-                 ->orderBy('updated_at', 'desc')
-                 ->get();
+        $klien = User::leftJoin('klien', 'users.no_kp', '=', 'klien.no_kp')
+                    ->where('tahap_pengguna', '=', '2')
+                    ->orderBy('users.updated_at', 'desc')
+                    ->get();
 
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                     ->whereIn('tahap_pengguna', [3, 4, 5])
@@ -100,13 +115,17 @@ class DaftarPenggunaController extends Controller
         // Retrieve the user by their ID
         $user = User::find($request->id);
 
+        // Retrieve the corresponding Klien record by no_kp
+        $klien = Klien::where('no_kp', $user->no_kp)->first();
+
         if ($user) 
         {
-            // Prepare the data for update
+            // Prepare the data for updating the User
             $updateData = [
-                'name'  => strtoupper($request->name),
+                'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
+                'updated_at' => now(),
             ];
 
             // Check if a new password has been provided
@@ -114,7 +133,7 @@ class DaftarPenggunaController extends Controller
                 $updateData['password'] = Hash::make($request->password);
             }
 
-            // Update user details
+            // Update User details
             $user->update($updateData);
 
             // Send email notification if password was updated and user has an email
@@ -122,11 +141,54 @@ class DaftarPenggunaController extends Controller
                 Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
             }
 
+            // Check if the Klien exists and update the no_tel and email
+            if ($klien) {
+                $klien->update([
+                    'no_tel' => $request->no_tel,
+                    'emel' => $request->email,
+                    'updated_at' => now(),
+                ]);
+            }
+
             return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
-        } 
+        }
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
     }
+
+    // public function kemaskiniKlien(Request $request)
+    // {
+    //     // Retrieve the user by their ID
+    //     $user = User::find($request->id);
+
+    //     if ($user) 
+    //     {
+    //         // Prepare the data for update
+    //         $updateData = [
+    //             'name'  => strtoupper($request->name),
+    //             'no_kp' => $request->no_kp,
+    //             'email' => $request->email,
+    //             'updated_at' => now(),
+    //         ];
+
+    //         // Check if a new password has been provided
+    //         if ($request->filled('password')) {
+    //             $updateData['password'] = Hash::make($request->password);
+    //         }
+
+    //         // Update user details
+    //         $user->update($updateData);
+
+    //         // Send email notification if password was updated and user has an email
+    //         if ($request->filled('password') && $user->email) {
+    //             Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+    //         }
+
+    //         return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
+    //     } 
+
+    //     return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
+    // }
 
     public function kemaskiniPegawai(Request $request)
     {
@@ -145,6 +207,7 @@ class DaftarPenggunaController extends Controller
                 'no_kp' => $request->no_kp,
                 'email' => $email,
                 'tahap_pengguna' => $request->tahap_pengguna,
+                'updated_at' => now(),
             ];
 
             // Check if a new password has been provided
@@ -170,6 +233,7 @@ class DaftarPenggunaController extends Controller
                 'peranan' => $request->tahap_pengguna,
                 'negeri_bertugas' => $request->negeri_bertugas,
                 'daerah_bertugas' => $request->daerah_bertugas,
+                'updated_at' => now(),
             ];
 
             // Update pegawai details
@@ -183,9 +247,6 @@ class DaftarPenggunaController extends Controller
 
     public function permohonanPegawai(Request $request, $id)
     {
-        // Combine email name and domain
-        // $email = $request->emailPegawai . '@adk.gov.my';
-
         // Fetch keputusan permohonan
         $keputusan = $request->input('status');
 
@@ -205,6 +266,7 @@ class DaftarPenggunaController extends Controller
             $user->password = bcrypt($password);
             $user->tahap_pengguna = $request->peranan_pengguna;
             $user->status = '0';
+            $user->updated_at = now();
             $user->save();
 
             // Store additional staff information in pegawai table
@@ -218,10 +280,12 @@ class DaftarPenggunaController extends Controller
             $pegawai->peranan = $request->peranan_pengguna;
             $pegawai->negeri_bertugas = $request->negeri_bertugas;
             $pegawai->daerah_bertugas = $request->daerah_bertugas;
+            $pegawai->updated_at = now();
             $pegawai->save();
 
             // Update the status in pegawai_mohon_daftar table
             $pegawaiBaharu->status = 'Lulus';
+            $pegawaiBaharu->updated_at = now();
             $pegawaiBaharu->save();
 
             // Generate the email verification URL
@@ -243,6 +307,7 @@ class DaftarPenggunaController extends Controller
         elseif ($keputusan == 'Ditolak') {
             // Update the status in pegawai_mohon_daftar table
             $pegawaiBaharu->status = 'Ditolak';
+            $pegawaiBaharu->updated_at = now();
             $pegawaiBaharu->save();
 
             $defaultEmail = 'fateennashuha9@gmail.com';

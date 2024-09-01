@@ -17,7 +17,7 @@
         <form method="POST" action="{{ route('register') }}" id="pegawai_mohon_daftar_form">
             @csrf
             <!-- Nama -->
-            <div class="mt-4">
+            <div class="mt-2">
                 <x-input-label for="nama" :value="__('Nama Penuh')" :required="true" />
                 <input type="text" class="form-control w-full" placeholder="" id="nama" name="nama" style="text-transform: uppercase;" required/>
                 <x-input-error :messages="$errors->get('nama')" class="mt-2" />
@@ -49,7 +49,7 @@
     
             {{-- No Telefon --}}
             <div class="mt-4">
-                <x-input-label for="no_tel" :value="__('Nombor Telefon')" :required="true"/>
+                <x-input-label for="no_tel" :value="__('No. Telefon')" :required="true"/>
                 {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                         <span class="path1"></span>

@@ -104,23 +104,28 @@
                                 <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                     <th class="min-w-250px">Nama</th>
                                     <th class="min-w-50px">No. Kad Pengenalan</th>
-                                    <th class="min-w-50px">Emel</th>
+                                    <th class="min-w-50px">E-mel</th>
                                     <th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
                                     <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
                                 </tr>
                             </thead>
+
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach ($klien as $user1)
                                     @php
                                         $peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-                                        $tarikh_daftar1 = Carbon::parse($user1->created_at)->format('d-m-Y');
+                                        $tarikh_daftar1 = Carbon::parse($user1->updated_at)->format('d-m-Y');
                                     @endphp
 
                                     <tr>
                                         <td>{{ $user1->name }}</td>
                                         <td>{{ $user1->no_kp }}</td>
                                         <td>{{ $user1->email }}</td>
-                                        <td style="text-align: center;">{{ $tarikh_daftar1}}</td>
+                                        @if ( $user1->updated_at !== null)
+												<td style="text-align: center;">{{ $tarikh_daftar1}}</td>
+											@else
+												<td style="text-align: center;">N/A</td>
+											@endif
                                         <td style="text-align: center;">
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
@@ -164,30 +169,48 @@
                                                                 <!--begin::Input group-->
                                                                 <div class="fv-row mb-7">
                                                                     <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">Nama</label>
+                                                                    <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" />
+                                                                    <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" readonly/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
                                                                 <!--begin::Input group-->
                                                                 <div class="fv-row mb-7">
                                                                     <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">Emel</label>
+                                                                    <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}" readonly/>
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
+                                                                <!--begin::Input group-->
+																	<div class="fv-row mb-7">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2 required">No. Telefon
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user1->no_tel}}" required/>
+																		<!--end::Input-->
+																	</div>
+																<!--end::Input group-->
+                                                                <!--begin::Input group-->
+                                                                <div class="fv-row mb-7">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold mb-2">E-mel</label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
                                                                     <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user1->email}}" />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">No. Kad Pengenalan</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}"/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
