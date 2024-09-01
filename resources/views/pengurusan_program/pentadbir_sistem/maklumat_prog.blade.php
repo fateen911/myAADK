@@ -44,7 +44,7 @@
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Program</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Aktiviti</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -53,7 +53,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Daftar Program</li>
+            <li class="breadcrumb-item text-muted">Daftar Aktiviti</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -187,7 +187,7 @@
                         <!--begin::Card header-->
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>Maklumat Program</h2>
+                                <h2>Maklumat Aktiviti</h2>
                             </div>
                             <div class="card-title">
                                 <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
@@ -203,7 +203,7 @@
                         <div class="card-body pt-0">
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Nama Program:</label>
+                                <label class="form-label">Nama Aktiviti:</label>
                                 <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->nama}}</p>
                             </div>
                             <!--end::Input group-->
@@ -217,7 +217,7 @@
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Objektif Program:</label>
+                                <label class="form-label">Objektif Aktiviti:</label>
                                 <div class="text-bg-light p-3 rounded border-bottom border-secondary">{!!$program->objektif!!}</div>
                             </div>
                             <!--end::Input group-->
@@ -243,14 +243,14 @@
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Tempat Program:</label>
+                                <label class="form-label">Tempat Aktiviti:</label>
                                 <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->tempat}}</p>
                             </div>
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Penganjur Program:</label>
+                                <label class="form-label">Penganjur Aktiviti:</label>
                                 <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">
                                     @if($program->penganjur!=null)
                                         {{$program->penganjur}}
@@ -741,7 +741,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN AKTIVITI</h5>
                     <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="bi bi-x-lg"></i>
                     </button>
@@ -760,7 +760,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN AKTIVITI</h5>
                     <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="bi bi-x-lg"></i>
                     </button>
@@ -779,7 +779,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN AKTIVITI</h5>
                     <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="bi bi-x-lg"></i>
                     </button>

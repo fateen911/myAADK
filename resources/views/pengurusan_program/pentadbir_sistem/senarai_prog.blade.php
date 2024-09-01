@@ -40,7 +40,7 @@
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Program</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Aktiviti</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -49,7 +49,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Senarai Program</li>
+            <li class="breadcrumb-item text-muted">Senarai Aktiviti</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -77,20 +77,20 @@
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
                         <div class="header p-0 m-0">
-                            <h2>Senarai Program<br><small>Sila klik pada butang "Tambah Program" untuk mendaftarkan program baharu.</small></h2>
+                            <h2>Senarai Aktiviti<br><small>Sila klik pada butang "Tambah Aktiviti" untuk mendaftarkan aktiviti baharu.</small></h2>
                         </div>
                         <input type="hidden" name="pegawai_id" id="pegawaiId" value="{{$user_id}}">
                         <!--begin::Card toolbar-->
                         <div class="card-toolbar">
                             <!--begin::Toolbar-->
                             <div class="d-flex justify-content-end gap-3" data-kt-customer-table-toolbar="base">
-                                <!--begin::Add program-->
+                                <!--begin::Add Aktiviti-->
                                 <a href={{url('/pengurusan-program/pentadbir-sistem/daftar-prog')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
-                                        <i class="bi bi-plus-circle"></i> Program &nbsp;
+                                        <i class="bi bi-plus-circle"></i> Aktiviti &nbsp;
                                     </button>
                                 </a>
-                                <!--end::Add program-->
+                                <!--end::Add Aktiviti-->
                                 <!--begin::Add category-->
                                 <a href={{url('/pengurusan-program/pentadbir-sistem/tambah-kategori')}}>
                                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
@@ -112,7 +112,7 @@
                             <thead>
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
                                 <th class="min-w-40px">ID</th>
-                                <th class="min-w-175px">Nama Program</th>
+                                <th class="min-w-175px">Nama Aktiviti</th>
                                 <th class="min-w-200px">Kategori</th>
                                 <th class="min-w-100px">Status</th>
                                 <th class="min-w-50px">Hebahan</th>
@@ -146,7 +146,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN PROGRAM</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">HEBAHAN AKTIVITI</h5>
                     <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
                         <i aria-hidden="true" class="bi bi-x-lg"></i>
                     </button>

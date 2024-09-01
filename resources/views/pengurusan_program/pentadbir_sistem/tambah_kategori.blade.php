@@ -40,7 +40,7 @@
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Program</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Aktiviti</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -49,7 +49,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Daftar Program</li>
+            <li class="breadcrumb-item text-muted">Tambah Kategori</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -71,7 +71,7 @@
                     <!--begin::Card header-->
                     <div class="card-header">
                         <div class="card-title">
-                            <h2>Kategori Program</h2>
+                            <h2>Kategori Aktiviti</h2>
                         </div>
                     </div>
                     <!--end::Card header-->
