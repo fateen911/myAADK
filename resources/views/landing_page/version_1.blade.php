@@ -136,10 +136,15 @@ License: For each use you must have a valid license purchased only from above li
                     <!--end::Title-->
                     <!--begin::Action-->
                     <h3 class="color-gray-landing">
-                        Menyokong proses kemajuan kepulihan<br>
-                        dan kecenderungan penagihan relaps<br>
-                        Klien Pasca RPDK secara berterusan<br>
+                        <p><i>"Pemulihan dengan Tujuan, Hidup dengan Makna"</i></p>
                     </h3>
+                    <h3 class="color-gray-landing fw-medium">
+                        Setiap langkah pemulihan diambil dengan tujuan yang jelas,<br>
+                        membawa anda ke arah kehidupan yang lebih bermakna dan <br>
+                        penuh harapan.<br>
+                    </h3>
+
+
                     <!--end::Action-->
                     <div class="d-flex gap-4 my-20">
                         <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-dadah-terkawal-2025.png" class="logo-default h-10px h-lg-30px"/>
@@ -225,7 +230,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--end::Link-->
                                 <!--begin::Link-->
                                 <a href="https://x.com/aadkmalaysia" class="mb-6">
-                                    <img src="/assets/media/svg/brand-logos/twitter-x-blue-logo.svg" class="h-20px me-2" alt="" />
+                                    <img src="/assets/media/logos/twitter-x-black.png" class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
                                 </a>
                                 <!--end::Link-->
