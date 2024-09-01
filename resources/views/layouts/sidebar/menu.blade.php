@@ -255,7 +255,7 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Program</span>
+                            <span class="menu-title">Aktiviti</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -467,7 +467,7 @@
                     </div>
 
                     @php
-                        // Get the client's ID 
+                        // Get the client's ID
                         $clientId = DB::table('klien')->where('no_kp', Auth::user()->no_kp)->value('id');
 
                         // Get the tkh_tamat_pengawasan date from RawatanKlien
@@ -674,7 +674,7 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Program</span>
+                            <span class="menu-title">Aktiviti</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -908,7 +908,7 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Program</span>
+                            <span class="menu-title">Aktiviti</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -1172,7 +1172,7 @@
                                     <span class="path5"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Program</span>
+                            <span class="menu-title">Aktiviti</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
