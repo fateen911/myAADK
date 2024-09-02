@@ -156,40 +156,6 @@ class DaftarPenggunaController extends Controller
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
     }
 
-    // public function kemaskiniKlien(Request $request)
-    // {
-    //     // Retrieve the user by their ID
-    //     $user = User::find($request->id);
-
-    //     if ($user) 
-    //     {
-    //         // Prepare the data for update
-    //         $updateData = [
-    //             'name'  => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $request->email,
-    //             'updated_at' => now(),
-    //         ];
-
-    //         // Check if a new password has been provided
-    //         if ($request->filled('password')) {
-    //             $updateData['password'] = Hash::make($request->password);
-    //         }
-
-    //         // Update user details
-    //         $user->update($updateData);
-
-    //         // Send email notification if password was updated and user has an email
-    //         if ($request->filled('password') && $user->email) {
-    //             Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
-    //         }
-
-    //         return redirect()->route('senarai-pengguna')->with('message', 'Data pengguna ' . $request->name . ' telah dikemaskini.');
-    //     } 
-
-    //     return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
-    // }
-
     public function kemaskiniPegawai(Request $request)
     {
         // Combine email name and domain
@@ -247,6 +213,18 @@ class DaftarPenggunaController extends Controller
 
     public function permohonanPegawai(Request $request, $id)
     {
+        // Add server-side validation for input fields
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_kp' => 'required|digits:12',  // Must be exactly 12 digits
+            'emelPegawai' => 'required|email',
+            'no_tel' => 'required|digits_between:10,11',  // Must be between 10 to 11 digits
+            'jawatan' => 'required|string',
+            'peranan_pengguna' => 'required',
+            'negeri_bertugas' => 'nullable|string', // If this can be optional, use nullable
+            'daerah_bertugas' => 'nullable|string', // If this can be optional, use nullable
+        ]);
+
         // Fetch keputusan permohonan
         $keputusan = $request->input('status');
 
@@ -260,11 +238,11 @@ class DaftarPenggunaController extends Controller
 
             // Store user information in users table
             $user = new User();
-            $user->name = $request->nama;
-            $user->no_kp = $request->no_kp;
-            $user->email = $request->emelPegawai;
+            $user->name = $validatedData['nama'];
+            $user->no_kp = $validatedData['no_kp'];
+            $user->email = $validatedData['emelPegawai'];
             $user->password = bcrypt($password);
-            $user->tahap_pengguna = $request->peranan_pengguna;
+            $user->tahap_pengguna = $validatedData['peranan_pengguna'];
             $user->status = '0';
             $user->updated_at = now();
             $user->save();
@@ -272,14 +250,14 @@ class DaftarPenggunaController extends Controller
             // Store additional staff information in pegawai table
             $pegawai = new Pegawai();
             $pegawai->users_id = $user->id;
-            $pegawai->no_kp = $request->no_kp;
-            $pegawai->nama = $request->nama;
-            $pegawai->emel = $request->emelPegawai;            ;
-            $pegawai->no_tel = $request->no_tel;
-            $pegawai->jawatan = $request->jawatan;
-            $pegawai->peranan = $request->peranan_pengguna;
-            $pegawai->negeri_bertugas = $request->negeri_bertugas;
-            $pegawai->daerah_bertugas = $request->daerah_bertugas;
+            $pegawai->no_kp = $validatedData['no_kp'];
+            $pegawai->nama = $validatedData['nama'];
+            $pegawai->emel = $validatedData['emelPegawai'];
+            $pegawai->no_tel = $validatedData['no_tel'];
+            $pegawai->jawatan = $validatedData['jawatan'];
+            $pegawai->peranan = $validatedData['peranan_pengguna'];
+            $pegawai->negeri_bertugas = $validatedData['negeri_bertugas'];
+            $pegawai->daerah_bertugas = $validatedData['daerah_bertugas'];
             $pegawai->updated_at = now();
             $pegawai->save();
 
@@ -367,10 +345,10 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            // $defaultEmail = 'fateenashuha2000@gmail.com';
+            $defaultEmail = 'fateenashuha2000@gmail.com';
 
-            Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp, $verificationUrl));
-            // Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
+            // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp, $verificationUrl));
+            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
 
             return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
         } 

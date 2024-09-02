@@ -123,7 +123,7 @@
 										<th class="min-w-125px">No. Kad Pengenalan</th>
 										<th class="min-w-125px">E-mel</th>
 										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-150px">Negeri (Daerah)</th>
+										<th class="min-w-150px">Negeri Bertugas (Daerah Bertugas)</th>
 										<th class="min-w-50px">Kelulusan</th>
 									</tr>
 								</thead>
@@ -196,7 +196,7 @@
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" required/>
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" style="text-transform: uppercase;" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -214,7 +214,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user3->no_kp}}" required/>
+																		<input type="text" class="form-control form-control-solid" id="no_kp_pegawai_mohon" name="no_kp" value="{{$user3->no_kp}}" inputmode="numeric" maxlength="12" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -246,7 +246,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user3->no_tel}}" required/>
+																		<input type="text" class="form-control form-control-solid" id="no_tel_pegawai_mohon" name="no_tel" value="{{$user3->no_tel}}" inputmode="numeric" maxlength="11" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -432,7 +432,7 @@
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user2->name}}" required/>
+																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user2->name}}" style="text-transform: uppercase;" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -450,7 +450,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" name="no_kp" value="{{$user2->no_kp}}" required/>
+																		<input type="text" class="form-control form-control-solid" id="no_kp_pegawai" name="no_kp" value="{{$user2->no_kp}}" inputmode="numeric" maxlength="12" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -482,7 +482,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user2->no_tel}}" required/>
+																		<input type="text" class="form-control form-control-solid" id="no_tel_pegawai" name="no_tel" value="{{$user2->no_tel}}" inputmode="numeric" maxlength="11" required/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -683,7 +683,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}" readonly/>
+																		<input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -701,7 +701,7 @@
 																		</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user1->no_tel}}"/>
+																		<input type="text" class="form-control form-control-solid" id="no_tel_klien" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
 																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
@@ -796,7 +796,7 @@
 											<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" class="form-control form-control-solid" placeholder="" id="name" name="name" required/>
+											<input type="text" class="form-control form-control-solid" placeholder="" id="name" name="name" style="text-transform: uppercase;" required/>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -814,7 +814,7 @@
 											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="no_kp" name="no_kp" required/>
+											<input type="number" class="form-control form-control-solid" placeholder="" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -835,7 +835,7 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<!--begin::Label-->
-											<label class="fs-6 fw-semibold mb-2">No. Telefon
+											<label class="fs-6 fw-semibold mb-2 required">No. Telefon
 												<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
 													<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
 														<span class="path1"></span>
@@ -846,7 +846,7 @@
 											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" maxlength="11" class="form-control form-control-solid" placeholder="" id="no_tel" name="no_tel" required/>
+											<input type="number" class="form-control form-control-solid" placeholder="" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -953,12 +953,6 @@
 			}
 		});
     </script>
-
-    <script>
-		$(document).ready(function() {
-			$('.js-example-basic-single').select2();
-			});
-	</script>
 	
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1106,6 +1100,59 @@
 				if (emailInput.includes('@')) {
 					alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
 					event.preventDefault();
+				}
+			});
+		});
+	</script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Select all elements with name 'no_kp' and 'no_tel'
+			const noKpElements = document.querySelectorAll('[name="no_kp"]');
+			const noTelElements = document.querySelectorAll('[name="no_tel"]');
+
+			// Restrict input to digits for 'no_kp' elements
+			noKpElements.forEach(function(element) {
+				element.addEventListener('input', function (e) {
+					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+					if (this.value.length > 12) {                // Limit to 12 digits
+						this.value = this.value.slice(0, 12);
+					}
+				});
+			});
+
+			// Restrict input to digits for 'no_tel' elements
+			noTelElements.forEach(function(element) {
+				element.addEventListener('input', function (e) {
+					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+					if (this.value.length > 11) {                // Limit to 11 digits
+						this.value = this.value.slice(0, 11);
+					}
+				});
+			});
+
+			// Add event listener to form submission
+			document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
+				let valid = true;
+
+				// Validate each 'no_kp' field
+				noKpElements.forEach(function(element) {
+					if (element.value.length !== 12) {
+						alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
+						valid = false;
+					}
+				});
+
+				// Validate each 'no_tel' field
+				noTelElements.forEach(function(element) {
+					if (element.value.length < 10 || element.value.length > 11) {
+						alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+						valid = false;
+					}
+				});
+
+				if (!valid) {
+					e.preventDefault();  // Prevent form submission if any validation fails
 				}
 			});
 		});

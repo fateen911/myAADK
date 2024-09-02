@@ -26,14 +26,7 @@
             {{-- No Kad Pengenalan --}}
             <div class="mt-4">
                 <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" :required="true"/>
-                {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
-                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                    </i>
-                </span> --}}
-                <input type="number" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" maxlength="12" required/>
+                <input type="text" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" inputmode="numeric" maxlength="12" required/>
                 <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
             </div>
       
@@ -50,14 +43,7 @@
             {{-- No Telefon --}}
             <div class="mt-4">
                 <x-input-label for="no_tel" :value="__('No. Telefon')" :required="true"/>
-                {{-- <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                    </i>
-                </span> --}}
-                <input type="number" class="form-control w-full" placeholder="0109000000" id="no_tel" name="no_tel" inputmode="numeric" pattern="\d{10,11}" maxlength="11" required />
+                <input type="text" class="form-control w-full" placeholder="0109000000" id="no_tel" name="no_tel" inputmode="numeric" maxlength="11" required />
                 <x-input-error :messages="$errors->get('no_tel')" class="mt-2" />
             </div>
     
@@ -87,7 +73,7 @@
     
             <!-- Negeri Bertugas -->
             <div class="mt-4" id="mohon_negeri_field">
-                <x-input-label for="negeri_bertugas" :value="__('Negeri Bertugas')" />
+                <x-input-label for="negeri_bertugas" :value="__('Negeri Bertugas')" :required="true"/>
                 <select id="negeri_bertugas" name="negeri_bertugas" class="form-control w-full">
                     <option value="">{{ __('Pilih Negeri') }}</option>
                     @foreach ($negeri as $item1)
@@ -99,7 +85,7 @@
     
             <!-- Daerah Bertugas -->
             <div class="mt-4" id="mohon_daerah_field">
-                <x-input-label for="daerah_bertugas" :value="__('Daerah Bertugas')" />
+                <x-input-label for="daerah_bertugas" :value="__('Daerah Bertugas')" :required="true"/>
                 <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full">
                     <option value="">{{ __('Select Daerah') }}</option>
                     @foreach ($daerah as $item2)
@@ -207,32 +193,42 @@
         </script>
 
         <script>
-            document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
-                const noKp = document.getElementById('no_kp').value;
-                const noTel = document.getElementById('no_tel').value;
-                
-                // Check if no_kp is exactly 12 digits
-                if (!/^\d{12}$/.test(noKp)) {
-                    alert('No Kad Pengenalan mesti tepat 12 digit.');
-                    e.preventDefault();
-                }
-            
-                // Check if no_tel is between 10 to 11 digits
-                if (!/^\d{10,11}$/.test(noTel)) {
-                    alert('Nombor Telefon mesti antara 10 hingga 11 digit.');
-                    e.preventDefault();
-                }
-            });
-        </script>  
-        
-        {{-- <script>
-            // Initialize Bootstrap tooltips
-            document.addEventListener('DOMContentLoaded', function () {
-                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
+            document.addEventListener('DOMContentLoaded', function() {
+                // Restrict input to digits by listening for input event
+                document.getElementById('no_kp').addEventListener('input', function (e) {
+                    this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                    if (this.value.length > 12) {                // Limit to 12 digits
+                        this.value = this.value.slice(0, 12);
+                    }
+                });
+
+                document.getElementById('no_tel').addEventListener('input', function (e) {
+                    this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                    if (this.value.length > 11) {                // Limit to 11 digits
+                        this.value = this.value.slice(0, 11);
+                    }
+                });
+
+                // Add event listener to form submission
+                document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
+                    const noKp = document.getElementById('no_kp').value;
+                    const noTel = document.getElementById('no_tel').value;
+                    
+                    // Check if no_kp is exactly 12 digits
+                    if (noKp.length !== 12) {
+                        alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
+                        e.preventDefault();  // Prevent form submission
+                        return false;
+                    }
+
+                    // Check if no_tel is between 10 to 11 digits
+                    if (noTel.length < 10 || noTel.length > 11) {
+                        alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+                        e.preventDefault();  // Prevent form submission
+                        return false;
+                    }
                 });
             });
-        </script> --}}
+        </script>
     </body>
 </x-guest-layout>

@@ -109,7 +109,6 @@
                                     <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
                                 </tr>
                             </thead>
-
                             <tbody class="fw-semibold text-gray-600">
                                 @foreach ($klien as $user1)
                                     @php
@@ -122,10 +121,10 @@
                                         <td>{{ $user1->no_kp }}</td>
                                         <td>{{ $user1->email }}</td>
                                         @if ( $user1->updated_at !== null)
-												<td style="text-align: center;">{{ $tarikh_daftar1}}</td>
-											@else
-												<td style="text-align: center;">N/A</td>
-											@endif
+                                            <td style="text-align: center;">{{ $tarikh_daftar1}}</td>
+                                        @else
+                                            <td style="text-align: center;">N/A</td>
+                                        @endif
                                         <td style="text-align: center;">
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
@@ -167,7 +166,7 @@
                                                             <input type="hidden" name="id" value="{{ $user1->id }}">
                                                             <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
                                                                 <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
+                                                                <div class="fv-row mb-5">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
                                                                     <!--end::Label-->
@@ -177,35 +176,35 @@
                                                                 </div>
                                                                 <!--end::Input group-->
                                                                 <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
+                                                                <div class="fv-row mb-5">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    <input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" name="no_kp" value="{{$user1->no_kp}}" readonly/>
+                                                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
                                                                 <!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
-																		<label class="fs-6 fw-semibold mb-2 required">No. Telefon
-																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																					<span class="path3"></span>
-																				</i>
-																			</span>
-																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" maxlength="11" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user1->no_tel}}" required/>
-																		<!--end::Input-->
-																	</div>
-																<!--end::Input group-->
+                                                                <div class="fv-row mb-5">
+                                                                    <!--begin::Label-->
+                                                                    <label class="fs-6 fw-semibold mb-2">No. Telefon
+                                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                                <span class="path1"></span>
+                                                                                <span class="path2"></span>
+                                                                                <span class="path3"></span>
+                                                                            </i>
+                                                                        </span>
+                                                                    </label>
+                                                                    <!--end::Label-->
+                                                                    <!--begin::Input-->
+                                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
+                                                                    <!--end::Input-->
+                                                                </div>
+                                                                <!--end::Input group-->
                                                                 <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
+                                                                <div class="fv-row mb-5">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold mb-2">E-mel</label>
                                                                     <!--end::Label-->
@@ -215,7 +214,7 @@
                                                                 </div>
                                                                 <!--end::Input group-->
                                                                 <!--begin::Input group-->
-                                                                <div class="fv-row mb-7">
+                                                                <div class="fv-row mb-5">
                                                                     <!--begin::Label-->
                                                                     <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
                                                                     <!--end::Label-->
@@ -280,12 +279,6 @@
 			}
 		});
     </script>
-
-    <script>
-		$(document).ready(function() {
-			$('.js-example-basic-single').select2();
-			});
-	</script>
 	
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -339,4 +332,28 @@
 			document.getElementById(inputId).value = password;
 		}
 	</script>	
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Restrict input to digits by listening for input event
+            document.getElementById('no_tel').addEventListener('input', function (e) {
+                this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                if (this.value.length > 11) {                // Limit to 11 digits
+                    this.value = this.value.slice(0, 11);
+                }
+            });
+
+            // Add event listener to form submission
+            document.getElementById('modal_kemaskini_klien_form').addEventListener('submit', function(e) {
+                const noTel = document.getElementById('no_tel').value;
+
+                // Check if no_tel is between 10 to 11 digits
+                if (noTel.length < 10 || noTel.length > 11) {
+                    alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+                    e.preventDefault();  // Prevent form submission
+                    return false;
+                }
+            });
+        });
+    </script>
 @endsection
