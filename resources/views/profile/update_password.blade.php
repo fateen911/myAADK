@@ -197,17 +197,17 @@
             @if(session('passwordSame'))
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Sila Semak Kata Laluan Baharu!',
+                    title: 'Semak Kata Laluan Baharu!',
                     text: '{{ session('passwordSame') }}',
                     confirmButtonText: 'OK'
                 });
             @endif
         
-            @if(session('passwordUpdateError'))
+            @if(session('passwordError'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{{ session('passwordUpdateError') }}',
+                    text: '{{ session('passwordError') }}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -234,9 +234,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
-            var minLength = tahapPengguna === 2 ? 6 : 8;
+            var minLength = tahapPengguna === 2 ? 6 : 12;
 
-            var lengthRequirementText = tahapPengguna === 2 ? "Minimum 6 aksara" : "Minimum 8 aksara";
+            var lengthRequirementText = tahapPengguna === 2 ? "Minimum 6 aksara" : "Minimum 12 aksara";
             document.getElementById('length-requirement').innerHTML = `<i class="fa fa-circle-check text-muted"></i> ${lengthRequirementText}`;
 
             var passwordInput = document.getElementById('newPassword');

@@ -2,35 +2,43 @@
 
 @section('content')
     <style>
-        .position-relative {
+        .input-group {
             position: relative;
         }
 
-        .toggle-password {
+        .input-group .toggle-password {
             position: absolute;
             top: 50%;
-            right: 15px;
+            right: 15px; /* Adjust as needed */
             transform: translateY(-50%);
             cursor: pointer;
+            z-index: 10; /* Ensure it's higher than other elements */
         }
 
-        .eye-icon {
-            font-size: 1.25rem;
+        .input-group .eye-icon {
+            font-size: 1rem;
             color: #6c757d;
-            padding-right: 10px;
+        }
+
+        .input-group input {
+            padding-right: 40px; /* Space for the icon */
+        }
+
+        .input-group input:focus + .toggle-password {
+            z-index: 11; /* Ensure the icon remains on top even when typing */
         }
     </style>
 
     <!--begin::Page title-->
-    {{-- <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+    <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Account Settings</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Akaun Pengguna</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Home</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Menu</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -39,15 +47,15 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Account</li>
+            <li class="breadcrumb-item text-muted">Profil Pengguna</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
-    </div> --}}
+    </div>
     <!--end::Page title-->
     
     <!--begin::Content-->
-    <div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content" class="app-content flex-column-fluid pt-5">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Basic info-->
@@ -137,18 +145,25 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">No Kad Pengenalan</label>
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">No. Kad Pengenalan
+                                    <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+                                        <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                        </i>
+                                    </span> 
+                                </label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="no_kp" class="form-control form-control-lg form-control-solid" placeholder="No Kad Pengenalan" value="{{ $user->no_kp }}"/>
+                                    <input type="number" name="no_kp" class="form-control form-control-lg form-control-solid" placeholder="No Kad Pengenalan" value="{{ $user->no_kp }}" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" maxlength="12" required/>
                                 </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
-
                             <!--begin::Input group-->
-                            <div class="row mb-6">
+                            <div class="row">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">E-mel</label>
                                 <!--end::Label-->
@@ -172,11 +187,10 @@
                 </div>
                 <!--end::Content-->
             </div>
-            <!--end::Basic info-->
-            
+            <!--end::Basic info-->  
 
             <!--begin::Sign-in Method-->
-            <div class="card mb-5 mb-xl-10">
+            <div class="card mb-xl-10">
                 <!--begin::Card header-->
                 <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
                     <div class="card-title m-0">
@@ -195,19 +209,21 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Semasa</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
+                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
                                             <span class="path3"></span>
                                         </i>
-                                    </span>
+                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Terkini" id="currentPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('currentPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
+                                    <div class="input-group">
+                                        <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Semasa" id="currentPassword" />
+                                        <span class="toggle-password" onclick="togglePassword('currentPassword')">
+                                            <i class="fa fa-eye-slash eye-icon"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -215,39 +231,69 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
+                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
                                             <span class="path3"></span>
                                         </i>
-                                    </span>
+                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu" id="newPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('newPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
+                                    <div class="input-group">
+                                        <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu" id="newPassword"/>
+                                        <span class="toggle-password" onclick="togglePassword('newPassword')">
+                                            <i class="fa fa-eye-slash eye-icon"></i>
+                                        </span>
+                                    </div>
+
+                                    <!-- Password Requirement List -->
+                                    <ul id="password-requirements" class="mt-2 list-unstyled">
+                                        <li id="length-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Minimum aksara
+                                        </li>
+                                        <li id="lowercase-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Sekurang-kurangnya mempunyai satu huruf kecil
+                                        </li>
+                                        <li id="uppercase-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Sekurang-kurangnya mempunyai satu huruf besar
+                                        </li>
+                                        <li id="number-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Sekurang-kurangnya mempunyai satu nombor
+                                        </li>
+                                        <li id="special-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Sekurang-kurangnya mempunyai satu simbol
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
 
                             <!-- Confirm New Password -->
-                            <div class="row mb-6">
+                            <div class="row">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Sahkan Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
+                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
                                         <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
                                             <span class="path1"></span>
                                             <span class="path2"></span>
                                             <span class="path3"></span>
                                         </i>
-                                    </span>
+                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('confirmPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
+                                    <div class="input-group">
+                                        <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
+                                        <span class="toggle-password" onclick="togglePassword('confirmPassword')">
+                                            <i class="fa fa-eye-slash eye-icon"></i>
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Confirm Password Match Requirement -->
+                                    <ul id="confirm-password-requirements" class="mt-2 list-unstyled">
+                                        <li id="match-requirement" class="text-muted">
+                                            <i class="fa fa-circle-check"></i> Sahkan Kata Laluan Baharu mesti sama dengan Kata Laluan Baharu
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +309,6 @@
                 <!--end::Content-->
             </div>
             <!--end::Sign-in Method-->
-
 
             <!--begin::Deactivate Account-->
             {{-- <div class="card">
@@ -329,22 +374,6 @@
 
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const icon = input.nextElementSibling.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            }
-        }
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -367,10 +396,114 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+
+            @if(session('passwordSame'))
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Semak Kata Laluan Baharu!',
+                    text: '{{ session('passwordSame') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        
+            @if(session('passwordError'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{{ session('passwordError') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 
     <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.parentElement.querySelector('.toggle-password i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
+            var minLength = tahapPengguna === 2 ? 6 : 12;
+
+            var lengthRequirementText = tahapPengguna === 2 ? "Minimum 6 aksara" : "Minimum 12 aksara";
+            document.getElementById('length-requirement').innerHTML = `<i class="fa fa-circle-check text-muted"></i> ${lengthRequirementText}`;
+
+            var passwordInput = document.getElementById('newPassword');
+            var confirmPasswordInput = document.getElementById('confirmPassword');
+            var matchRequirementItem = document.getElementById('match-requirement');
+
+            function validatePassword() {
+                var password = passwordInput.value;
+                var confirmPassword = confirmPasswordInput.value;
+
+                var isValidLength = password.length >= minLength;
+                var hasLowercase = /[a-z]/.test(password);
+                var hasUppercase = /[A-Z]/.test(password);
+                var hasNumber = /\d/.test(password);
+                var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                updateCriteria('length-requirement', isValidLength);
+                updateCriteria('lowercase-requirement', hasLowercase);
+                updateCriteria('uppercase-requirement', hasUppercase);
+                updateCriteria('number-requirement', hasNumber);
+                updateCriteria('special-requirement', hasSpecialChar);
+
+                if (confirmPassword !== "") {
+                    var passwordsMatch = password === confirmPassword;
+                    updateCriteria('match-requirement', passwordsMatch);
+                } 
+                else {
+                    resetCriteria('match-requirement');  // Reset the match requirement if confirmPassword is empty
+                }
+            }
+
+            function updateCriteria(elementId, isValid) {
+                var element = document.getElementById(elementId);
+                var icon = element.querySelector('i');
+
+                if (isValid) {
+                    icon.classList.remove('fa-circle-o', 'text-muted', 'text-danger');
+                    icon.classList.add('fa-circle-check', 'text-success');
+                    element.classList.remove('text-muted', 'text-danger');
+                    element.classList.add('text-success');
+                } else {
+                    icon.classList.remove('fa-circle-check', 'text-success');
+                    icon.classList.add('fa-circle-o', 'text-danger');
+                    element.classList.remove('text-muted', 'text-success');
+                    element.classList.add('text-danger');
+                }
+            }
+
+            function resetCriteria(elementId) {
+                var element = document.getElementById(elementId);
+                var icon = element.querySelector('i');
+
+                icon.classList.remove('fa-circle-check', 'text-success', 'text-danger');
+                icon.classList.add('fa-circle-check', 'text-muted');
+                element.classList.remove('text-success', 'text-danger');
+                element.classList.add('text-muted');
+            }
+
+            passwordInput.addEventListener('input', validatePassword);
+            confirmPasswordInput.addEventListener('input', validatePassword);
+        });
+    </script>
+
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
             var tooltips = [
@@ -395,5 +528,5 @@
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
         });
-    </script>
+    </script> --}}
 @endsection
