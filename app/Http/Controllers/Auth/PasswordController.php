@@ -26,8 +26,7 @@ class PasswordController extends Controller
                 ->letters()
                 ->numbers()
                 ->symbols();
-        } 
-        else {
+        } else {
             $passwordRules[] = Password::min(12)
                 ->mixedCase()
                 ->letters()
@@ -35,15 +34,20 @@ class PasswordController extends Controller
                 ->symbols();
         }
 
-        // dd($passwordRules);
-
-        // Validate the request
-        $validated = $request->validateWithBag('updatePassword', [
+        // Validate the request for the current password
+        $request->validate([
             'current_password' => ['required', 'current_password'],
-            'password' => $passwordRules,
         ]);
 
-        // dd($passwordRules);
+        // Check if the current password is the same as the new password
+        if (Hash::check($request->input('password'), $request->user()->password)) {
+            return redirect()->back()->with('passwordSame', 'Kata Laluan Baharu tidak boleh sama dengan Kata Laluan Semasa.');
+        }
+
+        // Validate the new password
+        $validated = $request->validateWithBag('updatePassword', [
+            'password' => $passwordRules,
+        ]);
 
         // Attempt to update the user's password
         $updateStatus = $request->user()->update([
@@ -54,24 +58,8 @@ class PasswordController extends Controller
         // Check if the password was updated successfully
         if ($updateStatus) {
             return redirect()->route('dashboard')->with('success', 'Kata Laluan Anda telah Berjaya Dikemaskini!');
-        } 
-        else {
-            return view('profile.update_password')->with('passwordUpdateError', 'Terdapat ralat semasa mengemaskini kata laluan anda. Sila cuba lagi.');
+        } else {
+            return redirect()->back()->with('passwordUpdateError', 'Terdapat ralat semasa mengemaskini kata laluan anda. Sila cuba lagi.');
         }
     }
-
-    // public function update(Request $request): RedirectResponse
-    // {
-    //     $validated = $request->validateWithBag('updatePassword', [
-    //         'current_password' => ['required', 'current_password'],
-    //         'password' => ['required', Password::defaults(), 'confirmed'],
-    //     ]);
-
-    //     $request->user()->update([
-    //         'password' => Hash::make($validated['password']),
-    //         'status' => 1,
-    //     ]);
-
-    //     return back()->with('success', 'Kata Laluan Anda telah Berjaya Dikemaskini!');
-    // }
 }

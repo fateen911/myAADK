@@ -6,22 +6,30 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <style>
-            .position-relative {
+            .input-group {
                 position: relative;
             }
-    
-            .toggle-password {
+
+            .input-group .toggle-password {
                 position: absolute;
                 top: 50%;
-                right: 15px;
+                right: 15px; /* Adjust as needed */
                 transform: translateY(-50%);
                 cursor: pointer;
+                z-index: 10; /* Ensure it's higher than other elements */
             }
-    
-            .eye-icon {
-                font-size: 1.25rem;
+
+            .input-group .eye-icon {
+                font-size: 1rem;
                 color: #6c757d;
-                padding-right: 10px;
+            }
+
+            .input-group input {
+                padding-right: 40px; /* Space for the icon */
+            }
+
+            .input-group input:focus + .toggle-password {
+                z-index: 11; /* Ensure the icon remains on top even when typing */
             }
         </style>
     </head>
@@ -78,10 +86,12 @@
                                     <span class="required">Kata Laluan Semasa</span>
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Semasa" id="currentPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('currentPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
+                                    <div class="input-group">
+                                        <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Semasa" id="currentPassword" />
+                                        <span class="toggle-password" onclick="togglePassword('currentPassword')">
+                                            <i class="fa fa-eye-slash eye-icon"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -100,6 +110,7 @@
                                             <i class="fa fa-eye-slash eye-icon"></i>
                                         </span>
                                     </div>
+
                                     <!-- Password Requirement List -->
                                     <ul id="password-requirements" class="mt-2 list-unstyled">
                                         <li id="length-requirement" class="text-muted">
@@ -142,46 +153,6 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            <!-- New Password -->
-                            {{-- <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                    <span class="required">Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
-                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </label>
-                                <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu" id="newPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('newPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
-                                </div>
-                            </div> --}}
-
-                            <!-- Confirm New Password -->
-                            {{-- <div class="row mb-6">
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                    <span class="required">Sahkan Kata Laluan Baharu</span>
-                                    <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
-                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span>
-                                </label>
-                                <div class="col-lg-8 fv-row position-relative">
-                                    <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
-                                    <span class="toggle-password" onclick="togglePassword('confirmPassword')">
-                                        <i class="fa fa-eye-slash eye-icon"></i>
-                                    </span>
-                                </div>
-                            </div> --}}
                         </div>
                         <!--end::Card body-->
 
@@ -222,22 +193,31 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+
+            @if(session('passwordSame'))
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Sila Semak Kata Laluan Baharu!',
+                    text: '{{ session('passwordSame') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         
             @if(session('passwordUpdateError'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Tidak Berjaya!',
-                text: '{{ session('passwordUpdateError') }}',
-                confirmButtonText: 'OK'
-            });
-        @endif
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{{ session('passwordUpdateError') }}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 
     <script>
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
-            const icon = input.nextElementSibling.querySelector('i');
+            const icon = input.parentElement.querySelector('.toggle-password i');
             
             if (input.type === 'password') {
                 input.type = 'text';
@@ -254,102 +234,69 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
-            var minLength = tahapPengguna === 2 ? 6 : 12;
-            
-            // Update length requirement text based on user level
-            var lengthRequirementText = tahapPengguna === 2 ? "Minimum 6 aksara" : "Minimum 12 aksara";
-            document.getElementById('length-requirement').innerHTML = `<i class="fa fa-circle-check"></i> ${lengthRequirementText}`;
+            var minLength = tahapPengguna === 2 ? 6 : 8;
+
+            var lengthRequirementText = tahapPengguna === 2 ? "Minimum 6 aksara" : "Minimum 8 aksara";
+            document.getElementById('length-requirement').innerHTML = `<i class="fa fa-circle-check text-muted"></i> ${lengthRequirementText}`;
 
             var passwordInput = document.getElementById('newPassword');
             var confirmPasswordInput = document.getElementById('confirmPassword');
-            var matchRequirement = document.getElementById('match-requirement');
+            var matchRequirementItem = document.getElementById('match-requirement');
 
-            // Password strength validation
-            passwordInput.addEventListener('input', function() {
-                var password = passwordInput.value;
-
-                // Check length requirement
-                if (password.length >= minLength) {
-                    updateRequirement('length-requirement', true);
-                } else {
-                    updateRequirement('length-requirement', false);
-                }
-
-                // Check lowercase
-                if (/[a-z]/.test(password)) {
-                    updateRequirement('lowercase-requirement', true);
-                } else {
-                    updateRequirement('lowercase-requirement', false);
-                }
-
-                // Check uppercase
-                if (/[A-Z]/.test(password)) {
-                    updateRequirement('uppercase-requirement', true);
-                } else {
-                    updateRequirement('uppercase-requirement', false);
-                }
-
-                // Check numbers
-                if (/[0-9]/.test(password)) {
-                    updateRequirement('number-requirement', true);
-                } else {
-                    updateRequirement('number-requirement', false);
-                }
-
-                // Check special characters
-                if (/[^a-zA-Z0-9]/.test(password)) {
-                    updateRequirement('special-requirement', true);
-                } else {
-                    updateRequirement('special-requirement', false);
-                }
-            });
-
-            confirmPasswordInput.addEventListener('input', function() {
+            function validatePassword() {
                 var password = passwordInput.value;
                 var confirmPassword = confirmPasswordInput.value;
 
-                // Check if passwords match
-                updateRequirementStatus(password === confirmPassword, matchRequirement);
-            });
+                var isValidLength = password.length >= minLength;
+                var hasLowercase = /[a-z]/.test(password);
+                var hasUppercase = /[A-Z]/.test(password);
+                var hasNumber = /\d/.test(password);
+                var hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-            function updateRequirement(elementId, isValid) {
-                var element = document.getElementById(elementId);
-                var icon = element.querySelector('i');
-                if (isValid) {
-                    icon.classList.remove('text-muted', 'fa-times-circle', 'text-danger');
-                    icon.classList.add('fa-circle-check', 'text-success');
-                } else {
-                    icon.classList.remove('fa-circle-check', 'text-success');
-                    icon.classList.add('fa-times-circle', 'text-danger');
+                updateCriteria('length-requirement', isValidLength);
+                updateCriteria('lowercase-requirement', hasLowercase);
+                updateCriteria('uppercase-requirement', hasUppercase);
+                updateCriteria('number-requirement', hasNumber);
+                updateCriteria('special-requirement', hasSpecialChar);
+
+                if (confirmPassword !== "") {
+                    var passwordsMatch = password === confirmPassword;
+                    updateCriteria('match-requirement', passwordsMatch);
+                } 
+                else {
+                    resetCriteria('match-requirement');  // Reset the match requirement if confirmPassword is empty
                 }
             }
-        });
-    </script>
 
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
-            var tooltips = [
-                document.getElementById("tooltip1"),
-                document.getElementById("tooltip2"),
-                document.getElementById("tooltip3")
-            ];
-            
-            if (tahapPengguna === 2) {
-                tooltips.forEach(function(tooltip) {
-                    tooltip.setAttribute("title", "Minimum 6 aksara, kombinasi huruf besar, huruf kecil, nombor dan simbol.");
-                });
-            } else {
-                tooltips.forEach(function(tooltip) {
-                    tooltip.setAttribute("title", "Minimum 12 aksara, kombinasi huruf besar, huruf kecil, nombor dan simbol.");
-                });
+            function updateCriteria(elementId, isValid) {
+                var element = document.getElementById(elementId);
+                var icon = element.querySelector('i');
+
+                if (isValid) {
+                    icon.classList.remove('fa-circle-o', 'text-muted', 'text-danger');
+                    icon.classList.add('fa-circle-check', 'text-success');
+                    element.classList.remove('text-muted', 'text-danger');
+                    element.classList.add('text-success');
+                } else {
+                    icon.classList.remove('fa-circle-check', 'text-success');
+                    icon.classList.add('fa-circle-o', 'text-danger');
+                    element.classList.remove('text-muted', 'text-success');
+                    element.classList.add('text-danger');
+                }
             }
 
-            // Reinitialize tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+            function resetCriteria(elementId) {
+                var element = document.getElementById(elementId);
+                var icon = element.querySelector('i');
+
+                icon.classList.remove('fa-circle-check', 'text-success', 'text-danger');
+                icon.classList.add('fa-circle-check', 'text-muted');
+                element.classList.remove('text-success', 'text-danger');
+                element.classList.add('text-muted');
+            }
+
+            passwordInput.addEventListener('input', validatePassword);
+            confirmPasswordInput.addEventListener('input', validatePassword);
         });
-    </script> --}}
+    </script>
 @endsection
