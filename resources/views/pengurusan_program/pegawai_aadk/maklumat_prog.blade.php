@@ -564,7 +564,7 @@
                                 <label class="form-label">No. Kad Pengenalan</label>
                                 <!--end::Label-->
                                 <!--begin::Input-->
-                                <input type="text" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
+                                <input type="number" name="no_kp" class="form-control mb-2" placeholder="No. Kad pengenalan" value="960101054554" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->

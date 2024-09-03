@@ -108,7 +108,7 @@
                         <div class="fv-row mb-8">
                             <!--begin::Input-->
                             <label class="required form-label">No. Kad Pengenalan (Tanpa '-')</label>
-                            <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
+                            <input type="number" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-8">

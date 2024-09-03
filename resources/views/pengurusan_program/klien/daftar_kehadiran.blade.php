@@ -107,7 +107,7 @@
                         <div class="fv-row text-start">
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
                                 <!--end::Input=-->
-                                <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
+                                <input type="number" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
                                 <!--end::Input=-->
                                 <!--begin::Submit-->
                                 <button class="btn btn-primary btn-active-success text-nowrap" type="submit">

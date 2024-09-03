@@ -597,7 +597,7 @@ class PengurusanProgController extends Controller
     public function postDaftarKehadiran(Request $request, $id) //perekodan
     {
         $request->validate([
-            'no_kp'  =>  'required|string|max:255'
+            'no_kp'  =>  'required'
         ]);
 
         $klien = Klien::where('no_kp', $request->no_kp)->first();
@@ -683,7 +683,7 @@ class PengurusanProgController extends Controller
     public function postPengesahanKehadiran(Request $request, $id)
     {
         $request->validate([
-            'no_kp'     =>  'required|string|max:255'
+            'no_kp'     =>  'required'
         ]);
 
         $klien = Klien::where('no_kp', $request->no_kp)->first();
