@@ -136,7 +136,7 @@ class HomeController extends Controller
                                     })
                                     ->where(function ($query) {
                                         $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
-                                              ->orWhere('kk.updated_at', '<', now()->subMonths(6)); // Latest record is more than 6 months old
+                                              ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
                                     })
                                     ->count();
 
@@ -282,31 +282,16 @@ class HomeController extends Controller
                     })->count();
 
                     $tidak_menjawab = DB::table('klien as u')
-                                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                                            $join->on('u.id', '=', 'kk.klien_id')
-                                                ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
-                                        })
-                                        ->select(
-                                            'u.id as klien_id',
-                                            'u.nama',
-                                            'u.no_kp',
-                                            'u.daerah',
-                                            'u.negeri',
-                                            'rk.tkh_tamat_pengawasan',
-                                            DB::raw('ROUND(kk.skor, 3) as skor'),
-                                            'kk.tahap_kepulihan_id',
-                                            'kk.updated_at'
-                                        )
-                                        ->where(function ($query) use ($sixMonthsAgo) {
-                                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
-                                                ->orWhere(function ($query) use ($sixMonthsAgo) {
-                                                    $query->whereNotNull('kk.klien_id')
-                                                            ->where('kk.updated_at', '<=', $sixMonthsAgo);
-                                                });
-                                        })
-                                        ->count();
+                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                    ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+                                        $join->on('u.id', '=', 'kk.klien_id')
+                                            ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                                    })
+                                    ->where(function ($query) {
+                                        $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
+                                              ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
+                                    })
+                                    ->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')

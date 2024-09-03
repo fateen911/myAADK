@@ -6,9 +6,7 @@
 <body>
     <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM MODAL KEPULIHAN KLIEN PASCA TAMAT RAWATAN PEMULIHAN DALAM KOMUNITI</h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
-    <br>
     <p>Tuan/Puan,</p>
-    <br>
     <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. 
        Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
     <p>No Kad Pengenalan : {{$no_kp}}

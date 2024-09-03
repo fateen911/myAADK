@@ -443,10 +443,9 @@ class ModalKepulihanController extends Controller
                         )
                         ->where(function ($query) use ($sixMonthsAgo) {
                             $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
                                 ->orWhere(function ($query) use ($sixMonthsAgo) {
                                     $query->whereNotNull('kk.klien_id')
-                                            ->where('kk.updated_at', '<=', $sixMonthsAgo);
+                                            ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months
                                 });
                         })
                         ->get();
@@ -502,10 +501,9 @@ class ModalKepulihanController extends Controller
                         )
                         ->where(function ($query) use ($sixMonthsAgo) {
                             $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
                                 ->orWhere(function ($query) use ($sixMonthsAgo) {
                                     $query->whereNotNull('kk.klien_id')
-                                            ->where('kk.updated_at', '<=', $sixMonthsAgo);
+                                            ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months old
                                 });
                         })
                         ->get();
