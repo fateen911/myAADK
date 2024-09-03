@@ -805,7 +805,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <span id="poskod_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja}}</span>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -825,7 +825,7 @@
                                         @php
                                             $negeriKerjaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja )->value('senarai_negeri.negeri');
                                         @endphp
-                                        <span id="negeri_kerja" class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
+                                        <span class="fs-6 form-control-plaintext">{{ $negeriKerjaKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -845,7 +845,7 @@
                                         @php
                                             $daerahKerjaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja )->value('senarai_daerah.daerah');
                                         @endphp
-                                        <span id="daerah_kerja" class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
+                                        <span class="fs-6 form-control-plaintext">{{ $daerahKerjaKlien }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1128,7 +1128,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="w-100">
-                                                            <span id="poskod_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_bapa}}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_bapa}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1143,7 +1143,7 @@
                                                             @php
                                                                 $negeriBapaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_bapa )->value('senarai_negeri.negeri');
                                                             @endphp
-                                                            <span id="negeri_bapa" class="fs-6 form-control-plaintext">{{ $negeriBapaKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $negeriBapaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1158,7 +1158,7 @@
                                                             @php
                                                                 $daerahBapaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_bapa )->value('senarai_daerah.daerah');
                                                             @endphp
-                                                            <span id="daerah_bapa" class="fs-6 form-control-plaintext">{{ $daerahBapaKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $daerahBapaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1254,7 +1254,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="w-100">
-                                                            <span id="poskod_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_ibu}}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_ibu}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1269,7 +1269,7 @@
                                                             @php
                                                                 $negeriIbuKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_ibu )->value('senarai_negeri.negeri');
                                                             @endphp
-                                                            <span id="negeri_ibu" class="fs-6 form-control-plaintext">{{ $negeriIbuKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $negeriIbuKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1284,7 +1284,7 @@
                                                             @php
                                                                 $daerahIbuKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_ibu )->value('senarai_daerah.daerah');
                                                             @endphp
-                                                            <span id="daerah_ibu" class="fs-6 form-control-plaintext">{{ $daerahIbuKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $daerahIbuKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1390,7 +1390,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="w-100">
-                                                            <span id="poskod_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_penjaga}}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_penjaga}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1405,7 +1405,7 @@
                                                             @php
                                                                 $negeriPenjagaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_penjaga )->value('senarai_negeri.negeri');
                                                             @endphp
-                                                            <span id="negeri_penjaga" class="fs-6 form-control-plaintext">{{ $negeriPenjagaKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $negeriPenjagaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1420,7 +1420,7 @@
                                                             @php
                                                                 $daerahPenjagaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_penjaga )->value('senarai_daerah.daerah');
                                                             @endphp
-                                                            <span id="daerah_penjaga" class="fs-6 form-control-plaintext">{{ $daerahPenjagaKlien }}</span>
+                                                            <span class="fs-6 form-control-plaintext">{{ $daerahPenjagaKlien }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1950,7 +1950,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <span id="poskod_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_pasangan}}</span>
+                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_pasangan}}</span>
                                             <!--end::Select2-->
                                         </div>
                                     </div>
@@ -1970,7 +1970,7 @@
                                             @php
                                                 $negeriPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_pasangan )->value('senarai_negeri.negeri');
                                             @endphp
-                                            <span id="negeri_pasagan" class="fs-6 form-control-plaintext">{{ $negeriPasanganKlien }}</span>
+                                            <span class="fs-6 form-control-plaintext">{{ $negeriPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1989,7 +1989,7 @@
                                             @php
                                                 $daerahPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_pasangan )->value('senarai_daerah.daerah');
                                             @endphp
-                                            <span id="daerah_pasangan" class="fs-6 form-control-plaintext">{{ $daerahPasanganKlien }}</span>
+                                            <span class="fs-6 form-control-plaintext">{{ $daerahPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -2023,7 +2023,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <span id="poskod_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja_pasangan}}</span>
+                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_kerja_pasangan}}</span>
                                             <!--end::Select2-->
                                         </div>
                                     </div>
@@ -2043,7 +2043,7 @@
                                             @php
                                                 $negeriKerjaPasanganKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_kerja_pasangan )->value('senarai_negeri.negeri');
                                             @endphp
-                                            <span id="negeri_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $negeriKerjaPasanganKlien }}</span>
+                                            <span class="fs-6 form-control-plaintext">{{ $negeriKerjaPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -2062,7 +2062,7 @@
                                             @php
                                                 $daerahKerjaPasanganKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_kerja_pasangan )->value('senarai_daerah.daerah');
                                             @endphp
-                                            <span id="daerah_kerja_pasangan" class="fs-6 form-control-plaintext">{{ $daerahKerjaPasanganKlien }}</span>
+                                            <span class="fs-6 form-control-plaintext">{{ $daerahKerjaPasanganKlien }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -2302,7 +2302,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri --}}
+    {{-- Display daerah based on negeri klien --}}     
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri').val();
@@ -2326,8 +2326,6 @@
             });
 
             function getBandarData(idnegeri) {
-                // $("#alamat_tetap_bandar").empty();
-
                 // AJAX request 
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
@@ -2341,7 +2339,6 @@
 
                         if (len > 0) {
                             var selectedValue = $("#daerah").val();
-                            // alert(selectedValue);
 
                             // Read data and create <option >
                             for (var i = 0; i < len; i++) {
@@ -2357,7 +2354,361 @@
                         }
                     },
                     error: function () {
-                        alert('tak keluar daerah punn');
+                        alert('Daerah tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri pekerjaan klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_kerja').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_kerja').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_kerja").empty();
+                $('#poskod_kerja').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_kerja").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_kerja").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah kerja tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri bapa klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_b').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_b').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_b").empty();
+                $('#poskod_b').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_b").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_b").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah bapa tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri ibu klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_i').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_i').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_i").empty();
+                $('#poskod_i').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_i").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_i").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah ibu tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri penjaga klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_p').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_p').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_p").empty();
+                $('#poskod_p').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_p").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_p").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah penjaga tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri pasangan klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_partner').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_partner').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_partner").empty();
+                $('#poskod_partner').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_partner").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_partner").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah pasangan tidak keluar');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}     
+    <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_kerja_pasangan').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_kerja_pasangan').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_kerja_pasangan").empty();
+                $('#poskod_kerja_pasangan').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_kerja_pasangan").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_kerja_pasangan").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah tempat kerja pasangan tidak keluar');
                     }
                 });
             }
