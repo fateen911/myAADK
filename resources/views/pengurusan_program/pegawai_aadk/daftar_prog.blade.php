@@ -245,6 +245,20 @@
 
     <script>
         document.getElementById('program_form').addEventListener('submit', function(event) {
+            var requiredDiv = document.getElementById('kt_docs_quill_basic');
+
+            // Strip HTML tags and trim whitespace
+            var cleanMessage = requiredDiv.textContent.trim();
+
+            // Check if the cleaned content is empty
+            if (cleanMessage === "") {
+                event.preventDefault(); // Prevent form submission
+                alert('Sila isi objektif program.');
+
+                // Optionally, highlight the div to draw attention
+                requiredDiv.style.border = '1px solid red';
+            }
+
             // Get the HTML content inside the div
             var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
             var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
