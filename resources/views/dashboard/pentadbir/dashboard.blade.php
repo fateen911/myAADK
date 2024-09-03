@@ -200,7 +200,7 @@
                                     <!--begin::Stats-->
                                     <div class="m-0">
                                         <a href="{{ route('senarai-klien') }}">
-                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$sedangKemaskini}}</span>
+                                            <span id="belumKemaskiniCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$telahKemaskini}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
                                     </div>
