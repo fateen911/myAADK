@@ -40,7 +40,6 @@ class PengurusanProgController extends Controller
     //TRY
     public function tryQR()
     {
-        phpinfo();
         return view('pengurusan_program.tryQR');
     }
 
