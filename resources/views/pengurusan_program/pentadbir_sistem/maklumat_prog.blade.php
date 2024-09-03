@@ -795,37 +795,7 @@
     <!--end::Modal - hebahan-->
 
     <!--begin::Javascript-->
-    <script>var hostUrl = "assets/";</script>
-    <script src="/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/js/scripts.bundle.js"></script>
-    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="/assets/js/custom/apps/customers/add.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <!-- Editor -->
-    <script src="assets/js/custom/apps/ecommerce/catalog/save-product.js"></script>
-    <!--end::Javascript-->
-    <script>
-        // Ensure the button does not trigger a form submission or page refresh
-        document.getElementById('modal_1').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
 
-        document.getElementById('modal_2').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-
-        document.getElementById('modal_3').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
-
-    </script>
     <script>
         function copyToClipboard1() {
             const inputField = document.getElementById('link_1');
@@ -883,6 +853,38 @@
                     console.error('Failed to copy: ', err);
                 });
         }
+    </script>
+
+    <script>var hostUrl = "assets/";</script>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="/assets/js/scripts.bundle.js"></script>
+    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
+    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
+    <script src="/assets/js/custom/apps/customers/add.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <!-- Editor -->
+    <script src="assets/js/custom/apps/ecommerce/catalog/save-product.js"></script>
+    <!--end::Javascript-->
+    <script>
+        // Ensure the button does not trigger a form submission or page refresh
+        document.getElementById('modal_1').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
+        document.getElementById('modal_2').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
+        document.getElementById('modal_3').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
     </script>
 
     <!-- Modal Hebahan -->

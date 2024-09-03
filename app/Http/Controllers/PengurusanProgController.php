@@ -150,15 +150,15 @@ class PengurusanProgController extends Controller
     public function postDaftarProgPA(Request $request)
     {
 //        $request->validate([
-//            'nama'              =>  'required|string|max:255',
-//            'objektif'          =>  'required|string|max:255',
-//            'tarikh_mula'       =>  'required|date_format:d/m/Y h:i A',
-//            'tarikh_tamat'      =>  'required|date_format:d/m/Y h:i A',
-//            'tempat'            =>  'required|string|max:255',
-//            'penganjur'         =>  'required|string|max:255',
-//            'nama_pegawai'      =>  'required|string|max:255',
-//            'no_tel_dihubungi'  =>  'required|integer',
-//            'catatan'           =>  'required|string|max:255',
+//            'nama'              =>  'required',
+//            'objektif'          =>  'required',
+//            'tarikh_mula'       =>  'required',
+//            'tarikh_tamat'      =>  'required',
+//            'tempat'            =>  'required',
+//            'penganjur'         =>  'required',
+//            'nama_pegawai'      =>  'required',
+//            'no_tel_dihubungi'  =>  'required',
+//            'catatan'           =>  'required',
 //        ]);
 
         $program = new Program();

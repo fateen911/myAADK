@@ -86,7 +86,7 @@
                                         <label class="required form-label">Kategori Aktiviti</label>
                                         <!--begin::Select2-->
                                         <select class="form-select" name="kategori" aria-label="Select example" required>
-                                            <option selected="selected">Sila Pilih</option>
+                                            <option selected="selected" value="">Sila Pilih</option>
                                             @foreach($kategori as $item)
                                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                                             @endforeach
