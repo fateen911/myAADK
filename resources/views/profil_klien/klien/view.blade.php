@@ -282,6 +282,54 @@
                             <!--begin::Input group-->
                             <div class="row fv-row">
                                 <div class="col-md-5 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Status Kesihatan Mental</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-5 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Status Orang Kurang Upaya (OKU)</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-5 text-md-start">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Skor CCRI</span>
+                                    </label>
+                                    <!--end::Label-->
+                                </div>
+                                <div class="col-md-7">
+                                    <!--begin::Input-->
+                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
+                                    <!--end::Input-->
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-5 text-md-start">
                                     <label class="fs-6 fw-semibold form-label mt-3"><span>Nombor Telefon</span></label>
                                 </div>
                                 <div class="col-md-7">
@@ -289,7 +337,7 @@
                                 </div>
                             </div>
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-3">
+                            <div class="row fv-row">
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
@@ -390,55 +438,7 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row">
-                                <div class="col-md-5 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status Kesihatan Mental</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row">
-                                <div class="col-md-5 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status Orang Kurang Upaya (OKU)</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row">
-                                <div class="col-md-5 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Skor CCRI</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-7">
-                                    <!--begin::Input-->
-                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-
+                            
                             <!--begin::Action buttons-->
                             <div class="row py-5">
                                 <div class="col-md-7 offset-md-5">
@@ -560,7 +560,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" maxlength="11" value="{{ old('no_tel', $butiranKlien->no_tel) }}" />
+                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{ $butiranKlien->no_tel }}" inputmode="numeric" maxlength="11"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -583,7 +583,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Alamat Rumah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah">{{ $butiranKlien->alamat_rumah }}</textarea>
+                                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah" style="text-transform: uppercase;">{{ $butiranKlien->alamat_rumah }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -591,7 +591,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="poskod" name="poskod" value="{{ $butiranKlien->poskod }}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod" name="poskod" value="{{ $butiranKlien->poskod }}" inputmode="numeric" maxlength="5"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -620,59 +620,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
-                                            {{-- <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
-                                                        <option value="">Pilih Negeri</option>
-                                                        @foreach ($negeri as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }} data-id="{{ $item->id }}">{{ $item->negeri }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
-                                                        <option value="">Pilih Daerah</option>
-                                                        @foreach ($daerah as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>                                             --}}
-                                            {{-- <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
-                                                        <option>Pilih Negeri</option>
-                                                        @foreach ($negeri as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }} data-id="{{ $item->id }}">{{ $item->negeri }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
-                                                        <option>Pilih Daerah</option>
-                                                        @foreach ($daerah as $item)
-                                                            <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div> --}}
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-4 text-md-start">
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
@@ -804,13 +751,6 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nama Majikan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Boleh masukkan sehingga dua tempat perpuluhan.">
-                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -827,13 +767,6 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nombor Telefon Majikan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -974,7 +907,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}" style="text-transform: uppercase;"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -982,7 +915,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}" style="text-transform: uppercase;"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1019,7 +952,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" />
+                                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" style="text-transform: uppercase;"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1035,7 +968,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}" inputmode="numeric" maxlength="11"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1043,7 +976,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$butiranKlien->alamat_kerja}}</textarea>
+                                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" style="text-transform: uppercase;">{{$butiranKlien->alamat_kerja}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1051,7 +984,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" maxlength="5" id="poskod_kerja" name="poskod_kerja" value="{{$butiranKlien->poskod_kerja}}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$butiranKlien->poskod_kerja}}" inputmode="numeric" maxlength="5"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -1536,7 +1469,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="nama_bapa" name="nama_bapa" value="{{ $butiranKlien->nama_bapa }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="nama_bapa" name="nama_bapa" value="{{ $butiranKlien->nama_bapa }}" style="text-transform: uppercase;"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1551,7 +1484,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" maxlength="12" value="{{ $butiranKlien->no_kp_bapa }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" value="{{ $butiranKlien->no_kp_bapa }}" inputmode="numeric" maxlength="12"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1567,7 +1500,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" maxlength="11" value="{{ $butiranKlien->no_tel_bapa }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" value="{{ $butiranKlien->no_tel_bapa }}" inputmode="numeric" maxlength="11"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1593,7 +1526,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa">{{ $butiranKlien->alamat_bapa }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa" style="text-transform: uppercase;">{{ $butiranKlien->alamat_bapa }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1601,7 +1534,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{ $butiranKlien->poskod_bapa }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{ $butiranKlien->poskod_bapa }}" inputmode="numeric" maxlength="5"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1663,7 +1596,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{ $butiranKlien->nama_ibu }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{ $butiranKlien->nama_ibu }}" style="text-transform: uppercase;"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1678,7 +1611,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" maxlength="12" value="{{ $butiranKlien->no_kp_ibu }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" value="{{ $butiranKlien->no_kp_ibu }}" inputmode="numeric" maxlength="12"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1694,7 +1627,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" maxlength="11" value="{{ $butiranKlien->no_tel_ibu }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" value="{{ $butiranKlien->no_tel_ibu }}" inputmode="numeric" maxlength="11"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1720,7 +1653,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu">{{ $butiranKlien->alamat_ibu }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu" style="text-transform: uppercase;">{{ $butiranKlien->alamat_ibu }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1728,7 +1661,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{ $butiranKlien->poskod_ibu }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{ $butiranKlien->poskod_ibu }}" inputmode="numeric" maxlength="5"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1790,7 +1723,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Hubungan</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{ $butiranKlien->hubungan_penjaga }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{ $butiranKlien->hubungan_penjaga }}" style="text-transform: uppercase;"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1798,7 +1731,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="nama_penjaga" name="nama_penjaga" value="{{ $butiranKlien->nama_penjaga }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="nama_penjaga" name="nama_penjaga" value="{{ $butiranKlien->nama_penjaga }}" style="text-transform: uppercase;"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1813,7 +1746,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" maxlength="12" value="{{ $butiranKlien->no_kp_penjaga }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" value="{{ $butiranKlien->no_kp_penjaga }}" inputmode="numeric" maxlength="12"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1829,7 +1762,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" maxlength="11" value="{{ $butiranKlien->no_tel_penjaga }}" />
+                                                            <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" value="{{ $butiranKlien->no_tel_penjaga }}" inputmode="numeric" maxlength="11"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1855,7 +1788,7 @@
                                                                     <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                                 </div>
                                                             </div>
-                                                            <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga">{{ $butiranKlien->alamat_penjaga }}</textarea>
+                                                            <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga" style="text-transform: uppercase;">{{ $butiranKlien->alamat_penjaga }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1863,7 +1796,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <input type="text" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{ $butiranKlien->poskod_penjaga }}"/>
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{ $butiranKlien->poskod_penjaga }}" inputmode="numeric" maxlength="5"/>
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -2174,7 +2107,7 @@
 
                                             <div class="row fv-row mb-7">
                                                 <div class="col-md-5 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Perkahwinan</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Status Perkahwinan</label>
                                                 </div> 
                                                 <div class="col-md-7">
                                                     <!--begin::Select2-->
@@ -2192,7 +2125,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" />
+                                                    <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" style="text-transform: uppercase;"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2208,7 +2141,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" maxlength="11" value="{{ $butiranKlien->no_tel_pasangan }}" />
+                                                    <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{ $butiranKlien->no_tel_pasangan }}" inputmode="numeric" maxlength="11"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2232,7 +2165,7 @@
                                                             <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                         </div>
                                                     </div>
-                                                    <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan">{{ $butiranKlien->alamat_pasangan }}</textarea>
+                                                    <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_pasangan }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2240,7 +2173,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}" inputmode="numeric" maxlength="5"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2274,7 +2207,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan">{{ $butiranKlien->alamat_kerja_pasangan }}</textarea>
+                                                    <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_kerja_pasangan }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2282,7 +2215,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{ $butiranKlien->poskod_kerja_pasangan }}"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{ $butiranKlien->poskod_kerja_pasangan }}" inputmode="numeric" maxlength="5"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -2484,7 +2417,7 @@
         });
     </script>
 
-    {{-- Checkbox alamat --}}
+    {{-- Checkbox alamat bapa --}}
     <script>
         // Store initial values in variables
         var initialAlamatBapa = document.getElementById("alamat_b").value;
@@ -2538,6 +2471,7 @@
         }
     </script>
 
+    {{-- Checkbox alamat ibu --}}
     <script>
         // Store initial values in variables
         var initialAlamatIbu = document.getElementById("alamat_i").value;
@@ -2591,6 +2525,7 @@
         }
     </script>
 
+    {{-- Checkbox alamat penjaga --}}
     <script>
         // Store initial values in variables
         var initialAlamatPenjaga = document.getElementById("alamat_p").value;
@@ -2644,6 +2579,7 @@
         }
     </script>
 
+    {{-- Checkbox alamat pasangan --}}
     <script>
         // Store initial values in variables
         var initialAlamatPasangan = document.getElementById("alamat_partner").value;
@@ -2696,49 +2632,73 @@
         }
     </script>
 
-    {{-- If status_perkahwinan is bujang, then block the other fields --}}
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var statusSelect = document.getElementById('status_perkahwinan');
-            var pasanganFields = document.getElementById('pasangan-fields');
-        
-            function togglePasanganFields() {
-                console.log('Status Perkahwinan changed to: ', statusSelect.value); // Debugging line
-                if (statusSelect.value === 'BERKAHWIN') {
-                    pasanganFields.style.display = 'block';
-                } else {
-                    pasanganFields.style.display = 'none';
-                }
+    {{-- Control input number --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to restrict input to digits and set max length
+            function restrictInput(element, maxLength) {
+                element.addEventListener('input', function() {
+                    this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                    if (this.value.length > maxLength) {         // Limit to max length
+                        this.value = this.value.slice(0, maxLength);
+                    }
+                });
             }
         
-            // Initialize the visibility on page load
-            togglePasanganFields();
+            // Restrict input to digits for all specified fields
+            const maxLengthSettings = {
+                'no_tel': 11,
+                'poskod': 5,
+                'no_tel_majikan': 11,
+                'poskod_kerja': 5,
+                'no_kp_bapa': 12,
+                'no_tel_bapa': 11,
+                'poskod_bapa': 5,
+                'no_kp_ibu': 12,
+                'no_tel_ibu': 11,
+                'poskod_ibu': 5,
+                'no_kp_penjaga': 12,
+                'no_tel_penjaga': 11,
+                'poskod_penjaga': 5,
+                'no_tel_pasangan': 11,
+                'poskod_pasangan': 5,
+                'poskod_kerja_pasangan': 5
+            };
         
-            // Listen for changes on the status select
-            statusSelect.addEventListener('change', function() {
-                console.log('Change event detected'); // Debugging line
-                togglePasanganFields();
+            // Loop through each setting and apply the restriction
+            Object.keys(maxLengthSettings).forEach(function(name) {
+                document.querySelectorAll('[name="' + name + '"]').forEach(function(element) {
+                    restrictInput(element, maxLengthSettings[name]);
+                });
             });
         });
-    </script>  --}}
-
-    {{-- Transform input to uppercase --}}
+    </script>        
     {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modal = document.getElementById('requestPeribadiKlien');
-            modal.addEventListener('shown.bs.modal', function() {
-                var inputField = document.getElementById('alamat_rumah');
-                if (inputField) {
-                    console.log("Input field found");
-                    inputField.addEventListener('input', function() {
-                        console.log("Input event triggered");
-                        inputField.value = inputField.value.toUpperCase();
-                    });
-                } else {
-                    console.log("Input field not found");
-                }
-            });
-        });
-    </script> --}}
+		document.addEventListener('DOMContentLoaded', function() {
+			// Select all elements with name 'no_kp' and 'no_tel'
+			const noKpElements = document.querySelectorAll('[name="no_kp"]');
+			const noTelElements = document.querySelectorAll('[name="no_tel"]');
+
+			// Restrict input to digits for 'no_kp' elements
+			noKpElements.forEach(function(element) {
+				element.addEventListener('input', function (e) {
+					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+					if (this.value.length > 12) {                // Limit to 12 digits
+						this.value = this.value.slice(0, 12);
+					}
+				});
+			});
+
+			// Restrict input to digits for 'no_tel' elements
+			noTelElements.forEach(function(element) {
+				element.addEventListener('input', function (e) {
+					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+					if (this.value.length > 11) {                // Limit to 11 digits
+						this.value = this.value.slice(0, 11);
+					}
+				});
+			});
+		});
+	</script> --}}
 </body>
 @endsection

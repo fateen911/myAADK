@@ -1258,7 +1258,7 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
 
-            PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            PekerjaanKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             $sejarahProfil->update([
                 'status_kemaskini' => 'Kemaskini',
@@ -1274,7 +1274,7 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            PekerjaanKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            PekerjaanKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -1326,7 +1326,7 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
 
-            KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            KeluargaKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             $sejarahProfil->update([
                 'status_kemaskini' => 'Kemaskini',
@@ -1342,7 +1342,7 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            KeluargaKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            KeluargaKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -1382,7 +1382,7 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             $sejarahProfil->update([
                 'status_kemaskini' => 'Kemaskini',
@@ -1399,7 +1399,7 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -1439,7 +1439,7 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             $sejarahProfil->update([
                 'status_kemaskini' => 'Kemaskini',
@@ -1456,7 +1456,7 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -1497,7 +1497,7 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             $sejarahProfil->update([
                 'status_kemaskini' => 'Kemaskini',
@@ -1514,7 +1514,7 @@ class ProfilKlienController extends Controller
                 'status' => 'Kemaskini',
             ]);
 
-            WarisKlien::where('id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
+            WarisKlien::where('klien_id', $klienId)->update(['status_kemaskini' => 'Kemaskini']);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([

@@ -147,7 +147,7 @@
                                                 </div>
                                                 <!--end::Symbol-->
                                                 <!--begin::Title-->
-                                                <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Keluarga</span>
+                                                <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Waris</span>
                                                 <!--end::Title-->
                                             </div>
                                             <!--end::Symbol and Text-->
@@ -193,7 +193,7 @@
                                                 </div>
                                                 <!--end::Symbol-->
                                                 <!--begin::Title-->
-                                                <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Pasangan</span>
+                                                <span class="text-gray-700 fw-semibold fs-3 lh-1">Maklumat Keluarga</span>
                                                 <!--end::Title-->
                                             </div>
                                             <!--end::Symbol and Text-->

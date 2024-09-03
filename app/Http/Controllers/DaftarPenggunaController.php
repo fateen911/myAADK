@@ -225,8 +225,6 @@ class DaftarPenggunaController extends Controller
             'daerah_bertugas' => 'nullable|string', 
         ]);
 
-        // dd($validatedData);
-
         // Fetch keputusan permohonan
         $keputusan = $request->input('status');
 
