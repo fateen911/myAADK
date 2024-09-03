@@ -42,24 +42,24 @@ class ProfilKlienController extends Controller
     public function senaraiKlien()
     {
         // Clients who have updated their profile (sedangKemaskini)
-        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
-                                ->leftJoin('sejarah_profil_klien', function($join) {
-                                    $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-                                        ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-                                })
-                                ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-                                ->where('sejarah_profil_klien.status_kemaskini', 'Lulus')  // Ensure status is 'Lulus'
-                                ->whereNotNull('sejarah_profil_klien.pengemaskini')        // Ensure pengemaskini is not null
-                                ->get();
-
         // $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
-        //     ->leftJoin('sejarah_profil_klien', function($join) {
-        //         $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-        //             ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-        //     })
-        //     ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-        //     ->whereNotNull('sejarah_profil_klien.klien_id')
-        //     ->get();
+        //                         ->leftJoin('sejarah_profil_klien', function($join) {
+        //                             $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
+        //                                 ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
+        //                         })
+        //                         ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
+        //                         ->where('sejarah_profil_klien.status_kemaskini', 'Lulus')  // Ensure status is 'Lulus'
+        //                         ->whereNotNull('sejarah_profil_klien.pengemaskini')        // Ensure pengemaskini is not null
+        //                         ->get();
+
+        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
+            ->leftJoin('sejarah_profil_klien', function($join) {
+                $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
+                    ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
+            })
+            ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
+            ->whereNotNull('sejarah_profil_klien.klien_id')
+            ->get();
 
         // Clients who have never updated their profile (belumKemaskini)
         $belumKemaskini = Klien::select('klien.*')

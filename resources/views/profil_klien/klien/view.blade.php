@@ -2673,32 +2673,5 @@
             });
         });
     </script>        
-    {{-- <script>
-		document.addEventListener('DOMContentLoaded', function() {
-			// Select all elements with name 'no_kp' and 'no_tel'
-			const noKpElements = document.querySelectorAll('[name="no_kp"]');
-			const noTelElements = document.querySelectorAll('[name="no_tel"]');
-
-			// Restrict input to digits for 'no_kp' elements
-			noKpElements.forEach(function(element) {
-				element.addEventListener('input', function (e) {
-					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
-					if (this.value.length > 12) {                // Limit to 12 digits
-						this.value = this.value.slice(0, 12);
-					}
-				});
-			});
-
-			// Restrict input to digits for 'no_tel' elements
-			noTelElements.forEach(function(element) {
-				element.addEventListener('input', function (e) {
-					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
-					if (this.value.length > 11) {                // Limit to 11 digits
-						this.value = this.value.slice(0, 11);
-					}
-				});
-			});
-		});
-	</script> --}}
 </body>
 @endsection
