@@ -1,110 +1,234 @@
-
-    <head>
-        <!--begin::Vendor Stylesheets(used for this page only)-->
-        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-        <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
-        <!-- Include jQuery from CDN -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!-- Include Select2 CSS from CDN -->
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <!-- Include Select2 JS from CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <!-- Custom AADK CSS -->
-        <link rel="stylesheet" href="/assets/css/customAADK.css">
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-        <!-- Bootstrap CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-    <!--end::Page title-->
-    @if (session('success'))
-        <div class="alert alert-success p-3 my-3" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger p-3 my-3" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    <!-- Modal-->
-        <a class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#Modal">
-            <i class="bi bi-share-fill fs-3"></i>
-        </a>
-
-        <div class="modal fade modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">PROGRAM</h5>
-                        <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Modal content here.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--end::Modal - hebahan-->
-
-    <!--begin::Javascript-->
-    <script>var hostUrl = "assets/";</script>
-    <script src="/assets/plugins/global/plugins.bundle.js"></script>
-    <script src="/assets/js/scripts.bundle.js"></script>
-    <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/export.js"></script>
-    <script src="/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="/assets/js/custom/apps/customers/add.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <!--end::Javascript-->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <!-- Modal Hebahan -->
-    <script>
-        $('#program').click(function() {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/program/' + id,
-                method: 'GET',
-                success: function(response) {
-                    $('#modalBody').html(response);
-                    $('#Modal').modal('show');  // Ensure modal is shown
-                },
-                error: function() {
-                    $('#modalBody').html('Error loading content.');
-                }
-            });
-        });
-
-    </script>
-
-    <script>
-        // JavaScript function to select/deselect all checkboxes
-        function toggleAll(source) {
-            checkboxes = document.querySelectorAll('input[name="pilihan[]"]');
-            for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = source.checked;
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    @keyframes fade {
+        0%, 50% {
+            opacity: 0;
+            transform: scale(0);
         }
-    </script>
+    }
+    @keyframes dot-anim {
+        0% {
+            top: -4vw;
+        }
+        50% {
+            top: 4vw;
+        }
+        100% {
+            top: -4vw;
+        }
+    }
+    @keyframes checked-radio-3 {
+        0% {
+            top: -10vw;
+            transform: scale(0);
+        }
+        100% {
+            top: 0;
+            transform: scale(1);
+        }
+    }
+    @keyframes unchecked-radio-3 {
+        0% {
+            bottom: 0;
+            transform: scale(1);
+        }
+        100% {
+            bottom: -10vw;
+            transform: scale(0);
+        }
+    }
+    @keyframes checked-radio-4 {
+        0% {
+            transform: rotate(0) translateY(-4.8vw) scale(.2);
+        }
+        83% {
+            transform: rotate(360deg) translateY(-2.5vw) scale(1);
+            transform-origin: 2vw;
+        }
+        88% {
+            transform: translateY(.6vw) scale(1);
+        }
+        93% {
+            transform: translateY(-.9vw) scale(1);
+        }
+        100% {
+            transform: translateY(0) scale(1);
+        }
+    }
+    @keyframes unchecked-radio-4 {
+        25% {
+            top: -6.5vw;
+        }
+        50% {
+            top: 9vw;
+        }
+        75% {
+            top: -10vw;
+        }
+        100% {
+            top: -10vw;
+            transform: scale(0);
+        }
+    }
+    *, *:before, *:after {
+        margin: auto;
+        padding: 0;
+        outline: 0;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    html, body { background: white; }
+    main, .container, label, label:before, label:after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    main {
+        width: 95vw;
+        height: 50vw;
+    }
+    .container {
+        width: 80%;
+        height: 50%;
+        animation: fade 1s;
+    }
+    label {
+        display: inline-block;
+        width: 7vw;
+        height: 7vw;
+        border-radius: 50%;
+    }
+    label:before {
+        content: "";
+        position: absolute;
+        width: 3vw;
+        height: 3vw;
+        background: white;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.117647) 0 0 .8vw 0, rgba(0, 0, 0, 0.239216) 0 .8vw .8vw 0;
+        transition: all .2s;
+    }
+    label:hover:before {
+        box-shadow: rgba(0, 0, 0, 0.0784314) 0 0 1vw 0, rgba(0, 0, 0, 0.239216) 0 1vw 1vw 0;
+    }
+    label:after {
+        content: "";
+        position: absolute;
+        width: 7vw;
+        height: 7vw;
+        background: rgba(255, 255, 255, .5);
+        border-radius: 50%;
+        transform: scale(0);
+    }
+    .radio:checked + label:after {
+        background: transparent;
+        transition: all .5s;
+        transform: scale(1);
+    }
+    /**** BLUE Radio button code ****/
+    #radio-1 + label {
+        left: -40vw;
+        background: #4285F4;
+        animation-delay: 0s;
+    }
+    #radio-1 + label:before {
+        transform: scale(0);
+    }
+    #radio-1:checked + label:before {
+        transform: scale(1);
+        transition: all .4s;
+    }
+    /**** RED radio button code ****/
+    #radio-2 + label {
+        left: -13vw;
+        background: #EA4335;
+        border-color: #EA4335!important;
+    }
+    #radio-2:checked + label {
+        background: white;
+        border: 1vw solid;
+        box-shadow: inset rgba(0, 0, 0, 0.117647) 0 0 .6vw 0, inset rgba(0, 0, 0, 0.239216) 0 .6vw .8vw 0;
+        transition: all .2s;
+    }
+    #radio-2:checked + label:before {
+        width: 3vw;
+        height: 3vw;
+        background: #EA4335;
+        transition: all .4s;
+    }
+    /* for IE */
+    #radio-2:not(:checked) + label:before {
+        width: 8vw;
+        height: 8vw;
+        background: #EA4335;
+        box-shadow: none;
+    }
+    /**** YELLOW radio button code ****/
+    #radio-3 + label {
+        left: 13vw;
+        background: #FBBC05;
+        animation-delay: .4s;
+    }
+    #radio-3 + label:before {
+        /* background: #E91E63; */
+        transform: scale(0);
+        animation-name: unchecked-radio-3;
+        animation-duration: .2s;
+        animation-timing-function: ease-in-out;
+    }
+    #radio-3:checked + label:before {
+        animation-name: checked-radio-3;
+        animation-duration: .4s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: both;
+    }
+    /**** GREEN radio button code ****/
+    #radio-4 + label {
+        left: 40vw;
+        background: #34A853;
+        animation-delay: .6s;
+    }
+    #radio-4 + label:before {
+        /* background: #8BC34A; */
+        animation: unchecked-radio-4 .5s both;
+    }
+    #radio-4:checked + label:before {
+        animation-name: checked-radio-4;
+        animation-duration: .6s;
+        animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+        animation-fill-mode: both;
+    }
+    [type="radio"] {
+        display: none;
+    }
 
+</style>
+<body>
+<form id="personalityTest">
+    <main>
+        <div class="container">
+            <h2 style="text-align: center">Question 1: What's your favorite color?</h2>
+            <input type="radio" class="radio" id="radio-1" name="group"/>
+            <label for="radio-1"></label>
+            <input type="radio" class="radio" id="radio-2" name="group"/>
+            <label for="radio-2"></label>
+            <input type="radio" class="radio" id="radio-3" name="group"/>
+            <label for="radio-3"></label>
+            <input type="radio" class="radio" id="radio-4" name="group"/>
+            <label for="radio-4"></label>
+        </div>
+    </main>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
