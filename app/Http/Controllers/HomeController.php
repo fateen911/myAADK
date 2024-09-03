@@ -488,27 +488,25 @@ class HomeController extends Controller
                                 ->get();
 
                     // Count number of clients that profile update statuses is Lulus
-                    $telahKemaskiniDaerah = DB::table('klien as k')
-                                                ->leftJoin('waris_klien as wk', 'k.id', '=', 'wk.klien_id')
-                                                ->leftJoin('pekerjaan_klien as pk', 'k.id', '=', 'pk.klien_id')
-                                                ->leftJoin('keluarga_klien as kk', 'k.id', '=', 'kk.klien_id')
-                                                ->where('k.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                                ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                                ->where(function ($query) {
-                                                    $query->where('k.status_kemaskini', 'Lulus')
-                                                        ->orWhere('wk.status_kemaskini', 'Lulus')
-                                                        ->orWhere('pk.status_kemaskini', 'Lulus')
-                                                        ->orWhere('kk.status_kemaskini', 'Lulus');
-                                                })
-                                                ->count();
+                    // $telahKemaskiniDaerah = DB::table('klien as k')
+                    //                             ->leftJoin('waris_klien as wk', 'k.id', '=', 'wk.klien_id')
+                    //                             ->leftJoin('pekerjaan_klien as pk', 'k.id', '=', 'pk.klien_id')
+                    //                             ->leftJoin('keluarga_klien as kk', 'k.id', '=', 'kk.klien_id')
+                    //                             ->where('k.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                    //                             ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                    //                             ->where(function ($query) {
+                    //                                 $query->where('k.status_kemaskini', 'Lulus')
+                    //                                     ->orWhere('wk.status_kemaskini', 'Lulus')
+                    //                                     ->orWhere('pk.status_kemaskini', 'Lulus')
+                    //                                     ->orWhere('kk.status_kemaskini', 'Lulus');
+                    //                             })
+                    //                             ->count();
 
-                    // $telahKemaskiniDaerah = $clients->filter(function ($client) {
-                    //                             return DB::table('sejarah_profil_klien')
-                    //                                 ->where('klien_id', $client->id)
-                    //                                 ->where('sejarah_profil_klien.status_kemaskini', 'Lulus')
-                    //                                 ->whereNotNull('sejarah_profil_klien.pengemaskini')
-                    //                                 ->exists();
-                    //                         })->count();
+                    $telahKemaskiniDaerah = $clients->filter(function ($client) {
+                                                return DB::table('sejarah_profil_klien')
+                                                    ->where('klien_id', $client->id)
+                                                    ->exists();
+                                            })->count();
 
                     $belumKemaskiniDaerah = $clients->filter(function ($client) {
                                                 return !DB::table('sejarah_profil_klien')

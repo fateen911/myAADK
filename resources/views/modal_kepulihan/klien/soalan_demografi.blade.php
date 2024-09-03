@@ -45,7 +45,7 @@
         }
 
         label {
-            font-size: 1.1em;
+            font-size: 1.3em;
             margin-bottom: 0.5em;
         }
 
@@ -211,7 +211,7 @@
                     <div class="mb-4">
                         <label for="tempoh_tidak_ambil_dadah"><b>3) Berapa lamakah anda sudah tidak mengambil dadah ?</b></label>
                         <div class="input-tahun">
-                            <input type="text" class="form-control" id="tempoh_tidak_ambil_dadah" name="tempoh_tidak_ambil_dadah" placeholder="Nyatakan berapa tahun" value="{{ $latestRespon->tempoh_tidak_ambil_dadah ?? '' }}" style="width: 20% !important;" required>
+                            <input type="number" class="form-control" id="tempoh_tidak_ambil_dadah" name="tempoh_tidak_ambil_dadah" placeholder="Nyatakan berapa tahun" value="{{ $latestRespon->tempoh_tidak_ambil_dadah ?? '' }}" style="width: 20% !important;" required>
                             <span style="margin-bottom:15px !important;">tahun</span>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                         </div>
 
                         <div class="input-tahun {{ (isset($latestRespon) && $latestRespon->kategori == 'Pasca bebas (relaps)') || old('kategori') == 'Pasca bebas (relaps)' ? '' : 'd-none' }}" id="jumlah_relapse_container">
-                            <input type="text" class="form-control mt-2" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ $latestRespon->jumlah_relapse ?? old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
+                            <input type="number" class="form-control mt-2" id="jumlah_relapse" name="jumlah_relapse" placeholder="Jumlah bilangan relapse sejak mula menerima rawatan" value="{{ $latestRespon->jumlah_relapse ?? old('jumlah_relapse') }}" style="width: 40%; margin-bottom: 10px;">
                             <span>kali</span>
                         </div>
                     </div>
@@ -297,7 +297,7 @@
                     <div class="mb-4">
                         <label for="tempoh_tinggal_lokasi_terkini"><b>7) Berapa lamakah anda tinggal di lokasi terkini ?</b></label>
                         <div class="input-tahun">
-                            <input type="text" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
+                            <input type="number" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
                                 value="{{ isset($latestRespon) ? $latestRespon->tempoh_tinggal_lokasi_terkini : old('tempoh_tinggal_lokasi_terkini') }}" style="width: 20%;" required>
                             <span style="margin-bottom:15px !important;">tahun</span>
                         </div>    
