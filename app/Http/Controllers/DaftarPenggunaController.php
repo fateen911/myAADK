@@ -216,14 +216,16 @@ class DaftarPenggunaController extends Controller
         // Add server-side validation for input fields
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'no_kp' => 'required|digits:12',  // Must be exactly 12 digits
-            'emelPegawai' => 'required|email',
-            'no_tel' => 'required|digits_between:10,11',  // Must be between 10 to 11 digits
+            'no_kp' => 'required|string|max:12',  // Must be exactly 12 digits
+            'emelPegawai' => 'required|string',
+            'no_tel' => 'nullable|string|max:11',  // Not more than 11 digits
             'jawatan' => 'required|string',
-            'peranan_pengguna' => 'required',
+            'peranan_pengguna' => 'required|string',
             'negeri_bertugas' => 'nullable|string', // If this can be optional, use nullable
-            'daerah_bertugas' => 'nullable|string', // If this can be optional, use nullable
+            'daerah_bertugas' => 'nullable|string', 
         ]);
+
+        // dd($validatedData);
 
         // Fetch keputusan permohonan
         $keputusan = $request->input('status');
@@ -240,7 +242,7 @@ class DaftarPenggunaController extends Controller
             $user = new User();
             $user->name = $validatedData['nama'];
             $user->no_kp = $validatedData['no_kp'];
-            $user->email = $validatedData['emelPegawai'];
+            $user->email = $validatedData['emelPegawai'] . '@adk.gov.my';
             $user->password = bcrypt($password);
             $user->tahap_pengguna = $validatedData['peranan_pengguna'];
             $user->status = '0';
@@ -252,12 +254,12 @@ class DaftarPenggunaController extends Controller
             $pegawai->users_id = $user->id;
             $pegawai->no_kp = $validatedData['no_kp'];
             $pegawai->nama = $validatedData['nama'];
-            $pegawai->emel = $validatedData['emelPegawai'];
+            $pegawai->emel = $validatedData['emelPegawai'] . '@adk.gov.my';
             $pegawai->no_tel = $validatedData['no_tel'];
             $pegawai->jawatan = $validatedData['jawatan'];
             $pegawai->peranan = $validatedData['peranan_pengguna'];
-            $pegawai->negeri_bertugas = $validatedData['negeri_bertugas'];
-            $pegawai->daerah_bertugas = $validatedData['daerah_bertugas'];
+            $pegawai->negeri_bertugas = $validatedData['negeri_bertugas'] ?? null; 
+            $pegawai->daerah_bertugas = $validatedData['daerah_bertugas'] ?? null; 
             $pegawai->updated_at = now();
             $pegawai->save();
 
