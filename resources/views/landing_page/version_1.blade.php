@@ -141,7 +141,7 @@ License: For each use you must have a valid license purchased only from above li
                     <h3 class="color-gray-landing fw-medium">
                         Setiap langkah pemulihan diambil dengan tujuan yang jelas,<br>
                         membawa anda ke arah kehidupan yang lebih bermakna dan <br>
-                        penuh harapan.<br>
+                        penuh harapan<br>
                     </h3>
 
 
