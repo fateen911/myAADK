@@ -324,7 +324,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" maxlength="11" id="no_tel" name="no_tel" value="{{$klien->no_tel}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$klien->no_tel}}" inputmode="numeric"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_rumah_klien" name="alamat_rumah_klien">{{$klien->alamat_rumah}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_rumah_klien" name="alamat_rumah_klien" style="text-transform: uppercase;">{{$klien->alamat_rumah}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -380,7 +380,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_k" name="poskod_klien" value="{{$klien->poskod}}" />
+                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_k" name="poskod_klien" value="{{$klien->poskod}}" inputmode="numeric"/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -749,7 +749,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" style="text-transform: uppercase;"/>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -763,7 +763,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}"/>
+                                    <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}" style="text-transform: uppercase;"/>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -823,7 +823,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" />
+                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" style="text-transform: uppercase;"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -846,7 +846,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" maxlength="11"/>
+                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" inputmode="numeric"/>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -862,7 +862,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja">{{$pekerjaan->alamat_kerja}}</textarea>
+                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" style="text-transform: uppercase;">{{$pekerjaan->alamat_kerja}}</textarea>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -879,7 +879,7 @@
                                 <div class="col-md-9">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" />
+                                        <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" inputmode="numeric"/>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -1090,7 +1090,6 @@
                         <div class="container-fluid">
                             <div class="row">
                                 {{-- begin::Sidebar --}}
-                                {{-- begin::Sidebar --}}
                                 <nav class="col-md-2">
                                     <div class="sidebar-sticky">
                                         <ul class="nav flex-column bg-light">
@@ -1127,53 +1126,6 @@
                                         </ul>
                                     </div>
                                 </nav>
-                                {{-- end::Sidebar --}}
-
-                                {{-- <nav class="col-md-2">
-                                    <div class="sidebar-sticky">
-                                        <ul class="nav flex-column bg-light">
-                                            <li class="nav-item border">
-                                                <a class="nav-link active fs-4" href="#maklumatBapa" data-toggle="tab">
-                                                    Maklumat Bapa
-                                                
-                                                    @if($requestedDataBapa)
-                                                        @if($statusBapa == 'Kemaskini')
-                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
-                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                </a>
-                                            </li>
-                                            <li class="nav-item border">
-                                                <a class="nav-link fs-4" href="#maklumatIbu" data-toggle="tab">
-                                                    Maklumat Ibu
-                                                
-                                                    @if($requestedDataIbu)
-                                                        @if($statusIbu == 'Kemaskini')
-                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
-                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                </a>
-                                            </li>
-                                            <li class="nav-item border">
-                                                <a class="nav-link fs-4" href="#maklumatPenjaga" data-toggle="tab">
-                                                    Maklumat Penjaga
-                                                
-                                                    @if($requestedDataPenjaga)
-                                                        @if($statusPenjaga == 'Kemaskini')
-                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
-                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </nav> --}}
                                 {{-- end::Sidebar --}}
 
                                 <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
@@ -1224,7 +1176,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" maxlength="12" value="{{$waris->no_kp_bapa}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" value="{{$waris->no_kp_bapa}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1247,7 +1199,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" maxlength="11" value="{{$waris->no_tel_bapa}}" maxlength="11"/>
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" value="{{$waris->no_tel_bapa}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1289,7 +1241,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa">{{$waris->alamat_bapa}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_b" name="alamat_bapa" style="text-transform: uppercase;">{{$waris->alamat_bapa}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1306,7 +1258,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{$waris->poskod_bapa}}" />
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{$waris->poskod_bapa}}" inputmode="numeric"/>
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -1401,7 +1353,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{$waris->nama_ibu}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{$waris->nama_ibu}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1424,7 +1376,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" maxlength="12" value="{{$waris->no_kp_ibu}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" value="{{$waris->no_kp_ibu}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1447,7 +1399,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" maxlength="11" value="{{$waris->no_tel_ibu}}" maxlength="11"/>
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" value="{{$waris->no_tel_ibu}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1489,7 +1441,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu">{{$waris->alamat_ibu}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_i" name="alamat_ibu" style="text-transform: uppercase;">{{$waris->alamat_ibu}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1506,7 +1458,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{$waris->poskod_ibu}}" />
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{$waris->poskod_ibu}}" inputmode="numeric"/>
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -1601,7 +1553,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{$waris->hubungan_penjaga}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{$waris->hubungan_penjaga}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1617,7 +1569,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="nama_penjaga" name="nama_penjaga" value="{{$waris->nama_penjaga}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="nama_penjaga" name="nama_penjaga" value="{{$waris->nama_penjaga}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1640,7 +1592,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" maxlength="12" value="{{$waris->no_kp_penjaga}}" />
+                                                        <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" value="{{$waris->no_kp_penjaga}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1663,7 +1615,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--begin::Input-->
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" maxlength="11" value="{{$waris->no_tel_penjaga}}" maxlength="11"/>
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" value="{{$waris->no_tel_penjaga}}" inputmode="numeric"/>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1705,7 +1657,7 @@
                                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga">{{$waris->alamat_penjaga}}</textarea>
+                                                        <textarea class="form-control form-control-solid" id="alamat_p" name="alamat_penjaga" style="text-transform: uppercase;">{{$waris->alamat_penjaga}}</textarea>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -1722,7 +1674,7 @@
                                                     <div class="col-md-6">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{$waris->poskod_penjaga}}" />
+                                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{$waris->poskod_penjaga}}" inputmode="numeric"/>
                                                             <!--end::Select2-->
                                                         </div>
                                                     </div>
@@ -2186,7 +2138,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{$pasangan->nama_pasangan}}" />
+                                        <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{$pasangan->nama_pasangan}}" style="text-transform: uppercase;"/>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2209,7 +2161,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{$pasangan->no_tel_pasangan}}" maxlength="11"/>
+                                        <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{$pasangan->no_tel_pasangan}}" inputmode="numeric"/>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2245,7 +2197,7 @@
                                                 <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
                                             </div>
                                         </div>
-                                        <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan">{{$pasangan->alamat_pasangan}}</textarea>
+                                        <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan" style="text-transform: uppercase;">{{$pasangan->alamat_pasangan}}</textarea>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2262,7 +2214,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{$pasangan->poskod_pasangan}}" />
+                                            <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{$pasangan->poskod_pasangan}}" inputmode="numeric"/>
                                             <!--end::Select2-->
                                         </div>
                                     </div>
@@ -2326,7 +2278,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan">{{$pasangan->alamat_kerja_pasangan}}</textarea>
+                                        <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan" style="text-transform: uppercase;">{{$pasangan->alamat_kerja_pasangan}}</textarea>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2343,7 +2295,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{$pasangan->poskod_kerja_pasangan}}" />
+                                            <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{$pasangan->poskod_kerja_pasangan}}" inputmode="numeric"/>
                                             <!--end::Select2-->
                                         </div>
                                     </div>
@@ -3063,5 +3015,47 @@
             }
         }
     </script>
+
+    {{-- Control input number --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to restrict input to digits and set max length
+            function restrictInput(element, maxLength) {
+                element.addEventListener('input', function() {
+                    this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                    if (this.value.length > maxLength) {         // Limit to max length
+                        this.value = this.value.slice(0, maxLength);
+                    }
+                });
+            }
+        
+            // Restrict input to digits for all specified fields
+            const maxLengthSettings = {
+                'no_tel': 11,
+                'poskod': 5,
+                'no_tel_majikan': 11,
+                'poskod_kerja': 5,
+                'no_kp_bapa': 12,
+                'no_tel_bapa': 11,
+                'poskod_bapa': 5,
+                'no_kp_ibu': 12,
+                'no_tel_ibu': 11,
+                'poskod_ibu': 5,
+                'no_kp_penjaga': 12,
+                'no_tel_penjaga': 11,
+                'poskod_penjaga': 5,
+                'no_tel_pasangan': 11,
+                'poskod_pasangan': 5,
+                'poskod_kerja_pasangan': 5
+            };
+        
+            // Loop through each setting and apply the restriction
+            Object.keys(maxLengthSettings).forEach(function(name) {
+                document.querySelectorAll('[name="' + name + '"]').forEach(function(element) {
+                    restrictInput(element, maxLengthSettings[name]);
+                });
+            });
+        });
+    </script>   
 </body>     
 @endsection
