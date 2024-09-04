@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="601765899334" value="" required/>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 601765899334" value="" required/>
                                             </div>
                                         </div>
 

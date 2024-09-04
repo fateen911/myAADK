@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Aktiviti</label>
-                                        <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Aktiviti" value="{{$program->nama}}" required/>
+                                        <input type="text" name="nama" class="form-control mb-2" value="{{$program->nama}}" required/>
                                         {{--                                                            <!--begin::Description-->--}}
                                         {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
                                         {{--                                                            <!--end::Description-->--}}
@@ -152,11 +152,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tempat Aktiviti</label>
-                                                <input type="text" name="tempat" class="form-control mb-2" placeholder="Tempat Aktiviti" value="{{$program->tempat}}" required/>
+                                                <input type="text" name="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" placeholder="Penganjur Aktiviti" value="{{$program->penganjur}}"/>
+                                                <input type="text" name="penganjur" class="form-control mb-2" value="{{$program->penganjur}}"/>
                                             </div>
                                         </div>
 
@@ -171,11 +171,11 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
                                                 <label class="required form-label">Nama Pegawai</label>
-                                                <input type="text" name="nama_pegawai" class="form-control mb-2" placeholder="Nama Pegawai" value="{{$program->nama_pegawai}}" required/>
+                                                <input type="text" name="nama_pegawai" class="form-control mb-2" value="{{$program->nama_pegawai}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="No. Telefon Untuk Dihubungi" value="{{$program->no_tel_dihubungi}}" required/>
+                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 601134789594" value="{{$program->no_tel_dihubungi}}" required/>
                                             </div>
                                         </div>
 
