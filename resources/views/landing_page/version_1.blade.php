@@ -249,7 +249,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Link-->
                                 <a href="https://www.tiktok.com/@aadk.tv" class="mb-6">
                                     <img src="/assets/media/svg/brand-logos/tiktok-2.svg" class="h-20px me-2" alt="" />
-                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">TIkTok</span>
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">TikTok</span>
                                 </a>
                                 <!--end::Link-->
                                 <!--begin::Link-->
