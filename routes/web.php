@@ -149,8 +149,6 @@ Route::get('muat-turun/maklumat-profil-diri', [ProfilKlienController::class, 'mu
 Route::get('muat-turun/profil-klien/{id}', [ProfilKlienController::class, 'muatTurunProfilKlien'])->name('export.profil.klien');
 Route::get('/get-daerah/{id}', [ProfilKlienController::class, 'getDaerah'])->name('getDaerah');
 
-
-
 // KLIEN - SEND REQUEST TO UPDATE PROFILE
 Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');
 Route::post('/klien/maklumat-perkerjaan/request-update', [ProfilKlienController::class, 'pekerjaanKlienRequestUpdate'])->name('pekerjaanKlien.requestUpdate');
@@ -170,6 +168,7 @@ Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController:
 
 // PENTADBIR - MODUL KEPULIHAN
 Route::get('/pentadbir/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
+Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
 
 // PEGAWAI - MODUL KEPULIHAN
 Route::get('/pegawai-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanBrpp'])->middleware('auth')->name('maklum.balas.kepulihan.brpp');

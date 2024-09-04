@@ -47,7 +47,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Senarai Klien</li>
+            <li class="breadcrumb-item text-muted">Soal Selidik</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -74,8 +74,9 @@
                         <div class="tab-pane fade show active scrollable-container" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
                             <!--begin::Card header-->
                             <div class="header">
-                                <h2>Senarai Keputusan Klien Menjawab Soal Selidik Modal Kepulihan
-                                    <br><small>Senarai keputusan kepulihan klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
+                                <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
+                                    <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
+                                    <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
                                 </h2>
                             </div>
                             <!--end::Card header-->
@@ -86,14 +87,13 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout:fixed;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 15%;">Nama</th>
-                                            <th style="text-align: center; width: 9%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 10%;">Daerah Pejabat Pengawasan</th>
-                                            <th style="text-align: center; width: 10%;">Negeri Pejabat Pengawasan</th>
-                                            <th style="text-align: center; width: 10%;">Tarikh Menjawab</th> 
-                                            <th style="text-align: center; width: 10%;">Status</th> 
-                                            <th style="text-align: center; width: 5%;">Skor</th> 
-                                            <th style="text-align: center; width: 11%;">Tahap Kepulihan</th> 
+                                            <th style="width: 25%;">Nama</th>
+                                            <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 13%;">Daerah Pejabat Pengawasan</th>
+                                            <th style="text-align: center; width: 13%;">Negeri Pejabat Pengawasan</th>
+                                            <th style="text-align: center; width: 12%;">Tarikh Terakhir Menjawab</th> 
+                                            <th style="text-align: center; width: 13%;">Status</th> 
+                                            <th style="text-align: center; width: 9%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -101,39 +101,29 @@
                                             @php
                                                 $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $response->daerah_pejabat)->value('senarai_daerah.daerah');
                                                 $negeri = DB::table('senarai_negeri')->where('id', $response->negeri_pejabat)->value('senarai_negeri.negeri');
-                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
                                             @endphp
 
                                             <tr>
-                                                <td>{{ $response->nama }}</td>
+                                                <td>
+                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response->klien_id) }}">
+                                                        {{ $response->nama }}
+                                                    </a>
+                                                </td>
                                                 <td style="text-align: center;">{{ $response->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td class="d-flex justify-content-center">
                                                     @if ($response->status == 'Selesai')
-                                                        <button class="btn btn-sm text-white" style="background-color:cadetblue">{{ strtoupper($response->status) }}</button>
+                                                        <span class="badge text-white" style="background-color: cadetblue; padding:10px;">{{ strtoupper($response->status) }}</span>
                                                     @else
-                                                        <button class="btn btn-sm text-white" style="background-color:cornflowerblue">{{ strtoupper($response->status) }}</button>
+                                                        <span class="badge text-white" style="background-color: cornflowerblue; padding:10px;">{{ strtoupper($response->status) }}</span>
                                                     @endif
                                                 </td>
-                                                <td style="text-align: center">
-                                                    @if ($response->skor)
-                                                        {{ number_format($response->skor, 3) }}
-                                                    @endif
-                                                </td>
-                                                <td style="text-align: center">                                        
-                                                    @if ($response->tahap_kepulihan_id)
-                                                        @if ($response->tahap_kepulihan_id == 1)
-                                                            <button class="btn btn-sm text-white" style="background-color: red;">{{ $tahap_kepulihan }}</button>
-                                                        @elseif ($response->tahap_kepulihan_id == 2)
-                                                            <button class="btn btn-sm text-white" style="background-color: darkorange;">{{ $tahap_kepulihan }}</button>
-                                                        @elseif ($response->tahap_kepulihan_id == 3)
-                                                            <button class="btn btn-sm text-white bg-warning">{{ $tahap_kepulihan }}</button>   
-                                                        @else
-                                                            <button class="btn btn-sm text-white" style="background-color: green;">{{ $tahap_kepulihan }}</button>
-                                                        @endif
-                                                    @endif
+                                                <td style="text-align: center;">
+                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response->klien_id) }}">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -160,7 +150,7 @@
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-30px">No. Kad Pengenalan</th>
+                                            <th class="min-w-30px" style="text-align: center;">No. Kad Pengenalan</th>
                                             <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
                                             <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
@@ -175,7 +165,7 @@
 
                                             <tr>
                                                 <td>{{ $response2->nama }}</td>
-                                                <td>{{ $response2->no_kp }}</td>
+                                                <td style="text-align: center;">{{ $response2->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>

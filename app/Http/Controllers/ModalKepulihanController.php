@@ -639,4 +639,25 @@ class ModalKepulihanController extends Controller
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
     }
 
+    public function sejarahSoalSelidik($klien_id)
+    {
+        $sejarah = DB::table('keputusan_kepulihan_klien as kk')
+                    ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                    ->select(
+                        'u.nama',
+                        'u.no_kp',
+                        'kk.skor',
+                        'kk.tahap_kepulihan_id',
+                        'kk.status',
+                        'kk.updated_at'
+                    )
+                    ->where('kk.klien_id', $klien_id)
+                    ->orderBy('kk.updated_at', 'desc')
+                    ->get();
+
+        // dd($sejarah);
+
+        return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah'));
+    }
+
 }
