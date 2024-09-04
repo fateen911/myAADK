@@ -124,7 +124,7 @@
                                             <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
                                             <th class="min-w-100px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
                                             <th class="min-w-100px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
-                                            <th class="min-w-30px" style="text-align: center;">Muat Turun</th>
+                                            <th class="min-w-30px" style="text-align: center;">Tindakan</th></th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">

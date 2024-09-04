@@ -26,7 +26,7 @@
             {{-- No Kad Pengenalan --}}
             <div class="mt-4">
                 <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" :required="true"/>
-                <input type="text" class="form-control w-full" placeholder="980406010678" id="no_kp" name="no_kp" inputmode="numeric" maxlength="12" required/>
+                <input type="text" class="form-control w-full" placeholder="Contoh: 980406010678" id="no_kp" name="no_kp" inputmode="numeric" maxlength="12" required/>
                 <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
             </div>
       
@@ -43,7 +43,7 @@
             {{-- No Telefon --}}
             <div class="mt-4">
                 <x-input-label for="no_tel" :value="__('No. Telefon')" :required="true"/>
-                <input type="text" class="form-control w-full" placeholder="0109000000" id="no_tel" name="no_tel" inputmode="numeric" maxlength="11" required />
+                <input type="text" class="form-control w-full" placeholder="Contoh: 0109000000" id="no_tel" name="no_tel" inputmode="numeric" maxlength="11" required />
                 <x-input-error :messages="$errors->get('no_tel')" class="mt-2" />
             </div>
     

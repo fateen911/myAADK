@@ -199,7 +199,7 @@
                                                                     </label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
+                                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -209,7 +209,7 @@
                                                                     <label class="fs-6 fw-semibold mb-2">E-mel</label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    <input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user1->email}}" />
+                                                                    <input type="email" class="form-control form-control-solid" name="email" placeholder="Contoh: contoh1@gmail.com" value="{{$user1->email}}" />
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
