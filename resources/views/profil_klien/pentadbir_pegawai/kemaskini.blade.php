@@ -1090,27 +1090,90 @@
                         <div class="container-fluid">
                             <div class="row">
                                 {{-- begin::Sidebar --}}
+                                {{-- begin::Sidebar --}}
                                 <nav class="col-md-2">
                                     <div class="sidebar-sticky">
                                         <ul class="nav flex-column bg-light">
                                             <li class="nav-item border">
-                                                <a class="nav-link active fs-4" href="#maklumatBapa" data-toggle="tab">
+                                                <a class="nav-link active fs-4 d-flex justify-content-between align-items-center" href="#maklumatBapa" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
                                                     Maklumat Bapa
+                                                    @if($requestedDataBapa && $statusBapa == 'Kemaskini')
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                            <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                        </span>
+                                                    @endif
                                                 </a>
                                             </li>
                                             <li class="nav-item border">
-                                                <a class="nav-link fs-4" href="#maklumatIbu" data-toggle="tab">
+                                                <a class="nav-link fs-4 d-flex justify-content-between align-items-center" href="#maklumatIbu" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
                                                     Maklumat Ibu
+                                                    @if($requestedDataIbu && $statusIbu == 'Kemaskini')
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                            <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                        </span>
+                                                    @endif
                                                 </a>
                                             </li>
                                             <li class="nav-item border">
-                                                <a class="nav-link fs-4" href="#maklumatPenjaga" data-toggle="tab">
+                                                <a class="nav-link fs-4 d-flex justify-content-between align-items-center" href="#maklumatPenjaga" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
                                                     Maklumat Penjaga
+                                                    @if($requestedDataPenjaga && $statusPenjaga == 'Kemaskini')
+                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                            <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                        </span>
+                                                    @endif
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
                                 </nav>
+                                {{-- end::Sidebar --}}
+
+                                {{-- <nav class="col-md-2">
+                                    <div class="sidebar-sticky">
+                                        <ul class="nav flex-column bg-light">
+                                            <li class="nav-item border">
+                                                <a class="nav-link active fs-4" href="#maklumatBapa" data-toggle="tab">
+                                                    Maklumat Bapa
+                                                
+                                                    @if($requestedDataBapa)
+                                                        @if($statusBapa == 'Kemaskini')
+                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                </a>
+                                            </li>
+                                            <li class="nav-item border">
+                                                <a class="nav-link fs-4" href="#maklumatIbu" data-toggle="tab">
+                                                    Maklumat Ibu
+                                                
+                                                    @if($requestedDataIbu)
+                                                        @if($statusIbu == 'Kemaskini')
+                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                </a>
+                                            </li>
+                                            <li class="nav-item border">
+                                                <a class="nav-link fs-4" href="#maklumatPenjaga" data-toggle="tab">
+                                                    Maklumat Penjaga
+                                                
+                                                    @if($requestedDataPenjaga)
+                                                        @if($statusPenjaga == 'Kemaskini')
+                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
+                                                                <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav> --}}
                                 {{-- end::Sidebar --}}
 
                                 <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">

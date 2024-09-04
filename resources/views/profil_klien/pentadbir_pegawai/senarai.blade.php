@@ -75,11 +75,11 @@
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-100px">Nama</th>
-                                            <th class="min-w-70px">No. Kad Pengenalan</th>
+                                            <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
                                             <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
                                             <th class="min-w-50px" style="text-align: center;">Pengemaskini</th> 
-                                            <th class="min-w-30px" style="text-align: center;">Muat Turun</th>
+                                            <th class="min-w-30px" style="text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -90,16 +90,27 @@
                                             @endphp
 
                                             <tr>
-                                                <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}" target="_blank">{{$user1->nama}}</a></td>
-                                                <td>{{ $user1->no_kp }}</td>
+                                                <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">{{$user1->nama}}</a></td>
+                                                <td style="text-align: center;">{{ $user1->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center;">{{ $user1->pengemaskini_name ?? 'N/A' }}</td>
                                                 <td style="text-align: center;">
+                                                    <!-- Pencil icon for kemaskini -->
+                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">
+                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
+                                                    </a>
+                                
+                                                    <!-- PDF icon for muat turun -->
+                                                    <a href="{{ url('muat-turun/profil-klien/'. $user1['id']) }}">
+                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
+                                                    </a>
+                                                </td>
+                                                {{-- <td style="text-align: center;">
                                                     <a href="{{ url('muat-turun/profil-klien/'. $user1['id']) }}" class="btn btn-sm btn-primary">
                                                         <i class="fas fa-download" style="color: white !important;"></i> Muat Turun
                                                     </a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -123,10 +134,10 @@
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-70px">No. Kad Pengenalan</th>
+                                            <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
                                             <th class="min-w-100px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
                                             <th class="min-w-100px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
-                                            <th class="min-w-30px" style="text-align: center;">Muat Turun</th>
+                                            <th class="min-w-30px" style="text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -138,12 +149,16 @@
 
                                             <tr>
                                                 <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}" target="_blank">{{$user2->nama}}</a></td>
-                                                <td>{{ $user2->no_kp }}</td>
+                                                <td style="text-align: center;">{{ $user2->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center;">
-                                                    <a href="{{ url('muat-turun/profil-klien/'. $user2['id']) }}" class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-download" style="color: white !important;"></i> Muat Turun
+                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}">
+                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:28px; font-size:18px;"></i>
+                                                    </a>
+                                
+                                                    <a href="{{ url('muat-turun/profil-klien/'. $user2['id']) }}">
+                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
                                                     </a>
                                                 </td>
                                             </tr>
