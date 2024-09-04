@@ -744,7 +744,7 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Bidang Pekerjaan</span>
+                                        <span>Bidang Pekerjaan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -758,7 +758,7 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Nama Pekerjaan</span>
+                                        <span>Nama Pekerjaan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -772,7 +772,7 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Pendapatan (RM)</span>
+                                        <span>Pendapatan (RM)</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -972,7 +972,7 @@
                                         
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Kerja</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['status_kerja'] != $pekerjaan->status_kerja ? 'border-primary' : '' }}" name="status_kerja" value="{{ $requestedDataPekerjaan['status_kerja'] }}" readonly />
@@ -2153,7 +2153,7 @@
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                    <label class="fs-6 fw-semibold form-label mt-3 required">
                                         <span>Status Perkahwinan</span>
                                     </label>
                                     <!--end::Label-->
@@ -2442,7 +2442,7 @@
                                         
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Perkahwinan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Status Perkahwinan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['status_perkahwinan'] != $pasangan->status_perkahwinan ? 'border-primary' : '' }}" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
