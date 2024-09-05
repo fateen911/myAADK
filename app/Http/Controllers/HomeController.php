@@ -82,21 +82,65 @@ class HomeController extends Controller
                                     ->distinct()
                                     ->count('klien.id');
 
-                    // Count the number of clients in "Selesai"
+                    // Find clients with status Kemaskini
+                    $clientsWithKemaskini = DB::table('klien')
+                                            ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                            ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                            ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                            ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                            ->where(function ($query) {
+                                                $query->where('klien_update_requests.status', 'Kemaskini')
+                                                    ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                                    ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                                    ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
+                                            })
+                                            ->distinct()
+                                            ->pluck('klien.id');
+
+                    // Count clients who are not in the above list and meet the criteria for being 'selesai'
                     $selesai = DB::table('klien')
-                                ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                ->select('klien.id')
-                                ->where(function ($query) {
-                                    $query->where('klien_update_requests.status', '!=', 'Kemaskini')
-                                        ->where('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
-                                        ->where('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
-                                        ->where('waris_klien_update_requests.status', '!=', 'Kemaskini');
-                                })
-                                ->distinct()
-                                ->count('klien.id');
+                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+                    ->where(function ($query) {
+                        $query->whereIn('klien.id', function ($subQuery) {
+                            $subQuery->select('klien_id')
+                                ->from('klien_update_requests')
+                                ->whereIn('status', ['Lulus', 'Ditolak'])
+                                ->unionAll(
+                                    DB::table('pekerjaan_klien_update_requests')
+                                        ->select('klien_id')
+                                        ->whereIn('status', ['Lulus', 'Ditolak'])
+                                )
+                                ->unionAll(
+                                    DB::table('keluarga_klien_update_requests')
+                                        ->select('klien_id')
+                                        ->whereIn('status', ['Lulus', 'Ditolak'])
+                                )
+                                ->unionAll(
+                                    DB::table('waris_klien_update_requests')
+                                        ->select('klien_id')
+                                        ->whereIn('status', ['Lulus', 'Ditolak'])
+                                );
+                        });
+                    })
+                    ->distinct()
+                    ->count('klien.id');
+
+
+                    // Count the number of clients in "Selesai"
+                    // $selesai = DB::table('klien')
+                    //             ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                    //             ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                    //             ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                    //             ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                    //             ->select('klien.id')
+                    //             ->where(function ($query) {
+                    //                 $query->where('klien_update_requests.status', '!=', 'Kemaskini')
+                    //                     ->orWhere('pekerjaan_klien_update_requests.status', '!=', 'Kemaskini')
+                    //                     ->orWhere('keluarga_klien_update_requests.status', '!=', 'Kemaskini')
+                    //                     ->orWhere('waris_klien_update_requests.status', '!=', 'Kemaskini');
+                    //             })
+                    //             ->distinct()
+                    //             ->count('klien.id');
 
                     $jumlah2 = $belumSelesai + $selesai;
         
@@ -548,16 +592,20 @@ class HomeController extends Controller
                                     ->where(function ($query) {
                                         $query->where(function ($subQuery) {
                                             $subQuery->where('klien_update_requests.status', '=', 'Lulus')
-                                                ->orWhere('klien_update_requests.status', '=', 'Ditolak');
+                                                ->orWhere('klien_update_requests.status', '=', 'Ditolak')
+                                                ->orWhere('klien_update_requests.status', '=', 'Baharu');
                                         })->where(function ($subQuery) {
                                             $subQuery->where('pekerjaan_klien_update_requests.status', '=', 'Lulus')
-                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Ditolak');
+                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Ditolak')
+                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Baharu');
                                         })->where(function ($subQuery) {
                                             $subQuery->where('keluarga_klien_update_requests.status', '=', 'Lulus')
-                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Ditolak');
+                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Ditolak')
+                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Baharu');
                                         })->where(function ($subQuery) {
                                             $subQuery->where('waris_klien_update_requests.status', '=', 'Lulus')
-                                                ->orWhere('waris_klien_update_requests.status', '=', 'Ditolak');
+                                                ->orWhere('waris_klien_update_requests.status', '=', 'Ditolak')
+                                                ->orWhere('waris_klien_update_requests.status', '=', 'Baharu');
                                         });
                                     })
                                     ->distinct()
