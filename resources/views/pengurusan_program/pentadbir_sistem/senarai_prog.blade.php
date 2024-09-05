@@ -121,12 +121,12 @@
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
                                 <tr>
-                                    <td><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}">null</a></td>
-                                    <td class="text-uppercase">null</td>
-                                    <td class="text-uppercase">null</td>
-                                    <td class="text-uppercase"><span class="badge fs-7 fw-bold"></span>null</td>
-                                    <td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id=""><i class="bi bi-share-fill fs-3"></i></a></td>
-                                    <td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href="{{url('/pengurusan-program/qr-code')}}"><i class="bi bi-qr-code fs-3"></i></a></td>
+                                    <td>Tiada</td>
+                                    <td>Tiada</td>
+                                    <td>Tiada</td>
+                                    <td>Tiada</td>
+                                    <td>Tiada</td>
+                                    <td>Tiada</td>
                                 </tr>
                             </tbody>
                         </table>

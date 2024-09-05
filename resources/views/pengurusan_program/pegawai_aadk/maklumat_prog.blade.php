@@ -469,6 +469,8 @@
                                     <th class="min-w-175px">No. Kad Pengenalan</th>
                                     <th class="min-w-175px">No. Telefon</th>
                                     <th class="min-w-175px">Pengesahan</th>
+                                    <th class="min-w-175px">Negeri</th>
+                                    <th class="min-w-175px">Daerah</th>
                                     <th class="min-w-175px">Catatan</th>
                                 </tr>
                                 </thead>
@@ -959,13 +961,19 @@
                     method: 'GET',
                     success: function(response) {
                         let rows = '';
+                        let catatan = '';
                         $.each(response, function(index, pengesahan) {
+                            if(pengesahan.catatan == null){
+                                catatan = 'Tiada';
+                            }
                             rows += '<tr>';
                             rows += '<td class="text-uppercase">' + pengesahan.klien.nama + '</td>';
                             rows += '<td class="text-uppercase">' + pengesahan.klien.no_kp + '</td>';
                             rows += '<td class="text-uppercase">' + pengesahan.klien.no_tel + '</td>';
                             rows += '<td class="text-uppercase">' + pengesahan.keputusan + '</td>';
-                            rows += '<td>' + pengesahan.catatan + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.negeri_pejabat + '</td>';
+                            rows += '<td class="text-uppercase">' + pengesahan.klien.daerah_pejabat + '</td>';
+                            rows += '<td>' + catatan + '</td>';
                             rows += '</tr>';
                         });
                         $('#pengesahanTable tbody').html(rows);

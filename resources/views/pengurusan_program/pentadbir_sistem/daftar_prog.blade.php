@@ -206,7 +206,7 @@
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="submit"  class="btn btn-primary">
-                                    <span class="indicator-label">Simpan</span>
+                                    <span class="indicator-label">Daftar</span>
                                     <span class="indicator-progress">Sila Tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
