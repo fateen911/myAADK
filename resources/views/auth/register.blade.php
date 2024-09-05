@@ -193,7 +193,12 @@
         </script>
 
         <script>
+            // Prevent typing numeric characters
             document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('nama').addEventListener('input', function (e) {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            });
+
                 // Restrict input to digits by listening for input event
                 document.getElementById('no_kp').addEventListener('input', function (e) {
                     this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters

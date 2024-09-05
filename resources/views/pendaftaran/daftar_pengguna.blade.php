@@ -18,10 +18,10 @@
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<script src="/assets/lang/Malay.json"></script>
 
 	<!-- Custom AADK CSS -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+	<script src="/assets/lang/Malay.json"></script>
 	<link rel="stylesheet" href="/assets/css/customAADK.css">
 
 	<style>
@@ -1106,6 +1106,16 @@
 	</script>
 
 	<script>
+		document.querySelectorAll('input[name="nama"]').forEach(function(input) {
+			input.addEventListener('input', function() {
+				this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+			});
+		});
+
+		document.getElementById('name').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+		});
+
 		document.addEventListener('DOMContentLoaded', function() {
 			// Select all elements with name 'no_kp' and 'no_tel'
 			const noKpElements = document.querySelectorAll('[name="no_kp"]');

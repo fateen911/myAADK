@@ -129,7 +129,7 @@
                 <br>
                 
                 @if ($butangMula)
-                    <a href="{{ route('klien.soalanDemografi') }}" class="status">KLIK UNTUK MULA MENJAWAB</a>
+                    <a href="{{ route('klien.soalanDemografi') }}" class="status text-black fs-4 fw-bold">KLIK UNTUK MENJAWAB -></a>
                 @else
                     <p style="color:crimson; font-size:14px;">
                         Anda tidak dibenarkan untuk menjawab soal selidik sekarang.<br>Sila cuba selepas 6 bulan dari tarikh terakhir menjawab.

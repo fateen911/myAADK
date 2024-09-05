@@ -18,11 +18,11 @@
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<script src="/assets/lang/Malay.json"></script>
 
 	<!-- Custom AADK CSS -->
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="/assets/css/customAADK.css">
+    <script src="/assets/lang/Malay.json"></script>
 
 	<style>
 		.btn-icon {
@@ -199,7 +199,7 @@
                                                                     </label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
+                                                                    <input type="text" class="form-control form-control-solid" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric"/>
                                                                     <!--end::Input-->
                                                                 </div>
                                                                 <!--end::Input group-->
@@ -335,25 +335,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Restrict input to digits by listening for input event
-            document.getElementById('no_tel').addEventListener('input', function (e) {
-                this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
-                if (this.value.length > 11) {                // Limit to 11 digits
-                    this.value = this.value.slice(0, 11);
-                }
-            });
+			// Select all elements with name 'no_kp' and 'no_tel'
+			const noTelElements = document.querySelectorAll('[name="no_tel"]');
 
-            // Add event listener to form submission
-            document.getElementById('modal_kemaskini_klien_form').addEventListener('submit', function(e) {
-                const noTel = document.getElementById('no_tel').value;
+			// Restrict input to digits for 'no_tel' elements
+			noTelElements.forEach(function(element) {
+				element.addEventListener('input', function (e) {
+					this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+					if (this.value.length > 11) {                // Limit to 11 digits
+						this.value = this.value.slice(0, 11);
+					}
+				});
+			});
 
-                // Check if no_tel is between 10 to 11 digits
-                if (noTel.length < 10 || noTel.length > 11) {
-                    alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
-                    e.preventDefault();  // Prevent form submission
-                    return false;
-                }
-            });
-        });
+			// Add event listener to form submission
+			document.getElementById('modal_kemaskini_klien_form').addEventListener('submit', function(e) {
+				let valid = true;
+
+				// Validate each 'no_tel' field
+				noTelElements.forEach(function(element) {
+					if (element.value.length < 10 || element.value.length > 11) {
+						alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+						valid = false;
+					}
+				});
+
+				if (!valid) {
+					e.preventDefault();  // Prevent form submission if any validation fails
+				}
+			});
+		});
     </script>
 @endsection
