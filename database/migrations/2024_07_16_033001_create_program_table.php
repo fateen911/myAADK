@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('tempat');
             $table->string('penganjur')->nullable();
             $table->string('nama_pegawai'); //yg terlibat sewaktu program dijalankan
-            $table->integer('no_tel_dihubungi');
+            $table->string('no_tel_dihubungi');
             $table->string('catatan')->nullable();
             $table->string('pautan_pengesahan');
             $table->string('qr_pengesahan');
