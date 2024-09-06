@@ -588,6 +588,7 @@ class ProfilKlienController extends Controller
 
     public function approveUpdateBapa(Request $request, $id)
     {
+        // dd($id);
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 1)->first();
         $warisKlien = WarisKlien::where('klien_id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();

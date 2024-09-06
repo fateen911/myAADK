@@ -1311,14 +1311,15 @@
                                                 </div>
                                                 <!--end::Input group-->
                                                 
-                                                <!--begin::Action buttons-->
+                                                <!-- begin::Action buttons -->
                                                 <div class="row py-5">
                                                     <div class="col-md-8 offset-md-4">
                                                         <div class="d-flex">
                                                             <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+
                                                             @if($requestedDataBapa)
                                                                 @if($statusBapa == 'Kemaskini')
-                                                                    <button type="submit" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
+                                                                    <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalBapa" data-target="#approvalBapa" style="background-color:#ffc107; color: white;">
                                                                         Semak Permohonan Kemaskini
                                                                     </button>
                                                                 @endif
@@ -1326,7 +1327,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!--end::Action buttons-->
+                                                <!-- end::Action buttons -->
                                             </form>
                                         </div>
                     
@@ -2818,7 +2819,6 @@
             var klien_negeri = document.getElementById("negeri_klien");
             var klien_daerah = document.getElementById("daerah_klien");
             var klien_poskod = document.getElementById("poskod_k");
-            // alert(klien_poskod.value);
 
             var alamat_bapa = document.getElementById("alamat_b");
             var negeri_bapa = document.getElementById("negeri_b");
