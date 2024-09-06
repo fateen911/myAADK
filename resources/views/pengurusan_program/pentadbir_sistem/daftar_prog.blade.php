@@ -28,6 +28,17 @@
             .d-none {
                 display: none;
             }
+            /* Hide number input spinners in WebKit browsers */
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* Hide number input spinners in Firefox */
+            input[type="number"] {
+                -moz-appearance: textfield;
+            }
         </style>
     </head>
 

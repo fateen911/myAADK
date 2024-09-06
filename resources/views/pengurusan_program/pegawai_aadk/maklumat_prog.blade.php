@@ -960,6 +960,7 @@
                     url: '/pengesahan/' + id,
                     method: 'GET',
                     success: function(response) {
+                        $('#pengesahanTable').DataTable().destroy();
                         let rows = '';
                         $.each(response, function(index, item) {
                             let catatan = item.catatan ? item.catatan : 'Tiada';  // Handle null catatan
@@ -976,6 +977,18 @@
                             rows += '</tr>';
                         });
                         $('#pengesahanTable tbody').html(rows);
+                        // Reinitialize DataTable if necessary
+                        $('#pengesahanTable').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
                     }
                 });
             }
@@ -993,6 +1006,7 @@
                     url: '/perekodan/' + id,
                     method: 'GET',
                     success: function(response) {
+                        $('#perekodanTable').DataTable().destroy();
                         let rows = '';
                         $.each(response, function(index, perekodan) {
                             let formattedDate = moment(perekodan.tarikh_perekodan).format('DD-MM-YYYY HH:mm:ss');
@@ -1003,6 +1017,17 @@
                             rows += '</tr>';
                         });
                         $('#perekodanTable tbody').html(rows);
+                        $('#perekodanTable').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
                     }
                 });
             }
