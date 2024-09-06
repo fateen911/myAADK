@@ -215,7 +215,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nombor Kad Pengenalan</span>
+                                        <span>No. Kad Pengenalan</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -311,7 +311,7 @@
                                 <div class="col-md-4 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nombor Telefon</span>
+                                        <span>No. Telefon</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                             <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -588,7 +588,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
+                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Telefon
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -833,7 +833,7 @@
                                 <div class="col-md-3 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nombor Telefon Majikan</span>
+                                        <span>No. Telefon Majikan</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                             <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                 <span class="path1"></span>
@@ -1020,7 +1020,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">No Telefon Majikan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Majikan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['no_tel_majikan'] != $pekerjaan->no_tel_majikan ? 'border-primary' : '' }}" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
@@ -1147,7 +1147,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nama</span>
+                                                            <span>Nama</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1163,7 +1163,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Kad Pengenalan</span>
+                                                            <span>No. Kad Pengenalan</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1186,7 +1186,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Telefon</span>
+                                                            <span>No. Telefon</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1209,7 +1209,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Status</span>
+                                                            <span>Status</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1229,7 +1229,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Alamat Rumah</span>
+                                                            <span>Alamat Rumah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1251,7 +1251,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Poskod</span>
+                                                            <span>Poskod</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1269,7 +1269,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Negeri</span>
+                                                            <span>Negeri</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1292,7 +1292,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Daerah</span>
+                                                            <span>Daerah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1348,7 +1348,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nama</span>
+                                                            <span>Nama</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1364,7 +1364,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Kad Pengenalan</span>
+                                                            <span>No. Kad Pengenalan</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1387,7 +1387,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Telefon</span>
+                                                            <span>No. Telefon</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1410,7 +1410,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Status</span>
+                                                            <span>Status</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1430,7 +1430,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Alamat Rumah</span>
+                                                            <span>Alamat Rumah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1452,7 +1452,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Poskod</span>
+                                                            <span>Poskod</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1470,7 +1470,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Negeri</span>
+                                                            <span>Negeri</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1493,7 +1493,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Daerah</span>
+                                                            <span>Daerah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1548,7 +1548,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Hubungan</span>
+                                                            <span>Hubungan</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1564,7 +1564,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nama</span>
+                                                            <span>Nama</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1580,7 +1580,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Kad Pengenalan</span>
+                                                            <span>No. Kad Pengenalan</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1603,7 +1603,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Nombor Telefon</span>
+                                                            <span>No. Telefon</span>
                                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                     <span class="path1"></span>
@@ -1626,7 +1626,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Status</span>
+                                                            <span>Status</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1646,7 +1646,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Alamat Rumah</span>
+                                                            <span>Alamat Rumah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1668,7 +1668,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Poskod</span>
+                                                            <span>Poskod</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1686,7 +1686,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Negeri</span>
+                                                            <span>Negeri</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1709,7 +1709,7 @@
                                                     <div class="col-md-4 text-md-start">
                                                         <!--begin::Label-->
                                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                                            <span class="required">Daerah</span>
+                                                            <span>Daerah</span>
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
@@ -1780,7 +1780,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataBapa['no_kp_bapa'] != $waris->no_kp_bapa ? 'border-primary' : '' }}" name="no_kp_bapa" value="{{ $requestedDataBapa['no_kp_bapa'] }}" readonly />
@@ -1788,7 +1788,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Telefon</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataBapa['no_tel_bapa'] != $waris->no_tel_bapa ? 'border-primary' : '' }}" name="no_tel_bapa" value="{{ $requestedDataBapa['no_tel_bapa'] }}" readonly />
@@ -1889,7 +1889,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataIbu['no_kp_ibu'] != $waris->no_kp_ibu ? 'border-primary' : '' }}" name="no_kp_ibu" value="{{ $requestedDataIbu['no_kp_ibu'] }}" readonly />
@@ -1897,7 +1897,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Telefon</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataIbu['no_tel_ibu'] != $waris->no_tel_ibu ? 'border-primary' : '' }}" name="no_tel_ibu" value="{{ $requestedDataIbu['no_tel_ibu'] }}" readonly />
@@ -2006,7 +2006,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataPenjaga['no_kp_penjaga'] != $waris->no_kp_penjaga ? 'border-primary' : '' }}" name="no_kp_penjaga" value="{{ $requestedDataPenjaga['no_kp_penjaga'] }}" readonly />
@@ -2014,7 +2014,7 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon</label>
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Telefon</label>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDataPenjaga['no_tel_penjaga'] != $waris->no_tel_penjaga ? 'border-primary' : '' }}" name="no_tel_penjaga" value="{{ $requestedDataPenjaga['no_tel_penjaga'] }}" readonly />
@@ -2149,7 +2149,7 @@
                                     <div class="col-md-4 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Nombor Telefon Pasangan</span>
+                                            <span>No. Telefon Pasangan</span>
                                             <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
                                                 <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                     <span class="path1"></span>
@@ -2411,7 +2411,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Pasangan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Pasangan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['no_tel_pasangan'] != $pasangan->no_tel_pasangan ? 'border-primary' : '' }}" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
