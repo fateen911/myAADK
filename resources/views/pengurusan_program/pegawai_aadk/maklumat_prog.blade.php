@@ -961,18 +961,17 @@
                     method: 'GET',
                     success: function(response) {
                         let rows = '';
-                        let catatan = '';
-                        $.each(response, function(index, pengesahan) {
-                            if(pengesahan.catatan == null){
-                                catatan = 'Tiada';
-                            }
+                        $.each(response, function(index, item) {
+                            let catatan = item.catatan ? item.catatan : 'Tiada';  // Handle null catatan
+
+                            // Construct table rows with the response data
                             rows += '<tr>';
-                            rows += '<td class="text-uppercase">' + pengesahan.klien.nama + '</td>';
-                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_kp + '</td>';
-                            rows += '<td class="text-uppercase">' + pengesahan.klien.no_tel + '</td>';
-                            rows += '<td class="text-uppercase">' + pengesahan.keputusan + '</td>';
-                            rows += '<td class="text-uppercase">' + pengesahan.klien.negeri_pejabat + '</td>';
-                            rows += '<td class="text-uppercase">' + pengesahan.klien.daerah_pejabat + '</td>';
+                            rows += '<td class="text-uppercase">' + item.klien + '</td>';
+                            rows += '<td class="text-uppercase">' + item.no_kp + '</td>';
+                            rows += '<td class="text-uppercase">' + item.no_tel + '</td>';
+                            rows += '<td class="text-uppercase">' + item.keputusan + '</td>';
+                            rows += '<td class="text-uppercase">' + item.negeri + '</td>';
+                            rows += '<td class="text-uppercase">' + item.daerah + '</td>';
                             rows += '<td>' + catatan + '</td>';
                             rows += '</tr>';
                         });

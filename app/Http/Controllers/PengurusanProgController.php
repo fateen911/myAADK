@@ -108,8 +108,32 @@ class PengurusanProgController extends Controller
 
     public function pengesahan($id)
     {
-        $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
-        return response()->json($pengesahan);
+        // Fetch program and klien details using Eloquent relationships
+        $pengesahan = PengesahanKehadiranProgram::with('program', 'klien')->where('program_id', $id)->get();
+
+        // Initialize empty arrays for storing negeri and daerah values
+        $responseData = [];
+
+        // Loop through each pengesahan to fetch negeri and daerah
+        foreach ($pengesahan as $item) {
+            // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+            $negeri = Negeri::where('id', $item->klien->negeri_pejabat)->first();
+            $daerah = DaerahPejabat::where('kod', $item->klien->daerah_pejabat)->first();
+
+            // Add the negeri and daerah information to each pengesahan
+            $responseData[] = [
+                'klien' => $item->klien->nama,
+                'no_kp' => $item->klien->no_kp,
+                'no_tel' => $item->klien->no_tel,
+                'keputusan' => $item->keputusan,
+                'negeri' => $negeri ? $negeri->negeri : 'N/A',
+                'daerah' => $daerah ? $daerah->daerah : 'N/A',
+                'catatan' => $item->catatan,
+            ];
+        }
+
+        // Return the response as JSON
+        return response()->json($responseData);
     }
 
     public function perekodan($id)
