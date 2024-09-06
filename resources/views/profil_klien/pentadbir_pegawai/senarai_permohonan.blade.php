@@ -81,6 +81,7 @@
                                             @php
                                                 $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user1['daerah_pejabat'])->value('senarai_daerah.daerah');
                                                 $negeri = DB::table('senarai_negeri')->where('id', $user1['negeri_pejabat'])->value('senarai_negeri.negeri');
+                                                $nama_pengemaskini = DB::table('pegawai')->where('users_id', $user1['pengemaskini'])->value('pegawai.nama');
                                             @endphp
 
                                             <tr>
@@ -88,7 +89,7 @@
                                                 <td style="text-align: center;">{{ $user1->no_kp }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">{{ $user1->pengemaskini_name ?? 'N/A' }}</td>
+                                                <td style="text-align: center;">{{ $nama_pengemaskini ?? 'N/A' }}</td>
                                                 <td style="text-align: center;">
                                                     <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">
                                                         <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>

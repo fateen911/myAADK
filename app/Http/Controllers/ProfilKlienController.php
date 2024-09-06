@@ -89,7 +89,8 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
+                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
                                     ->where(function ($query) {
                                         $query->whereIn('klien.id', function ($subQuery) {
                                             $subQuery->select('klien_id')
@@ -165,7 +166,8 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
+                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
                                     ->where(function ($query) {
                                         $query->whereIn('klien.id', function ($subQuery) {
                                             $subQuery->select('klien_id')
@@ -251,7 +253,8 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
+                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
                                     ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                     ->where(function ($query) {
                                         $query->whereIn('klien.id', function ($subQuery) {
@@ -342,7 +345,8 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
+                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
                                     ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
                                     ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                     ->where(function ($query) {
@@ -1367,11 +1371,16 @@ class ProfilKlienController extends Controller
             'negeri_kerja_pasangan' => 'nullable|string|max:255',
         ]);
 
-        // Check for default select values and set to null if needed
-        $validatedData['daerah_pasangan'] = $validatedData['daerah_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_pasangan'];
-        $validatedData['negeri_pasangan'] = $validatedData['negeri_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_pasangan'];
-        $validatedData['daerah_kerja_pasangan'] = $validatedData['daerah_kerja_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja_pasangan'];
-        $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
+        // Reusable function to check and assign null if the value is not selected
+        function checkAndAssignNull($array, $key, $default) {
+            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
+        }
+
+        // Apply the function to each field
+        $validatedData['daerah_pasangan'] = checkAndAssignNull($validatedData, 'daerah_pasangan', 'Pilih Daerah');
+        $validatedData['negeri_pasangan'] = checkAndAssignNull($validatedData, 'negeri_pasangan', 'Pilih Negeri');
+        $validatedData['daerah_kerja_pasangan'] = checkAndAssignNull($validatedData, 'daerah_kerja_pasangan', 'Pilih Daerah');
+        $validatedData['negeri_kerja_pasangan'] = checkAndAssignNull($validatedData, 'negeri_kerja_pasangan', 'Pilih Negeri');
 
         // Proceed with the existing logic
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
