@@ -41,7 +41,7 @@
         input.form-control.form-control-solid,
         textarea.form-control.form-control-solid,
         select.form-select.form-select-solid {
-            background-color: #d0d0d0; /* Darker background */
+            background-color: #e0e0e0; /* Darker background */
             color: #222222; /* Lighter text color */
         }
 
@@ -49,7 +49,7 @@
         input.form-control.form-control-solid:focus,
         textarea.form-control.form-control-solid:focus,
         select.form-select.form-select-solid:focus {
-            background-color: #e0e0e0; /* Slightly lighter on focus */
+            background-color: #d0d0d0;; /* Slightly lighter on focus */
             color: #333333; /* Darker text color */
             box-shadow: none; /* Remove Bootstrap focus shadow */
         }
@@ -260,7 +260,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$butiranKlien->jantina}}</span>
+                                        <span id="jantina" class="fs-6 form-control-plaintext">{{ $butiranKlien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +276,10 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="agama" class="fs-6 form-control-plaintext">{{$butiranKlien->agama}}</span>
+                                        @php
+                                            $agamaKlien = DB::table('senarai_agama')->where('id', $butiranKlien->agama)->value('senarai_agama.agama');
+                                        @endphp
+                                        <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +295,10 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$butiranKlien->bangsa}}</span>
+                                        @php
+                                            $bangsaKlien = DB::table('senarai_bangsa')->where('id', $butiranKlien->bangsa)->value('senarai_bangsa.bangsa');
+                                        @endphp
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -452,7 +458,10 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">{{$butiranKlien->tahap_pendidikan}}</span>
+                                    @php
+                                        $pendidikan = DB::table('senarai_pendidikan')->where('id', $butiranKlien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
+                                    @endphp
+                                    <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">{{$pendidikan}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -523,7 +532,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <span id="jantina" class="fs-6 form-control-plaintext">{{$butiranKlien->jantina}}</span>
+                                                    <span id="jantina" class="fs-6 form-control-plaintext">{{ $butiranKlien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN' }}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -531,7 +540,10 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <span id="agama" class="fs-6 form-control-plaintext">{{$butiranKlien->agama}}</span>
+                                                    @php
+                                                        $agamaKlien = DB::table('senarai_agama')->where('id', $butiranKlien->agama)->value('senarai_agama.agama');
+                                                    @endphp
+                                                    <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -539,7 +551,10 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <span id="bangsa" class="fs-6 form-control-plaintext">{{$butiranKlien->bangsa}}</span>
+                                                    @php
+                                                        $bangsaKlien = DB::table('senarai_bangsa')->where('id', $butiranKlien->bangsa)->value('senarai_bangsa.bangsa');
+                                                    @endphp
+                                                    <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -645,10 +660,9 @@
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-hide-search="true" >
                                                         <option>Pilih Tahap Pendidikan</option>
-                                                        <option value="PRA SEKOLAH" {{ $butiranKlien->tahap_pendidikan == 'PRA SEKOLAH' ? 'selected' : '' }}>PRA SEKOLAH</option>
-                                                        <option value="PENDIDIKAN RENDAH" {{ $butiranKlien->tahap_pendidikan == 'PENDIDIKAN RENDAH' ? 'selected' : '' }}>PENDIDIKAN RENDAH</option>
-                                                        <option value="PENDIDIKAN MENENGAH" {{ $butiranKlien->tahap_pendidikan == 'PENDIDIKAN MENENGAH' ? 'selected' : '' }}>PENDIDIKAN MENENGAH</option>
-                                                        <option value="PENGAJIAN TINGGI" {{ $butiranKlien->tahap_pendidikan == 'PENGAJIAN TINGGI' ? 'selected' : '' }}>PENGAJIAN TINGGI</option>
+                                                        @foreach ($tahapPendidikan as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -694,7 +708,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="status_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -710,7 +724,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="bidang_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->bidang_kerja}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->bidang_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -726,7 +740,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="nama_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_kerja}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -742,7 +756,10 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="pendapatan" class="fs-6 form-control-plaintext">{{$butiranKlien->pendapatan}}</span>
+                                    @php
+                                        $pendapatanKlien = DB::table('senarai_pendapatan')->where('id', $butiranKlien->pendapatan)->value('senarai_pendapatan.pendapatan');
+                                    @endphp
+                                    <span class="fs-6 form-control-plaintext">{{$pendapatanKlien}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -758,7 +775,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="kategori_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->kategori_majikan}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->kategori_majikan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -774,7 +791,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="nama_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_majikan}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_majikan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -790,7 +807,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="no_tel_majikan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_majikan}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_majikan}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -806,7 +823,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <!--begin::Input-->
-                                    <span id="alamat_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -901,6 +918,176 @@
                                         <h3 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
+                        
+                                    <div class="modal-body">
+                                        <form method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
+                                            @csrf
+                        
+                                            <div class="row fv-row mb-7">
+                                                <div class="col-md-4 text-md-start">
+                                                    <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-hide-search="true">
+                                                        <option>Pilih Status</option>
+                                                        <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
+                                                        <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                        
+                                            <!-- Fields to display when status is BEKERJA -->
+                                            <div id="bekerjaFields">
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}" style="text-transform: uppercase;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}" style="text-transform: uppercase;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-hide-search="true">
+                                                            <option>Pilih Julat Pendapatan</option>
+                                                            @foreach ($pendapatan as $item)
+                                                                <option value="{{ $item->id }}" {{ $butiranKlien->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-hide-search="true">
+                                                            <option>Pilih Kategori Majikan</option>
+                                                            <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
+                                                            <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                                            <option value="BADAN BERKANUN" {{ $butiranKlien->kategori_majikan == 'BADAN BERKANUN' ? 'selected' : '' }}>BADAN BERKANUN</option>
+                                                            <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                                            <option value="RAHSIA" {{ $butiranKlien->kategori_majikan == 'RAHSIA' ? 'selected' : '' }}>RAHSIA</option>
+                                                            <option value="LAIN-LAIN" {{ $butiranKlien->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" style="text-transform: uppercase;"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Majikan
+                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                    <span class="path1"></span>
+                                                                    <span class="path2"></span>
+                                                                    <span class="path3"></span>
+                                                                </i>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$butiranKlien->no_tel_majikan}}" inputmode="numeric" maxlength="11"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" style="text-transform: uppercase;">{{$butiranKlien->alamat_kerja}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$butiranKlien->poskod_kerja}}" inputmode="numeric" maxlength="5"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-hide-search="true">
+                                                            <option>Pilih Negeri</option>
+                                                            @foreach ($negeriKerja as $negeriK)
+                                                                <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja">
+                                                            <option>Pilih Daerah</option>
+                                                            @foreach ($daerahKerja as $daerahK)
+                                                                <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <!-- New field for "Status Tidak Bekerja" -->
+                                            <div id="tidakBekerjaFields" style="display:none;">
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Tidak Bekerja</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <select class="form-select form-select-solid" id="status_tidak_bekerja" name="status_tidak_bekerja" data-hide-search="true">
+                                                            <option>Pilih Status</option>
+                                                            <option value="Penganggur">PENGANGGUR</option>
+                                                            <option value="Pelajar">PELAJAR</option>
+                                                            <option value="Sakit">PESAKIT</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <div class="row fv-row mb-2">
+                                                <div class="col-md-12">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <button type="submit" class="btn btn-primary">Hantar</button>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- <div class="modal fade" id="requestPekerjaanKlien" tabindex="-1" aria-labelledby="permohonanPekerjaanKlienLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h3>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
 
                                     <div class="modal-body">
                                         <form method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
@@ -911,7 +1098,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-hide-search="true">
                                                         <option>Pilih Status</option>
                                                         <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                                         <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
@@ -941,14 +1128,11 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-hide-search="true">
                                                         <option>Pilih Julat Pendapatan</option>
-                                                        <option value="RM0-RM999" {{ $butiranKlien->pendapatan == 'RM0-RM999' ? 'selected' : '' }}>RM0-RM999</option>
-                                                        <option value="RM1000-RM1999" {{ $butiranKlien->pendapatan == 'RM1000-RM1999' ? 'selected' : '' }}>RM1000-RM1999</option>
-                                                        <option value="RM2000-RM2999" {{ $butiranKlien->pendapatan == 'RM2000-RM2999' ? 'selected' : '' }}>RM2000-RM2999</option>
-                                                        <option value="RM3000-RM3999" {{ $butiranKlien->pendapatan == 'RM3000-RM3999' ? 'selected' : '' }}>RM3000-RM3999</option>
-                                                        <option value="RM4000-RM4999" {{ $butiranKlien->pendapatan == 'RM4000-RM4999' ? 'selected' : '' }}>RM4000-RM4999</option>
-                                                        <option value="Lebih RM5000" {{ $butiranKlien->pendapatan == 'Lebih RM5000' ? 'selected' : '' }}>Lebih RM5000</option>
+                                                        @foreach ($pendapatan as $item)
+                                                            <option value="{{ $item->id }}" {{ $butiranKlien->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -957,10 +1141,13 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-hide-search="true">
                                                         <option>Pilih Kategori Majikan</option>
-                                                        <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                                        <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                                         <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                                        <option value="BADAN BERKANUN" {{ $butiranKlien->kategori_majikan == 'BADAN BERKANUN' ? 'selected' : '' }}>BADAN BERKANUN</option>
+                                                        <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                                        <option value="RAHSIA" {{ $butiranKlien->kategori_majikan == 'RAHSIA' ? 'selected' : '' }}>RAHSIA</option>
                                                         <option value="LAIN-LAIN" {{ $butiranKlien->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                     </select>
                                                 </div>
@@ -1010,7 +1197,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriKerja as $negeriK)
                                                             <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
@@ -1023,7 +1210,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                                    <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahKerja as $daerahK)
                                                             <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
@@ -1043,7 +1230,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                                
+                        </div>                                                 --}}
                         <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
@@ -1526,7 +1713,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-hide-search="true">
                                                                 <option>Pilih Status Bapa</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_bapa == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1560,7 +1747,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-hide-search="true" data-placeholder="Pilih">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_bapa == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1573,7 +1760,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih">
+                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-hide-search="true" data-placeholder="Pilih">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_bapa == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -1653,7 +1840,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-hide-search="true">
                                                                 <option>Pilih Status Ibu</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_ibu == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_ibu == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1687,7 +1874,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_ibu == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1700,7 +1887,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_ibu == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -1788,7 +1975,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-hide-search="true">
                                                                 <option>Pilih Status Penjaga</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_penjaga == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_penjaga == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1822,7 +2009,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_penjaga == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1835,7 +2022,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_penjaga == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -2129,7 +2316,7 @@
                                                 </div> 
                                                 <div class="col-md-7">
                                                     <!--begin::Select2-->
-                                                    <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-hide-search="true">
                                                         <option>Pilih Status Perkahwinan</option>
                                                         <option value="BUJANG" {{ $butiranKlien->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                                         <option value="BERKAHWIN" {{ $butiranKlien->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
@@ -2199,7 +2386,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2212,7 +2399,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahPasangan as $daerahP)
                                                             <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2241,7 +2428,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriKerjaPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2254,7 +2441,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahKerjaPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -3041,6 +3228,35 @@
                 });
             });
         });
-    </script>        
+    </script>   
+    
+    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusKerja = document.getElementById('status_kerja');
+            const bekerjaFields = document.getElementById('bekerjaFields');
+            const tidakBekerjaFields = document.getElementById('tidakBekerjaFields');
+    
+            function toggleFields() {
+                console.log('Status Kerja:', statusKerja.value); // Debugging
+                if (statusKerja.value === 'BEKERJA') {
+                    bekerjaFields.style.display = 'block';
+                    tidakBekerjaFields.style.display = 'none';
+                } else if (statusKerja.value === 'TIDAK BEKERJA') {
+                    bekerjaFields.style.display = 'none';
+                    tidakBekerjaFields.style.display = 'block';
+                } else {
+                    bekerjaFields.style.display = 'none';
+                    tidakBekerjaFields.style.display = 'none';
+                }
+            }
+    
+            // Initial check
+            toggleFields();
+    
+            // Listen for changes to the status kerja dropdown
+            statusKerja.addEventListener('change', toggleFields);
+        });
+    </script>
 </body>
 @endsection

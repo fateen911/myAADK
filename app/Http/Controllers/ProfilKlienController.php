@@ -18,6 +18,8 @@ use App\Models\KlienUpdateRequest;
 use App\Models\KeluargaKlienUpdateRequest;
 use App\Models\Pegawai;
 use App\Models\PekerjaanKlienUpdateRequest;
+use App\Models\Pendapatan;
+use App\Models\Pendidikan;
 use App\Models\RawatanKlienUpdateRequest;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
@@ -398,6 +400,8 @@ class ProfilKlienController extends Controller
         $daerahPasangan = Daerah::all()->sortBy('daerah');
         $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
+        $tahapPendidikan = Pendidikan::all();
+        $pendapatan = Pendapatan::all();
 
         // PERIBADI
         $klien = Klien::where('id', $id)->first();
@@ -441,7 +445,7 @@ class ProfilKlienController extends Controller
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
                                                                         'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa','statusBapa','updateRequestIbu','requestedDataIbu','statusIbu','updateRequestPenjaga','requestedDataPenjaga','statusPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan'));
+                                                                        'rawatan','pendapatan','tahapPendidikan'));
     }
 
     // PEGAWAI/PENTADBIR : APPROVAL CLIENT'S REQUEST
@@ -1163,6 +1167,8 @@ class ProfilKlienController extends Controller
         $daerahPasangan = Daerah::all()->sortBy('daerah');
         $negeriKerjaPasangan = Negeri::all()->sortBy('negeri');
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
+        $tahapPendidikan = Pendidikan::all();
+        $pendapatan = Pendapatan::all();
 
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1183,7 +1189,8 @@ class ProfilKlienController extends Controller
         $resultRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 3)->first();
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
-                                                        'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga'));
+                                                        'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga',
+                                                        'tahapPendidikan','pendapatan'));
     }
 
     public function muatTurunProfilDiri()
