@@ -1188,6 +1188,8 @@ class ProfilKlienController extends Controller
         $resultRequestIbu = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 2)->first();
         $resultRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 3)->first();
 
+        // dd($butiranKlien);
+
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                         'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga',
                                                         'tahapPendidikan','pendapatan'));
@@ -1222,6 +1224,8 @@ class ProfilKlienController extends Controller
             'poskod'           => 'required|string|max:5',
             'tahap_pendidikan' => 'required|string|max:255',
         ]);
+
+        // dd($validatedData);
 
         // Retrieve the existing data that cannot be updated by the user
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1296,6 +1300,7 @@ class ProfilKlienController extends Controller
     {
         $validatedData = $request->validate([
             'status_kerja'      => 'required|string|max:255',
+            'alasan_tidak_kerja'=> 'nullable|string|max:255',
             'bidang_kerja'      => 'nullable|string|max:255',
             'nama_kerja'        => 'nullable|string|max:255',
             'pendapatan'        => 'nullable|string|max:255',
@@ -1307,14 +1312,32 @@ class ProfilKlienController extends Controller
             'daerah_kerja'      => 'nullable|string|max:255',
             'negeri_kerja'      => 'nullable|string|max:255',
         ]);    
-        
-        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
-        if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
+
+        // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
+        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
+            $validatedData['bidang_kerja'] = null;
+            $validatedData['nama_kerja'] = null;
+            $validatedData['pendapatan'] = null;
+            $validatedData['kategori_majikan'] = null;
+            $validatedData['nama_majikan'] = null;
+            $validatedData['no_tel_majikan'] = null;
+            $validatedData['alamat_kerja'] = null;
+            $validatedData['poskod_kerja'] = null;
             $validatedData['daerah_kerja'] = null;
-        }
-        if ($validatedData['negeri_kerja'] === 'Pilih Negeri') {
             $validatedData['negeri_kerja'] = null;
         }
+
+        // dd($validatedData);
+
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
+        function checkAssignNull($array, $key, $default) {
+            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
+        }
+
+        // Apply the function to each field
+        $validatedData['daerah_kerja'] = checkAssignNull($validatedData, 'daerah_kerja', 'Pilih Daerah');
+        $validatedData['negeri_kerja'] = checkAssignNull($validatedData, 'negeri_kerja', 'Pilih Negeri');
+        $validatedData['alasan_tidak_kerja'] = checkAssignNull($validatedData, 'alasan_tidak_kerja', 'Pilih Alasan');
         
         $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequest = PekerjaanKlienUpdateRequest::where('klien_id', $klienId)->first();
@@ -1445,6 +1468,14 @@ class ProfilKlienController extends Controller
             'daerah_bapa'   => 'nullable|string|max:255',
             'negeri_bapa'   => 'nullable|string|max:255',
         ]);
+
+        function assignNull($array, $key, $default) {
+            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
+        }
+
+        // Apply the function to each field
+        $validatedData['daerah_bapa'] = assignNull($validatedData, 'daerah_bapa', 'Pilih Daerah');
+        $validatedData['negeri_bapa'] = assignNull($validatedData, 'negeri_bapa', 'Pilih Negeri');
         
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','1')->first();
@@ -1502,6 +1533,14 @@ class ProfilKlienController extends Controller
             'daerah_ibu' => 'nullable|string|max:255',
             'negeri_ibu' => 'nullable|string|max:255',
         ]);
+
+        function assignNull2($array, $key, $default) {
+            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
+        }
+
+        // Apply the function to each field
+        $validatedData['daerah_ibu'] = assignNull2($validatedData, 'daerah_ibu', 'Pilih Daerah');
+        $validatedData['negeri_ibu'] = assignNull2($validatedData, 'negeri_ibu', 'Pilih Negeri');
         
         $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
         $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','2')->first();
@@ -1560,6 +1599,14 @@ class ProfilKlienController extends Controller
             'daerah_penjaga'    => 'nullable|string|max:255',
             'negeri_penjaga'    => 'nullable|string|max:255',
         ]);
+
+        function assignNull3($array, $key, $default) {
+            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
+        }
+
+        // Apply the function to each field
+        $validatedData['daerah_penjaga'] = assignNull3($validatedData, 'daerah_penjaga', 'Pilih Daerah');
+        $validatedData['negeri_penjaga'] = assignNull3($validatedData, 'negeri_penjaga', 'Pilih Negeri');
 
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','3')->first();

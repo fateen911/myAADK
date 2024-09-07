@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="col-md-7 d-flex align-items-center">
                                     <!--begin::Text-->
-                                    <span id="nama" class="fs-6 form-control-plaintext">{{$butiranKlien->nama}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama}}</span>
                                     <!--end::Text-->
                                 </div>
                             </div>
@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="col-md-7 d-flex align-items-center">
                                     <!--begin::Input-->
-                                    <span id="no_kp" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="w-100">
-                                        <span id="jantina" class="fs-6 form-control-plaintext">{{ $butiranKlien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN' }}</span>
+                                        <span class="fs-6 form-control-plaintext">{{ $butiranKlien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN' }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +278,7 @@
                                         @php
                                             $agamaKlien = DB::table('senarai_agama')->where('id', $butiranKlien->agama)->value('senarai_agama.agama');
                                         @endphp
-                                        <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +297,7 @@
                                         @php
                                             $bangsaKlien = DB::table('senarai_bangsa')->where('id', $butiranKlien->bangsa)->value('senarai_bangsa.bangsa');
                                         @endphp
-                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +313,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -329,7 +329,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="status_oku" class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_oku}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -345,7 +345,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -356,7 +356,7 @@
                                     <label class="fs-6 fw-semibold form-label mt-3"><span>Nombor Telefon</span></label>
                                 </div>
                                 <div class="col-md-7">
-                                    <span id="no_tel" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel}}</span>
                                 </div>
                             </div>
                             <!--begin::Input group-->
@@ -370,7 +370,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="emel" class="fs-6 form-control-plaintext">{{$butiranKlien->emel}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->emel}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -386,7 +386,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span id="alamat_rumah" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_rumah}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_rumah}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -403,7 +403,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <span id="poskod" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod}}</span>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -460,7 +460,7 @@
                                     @php
                                         $pendidikan = DB::table('senarai_pendidikan')->where('id', $butiranKlien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
                                     @endphp
-                                    <span id="tahap_pendidikan" class="fs-6 form-control-plaintext">{{$pendidikan}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$pendidikan}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -499,7 +499,7 @@
                                     </div>
 
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('klien.requestUpdate') }}">
+                                        <form id="peribadiKlienForm" method="POST" action="{{ route('klien.requestUpdate') }}">
                                             @csrf
 
                                             <div class="row fv-row">
@@ -632,7 +632,6 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="negeri" name="negeri" data-hide-search="true">
-                                                        <option value="">Pilih Negeri</option>
                                                         @foreach ($negeri as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                                         @endforeach
@@ -645,7 +644,6 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="daerah" name="daerah" data-hide-search="true">
-                                                        <option>Pilih Daerah</option>
                                                         @foreach ($daerah as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
                                                         @endforeach
@@ -658,7 +656,6 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-hide-search="true" >
-                                                        <option>Pilih Tahap Pendidikan</option>
                                                         @foreach ($tahapPendidikan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                                         @endforeach
@@ -669,7 +666,7 @@
                                             <div class="row fv-row mb-2">
                                                 <div class="col-md-12">
                                                     <div class="d-flex justify-content-center align-items-center">
-                                                        <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        <button type="submit" id="submitBtnKlien" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
                                             </div>   
@@ -895,7 +892,7 @@
                                     </div>
                         
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
+                                        <form id="pekerjaanKlienForm" method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
                                             @csrf
                         
                                             <div class="row fv-row mb-7">
@@ -904,7 +901,6 @@
                                                 </div>
                                                 <div class="col-md-8">
                                                     <select class="form-select form-select-solid" id="status_kerja_modal" name="status_kerja" data-hide-search="true">
-                                                        <option>Pilih Status</option>
                                                         <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                                         <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
                                                     </select>
@@ -1046,7 +1042,7 @@
                                             <div class="row fv-row mb-2">
                                                 <div class="col-md-12">
                                                     <div class="d-flex justify-content-center align-items-center">
-                                                        <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        <button type="submit" id="submitBtnPekerjaan" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
                                             </div>   
@@ -3109,5 +3105,152 @@
             statusKerjaModal.addEventListener('change', toggleFields);
         });
     </script>
+
+    {{-- Compare original data with updated data --}}
+    <script>
+        document.getElementById('submitBtnKlien').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalDataKlien = {
+                no_tel: "{{ $butiranKlien->no_tel }}",
+                emel: "{{ $butiranKlien->emel }}",
+                alamat_rumah: "{{ $butiranKlien->alamat_rumah }}",
+                poskod: "{{ $butiranKlien->poskod }}",
+                negeri: "{{ $butiranKlien->negeri }}",
+                daerah: "{{ $butiranKlien->daerah }}",
+                tahap_pendidikan: "{{ $butiranKlien->tahap_pendidikan }}",
+            };
+    
+            // Get current data (input values from form)
+            const currentDataKlien = {
+                no_tel: document.getElementById('no_tel').value,
+                emel: document.getElementById('emel').value,
+                alamat_rumah: document.getElementById('alamat_rumah').value,
+                poskod: document.getElementById('poskod').value,
+                negeri: document.getElementById('negeri').value,
+                daerah: document.getElementById('daerah').value,
+                tahap_pendidikan: document.getElementById('tahap_pendidikan').value,
+            };
+    
+            // Handle poskod as a string for comparison, but check if the field is defined
+            if (originalDataKlien.poskod !== null && originalDataKlien.poskod !== undefined) {
+                originalDataKlien.poskod = originalDataKlien.poskod.toString();
+            }
+            if (currentDataKlien.poskod !== null && currentDataKlien.poskod !== undefined) {
+                currentDataKlien.poskod = currentDataKlien.poskod.toString();
+            }
+    
+            let isChanged = false;
+    
+            console.log("Checking field comparisons...");
+    
+            // Compare all fields except emel (case-insensitive comparison)
+            Object.keys(originalDataKlien).forEach(key => {
+                if (key !== 'emel') {
+                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';  
+                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';   
+    
+                    console.log(`Comparing ${key}: Original Value: ${originalValue} | Current Value: ${currentValue}`);
+    
+                    if (originalValue !== currentValue) {
+                        isChanged = true;  // Mark as changed
+                        console.log(`${key} has changed.`);
+                    }
+                }
+            });
+    
+            // Compare email case-sensitively
+            console.log(`Comparing emel: Original Value: ${originalDataKlien.emel} | Current Value: ${currentDataKlien.emel}`);
+            if (originalDataKlien.emel !== currentDataKlien.emel) {
+                isChanged = true;  // Mark as changed if email differs (case-sensitive)
+                console.log("Email has changed.");
+            }
+    
+            if (!isChanged) {
+                // Display alert if no changes are detected
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission
+                e.preventDefault(); 
+                return;
+            } else {
+                // Allow form submission if changes are detected
+                console.log("Data has changed. Submitting the form.");
+                document.getElementById('peribadiKlienForm').submit();
+            }
+        });
+    </script>
+    
+    <script>
+        document.getElementById('submitBtnPekerjaan').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                status_kerja: "{{ $butiranKlien->status_kerja }}",
+                bidang_kerja: "{{ $butiranKlien->bidang_kerja }}",
+                nama_kerja: "{{ $butiranKlien->nama_kerja }}",
+                pendapatan: "{{ $butiranKlien->pendapatan }}",
+                kategori_majikan: "{{ $butiranKlien->kategori_majikan }}",
+                nama_majikan: "{{ $butiranKlien->nama_majikan }}",
+                no_tel_majikan: "{{ $butiranKlien->no_tel_majikan }}",
+                alamat_kerja: "{{ $butiranKlien->alamat_kerja }}",
+                poskod_kerja: "{{ $butiranKlien->poskod_kerja }}",
+                negeri_kerja: "{{ $butiranKlien->negeri_kerja }}",
+                daerah_kerja: "{{ $butiranKlien->daerah_kerja }}",
+                alasan_tidak_kerja: "{{ $butiranKlien->alasan_tidak_kerja }}"  // This could be null
+            };
+    
+            // Get current form data
+            let alasan_tidak_kerja = document.getElementById('alasan_tidak_kerja') ? document.getElementById('alasan_tidak_kerja').value : '';
+            if (alasan_tidak_kerja === 'Pilih Alasan') {
+                alasan_tidak_kerja = null;  // Treat "Pilih Alasan" as null
+            }
+    
+            const currentData = {
+                status_kerja: document.getElementById('status_kerja_modal').value,
+                bidang_kerja: document.getElementById('bidang_kerja').value,
+                nama_kerja: document.getElementById('nama_kerja').value,
+                pendapatan: document.getElementById('pendapatan').value,
+                kategori_majikan: document.getElementById('kategori_majikan').value,
+                nama_majikan: document.getElementById('nama_majikan').value,
+                no_tel_majikan: document.getElementById('no_tel_majikan').value,
+                alamat_kerja: document.getElementById('alamat_kerja').value,
+                poskod_kerja: document.getElementById('poskod_kerja').value,
+                negeri_kerja: document.getElementById('negeri_kerja').value,
+                daerah_kerja: document.getElementById('daerah_kerja').value,
+                alasan_tidak_kerja: alasan_tidak_kerja  // Use the updated value
+            };
+    
+            // Handle poskod_kerja as a string for comparison
+            if (originalData.poskod_kerja !== null) {
+                originalData.poskod_kerja = originalData.poskod_kerja.toString();
+            }
+            if (currentData.poskod_kerja !== null) {
+                currentData.poskod_kerja = currentData.poskod_kerja.toString();
+            }
+
+            let isChanged = false;
+    
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+    
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+    
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('pekerjaanKlienForm').submit();
+            }
+        });
+    </script>
+    
 </body>
 @endsection
