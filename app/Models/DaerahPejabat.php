@@ -14,7 +14,10 @@ class DaerahPejabat extends Model
     protected $fillable = [
         'id',
         'kod',
-        'daerah',
         'negeri_id',
+        'daerah',
+        'alamat',
+        'no_tel',
+        'no_fax',
     ];
 }

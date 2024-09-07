@@ -37,6 +37,24 @@
             align-items: center; /* Center contents horizontally */
         }
 
+        /* General styles for input, textarea, and select */
+        input.form-control.form-control-solid,
+        textarea.form-control.form-control-solid,
+        select.form-select.form-select-solid {
+            background-color: #d0d0d0; /* Darker background */
+            color: #222222; /* Lighter text color */
+        }
+
+        /* Focus state for input, textarea, and select */
+        input.form-control.form-control-solid:focus,
+        textarea.form-control.form-control-solid:focus,
+        select.form-select.form-select-solid:focus {
+            background-color: #e0e0e0; /* Slightly lighter on focus */
+            color: #333333; /* Darker text color */
+            box-shadow: none; /* Remove Bootstrap focus shadow */
+        }
+
+
         .form-control-plaintext {
             margin-left: 10px;
             display: inline-block;
@@ -599,7 +617,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-hide-search="true">
                                                         <option value="">Pilih Negeri</option>
                                                         @foreach ($negeri as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -612,7 +630,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerah as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
@@ -625,7 +643,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" >
+                                                    <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-hide-search="true" >
                                                         <option>Pilih Tahap Pendidikan</option>
                                                         <option value="PRA SEKOLAH" {{ $butiranKlien->tahap_pendidikan == 'PRA SEKOLAH' ? 'selected' : '' }}>PRA SEKOLAH</option>
                                                         <option value="PENDIDIKAN RENDAH" {{ $butiranKlien->tahap_pendidikan == 'PENDIDIKAN RENDAH' ? 'selected' : '' }}>PENDIDIKAN RENDAH</option>
