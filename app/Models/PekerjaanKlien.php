@@ -14,6 +14,7 @@ class PekerjaanKlien extends Model
     protected $fillable = [
         'klien_id',
         'status_kerja',
+        'alasan_tidak_kerja',
         'bidang_kerja',
         'nama_kerja',
         'pendapatan',

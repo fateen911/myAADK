@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('klien_id');
             $table->string('status_kerja');
+            $table->string('alasan_tidak_kerja')->nullable();
             $table->string('bidang_kerja')->nullable();
             $table->string('nama_kerja')->nullable();
             $table->string('pendapatan')->nullable();

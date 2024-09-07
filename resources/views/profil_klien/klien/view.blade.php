@@ -54,7 +54,6 @@
             box-shadow: none; /* Remove Bootstrap focus shadow */
         }
 
-
         .form-control-plaintext {
             margin-left: 10px;
             display: inline-block;
@@ -857,7 +856,7 @@
                                         <label class="fs-6 fw-semibold form-label mt-3">Status Tidak Bekerja</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <span id="status_kerja" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kerja}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alasan_tidak_kerja}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1031,14 +1030,14 @@
                                             <div id="tidakBekerjaFieldsModal" style="display:none;">
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Tidak Bekerja</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="status_tidak_bekerja" name="status_tidak_bekerja" data-hide-search="true">
-                                                            <option>Pilih Status</option>
-                                                            <option value="Penganggur">PENGANGGUR</option>
-                                                            <option value="Pelajar">PELAJAR</option>
-                                                            <option value="Sakit">PESAKIT</option>
+                                                        <select class="form-select form-select-solid" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-hide-search="true">
+                                                            <option>Pilih Alasan</option>
+                                                            <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
+                                                            <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
+                                                            <option value="PESAKIT" {{ $butiranKlien->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
                                                         </select>
                                                     </div>
                                                 </div>
