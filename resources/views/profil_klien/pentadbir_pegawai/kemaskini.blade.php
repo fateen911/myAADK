@@ -40,19 +40,27 @@
 
         /* General styles for input, textarea, and select */
         input.form-control.form-control-solid,
-        textarea.form-control.form-control-solid,
-        select.form-select.form-select-solid {
-            background-color: #e0e0e0; /* Darker background */
-            color: #222222; /* Lighter text color */
+        textarea.form-control.form-control-solid {
+            background-color: #e0e0e0;
+            color: #45505b;
         }
 
         /* Focus state for input, textarea, and select */
         input.form-control.form-control-solid:focus,
-        textarea.form-control.form-control-solid:focus,
-        select.form-select.form-select-solid:focus {
-            background-color: #d0d0d0;; /* Slightly lighter on focus */
-            color: #333333; /* Darker text color */
-            box-shadow: none; /* Remove Bootstrap focus shadow */
+        textarea.form-control.form-control-solid:focus {
+            background-color: #d0d0d0;
+            color: #333333;
+            box-shadow: none;
+        }
+
+        .form-select.custom-select {
+            background-color: #e0e0e0 !important;
+            color: #222222 !important;
+        }
+
+        .form-select.custom-select option {
+            background-color: #f5f5f5 !important;
+            color: #222222 !important;
         }
 
         .form-control-plaintext {
@@ -381,7 +389,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid" id="negeri_klien" name="negeri_klien" data-hide-search="true" data-placeholder="Pilih negeri">
+                                        <select class="form-select form-select-solid custom-select" id="negeri_klien" name="negeri_klien"  data-control="select2" data-hide-search="true">
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
@@ -399,7 +407,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid" id="daerah_klien" name="daerah_klien" data-hide-search="true" data-placeholder="Pilih daerah">
+                                        <select class="form-select form-select-solid custom-select" id="daerah_klien" name="daerah_klien"  data-control="select2" data-hide-search="true">
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
@@ -417,7 +425,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-hide-search="true" >
+                                        <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan"  data-control="select2" data-hide-search="true" >
                                             @foreach ($tahapPendidikan as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                             @endforeach
@@ -490,6 +498,10 @@
                                                     $requestedNegeriRumahKlien = DB::table('senarai_negeri')->where('id', $requestedDataKlien['negeri'])->value('senarai_negeri.negeri');
                                                     $daerahRumahKlien = DB::table('senarai_daerah')->where('id', $klien->daerah)->value('senarai_daerah.daerah');
                                                     $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $klien->negeri)->value('senarai_negeri.negeri');
+                                                    $bangsaKlien = DB::table('senarai_bangsa')->where('id', $klien->bangsa)->value('senarai_bangsa.bangsa');
+                                                    $agamaKlien = DB::table('senarai_agama')->where('id', $klien->agama)->value('senarai_agama.agama');
+                                                    $requestedPendidikan = DB::table('senarai_pendidikan')->where('id', $requestedDataKlien['tahap_pendidikan'])->value('senarai_pendidikan.pendidikan');
+                                                    $pendidikanKlien = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
                                                 @endphp
                                         
                                                 <div class="row fv-row">
@@ -521,7 +533,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina}}</span>
+                                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN'}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -529,7 +541,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="agama" class="fs-6 form-control-plaintext">{{$klien->agama}}</span>
+                                                        <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">
@@ -537,7 +549,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
+                                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">
@@ -562,10 +574,6 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ ($requestedDataKlien['no_tel'] ?? '') != $klien->no_tel ? 'border-primary' : '' }}" name="no_tel" value="{{ $requestedDataKlien['no_tel'] ?? '' }}" readonly />
-
-                                                        @if (($requestedDataKlien['no_tel'] ?? '') != $klien->no_tel)
-                                                            <i class="ki-duotone ki-warning-2 text-danger fs-6 position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);" data-bs-toggle="tooltip" title="This field has been modified by the client."></i>
-                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -621,7 +629,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['tahap_pendidikan'] != $klien->tahap_pendidikan ? 'border-primary' : '' }}" name="tahap_pendidikan" value="{{ $requestedDataKlien['tahap_pendidikan'] }}" readonly />
+                                                        <input type="text" class="form-control form-control-solid {{ $requestedPendidikan != $pendidikanKlien ? 'border-primary' : '' }}" name="tahap_pendidikan" value="{{ $requestedPendidikan }}" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -691,7 +699,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <!--begin::Select2-->
-                                    <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
+                                    <select class="form-select form-select-solid custom-select" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
                                         <option value="BEKERJA" {{ $pekerjaan->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                         <option value="TIDAK BEKERJA" {{ $pekerjaan->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
                                     </select>
@@ -699,195 +707,216 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Bidang Pekerjaan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" style="text-transform: uppercase;"/>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nama Pekerjaan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}" style="text-transform: uppercase;"/>
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Pendapatan (RM)</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
-                                        <option>Pilih Julat Pendapatan</option>
-                                        @foreach ($pendapatan as $item)
-                                            <option value="{{ $item->id }}" {{ $pekerjaan->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
-                                        @endforeach
-                                    </select>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Kategori Majikan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
-                                        <option>Pilih Kategori Majikan</option>
-                                        <option value="KERAJAAN" {{ $pekerjaan->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
-                                        <option value="SWASTA" {{ $pekerjaan->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
-                                        <option value="LAIN-LAIN" {{ $pekerjaan->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
-                                    </select>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Nama Majikan</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" style="text-transform: uppercase;"/>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>No. Telefon Majikan</span>
-                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                            </i>
-                                        </span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" inputmode="numeric"/>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Alamat Tempat Kerja</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <!--begin::Input-->
-                                    <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" style="text-transform: uppercase;">{{$pekerjaan->alamat_kerja}}</textarea>
-                                    <!--end::Input-->
-                                </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Poskod</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" inputmode="numeric"/>
-                                        <!--end::Select2-->
+
+                            <!-- Fields to display when status is BEKERJA -->
+                            <div id="bekerjaFields">
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Bidang Pekerjaan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" style="text-transform: uppercase;"/>
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Negeri</span>
-                                    </label>
-                                    <!--end::Label-->
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nama Pekerjaan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}" style="text-transform: uppercase;"/>
+                                    </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
-                                            <option>Pilih negeri</option>
-                                            @foreach ($negeriKerja as $negeriK)
-                                                <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Pendapatan (RM)</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                            <option>Pilih Julat Pendapatan</option>
+                                            @foreach ($pendapatan as $item)
+                                                <option value="{{ $item->id }}" {{ $pekerjaan->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
                                             @endforeach
                                         </select>
-                                        <!--end::Select2-->
+                                        <!--end::Input-->
                                     </div>
                                 </div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row fv-row mb-7">
-                                <div class="col-md-3 text-md-start">
-                                    <!--begin::Label-->
-                                    <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Daerah</span>
-                                    </label>
-                                    <!--end::Label-->
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                            <option>Pilih daerah</option>
-                                            @foreach ($daerahKerja as $daerahK)
-                                                <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
-                                            @endforeach
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Kategori Majikan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                            <option>Pilih Kategori Majikan</option>
+                                            <option value="KERAJAAN" {{ $pekerjaan->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                            <option value="SWASTA" {{ $pekerjaan->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                            <option value="LAIN-LAIN" {{ $pekerjaan->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                         </select>
-                                        <!--end::Select2-->
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Nama Majikan</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" style="text-transform: uppercase;"/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>No. Telefon Majikan</span>
+                                            <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid" id="no_tel_majikan" name="no_tel_majikan" value="{{$pekerjaan->no_tel_majikan}}" inputmode="numeric"/>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Alamat Tempat Kerja</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--begin::Input-->
+                                        <textarea class="form-control form-control-solid" id="alamat_kerja" name="alamat_kerja" style="text-transform: uppercase;">{{$pekerjaan->alamat_kerja}}</textarea>
+                                        <!--end::Input-->
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Poskod</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" inputmode="numeric"/>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Negeri</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                <option>Pilih negeri</option>
+                                                @foreach ($negeriKerja as $negeriK)
+                                                    <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <!--begin::Label-->
+                                        <label class="fs-6 fw-semibold form-label mt-3">
+                                            <span>Daerah</span>
+                                        </label>
+                                        <!--end::Label-->
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="w-100">
+                                            <!--begin::Select2-->
+                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                                <option>Pilih daerah</option>
+                                                @foreach ($daerahKerja as $daerahK)
+                                                    <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Select2-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+
+                            <!-- New field for status is TIDAK BEKERJA -->
+                            <div id="tidakBekerjaFields" style="display:none;">
+                                <div class="row fv-row mb-7">
+                                    <div class="col-md-3 text-md-start">
+                                        <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="true">
+                                            <option>Pilih Alasan</option>
+                                            <option value="PENGANGGUR" {{ $pekerjaan->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
+                                            <option value="PELAJAR" {{ $pekerjaan->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
+                                            <option value="PESAKIT" {{ $pekerjaan->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Input group-->
 
                             <!--begin::Action buttons-->
                             <div class="row py-5">
@@ -925,6 +954,8 @@
                                                     $requestedNegeriKerja = DB::table('senarai_negeri')->where('id', $requestedDataPekerjaan['negeri_kerja'])->value('senarai_negeri.negeri');
                                                     $daerahKerja = DB::table('senarai_daerah')->where('id', $pekerjaan->daerah_kerja)->value('senarai_daerah.daerah');
                                                     $negeriKerja = DB::table('senarai_negeri')->where('id', $pekerjaan->negeri_kerja)->value('senarai_negeri.negeri');
+                                                    $requestedPendapatan = DB::table('senarai_pendapatan')->where('id', $requestedDataPekerjaan['pendapatan'])->value('senarai_pendapatan.pendapatan');
+                                                    $pendapatan = DB::table('senarai_pendapatan')->where('id', $pekerjaan->pendapatan)->value('senarai_pendapatan.pendapatan');
                                                 @endphp
                                         
                                                 <div class="row fv-row mb-7">
@@ -932,87 +963,103 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['status_kerja'] != $pekerjaan->status_kerja ? 'border-primary' : '' }}" name="status_kerja" value="{{ $requestedDataPekerjaan['status_kerja'] }}" readonly />
+                                                        <input type="text" id="status_kerja_modal" class="form-control form-control-solid {{ $requestedDataPekerjaan['status_kerja'] != $pekerjaan->status_kerja ? 'border-primary' : '' }}" name="status_kerja" value="{{ $requestedDataPekerjaan['status_kerja'] }}" readonly />
                                                     </div>
                                                 </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
+
+                                                <!-- Fields to display when status is BEKERJA -->
+                                                <div id="bekerjaFieldsModal">
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['bidang_kerja'] != $pekerjaan->bidang_kerja ? 'border-primary' : '' }}" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['bidang_kerja'] != $pekerjaan->bidang_kerja ? 'border-primary' : '' }}" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_kerja'] != $pekerjaan->nama_kerja ? 'border-primary' : '' }}" name="nama_kerja" value="{{ $requestedDataPekerjaan['nama_kerja'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedPendapatan != $pendapatan ? 'border-primary' : '' }}" name="pendapatan" value="{{ $requestedPendapatan }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['kategori_majikan'] != $pekerjaan->kategori_majikan ? 'border-primary' : '' }}" name="kategori_majikan" value="{{ $requestedDataPekerjaan['kategori_majikan'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_majikan'] != $pekerjaan->nama_majikan ? 'border-primary' : '' }}" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Majikan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['no_tel_majikan'] != $pekerjaan->no_tel_majikan ? 'border-primary' : '' }}" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-primary' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['poskod_kerja'] != $pekerjaan->poskod_kerja ? 'border-primary' : '' }}" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerja != $negeriKerja ? 'border-primary' : '' }}" name="negeri_kerja" value="{{ $requestedNegeriKerja }}" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerja != $daerahKerja ? 'border-primary' : '' }}" name="daerah_kerja" value="{{ $requestedDaerahKerja }}" readonly />
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_kerja'] != $pekerjaan->nama_kerja ? 'border-primary' : '' }}" name="nama_kerja" value="{{ $requestedDataPekerjaan['nama_kerja'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['pendapatan'] != $pekerjaan->pendapatan ? 'border-primary' : '' }}" name="pendapatan" value="{{ $requestedDataPekerjaan['pendapatan'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['kategori_majikan'] != $pekerjaan->kategori_majikan ? 'border-primary' : '' }}" name="kategori_majikan" value="{{ $requestedDataPekerjaan['kategori_majikan'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_majikan'] != $pekerjaan->nama_majikan ? 'border-primary' : '' }}" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Majikan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['no_tel_majikan'] != $pekerjaan->no_tel_majikan ? 'border-primary' : '' }}" name="no_tel_majikan" value="{{ $requestedDataPekerjaan['no_tel_majikan'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-primary' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['poskod_kerja'] != $pekerjaan->poskod_kerja ? 'border-primary' : '' }}" name="poskod_kerja" value="{{ $requestedDataPekerjaan['poskod_kerja'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerja != $negeriKerja ? 'border-primary' : '' }}" name="negeri_kerja" value="{{ $requestedNegeriKerja }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerja != $daerahKerja ? 'border-primary' : '' }}" name="daerah_kerja" value="{{ $requestedDaerahKerja }}" readonly />
+
+                                                <!-- New field for status is TIDAK BEKERJA -->
+                                                <div id="tidakBekerjaFieldsModal" style="display:none;">
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['alasan_tidak_kerja'] != $pekerjaan->alasan_tidak_kerja ? 'border-primary' : '' }}" name="alasan_tidak_kerja" value="{{ $requestedDataPekerjaan['alasan_tidak_kerja'] }}" readonly />
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -1172,7 +1219,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <!--begin::Input-->
-                                                        <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Bapa</option>
                                                             <option value="HIDUP" {{ $waris->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                             <option value="MENINGGAL DUNIA" {{ $waris->status_bapa == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1233,7 +1280,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_bapa == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1256,7 +1303,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_bapa == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1373,7 +1420,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <!--begin::Input-->
-                                                        <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Ibu</option>
                                                             <option value="HIDUP" {{ $waris->status_ibu == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                             <option value="MENINGGAL DUNIA" {{ $waris->status_ibu == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1434,7 +1481,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_ibu == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1457,7 +1504,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_ibu == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1589,7 +1636,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <!--begin::Input-->
-                                                        <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Penjaga</option>
                                                             <option value="HIDUP" {{ $waris->status_penjaga == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                             <option value="MENINGGAL DUNIA" {{ $waris->status_penjaga == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1650,7 +1697,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_penjaga == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1673,7 +1720,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_penjaga == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -2071,7 +2118,7 @@
                                 <div class="col-md-8">
                                     <div class="d-flex mt-3">
                                         <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
+                                        <select class="form-select form-select-solid custom-select" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
                                             <option value="BUJANG" {{ $pasangan->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                             <option value="BERKAHWIN" {{ $pasangan->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
                                             <option value="DUDA/JANDA/BALU" {{ $pasangan->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>
@@ -2189,7 +2236,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                 <option>Pilih Negeri</option>
                                                 @foreach ($negeriPasangan as $negeriP)
                                                     <option value="{{ $negeriP->id }}" {{ $pasangan->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->negeri }}</option>
@@ -2212,7 +2259,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                 <option>Pilih Daerah</option>
                                                 @foreach ($daerahPasangan as $daerahP)
                                                     <option value="{{ $daerahP->id }}" {{ $pasangan->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2270,7 +2317,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
                                                 <option>Pilih Negeri</option>
                                                 @foreach ($negeriKerjaPasangan as $negeriKP)
                                                     <option value="{{ $negeriKP->id }}" {{ $pasangan->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
@@ -2293,7 +2340,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
                                                 <option>Pilih Daerah</option>
                                                 @foreach ($daerahKerjaPasangan as $daerahKP)    
                                                     <option value="{{ $daerahKP->id }}" {{ $pasangan->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
@@ -2665,7 +2712,17 @@
 
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    {{-- Script for select2 --}}
+    <script>
+        $(document).ready(function() {
+			$('.js-example-basic-single').select2();
+		});
+    </script>
+
+    {{-- Calculate umur based on IC --}}
     <script>
         function calculateAgeFromIC() {
             let icNumber = document.getElementById('no_kp').textContent.trim();
@@ -2699,6 +2756,7 @@
         });
     </script>
 
+    {{-- Success / Error Message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Check if there is a flash message
@@ -2733,6 +2791,7 @@
         });
     </script>
 
+    {{-- Open modal nased on data-target --}}
     <script>
         document.querySelectorAll('.modal-trigger').forEach(function(trigger) {
             trigger.addEventListener('click', function() {
@@ -2747,6 +2806,7 @@
         });
     </script>
 
+    {{-- Checkbox alamat --}}
     <script>
         // Store initial values in variables
         var initialAlamatBapa = document.getElementById("alamat_b").value;
@@ -2896,7 +2956,7 @@
 
                 // Trigger select2 update if using select2
                 if ($(negeri_penjaga).data('select2')) {
-                    $(negeri_penjaga).val(initialNegeriaPenjaga).trigger('change.select2');
+                    $(negeri_penjaga).val(initialNegeriPenjaga).trigger('change.select2');
                 }
                 if ($(daerah_penjaga).data('select2')) {
                     $(daerah_penjaga).val(initialDaerahPenjaga).trigger('change.select2');
@@ -2999,6 +3059,60 @@
             });
         });
     </script> 
+
+    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusKerja = $('#status_kerja');
+            const bekerjaFields = document.getElementById('bekerjaFields');
+            const tidakBekerjaFields = document.getElementById('tidakBekerjaFields');
+
+            // Function to show or hide fields based on status_kerja
+            function toggleFields() {
+                const value = statusKerja.val(); // Use val() for Select2
+                if (value === 'BEKERJA') {
+                    bekerjaFields.style.display = 'block';
+                    tidakBekerjaFields.style.display = 'none';
+                } else if (value === 'TIDAK BEKERJA') {
+                    bekerjaFields.style.display = 'none';
+                    tidakBekerjaFields.style.display = 'block';
+                }
+            }
+
+            // Trigger the function when the page loads
+            toggleFields();
+
+            // Add event listener for Select2 change event
+            statusKerja.on('change.select2', function() {
+                toggleFields();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusKerjaModal = document.getElementById('status_kerja_modal');
+            const bekerjaFields = document.getElementById('bekerjaFieldsModal');
+            const tidakBekerjaFields = document.getElementById('tidakBekerjaFieldsModal');
+    
+            function toggleFields() 
+            {
+                console.log('Status Kerja Modal:', statusKerjaModal.value); // Debugging
+
+                if (statusKerjaModal.value === 'BEKERJA') {
+                    bekerjaFields.style.display = 'block';
+                    tidakBekerjaFields.style.display = 'none';
+                } else if (statusKerjaModal.value === 'TIDAK BEKERJA') {
+                    bekerjaFields.style.display = 'none';
+                    tidakBekerjaFields.style.display = 'block';
+                } else {
+                    bekerjaFields.style.display = 'none';
+                    tidakBekerjaFields.style.display = 'none';
+                }
+            }
+    
+            // Initial check
+            toggleFields();
+        });
+    </script>
     
     {{-- Compare original data with updated data --}}
     <script>
@@ -3075,22 +3189,22 @@
         });
     </script>
 
-    {{-- <script>
+    <script>
         document.getElementById('submitBtnPekerjaan').addEventListener('click', function (e) {
             // Get original data (fetched from server/database)
             const originalData = {
-                status_kerja: "{{ $butiranKlien->status_kerja }}",
-                bidang_kerja: "{{ $butiranKlien->bidang_kerja }}",
-                nama_kerja: "{{ $butiranKlien->nama_kerja }}",
-                pendapatan: "{{ $butiranKlien->pendapatan }}",
-                kategori_majikan: "{{ $butiranKlien->kategori_majikan }}",
-                nama_majikan: "{{ $butiranKlien->nama_majikan }}",
-                no_tel_majikan: "{{ $butiranKlien->no_tel_majikan }}",
-                alamat_kerja: "{{ $butiranKlien->alamat_kerja }}",
-                poskod_kerja: "{{ $butiranKlien->poskod_kerja }}",
-                negeri_kerja: "{{ $butiranKlien->negeri_kerja }}",
-                daerah_kerja: "{{ $butiranKlien->daerah_kerja }}",
-                alasan_tidak_kerja: "{{ $butiranKlien->alasan_tidak_kerja }}"  // This could be null
+                status_kerja: "{{ $pekerjaan->status_kerja }}",
+                bidang_kerja: "{{ $pekerjaan->bidang_kerja }}",
+                nama_kerja: "{{ $pekerjaan->nama_kerja }}",
+                pendapatan: "{{ $pekerjaan->pendapatan }}",
+                kategori_majikan: "{{ $pekerjaan->kategori_majikan }}",
+                nama_majikan: "{{ $pekerjaan->nama_majikan }}",
+                no_tel_majikan: "{{ $pekerjaan->no_tel_majikan }}",
+                alamat_kerja: "{{ $pekerjaan->alamat_kerja }}",
+                poskod_kerja: "{{ $pekerjaan->poskod_kerja }}",
+                negeri_kerja: "{{ $pekerjaan->negeri_kerja }}",
+                daerah_kerja: "{{ $pekerjaan->daerah_kerja }}",
+                alasan_tidak_kerja: "{{ $pekerjaan->alasan_tidak_kerja }}"  // This could be null
             };
 
             // Get current form data
@@ -3100,7 +3214,7 @@
             }
 
             const currentData = {
-                status_kerja: document.getElementById('status_kerja_modal').value,
+                status_kerja: document.getElementById('status_kerja').value,
                 bidang_kerja: document.getElementById('bidang_kerja').value,
                 nama_kerja: document.getElementById('nama_kerja').value,
                 pendapatan: document.getElementById('pendapatan').value,
@@ -3146,6 +3260,6 @@
                 document.getElementById('pekerjaanKlienForm').submit();
             }
         });
-    </script> --}}
+    </script>
 </body>     
 @endsection

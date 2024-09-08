@@ -23,43 +23,43 @@
         .tab-pane {
             display: flex;
             justify-content: center;
-            align-items: start; /* Change to 'center' if you want vertical centering */
-            min-height: 100vh; /* Ensure it takes full viewport height if needed */
+            align-items: start; 
+            min-height: 100vh; 
         }
 
         /* Centered form settings */
         .centered-form {
             width: 100%;
-            padding-left: 50px; /* Add some padding for better appearance */
+            padding-left: 50px; 
             padding-right: 50px;
-            box-sizing: border-box; /* Ensure padding doesn't increase form size */
+            box-sizing: border-box; 
             flex-direction: column;
-            align-items: center; /* Center contents horizontally */
+            align-items: center; 
         }
 
         /* General styles for input, textarea, and select */
         input.form-control.form-control-solid,
         textarea.form-control.form-control-solid {
-            background-color: #e0e0e0; /* Uniform background */
-            color: #222222; /* Uniform text color */
+            background-color: #e0e0e0;
+            color: #45505b;
         }
 
         /* Focus state for input, textarea, and select */
         input.form-control.form-control-solid:focus,
         textarea.form-control.form-control-solid:focus {
-            background-color: #d0d0d0; /* Slightly lighter on focus */
-            color: #333333; /* Darker text color on focus */
-            box-shadow: none; /* Remove Bootstrap focus shadow */
+            background-color: #d0d0d0;
+            color: #333333;
+            box-shadow: none;
         }
 
         .form-select.custom-select {
-            background-color: #e0e0e0 !important; /* Change background */
-            color: #222222 !important; /* Ensure text color changes */
+            background-color: #e0e0e0 !important;
+            color: #222222 !important;
         }
 
         .form-select.custom-select option {
-            background-color: #f5f5f5 !important; /* Change option background */
-            color: #222222 !important; /* Ensure text color */
+            background-color: #f5f5f5 !important;
+            color: #222222 !important;
         }
 
         .form-control-plaintext {
@@ -73,24 +73,24 @@
         }
 
         .btn-light-warning {
-            background-color: #faf5d6; /* A light version of the warning color */
-            color: #ffbd07; /* Bootstrap warning color */
-            padding: 0.75rem 0.75rem; /* Same padding as Bootstrap buttons */
-            border-radius: 0.25rem; /* Same border radius as Bootstrap buttons */
-            display: inline-block; /* To ensure it behaves like a button */
-            text-align: center; /* Center the text */
+            background-color: #faf5d6;
+            color: #ffbd07;
+            padding: 0.75rem 0.75rem;
+            border-radius: 0.25rem;
+            display: inline-block;
+            text-align: center;
             margin-left: 10px;
         }
 
         .btn-light-warning:hover,
         .btn-light-warning:focus,
         .btn-light-warning:active {
-            background-color: #faf5d6; /* Same light warning color */
-            color: #ffbd07; /* Same warning color for text */
+            background-color: #faf5d6;
+            color: #ffbd07; 
         }
 
         .scrollable-container {
-            max-height: 375px; /* Adjust the height as needed */
+            max-height: 375px; 
             overflow-y: auto;
         }
 
@@ -639,7 +639,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid custom-select bg-light-dark" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
                                                         @foreach ($negeri as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                                         @endforeach
@@ -2308,6 +2308,13 @@
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+    {{-- Script for select2 --}}
+    <script>
+        $(document).ready(function() {
+			$('.js-example-basic-single').select2();
+		});
+    </script>
+    
     {{-- Success / Error Message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -3095,31 +3102,29 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            const statusKerjaModal = document.getElementById('status_kerja_modal');
+            const statusKerja = $('#status_kerja_modal');
             const bekerjaFields = document.getElementById('bekerjaFieldsModal');
             const tidakBekerjaFields = document.getElementById('tidakBekerjaFieldsModal');
-    
-            function toggleFields() 
-            {
-                console.log('Status Kerja Modal:', statusKerjaModal.value); // Debugging
 
-                if (statusKerjaModal.value === 'BEKERJA') {
+            // Function to show or hide fields based on status_kerja
+            function toggleFields() {
+                const value = statusKerja.val(); // Use val() for Select2
+                if (value === 'BEKERJA') {
                     bekerjaFields.style.display = 'block';
                     tidakBekerjaFields.style.display = 'none';
-                } else if (statusKerjaModal.value === 'TIDAK BEKERJA') {
+                } else if (value === 'TIDAK BEKERJA') {
                     bekerjaFields.style.display = 'none';
                     tidakBekerjaFields.style.display = 'block';
-                } else {
-                    bekerjaFields.style.display = 'none';
-                    tidakBekerjaFields.style.display = 'none';
                 }
             }
     
             // Initial check
             toggleFields();
     
-            // Listen for changes to the status kerja dropdown
-            statusKerjaModal.addEventListener('change', toggleFields);
+            // Add event listener for Select2 change event
+            statusKerja.on('change.select2', function() {
+                toggleFields();
+            });
         });
     </script>
 
