@@ -2323,6 +2323,16 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+
+            // Check if there is a flash error message
+            @if(session('errorKlien'))
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Tidak Berjaya!',
+                    text: '{!! session('errorKlien') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 

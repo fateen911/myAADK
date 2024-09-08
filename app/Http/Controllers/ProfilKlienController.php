@@ -1214,18 +1214,22 @@ class ProfilKlienController extends Controller
 
     public function KlienRequestUpdate(Request $request)
     {
-        // Validation rules for fields that users can update
-        $validatedData = $request->validate([
-            'no_tel'           => 'nullable|string|max:11',
-            'emel'             => 'nullable|email',
-            'alamat_rumah'     => 'required|string|max:255',
-            'daerah'           => 'required|string|max:255',
-            'negeri'           => 'required|string|max:255',
-            'poskod'           => 'required|string|max:5',
-            'tahap_pendidikan' => 'required|string|max:255',
-        ]);
-
-        // dd($validatedData);
+        try {
+            // Validation rules for fields that users can update
+            $validatedData = $request->validate([
+                'no_tel'           => 'nullable|string|max:11',
+                'emel'             => 'nullable|email',
+                'alamat_rumah'     => 'required|string|max:255',
+                'daerah'           => 'required|string|max:255',
+                'negeri'           => 'required|string|max:255',
+                'poskod'           => 'required|string|max:5',
+                'tahap_pendidikan' => 'required|string|max:255',
+            ]);
+        } 
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorKlien', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul.');
+        }
 
         // Retrieve the existing data that cannot be updated by the user
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1256,6 +1260,7 @@ class ProfilKlienController extends Controller
         $updateRequest = KlienUpdateRequest::where('klien_id', $klienId)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $klienId)->first();
 
+        // Handle the update logic
         if ($updateRequest && $sejarahProfil) 
         {
             // Both $updateRequest and $sejarahProfil exist, update them
@@ -1295,6 +1300,7 @@ class ProfilKlienController extends Controller
 
         return redirect()->back()->with('success', 'Permohonan kemaskini profil diri telah dihantar untuk semakan.');
     }
+
 
     public function pekerjaanKlienRequestUpdate(Request $request)
     {
