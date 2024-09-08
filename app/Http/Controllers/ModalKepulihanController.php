@@ -19,7 +19,7 @@ class ModalKepulihanController extends Controller
         $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
         $clientId = $klien->id;
         $sixMonthsAgo = Carbon::now()->subMonths(6);
-       
+
         // Fetch the latest record from keputusan_kepulihan_klien for this client within 6 months
         $latestRecordKeputusan = DB::table('keputusan_kepulihan_klien')
                         ->where('klien_id', $clientId)
@@ -36,9 +36,9 @@ class ModalKepulihanController extends Controller
         $butangMula = false;
 
         if (!$latestRecordKeputusan || $latestRecordKeputusan->status == 'Belum Selesai') {
-            // If there is no record, the client can click the button or status is Belum Selesai 
+            // If there is no record, the client can click the button or status is Belum Selesai
             $butangMula = true;
-        } 
+        }
         else {
             // Check if the current date is more than 6 months after the updated_at date of $latestRecordKeputusan
             $updatedAt = Carbon::parse($latestRecordKeputusan->updated_at);
@@ -153,7 +153,7 @@ class ModalKepulihanController extends Controller
             $existingResponse->kawasan_tempat_tinggal = $request->kawasan_tempat_tinggal;
             $existingResponse->status = 'Belum Selesai';
             $existingResponse->save();
-        } 
+        }
         else {
             // Store a new response
             $respon = new ResponDemografi();
@@ -204,7 +204,7 @@ class ModalKepulihanController extends Controller
         $isNewSession = !$latestSessionRespon || ($latestSessionRespon && Carbon::parse($latestSessionRespon->updated_at)->lt($sixMonthsAgo));
 
         // Fetch or generate questions
-        if ($isNewSession) 
+        if ($isNewSession)
         {
             // Delete previous session's questions
             ResponModalKepulihan::where('klien_id', $clientId)->delete();
@@ -255,8 +255,8 @@ class ModalKepulihanController extends Controller
                 'status' => 'Belum Selesai',
                 'created_at' => now(),
                 'updated_at' => now()
-            ]); 
-        } 
+            ]);
+        }
         else {
             // Fetch questions based on saved order
             $savedQuestions = DB::table('respon_modal_kepulihan')
@@ -274,14 +274,14 @@ class ModalKepulihanController extends Controller
 
         // Paginate the questions
         $questions = $questions->take(25)->chunk(10);
-        
+
         // Fetch autosaved answers
         $autosavedAnswers = DB::table('respon_modal_kepulihan')
             ->where('klien_id', $clientId)
             ->pluck('skala_id', 'soalan_id')
             ->toArray();
 
-        return view('modal_kepulihan.klien.soalan_kepulihan', [
+        return view('modal_kepulihan.klien.soalan_kepulihan3', [
             'questions' => $questions,
             'autosavedAnswers' => $autosavedAnswers,
             'currentPage' => $currentPage
@@ -315,7 +315,7 @@ class ModalKepulihanController extends Controller
             ->where('updated_at', '>=', $sixMonthsAgo)
             ->orderBy('updated_at', 'desc')
             ->first();
-        
+
         // dd($latestSessionKeputusan);
 
         // Determine the session to use
@@ -380,17 +380,17 @@ class ModalKepulihanController extends Controller
             ['klien_id' => $clientId, 'sesi' => $newSession],
             ['tahap_kepulihan_id' => $tahapKepulihanId, 'skor' => $skor, 'status' => 'Selesai', 'updated_at' => now()]
         );
-        
+
         // Check if a response demografi already exists for the current session
         $existingResponseDemografi = ResponDemografi::where('klien_id', $clientId)
                                     ->where('sesi', $newSession)
                                     ->first();
-        
+
         // If exists, update the status to 'Selesai'
         if ($existingResponseDemografi) {
             $existingResponseDemografi->update(['status' => 'Selesai']);
         }
-        
+
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
 
@@ -422,7 +422,7 @@ class ModalKepulihanController extends Controller
                     })
                     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                     ->get();
-        
+
         // Fetch clients who have not responded yet or their last response was over 6 months ago
         $tidakMenjawab = DB::table('klien as u')
                         ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
@@ -480,7 +480,7 @@ class ModalKepulihanController extends Controller
                     })
                     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                     ->get();
-        
+
         // Fetch clients who have not responded yet or their last response was over 6 months ago
         $tidakMenjawab = DB::table('klien as u')
                         ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')

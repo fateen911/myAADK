@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.question-container {
+    text-align: center;
+}
+
+.likert-scale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.likert-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    font-size: 14px;
+    color: #666;
+}
+
+.circle4 {
+    width: 40px;
+    height: 40px;
+    border: 2px solid forestgreen;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.circle3 {
+    width: 30px;
+    height: 30px;
+    border: 2px solid forestgreen;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.circle2 {
+    width: 30px;
+    height: 30px;
+    border: 2px solid purple;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.circle1 {
+    width: 40px;
+    height: 40px;
+    border: 2px solid purple;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.circle4:hover{
+    border-color: forestgreen;
+    background-color: forestgreen;
+    transition: 0.2s;
+}
+
+.circle3:hover{
+    border-color: forestgreen;
+    background-color: forestgreen;
+    transition: 0.2s;
+}
+
+.circle2:hover{
+    border-color: purple;
+    background-color: purple;
+    transition: 0.2s;
+}
+
+.circle1:hover{
+    border-color: purple;
+    background-color: purple;
+    transition: 0.2s;
+}
+
+input[type="radio"]:checked + .circle4 {
+    color: white;
+    border-color: forestgreen;
+    background-color: forestgreen;
+}
+
+input[type="radio"]:checked + .circle3 {
+    border-color: forestgreen;
+    background-color: forestgreen;
+}
+
+input[type="radio"]:checked + .circle2 {
+    border-color: purple;
+    background-color: purple;
+}
+
+input[type="radio"]:checked + .circle1 {
+    border-color: purple;
+    background-color: purple;
+}
+
+.keputusan{
+    height: 30px;
+    align-items: center;
+    margin: auto 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.hr{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.mt-50{
+    margin-top: 50px;
+}
+
+.mt-40{
+    margin-top: 40px;
+}
+
+.color-purple{
+    color: purple;
+}
+
+.color-green{
+    color: forestgreen;
+}
+
+.question{
+    font-weight: bold;
+    font-size: 22px;
+    color: #424242;
+}

@@ -45,13 +45,7 @@ class PengurusanProgController extends Controller
 
     public function try()
     {
-        $id =1;
-        $program = Program::with('kategori')->find($id);
-        if ($program) {
-            return view('pengurusan_program.try', compact('program'));
-        } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
-        }
+        return view('pengurusan_program.try');
     }
 
     //JSON
