@@ -670,7 +670,7 @@
                     <!--begin:::Tab pane Pekerjaan-->
                     <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                         <!--begin::Form-->
-                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('kemaskini.maklumat.pekerjaan.klien', ['id' => $klien->id]) }}">
+                        <form method="post" id="pekerjaanKlienForm" class="form centered-form" action="{{ route('kemaskini.maklumat.pekerjaan.klien', ['id' => $klien->id]) }}">
                             @csrf
                             <!--begin::Heading-->
                             <div class="row mb-7">
@@ -893,7 +893,7 @@
                             <div class="row py-5">
                                 <div class="col-md-9 offset-md-3">
                                     <div class="d-flex">
-                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        <button type="submit" class="btn btn-primary me-3" id="submitBtnPekerjaan">Kemaskini</button>
                                         @if($requestPekerjaan)
                                             <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPekerjaan" data-target="#approvalPekerjaan" style="background-color:#ffc107; color: white;">
                                                 Semak Permohonan Kemaskini
@@ -3071,6 +3071,79 @@
                 // Allow form submission if changes are detected
                 console.log("Data has changed. Submitting the form.");
                 document.getElementById('peribadiKlienForm').submit();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('submitBtnPekerjaan').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                status_kerja: "{{ $butiranKlien->status_kerja }}",
+                bidang_kerja: "{{ $butiranKlien->bidang_kerja }}",
+                nama_kerja: "{{ $butiranKlien->nama_kerja }}",
+                pendapatan: "{{ $butiranKlien->pendapatan }}",
+                kategori_majikan: "{{ $butiranKlien->kategori_majikan }}",
+                nama_majikan: "{{ $butiranKlien->nama_majikan }}",
+                no_tel_majikan: "{{ $butiranKlien->no_tel_majikan }}",
+                alamat_kerja: "{{ $butiranKlien->alamat_kerja }}",
+                poskod_kerja: "{{ $butiranKlien->poskod_kerja }}",
+                negeri_kerja: "{{ $butiranKlien->negeri_kerja }}",
+                daerah_kerja: "{{ $butiranKlien->daerah_kerja }}",
+                alasan_tidak_kerja: "{{ $butiranKlien->alasan_tidak_kerja }}"  // This could be null
+            };
+
+            // Get current form data
+            let alasan_tidak_kerja = document.getElementById('alasan_tidak_kerja') ? document.getElementById('alasan_tidak_kerja').value : '';
+            if (alasan_tidak_kerja === 'Pilih Alasan') {
+                alasan_tidak_kerja = null;  // Treat "Pilih Alasan" as null
+            }
+
+            const currentData = {
+                status_kerja: document.getElementById('status_kerja_modal').value,
+                bidang_kerja: document.getElementById('bidang_kerja').value,
+                nama_kerja: document.getElementById('nama_kerja').value,
+                pendapatan: document.getElementById('pendapatan').value,
+                kategori_majikan: document.getElementById('kategori_majikan').value,
+                nama_majikan: document.getElementById('nama_majikan').value,
+                no_tel_majikan: document.getElementById('no_tel_majikan').value,
+                alamat_kerja: document.getElementById('alamat_kerja').value,
+                poskod_kerja: document.getElementById('poskod_kerja').value,
+                negeri_kerja: document.getElementById('negeri_kerja').value,
+                daerah_kerja: document.getElementById('daerah_kerja').value,
+                alasan_tidak_kerja: alasan_tidak_kerja  // Use the updated value
+            };
+
+            // Handle poskod_kerja as a string for comparison
+            if (originalData.poskod_kerja !== null) {
+                originalData.poskod_kerja = originalData.poskod_kerja.toString();
+            }
+            if (currentData.poskod_kerja !== null) {
+                currentData.poskod_kerja = currentData.poskod_kerja.toString();
+            }
+
+            let isChanged = false;
+
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('pekerjaanKlienForm').submit();
             }
         });
     </script>
