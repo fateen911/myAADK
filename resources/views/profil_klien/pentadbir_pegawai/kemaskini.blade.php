@@ -38,6 +38,23 @@
             align-items: center; 
         }
 
+        /* General styles for input, textarea, and select */
+        input.form-control.form-control-solid,
+        textarea.form-control.form-control-solid,
+        select.form-select.form-select-solid {
+            background-color: #e0e0e0; /* Darker background */
+            color: #222222; /* Lighter text color */
+        }
+
+        /* Focus state for input, textarea, and select */
+        input.form-control.form-control-solid:focus,
+        textarea.form-control.form-control-solid:focus,
+        select.form-select.form-select-solid:focus {
+            background-color: #d0d0d0;; /* Slightly lighter on focus */
+            color: #333333; /* Darker text color */
+            box-shadow: none; /* Remove Bootstrap focus shadow */
+        }
+
         .form-control-plaintext {
             margin-left: 10px;
             display: inline-block;
@@ -184,8 +201,9 @@
                     <!--begin:::Tab pane Klien-->
                     <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                         <!--begin::Form-->
-                        <form method="post" id="kt_ecommerce_settings_general_form" class="form centered-form" action="{{ route('kemaskini.maklumat.peribadi.klien', ['id' => $klien->id]) }}">
-                        @csrf
+                        <form method="post" id="peribadiKlienForm" class="form centered-form" action="{{ route('kemaskini.maklumat.peribadi.klien', ['id' => $klien->id]) }}">
+                            @csrf
+
                             <!--begin::Heading-->
                             <div class="row mb-7">
                                 <div class="col-md-8 offset-md-4">
@@ -197,63 +215,49 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Nama Penuh</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <span id="nama" class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>No. Kad Pengenalan</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-2">
-                                    <!--begin::Input-->
                                     <span id="no_kp" class="fs-6 form-control-plaintext">{{$klien->no_kp}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Umur</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <span id="umur" class="fs-6 form-control-plaintext"></span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Jantina</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina}}</span>
+                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN'}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -261,15 +265,16 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Agama</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <span id="agama" class="fs-6 form-control-plaintext">{{$klien->agama}}</span>
+                                        @php
+                                            $agamaKlien = DB::table('senarai_agama')->where('id', $klien->agama)->value('senarai_agama.agama');
+                                        @endphp
+                                        <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -277,15 +282,16 @@
                             <!--begin::Input group-->
                             <div class="row fv-row">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Bangsa</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$klien->bangsa}}</span>
+                                        @php
+                                            $bangsaKlien = DB::table('senarai_bangsa')->where('id', $klien->bangsa)->value('senarai_bangsa.bangsa');
+                                        @endphp
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -293,23 +299,18 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Skor CCRI</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>No. Telefon</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
@@ -320,19 +321,15 @@
                                             </i>
                                         </span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="no_tel" name="no_tel" value="{{$klien->no_tel}}" inputmode="numeric"/>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>E-mel</span>
                                         <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan alamat emel yang aktif.">
@@ -343,45 +340,34 @@
                                             </i>
                                         </span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{$klien->emel}}"/>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Alamat Rumah</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <textarea class="form-control form-control-solid" id="alamat_rumah_klien" name="alamat_rumah_klien" style="text-transform: uppercase;">{{$klien->alamat_rumah}}</textarea>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Poskod</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <!--begin::Select2-->
                                         <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_k" name="poskod_klien" value="{{$klien->poskod}}" inputmode="numeric"/>
-                                        <!--end::Select2-->
                                     </div>
                                 </div>
                             </div>
@@ -389,22 +375,17 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Negeri</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="negeri_klien" name="negeri_klien" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
-                                            <option>Pilih Negeri</option>
+                                        <select class="form-select form-select-solid" id="negeri_klien" name="negeri_klien" data-hide-search="true" data-placeholder="Pilih negeri">
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
                                         </select>
-                                        <!--end::Select2-->
                                     </div>
                                 </div>
                             </div>
@@ -412,22 +393,17 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Daerah</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="daerah_klien" name="daerah_klien" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
-                                            <option>Pilih Daerah</option>
+                                        <select class="form-select form-select-solid" id="daerah_klien" name="daerah_klien" data-hide-search="true" data-placeholder="Pilih daerah">
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
                                         </select>
-                                        <!--end::Select2-->
                                     </div>
                                 </div>
                             </div>
@@ -435,23 +411,17 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Tahap Pendidikan</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <!--begin::Select2-->
-                                        <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" data-placeholder="Pilih Tahap Pendidikan">
-                                            <option>Pilih Tahap Pendidikan</option>
-                                            <option value="PRA SEKOLAH" {{ $klien->tahap_pendidikan == 'PRA SEKOLAH' ? 'selected' : '' }}>PRA SEKOLAH</option>
-                                            <option value="PENDIDIKAN RENDAH" {{ $klien->tahap_pendidikan == 'PENDIDIKAN RENDAH' ? 'selected' : '' }}>PENDIDIKAN RENDAH</option>
-                                            <option value="PENDIDIKAN MENENGAH" {{ $klien->tahap_pendidikan == 'PENDIDIKAN MENENGAH' ? 'selected' : '' }}>PENDIDIKAN MENENGAH</option>
-                                            <option value="PENGAJIAN TINGGI" {{ $klien->tahap_pendidikan == 'PENGAJIAN TINGGI' ? 'selected' : '' }}>PENGAJIAN TINGGI</option>
+                                        <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-hide-search="true" >
+                                            @foreach ($tahapPendidikan as $item)
+                                                <option value="{{ $item->id }}" {{ $klien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
+                                            @endforeach
                                         </select>
-                                        <!--end::Select2-->
                                     </div>
                                 </div>
                             </div>
@@ -459,32 +429,24 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Status Kesihatan Mental</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$klien->status_kesihatan_mental}}"/>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span class="required">Status Orang Kurang Upaya (OKU)</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-8 position-relative">
-                                    <!--begin::Input-->
                                     <input type="text" class="form-control form-control-solid" id="status_oku" name="status_oku" value="{{$klien->status_oku}}"/>
-                                    <!--end::Input-->
                                     <div class="position-absolute top-10 end-0 mt-3 me-2">
                                         <label class="form-label fs-6 mb-0 fst-italic">** Klik <a href="https://oku.jkm.gov.my/semakan_oku" class="text-primary">di sini</a> untuk semakan OKU</label>
                                     </div>
@@ -496,7 +458,7 @@
                             <div class="row py-5">
                                 <div class="col-md-8 offset-md-4">
                                     <div class="d-flex">
-                                        <button type="submit" class="btn btn-primary me-3" id="kt_ecommerce_settings_save">Kemaskini</button>
+                                        <button type="submit" class="btn btn-primary me-3" id="submitBtnKlien">Kemaskini</button>
                                         @if($requestKlien)
                                             <button type="button" class="btn btn-secondary modal-trigger" id="approvalModalPeribadiKlien" data-target="#approvalPeribadiKlien" style="background-color:#ffc107; color: white;">
                                                 Semak Permohonan Kemaskini
@@ -732,8 +694,6 @@
                                     <select class="form-select form-select-solid" id="status_kerja" name="status_kerja" data-control="select2" data-hide-search="true">
                                         <option value="BEKERJA" {{ $pekerjaan->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                         <option value="TIDAK BEKERJA" {{ $pekerjaan->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
-                                        <option value="MENGANGGUR" {{ $pekerjaan->status_kerja == 'MENGANGGUR' ? 'selected' : '' }}>MENGANGGUR</option>
-                                        <option value="BELAJAR" {{ $pekerjaan->status_kerja == 'BELAJAR' ? 'selected' : '' }}>BELAJAR</option>
                                     </select>
                                     <!--end::Select2-->
                                 </div>
@@ -780,12 +740,9 @@
                                     <!--begin::Input-->
                                     <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
                                         <option>Pilih Julat Pendapatan</option>
-                                        <option value="RM0-RM999" {{ $pekerjaan->pendapatan == 'RM0-RM999' ? 'selected' : '' }}>RM0-RM999</option>
-                                        <option value="RM1000-RM1999" {{ $pekerjaan->pendapatan == 'RM1000-RM1999' ? 'selected' : '' }}>RM1000-RM1999</option>
-                                        <option value="RM2000-RM2999" {{ $pekerjaan->pendapatan == 'RM2000-RM2999' ? 'selected' : '' }}>RM2000-RM2999</option>
-                                        <option value="RM3000-RM3999" {{ $pekerjaan->pendapatan == 'RM3000-RM3999' ? 'selected' : '' }}>RM3000-RM3999</option>
-                                        <option value="RM4000-RM4999" {{ $pekerjaan->pendapatan == 'RM4000-RM4999' ? 'selected' : '' }}>RM4000-RM4999</option>
-                                        <option value="Lebih RM5000" {{ $pekerjaan->pendapatan == 'Lebih RM5000' ? 'selected' : '' }}>Lebih RM5000</option>
+                                        @foreach ($pendapatan as $item)
+                                            <option value="{{ $item->id }}" {{ $pekerjaan->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
+                                        @endforeach
                                     </select>
                                     <!--end::Input-->
                                 </div>
@@ -1151,7 +1108,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="nama_bapa" name="nama_bapa" value="{{$waris->nama_bapa}}" />
                                                         <!--end::Input-->
@@ -1174,7 +1131,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_kp_bapa" name="no_kp_bapa" value="{{$waris->no_kp_bapa}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1197,7 +1154,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_tel_bapa" name="no_tel_bapa" value="{{$waris->no_tel_bapa}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1213,7 +1170,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Bapa</option>
@@ -1233,7 +1190,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <div class="d-flex flex-stack">
                                                             <div class="me-5">
@@ -1255,7 +1212,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <input type="text" class="form-control form-control-solid" id="poskod_b" name="poskod_bapa" value="{{$waris->poskod_bapa}}" inputmode="numeric"/>
@@ -1273,7 +1230,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -1296,7 +1253,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -1352,7 +1309,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="nama_ibu" name="nama_ibu" value="{{$waris->nama_ibu}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
@@ -1375,7 +1332,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_kp_ibu" name="no_kp_ibu" value="{{$waris->no_kp_ibu}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1398,7 +1355,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_tel_ibu" name="no_tel_ibu" value="{{$waris->no_tel_ibu}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1414,7 +1371,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Ibu</option>
@@ -1434,7 +1391,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <div class="d-flex flex-stack">
                                                             <div class="me-5">
@@ -1456,7 +1413,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <input type="text" class="form-control form-control-solid" id="poskod_i" name="poskod_ibu" value="{{$waris->poskod_ibu}}" inputmode="numeric"/>
@@ -1474,7 +1431,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -1497,7 +1454,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -1552,7 +1509,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="hubungan_penjaga" name="hubungan_penjaga" value="{{$waris->hubungan_penjaga}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
@@ -1568,7 +1525,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="nama_penjaga" name="nama_penjaga" value="{{$waris->nama_penjaga}}" style="text-transform: uppercase;"/>
                                                         <!--end::Input-->
@@ -1591,7 +1548,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_kp_penjaga" name="no_kp_penjaga" value="{{$waris->no_kp_penjaga}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1614,7 +1571,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <input type="text" class="form-control form-control-solid" id="no_tel_penjaga" name="no_tel_penjaga" value="{{$waris->no_tel_penjaga}}" inputmode="numeric"/>
                                                         <!--end::Input-->
@@ -1630,7 +1587,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Status Penjaga</option>
@@ -1650,7 +1607,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <!--begin::Input-->
                                                         <div class="d-flex flex-stack">
                                                             <div class="me-5">
@@ -1672,7 +1629,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <input type="text" maxlength="5" class="form-control form-control-solid" id="poskod_p" name="poskod_penjaga" value="{{$waris->poskod_penjaga}}" inputmode="numeric"/>
@@ -1690,7 +1647,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
@@ -1713,7 +1670,7 @@
                                                         </label>
                                                         <!--end::Label-->
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
@@ -2115,7 +2072,6 @@
                                     <div class="d-flex mt-3">
                                         <!--begin::Select2-->
                                         <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
-                                            <option>Pilih Status Perkahwinan</option>
                                             <option value="BUJANG" {{ $pasangan->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                             <option value="BERKAHWIN" {{ $pasangan->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
                                             <option value="DUDA/JANDA/BALU" {{ $pasangan->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>
@@ -2531,105 +2487,87 @@
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Seksyen (Perintah/Sukarela)</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
-                                    <span id="seksyen_okp" class="fs-6 form-control-plaintext">{{$rawatan->seksyen}}</span>
-                                    <!--end::Input-->
+                                    <span class="fs-6 form-control-plaintext">{{$rawatan->seksyen}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Pusat Penjara (PUSPEN)</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
-                                    <span id="puspen" class="fs-6 form-control-plaintext">{{$rawatan->puspen}}</span>
-                                    <!--end::Input-->
+                                    @php
+                                        $puspen = DB::table('senarai_puspen')->where('id', $rawatan->puspen)->value('senarai_puspen.puspen');
+                                    @endphp
+                                    <span class="fs-6 form-control-plaintext">{{$puspen}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Pejabat Pengawasan</span>
+                                        <span>Daerah Pejabat Pengawasan</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
-                                    <span id="pejabat" class="fs-6 form-control-plaintext">{{$rawatan->pejabat}}</span>
-                                    <!--end::Input-->
+                                    @php
+                                        $daerah_pejabat = DB::table('senarai_daerah_pejabat')->where('kod', $rawatan->pejabat)->value('senarai_daerah_pejabat.daerah');
+                                    @endphp
+                                    <span class="fs-6 form-control-plaintext">{{$daerah_pejabat}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Tarikh Perintah</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
                                     @php
                                         $formattedDatePerintah = Carbon::parse($rawatan->tkh_perintah)->format('d-m-Y');
                                     @endphp
                                     <span id="tkh_perintah" class="fs-6 form-control-plaintext">{{$formattedDatePerintah}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Tarikh Mula Pengawasan</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
                                     @php
                                         $formattedDateMula = Carbon::parse($rawatan->tkh_mula_pengawasan)->format('d-m-Y');
                                     @endphp
                                     <span id="tkh_mula_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDateMula}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
-                                    <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Tarikh Tamat Pengawasan</span>
                                     </label>
-                                    <!--end::Label-->
                                 </div>
                                 <div class="col-md-4">
-                                    <!--begin::Input-->
                                     @php
                                         $formattedDateTamat = Carbon::parse($rawatan->tkh_tamat_pengawasan)->format('d-m-Y');
                                     @endphp
                                     <span id="tkh_tamat_pengawasan" class="fs-6 form-control-plaintext">{{$formattedDateTamat}}</span>
-                                    <!--end::Input-->
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -2729,12 +2667,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
-    </script>
-
-    <script>
         function calculateAgeFromIC() {
             let icNumber = document.getElementById('no_kp').textContent.trim();
             icNumber = icNumber.replace(':', '').trim();  // Remove colon and trim whitespace
@@ -2785,6 +2717,16 @@
                     icon: 'error',
                     title: 'Tidak Berjaya!',
                     text: '{!! session('error') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // Check if there is a flash error message
+            @if(session('errorProfil'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Berjaya!',
+                    text: '{!! session('errorProfil') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -3032,7 +2974,7 @@
             // Restrict input to digits for all specified fields
             const maxLengthSettings = {
                 'no_tel': 11,
-                'poskod': 5,
+                'poskod_klien': 5,
                 'no_tel_majikan': 11,
                 'poskod_kerja': 5,
                 'no_kp_bapa': 12,
@@ -3056,6 +2998,81 @@
                 });
             });
         });
-    </script>   
+    </script> 
+    
+    {{-- Compare original data with updated data --}}
+    <script>
+        document.getElementById('submitBtnKlien').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalDataKlien = {
+                no_tel: "{{ $klien->no_tel }}",
+                emel: "{{ $klien->emel }}",
+                alamat_rumah_klien: "{{ $klien->alamat_rumah }}",
+                poskod_k: "{{ $klien->poskod }}",
+                negeri_klien: "{{ $klien->negeri }}",
+                daerah_klien: "{{ $klien->daerah }}",
+                tahap_pendidikan: "{{ $klien->tahap_pendidikan }}",
+                status_kesihatan_mental: "{{ $klien->status_kesihatan_mental }}",
+                status_oku: "{{ $klien->status_oku }}",
+            };
+    
+            // Get current data (input values from form)
+            const currentDataKlien = {
+                no_tel: document.getElementById('no_tel').value,
+                emel: document.getElementById('emel').value,
+                alamat_rumah_klien: document.getElementById('alamat_rumah_klien').value,
+                poskod_k: document.getElementById('poskod_k').value,
+                negeri_klien: document.getElementById('negeri_klien').value,
+                daerah_klien: document.getElementById('daerah_klien').value,
+                tahap_pendidikan: document.getElementById('tahap_pendidikan').value,
+                status_kesihatan_mental: document.getElementById('status_kesihatan_mental').value,
+                status_oku: document.getElementById('status_oku').value,
+            };
+    
+            // Handle poskod_k as a string for comparison, but check if the field is defined
+            if (originalDataKlien.poskod_k !== null && originalDataKlien.poskod_k !== undefined) {
+                originalDataKlien.poskod_k = originalDataKlien.poskod_k.toString();
+            }
+            if (currentDataKlien.poskod_k !== null && currentDataKlien.poskod_k !== undefined) {
+                currentDataKlien.poskod_k = currentDataKlien.poskod_k.toString();
+            }
+    
+            let isChanged = false;
+        
+            // Compare all fields except emel (case-insensitive comparison)
+            Object.keys(originalDataKlien).forEach(key => {
+                if (key !== 'emel') {
+                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';  
+                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';   
+    
+                    console.log(`Comparing ${key}: Original Value: ${originalValue} | Current Value: ${currentValue}`);
+    
+                    if (originalValue !== currentValue) {
+                        isChanged = true;  // Mark as changed
+                        console.log(`${key} has changed.`);
+                    }
+                }
+            });
+    
+            // Compare email case-sensitively
+            console.log(`Comparing emel: Original Value: ${originalDataKlien.emel} | Current Value: ${currentDataKlien.emel}`);
+            if (originalDataKlien.emel !== currentDataKlien.emel) {
+                isChanged = true;  // Mark as changed if email differs (case-sensitive)
+                console.log("Email has changed.");
+            }
+    
+            if (!isChanged) {
+                // Display alert if no changes are detected
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission
+                e.preventDefault(); 
+                return;
+            } else {
+                // Allow form submission if changes are detected
+                console.log("Data has changed. Submitting the form.");
+                document.getElementById('peribadiKlienForm').submit();
+            }
+        });
+    </script>
 </body>     
 @endsection

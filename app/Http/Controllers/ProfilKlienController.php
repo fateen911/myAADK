@@ -825,18 +825,24 @@ class ProfilKlienController extends Controller
     // PENTADBIR/PEGAWAI : UPDATE WITHOUT REQUEST
     public function kemaskiniMaklumatPeribadiKlien(Request $request, $id)
     {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'no_tel'                    => 'required|string|max:11',
-            'emel'                      => 'required|email',
-            'alamat_rumah_klien'        => 'required|string|max:255',
-            'poskod_klien'              => 'required|string|max:5',
-            'daerah_klien'              => 'required|string|max:255',
-            'negeri_klien'              => 'required|string|max:255',
-            'tahap_pendidikan'          => 'required|string|max:255',
-            'status_kesihatan_mental'   => 'required|string|max:255',
-            'status_oku'                => 'required|string|max:255',
-        ]);
+        try {
+            // Validate the request data
+            $validatedData = $request->validate([
+                'no_tel'                    => 'nullable|string|max:11',
+                'emel'                      => 'nullable|email',
+                'alamat_rumah_klien'        => 'required|string|max:255',
+                'poskod_klien'              => 'required|string|max:5',
+                'daerah_klien'              => 'required|string|max:255',
+                'negeri_klien'              => 'required|string|max:255',
+                'tahap_pendidikan'          => 'required|string|max:255',
+                'status_kesihatan_mental'   => 'required|string|max:255',
+                'status_oku'                => 'required|string|max:255',
+            ]);
+        } 
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         // Map the validated data to the original field names
         $updateData = [
