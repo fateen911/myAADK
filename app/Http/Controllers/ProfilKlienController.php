@@ -893,19 +893,25 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatPekerjaanKlien(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'status_kerja'      => 'required|string|max:11',
-            'bidang_kerja'      => 'nullable|string|max:255',
-            'nama_kerja'        => 'nullable|string|max:255',
-            'pendapatan'        => 'nullable|string|max:255',
-            'kategori_majikan'  => 'nullable|string|max:255',
-            'nama_majikan'      => 'nullable|string|max:255',
-            'no_tel_majikan'    => 'nullable|string|max:11',
-            'alamat_kerja'      => 'nullable|string|max:255',
-            'poskod_kerja'      => 'nullable|string|max:5',
-            'daerah_kerja'      => 'nullable|string|max:255',
-            'negeri_kerja'      => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'status_kerja'      => 'required|string|max:11',
+                'bidang_kerja'      => 'nullable|string|max:255',
+                'nama_kerja'        => 'nullable|string|max:255',
+                'pendapatan'        => 'nullable|string|max:255',
+                'kategori_majikan'  => 'nullable|string|max:255',
+                'nama_majikan'      => 'nullable|string|max:255',
+                'no_tel_majikan'    => 'nullable|string|max:11',
+                'alamat_kerja'      => 'nullable|string|max:255',
+                'poskod_kerja'      => 'nullable|string|max:5',
+                'daerah_kerja'      => 'nullable|string|max:255',
+                'negeri_kerja'      => 'nullable|string|max:255',
+            ]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         $pekerjaanKlien = PekerjaanKlien::where('klien_id',$id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
@@ -941,20 +947,26 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatKeluargaKlien(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'status_perkahwinan'    => 'required|string|max:255',
-            'nama_pasangan'         => 'nullable|string|max:255',
-            'no_tel_pasangan'       => 'nullable|string|max:11',
-            'bilangan_anak'         => 'nullable|integer',
-            'alamat_pasangan'       => 'nullable|string|max:255',
-            'poskod_pasangan'       => 'nullable|string|max:5',
-            'daerah_pasangan'       => 'nullable|string|max:255',
-            'negeri_pasangan'       => 'nullable|string|max:255',
-            'alamat_kerja_pasangan' => 'nullable|string|max:255',
-            'poskod_kerja_pasangan' => 'nullable|string|max:5',
-            'daerah_kerja_pasangan' => 'nullable|string|max:255',
-            'negeri_kerja_pasangan' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'status_perkahwinan'    => 'required|string|max:255',
+                'nama_pasangan'         => 'nullable|string|max:255',
+                'no_tel_pasangan'       => 'nullable|string|max:11',
+                'bilangan_anak'         => 'nullable|integer',
+                'alamat_pasangan'       => 'nullable|string|max:255',
+                'poskod_pasangan'       => 'nullable|string|max:5',
+                'daerah_pasangan'       => 'nullable|string|max:255',
+                'negeri_pasangan'       => 'nullable|string|max:255',
+                'alamat_kerja_pasangan' => 'nullable|string|max:255',
+                'poskod_kerja_pasangan' => 'nullable|string|max:5',
+                'daerah_kerja_pasangan' => 'nullable|string|max:255',
+                'negeri_kerja_pasangan' => 'nullable|string|max:255',
+            ]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
         if ($validatedData['daerah_pasangan'] === 'Pilih Daerah') {
@@ -1004,16 +1016,22 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatBapaKlien(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'nama_bapa' => 'nullable|string|max:255',
-            'no_kp_bapa'  => 'nullable|string|max:255',
-            'no_tel_bapa' => 'nullable|string|max:11',
-            'status_bapa' => 'nullable|string|max:255',
-            'alamat_bapa' => 'nullable|string|max:255',
-            'poskod_bapa' => 'nullable|string|max:5',
-            'daerah_bapa' => 'nullable|string|max:255',
-            'negeri_bapa' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nama_bapa' => 'nullable|string|max:255',
+                'no_kp_bapa'  => 'nullable|string|max:255',
+                'no_tel_bapa' => 'nullable|string|max:11',
+                'status_bapa' => 'nullable|string|max:255',
+                'alamat_bapa' => 'nullable|string|max:255',
+                'poskod_bapa' => 'nullable|string|max:5',
+                'daerah_bapa' => 'nullable|string|max:255',
+                'negeri_bapa' => 'nullable|string|max:255',
+            ]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         $waris = WarisKlien::where('id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
@@ -1049,16 +1067,22 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatIbuKlien(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'nama_ibu'  => 'nullable|string|max:255',
-            'no_kp_ibu' => 'nullable|string|max:255',
-            'no_tel_ibu' => 'nullable|string|max:11',
-            'status_ibu' => 'nullable|string|max:255',
-            'alamat_ibu' => 'nullable|string|max:255',
-            'poskod_ibu' => 'nullable|string|max:5',
-            'daerah_ibu' => 'nullable|string|max:255',
-            'negeri_ibu' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'nama_ibu'  => 'nullable|string|max:255',
+                'no_kp_ibu' => 'nullable|string|max:255',
+                'no_tel_ibu' => 'nullable|string|max:11',
+                'status_ibu' => 'nullable|string|max:255',
+                'alamat_ibu' => 'nullable|string|max:255',
+                'poskod_ibu' => 'nullable|string|max:5',
+                'daerah_ibu' => 'nullable|string|max:255',
+                'negeri_ibu' => 'nullable|string|max:255',
+            ]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         $waris = WarisKlien::where('id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
@@ -1094,19 +1118,23 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatPenjagaKlien(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'hubungan_penjaga' => 'nullable|string|max:255',
-            'nama_penjaga' => 'nullable|string|max:255',
-            'no_kp_penjaga' => 'nullable|string|max:255',
-            'no_tel_penjaga' => 'nullable|string|max:11',
-            'status_penjaga' => 'nullable|string|max:255',
-            'alamat_penjaga' => 'nullable|string|max:255',
-            'poskod_penjaga' => 'nullable|string|max:5',
-            'daerah_penjaga' => 'nullable|string|max:255',
-            'negeri_penjaga' => 'nullable|string|max:255',
-        ]);
-
-        // dd($validatedData);
+        try {
+            $validatedData = $request->validate([
+                'hubungan_penjaga' => 'nullable|string|max:255',
+                'nama_penjaga' => 'nullable|string|max:255',
+                'no_kp_penjaga' => 'nullable|string|max:255',
+                'no_tel_penjaga' => 'nullable|string|max:11',
+                'status_penjaga' => 'nullable|string|max:255',
+                'alamat_penjaga' => 'nullable|string|max:255',
+                'poskod_penjaga' => 'nullable|string|max:5',
+                'daerah_penjaga' => 'nullable|string|max:255',
+                'negeri_penjaga' => 'nullable|string|max:255',
+            ]);
+        }
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
 
         $waris = WarisKlien::where('id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
@@ -1140,26 +1168,27 @@ class ProfilKlienController extends Controller
         }
     }
 
-    public function kemaskiniMaklumatRawatanKlien(Request $request, $id)
-    {
-        $rawatan = RawatanKlien::where('id',$id)->first();
+    // public function kemaskiniMaklumatRawatanKlien(Request $request, $id)
+    // {
+    //     $rawatan = RawatanKlien::where('id',$id)->first();
 
-        if ($rawatan) {
-            $rawatan->update([
-                'status_kesihatan_mental' => $request->status_kesihatan_mental,
-                'status_oku' => $request->status_oku,
-                'seksyen_okp' => $request->seksyen_okp,
-                'tarikh_tamat_pengawasan' => $request->tarikh_tamat_pengawasan,
-                'skor_ccri' => $request->skor_ccri,
-            ]);
+    //     if ($rawatan) {
+    //         $rawatan->update([
+    //             'status_kesihatan_mental' => $request->status_kesihatan_mental,
+    //             'status_oku' => $request->status_oku,
+    //             'seksyen_okp' => $request->seksyen_okp,
+    //             'tarikh_tamat_pengawasan' => $request->tarikh_tamat_pengawasan,
+    //             'skor_ccri' => $request->skor_ccri,
+    //         ]);
     
-            return redirect()->back()->with('success', 'Maklumat rawatan dan pemulihan klien berjaya dikemaskini.');
-        } 
-        else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
-        }
-    }
+    //         return redirect()->back()->with('success', 'Maklumat rawatan dan pemulihan klien berjaya dikemaskini.');
+    //     } 
+    //     else {
+    //         return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+    //     }
+    // }
 
+    
     // KLIEN
     public function pengurusanProfil()
     {
