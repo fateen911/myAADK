@@ -45,8 +45,6 @@
             flex-grow: 1;
         }
         .status {
-            /* background: #e0f8e0; */
-            /* color: #34c759; */
             color: white;
             background-color: cornflowerblue;
             padding: 5px 10px;
@@ -105,24 +103,24 @@
             <div class="card-body">
                 @if(isset($latestRecordKeputusan))
                     @if($latestRecordKeputusan->status == 'Selesai')
-                        <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b> {{ Carbon::parse($latestRecordKeputusan->updated_at)->format('d/m/Y') }}</p>
-                        <p><b>STATUS TERAKHIR SOAL SELIDIK:</b> SELESAI MENJAWAB</p>
+                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b> {{ Carbon::parse($latestRecordKeputusan->updated_at)->format('d/m/Y') }}</p>
+                        <p class="text-black fs-5"><b>STATUS TERAKHIR SOAL SELIDIK:</b> SELESAI MENJAWAB</p>
                     @else
                         @if ($latestRecordDemografi)
-                            <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
-                            <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
+                            <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                            <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
                         @else
-                            <p><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
-                            <p><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
+                            <p class="text-black fs-5"><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
+                            <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
                         @endif
                     @endif
                 @else
                     @if ($latestRecordDemografi)
-                        <p><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
-                        <p><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
+                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                        <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
                     @else
-                        <p><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
-                        <p><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
+                        <p class="text-black fs-5"><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
+                        <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
                     @endif
                 @endif
 

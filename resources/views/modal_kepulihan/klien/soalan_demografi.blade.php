@@ -212,7 +212,7 @@
                         <label for="tempoh_tidak_ambil_dadah"><b>3) Berapa lamakah anda sudah tidak mengambil dadah ?</b></label>
                         <div class="input-tahun">
                             <input type="number" class="form-control" id="tempoh_tidak_ambil_dadah" name="tempoh_tidak_ambil_dadah" placeholder="Nyatakan berapa tahun" value="{{ $latestRespon->tempoh_tidak_ambil_dadah ?? '' }}" style="width: 20% !important;" required>
-                            <span style="margin-bottom:15px !important;">tahun</span>
+                            <span>tahun</span>
                         </div>
                     </div>
 
@@ -299,7 +299,7 @@
                         <div class="input-tahun">
                             <input type="number" class="form-control" id="tempoh_tinggal_lokasi_terkini" name="tempoh_tinggal_lokasi_terkini" placeholder="Tahun" 
                                 value="{{ isset($latestRespon) ? $latestRespon->tempoh_tinggal_lokasi_terkini : old('tempoh_tinggal_lokasi_terkini') }}" style="width: 20%;" required>
-                            <span style="margin-bottom:15px !important;">tahun</span>
+                            <span>tahun</span>
                         </div>    
                     </div>
                     
