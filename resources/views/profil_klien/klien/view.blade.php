@@ -1101,7 +1101,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="nama_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_bapa}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_bapa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1111,7 +1111,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_kp_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_bapa}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_bapa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1121,7 +1121,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_tel_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_bapa}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_bapa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1131,7 +1131,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="status_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->status_bapa}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_bapa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1141,7 +1141,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="alamat_bapa" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_bapa}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_bapa}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1227,7 +1227,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="nama_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_ibu}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_ibu}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1237,7 +1237,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_kp_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_ibu}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_ibu}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1247,7 +1247,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_tel_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_ibu}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_ibu}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1257,7 +1257,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="status_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->status_ibu}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_ibu}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1267,7 +1267,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="alamat_ibu" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_ibu}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_ibu}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1353,7 +1353,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="hubungan_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1363,7 +1363,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="nama_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1373,7 +1373,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_kp_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1383,7 +1383,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="no_tel_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1393,7 +1393,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="status_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->status_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1403,7 +1403,7 @@
                                                         </label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <span id="alamat_penjaga" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_penjaga}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_penjaga}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -1485,7 +1485,7 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <form method="POST" action="{{ route('bapaKlien.requestUpdate') }}">
+                                                <form id="bapaKlienForm" method="POST" action="{{ route('bapaKlien.requestUpdate') }}">
                                                     @csrf
 
                                                     <div class="row fv-row mb-7">
@@ -1591,7 +1591,7 @@
                                                     <div class="row fv-row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center align-items-center">
-                                                                <button type="submit" class="btn btn-primary">Hantar</button>
+                                                                <button type="submit" id="submitBtnBapa" class="btn btn-primary">Hantar</button>
                                                             </div>
                                                         </div>
                                                     </div>                                            
@@ -1612,7 +1612,7 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <form method="POST" action="{{ route('ibuKlien.requestUpdate') }}">
+                                                <form id="ibuKlienForm" method="POST" action="{{ route('ibuKlien.requestUpdate') }}">
                                                     @csrf
 
                                                     <div class="row fv-row mb-7">
@@ -1718,7 +1718,7 @@
                                                     <div class="row fv-row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center align-items-center">
-                                                                <button type="submit" class="btn btn-primary">Hantar</button>
+                                                                <button type="submit" id="submitBtnIbu" class="btn btn-primary">Hantar</button>
                                                             </div>
                                                         </div>
                                                     </div>                                            
@@ -1739,7 +1739,7 @@
                                             </div>
 
                                             <div class="modal-body">
-                                                <form method="POST" action="{{ route('penjagaKlien.requestUpdate') }}">
+                                                <form id="penjagaKlienForm" method="POST" action="{{ route('penjagaKlien.requestUpdate') }}">
                                                     @csrf
 
                                                     <div class="row fv-row mb-7">
@@ -1853,7 +1853,7 @@
                                                     <div class="row fv-row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex justify-content-center align-items-center">
-                                                                <button type="submit" class="btn btn-primary">Hantar</button>
+                                                                <button type="submit" id="submitBtnPenjaga" class="btn btn-primary">Hantar</button>
                                                             </div>
                                                         </div>
                                                     </div>                                            
@@ -1892,7 +1892,7 @@
                                     <!--end::Label-->
                                 </div>
                                 <div class="col-md-8">
-                                    <span id="status_perkahwinan" class="fs-6 form-control-plaintext">{{$butiranKlien->status_perkahwinan}}</span>
+                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_perkahwinan}}</span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -1909,7 +1909,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="nama_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->nama_pasangan}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_pasangan}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -1925,7 +1925,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="no_tel_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_pasangan}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_pasangan}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -1941,7 +1941,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="bilangan_anak" class="fs-6 form-control-plaintext">{{$butiranKlien->bilangan_anak}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->bilangan_anak}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -1957,7 +1957,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="alamat_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_pasangan}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_pasangan}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2030,7 +2030,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <!--begin::Input-->
-                                        <span id="alamat_kerja_pasangan" class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja_pasangan}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_kerja_pasangan}}</span>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -2126,7 +2126,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('pasanganKlien.requestUpdate') }}">
+                                        <form id="keluargaKlienForm" method="POST" action="{{ route('pasanganKlien.requestUpdate') }}">
                                             @csrf
 
                                             <div class="row fv-row mb-7">
@@ -2272,7 +2272,7 @@
                                             <div class="row fv-row mb-2">
                                                 <div class="col-md-12">
                                                     <div class="d-flex justify-content-center align-items-center">
-                                                        <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        <button type="submit" id="submitBtnKeluarga" class="btn btn-primary">Hantar</button>
                                                     </div>
                                                 </div>
                                             </div>                                             
@@ -2325,11 +2325,11 @@
             @endif
 
             // Check if there is a flash error message
-            @if(session('errorKlien'))
+            @if(session('errorProfil'))
                 Swal.fire({
-                    icon: 'warning',
+                    icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{!! session('errorKlien') !!}',
+                    text: '{!! session('errorProfil') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -3258,6 +3258,109 @@
             else {
                 // Allow form submission
                 document.getElementById('pekerjaanKlienForm').submit();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('submitBtnKeluarga').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                status_perkahwinan: "{{ $butiranKlien->status_perkahwinan }}",
+                nama_pasangan: "{{ $butiranKlien->nama_pasangan }}",
+                no_tel_pasangan: "{{ $butiranKlien->no_tel_pasangan }}",
+                bilangan_anak: "{{ $butiranKlien->bilangan_anak }}",
+                alamat_partner: "{{ $butiranKlien->alamat_partner }}",
+                poskod_partner: "{{ $butiranKlien->poskod_partner }}",
+                negeri_partner: "{{ $butiranKlien->negeri_partner }}",
+                daerah_partner: "{{ $butiranKlien->daerah_partner }}",
+                alamat_kerja_pasangan: "{{ $butiranKlien->alamat_kerja_pasangan }}",
+                poskod_kerja_pasangan: "{{ $butiranKlien->poskod_kerja_pasangan }}",
+                negeri_kerja_pasangan: "{{ $butiranKlien->negeri_kerja_pasangan }}",
+                daerah_kerja_pasangan: "{{ $butiranKlien->daerah_kerja_pasangan }}"
+            };
+
+            let negeri_partner = document.getElementById('negeri_partner') ? document.getElementById('negeri_partner').value : '';
+            if (negeri_partner === 'Pilih Negeri') {
+                negeri_partner = null;  // Treat as null
+            }
+
+            let daerah_partner = document.getElementById('daerah_partner') ? document.getElementById('daerah_partner').value : '';
+            if (daerah_partner === 'Pilih Daerah') {
+                daerah_partner = null;  // Treat as null
+            }
+
+            let negeri_kerja_pasangan = document.getElementById('negeri_kerja_pasangan') ? document.getElementById('negeri_kerja_pasangan').value : '';
+            if (negeri_kerja_pasangan === 'Pilih Negeri') {
+                negeri_kerja_pasangan = null;  // Treat as null
+            }
+
+            let daerah_kerja_pasangan = document.getElementById('daerah_kerja_pasangan') ? document.getElementById('daerah_kerja_pasangan').value : '';
+            if (daerah_kerja_pasangan === 'Pilih Daerah') {
+                daerah_kerja_pasangan = null;  // Treat as null
+            }
+
+            const currentData = {
+                status_perkahwinan: document.getElementById('status_perkahwinan').value,
+                nama_pasangan: document.getElementById('nama_pasangan').value,
+                no_tel_pasangan: document.getElementById('no_tel_pasangan').value,
+                bilangan_anak: document.getElementById('bilangan_anak').value,
+                alamat_partner: document.getElementById('alamat_partner').value,
+                poskod_partner: document.getElementById('poskod_partner').value,
+                negeri_partner: negeri_partner,
+                daerah_partner: daerah_partner,
+                alamat_kerja_pasangan: document.getElementById('alamat_kerja_pasangan').value,
+                poskod_kerja_pasangan: document.getElementById('poskod_kerja_pasangan').value,
+                negeri_kerja_pasangan: daerah_kerja_pasangan,
+                daerah_kerja_pasangan: daerah_kerja_pasangan,
+            };
+
+            // Handle poskod_partner as a string for comparison
+            if (originalData.poskod_partner !== null) {
+                originalData.poskod_partner = originalData.poskod_partner.toString();
+            }
+            if (currentData.poskod_partner !== null) {
+                currentData.poskod_partner = currentData.poskod_partner.toString();
+            }
+
+            // Handle poskod_kerja_pasangan as a string for comparison
+            if (originalData.poskod_kerja_pasangan !== null) {
+                originalData.poskod_kerja_pasangan = originalData.poskod_kerja_pasangan.toString();
+            }
+            if (currentData.poskod_kerja_pasangan !== null) {
+                currentData.poskod_kerja_pasangan = currentData.poskod_kerja_pasangan.toString();
+            }
+
+            // Handle bilangan_anak as a string for comparison
+            if (originalData.bilangan_anak !== null) {
+                originalData.bilangan_anak = originalData.bilangan_anak.toString();
+            }
+            if (currentData.bilangan_anak !== null) {
+                currentData.bilangan_anak = currentData.bilangan_anak.toString();
+            }
+
+            let isChanged = false;
+
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('keluargaKlienForm').submit();
             }
         });
     </script>

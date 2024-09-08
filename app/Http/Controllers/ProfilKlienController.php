@@ -1228,7 +1228,7 @@ class ProfilKlienController extends Controller
         } 
         catch (\Illuminate\Validation\ValidationException $e) {
             // Redirect back with custom error message when validation fails
-            return redirect()->back()->with('errorKlien', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul.');
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
         // Retrieve the existing data that cannot be updated by the user
@@ -1301,23 +1301,29 @@ class ProfilKlienController extends Controller
         return redirect()->back()->with('success', 'Permohonan kemaskini profil diri telah dihantar untuk semakan.');
     }
 
-
     public function pekerjaanKlienRequestUpdate(Request $request)
     {
-        $validatedData = $request->validate([
-            'status_kerja'      => 'required|string|max:255',
-            'alasan_tidak_kerja'=> 'nullable|string|max:255',
-            'bidang_kerja'      => 'nullable|string|max:255',
-            'nama_kerja'        => 'nullable|string|max:255',
-            'pendapatan'        => 'nullable|string|max:255',
-            'kategori_majikan'  => 'nullable|string|max:255',
-            'nama_majikan'      => 'nullable|string|max:255',
-            'no_tel_majikan'    => 'nullable|string|max:11',
-            'alamat_kerja'      => 'nullable|string|max:255',
-            'poskod_kerja'      => 'nullable|integer',
-            'daerah_kerja'      => 'nullable|string|max:255',
-            'negeri_kerja'      => 'nullable|string|max:255',
-        ]);    
+        try {
+            // Validation rules for fields that users can update
+            $validatedData = $request->validate([
+                'status_kerja'      => 'required|string|max:255',
+                'alasan_tidak_kerja'=> 'nullable|string|max:255',
+                'bidang_kerja'      => 'nullable|string|max:255',
+                'nama_kerja'        => 'nullable|string|max:255',
+                'pendapatan'        => 'nullable|string|max:255',
+                'kategori_majikan'  => 'nullable|string|max:255',
+                'nama_majikan'      => 'nullable|string|max:255',
+                'no_tel_majikan'    => 'nullable|string|max:11',
+                'alamat_kerja'      => 'nullable|string|max:255',
+                'poskod_kerja'      => 'nullable|integer',
+                'daerah_kerja'      => 'nullable|string|max:255',
+                'negeri_kerja'      => 'nullable|string|max:255',
+            ]); 
+        } 
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }  
 
         // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
         if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
@@ -1391,21 +1397,27 @@ class ProfilKlienController extends Controller
 
     public function keluargaKlienRequestUpdate(Request $request)
     {
-        // Validate the incoming request
-        $validatedData = $request->validate([
-            'status_perkahwinan'    => 'required|string|max:255',
-            'nama_pasangan'         => 'nullable|string|max:255',
-            'no_tel_pasangan'       => 'nullable|string|max:11',
-            'bilangan_anak'         => 'nullable|string|max:255',
-            'alamat_pasangan'       => 'nullable|string|max:255',
-            'poskod_pasangan'       => 'nullable|string|max:5',
-            'daerah_pasangan'       => 'nullable|string|max:255',
-            'negeri_pasangan'       => 'nullable|string|max:255',
-            'alamat_kerja_pasangan' => 'nullable|string|max:255',
-            'poskod_kerja_pasangan' => 'nullable|string|max:5',
-            'daerah_kerja_pasangan' => 'nullable|string|max:255',
-            'negeri_kerja_pasangan' => 'nullable|string|max:255',
-        ]);
+        try {
+            // Validation rules for fields that users can update
+            $validatedData = $request->validate([
+                'status_perkahwinan'    => 'required|string|max:255',
+                'nama_pasangan'         => 'nullable|string|max:255',
+                'no_tel_pasangan'       => 'nullable|string|max:11',
+                'bilangan_anak'         => 'nullable|string|max:255',
+                'alamat_pasangan'       => 'nullable|string|max:255',
+                'poskod_pasangan'       => 'nullable|string|max:5',
+                'daerah_pasangan'       => 'nullable|string|max:255',
+                'negeri_pasangan'       => 'nullable|string|max:255',
+                'alamat_kerja_pasangan' => 'nullable|string|max:255',
+                'poskod_kerja_pasangan' => 'nullable|string|max:5',
+                'daerah_kerja_pasangan' => 'nullable|string|max:255',
+                'negeri_kerja_pasangan' => 'nullable|string|max:255',
+            ]);
+        } 
+        catch (\Illuminate\Validation\ValidationException $e) {
+            // Redirect back with custom error message when validation fails
+            return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }  
 
         // Reusable function to check and assign null if the value is not selected
         function checkAndAssignNull($array, $key, $default) {
@@ -1417,6 +1429,8 @@ class ProfilKlienController extends Controller
         $validatedData['negeri_pasangan'] = checkAndAssignNull($validatedData, 'negeri_pasangan', 'Pilih Negeri');
         $validatedData['daerah_kerja_pasangan'] = checkAndAssignNull($validatedData, 'daerah_kerja_pasangan', 'Pilih Daerah');
         $validatedData['negeri_kerja_pasangan'] = checkAndAssignNull($validatedData, 'negeri_kerja_pasangan', 'Pilih Negeri');
+
+        // dd($validatedData);
 
         // Proceed with the existing logic
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
