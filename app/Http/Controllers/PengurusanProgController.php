@@ -275,7 +275,7 @@ class PengurusanProgController extends Controller
         ]);
 
         $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya didaftar.');
     }
 
     public function kemaskiniProgPA($id)
@@ -315,7 +315,7 @@ class PengurusanProgController extends Controller
         ]);
 
         $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
     }
 
     public function padamProgPA($id){
@@ -324,9 +324,9 @@ class PengurusanProgController extends Controller
         if ($program) {
             $program->delete();
             $direct = "/pengurusan-program/pegawai-aadk/senarai-prog/";
-            return redirect()->to($direct)->with('success', 'Program berjaya dipadam.');
+            return redirect()->to($direct)->with('success', 'Aktiviti berjaya dipadam.');
         } else {
-            return redirect()->back()->with('error', 'Program gagal dipadam.');
+            return redirect()->back()->with('error', 'Aktiviti gagal dipadam.');
         }
     }
 
@@ -366,7 +366,7 @@ class PengurusanProgController extends Controller
         $kategori->kod  =   $request->kod;
         $kategori->save();
 
-        return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
+        return redirect()->back()->with('success', 'Kategori aktiviti ditambah.');
     }
 
     public function padamKategoriPA($id){
@@ -374,9 +374,9 @@ class PengurusanProgController extends Controller
 
         if ($kategori) {
             $kategori->delete();
-            return redirect()->back()->with('success2', 'Kategori program berjaya dipadam.');
+            return redirect()->back()->with('success2', 'Kategori aktiviti berjaya dipadam.');
         } else {
-            return redirect()->back()->with('error2', 'Kategori program gagal dipadam.');
+            return redirect()->back()->with('error2', 'Kategori aktiviti gagal dipadam.');
         }
     }
 
@@ -500,7 +500,7 @@ class PengurusanProgController extends Controller
         ]);
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Program berjaya didaftar.');
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya didaftar.');
     }
 
     public function kemaskiniProgPS($id)
@@ -540,7 +540,7 @@ class PengurusanProgController extends Controller
         ]);
 
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Program berjaya dikemaskini.');
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
     }
 
     public function padamProgPS($id){
@@ -549,9 +549,9 @@ class PengurusanProgController extends Controller
         if ($program) {
             $program->delete();
             $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
-            return redirect()->to($direct)->with('success', 'Program berjaya dipadam.');
+            return redirect()->to($direct)->with('success', 'Aktiviti berjaya dipadam.');
         } else {
-            return redirect()->back()->with('error', 'Program gagal dipadam.');
+            return redirect()->back()->with('error', 'Aktiviti gagal dipadam.');
         }
     }
 
@@ -591,7 +591,7 @@ class PengurusanProgController extends Controller
         $kategori->kod  =   $request->kod;
         $kategori->save();
 
-        return redirect()->back()->with('success', 'Kategori program berjaya ditambah.');
+        return redirect()->back()->with('success', 'Kategori aktiviti berjaya ditambah.');
     }
 
     public function padamKategoriPS($id){
@@ -599,9 +599,9 @@ class PengurusanProgController extends Controller
 
         if ($kategori) {
             $kategori->delete();
-            return redirect()->back()->with('success2', 'Kategori program berjaya dipadam.');
+            return redirect()->back()->with('success2', 'Kategori aktiviti berjaya dipadam.');
         } else {
-            return redirect()->back()->with('error2', 'Kategori program gagal dipadam.');
+            return redirect()->back()->with('error2', 'Kategori aktiviti gagal dipadam.');
         }
     }
 

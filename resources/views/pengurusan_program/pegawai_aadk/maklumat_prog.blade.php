@@ -63,17 +63,6 @@
     <!--begin::Body-->
     <div class="my-10">
         <!--begin:::Tabs-->
-        @if (session('success'))
-            <div class="alert alert-success p-3" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger p-3" role="alert">
-                {{ session('error') }}
-            </div>
-        @endif
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
             <!--begin:::Tab item-->
             <li class="nav-item">
@@ -578,18 +567,6 @@
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
-
-                            @if (session('success2'))
-                                <div class="alert alert-success p-3" role="alert">
-                                    {{ session('success2') }}
-                                </div>
-                            @endif
-
-                            @if (session('error2'))
-                                <div class="alert alert-danger p-3" role="alert">
-                                    {{ session('error2') }}
-                                </div>
-                            @endif
                             <!--end::Input group-->
                         </div>
                         <!--end::Card header-->
@@ -1088,11 +1065,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Check if there is a flash message
-            @if(session('message'))
+            @if(session('success'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berjaya!',
-                text: '{!! session('message') !!}',
+                text: '{!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+            @endif
+
+            @if(session('success2'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: '{!! session('success2') !!}',
                 confirmButtonText: 'OK'
             });
             @endif
@@ -1103,6 +1089,15 @@
                 icon: 'error',
                 title: 'Tidak Berjaya!',
                 text: '{!! session('error') !!}',
+                confirmButtonText: 'OK'
+            });
+            @endif
+
+            @if(session('error2'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: '{!! session('error2') !!}',
                 confirmButtonText: 'OK'
             });
             @endif
