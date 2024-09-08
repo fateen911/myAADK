@@ -102,7 +102,7 @@
                                     $savedAnswer = isset($autosavedAnswers[$question->id]) ? $autosavedAnswers[$question->id] : null;
                                 @endphp
                                 <div class="likert-scale mt-40">
-                                    <span class="keputusan color-purple">Sangat Tidak Setuju</span>
+                                    <span class="keputusan color-orange">Sangat Tidak Setuju</span>
                                     <div class="likert-option">
                                         <input type="radio" id="option1[{{ $question->id }}]" name="answer[{{ $question->id }}]" value="1" {{ $savedAnswer == 1 ? 'checked' : '' }}>
                                         <label for="option1[{{ $question->id }}]" class="circle1"></label>
@@ -140,7 +140,7 @@
                         <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
                             @csrf
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
+                                <button type="submit" class="btn btn-info text-center mt-5" id="hantarBtn" disabled>Hantar</button>
                             </div>
                         </form>
                     @endif
