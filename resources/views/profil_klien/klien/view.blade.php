@@ -40,32 +40,26 @@
         /* General styles for input, textarea, and select */
         input.form-control.form-control-solid,
         textarea.form-control.form-control-solid {
-            background-color: #e0e0e0; /* Darker background */
-            color: #222222; /* Lighter text color */
+            background-color: #e0e0e0; /* Uniform background */
+            color: #222222; /* Uniform text color */
         }
 
         /* Focus state for input, textarea, and select */
         input.form-control.form-control-solid:focus,
         textarea.form-control.form-control-solid:focus {
-            background-color: #d0d0d0;; /* Slightly lighter on focus */
-            color: #333333; /* Darker text color */
-            box-shadow: none; /* Remove Bootstrap focus shadow */
-        }
-
-        /* General styles for Select2 */
-        .select2-container--default .select2-selection--single {
-            background-color: #d0d0d0; /* Custom background color */
-            color: #222222; /* Custom text color */
-            border: 1px solid #888888; /* Custom border color */
-        }
-
-        /* Focus state for Select2 */
-        .select2-container--default .select2-selection--single:focus,
-        .select2-container--default .select2-selection--single:hover {
-            background-color: #e0e0e0; /* Slightly lighter background on focus */
-            border-color: #666666; /* Darker border on focus */
+            background-color: #d0d0d0; /* Slightly lighter on focus */
             color: #333333; /* Darker text color on focus */
             box-shadow: none; /* Remove Bootstrap focus shadow */
+        }
+
+        .form-select.custom-select {
+            background-color: #e0e0e0 !important; /* Change background */
+            color: #222222 !important; /* Ensure text color changes */
+        }
+
+        .form-select.custom-select option {
+            background-color: #f5f5f5 !important; /* Change option background */
+            color: #222222 !important; /* Ensure text color */
         }
 
         .form-control-plaintext {
@@ -417,7 +411,7 @@
                                 <div class="col-md-7">
                                     <div class="w-100">
                                         <!--begin::Select2-->
-                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod}}</span>
+                                        <span id="poskod_klien" class="fs-6 form-control-plaintext">{{$butiranKlien->poskod}}</span>
                                         <!--end::Select2-->
                                     </div>
                                 </div>
@@ -637,7 +631,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Poskod</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" id="poskod" name="poskod" value="{{ $butiranKlien->poskod }}" inputmode="numeric" maxlength="5"/>
+                                                    <input type="text" class="form-control form-control-solid" id="poskod" name="poskod" value="{{ $butiranKlien->poskod }}" inputmode="numeric"/>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
@@ -645,7 +639,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select bg-light-dark" id="negeri" name="negeri" data-control="select2" data-hide-search="true">
                                                         @foreach ($negeri as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                                         @endforeach
@@ -657,7 +651,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="daerah" name="daerah" data-control="select2" data-hide-search="true">
                                                         @foreach ($daerah as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
                                                         @endforeach
@@ -669,7 +663,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true" >
+                                                    <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-hide-search="true">
                                                         @foreach ($tahapPendidikan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                                         @endforeach
@@ -914,7 +908,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <select class="form-select form-select-solid" id="status_kerja_modal" name="status_kerja" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="status_kerja_modal" name="status_kerja" data-control="select2" data-hide-search="true">
                                                         <option value="BEKERJA" {{ $butiranKlien->status_kerja == 'BEKERJA' ? 'selected' : '' }}>BEKERJA</option>
                                                         <option value="TIDAK BEKERJA" {{ $butiranKlien->status_kerja == 'TIDAK BEKERJA' ? 'selected' : '' }}>TIDAK BEKERJA</option>
                                                     </select>
@@ -944,7 +938,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Julat Pendapatan</option>
                                                             @foreach ($pendapatan as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
@@ -957,7 +951,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Kategori Majikan</option>
                                                             <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                                             <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
@@ -1013,7 +1007,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Negeri</option>
                                                             @foreach ($negeriKerja as $negeriK)
                                                                 <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
@@ -1026,7 +1020,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="daerah_kerja" name="daerah_kerja" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Daerah</option>
                                                             @foreach ($daerahKerja as $daerahK)
                                                                 <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
@@ -1043,7 +1037,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="true">
+                                                        <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="true">
                                                             <option>Pilih Alasan</option>
                                                             <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                                             <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
@@ -1546,7 +1540,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="status_bapa" name="status_bapa" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Status Bapa</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_bapa == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_bapa == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1580,7 +1574,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_bapa == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1593,7 +1587,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_bapa == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -1673,7 +1667,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="status_ibu" name="status_ibu" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Status Ibu</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_ibu == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_ibu == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1707,7 +1701,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_ibu == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1720,7 +1714,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_ibu == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -1808,7 +1802,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Status</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="status_penjaga" name="status_penjaga" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Status Penjaga</option>
                                                                 <option value="HIDUP" {{ $butiranKlien->status_penjaga == 'HIDUP' ? 'selected' : '' }}>HIDUP</option>
                                                                 <option value="MENINGGAL DUNIA" {{ $butiranKlien->status_penjaga == 'MENINGGAL DUNIA' ? 'selected' : '' }}>MENINGGAL DUNIA</option>
@@ -1842,7 +1836,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->negeri_penjaga == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -1855,7 +1849,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                         </div>
                                                         <div class="col-md-9">
-                                                            <select class="form-select form-select-solid" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->daerah_penjaga == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -2149,7 +2143,7 @@
                                                 </div> 
                                                 <div class="col-md-7">
                                                     <!--begin::Select2-->
-                                                    <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
                                                         <option value="BUJANG" {{ $butiranKlien->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                                         <option value="BERKAHWIN" {{ $butiranKlien->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
                                                         <option value="DUDA/JANDA/BALU" {{ $butiranKlien->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>
@@ -2218,7 +2212,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2231,7 +2225,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahPasangan as $daerahP)
                                                             <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2260,7 +2254,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Negeri</option>
                                                         @foreach ($negeriKerjaPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
@@ -2273,7 +2267,7 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <select class="form-select form-select-solid" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
+                                                    <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true">
                                                         <option>Pilih Daerah</option>
                                                         @foreach ($daerahKerjaPasangan as $item)
                                                             <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
@@ -2829,7 +2823,7 @@
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
             var klien_daerah = document.getElementById("daerah");
-            var klien_poskod = document.getElementById("poskod");
+            var klien_poskod = document.getElementById("poskod_klien");
 
             var alamat_bapa = document.getElementById("alamat_b");
             var negeri_bapa = document.getElementById("negeri_b");
@@ -2883,7 +2877,7 @@
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
             var klien_daerah = document.getElementById("daerah");
-            var klien_poskod = document.getElementById("poskod");
+            var klien_poskod = document.getElementById("poskod_klien");
 
             var alamat_ibu = document.getElementById("alamat_i");
             var negeri_ibu = document.getElementById("negeri_i");
@@ -2937,7 +2931,7 @@
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
             var klien_daerah = document.getElementById("daerah");
-            var klien_poskod = document.getElementById("poskod");
+            var klien_poskod = document.getElementById("poskod_klien");
 
             var alamat_penjaga = document.getElementById("alamat_p");
             var negeri_penjaga = document.getElementById("negeri_p");
@@ -2967,7 +2961,7 @@
 
                 // Trigger select2 update if using select2
                 if ($(negeri_penjaga).data('select2')) {
-                    $(negeri_penjaga).val(initialNegeriaPenjaga).trigger('change.select2');
+                    $(negeri_penjaga).val(initialNegeriPenjaga).trigger('change.select2');
                 }
                 if ($(daerah_penjaga).data('select2')) {
                     $(daerah_penjaga).val(initialDaerahPenjaga).trigger('change.select2');
@@ -2991,7 +2985,7 @@
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
             var klien_daerah = document.getElementById("daerah");
-            var klien_poskod = document.getElementById("poskod");
+            var klien_poskod = document.getElementById("poskod_klien");
 
             var alamat_partner = document.getElementById("alamat_partner");
             var negeri_partner = document.getElementById("negeri_partner");

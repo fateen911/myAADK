@@ -3075,7 +3075,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         document.getElementById('submitBtnPekerjaan').addEventListener('click', function (e) {
             // Get original data (fetched from server/database)
             const originalData = {
@@ -3146,6 +3146,6 @@
                 document.getElementById('pekerjaanKlienForm').submit();
             }
         });
-    </script>
+    </script> --}}
 </body>     
 @endsection
