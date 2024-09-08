@@ -1496,6 +1496,8 @@ class ProfilKlienController extends Controller
         // Apply the function to each field
         $validatedData['daerah_bapa'] = assignNull($validatedData, 'daerah_bapa', 'Pilih Daerah');
         $validatedData['negeri_bapa'] = assignNull($validatedData, 'negeri_bapa', 'Pilih Negeri');
+
+        // dd($validatedData);
         
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $klienId)->where('waris','1')->first();

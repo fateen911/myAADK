@@ -1087,7 +1087,7 @@
                                     <div class="tab-content">
                                         <!-- Maklumat Bapa -->
                                         <div class="tab-pane active" id="maklumatBapa">
-                                            <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
+                                            <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form">
                                                 @csrf
                                                 <div class="row mb-2">
                                                     <div class="col-md-8 offset-md-4">
@@ -1100,7 +1100,7 @@
                                                             <span>Nama</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_bapa}}</span>
                                                     </div>
                                                 </div>
@@ -1110,7 +1110,7 @@
                                                             <span>No Kad Pengenalan</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_bapa}}</span>
                                                     </div>
                                                 </div>
@@ -1120,7 +1120,7 @@
                                                             <span>Nombor Telefon</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_bapa}}</span>
                                                     </div>
                                                 </div>
@@ -1130,7 +1130,7 @@
                                                             <span>Status</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_bapa}}</span>
                                                     </div>
                                                 </div>
@@ -1140,7 +1140,7 @@
                                                             <span>Alamat Rumah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_bapa}}</span>
                                                     </div>
                                                 </div>
@@ -1150,7 +1150,7 @@
                                                             <span>Poskod</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_bapa}}</span>
                                                         </div>
@@ -1162,7 +1162,7 @@
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $negeriBapaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_bapa )->value('senarai_negeri.negeri');
@@ -1177,7 +1177,7 @@
                                                             <span>Daerah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $daerahBapaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_bapa )->value('senarai_daerah.daerah');
@@ -1213,7 +1213,7 @@
                     
                                         <!-- Maklumat Ibu -->
                                         <div class="tab-pane" id="maklumatIbu">
-                                            <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
+                                            <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form">
                                                 @csrf
                                                 <div class="row mb-2">
                                                     <div class="col-md-8 offset-md-4">
@@ -1226,7 +1226,7 @@
                                                             <span>Nama</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_ibu}}</span>
                                                     </div>
                                                 </div>
@@ -1236,7 +1236,7 @@
                                                             <span>Nombor Kad Pengenalan</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_ibu}}</span>
                                                     </div>
                                                 </div>
@@ -1246,7 +1246,7 @@
                                                             <span>Nombor Telefon</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_ibu}}</span>
                                                     </div>
                                                 </div>
@@ -1256,7 +1256,7 @@
                                                             <span>Status</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_ibu}}</span>
                                                     </div>
                                                 </div>
@@ -1266,7 +1266,7 @@
                                                             <span>Alamat Rumah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_ibu}}</span>
                                                     </div>
                                                 </div>
@@ -1288,7 +1288,7 @@
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $negeriIbuKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_ibu )->value('senarai_negeri.negeri');
@@ -1303,7 +1303,7 @@
                                                             <span>Daerah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $daerahIbuKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_ibu )->value('senarai_daerah.daerah');
@@ -1352,7 +1352,7 @@
                                                             <span>Hubungan</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->hubungan_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1362,7 +1362,7 @@
                                                             <span>Nama</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1372,7 +1372,7 @@
                                                             <span>Nombor Kad Pengenalan</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1382,7 +1382,7 @@
                                                             <span>Nombor Telefon</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->no_tel_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1392,7 +1392,7 @@
                                                             <span>Status</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1402,7 +1402,7 @@
                                                             <span>Alamat Rumah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->alamat_penjaga}}</span>
                                                     </div>
                                                 </div>
@@ -1412,7 +1412,7 @@
                                                             <span>Poskod</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             <span class="fs-6 form-control-plaintext">{{$butiranKlien->poskod_penjaga}}</span>
                                                         </div>
@@ -1424,7 +1424,7 @@
                                                             <span>Negeri</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $negeriPenjagaKlien = DB::table('senarai_negeri')->where('id', $butiranKlien->negeri_penjaga )->value('senarai_negeri.negeri');
@@ -1439,7 +1439,7 @@
                                                             <span>Daerah</span>
                                                         </label>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <div class="w-100">
                                                             @php
                                                                 $daerahPenjagaKlien = DB::table('senarai_daerah')->where('id', $butiranKlien->daerah_penjaga )->value('senarai_daerah.daerah');
@@ -3364,6 +3364,251 @@
             }
         });
     </script>
+
+    <script>
+        document.getElementById('submitBtnBapa').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                nama_bapa: "{{ $butiranKlien->nama_bapa }}",
+                no_kp_bapa: "{{ $butiranKlien->no_kp_bapa }}",
+                no_tel_bapa: "{{ $butiranKlien->no_tel_bapa }}",
+                status_bapa: "{{ $butiranKlien->status_bapa }}",
+                alamat_b: "{{ $butiranKlien->alamat_bapa }}",
+                poskod_b: "{{ $butiranKlien->poskod_bapa }}",
+                negeri_b: "{{ $butiranKlien->negeri_bapa }}",
+                daerah_b: "{{ $butiranKlien->daerah_bapa }}",
+            };
+
+            // Get current form data
+            let negeri_b = document.getElementById('negeri_b') ? document.getElementById('negeri_b').value : '';
+            if (negeri_b === 'Pilih Negeri') {
+                negeri_b = null;  // Treat as null
+            }
+
+            let daerah_b = document.getElementById('daerah_b') ? document.getElementById('daerah_b').value : '';
+            if (daerah_b === 'Pilih Daerah') {
+                daerah_b = null;  // Treat as null
+            }
+
+            let status_bapa = document.getElementById('status_bapa') ? document.getElementById('status_bapa').value : '';
+            if (status_bapa === 'Pilih Status Bapa') {
+                status_bapa = null;  // Treat as null
+            }
+
+            const currentData = {
+                nama_bapa: document.getElementById('nama_bapa').value,
+                no_kp_bapa: document.getElementById('no_kp_bapa').value,
+                no_tel_bapa: document.getElementById('no_tel_bapa').value,
+                status_bapa: status_bapa,
+                alamat_b: document.getElementById('alamat_b').value,
+                poskod_b: document.getElementById('poskod_b').value,
+                negeri_b: negeri_b,
+                daerah_b: daerah_b,
+            };
+
+            // Log the original and current data to debug the issue
+            console.log('Original Data:', originalData);
+            console.log('Current Data:', currentData);
+
+            // Handle poskod_kerja as a string for comparison
+            if (originalData.poskod_b !== null) {
+                originalData.poskod_b = originalData.poskod_b.toString();
+            }
+            if (currentData.poskod_b !== null) {
+                currentData.poskod_b = currentData.poskod_b.toString();
+            }
+
+            let isChanged = false;
+
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
+
+                console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
+
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('bapaKlienForm').submit();
+            }
+        });
+    </script>
     
+    <script>
+        document.getElementById('submitBtnIbu').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                nama_ibu: "{{ $butiranKlien->nama_ibu }}",
+                no_kp_ibu: "{{ $butiranKlien->no_kp_ibu }}",
+                no_tel_ibu: "{{ $butiranKlien->no_tel_ibu }}",
+                status_ibu: "{{ $butiranKlien->status_ibu }}",
+                alamat_i: "{{ $butiranKlien->alamat_ibu }}",
+                poskod_i: "{{ $butiranKlien->poskod_ibu }}",
+                negeri_i: "{{ $butiranKlien->negeri_ibu }}",
+                daerah_i: "{{ $butiranKlien->daerah_ibu }}",
+            };
+
+            // Get current form data
+            let negeri_i = document.getElementById('negeri_i') ? document.getElementById('negeri_i').value : '';
+            if (negeri_i === 'Pilih Negeri') {
+                negeri_i = null;  // Treat as null
+            }
+
+            let daerah_i = document.getElementById('daerah_i') ? document.getElementById('daerah_i').value : '';
+            if (daerah_i === 'Pilih Daerah') {
+                daerah_i = null;  // Treat as null
+            }
+
+            let status_ibu = document.getElementById('status_ibu') ? document.getElementById('status_ibu').value : '';
+            if (status_ibu === 'Pilih Status Ibu') {
+                status_ibu = null;  // Treat as null
+            }
+
+            const currentData = {
+                nama_ibu: document.getElementById('nama_ibu').value,
+                no_kp_ibu: document.getElementById('no_kp_ibu').value,
+                no_tel_ibu: document.getElementById('no_tel_ibu').value,
+                status_ibu: status_ibu,
+                alamat_i: document.getElementById('alamat_i').value,
+                poskod_i: document.getElementById('poskod_i').value,
+                negeri_i: negeri_i,
+                daerah_i: daerah_i,
+            };
+
+            // Log the original and current data to debug the issue
+            console.log('Original Data:', originalData);
+            console.log('Current Data:', currentData);
+
+            // Handle poskod_kerja as a string for comparison
+            if (originalData.poskod_i !== null) {
+                originalData.poskod_i = originalData.poskod_i.toString();
+            }
+            if (currentData.poskod_i !== null) {
+                currentData.poskod_i = currentData.poskod_i.toString();
+            }
+
+            let isChanged = false;
+
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
+
+                console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
+
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('ibuKlienForm').submit();
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('submitBtnPenjaga').addEventListener('click', function (e) {
+            // Get original data (fetched from server/database)
+            const originalData = {
+                hubungan_penjaga: "{{ $butiranKlien->hubungan_penjaga }}",
+                nama_penjaga: "{{ $butiranKlien->nama_penjaga }}",
+                no_kp_penjaga: "{{ $butiranKlien->no_kp_penjaga }}",
+                no_tel_penjaga: "{{ $butiranKlien->no_tel_penjaga }}",
+                status_penjaga: "{{ $butiranKlien->status_penjaga }}",
+                alamat_p: "{{ $butiranKlien->alamat_penjaga }}",
+                poskod_p: "{{ $butiranKlien->poskod_penjaga }}",
+                negeri_p: "{{ $butiranKlien->negeri_penjaga }}",
+                daerah_p: "{{ $butiranKlien->daerah_penjaga }}",
+            };
+
+            // Get current form data
+            let negeri_p = document.getElementById('negeri_p') ? document.getElementById('negeri_p').value : '';
+            if (negeri_p === 'Pilih Negeri') {
+                negeri_p = null;  // Treat as null
+            }
+
+            let daerah_p = document.getElementById('daerah_p') ? document.getElementById('daerah_p').value : '';
+            if (daerah_p === 'Pilih Daerah') {
+                daerah_p = null;  // Treat as null
+            }
+
+            let status_penjaga = document.getElementById('status_penjaga') ? document.getElementById('status_penjaga').value : '';
+            if (status_penjaga === 'Pilih Status Penjaga') {
+                status_penjaga = null;  // Treat as null
+            }
+
+            const currentData = {
+                hubungan_penjaga: document.getElementById('hubungan_penjaga').value,
+                nama_penjaga: document.getElementById('nama_penjaga').value,
+                no_kp_penjaga: document.getElementById('no_kp_penjaga').value,
+                no_tel_penjaga: document.getElementById('no_tel_penjaga').value,
+                status_penjaga: status_penjaga,
+                alamat_p: document.getElementById('alamat_p').value,
+                poskod_p: document.getElementById('poskod_p').value,
+                negeri_p: negeri_p,
+                daerah_p: daerah_p,
+            };
+
+            // Log the original and current data to debug the issue
+            console.log('Original Data:', originalData);
+            console.log('Current Data:', currentData);
+
+            // Handle poskod_kerja as a string for comparison
+            if (originalData.poskod_p !== null) {
+                originalData.poskod_p = originalData.poskod_p.toString();
+            }
+            if (currentData.poskod_p !== null) {
+                currentData.poskod_p = currentData.poskod_p.toString();
+            }
+
+            let isChanged = false;
+
+            // Compare all fields
+            Object.keys(originalData).forEach(key => {
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
+
+                console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
+
+                if (originalValue !== currentValue) {
+                    isChanged = true;  // Mark as changed
+                }
+            });
+
+
+            if (!isChanged) {
+                // Display alert
+                alert("Data yang dikemaskini adalah sama dengan data asal");
+                // Stop form submission if no changes are detected
+                e.preventDefault(); 
+                return;
+            } 
+            else {
+                // Allow form submission
+                document.getElementById('penjagaKlienForm').submit();
+            }
+        });
+    </script>
 </body>
 @endsection
