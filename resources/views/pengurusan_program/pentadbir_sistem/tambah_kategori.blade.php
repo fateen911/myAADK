@@ -219,7 +219,7 @@
                             rows += '<td class="text-uppercase" id="nama">' + kategori.nama + '</td>';
                             rows += '<td class="text-uppercase" id="kod">' + kategori.kod + '</td>';
                             rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
-                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm"> &nbsp;<i class="bi bi bi-trash3-fill fs-3"></i></a></td>';
+                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm" id="padam"> &nbsp;<i class="bi bi bi-trash3-fill fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#items-table-body').html(rows);
@@ -326,6 +326,29 @@
                 confirmButtonText: 'OK'
             });
             @endif
+        });
+    </script>
+    <script>
+        $(document).on('click', '#padam', function(e) {
+            e.preventDefault(); // Prevent default action (like submitting a form or following a link)
+            var link = $(this).data('link'); // Get the link from the data-link attribute
+            Swal.fire({
+                html: "Adakah anda pasti?",
+                icon: "warning",
+                buttonsStyling: false,
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: "btn btn-primary",
+                    cancelButton: 'btn btn-danger'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the link if the user confirms
+                    window.location.href = link;
+                }
+            });
         });
     </script>
 
