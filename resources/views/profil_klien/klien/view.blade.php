@@ -736,7 +736,7 @@
                                 <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Pendapatan (RM)</span>
+                                            <span>Pendapatan Bulanan (RM)</span>
                                         </label>
                                     </div>
                                     <div class="col-md-8">
@@ -2136,7 +2136,6 @@
                                                 <div class="col-md-7">
                                                     <!--begin::Select2-->
                                                     <select class="form-select form-select-solid" id="status_perkahwinan" name="status_perkahwinan" data-hide-search="true">
-                                                        <option>Pilih Status Perkahwinan</option>
                                                         <option value="BUJANG" {{ $butiranKlien->status_perkahwinan == 'BUJANG' ? 'selected' : '' }}>BUJANG</option>
                                                         <option value="BERKAHWIN" {{ $butiranKlien->status_perkahwinan == 'BERKAHWIN' ? 'selected' : '' }}>BERKAHWIN</option>
                                                         <option value="DUDA/JANDA/BALU" {{ $butiranKlien->status_perkahwinan == 'DUDA/JANDA/BALU' ? 'selected' : '' }}>DUDA/JANDA/BALU</option>

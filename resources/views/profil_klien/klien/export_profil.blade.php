@@ -137,6 +137,14 @@
         $negeriKerjaPasangan = $pasangan && isset($pasangan['negeri_kerja_pasangan']) 
                                 ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri') 
                                 : null;
+
+        $agamaKlien = DB::table('senarai_agama')->where('id', $klien->agama)->value('senarai_agama.agama');
+
+        $bangsaKlien = DB::table('senarai_bangsa')->where('id', $klien->bangsa)->value('senarai_bangsa.bangsa');
+
+        $pendidikan = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
+    
+        $pendapatanKlien = DB::table('senarai_pendapatan')->where('id', $pekerjaan->pendapatan)->value('senarai_pendapatan.pendapatan');
     @endphp
 
     <table class="profile-form no-break">
@@ -165,7 +173,7 @@
                 <td>{{$klien->no_kp}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon</td>
+                <td style="width: 35%">No. Telefon</td>
                 <td style="width: 2%">:</td>
                 <td>{{$klien->no_tel}}</td>
             </tr>
@@ -177,17 +185,32 @@
             <tr class="gap-left">
                 <td style="width: 35%">Jantina</td>
                 <td style="width: 2%">:</td>
-                <td>{{$klien->jantina}}</td>
+                <td>{{$klien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN'}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Agama</td>
                 <td style="width: 2%">:</td>
-                <td>{{$klien->agama}}</td>
+                <td>{{$agamaKlien}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Bangsa</td>
                 <td style="width: 2%">:</td>
-                <td>{{$klien->bangsa}}</td>
+                <td>{{$bangsaKlien}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Status Kesihatan Mental</td>
+                <td style="width: 2%">:</td>
+                <td>{{$klien->status_kesihatan_mental}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$klien->status_oku}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Skor CCRI</td>
+                <td style="width: 2%">:</td>
+                <td>{{$klien->skor_ccri}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Alamat Rumah</td>
@@ -212,22 +235,7 @@
             <tr class="gap-left">
                 <td style="width: 35%">Tahap Pendidikan</td>
                 <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{$klien->tahap_pendidikan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Status Kesihatan Mental</td>
-                <td style="width: 2%">:</td>
-                <td>{{$klien->status_kesihatan_mental}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$klien->status_oku}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Skor CCRI</td>
-                <td style="width: 2%">:</td>
-                <td>{{$klien->skor_ccri}}</td>
+                <td class="gap-bottom">{{$pendidikan}}</td>
             </tr>
 
             <tr>
@@ -243,12 +251,12 @@
                 <td class="gap-top">{{$waris->nama_bapa}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">No Kad Pengenalan</td>
+                <td style="width: 35%">No. Kad Pengenalan</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_kp_bapa}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon</td>
+                <td style="width: 35%">No. Telefon</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_tel_bapa}}</td>
             </tr>
@@ -258,7 +266,7 @@
                 <td>{{$waris->status_bapa}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Alamat</td>
+                <td style="width: 35%">Alamat Rumah</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->alamat_bapa}}</td>
             </tr>
@@ -287,12 +295,12 @@
                 <td class="gap-top">{{$waris->nama_ibu}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">No Kad Pengenalan</td>
+                <td style="width: 35%">No. Kad Pengenalan</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_kp_ibu}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon</td>
+                <td style="width: 35%">No. Telefon</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_tel_ibu}}</td>
             </tr>
@@ -302,7 +310,7 @@
                 <td>{{$waris->status_ibu}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Alamat</td>
+                <td style="width: 35%">Alamat Rumah</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->alamat_ibu}}</td>
             </tr>
@@ -336,12 +344,12 @@
                 <td class="gap-top">{{$waris->nama_penjaga}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">No Kad Pengenalan</td>
+                <td style="width: 35%">No. Kad Pengenalan</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_kp_penjaga}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon</td>
+                <td style="width: 35%">No. Telefon</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->no_tel_penjaga}}</td>
             </tr>
@@ -351,7 +359,7 @@
                 <td>{{$waris->status_penjaga}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Alamat</td>
+                <td style="width: 35%">Alamat Rumah</td>
                 <td style="width: 2%">:</td>
                 <td>{{$waris->alamat_penjaga}}</td>
             </tr>
@@ -385,7 +393,7 @@
                 <td>{{$pasangan->nama_pasangan}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon Pasangan</td>
+                <td style="width: 35%">No. Telefon Pasangan</td>
                 <td style="width: 2%">:</td>
                 <td>{{$pasangan->no_tel_pasangan}}</td>
             </tr>
@@ -439,60 +447,68 @@
                 <td class="header-part" colspan="3">D. MAKLUMAT PEKERJAAN</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%" class="gap-top">Status</td>
+                <td style="width: 35%" class="gap-top">Status Kerja</td>
                 <td style="width: 2%" class="gap-top">:</td>
                 <td class="gap-top">{{$pekerjaan->status_kerja ?? ''}}</td>
             </tr>
-            <tr class="gap-left">
-                <td style="width: 35%" class="gap-top">Bidang</td>
-                <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->bidang_kerja ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%" class="gap-top">Nama</td>
-                <td style="width: 2%" class="gap-top">:</td>
-                <td class="gap-top">{{$pekerjaan->nama_kerja ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Pendapatan Bulanan (RM)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->pendapatan ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Kategori Majikan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->kategori_majikan ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Nama Majikan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->nama_majikan ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Nombor Telefon Majikan</td>
-                <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{$pekerjaan->no_tel_majikan ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Alamat Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->alamat_kerja ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Poskod Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pekerjaan->poskod_kerja ?? ''}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Daerah Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$daerahKerja}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Negeri Tempat Bekerja</td>
-                <td style="width: 2%">:</td>
-                <td>{{$negeriKerja}}</td>
-            </tr>
+            @if ($pekerjaan->status_kerja == 'BEKERJA')
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">Bidang Pekerjaan</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{$pekerjaan->bidang_kerja ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">Nama Pekerjaan</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{$pekerjaan->nama_kerja ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Pendapatan Bulanan (RM)</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pendapatanKlien}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Kategori Majikan</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pekerjaan->kategori_majikan ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Nama Majikan</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pekerjaan->nama_majikan ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">No. Telefon Majikan</td>
+                    <td style="width: 2%">:</td>
+                    <td class="gap-bottom">{{$pekerjaan->no_tel_majikan ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Alamat Tempat Bekerja</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pekerjaan->alamat_kerja ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Poskod</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pekerjaan->poskod_kerja ?? ''}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Daerah</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$daerahKerja}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Negeri</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$negeriKerja}}</td>
+                </tr>
+            @else
+                <tr class="gap-left">
+                    <td style="width: 35%">Alasan Tidak Bekerja</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pekerjaan->alasan_tidak_kerja ?? ''}}</td>
+                </tr> 
+            @endif
         </tbody>
     </table>
 </body>
