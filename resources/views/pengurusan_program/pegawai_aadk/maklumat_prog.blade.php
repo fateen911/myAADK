@@ -182,8 +182,8 @@
                                 <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                     Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
-                                    Padam <i class="bi bi-trash-fill"></i>
+                                <a href="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" id="padam" data-link="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                    Padam <i class="bi bi-trash3-fill"></i>
                                 </a>
                             </div>
                         </div>
@@ -1143,6 +1143,29 @@
             }
         );
 
+    </script>
+    <script>
+        $(document).on('click', '#padam', function(e) {
+            e.preventDefault(); // Prevent default action (like submitting a form or following a link)
+            var link = $(this).data('link'); // Get the link from the data-link attribute
+            Swal.fire({
+                html: "Adakah anda pasti?",
+                icon: "warning",
+                buttonsStyling: false,
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: "btn btn-primary",
+                    cancelButton: 'btn btn-danger'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the link if the user confirms
+                    window.location.href = link;
+                }
+            });
+        });
     </script>
 
 @endsection

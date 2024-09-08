@@ -55,17 +55,7 @@
         <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
-    @if (session('success'))
-        <div class="alert alert-success p-3 my-3" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger p-3 my-3" role="alert">
-            {{ session('error') }}
-        </div>
-    @endif
     <!--begin::Body-->
     <div class="card shadow-sm">
         <div class="table-responsive">
@@ -290,11 +280,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Check if there is a flash message
-            @if(session('message'))
+            @if(session('success'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berjaya!',
-                text: '{!! session('message') !!}',
+                text: '{!! session('success') !!}',
+                confirmButtonText: 'OK'
+            });
+            @endif
+
+            @if(session('success2'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berjaya!',
+                text: '{!! session('success2') !!}',
                 confirmButtonText: 'OK'
             });
             @endif
@@ -305,6 +304,15 @@
                 icon: 'error',
                 title: 'Tidak Berjaya!',
                 text: '{!! session('error') !!}',
+                confirmButtonText: 'OK'
+            });
+            @endif
+
+            @if(session('error2'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: '{!! session('error2') !!}',
                 confirmButtonText: 'OK'
             });
             @endif

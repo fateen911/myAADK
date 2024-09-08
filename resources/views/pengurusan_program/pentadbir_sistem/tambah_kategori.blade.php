@@ -219,7 +219,7 @@
                             rows += '<td class="text-uppercase" id="nama">' + kategori.nama + '</td>';
                             rows += '<td class="text-uppercase" id="kod">' + kategori.kod + '</td>';
                             rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
-                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm" id="padam"> &nbsp;<i class="bi bi bi-trash3-fill fs-3"></i></a></td>';
+                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm" id="padam"> &nbsp;<i class="bi bi-trash3-fill fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#items-table-body').html(rows);
