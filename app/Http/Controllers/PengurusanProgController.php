@@ -79,6 +79,12 @@ class PengurusanProgController extends Controller
         return response()->json($kategori);
     }
 
+    public function kategoriData($id)
+    {
+        $kategori = KategoriProgram::find($id);
+        return response()->json($kategori);
+    }
+
     public function program($id)
     {
         $user = User::find($id);
@@ -592,6 +598,23 @@ class PengurusanProgController extends Controller
         $kategori->save();
 
         return redirect()->back()->with('success', 'Kategori aktiviti berjaya ditambah.');
+    }
+
+    public function postKemaskiniKategoriPS(Request $request){
+        $request->validate([
+            'nama2'  =>  'required|string|max:255',
+            'kod2'   =>  'required|string|max:255',
+        ]);
+
+        $id = $request->kat_id;
+
+        $kategori = KategoriProgram::find($id);
+        $kategori->update([
+            'nama'   =>   $request->nama2,
+            'kod'    =>   $request->kod2,
+        ]);
+
+        return redirect()->back()->with('success', 'Kategori aktiviti berjaya dikemaskini.');
     }
 
     public function padamKategoriPS($id){

@@ -53,6 +53,7 @@ Route::get('/pengurusan-program/pentadbir-sistem/maklumat-prog/{id}',[Pengurusan
 Route::get('/pengurusan-program/pentadbir-sistem/senarai-prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');
 Route::post('/pengurusan-program/pentadbir-sistem/post-tambah-kategori',[PengurusanProgController::class, 'postTambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_tambah_kategori');
+Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-kategori',[PengurusanProgController::class, 'postKemaskiniKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_kategori');
 Route::get('/pengurusan-program/pentadbir-sistem/padam-kategori/{id}',[PengurusanProgController::class, 'padamKategoriPS'])->name('pengurusan_program.pentadbir_sistem.padam_kategori');
 
 // PENGURUSAN PROGRAM - KLIEN
@@ -88,6 +89,7 @@ Route::get('/klien-semua', [PengurusanProgController::class, 'klienSemua']);
 Route::get('/klien-negeri/{id}', [PengurusanProgController::class, 'klienNegeri']);
 Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah']);
 Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
+Route::get('/kategori-data/{id}', [PengurusanProgController::class, 'kategoriData']);
 Route::get('/program/{id}', [PengurusanProgController::class, 'program']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);

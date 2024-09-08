@@ -80,11 +80,11 @@
                     <div class="card-body pt-0">
                         <div class="mb-5 fv-row">
                             <label class="required form-label">Nama Kategori</label>
-                            <input type="text" name="nama" class="form-control mb-2" placeholder="Nama Kategori" value="" required/>
+                            <input type="text" name="nama" class="form-control mb-2" value="" required/>
                         </div>
                         <div class="mb-5 fv-row">
                             <label class="required form-label">Kod Kategori</label>
-                            <input type="text" name="kod" class="form-control mb-2" placeholder="Kod Kategori" value="" required/>
+                            <input type="text" name="kod" class="form-control mb-2" value="" required/>
                         </div>
                         <!--end::Input group-->
                         <div class="d-flex justify-content-end">
@@ -119,7 +119,7 @@
                                     <th class="min-w-125px">Nama</th>
                                     <th class="min-w-60px">Kod</th>
                                     <th class="min-w-175px">Tarikh Dicipta</th>
-                                    <th class="min-w-50px">Tindakan</th>
+                                    <th class="min-w-60px">Tindakan</th>
                                 </tr>
                                 </thead>
                                 <tbody id="items-table-body">
@@ -139,6 +139,40 @@
         <!--end::Form-->
     </div>
     <!--end::Content container-->
+
+    <!--begin::Modal - kemaskini-->
+    <div class="modal fade" tabindex="-1" id="kt_modal_1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">KEMASKINI KATEGORI</h5>
+                    <div class="btn btn-icon btn-sm ms-2" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg fs-4"><span class="path1"></span><span class="path2"></span></i>
+                    </div>
+                </div>
+                <form action="{{ url('/pengurusan-program/pentadbir-sistem/post-kemaskini-kategori') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Nama Kategori</label>
+                            <input type="text" name="nama2" id="nama2" class="form-control mb-2" value="" required/>
+                        </div>
+                        <div class="mb-5 fv-row">
+                            <label class="required form-label">Kod Kategori</label>
+                            <input type="text" name="kod2" id="kod2" class="form-control mb-2" value="" required/>
+                        </div>
+                        <input type="hidden" name="kat_id" id="katId" value="">
+                    </div>
+
+                    <div class="modal-footer gap-3">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Kemaskini</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--end::Modal - hebahan-->
 
     <!--begin::Javascript-->
     <script>var hostUrl = "assets/";</script>
@@ -182,10 +216,10 @@
                         $.each(response, function(index, kategori) {
                             let formattedDate = moment(kategori.created_at).format('DD-MM-YYYY HH:mm:ss');
                             rows += '<tr>';
-                            rows += '<td class="text-uppercase">' + kategori.nama + '</td>';
-                            rows += '<td class="text-uppercase">' + kategori.kod + '</td>';
+                            rows += '<td class="text-uppercase" id="nama">' + kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase" id="kod">' + kategori.kod + '</td>';
                             rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
-                            rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-sm btn-danger px-4"><i class="bi bi-trash-fill fs-3"></i></a></td>';
+                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm"> &nbsp;<i class="bi bi bi-trash3-fill fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#items-table-body').html(rows);
@@ -194,7 +228,25 @@
             }
         });
     </script>
-
+    <!-- Modal Kemaskini -->
+    <script>
+        $(document).on('click', '#kategori', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/kategori-data/' + id,  // Pass the item ID in the URL
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    document.getElementById('nama2').value = data.nama;
+                    document.getElementById('kod2').value = data.kod;
+                    document.getElementById('katId').value = data.id;
+                },
+                error: function() {
+                    alert('Category not found');
+                }
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
@@ -276,5 +328,6 @@
             @endif
         });
     </script>
+
 
 @endsection
