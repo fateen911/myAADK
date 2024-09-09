@@ -38,23 +38,27 @@
         <table class="table table-row-dashed fs-6 gy-5 my-0" id="pengesahanTable">
             <thead>
             <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                <th class="min-w-125px">Nama</th>
-                <th class="min-w-175px">No. Kad Pengenalan</th>
-                <th class="min-w-175px">Alamat</th>
-                <th class="min-w-175px">No. Telefon</th>
-                <th class="min-w-150px">Pengesahan</th>
-                <th class="min-w-175px">Catatan</th>
+                <th class="min-w-125px uppercase">Nama</th>
+                <th class="min-w-150px uppercase">No. Kad Pengenalan</th>
+                <th class="min-w-175px uppercase">Alamat</th>
+                <th class="min-w-125px uppercase">No. Telefon</th>
+                <th class="min-w-60px uppercase">Pengesahan</th>
+                <th class="min-w-60px uppercase">Negeri</th>
+                <th class="min-w-60px uppercase">Daerah</th>
+                <th class="min-w-150px uppercase">Catatan</th>
             </tr>
             </thead>
             <tbody>
                 @foreach($pengesahan as $item)
                     <tr>';
-                        <td class="text-uppercase"> {{$item->klien->nama}} </td>
-                        <td class="text-uppercase"> {{$item->klien->no_kp}} </td>
-                        <td class="text-uppercase"> {{$item->klien->alamat_rumah}} </td>
-                        <td class="text-uppercase"> {{$item->klien->no_tel}} </td>
-                        <td class="text-uppercase"> {{$item->keputusan}} </td>
-                        <td> {{$item->catatan}} </td>
+                        <td class="text-uppercase"> {{$item['klien']}} </td>
+                        <td class="text-uppercase"> {{$item['no_kp']}} </td>
+                        <td class="text-uppercase"> {{$item['alamat']}} </td>
+                        <td class="text-uppercase"> {{$item['no_tel']}} </td>
+                        <td class="text-uppercase"> {{$item['keputusan']}} </td>
+                        <td class="text-uppercase"> {{$item['negeri']}} </td>
+                        <td class="text-uppercase"> {{$item['daerah']}} </td>
+                        <td> {{$item['catatan']}} </td>
                     </tr>';
                 @endforeach
             </tbody>

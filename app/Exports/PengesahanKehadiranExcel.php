@@ -1,6 +1,9 @@
 <?php
 namespace App\Exports;
 
+use App\Models\DaerahPejabat;
+use App\Models\Negeri;
+use App\Models\PengesahanKehadiranProgram;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -26,6 +29,32 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         $this->tarikh_mula = Carbon::parse($program->tarikh_mula)->format('d/m/Y, h:iA');
         $this->tarikh_tamat = Carbon::parse($program->tarikh_tamat)->format('d/m/Y, h:iA');
         $this->tempat = strtoupper($program->tempat);
+
+        // Fetch program and klien details using Eloquent relationships
+        $pengesahan_data = PengesahanKehadiranProgram::with('program','klien')->where('program_id', $program->id)->get();
+
+        // Initialize empty arrays for storing negeri and daerah values
+        $pengesahan = [];
+
+        // Loop through each pengesahan to fetch negeri and daerah
+        foreach ($pengesahan_data as $item) {
+            // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+            $negeri = Negeri::where('id', $item->klien->negeri_pejabat)->first();
+            $daerah = DaerahPejabat::where('kod', $item->klien->daerah_pejabat)->first();
+
+            // Add the negeri and daerah information to each pengesahan
+            $pengesahan[] = [
+                'klien' => $item->klien->nama,
+                'no_kp' => $item->klien->no_kp,
+                'alamat' => $item->klien->alamat_rumah,
+                'no_tel' => $item->klien->no_tel,
+                'keputusan' => $item->keputusan,
+                'negeri' => $negeri ? $negeri->negeri : 'TIADA',
+                'daerah' => $daerah ? $daerah->daerah : 'TIADA',
+                'catatan' => $item->catatan ? $daerah->daerah : 'TIADA',
+            ];
+        }
+
         $this->pengesahan = $pengesahan;
     }
 
@@ -42,19 +71,10 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
             ['TARIKH/MASA TAMAT: ' . $this->tarikh_tamat],
             ['TEMPAT: ' . $this->tempat],
             [''], // Empty row for spacing
-            ['NAMA', 'NO. KAD PENGENALAN', 'ALAMAT', 'NO. TELEFON', 'PENGESAHAN','CATATAN']
+            ['NAMA', 'NO. KAD PENGENALAN', 'ALAMAT', 'NO. TELEFON', 'PENGESAHAN','NEGERI', 'DAERAH','CATATAN']
         ];
 
-        foreach ($this->pengesahan as $item) {
-            $data[] = [
-                $item->klien->nama,
-                $item->klien->no_kp,
-                $item->klien->alamat_rumah,
-                $item->klien->no_tel,
-                $item->keputusan,
-                $item->catatan,
-            ];
-        }
+        $data[] = $this->pengesahan;
 
         return $data;
     }
@@ -100,6 +120,8 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         $sheet->getStyle('D8')->getFont()->setBold(true);
         $sheet->getStyle('E8')->getFont()->setBold(true);
         $sheet->getStyle('F8')->getFont()->setBold(true);
+        $sheet->getStyle('G8')->getFont()->setBold(true);
+        $sheet->getStyle('H8')->getFont()->setBold(true);
 
         // Style the table with borders
         $highestRow = $sheet->getHighestRow(); // Get the highest row number
@@ -132,6 +154,8 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         $sheet->getColumnDimension('D')->setWidth(20);
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(20);
+        $sheet->getColumnDimension('G')->setWidth(20);
+        $sheet->getColumnDimension('H')->setWidth(20);
     }
 }
 
