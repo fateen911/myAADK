@@ -3060,7 +3060,7 @@
         });
     </script> 
 
-    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}
+    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}  
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusKerja = $('#status_kerja');

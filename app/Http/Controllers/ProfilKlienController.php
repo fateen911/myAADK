@@ -894,8 +894,10 @@ class ProfilKlienController extends Controller
     public function kemaskiniMaklumatPekerjaanKlien(Request $request, $id)
     {
         try {
+            // Validate the input with conditional rules based on status_kerja
             $validatedData = $request->validate([
-                'status_kerja'      => 'required|string|max:11',
+                'status_kerja'      => 'required|string|max:255',
+                'alasan_tidak_kerja'=> 'nullable|string|max:255',
                 'bidang_kerja'      => 'nullable|string|max:255',
                 'nama_kerja'        => 'nullable|string|max:255',
                 'pendapatan'        => 'nullable|string|max:255',
@@ -903,28 +905,46 @@ class ProfilKlienController extends Controller
                 'nama_majikan'      => 'nullable|string|max:255',
                 'no_tel_majikan'    => 'nullable|string|max:11',
                 'alamat_kerja'      => 'nullable|string|max:255',
-                'poskod_kerja'      => 'nullable|string|max:5',
+                'poskod_kerja'      => 'nullable|integer',
                 'daerah_kerja'      => 'nullable|string|max:255',
                 'negeri_kerja'      => 'nullable|string|max:255',
             ]);
-        }
-        catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             // Redirect back with custom error message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
+        // dd($validatedData);
+
         // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
-        if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
-            $validatedData['daerah_kerja'] = null;
-        }
-        if ($validatedData['negeri_kerja'] === 'Pilih Negeri') {
-            $validatedData['negeri_kerja'] = null;
+        $validatedData['daerah_kerja'] = $validatedData['daerah_kerja'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja'];
+        $validatedData['negeri_kerja'] = $validatedData['negeri_kerja'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja'];
+
+        // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
+        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
+            $validatedData = array_merge($validatedData, [
+                'bidang_kerja' => null,
+                'nama_kerja' => null,
+                'pendapatan' => null,
+                'kategori_majikan' => null,
+                'nama_majikan' => null,
+                'no_tel_majikan' => null,
+                'alamat_kerja' => null,
+                'poskod_kerja' => null,
+                'daerah_kerja' => null,
+                'negeri_kerja' => null,
+            ]);
+        } else {
+            // Set alasan_tidak_kerja to null if status_kerja is BEKERJA
+            $validatedData['alasan_tidak_kerja'] = null;
         }
 
-        $pekerjaanKlien = PekerjaanKlien::where('klien_id',$id)->first();
+        // Find PekerjaanKlien record
+        $pekerjaanKlien = PekerjaanKlien::where('klien_id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
 
-        if ($pekerjaanKlien) {
+        if ($pekerjaanKlien) 
+        {
             $pekerjaanKlien->update($validatedData);
             $pekerjaanKlien->update(['status_kemaskini' => 'Lulus','updated_at' => now()]);
 
@@ -1208,26 +1228,6 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
         }
     }
-
-    // public function kemaskiniMaklumatRawatanKlien(Request $request, $id)
-    // {
-    //     $rawatan = RawatanKlien::where('id',$id)->first();
-
-    //     if ($rawatan) {
-    //         $rawatan->update([
-    //             'status_kesihatan_mental' => $request->status_kesihatan_mental,
-    //             'status_oku' => $request->status_oku,
-    //             'seksyen_okp' => $request->seksyen_okp,
-    //             'tarikh_tamat_pengawasan' => $request->tarikh_tamat_pengawasan,
-    //             'skor_ccri' => $request->skor_ccri,
-    //         ]);
-    
-    //         return redirect()->back()->with('success', 'Maklumat rawatan dan pemulihan klien berjaya dikemaskini.');
-    //     } 
-    //     else {
-    //         return redirect()->back()->with('error', 'Klien tidak dijumpai.');
-    //     }
-    // }
 
     
     // KLIEN
