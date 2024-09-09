@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
 use App\Http\Controllers\ModalKepulihanController;
 use App\Http\Controllers\TelegramBotController;
+use App\Http\Controllers\PejabatPengawasanController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -176,5 +177,10 @@ Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanControlle
 Route::get('/pegawai-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanBrpp'])->middleware('auth')->name('maklum.balas.kepulihan.brpp');
 Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.negeri');
 Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanDaerah'])->middleware('auth')->name('maklum.balas.kepulihan.daerah');
+
+// KLIEN - PERTUKARAN PEJABAT
+Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
+Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
+// Route::get('/get-daerah-pejabat/{id}', [ProfilKlienController::class, 'getDaerahPejabat'])->name('daerah.pejabat');
 
 require __DIR__.'/auth.php';

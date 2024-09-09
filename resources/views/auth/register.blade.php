@@ -195,7 +195,7 @@
         <script>
             // Prevent typing numeric characters
             document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('nama').addEventListener('input', function (e) {
+                document.getElementById('nama').addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
             });
 

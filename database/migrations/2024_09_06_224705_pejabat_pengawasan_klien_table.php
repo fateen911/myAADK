@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('klien_id');
             $table->string('negeri_asal');
-            $table->string('negeri_baru');
             $table->string('daerah_asal');
-            $table->string('daerah_baru');
+            $table->string('negeri_baru')->nullable();
+            $table->string('daerah_baru')->nullable();
             $table->timestamps();
 
             $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');
