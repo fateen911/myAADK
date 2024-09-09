@@ -656,7 +656,8 @@
                                                     <div class="col-md-8">
                                                         <div class="d-flex">
                                                             <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Lulus</button>
-                                                            <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien_ditolak{{$updateRequestKlien->klien_id}}">Ditolak</button>
+                                                            {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -671,6 +672,45 @@
                             </div>
                         </div>                                                
                         <!--end::Modal-->
+
+                        @if ($updateRequestKlien)
+                            <!--begin::Modal Permohonan Kemaskini Klien Ditolak-->
+                            <div class="modal fade" id="modal_kemaskini_klien_ditolak{{$updateRequestKlien->klien_id}}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Klien Ditolak</h2>
+                                            <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                <i class="ki-solid ki-cross-circle fs-1"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form id="kemaskini_klien_ditolak_form_{{$updateRequestKlien->klien_id}}" action="{{ route('tolak.update.klien', ['id' => $updateRequestKlien->klien_id]) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <input type="hidden" name="id" value="{{ $updateRequestKlien->klien_id }}">
+                            
+                                                <!-- Begin Rejection Reasons Input -->
+                                                <div id="dynamicFields">
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <div class="input-group mb-2 catatan-row">
+                                                        <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila semak alamat emel, Semak tahap pendidikan"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- End Rejection Reasons Input -->
+                            
+                                                <!-- Form actions -->
+                                                <div class="text-center pt-3">
+                                                    <button type="submit" class="btn btn-primary">Hantar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Modal Ditolak-->
+                        @endif
                     </div>
                     <!--end:::Tab pane-->
 
@@ -1070,7 +1110,8 @@
                                                     <div class="col-md-8">
                                                         <div class="d-flex">
                                                             <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                            <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_pekerjaan_ditolak{{$updateRequestPekerjaan->klien_id}}">Ditolak</button>
+                                                            {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1085,6 +1126,45 @@
                             </div>
                         </div>                                                
                         <!--end::Modal-->
+
+                        @if ($updateRequestPekerjaan)
+                            <!--begin::Modal Permohonan Kemaskini Pekerjaan Klien Ditolak-->
+                            <div class="modal fade" id="modal_kemaskini_pekerjaan_ditolak{{$updateRequestPekerjaan->klien_id}}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Pekerjaan Klien Ditolak</h2>
+                                            <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                <i class="ki-solid ki-cross-circle fs-1"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form id="kemaskini_pekerjaan_ditolak_form_{{$updateRequestPekerjaan->klien_id}}" action="{{ route('tolak.update.pekerjaan', ['id' => $updateRequestPekerjaan->klien_id]) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <input type="hidden" name="id" value="{{ $updateRequestPekerjaan->klien_id }}">
+                            
+                                                <!-- Begin Rejection Reasons Input -->
+                                                <div id="dynamicFields">
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <div class="input-group mb-2 catatan-row">
+                                                        <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Poskod tempat kerja salah, Isi maklumat majikan"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- End Rejection Reasons Input -->
+                            
+                                                <!-- Form actions -->
+                                                <div class="text-center pt-3">
+                                                    <button type="submit" class="btn btn-primary">Hantar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Modal Ditolak-->
+                        @endif
                     </div>
                     <!--end:::Tab pane-->
 
@@ -1846,7 +1926,8 @@
                                                             <div class="col-md-8">
                                                                 <div class="d-flex">
                                                                     <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_bapa_ditolak{{$updateRequestBapa->klien_id}}">Ditolak</button>
+                                                                    {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1861,6 +1942,45 @@
                                     </div>
                                 </div>                                                  
                                 <!--end::Modal BapaKlien-->
+
+                                @if($updateRequestBapa)
+                                    <!--begin::Modal Permohonan Kemaskini Bapa Klien Ditolak-->
+                                    <div class="modal fade" id="modal_kemaskini_bapa_ditolak{{$updateRequestBapa->klien_id}}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered mw-650px">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Bapa Klien Ditolak</h2>
+                                                    <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                        <i class="ki-solid ki-cross-circle fs-1"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <form id="kemaskini_bapa_ditolak_form_{{$updateRequestBapa->klien_id}}" action="{{ route('tolak.update.bapa', ['id' => $updateRequestBapa->klien_id]) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="Ditolak">
+                                                        <input type="hidden" name="id" value="{{ $updateRequestBapa->klien_id }}">
+                                    
+                                                        <!-- Begin Rejection Reasons Input -->
+                                                        <div id="dynamicFields">
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <div class="input-group mb-2 catatan-row">
+                                                                <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila pilih status bapa, Poskod salah"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Rejection Reasons Input -->
+                                    
+                                                        <!-- Form actions -->
+                                                        <div class="text-center pt-3">
+                                                            <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Modal Ditolak-->
+                                @endif
 
                                 <!--begin::Modal IbuKlien-->
                                 <div class="modal fade" id="approvalIbu" tabindex="-1" aria-labelledby="luluskanPermohonanIbuLabel" aria-hidden="true">
@@ -1955,7 +2075,8 @@
                                                             <div class="col-md-8">
                                                                 <div class="d-flex">
                                                                     <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_ibu_ditolak{{$updateRequestIbu->klien_id}}">Ditolak</button>
+                                                                    {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1970,6 +2091,45 @@
                                     </div>
                                 </div> 
                                 <!--end::Modal IbuKlien-->
+
+                                @if($updateRequestIbu)
+                                    <!--begin::Modal Permohonan Kemaskini Ibu Klien Ditolak-->
+                                    <div class="modal fade" id="modal_kemaskini_ibu_ditolak{{$updateRequestIbu->klien_id}}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered mw-650px">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Ibu Klien Ditolak</h2>
+                                                    <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                        <i class="ki-solid ki-cross-circle fs-1"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <form id="kemaskini_ibu_ditolak_form_{{$updateRequestIbu->klien_id}}" action="{{ route('tolak.update.ibu', ['id' => $updateRequestIbu->klien_id]) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="Ditolak">
+                                                        <input type="hidden" name="id" value="{{ $updateRequestIbu->klien_id }}">
+                                    
+                                                        <!-- Begin Rejection Reasons Input -->
+                                                        <div id="dynamicFields">
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <div class="input-group mb-2 catatan-row">
+                                                                <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila pilih status ibu, Poskod salah"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Rejection Reasons Input -->
+                                    
+                                                        <!-- Form actions -->
+                                                        <div class="text-center pt-3">
+                                                            <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Modal Ditolak-->
+                                @endif
 
                                 <!--begin::Modal PenjagaKlien-->
                                 <div class="modal fade" id="approvalPenjaga" tabindex="-1" aria-labelledby="luluskanPermohonanPenjagaLabel" aria-hidden="true">
@@ -2072,7 +2232,8 @@
                                                             <div class="col-md-8">
                                                                 <div class="d-flex">
                                                                     <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                                    <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_penjaga_ditolak{{$updateRequestPenjaga->klien_id}}">Ditolak</button>
+                                                                    {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2087,6 +2248,45 @@
                                     </div>
                                 </div> 
                                 <!--end::Modal PenjagaKlien-->
+
+                                @if($updateRequestPenjaga)
+                                    <!--begin::Modal Permohonan Kemaskini Penjaga Klien Ditolak-->
+                                    <div class="modal fade" id="modal_kemaskini_penjaga_ditolak{{$updateRequestPenjaga->klien_id}}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered mw-650px">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Keluarga Klien Ditolak</h2>
+                                                    <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                        <i class="ki-solid ki-cross-circle fs-1"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <form id="kemaskini_penjaga_ditolak_form_{{$updateRequestPenjaga->klien_id}}" action="{{ route('tolak.update.penjaga', ['id' => $updateRequestPenjaga->klien_id]) }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="Ditolak">
+                                                        <input type="hidden" name="id" value="{{ $updateRequestPenjaga->klien_id }}">
+                                    
+                                                        <!-- Begin Rejection Reasons Input -->
+                                                        <div id="dynamicFields">
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <div class="input-group mb-2 catatan-row">
+                                                                <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila masukkan hubungan penjaga, Poskod salah"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Rejection Reasons Input -->
+                                    
+                                                        <!-- Form actions -->
+                                                        <div class="text-center pt-3">
+                                                            <button type="submit" class="btn btn-primary">Hantar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Modal Ditolak-->
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -2370,7 +2570,7 @@
                         </form>
                         <!--end::Form-->
 
-                        <!--begin::Modal Keluargs-->
+                        <!--begin::Modal Keluarga-->
                         <div class="modal fade" id="approvalPasangan" tabindex="-1" aria-labelledby="luluskanPermohonanPasanganLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -2500,7 +2700,8 @@
                                                     <div class="col-md-8">
                                                         <div class="d-flex">
                                                             <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                            <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_keluarga_ditolak{{$updateRequestPasangan->klien_id}}">Ditolak</button>
+                                                            {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2515,6 +2716,45 @@
                             </div>
                         </div>                                                
                         <!--end::Modal-->
+
+                        @if($updateRequestPasangan)
+                            <!--begin::Modal Permohonan Keluarga Klien Ditolak-->
+                            <div class="modal fade" id="modal_kemaskini_keluarga_ditolak{{$updateRequestPasangan->klien_id}}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 style="text-align: center !important;">Permohonan Kemaskini Maklumat Keluarga Klien Ditolak</h2>
+                                            <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+                                                <i class="ki-solid ki-cross-circle fs-1"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form id="kemaskini_keluarga_ditolak_form_{{$updateRequestPasangan->klien_id}}" action="{{ route('tolak.update.pasangan', ['id' => $updateRequestPasangan->klien_id]) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <input type="hidden" name="id" value="{{ $updateRequestPasangan->klien_id }}">
+                            
+                                                <!-- Begin Rejection Reasons Input -->
+                                                <div id="dynamicFields">
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <div class="input-group mb-2 catatan-row">
+                                                        <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Masukkan no.telefon peribadi pasangan, Poskod salah"></textarea>
+                                                    </div>
+                                                </div>
+                                                <!-- End Rejection Reasons Input -->
+                            
+                                                <!-- Form actions -->
+                                                <div class="text-center pt-3">
+                                                    <button type="submit" class="btn btn-primary">Hantar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Modal Ditolak-->
+                        @endif
                     </div>
                     <!--end:::Tab pane-->
 

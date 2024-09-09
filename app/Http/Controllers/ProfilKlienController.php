@@ -461,8 +461,18 @@ class ProfilKlienController extends Controller
 
             // Update the _klien with the requested data
             $klien->update($requestedDataKlien);
-            $updateRequest->update(['status' => $request->status]);
-            $klien->update(['status_kemaskini' => $request->status]);
+
+            // Explicitly update the status and updated_at fields
+            $updateRequest->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $klien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -483,32 +493,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat peribadi klien telah berjaya dikemaskini.');
+        } 
+    }
+
+    public function tolakUpdateKlien(Request $request, $id)
+    {
+        $updateRequest = KlienUpdateRequest::where('klien_id', $id)->first();
+        $klien = Klien::where('id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $klien->id)->first();
+
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequest->alasan_ditolak = json_encode($alasanDitolak);
+
+        // Explicitly update the status and updated_at fields
+        $updateRequest->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $klien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $klien->id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Klien',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequest->update(['status' => $request->status]);
-            $klien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Klien',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $klien->id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Klien',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Klien',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat peribadi klien tidak berjaya dikemaskini.');
-        }   
+        return redirect()->back()->with('error', 'Maklumat peribadi klien tidak berjaya dikemaskini.');
     }
 
     public function approveUpdatePekerjaan(Request $request, $id)
@@ -523,9 +554,19 @@ class ProfilKlienController extends Controller
 
             // Update the pekerjaan_klien with the requested data
             $pekerjaanKlien->update($requestedData);
-            $updateRequestPekerjaan->update(['status' => $request->status]);
-            $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
 
+            // Explicitly update the status and updated_at fields
+            $updateRequestPekerjaan->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $pekerjaanKlien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
+            
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
                     'klien_id' => $pekerjaanKlien->klien_id,
@@ -545,32 +586,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat pekerjaan klien telah berjaya dikemaskini.');
+        }  
+    }
+
+    public function tolakUpdatePekerjaan(Request $request, $id)
+    {
+        $updateRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $id)->first();
+        $pekerjaanKlien = PekerjaanKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
+
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequestPekerjaan->alasan_ditolak = json_encode($alasanDitolak);
+
+        // Explicitly update the status and updated_at fields
+        $updateRequestPekerjaan->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $pekerjaanKlien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $pekerjaanKlien->klien_id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Pekerjaan',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequestPekerjaan->update(['status' => $request->status]);
-            $pekerjaanKlien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Pekerjaan',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $pekerjaanKlien->klien_id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Pekerjaan',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Pekerjaan',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat pekerjaan klien tidak berjaya dikemaskini.');
-        }   
+        return redirect()->back()->with('error', 'Maklumat pekerjaan klien tidak berjaya dikemaskini.');
     }
 
     public function approveUpdateKeluarga(Request $request, $id)
@@ -585,8 +647,18 @@ class ProfilKlienController extends Controller
 
             // Update the keluarga_klien with the requested data
             $pasanganKlien->update($requestedDataPasangan);
-            $updateRequestPasangan->update(['status' => $request->status]);
-            $pasanganKlien->update(['status_kemaskini' => $request->status]);
+
+            // Explicitly update the status and updated_at fields
+            $updateRequestPasangan->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $pasanganKlien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -607,32 +679,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat pasangan klien telah berjaya dikemaskini.');
+        }  
+    }
+
+    public function tolakUpdateKeluarga(Request $request, $id)
+    {
+        $updateRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $id)->first();
+        $pasanganKlien = KeluargaKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $pasanganKlien->klien_id)->first();
+
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequestPasangan->alasan_ditolak = json_encode($alasanDitolak);
+
+        // Explicitly update the status and updated_at fields
+        $updateRequestPasangan->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $pasanganKlien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $pasanganKlien->klien_id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Keluarga',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequestPasangan->update(['status' => $request->status]);
-            $pasanganKlien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Keluarga',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $pasanganKlien->klien_id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Keluarga',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Keluarga',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat pasangan klien tidak berjaya dikemaskini.');
-        }   
+        return redirect()->back()->with('error', 'Maklumat pasangan klien tidak berjaya dikemaskini.');
     }
 
     public function approveUpdateBapa(Request $request, $id)
@@ -647,8 +740,18 @@ class ProfilKlienController extends Controller
 
             // Update the Waris_klien with the requested data
             $warisKlien->update($requestedDataWaris);
-            $updateRequestBapa->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            // Explicitly update the status and updated_at fields
+            $updateRequestBapa->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $warisKlien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -669,32 +772,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat bapa klien telah berjaya dikemaskini.');
+        }  
+    }
+
+    public function tolakUpdateBapa(Request $request, $id)
+    {
+        $updateRequestBapa = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 1)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
+        
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequestBapa->alasan_ditolak = json_encode($alasanDitolak);
+
+        // Explicitly update the status and updated_at fields
+        $updateRequestBapa->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $warisKlien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequestBapa->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $warisKlien->klien_id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat bapa klien tidak berjaya dikemaskini.');
-        }    
+        return redirect()->back()->with('error', 'Maklumat bapa klien tidak berjaya dikemaskini.');       
     }
 
     public function approveUpdateIbu(Request $request, $id)
@@ -709,8 +833,18 @@ class ProfilKlienController extends Controller
 
             // Update the Waris_klien with the requested data
             $warisKlien->update($requestedDataWaris);
-            $updateRequestIbu->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            // Explicitly update the status and updated_at fields
+            $updateRequestIbu->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $warisKlien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -731,32 +865,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat ibu klien telah berjaya dikemaskini.');
+        }   
+    }
+
+    public function tolakUpdateIbu(Request $request, $id)
+    {
+        $updateRequestIbu = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 2)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
+
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequestIbu->alasan_ditolak = json_encode($alasanDitolak);
+
+        // Explicitly update the status and updated_at fields
+        $updateRequestIbu->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $warisKlien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequestIbu->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $warisKlien->klien_id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat ibu klien tidak berjaya dikemaskini.');
-        }    
+        return redirect()->back()->with('error', 'Maklumat ibu klien tidak berjaya dikemaskini.');
     }
 
     public function approveUpdatePenjaga(Request $request, $id)
@@ -771,8 +926,18 @@ class ProfilKlienController extends Controller
 
             // Update the Waris_klien with the requested data
             $warisKlien->update($requestedDataWaris);
-            $updateRequestPenjaga->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+
+            // Explicitly update the status and updated_at fields
+            $updateRequestPenjaga->update([
+                'status' => $request->status,
+                'updated_at' => now(),
+            ]);
+
+            // Also update the warisKlien status
+            $warisKlien->update([
+                'status_kemaskini' => $request->status,
+                'updated_at' => now(), 
+            ]);
 
             if (!$sejarahProfil) {
                 SejarahProfilKlien::create([
@@ -793,32 +958,53 @@ class ProfilKlienController extends Controller
             }
 
             return redirect()->back()->with('success', 'Maklumat penjaga klien telah berjaya dikemaskini.');
+        } 
+    }
+
+    public function tolakUpdatePenjaga(Request $request, $id)
+    {
+        $updateRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $id)->where('waris', 3)->first();
+        $warisKlien = WarisKlien::where('klien_id', $id)->first();
+        $sejarahProfil = SejarahProfilKlien::where('klien_id', $warisKlien->klien_id)->first();
+
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+        // Encode the alasan_ditolak array as JSON before saving
+        $updateRequestPenjaga->alasan_ditolak = json_encode($alasanDitolak);
+        
+        // Explicitly update the status and updated_at fields
+        $updateRequestPenjaga->update([
+            'status' => $request->status,
+            'updated_at' => now(),
+        ]);
+
+        // Also update the warisKlien status
+        $warisKlien->update([
+            'status_kemaskini' => $request->status,
+            'updated_at' => now(), 
+        ]);
+
+        if (!$sejarahProfil) {
+            SejarahProfilKlien::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
         }
-        else
-        {
-            $updateRequestPenjaga->update(['status' => $request->status]);
-            $warisKlien->update(['status_kemaskini' => $request->status]);
+        else{
+            $sejarahProfil->update([
+                'status_kemaskini' => 'Ditolak',
+                'bahagian_kemaskini' => 'Waris',
+                'pengemaskini' => Auth::id(),
+                'updated_at' => now(),
+            ]);
+        }
 
-            if (!$sejarahProfil) {
-                SejarahProfilKlien::create([
-                    'klien_id' => $warisKlien->klien_id,
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-            else{
-                $sejarahProfil->update([
-                    'status_kemaskini' => 'Ditolak',
-                    'bahagian_kemaskini' => 'Waris',
-                    'pengemaskini' => Auth::id(),
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->back()->with('error', 'Maklumat penjaga klien tidak berjaya dikemaskini.');
-        }    
+        return redirect()->back()->with('error', 'Maklumat penjaga klien tidak berjaya dikemaskini.');
     }
 
 

@@ -327,7 +327,7 @@
 											<div class="modal-dialog modal-dialog-centered mw-650px">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h2 style="text-align: center !important;">Alasan Permohonan Ditolak</h2>
+														<h2 style="text-align: center !important;">Alasan Permohonan Pegawai Ditolak</h2>
 														<div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
 															<i class="ki-solid ki-cross-circle fs-1"></i>
 														</div>
@@ -341,9 +341,9 @@
 										
 															<!-- Begin Rejection Reasons Input -->
 															<div id="dynamicFields">
-																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
+																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila letak koma jika terdapat banyak alasan:</label>
 																<div class="input-group mb-2 catatan-row">
-																	<textarea class="form-control" name="alasan_ditolak" placeholder="Nyatakan dan sila letak koma jika terdapat banyak alasan"></textarea>
+																	<textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Peranan salah, Sila isi nama seperti kad pengenalan"></textarea>
 																</div>
 																{{-- <div class="input-group mb-2 catatan-row">
 																	<input type="text" class="form-control" name="alasan_ditolak" placeholder="Nyatakan alasan">

@@ -138,7 +138,7 @@ Route::post('/kemaskini/maklumat/bapa-klien/{id}', [ProfilKlienController::class
 Route::post('/kemaskini/maklumat/ibu-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatIbuKlien'])->middleware('auth')->name('kemaskini.ibu.klien');
 Route::post('/kemaskini/maklumat/penjaga-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPenjagaKlien'])->middleware('auth')->name('kemaskini.penjaga.klien');
 
-// PENTADBIR - APPROVE REQUEST TO UPDATE PROFILE
+// PENTADBIR & PEGAWAI - APPROVE REQUEST TO UPDATE PROFILE
 Route::patch('/approve-update/peribadi-klien/{id}', [ProfilKlienController::class, 'approveUpdateKlien'])->name('approve.update.klien');
 Route::patch('/approve-update/pekerjaan-klien/{id}', [ProfilKlienController::class, 'approveUpdatePekerjaan'])->name('approve.update.pekerjaan');
 Route::patch('/approve-update/pasangan-klien/{id}', [ProfilKlienController::class, 'approveUpdateKeluarga'])->name('approve.update.pasangan');
@@ -146,6 +146,15 @@ Route::patch('/approve-update/rawatan-klien/{id}', [ProfilKlienController::class
 Route::patch('/approve-update/bapa-klien/{id}', [ProfilKlienController::class, 'approveUpdateBapa'])->name('approve.update.bapa');
 Route::patch('/approve-update/ibu-klien/{id}', [ProfilKlienController::class, 'approveUpdateIbu'])->name('approve.update.ibu');
 Route::patch('/approve-update/penjaga-klien/{id}', [ProfilKlienController::class, 'approveUpdatePenjaga'])->name('approve.update.penjaga');
+
+// PENTADBIR & PEGAWAI - REJECT REQUEST TO UPDATE PROFILE
+Route::post('/tolak-update/peribadi-klien/{id}', [ProfilKlienController::class, 'tolakUpdateKlien'])->name('tolak.update.klien');
+Route::post('/tolak-update/pekerjaan-klien/{id}', [ProfilKlienController::class, 'tolakUpdatePekerjaan'])->name('tolak.update.pekerjaan');
+Route::post('/tolak-update/pasangan-klien/{id}', [ProfilKlienController::class, 'tolakUpdateKeluarga'])->name('tolak.update.pasangan');
+Route::post('/tolak-update/rawatan-klien/{id}', [ProfilKlienController::class, 'tolakUpdateRawatan'])->name('tolak.update.rawatan');
+Route::post('/tolak-update/bapa-klien/{id}', [ProfilKlienController::class, 'tolakUpdateBapa'])->name('tolak.update.bapa');
+Route::post('/tolak-update/ibu-klien/{id}', [ProfilKlienController::class, 'tolakUpdateIbu'])->name('tolak.update.ibu');
+Route::post('/tolak-update/penjaga-klien/{id}', [ProfilKlienController::class, 'tolakUpdatePenjaga'])->name('tolak.update.penjaga');
 
 // KLIEN - PENGURUSAN PROFIL
 Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
@@ -182,6 +191,5 @@ Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanContro
 // KLIEN - PERTUKARAN PEJABAT
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
 Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
-// Route::get('/get-daerah-pejabat/{id}', [ProfilKlienController::class, 'getDaerahPejabat'])->name('daerah.pejabat');
 
 require __DIR__.'/auth.php';
