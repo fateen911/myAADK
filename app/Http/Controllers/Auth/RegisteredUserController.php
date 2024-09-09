@@ -8,8 +8,10 @@ use App\Models\Pegawai;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\Negeri;
 use App\Models\Daerah;
+use App\Models\DaerahPejabat;
 use App\Models\TahapPengguna;
 use App\Models\JawatanAADK;
+use App\Models\NegeriPejabat;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,8 +28,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $negeri = Negeri::all()->sortBy('negeri');
-        $daerah = Daerah::all()->sortBy('daerah');
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
 
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();

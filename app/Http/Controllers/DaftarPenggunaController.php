@@ -222,7 +222,9 @@ class DaftarPenggunaController extends Controller
             'jawatan' => 'required|string',
             'peranan_pengguna' => 'required|string',
             'negeri_bertugas' => 'nullable|string', // If this can be optional, use nullable
-            'daerah_bertugas' => 'nullable|string', 
+            'daerah_bertugas' => 'nullable|string',
+            'alasan_ditolak' => 'nullable|array', // Validate the array of rejection reasons
+            'alasan_ditolak.*' => 'nullable|string', // Validate each reason
         ]);
 
         // Fetch keputusan permohonan
@@ -285,6 +287,7 @@ class DaftarPenggunaController extends Controller
         elseif ($keputusan == 'Ditolak') {
             // Update the status in pegawai_mohon_daftar table
             $pegawaiBaharu->status = 'Ditolak';
+            $pegawaiBaharu->alasan_ditolak = $request->input('alasan_ditolak'); // Save rejection reasons as JSON
             $pegawaiBaharu->updated_at = now();
             $pegawaiBaharu->save();
 

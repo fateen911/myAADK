@@ -77,7 +77,7 @@
                 <select id="negeri_bertugas" name="negeri_bertugas" class="form-control w-full">
                     <option value="">{{ __('Pilih Negeri') }}</option>
                     @foreach ($negeri as $item1)
-                        <option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
+                        <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('negeri_bertugas')" class="mt-2" />
@@ -89,7 +89,7 @@
                 <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full">
                     <option value="">{{ __('Select Daerah') }}</option>
                     @foreach ($daerah as $item2)
-                        <option value="{{ $item2->kod_daerah_pejabat }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+                        <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('daerah_bertugas')" class="mt-2" />

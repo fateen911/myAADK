@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('negeri_bertugas')->nullable();
             $table->string('daerah_bertugas')->nullable();
             $table->enum('status', ['Baharu','Lulus','Ditolak'])->default('Baharu');
+            $table->json('alasan_ditolak')->nullable(); 
             $table->timestamps();
         });
     }

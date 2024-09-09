@@ -20,6 +20,7 @@ class PegawaiMohonDaftar extends Model
         'peranan',
         'negeri_bertugas',
         'daerah_bertugas',
-        'status'
+        'status',
+        'alasan_ditolak',
     ];
 }
