@@ -12,29 +12,6 @@ use App\Models\PejabatPengawasanKlien;
 
 class PejabatPengawasanController extends Controller
 {
-    // public function getDaerahPejabat($idnegeri=0)
-    // {
-    //     $daerahList['data'] = DaerahPejabat::orderby("daerah","asc")
-    //                                         ->select('kod','daerah')
-    //                                         ->where('negeri_id',$idnegeri)
-    //                                         ->get();
-    //     dd($daerahList['data']);
-        
-    //     return response()->json($daerahList);
-    // }
-
-    // public function getDaerahPejabat($idnegeri = 0)
-    // {
-    //     Log::info('ID Negeri received: ' . $idnegeri); // Log the negeri_id received
-
-    //     $daerahList = DaerahPejabat::where('negeri_id', $idnegeri)
-    //                                 ->orderBy("daerah", "asc")
-    //                                 ->select('kod', 'daerah')  // Only return necessary fields
-    //                                 ->get();
-
-    //     return response()->json($daerahList);  // Send directly as JSON
-    // }
-
     public function view(Request $request)
     {
         // Retrieve the client's id based on their no_kp
