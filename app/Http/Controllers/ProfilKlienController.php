@@ -913,6 +913,14 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"
+        if ($validatedData['daerah_kerja'] === 'Pilih Daerah') {
+            $validatedData['daerah_kerja'] = null;
+        }
+        if ($validatedData['negeri_kerja'] === 'Pilih Negeri') {
+            $validatedData['negeri_kerja'] = null;
+        }
+
         $pekerjaanKlien = PekerjaanKlien::where('klien_id',$id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
 
@@ -1033,6 +1041,17 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri" or Pilih Status
+        if ($validatedData['daerah_bapa'] === 'Pilih Daerah') {
+            $validatedData['daerah_bapa'] = null;
+        }
+        if ($validatedData['negeri_bapa'] === 'Pilih Negeri') {
+            $validatedData['negeri_bapa'] = null;
+        }
+        if ($validatedData['status_bapa'] === 'Pilih Status Bapa') {
+            $validatedData['status_bapa'] = null;
+        }
+
         $waris = WarisKlien::where('id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $waris->klien_id)->first();
 
@@ -1082,6 +1101,17 @@ class ProfilKlienController extends Controller
         catch (\Illuminate\Validation\ValidationException $e) {
             // Redirect back with custom error message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
+
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri" or Pilih Status
+        if ($validatedData['daerah_ibu'] === 'Pilih Daerah') {
+            $validatedData['daerah_ibu'] = null;
+        }
+        if ($validatedData['negeri_ibu'] === 'Pilih Negeri') {
+            $validatedData['negeri_ibu'] = null;
+        }
+        if ($validatedData['status_ibu'] === 'Pilih Status Ibu') {
+            $validatedData['status_ibu'] = null;
         }
 
         $waris = WarisKlien::where('id', $id)->first();
@@ -1134,6 +1164,17 @@ class ProfilKlienController extends Controller
         catch (\Illuminate\Validation\ValidationException $e) {
             // Redirect back with custom error message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
+        }
+
+        // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri" or Pilih Status
+        if ($validatedData['daerah_penjaga'] === 'Pilih Daerah') {
+            $validatedData['daerah_penjaga'] = null;
+        }
+        if ($validatedData['negeri_penjaga'] === 'Pilih Negeri') {
+            $validatedData['negeri_penjaga'] = null;
+        }
+        if ($validatedData['status_penjaga'] === 'Pilih Status Penjaga') {
+            $validatedData['status_penjaga'] = null;
         }
 
         $waris = WarisKlien::where('id', $id)->first();
