@@ -8,27 +8,20 @@
 
 <head>
 	<!--begin::Vendor Stylesheets(used for this page only)-->
-	{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
-	{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> --}}
-	{{-- <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<!-- Bootstrap CSS -->
-	{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-
-	<!-- Bootstrap JS -->
-	{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
 
 	<!-- Custom AADK CSS -->
 	<script src="/assets/lang/Malay.json"></script>
 	<link rel="stylesheet" href="/assets/css/customAADK.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-	{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
 	<style>
 		.btn-icon {
@@ -65,13 +58,13 @@
 <!--begin::Page title-->
 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
 	<!--begin::Title-->
-	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pendaftaran</h1>
+	<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Senarai Pengguna</h1>
 	<!--end::Title-->
 	<!--begin::Breadcrumb-->
 	<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
 		<!--begin::Item-->
 		<li class="breadcrumb-item text-muted">
-			<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pendaftaran</a>
+			<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Akaun Pengguna</a>
 		</li>
 		<!--end::Item-->
 		<!--begin::Item-->
@@ -313,48 +306,10 @@
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
 																	<button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
-																	{{-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_rejection{{$user3->id}}">Ditolak</button> --}}
-                                                                    {{-- <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button> --}}
-																	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Test Modal</button>
+																	<!-- Close the first modal before opening the second one -->
+																	<button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak{{$user3->id}}">Ditolak</button>
 																</div>
 																<!--end::Actions-->
-
-																<!--begin::Modal Ditolak-->
-																<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-																	<div class="modal-dialog modal-dialog-centered mw-650px">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h2>Alasan Penolakan</h2>
-																				<button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-																					<i class="ki-duotone ki-cross fs-1"></i>
-																				</button>
-																			</div>
-
-																			<div class="modal-body">
-																				<form id="rejection_form_{{$user3->id}}" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $user3->id]) }}" method="post">
-																					@csrf
-																					<input type="hidden" name="status" value="Ditolak">
-																					<input type="hidden" name="id" value="{{ $user3->id }}">
-																
-																					<!-- Begin Rejection Reasons Input -->
-																					<div class="form-group">
-																						<label class="fs-6 fw-semibold mb-2">Alasan Penolakan</label>
-																						<textarea name="alasan_ditolak[]" class="form-control mb-2" rows="3" placeholder="Masukkan alasan penolakan"></textarea>
-																						<!-- Add button to add more reasons -->
-																						<button type="button" class="btn btn-light-primary" id="add_reason_button_{{$user3->id}}">Tambah Alasan</button>
-																					</div>
-																					<!-- End Rejection Reasons Input -->
-																
-																					<!-- Form actions -->
-																					<div class="text-center pt-3">
-																						<button type="submit" class="btn btn-danger">Hantar</button>
-																					</div>
-																				</form>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!--end::Modal Ditolak-->
 															</form>
 															<!--end::Form-->
 														</div>
@@ -366,6 +321,47 @@
 											</div>
 											<!--end::Modal -  Kemaskini Pegawai-->
 										</tr>
+
+										<!--begin::Modal Ditolak-->
+										<div class="modal fade" id="modal_permohonan_ditolak{{$user3->id}}" tabindex="-1" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered mw-650px">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h2 style="text-align: center !important;">Alasan Permohonan Ditolak</h2>
+														<div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+															<i class="ki-solid ki-cross-circle fs-1"></i>
+														</div>
+													</div>
+
+													<div class="modal-body">
+														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
+															@csrf
+															<input type="hidden" name="status" value="Ditolak">
+															<input type="hidden" name="id" value="{{ $user3->id }}">
+										
+															<!-- Begin Rejection Reasons Input -->
+															<div id="dynamicFields">
+																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
+																<div class="input-group mb-2 catatan-row">
+																	<textarea class="form-control" name="alasan_ditolak" placeholder="Nyatakan dan sila letak koma jika terdapat banyak alasan"></textarea>
+																</div>
+																{{-- <div class="input-group mb-2 catatan-row">
+																	<input type="text" class="form-control" name="alasan_ditolak" placeholder="Nyatakan alasan">
+																	<button class="btn btn-primary add-field" type="button">+</button>
+																</div>																 --}}
+															</div>
+															<!-- End Rejection Reasons Input -->
+										
+															<!-- Form actions -->
+															<div class="text-center pt-3">
+																<button type="submit" class="btn btn-primary">Hantar</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--end::Modal Ditolak-->
 									@endforeach
 								</tbody>
 							</table>
@@ -1221,26 +1217,73 @@
 	</script>
 
 	{{-- Reason of rejections --}}
-	<script>
-		// Trigger rejection modal
-		// document.querySelectorAll('.btn-danger').forEach(button => {
-		// 	button.addEventListener('click', function() {
-		// 		var modalId = this.getAttribute('data-bs-target');
-		// 		var modalElement = document.querySelector(modalId);
-		// 		var modal = new bootstrap.Modal(modalElement);
-		// 		modal.show();
-		// 	});
-		// });
+	{{-- <script>
+		$(document).ready(function () {
+			// Function to add new field
+			$(document).on('click', '.add-field', function () {
+				console.log('Tambah field');
+				
+				// Check if the container exists
+				if ($('#dynamicFields').length > 0) {
+					console.log('Container exists, appending new field');
+				} else {
+					console.log('Container does not exist');
+				}
 
-		// Add more reasons dynamically
-		document.getElementById('add_reason_button_{{$user3->id}}').addEventListener('click', function() {
-			const formGroup = document.querySelector('#rejection_form_{{$user3->id}} .form-group');
-			const textarea = document.createElement('textarea');
-			textarea.classList.add('form-control', 'mb-2');
-			textarea.name = 'alasan_ditolak[]';
-			textarea.rows = 3;
-			textarea.placeholder = 'Masukkan alasan tambahan';
-			formGroup.insertBefore(textarea, this);
-		});
-	</script>
+				let fieldHtml = `
+					<div class="input-group mb-2 catatan-row">
+						<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Nyatakan">
+						<button class="btn btn-danger remove-field" type="button">-</button>
+					</div>`;
+				
+				// Append the new field to the container
+				$('#dynamicFields').append(fieldHtml);
+			});
+
+			// Function to remove field
+			$(document).on('click', '.remove-field', function () {
+				$(this).closest('.input-group').remove();
+			});
+		}); 
+    </script> --}}
+
+	{{-- <script>
+		function addCatatanField() {
+			var catatanContainer = document.getElementById('catatan-container');
+	
+			// Create a new row for the input and button
+			var newCatatanRow = document.createElement('div');
+			newCatatanRow.className = 'input-group mb-2 catatan-row';
+	
+			// Create new input field
+			var newCatatanField = document.createElement('input');
+			newCatatanField.type = 'text';
+			newCatatanField.name = 'alasan_ditolak[]';
+			newCatatanField.className = 'form-control form-control-solid';
+			newCatatanField.style.padding = '5px';
+			newCatatanField.placeholder = 'Nyatakan alasan';
+			newCatatanField.required = true;
+	
+			// Create the remove button
+			var removeCatatanButton = document.createElement('button');
+			removeCatatanButton.textContent = '-';
+			removeCatatanButton.className = 'btn btn-outline-danger';
+			removeCatatanButton.type = 'button';
+			removeCatatanButton.onclick = function() {
+				removeCatatanField(newCatatanRow); // Pass the row to be removed
+			};
+	
+			// Append input and button to the new row
+			newCatatanRow.appendChild(newCatatanField);
+			newCatatanRow.appendChild(removeCatatanButton);
+	
+			// Add the new row to the container
+			catatanContainer.appendChild(newCatatanRow);
+		}
+	
+		function removeCatatanField(row) {
+			var catatanContainer = document.getElementById('catatan-container');
+			catatanContainer.removeChild(row);
+		}
+	</script> --}}
 @endsection

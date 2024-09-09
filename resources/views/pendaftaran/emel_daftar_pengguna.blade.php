@@ -9,6 +9,7 @@
     <p>Tuan/Puan,</p>
     <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. 
        Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
+    <p>Nama Pegawai : {{$nama}}</p>
     <p>No Kad Pengenalan : {{$no_kp}}
     <p>Kata Laluan : {{$password}}
     <p>Sila klik pautan di bawah untuk mengesahkan emel anda dan log masuk ke dalam sistem.

@@ -211,7 +211,7 @@ class DaftarPenggunaController extends Controller
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
     }
 
-    public function permohonanPegawai(Request $request, $id)
+    public function permohonanPegawaiLulus(Request $request, $id)
     {
         // Add server-side validation for input fields
         $validatedData = $request->validate([
@@ -223,8 +223,6 @@ class DaftarPenggunaController extends Controller
             'peranan_pengguna' => 'required|string',
             'negeri_bertugas' => 'nullable|string', // If this can be optional, use nullable
             'daerah_bertugas' => 'nullable|string',
-            'alasan_ditolak' => 'nullable|array', // Validate the array of rejection reasons
-            'alasan_ditolak.*' => 'nullable|string', // Validate each reason
         ]);
 
         // Fetch keputusan permohonan
@@ -284,21 +282,37 @@ class DaftarPenggunaController extends Controller
 
             return redirect()->back()->with('message', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini.');
         } 
-        elseif ($keputusan == 'Ditolak') {
-            // Update the status in pegawai_mohon_daftar table
-            $pegawaiBaharu->status = 'Ditolak';
-            $pegawaiBaharu->alasan_ditolak = $request->input('alasan_ditolak'); // Save rejection reasons as JSON
-            $pegawaiBaharu->updated_at = now();
-            $pegawaiBaharu->save();
+    }
 
-            $defaultEmail = 'fateennashuha9@gmail.com';
+    public function permohonanPegawaiDitolak(Request $request, $id)
+    {
+        // Fetch the staff request data
+        $pegawaiDitolak = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
+        
+        // Ensure alasan_ditolak is always an array, even if only one reason is provided
+        // $alasanDitolak = $request->input('alasan_ditolak');
+        // if (!is_array($alasanDitolak)) {
+        //     $alasanDitolak = [$alasanDitolak]; // Wrap single reason into an array
+        // }
 
-            // Send rejection email to the staff
-            Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiBaharu));
-            // Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiBaharu));
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
 
-            return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiBaharu->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
-        }
+        // Encode the alasan_ditolak array as JSON before saving
+        $pegawaiDitolak->alasan_ditolak = json_encode($alasanDitolak);
+        $pegawaiDitolak->status = 'Ditolak';
+        $pegawaiDitolak->updated_at = now();
+        $pegawaiDitolak->save();
+
+
+        $defaultEmail = 'fateennashuha9@gmail.com';
+
+        // Send rejection email to the staff
+        Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
+        // Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiDitolak));
+
+        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
     }
 
     public function daftarPegawai(Request $request)
