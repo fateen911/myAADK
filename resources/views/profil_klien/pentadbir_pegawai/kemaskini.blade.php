@@ -560,6 +560,22 @@
                                                         <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
                                                     </div>
                                                 </div>
+                                                <div class="row fv-row mb-2">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Kesihatan Mental</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$klien->status_kesihatan_mental}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-5">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Orang Kurang Upaya</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$klien->status_oku}}</span>
+                                                    </div>
+                                                </div>
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">No. Telefon
@@ -630,22 +646,6 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid {{ $requestedPendidikan != $pendidikanKlien ? 'border-danger' : '' }}" name="tahap_pendidikan" value="{{ $requestedPendidikan }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Status Kesihatan Mental</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['status_kesihatan_mental'] != $klien->status_kesihatan_mental ? 'border-danger' : '' }}" name="status_kesihatan_mental" value="{{ $requestedDataKlien['status_kesihatan_mental'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Status Orang Kurang Upaya (OKU)</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataKlien['status_oku'] != $klien->status_oku ? 'border-danger' : '' }}" name="status_oku" value="{{ $requestedDataKlien['status_oku'] }}" readonly />
                                                     </div>
                                                 </div>
                                                 
