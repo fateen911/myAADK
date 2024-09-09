@@ -12,7 +12,8 @@ class KeluargaKlienUpdateRequest extends Model
     protected $fillable = [
         'klien_id', 
         'requested_data', 
-        'status'
+        'status',
+        'alasan_ditolak'
     ];
 
     public function keluargaKlien()

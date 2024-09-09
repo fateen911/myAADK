@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('klien_id')->constrained('pekerjaan_klien')->onDelete('cascade');
             $table->json('requested_data'); // Store the requested updates in JSON format
             $table->enum('status', ['Baharu','Kemaskini', 'Lulus', 'Ditolak'])->default('Kemaskini');
+            $table->json('alasan_ditolak')->nullable(); 
             $table->timestamps();
         });
     }

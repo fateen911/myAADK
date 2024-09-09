@@ -13,7 +13,8 @@ class WarisKlienUpdateRequest extends Model
         'klien_id', 
         'waris',
         'requested_data', 
-        'status'
+        'status',
+        'alasan_ditolak'
     ];
 
     public function warisKlien()
