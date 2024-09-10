@@ -122,7 +122,7 @@
                                                     @elseif ($response->tahap_kepulihan_id == 2)
                                                         <badge class="badge text-white" style="background-color: darkorange; padding:10px;">{{ $tahap_kepulihan }}</badge>
                                                     @elseif ($response->tahap_kepulihan_id == 3)
-                                                        <badge class="badge text-white bg-warning p-10">{{ $tahap_kepulihan }}</badge>   
+                                                        <badge class="badge text-white bg-warning" style="padding: 10px;">{{ $tahap_kepulihan }}</badge>   
                                                     @else
                                                         <badge class="badge text-white" style="background-color: green; padding:10px;">{{ $tahap_kepulihan }}</badge>
                                                     @endif

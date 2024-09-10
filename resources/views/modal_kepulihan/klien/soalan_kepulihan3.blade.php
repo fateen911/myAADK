@@ -127,10 +127,10 @@
 
                         <div class="pagination-buttons">
                             @if ($currentPage > 1)
-                                <button type="button" class="btn btn-primary btn-active-secondary" onclick="changePage({{ $currentPage - 1 }})">Halaman Sebelum</button>
+                                <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage - 1 }})" style="font-weight: bold;">Halaman Sebelum</button>
                             @endif
                             @if ($currentPage < 3)
-                                <button type="button" class="btn btn-primary btn-active-secondary" onclick="changePage({{ $currentPage + 1 }})">Seterusnya</button>
+                                <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage + 1 }})" style="font-weight: bold;">Seterusnya</button>
                             @endif
                         </div>
                     </form>
@@ -140,7 +140,7 @@
                         <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
                             @csrf
                             <div class="text-center">
-                                <button type="submit" class="btn btn-info text-center mt-5" id="hantarBtn" disabled>Hantar</button>
+                                <button type="submit" class="btn btn-primary text-center mt-5" id="hantarBtn" disabled>Hantar</button>
                             </div>
                         </form>
                     @endif
