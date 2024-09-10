@@ -75,7 +75,7 @@
                                         <span>Negeri Pejabat Pengawasan Semasa</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <span class="fs-6 form-control-plaintext">{{$negeriSemasa}}</span>
+                                        <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$negeriSemasa}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-6">
@@ -83,7 +83,7 @@
                                         <span>Daerah Pejabat Pengawasan Semasa</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <span class="fs-6 form-control-plaintext">{{$daerahSemasa}}</span>
+                                        <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$daerahSemasa}}</span>
                                     </div>
                                 </div>
         

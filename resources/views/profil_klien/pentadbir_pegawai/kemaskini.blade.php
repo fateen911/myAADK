@@ -2787,7 +2787,7 @@
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Pusat Penjara (PUSPEN)</span>
+                                        <span>PUSPEN</span>
                                     </label>
                                 </div>
                                 <div class="col-md-4">
@@ -2802,7 +2802,7 @@
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Daerah Pejabat Pengawasan</span>
+                                        <span>AADK Daerah</span>
                                     </label>
                                 </div>
                                 <div class="col-md-4">

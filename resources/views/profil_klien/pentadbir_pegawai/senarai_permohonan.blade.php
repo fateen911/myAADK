@@ -79,8 +79,8 @@
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach ($permohonanSelesai as $user1)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user1['daerah_pejabat'])->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $user1['negeri_pejabat'])->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user1['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
+                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user1['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
                                                 $nama_pengemaskini = DB::table('pegawai')->where('users_id', $user1['pengemaskini'])->value('pegawai.nama');
                                             @endphp
 
@@ -131,8 +131,8 @@
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach ($permohonanBelumSelesai as $user2)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $user2['daerah_pejabat'])->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $user2['negeri_pejabat'])->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user2['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
+                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user2['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
                                             @endphp
 
                                             <tr>
