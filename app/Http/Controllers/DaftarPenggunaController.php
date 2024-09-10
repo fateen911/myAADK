@@ -365,7 +365,7 @@ class DaftarPenggunaController extends Controller
             $defaultEmail = 'fateenashuha2000@gmail.com';
 
             // Mail::to($email)->send(new DaftarPengguna($email, $password, $request->no_kp, $verificationUrl));
-            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $verificationUrl));
+            Mail::to($defaultEmail)->send(new DaftarPengguna($defaultEmail, $password, $request->no_kp, $request->name, $verificationUrl));
 
             return redirect()->route('senarai-pengguna')->with('message', 'Emel notifikasi maklumat akaun pengguna telah dihantar kepada ' . $request->name);
         } 

@@ -29,7 +29,7 @@ class KemaskiniKataLaluan extends Mailable
 
     public function build()
     {
-        $subject = "MAKLUMAT AKAUN PENGGUNA SISTEM i-Recover";
+        $subject = "KEMASKINI KATA LALUAN AKAUN SISTEM MySupport";
         return $this->subject($subject)
                     ->view('pendaftaran.pegawai_daerah.emel_kemaskini_kata_laluan')
                     ->with([

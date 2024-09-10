@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Sistem Pemulihan dan Rawatan Klien AADK: Daftar Pengguna Sistem</title>
-    </head>
-
     <body>
-        <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM MODAL KEPULIHAN KLIEN PASCA TAMAT RAWATAN PEMULIHAN DALAM KOMUNITI</h3>
+        <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM MySupport</h3>
         <p>Assalamualaikum WBT & Salam Sejahtera,</p>
         
         <p>Tuan/Puan,</p>

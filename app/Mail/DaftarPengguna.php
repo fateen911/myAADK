@@ -18,13 +18,15 @@ class DaftarPengguna extends Mailable
     public $email;
     public $no_kp;
     public $password;
+    public $nama;
     public $verificationUrl;
 
-    public function __construct($email, $password, $no_kp, $verificationUrl)
+    public function __construct($email, $password, $no_kp, $nama, $verificationUrl)
     {
         $this->email = $email;
         $this->no_kp = $no_kp;
         $this->password = $password;
+        $this->nama = $nama;
         $this->verificationUrl = $verificationUrl;
     }
 
@@ -42,12 +44,13 @@ class DaftarPengguna extends Mailable
         //                         ['id' => $userId, 'hash' => sha1($this->email)]
         //                     );
 
-        $subject = "DAFTAR PENGGUNA SISTEM i-Recover";
+        $subject = "DAFTAR PENGGUNA SISTEM MySupport";
         return $this->subject($subject)
                     ->view('pendaftaran.emel_daftar_pengguna')
                     ->with([
                         'no_kp' => $this->no_kp,
                         'password' => $this->password,
+                        'nama' => $this->nama,
                         'verificationUrl' => $this->verificationUrl,
                         // 'verificationUrl' => $verificationUrl,
                     ]);
