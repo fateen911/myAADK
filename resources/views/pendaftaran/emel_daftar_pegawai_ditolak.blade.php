@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h3>PENDAFTARAN AKAUN PENGGUNA SISTEM MySupport</h3>
+        <h3>PENDAFTARAN PEGAWAI SEBAGAI PENGGUNA SISTEM MySupport AADK DITOLAK</h3>
         <p>Assalamualaikum WBT & Salam Sejahtera,</p>
         
         <p>Tuan/Puan,</p>
@@ -21,7 +21,6 @@
         @endif
 
         <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> di talian 1-800-22-2235 / 019 – 626 2233 atau e-mel ke webmaster@adk.gov.my </p>
-    
         <p>Untuk maklumat lanjut, sila layari https://www.adk.gov.my </p>
         <br>
         <p>Sekian, terima kasih.</p>

@@ -107,7 +107,7 @@ class DaftarPenggunaController extends Controller
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
+        return view ('pendaftaran.pentadbir.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function kemaskiniKlien(Request $request)
