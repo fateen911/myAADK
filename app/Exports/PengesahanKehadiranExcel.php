@@ -51,7 +51,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
                 'keputusan' => $item->keputusan,
                 'negeri' => $negeri ? $negeri->negeri : 'TIADA',
                 'daerah' => $daerah ? $daerah->daerah : 'TIADA',
-                'catatan' => $item->catatan ? $daerah->daerah : 'TIADA',
+                'catatan' => $item->catatan ? $item->catatan : 'TIADA',
             ];
         }
 

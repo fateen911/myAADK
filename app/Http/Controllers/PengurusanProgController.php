@@ -999,7 +999,7 @@ class PengurusanProgController extends Controller
                 'keputusan' => $item->keputusan,
                 'negeri' => $negeri ? $negeri->negeri : 'TIADA',
                 'daerah' => $daerah ? $daerah->daerah : 'TIADA',
-                'catatan' => $item->catatan ? $daerah->daerah : 'TIADA',
+                'catatan' => $item->catatan ? $item->catatan : 'TIADA',
             ];
         }
 
