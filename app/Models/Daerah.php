@@ -15,7 +15,6 @@ class Daerah extends Model
         'id',
         'daerah',
         'negeri_id',
-        'kod_daerah_pejabat',
     ];
 
     public function negeri()

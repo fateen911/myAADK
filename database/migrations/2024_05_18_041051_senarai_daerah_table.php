@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('daerah');
             $table->string('negeri_id');
-            $table->string('kod_daerah_pejabat')->nullable();
             $table->timestamps();
         });
     }
