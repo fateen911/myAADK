@@ -14,7 +14,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 <!--begin::Head-->
 <head><base href=""/>
-    <title>AADK | i-Recover</title>
+    <title>MySupport | AADK</title>
     <meta charset="utf-8" />
     <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
     <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -68,7 +68,7 @@ License: For each use you must have a valid license purchased only from above li
                             <a href="{{url('/landing-page/version-2')}}">
                                 <div class="d-flex gap-2">
                                     <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                                        <span id="kt_landing_hero_text" class="h1">i-RECOVER</span>
+                                        <span id="kt_landing_hero_text" class="h1">MySupport AADK</span>
                                     </span>
                                 </div>
                             </a>
@@ -129,8 +129,8 @@ License: For each use you must have a valid license purchased only from above li
                     <!--begin::Title-->
                     <h1 class="lh-base fw-bold fs-3x fs-lg-3x my-8">SELAMAT DATANG KE
                         <br>
-                        <span class="fs-5x" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                            <span id="kt_landing_hero_text">i-RECOVER</span>
+                        <span class="fs-4x" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                            <span id="kt_landing_hero_text">MySupport AADK</span>
                         </span>
                     </h1>
                     <!--end::Title-->
@@ -271,6 +271,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--begin::Separator-->
             <div class="landing-dark-separator"></div>
             <!--end::Separator-->
+            {{--
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Wrapper-->
@@ -291,6 +292,7 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Wrapper-->
             </div>
             <!--end::Container-->
+            --}}
         </div>
         <!--end::Wrapper-->
     </div>

@@ -67,7 +67,7 @@ License: For each use you must have a valid license purchased only from above li
                             <a href="{{url('/landing-page/version-2')}}">
                                 <div class="d-flex gap-2">
                                     <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                                        <span id="kt_landing_hero_text" class="h1">i-RECOVER</span>
+                                        <span id="kt_landing_hero_text" class="h1">MySupport</span>
                                     </span>
                                 </div>
                             </a>
@@ -129,7 +129,7 @@ License: For each use you must have a valid license purchased only from above li
                     <h1 class="lh-base fw-bold fs-3x fs-lg-3x my-8">SELAMAT DATANG KE
                         <br>
                         <span class="fs-5x" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                            <span id="kt_landing_hero_text">i-RECOVER</span>
+                            <span id="kt_landing_hero_text">MySupport</span>
                         </span>
                     </h1>
                     <!--end::Title-->

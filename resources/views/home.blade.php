@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts._default')
 
 @section('content')
 <!--begin::Body-->
