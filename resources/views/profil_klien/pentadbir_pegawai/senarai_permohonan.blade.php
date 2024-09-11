@@ -68,12 +68,12 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-                                            <th class="min-w-100px">Nama</th>
-                                            <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Pengemaskini</th> 
-                                            <th class="min-w-30px" style="text-align: center;">Tindakan</th>
+                                            <th style="width:25% !important;">Nama</th>
+                                            <th style="width:15% !important; text-align: center;">No. Kad Pengenalan</th>
+                                            <th style="width:20% !important; text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th style="width:15% !important; text-align: center;">AADK Negeri</th>
+                                            <th style="width:15% !important; text-align: center;">Pengemaskini</th> 
+                                            <th style="width:10% !important; text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -85,12 +85,12 @@
                                             @endphp
 
                                             <tr>
-                                                <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}" target="_blank">{{$user1->nama}}</a></td>
-                                                <td style="text-align: center;">{{ $user1->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">{{ $nama_pengemaskini ?? 'N/A' }}</td>
-                                                <td style="text-align: center;">
+                                                <td style="width:25% !important;"><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}" target="_blank">{{$user1->nama}}</a></td>
+                                                <td style="width:15% !important; text-align: center;">{{ $user1->no_kp }}</td>
+                                                <td style="width:20% !important; text-align: center;">{{ $daerah }}</td>
+                                                <td style="width:15% !important; text-align: center;">{{ $negeri }}</td>
+                                                <td style="width:15% !important; text-align: center;">{{ $nama_pengemaskini ?? 'N/A' }}</td>
+                                                <td style="width:10% !important; text-align: center;">
                                                     <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">
                                                         <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
                                                     </a>
@@ -123,8 +123,8 @@
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
-                                            <th class="min-w-100px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
+                                            <th class="min-w-100px" style="text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th class="min-w-100px" style="text-align: center;">AADK Negeri</th>
                                             <th class="min-w-30px" style="text-align: center;">Tindakan</th></th>
                                         </tr>
                                     </thead>

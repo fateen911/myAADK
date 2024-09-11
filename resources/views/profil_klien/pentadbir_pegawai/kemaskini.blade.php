@@ -312,7 +312,18 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
+                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">
+                                        {{$klien->skor_ccri}}
+                                        @if($klien->skor_ccri < 40)
+                                            (TIDAK MEMUASKAN)
+                                        @elseif($klien->skor_ccri >= 40 && $klien->skor_ccri <= 60)
+                                            (MEMUASKAN)
+                                        @elseif($klien->skor_ccri >= 61 && $klien->skor_ccri <= 79)
+                                            (BAIK)
+                                        @elseif($klien->skor_ccri >= 80)
+                                            (CEMERLANG)
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -557,7 +568,18 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$klien->skor_ccri}}</span>
+                                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">
+                                                            {{$klien->skor_ccri}}
+                                                            @if($klien->skor_ccri < 40)
+                                                                (TIDAK MEMUASKAN)
+                                                            @elseif($klien->skor_ccri >= 40 && $klien->skor_ccri <= 60)
+                                                                (MEMUASKAN)
+                                                            @elseif($klien->skor_ccri >= 61 && $klien->skor_ccri <= 79)
+                                                                (BAIK)
+                                                            @elseif($klien->skor_ccri >= 80)
+                                                                (CEMERLANG)
+                                                            @endif
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">

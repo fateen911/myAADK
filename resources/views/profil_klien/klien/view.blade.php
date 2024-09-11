@@ -353,7 +353,18 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
+                                    <span class="fs-6 form-control-plaintext">
+                                        {{$butiranKlien->skor_ccri}}
+                                        @if($butiranKlien->skor_ccri < 40)
+                                            (TIDAK MEMUASKAN)
+                                        @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
+                                            (MEMUASKAN)
+                                        @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
+                                            (BAIK)
+                                        @elseif($butiranKlien->skor_ccri >= 80)
+                                            (CEMERLANG)
+                                        @endif
+                                    </span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -585,7 +596,18 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">{{$butiranKlien->skor_ccri}}</span>
+                                                    <span id="skor_ccri" class="fs-6 form-control-plaintext">
+                                                        {{$butiranKlien->skor_ccri}}
+                                                        @if($butiranKlien->skor_ccri < 40)
+                                                            (TIDAK MEMUASKAN)
+                                                        @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
+                                                            (MEMUASKAN)
+                                                        @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
+                                                            (BAIK)
+                                                        @elseif($butiranKlien->skor_ccri >= 80)
+                                                            (CEMERLANG)
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row mb-7">
