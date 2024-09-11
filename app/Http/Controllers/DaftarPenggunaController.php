@@ -89,11 +89,11 @@ class DaftarPenggunaController extends Controller
     // PENTADBIR
     public function senaraiPengguna()
     {
-        $klien = User::leftJoin('klien', 'users.no_kp', '=', 'klien.no_kp')
-                    ->where('tahap_pengguna', '=', '2')
+        $klien = User::where('tahap_pengguna', '=', '2')
+                    ->join('klien', 'users.no_kp', '=', 'klien.no_kp')
                     ->orderBy('users.updated_at', 'desc')
-                    ->get();
-
+                    ->get(['users.*', 'klien.no_tel', 'klien.emel']);
+        
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                     ->whereIn('tahap_pengguna', [3, 4, 5])
                     ->orderBy('users.updated_at', 'desc')
@@ -288,16 +288,9 @@ class DaftarPenggunaController extends Controller
     {
         // Fetch the staff request data
         $pegawaiDitolak = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
-        
-        // Ensure alasan_ditolak is always an array, even if only one reason is provided
-        // $alasanDitolak = $request->input('alasan_ditolak');
-        // if (!is_array($alasanDitolak)) {
-        //     $alasanDitolak = [$alasanDitolak]; // Wrap single reason into an array
-        // }
 
-        // Split the input by commas and trim any spaces
-        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
-        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+        // Get the input directly as an array from the form
+        $alasanDitolak = $request->input('alasan_ditolak');
 
         // Encode the alasan_ditolak array as JSON before saving
         $pegawaiDitolak->alasan_ditolak = json_encode($alasanDitolak);
@@ -305,15 +298,40 @@ class DaftarPenggunaController extends Controller
         $pegawaiDitolak->updated_at = now();
         $pegawaiDitolak->save();
 
-
         $defaultEmail = 'fateennashuha9@gmail.com';
 
         // Send rejection email to the staff
         Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
         // Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiDitolak));
 
-        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
+        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi emel telah dihantar kepada pemohon.');
     }
+
+
+    // public function permohonanPegawaiDitolak(Request $request, $id)
+    // {
+    //     // Fetch the staff request data
+    //     $pegawaiDitolak = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
+
+    //     // Split the input by commas and trim any spaces
+    //     $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+    //     $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
+
+    //     // Encode the alasan_ditolak array as JSON before saving
+    //     $pegawaiDitolak->alasan_ditolak = json_encode($alasanDitolak);
+    //     $pegawaiDitolak->status = 'Ditolak';
+    //     $pegawaiDitolak->updated_at = now();
+    //     $pegawaiDitolak->save();
+
+
+    //     $defaultEmail = 'fateennashuha9@gmail.com';
+
+    //     // Send rejection email to the staff
+    //     Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
+    //     // Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiDitolak));
+
+    //     return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
+    // }
 
     public function daftarPegawai(Request $request)
     {

@@ -52,6 +52,31 @@
 		.form-control {
 			flex: 1;
 		}
+
+		/* General styles for input, textarea, and select */
+		input.form-control.form-control-solid,
+        textarea.form-control.form-control-solid {
+            background-color: #e0e0e0;
+            color: #45505b;
+        }
+
+        /* Focus state for input, textarea, and select */
+        input.form-control.form-control-solid:focus,
+        textarea.form-control.form-control-solid:focus {
+            background-color: #d0d0d0;
+            color: #333333;
+            box-shadow: none;
+        }
+
+        .form-select.custom-select {
+            background-color: #e0e0e0 !important;
+            color: #222222 !important;
+        }
+
+        .form-select.custom-select option {
+            background-color: #f5f5f5 !important;
+            color: #222222 !important;
+        }
 	</style>
 </head>
 
@@ -252,7 +277,7 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2 required">Jawatan & Gred</label>
-																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+																		<select name="jawatan" id="jawatan" class="form-select form-select-solid custom-select">
 																			<option value="">Pilih</option>
 																			@foreach ($jawatan as $j)
 																				<option value="{{ $j->id }}" {{$user3->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
@@ -266,7 +291,7 @@
 																		<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																		<select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
 																			@foreach ($tahap as $tahap1)
 																				<option value="{{$tahap1->id}}" {{$user3->peranan == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
@@ -278,7 +303,7 @@
 																	@if ($user3->negeri_bertugas != null)
 																		<div class="fv-row mb-5">
 																			<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Negeri Bertugas</option>
 																				@foreach ($negeri as $item1)
 																					<option value="{{ $item1->id}}" {{$user3->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
@@ -291,7 +316,7 @@
 																	@if ($user3->daerah_bertugas != null)
 																		<div class="fv-row mb-5">
 																			<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
 																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user3->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
@@ -328,29 +353,24 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<h2 style="text-align: center !important;">Alasan Permohonan Pegawai Ditolak</h2>
-														<div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+														<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
 															<i class="ki-solid ki-cross-circle fs-1"></i>
 														</div>
 													</div>
-
+										
 													<div class="modal-body">
 														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
 															@csrf
-															<input type="hidden" name="status" value="Ditolak">
-															<input type="hidden" name="id" value="{{ $user3->id }}">
-										
-															<!-- Begin Rejection Reasons Input -->
+															<!-- Dynamic Rejection Reasons Input -->
 															<div id="dynamicFields">
-																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila letak koma jika terdapat banyak alasan:</label>
-																<div class="input-group mb-2 catatan-row">
-																	<textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Peranan salah, Sila isi nama seperti kad pengenalan"></textarea>
+																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
+																
+																<!-- First input field with only a plus button -->
+																<div class="input-group mb-2 reason-row">
+																	<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Contoh: Sila isi nama seperti kad pengenalan">
+																	<button type="button" class="btn btn-info addField">+</button>
 																</div>
-																{{-- <div class="input-group mb-2 catatan-row">
-																	<input type="text" class="form-control" name="alasan_ditolak" placeholder="Nyatakan alasan">
-																	<button class="btn btn-primary add-field" type="button">+</button>
-																</div>																 --}}
 															</div>
-															<!-- End Rejection Reasons Input -->
 										
 															<!-- Form actions -->
 															<div class="text-center pt-3">
@@ -382,7 +402,7 @@
 							<!--begin::Card toolbar-->
 							<div class="col-auto">
 								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
-									<i class="bi bi-plus-circle"></i> &nbsp;Tambah Pegawai 
+									<i class="bi bi-plus-circle"></i> &nbsp;Daftar Pegawai 
 								</button>
 							</div>
 							<!--end::Card toolbar-->
@@ -394,12 +414,12 @@
 							<table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-175px">Nama</th>
+										<th class="min-w-150px">Nama</th>
 										<th class="min-w-125px">No. Kad Pengenalan</th>
-										<th class="min-w-125px">E-mel</th>
-										<th class="min-w-125px">Peranan</th>
-										<th class="min-w-150px">Negeri (Daerah)</th>
-										<th class="min-w-100px">Tarikh Daftar</th>
+										<th class="min-w-100px">E-mel</th>
+										<th class="min-w-100px">Peranan</th>
+										<th class="min-w-150px">Negeri Bertugas (Daerah Bertugas)</th>
+										<th class="min-w-75px">Tarikh Daftar</th>
 										<th class="min-w-50px">Kemaskini</th>
 									</tr>
 								</thead>
@@ -530,7 +550,7 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2 required">Jawatan & Gred</label>
-																		<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
+																		<select name="jawatan" id="jawatan" class="form-select form-select-solid custom-select">
 																			<option value="">Pilih</option>
 																			@foreach ($jawatan as $j)
 																				<option value="{{ $j->id }}" {{$user2->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
@@ -544,7 +564,7 @@
 																		<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
 																		<!--end::Label-->
 																		<!--begin::Input-->
-																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid" data-placeholder="Pilih">
+																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
 																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
 																				<option value="{{$tahap1->id}}" {{$user2->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
@@ -556,7 +576,7 @@
 																	@if ($user2->negeri_bertugas != null)
 																		<div class="fv-row mb-5">
 																			<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid fw-bold">
+																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Negeri Bertugas</option>
 																				@foreach ($negeri as $item1)
 																					<option value="{{ $item1->id}}" {{$user2->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
@@ -569,7 +589,7 @@
 																	@if ($user2->daerah_bertugas != null)
 																		<div class="fv-row mb-5">
 																			<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid fw-bold">
+																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
 																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user2->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
@@ -655,7 +675,7 @@
 											<td>{{ $user1->name }}</td>
 											<td>{{ $user1->no_kp }}</td>
 											<td>{{ $user1->email }}</td>
-											@if ( $user1->updated_at !== null)
+											@if ( $user1->updated_at !== NULL)
 												<td style="text-align: center;">{{ $tarikh_daftar1}}</td>
 											@else
 												<td style="text-align: center;">N/A</td>
@@ -802,7 +822,8 @@
 					</div> 
 				</div>
 
-				<!--begin::Modal - Tambah Pegawai-->
+
+				<!--begin::Modal - Daftar Pegawai-->
 				<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
 					<!--begin::Modal dialog-->
 					<div class="modal-dialog modal-dialog-centered mw-650px">
@@ -814,14 +835,11 @@
 								<!--begin::Modal header-->
 								<div class="modal-header" id="kt_modal_add_customer_header">
 									<!--begin::Modal title-->
-									<h2 class="fw-bold">Tambah Pegawai Baharu</h2>
+									<h2 class="fw-bold">Daftar Pegawai Baharu</h2>
 									<!--end::Modal title-->
 									<!--begin::Close-->
 									<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-										<i class="ki-duotone ki-cross fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
-										</i>
+										<i class="ki-solid ki-cross-circle fs-1"></i>
 									</div>
 									<!--end::Close-->
 								</div>
@@ -855,7 +873,7 @@
 											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="number" class="form-control form-control-solid" placeholder="" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
+											<input type="number" class="form-control form-control-solid" placeholder="Contoh: 950506019001" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
@@ -887,15 +905,15 @@
 											</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="number" class="form-control form-control-solid" placeholder="" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
+											<input type="number" class="form-control form-control-solid" placeholder="Contoh: 0139001234" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
 											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<label class="fs-6 fw-semibold mb-2 required">Jawatan & Gred</label>
-											<select name="jawatan" id="jawatan" class="form-select form-select-solid fw-bold">
-												<option value="">Pilih</option>
+											<select name="jawatan" id="jawatan" class="form-select form-select-solid custom-select">
+												<option value="">Pilih Jawatan & Gred</option>
 												@foreach ($jawatan as $j)
 													<option value="{{ $j->id }}">{{ $j->jawatan_gred }}</option>
 												@endforeach
@@ -905,8 +923,8 @@
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
 											<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-											<select name="peranan_pegawai" id="peranan_pegawai" class="form-select form-select-solid fw-bold">
-												<option value="">Pilih</option>
+											<select name="peranan_pegawai" id="peranan_pegawai" class="form-select form-select-solid custom-select">
+												<option value="">Pilih Peranan</option>
 												@foreach ($tahap->sortBy('jawatan') as $t)
 													<option value="{{ $t->id }}">{{ $t->peranan }}</option>
 												@endforeach
@@ -915,7 +933,7 @@
 										<!--end::Input group-->
 										<div class="fv-row mb-5" id="daftar_negeri_field">
 											<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-											<select name="daftar_negeri_bertugas" id="daftar_negeri_bertugas" class="form-select form-select-solid fw-bold">
+											<select name="daftar_negeri_bertugas" id="daftar_negeri_bertugas" class="form-select form-select-solid custom-select">
 												<option value="">Pilih Negeri Bertugas</option>
 												@foreach ($negeri as $item1)
 													<option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
@@ -924,7 +942,7 @@
 										</div>
 										<div class="fv-row mb-5" id="daftar_daerah_field">
 											<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-											<select name="daftar_daerah_bertugas" id="daftar_daerah_bertugas" class="form-select form-select-solid fw-bold">
+											<select name="daftar_daerah_bertugas" id="daftar_daerah_bertugas" class="form-select form-select-solid custom-select">
 												<option value="">Pilih Daerah Bertugas</option>
 												@foreach ($daerah as $item2)
 													<option value="{{ $item2->kod_daerah_pejabat }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
@@ -955,7 +973,7 @@
 						</div>
 					</div>
 				</div>
-				<!--end::Modal - Tambah Pegawai-->
+				<!--end::Modal - Daftar Pegawai-->
 			</div>
 			<!--end::Content container-->
 		</div>
@@ -1014,7 +1032,7 @@
             @if(session('error'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Tidak Berjaya!',
+                    title: 'Tidak Didaftarkan!',
                     text: '{!! session('error') !!}',
                     confirmButtonText: 'OK'
                 });
@@ -1216,74 +1234,69 @@
 		});
 	</script>
 
-	{{-- Reason of rejections --}}
-	{{-- <script>
-		$(document).ready(function () {
-			// Function to add new field
-			$(document).on('click', '.add-field', function () {
-				console.log('Tambah field');
-				
-				// Check if the container exists
-				if ($('#dynamicFields').length > 0) {
-					console.log('Container exists, appending new field');
-				} else {
-					console.log('Container does not exist');
+	<!-- JavaScript to handle dynamic fields for reason of rejection -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const dynamicFieldsContainer = document.getElementById('dynamicFields');
+
+			// Function to update buttons visibility
+			function updateButtons() {
+				const rows = dynamicFieldsContainer.querySelectorAll('.reason-row');
+				rows.forEach((row, index) => {
+					const addButton = row.querySelector('.addField');
+					const removeButton = row.querySelector('.removeField');
+					
+					if (index === rows.length - 1) {
+						addButton.style.display = 'inline-block';
+						if (rows.length > 1) {
+							if (!removeButton) {
+								const newRemoveButton = document.createElement('button');
+								newRemoveButton.type = 'button';
+								newRemoveButton.className = 'btn btn-danger removeField';
+								newRemoveButton.innerHTML = '-';
+								row.appendChild(newRemoveButton);
+								attachRemoveListener(newRemoveButton);
+							}
+						}
+					} else {
+						addButton.style.display = 'none';
+						if (!removeButton) {
+							const newRemoveButton = document.createElement('button');
+							newRemoveButton.type = 'button';
+							newRemoveButton.className = 'btn btn-danger removeField';
+							newRemoveButton.innerHTML = '-';
+							row.appendChild(newRemoveButton);
+							attachRemoveListener(newRemoveButton);
+						}
+					}
+				});
+			}
+
+			// Add new input field
+			dynamicFieldsContainer.addEventListener('click', function (e) {
+				if (e.target.classList.contains('addField')) {
+					const newField = document.createElement('div');
+					newField.classList.add('input-group', 'mb-2', 'reason-row');
+					newField.innerHTML = `
+						<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Contoh: Sila isi nama seperti kad pengenalan">
+						<button type="button" class="btn btn-info addField">+</button>
+						<button type="button" class="btn btn-danger removeField">-</button>
+					`;
+					console.log(newField);  
+					dynamicFieldsContainer.appendChild(newField);
+					updateButtons();
 				}
-
-				let fieldHtml = `
-					<div class="input-group mb-2 catatan-row">
-						<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Nyatakan">
-						<button class="btn btn-danger remove-field" type="button">-</button>
-					</div>`;
-				
-				// Append the new field to the container
-				$('#dynamicFields').append(fieldHtml);
 			});
 
-			// Function to remove field
-			$(document).on('click', '.remove-field', function () {
-				$(this).closest('.input-group').remove();
-			});
-		}); 
-    </script> --}}
+			// Remove input field
+			function attachRemoveListener(button) {
+				button.addEventListener('click', function () {
+					button.closest('.reason-row').remove();
+					updateButtons();
+				});
+			}
 
-	{{-- <script>
-		function addCatatanField() {
-			var catatanContainer = document.getElementById('catatan-container');
-	
-			// Create a new row for the input and button
-			var newCatatanRow = document.createElement('div');
-			newCatatanRow.className = 'input-group mb-2 catatan-row';
-	
-			// Create new input field
-			var newCatatanField = document.createElement('input');
-			newCatatanField.type = 'text';
-			newCatatanField.name = 'alasan_ditolak[]';
-			newCatatanField.className = 'form-control form-control-solid';
-			newCatatanField.style.padding = '5px';
-			newCatatanField.placeholder = 'Nyatakan alasan';
-			newCatatanField.required = true;
-	
-			// Create the remove button
-			var removeCatatanButton = document.createElement('button');
-			removeCatatanButton.textContent = '-';
-			removeCatatanButton.className = 'btn btn-outline-danger';
-			removeCatatanButton.type = 'button';
-			removeCatatanButton.onclick = function() {
-				removeCatatanField(newCatatanRow); // Pass the row to be removed
-			};
-	
-			// Append input and button to the new row
-			newCatatanRow.appendChild(newCatatanField);
-			newCatatanRow.appendChild(removeCatatanButton);
-	
-			// Add the new row to the container
-			catatanContainer.appendChild(newCatatanRow);
-		}
-	
-		function removeCatatanField(row) {
-			var catatanContainer = document.getElementById('catatan-container');
-			catatanContainer.removeChild(row);
-		}
-	</script> --}}
+			updateButtons(); // Initial update for buttons
+		});
+	</script>
 @endsection

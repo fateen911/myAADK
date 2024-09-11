@@ -99,8 +99,8 @@
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($responses as $response)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $response->daerah_pejabat)->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $response->negeri_pejabat)->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
+                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
 
                                             <tr>
@@ -159,8 +159,8 @@
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($tidakMenjawab as $response2)
                                             @php
-                                                $daerah = DB::table('senarai_daerah')->where('kod_daerah_pejabat', $response2->daerah_pejabat)->value('senarai_daerah.daerah');
-                                                $negeri = DB::table('senarai_negeri')->where('id', $response2->negeri_pejabat)->value('senarai_negeri.negeri');
+                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response2->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
+                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response2->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
 
                                             <tr>
