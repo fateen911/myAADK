@@ -54,15 +54,15 @@
 		}
 
 		/* General styles for input, textarea, and select */
-		input.form-control.form-control-solid,
-        textarea.form-control.form-control-solid {
+		input.form-control.form-control-solid.custom-form,
+        textarea.form-control.form-control-solid.custom-form {
             background-color: #e0e0e0;
             color: #45505b;
         }
 
         /* Focus state for input, textarea, and select */
-        input.form-control.form-control-solid:focus,
-        textarea.form-control.form-control-solid:focus {
+        input.form-control.form-control-solid.custom-form:focus,
+        textarea.form-control.form-control-solid.custom-form:focus {
             background-color: #d0d0d0;
             color: #333333;
             box-shadow: none;
@@ -216,17 +216,12 @@
 																<div class="scroll-y me-n7 pe-7" id="modal_permohonan_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_permohonan_pegawai_header" data-kt-scroll-wrappers="#modal_permohonan_pegawai_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user3->nama}}" style="text-transform: uppercase;" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$user3->nama}}" style="text-transform: uppercase;" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -236,29 +231,21 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" id="no_kp_pegawai_mohon" name="no_kp" value="{{$user3->no_kp}}" inputmode="numeric" maxlength="12" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" id="no_kp_pegawai_mohon" name="no_kp" value="{{$user3->no_kp}}" inputmode="numeric" maxlength="12" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">E-mel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" required/>
+																			<input type="text" class="form-control form-control-solid custom-form" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" required/>
 																			<span class="input-group-text">@adk.gov.my</span>
 																			{{-- <input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" /> --}}
 																		</div>
-																		<!--end::Input-->
 																	</div>																	
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">No. Telefon
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -268,10 +255,7 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" id="no_tel_pegawai_mohon" name="no_tel" value="{{$user3->no_tel}}" inputmode="numeric" maxlength="11" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" id="no_tel_pegawai_mohon" name="no_tel" value="{{$user3->no_tel}}" inputmode="numeric" maxlength="11" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -287,16 +271,12 @@
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
 																			@foreach ($tahap as $tahap1)
 																				<option value="{{$tahap1->id}}" {{$user3->peranan == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
 																		</select>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -489,17 +469,12 @@
 																<div class="scroll-y me-n7 pe-7" id="modal_kemaskini_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_kemaskini_pegawai_header" data-kt-scroll-wrappers="#modal_kemaskini_pegawai_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" name="nama" id="nama" value="{{$user2->name}}" style="text-transform: uppercase;" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$user2->name}}" style="text-transform: uppercase;" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -509,29 +484,20 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" id="no_kp_pegawai" name="no_kp" value="{{$user2->no_kp}}" inputmode="numeric" maxlength="12" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" id="no_kp_pegawai" name="no_kp" value="{{$user2->no_kp}}" inputmode="numeric" maxlength="12" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">E-mel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid" id="emel" name="emel" value="{{ explode('@', $user2->email)[0] }}" required/>
+																			<input type="text" class="form-control form-control-solid custom-form" id="emel" name="emel" value="{{ explode('@', $user2->email)[0] }}" required/>
 																			<span class="input-group-text">@adk.gov.my</span>
-																			{{-- <input type="hidden" id="email" name="email" value="{{ $user2->email }}" /> --}}
 																		</div>
-																		<!--end::Input-->
 																	</div>																	
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">No. Telefon
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -541,10 +507,7 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" id="no_tel_pegawai" name="no_tel" value="{{$user2->no_tel}}" inputmode="numeric" maxlength="11" required/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" id="no_tel_pegawai" name="no_tel" value="{{$user2->no_tel}}" inputmode="numeric" maxlength="11" required/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -560,16 +523,12 @@
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<select name="tahap_pengguna" id="tahap_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
 																			@foreach ($tahap->sortBy('jawatan') as $tahap1)
 																				<option value="{{$tahap1->id}}" {{$user2->tahap_pengguna == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
 																			@endforeach
 																		</select>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -600,15 +559,11 @@
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-7">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid" id="password{{$user2->id}}" name="password" />
+																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" id="password{{$user2->id}}" name="password" />
 																			<button type="button" class="btn btn-secondary" onclick="generatePasswordPegawai('password{{$user2->id}}')">Jana Kata Laluan</button>
 																		</div>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																</div>
@@ -722,17 +677,12 @@
 																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" readonly/>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -742,15 +692,11 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">No. Telefon
 																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
 																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -760,33 +706,22 @@
 																				</i>
 																			</span>
 																		</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="text" class="form-control form-control-solid" id="no_tel_klien" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
-																		<!--end::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">E-mel</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
-																		<input type="email" class="form-control form-control-solid" placeholder="" name="email" value="{{$user1->email}}" />
-																		<!--end::Input-->
+																		<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="{{$user1->email}}" />
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
-																		<!--begin::Label-->
 																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
-																		<!--end::Label-->
-																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid" placeholder="" id="password{{$user1->id}}" name="password" />
+																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="password{{$user1->id}}" name="password" />
 																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('password{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
-																		<!--end::Input-->
 																	</div>
 																	<!--end::Input group-->
 																</div>
@@ -851,17 +786,12 @@
 									<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<!--begin::Label-->
 											<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-											<!--end::Label-->
-											<!--begin::Input-->
-											<input type="text" class="form-control form-control-solid" placeholder="" id="name" name="name" style="text-transform: uppercase;" required/>
-											<!--end::Input-->
+											<input type="text" class="form-control form-control-solid custom-form" id="name" name="name" style="text-transform: uppercase;" required/>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<!--begin::Label-->
 											<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
 												<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
 													<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -871,29 +801,20 @@
 													</i>
 												</span>
 											</label>
-											<!--end::Label-->
-											<!--begin::Input-->
-											<input type="number" class="form-control form-control-solid" placeholder="Contoh: 950506019001" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
-											<!--end::Input-->
+											<input type="number" class="form-control form-control-solid custom-form" placeholder="Contoh: 950506019001" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<!--begin::Label-->
 											<label class="fs-6 fw-semibold mb-2 required">E-mel</label>
-											<!--end::Label-->
-											<!--begin::Input-->
 											<div class="input-group">
-												<input type="text" class="form-control form-control-solid" placeholder="contoh12" id="emailPegawai" name="emailPegawai" required />
+												<input type="text" class="form-control form-control-solid custom-form" placeholder="contoh12" id="emailPegawai" name="emailPegawai" required />
 												<span class="input-group-text">@adk.gov.my</span>
-												{{-- <input type="hidden" id="emel" name="emel" /> --}}
 											</div>
-											<!--end::Input-->
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
 										<div class="fv-row mb-5">
-											<!--begin::Label-->
 											<label class="fs-6 fw-semibold mb-2 required">No. Telefon
 												<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
 													<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
@@ -903,10 +824,7 @@
 													</i>
 												</span>
 											</label>
-											<!--end::Label-->
-											<!--begin::Input-->
-											<input type="number" class="form-control form-control-solid" placeholder="Contoh: 0139001234" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
-											<!--end::Input-->
+											<input type="number" class="form-control form-control-solid custom-form" placeholder="Contoh: 0139001234" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
@@ -1174,12 +1092,12 @@
 	<script>
 		document.querySelectorAll('input[name="nama"]').forEach(function(input) {
 			input.addEventListener('input', function() {
-				this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+				this.value = this.value.replace(/[^a-zA-Z\s@]/g, '');
 			});
 		});
 
 		document.getElementById('name').addEventListener('input', function (e) {
-			this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+			this.value = this.value.replace(/[^a-zA-Z\s@]/g, '');
 		});
 
 		document.addEventListener('DOMContentLoaded', function() {
