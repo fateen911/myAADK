@@ -315,7 +315,7 @@
                                 <div class="col-md-5 text-md-start">
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span>Status Kesihatan Mental</span>
+                                        <span>Penyakit</span>
                                     </label>
                                     <!--end::Label-->
                                 </div>
@@ -566,7 +566,7 @@
                                             </div>
                                             <div class="row fv-row">
                                                 <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Kesihatan Mental</label>
+                                                    <label class="fs-6 fw-semibold form-label mt-3">Penyakit</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>

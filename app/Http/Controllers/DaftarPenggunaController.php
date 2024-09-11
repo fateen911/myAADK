@@ -15,8 +15,8 @@ use App\Mail\KemaskiniKataLaluan;
 use App\Models\User;
 use App\Models\Klien;
 use App\Models\Pegawai;
-use App\Models\Negeri;
-use App\Models\Daerah;
+use App\Models\NegeriPejabat;
+use App\Models\DaerahPejabat;
 use App\Models\JawatanAADK;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
@@ -101,8 +101,8 @@ class DaftarPenggunaController extends Controller
 
         $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')->orderBy('updated_at', 'desc')->get();
 
-        $negeri = Negeri::all()->sortBy('negeri');
-        $daerah = Daerah::all()->sortBy('daerah');
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
 
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();

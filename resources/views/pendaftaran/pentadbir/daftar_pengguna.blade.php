@@ -306,7 +306,7 @@
 																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Negeri Bertugas</option>
 																				@foreach ($negeri as $item1)
-																					<option value="{{ $item1->id}}" {{$user3->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																					<option value="{{ $item1->negeri_id}}" {{$user3->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
 																				@endforeach
 																			</select>
 																		</div>	
@@ -319,7 +319,7 @@
 																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
-																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user3->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
+																					<option value="{{ $item2->kod }}" {{$user3->daerah_bertugas == $item2->kod  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
 																				@endforeach
 																			</select>
 																		</div>
@@ -579,7 +579,7 @@
 																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Negeri Bertugas</option>
 																				@foreach ($negeri as $item1)
-																					<option value="{{ $item1->id}}" {{$user2->negeri_bertugas == $item1->id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
+																					<option value="{{ $item1->negeri_id}}" {{$user2->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
 																				@endforeach
 																			</select>
 																		</div>	
@@ -592,7 +592,7 @@
 																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
 																				<option value="">Pilih Daerah Bertugas</option>
 																				@foreach ($daerah as $item2)
-																					<option value="{{ $item2->kod_daerah_pejabat }}" {{$user2->daerah_bertugas == $item2->kod_daerah_pejabat  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
+																					<option value="{{ $item2->kod }}" {{$user2->daerah_bertugas == $item2->kod  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
 																				@endforeach
 																			</select>
 																		</div>
@@ -936,7 +936,7 @@
 											<select name="daftar_negeri_bertugas" id="daftar_negeri_bertugas" class="form-select form-select-solid custom-select">
 												<option value="">Pilih Negeri Bertugas</option>
 												@foreach ($negeri as $item1)
-													<option value="{{ $item1->id }}" data-id="{{ $item1->id }}">{{ $item1->negeri }}</option>
+													<option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
 												@endforeach
 											</select>
 										</div>
@@ -945,7 +945,7 @@
 											<select name="daftar_daerah_bertugas" id="daftar_daerah_bertugas" class="form-select form-select-solid custom-select">
 												<option value="">Pilih Daerah Bertugas</option>
 												@foreach ($daerah as $item2)
-													<option value="{{ $item2->kod_daerah_pejabat }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+													<option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
 												@endforeach
 											</select>
 										</div>

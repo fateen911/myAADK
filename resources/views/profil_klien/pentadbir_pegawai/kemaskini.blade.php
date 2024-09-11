@@ -438,7 +438,7 @@
                             <div class="row fv-row mb-7">
                                 <div class="col-md-4 text-md-start">
                                     <label class="fs-6 fw-semibold form-label mt-3">
-                                        <span class="required">Status Kesihatan Mental</span>
+                                        <span class="required">Penyakit</span>
                                     </label>
                                 </div>
                                 <div class="col-md-8">
@@ -562,7 +562,7 @@
                                                 </div>
                                                 <div class="row fv-row mb-2">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Status Kesihatan Mental</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Penyakit</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$klien->status_kesihatan_mental}}</span>
@@ -2860,85 +2860,6 @@
                             <!--end::Input group-->
                         </form>
                         <!--end::Form-->
-
-                        <!--begin::Modal Rawatan-->
-                        {{-- <div class="modal fade" id="approvalRawatan" tabindex="-1" aria-labelledby="luluskanPermohonanRawatanLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="luluskanPermohonanRawatanLabel">Luluskan Permintaan Kemaskini Maklumat Rawatan Klien</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" action="{{ route('approve.update.rawatan', ['id' => $updateRequestRawatan->klien_id]) }}">
-                                            @csrf
-                                            @method('PATCH')
-
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Kesihatan Mental</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="status_kesihatan_mental" value="{{ $requestedDataRawatan['status_kesihatan_mental'] }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status Orang Kurang Upaya (OKU)</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="status_oku" value="{{ $requestedDataRawatan['status_oku'] }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Status OKP</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="seksyen_okp" value="{{ $requestedDataRawatan['seksyen_okp'] }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Tarikh Tamat Rawatan dan Pemulihan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    @php
-                                                        $formattedDate = Carbon::parse($requestedDataRawatan['tarikh_tamat_pengawasan'])->format('d-m-Y');
-                                                    @endphp
-                                                    <input type="text" class="form-control form-control-solid" name="tarikh_tamat_pengawasan" value="{{ $formattedDate }}" readonly />
-                                                </div>
-                                            </div>
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input type="text" class="form-control form-control-solid" name="skor_ccri" value="{{ $requestedDataRawatan['skor_ccri'] }}" readonly />
-                                                </div>
-                                            </div>
-
-                                            <div class="row fv-row mb-7">
-                                                <div class="col-md-4 text-md-start">
-                                                    <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="d-flex">
-                                                        <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Luluskan</button>
-                                                        <button type="submit" name="status" value="Ditolak" class="btn btn-danger">Ditolak</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <!--end::Modal-->
                     </div>
                     <!--end:::Tab pane-->
                 </div>
