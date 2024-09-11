@@ -184,13 +184,13 @@ class ModalKepulihanController extends Controller
 
         $sixMonthsAgo = Carbon::now()->subMonths(6);
         $latestSessionRespon = ResponModalKepulihan::where('klien_id', $clientId)
-            ->where('updated_at', '>=', $sixMonthsAgo)
-            ->orderBy('updated_at', 'desc')
-            ->first();
+                                                    ->where('updated_at', '>=', $sixMonthsAgo)
+                                                    ->orderBy('updated_at', 'desc')
+                                                    ->first();
         $latestSessionKeputusan = KeputusanKepulihan::where('klien_id', $clientId)
-            ->where('updated_at', '>=', $sixMonthsAgo)
-            ->orderBy('updated_at', 'desc')
-            ->first();
+                                                    ->where('updated_at', '>=', $sixMonthsAgo)
+                                                    ->orderBy('updated_at', 'desc')
+                                                    ->first();
 
         // Determine the session to use
         if (!$latestSessionRespon && !$latestSessionKeputusan) {
@@ -211,27 +211,27 @@ class ModalKepulihanController extends Controller
 
             $fixedQuestionIds = [5, 9, 24, 28, 49, 60, 62, 120];
             $fixedQuestions = DB::table('soalan_modal_kepulihan')
-                ->whereIn('id', $fixedQuestionIds)
-                ->get();
+                                ->whereIn('id', $fixedQuestionIds)
+                                ->get();
 
             // Ensure we have 5 capital questions
             $capitalQuestions = DB::table('soalan_modal_kepulihan')
-                ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-                ->whereNotIn('id', $fixedQuestionIds)
-                ->inRandomOrder()
-                ->limit(5)
-                ->get();
+                                    ->whereIn('modal_id', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+                                    ->whereNotIn('id', $fixedQuestionIds)
+                                    ->inRandomOrder()
+                                    ->limit(5)
+                                    ->get();
 
             // Calculate remaining questions needed to make up 25 in total
             $remainingQuestionsCount = 25 - $fixedQuestions->count() - $capitalQuestions->count();
 
             // Fetch remaining random questions
             $remainingQuestions = DB::table('soalan_modal_kepulihan')
-                ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
-                ->whereNotIn('id', $capitalQuestions->pluck('id')->toArray())
-                ->inRandomOrder()
-                ->limit($remainingQuestionsCount)
-                ->get();
+                                    ->whereNotIn('id', $fixedQuestions->pluck('id')->toArray())
+                                    ->whereNotIn('id', $capitalQuestions->pluck('id')->toArray())
+                                    ->inRandomOrder()
+                                    ->limit($remainingQuestionsCount)
+                                    ->get();
 
             $allQuestions = $fixedQuestions->merge($capitalQuestions)->merge($remainingQuestions);
             $shuffledQuestions = $allQuestions->shuffle();
@@ -260,15 +260,15 @@ class ModalKepulihanController extends Controller
         else {
             // Fetch questions based on saved order
             $savedQuestions = DB::table('respon_modal_kepulihan')
-                ->where('klien_id', $clientId)
-                ->pluck('soalan_id')
-                ->toArray();
+                                ->where('klien_id', $clientId)
+                                ->pluck('soalan_id')
+                                ->toArray();
 
             if (!empty($savedQuestions)) {
                 $questions = DB::table('soalan_modal_kepulihan')
-                    ->whereIn('id', $savedQuestions)
-                    ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
-                    ->get();
+                                ->whereIn('id', $savedQuestions)
+                                ->orderByRaw("FIELD(id, " . implode(',', $savedQuestions) . ")")
+                                ->get();
             }
         }
 
@@ -277,9 +277,9 @@ class ModalKepulihanController extends Controller
 
         // Fetch autosaved answers
         $autosavedAnswers = DB::table('respon_modal_kepulihan')
-            ->where('klien_id', $clientId)
-            ->pluck('skala_id', 'soalan_id')
-            ->toArray();
+                                ->where('klien_id', $clientId)
+                                ->pluck('skala_id', 'soalan_id')
+                                ->toArray();
 
         return view('modal_kepulihan.klien.soalan_kepulihan3', [
             'questions' => $questions,
@@ -312,9 +312,9 @@ class ModalKepulihanController extends Controller
 
         // Filter the record where the updated_at is greater than or equal to within six months.
         $latestSessionKeputusan = KeputusanKepulihan::where('klien_id', $clientId)
-            ->where('updated_at', '>=', $sixMonthsAgo)
-            ->orderBy('updated_at', 'desc')
-            ->first();
+                                                    ->where('updated_at', '>=', $sixMonthsAgo)
+                                                    ->orderBy('updated_at', 'desc')
+                                                    ->first();
 
         // dd($latestSessionKeputusan);
 
@@ -329,9 +329,9 @@ class ModalKepulihanController extends Controller
 
         // Retrieve the autosaved answers
         $autosavedAnswers = DB::table('respon_modal_kepulihan')
-            ->where('klien_id', $clientId)
-            ->pluck('skala_id', 'soalan_id')
-            ->toArray();
+                                ->where('klien_id', $clientId)
+                                ->pluck('skala_id', 'soalan_id')
+                                ->toArray();
 
         if (count($autosavedAnswers) == 0) {
             return redirect()->back()->with('error', 'Tiada jawapan yang diterima.');
@@ -421,6 +421,7 @@ class ModalKepulihanController extends Controller
                             ->groupBy('klien_id');
                     })
                     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+                    ->orderBy('kk.updated_at', 'desc')
                     ->get();
 
         // Fetch clients who have not responded yet or their last response was over 6 months ago
@@ -448,6 +449,7 @@ class ModalKepulihanController extends Controller
                                             ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months
                                 });
                         })
+                        ->orderBy('kk.updated_at', 'desc')
                         ->get();
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));

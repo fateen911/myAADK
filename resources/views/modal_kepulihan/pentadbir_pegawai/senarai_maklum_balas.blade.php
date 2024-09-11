@@ -89,8 +89,8 @@
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 25%;">Nama</th>
                                             <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 13%;">Daerah Pejabat Pengawasan</th>
-                                            <th style="text-align: center; width: 13%;">Negeri Pejabat Pengawasan</th>
+                                            <th style="text-align: center; width: 13%;">AADK Daerah & Pusat RPDK</th>
+                                            <th style="text-align: center; width: 13%;">AADK Negeri</th>
                                             <th style="text-align: center; width: 12%;">Tarikh Terakhir Menjawab</th> 
                                             <th style="text-align: center; width: 13%;">Status</th> 
                                             <th style="text-align: center; width: 9%;">Sejarah Menjawab</th>
@@ -151,9 +151,10 @@
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-30px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Daerah Pejabat Pengawasan</th>
-                                            <th class="min-w-50px" style="text-align: center;">Negeri Pejabat Pengawasan</th>
+                                            <th class="min-w-50px" style="text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th class="min-w-50px" style="text-align: center;">AADK Negeri</th>
                                             <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
+                                            <th class="min-w-50px" style="text-align: center;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -169,6 +170,16 @@
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
+                                                <td style="text-align: center;">
+                                                    @if ($response2->updated_at !== NULL)
+                                                        <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                   
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
