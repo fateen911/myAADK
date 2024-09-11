@@ -9,33 +9,29 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class KemaskiniKataLaluan extends Mailable
+class DaftarKlien extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public $email;
-    public $no_kp;
+    public $user;
     public $password;
 
-    public function __construct($email, $password, $no_kp)
+    public function __construct($user, $password)
     {
-        $this->email = $email;
-        $this->no_kp = $no_kp;
+        $this->user = $user;
         $this->password = $password;
     }
 
     public function build()
     {
-        $subject = "KEMASKINI KATA LALUAN AKAUN SISTEM MySupport";
+        $subject = "DAFTAR PENGGUNA SISTEM MySupport";
         return $this->subject($subject)
-                    ->view('pendaftaran.emel_kemaskini_kata_laluan')
+                    ->view('pendaftaran.emel_daftar_klien')
                     ->with([
-                        'no_kp' => $this->no_kp,
+                        'nama' => $this->user->name,
+                        'no_kp' => $this->user->no_kp,
                         'password' => $this->password,
                     ]);
     }
+    
 }
-

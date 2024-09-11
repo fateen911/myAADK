@@ -8,7 +8,7 @@
     <br>
     <p><b>Nama Pegawai :</b> {{strtoupper($nama)}}</p>
     <p><b>No Kad Pengenalan :</b> {{$no_kp}}
-    <p><b>Kata Laluan :</b>Kata Laluan : {{$password}}
+    <p><b>Kata Laluan :</b> {{$password}}
     <p>Sila klik pada pautan yang diberikan untuk mengesahkan emel anda dan log masuk ke dalam sistem.
         @component('mail::button', ['url' => $verificationUrl])
         @endcomponent

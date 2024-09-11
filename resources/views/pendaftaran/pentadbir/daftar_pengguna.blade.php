@@ -623,18 +623,18 @@
 									@foreach ($klien as $user1)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-											$tarikh_daftar1 = Carbon::parse($user1->updated_at)->format('d-m-Y');
+											$tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : null;
+											// $tkh_daftar = DB::table('users')->where('no_kp', $user1->no_kp)->value('users.updated_at');
+											// $tarikh_daftar1 = Carbon::parse($tkh_daftar)->format('d-m-Y');
 										@endphp
 	
 										<tr>
-											<td>{{ $user1->name }}</td>
+											<td>{{ $user1->nama }}</td>
 											<td>{{ $user1->no_kp }}</td>
-											<td>{{ $user1->email }}</td>
-											@if ( $user1->updated_at !== NULL)
-												<td style="text-align: center;">{{ $tarikh_daftar1}}</td>
-											@else
-												<td style="text-align: center;">N/A</td>
-											@endif
+											<td>{{ $user1->emel }}</td>
+											<td style="text-align: center;">
+												{{ $tarikh_daftar1 ? $tarikh_daftar1 : 'N/A' }}
+											</td>
 											<td style="text-align: center;">
 												<div class="d-flex justify-content-center align-items-center">
 													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
@@ -678,7 +678,7 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->name}}" readonly/>
+																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->nama}}" readonly/>
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -712,7 +712,7 @@
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">E-mel</label>
-																		<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="{{$user1->email}}" />
+																		<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="{{$user1->emel}}" />
 																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -935,18 +935,26 @@
 	
 	{{-- Popup alert success/error message --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check if there is a flash message
+        document.addEventListener('DOMContentLoaded', function () 
+		{
             @if(session('message'))
                 Swal.fire({
                     icon: 'success',
-                    title: 'Berjaya!',
+                    title: 'Berjaya Dikemaskini!',
                     text: '{!! session('message') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
 
-            // Check if there is a flash error message
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya Didaftarkan!',
+                    text: '{!! session('success') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
             @if(session('error'))
                 Swal.fire({
                     icon: 'error',

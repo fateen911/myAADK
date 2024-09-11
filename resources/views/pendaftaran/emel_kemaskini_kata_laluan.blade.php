@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h3>KATA LALUAN BAHARU BAGI AKAUN PENGGUNA SISTEM MySupport AADK</h3>
+        <h3>KATA LALUAN BAHARU BAGI PENGGUNA SISTEM MySupport AADK</h3>
         <p>Assalamualaikum WBT & Salam Sejahtera,</p>
-        <br>
         <p>Tuan/Puan,</p>
-        <br>
         <p>Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
         <p><b>No Kad Pengenalan :</b> {{$no_kp}}
         <p><b>Kata Laluan :</b> {{$password}}
