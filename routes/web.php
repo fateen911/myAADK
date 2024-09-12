@@ -106,7 +106,8 @@ Route::middleware('auth')->group(function () {
 
 // PENTADBIR - DAFTAR PENGGUNA
 Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
-Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'kemaskiniKlien'])->name('kemaskini-klien');
+Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'pentadbirKemaskiniKlien'])->name('pentadbir-kemaskini-klien');
+Route::post('pentadbir/daftar/klien', [DaftarPenggunaController::class, 'pentadbirDaftarKlien'])->name('pentadbir-daftar-klien');
 Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'kemaskiniPegawai'])->name('kemaskini-pegawai');
 Route::post('pentadbir/daftar/pegawai', [DaftarPenggunaController::class, 'daftarPegawai'])->name('daftar-pegawai');
 Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiLulus'])->middleware('auth')->name('kelulusan-permohonan-pegawai');

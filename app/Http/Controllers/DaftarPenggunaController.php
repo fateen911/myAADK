@@ -179,7 +179,7 @@ class DaftarPenggunaController extends Controller
     }
 
     // PENTADBIR : DAFTAR / KEMASKINI AKAUN KLIEN
-    public function kemaskiniKlien(Request $request)
+    public function pentadbirKemaskiniKlien(Request $request)
     {
         // Retrieve the user by their ID
         $user = User::where('no_kp', $request->no_kp)->first();
@@ -241,44 +241,54 @@ class DaftarPenggunaController extends Controller
                 return redirect()->route(route: 'senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
             }
         }
+        else{
+            return redirect()->route(route: 'senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
+        }
+    }
+
+    public function pentadbirDaftarKlien(Request $request)
+    {
+        // Retrieve the user by their ID
+        $user = User::where('no_kp', $request->no_kp)->first();
+
+        // Retrieve the corresponding Klien record by no_kp
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
+
+        // Check if a password has been provided
+        if (!$request->filled('password')) {
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+        }
         else
         {
-            // Check if a password has been provided
-            if (!$request->filled('password')) {
-                return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
-            }
-            else
-            {
-                $createData = [
-                    'name' => strtoupper($request->name),
-                    'no_kp' => $request->no_kp,
-                    'email' => $request->email,
-                    'tahap_pengguna' => 2,   // Set default user level
-                    'status' => 0,           // Set default status
-                    'password' => Hash::make($request->password),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
+            $createData = [
+                'name' => strtoupper($request->name),
+                'no_kp' => $request->no_kp,
+                'email' => $request->email,
+                'tahap_pengguna' => 2,   // Set default user level
+                'status' => 0,           // Set default status
+                'password' => Hash::make($request->password),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
 
-                // Create the new user
-                $user = User::create($createData);
+            // Create the new user
+            $user = User::create($createData);
+        
+            // Update in table klien
+            $klien->update([
+                'no_tel' => $request->no_tel,
+                'emel' => $request->email,
+                'updated_at' => now(),
+            ]);
             
-                // Update in table klien
-                $klien->update([
-                    'no_tel' => $request->no_tel,
-                    'emel' => $request->email,
-                    'updated_at' => now(),
-                ]);
-                
-                if ($request->email){
-                    Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->password));
-                    return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
-                }
-                else{
-                    return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
-                }
-            } 
-        }
+            if ($request->email){
+                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->password));
+                return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
+            }
+            else{
+                return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
+            }
+        } 
     }
 
     public function kemaskiniPegawai(Request $request)

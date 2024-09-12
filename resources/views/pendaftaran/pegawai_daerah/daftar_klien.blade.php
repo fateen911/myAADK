@@ -344,7 +344,7 @@
                                                                 <!--begin::Input group-->
                                                                 <div class="fv-row mb-5">
                                                                     <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+                                                                    <label class="fs-6 fw-semibold mb-2 required">Kata Laluan Baharu</label>
                                                                     <!--end::Label-->
                                                                     <!--begin::Input-->
                                                                     <div class="input-group">
@@ -376,7 +376,7 @@
                                             </div>
                                             <!--end::Modal dialog-->
                                         </div>
-                                        <!--end::Modal - Kemaskini Klien-->
+                                        <!--end::Modal - Daftar Klien-->
                                     </tr>
                                 @endforeach
                             </tbody>

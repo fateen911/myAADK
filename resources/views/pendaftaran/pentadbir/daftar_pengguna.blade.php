@@ -627,11 +627,19 @@
 											</td>
 											<td style="text-align: center;">
 												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
-														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-															<i class="ki-duotone bi bi-pencil fs-3"></i>
-														</span>
-													</a>
+													@if ( $user1->updated_at !== null)
+														<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
+															<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+																<i class="ki-duotone bi bi-pencil fs-3"></i>
+															</span>
+														</a>
+													@else
+														<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_daftar_klien{{$user1->id}}">
+															<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+																<i class="ki-duotone bi bi-pencil fs-3"></i>
+															</span>
+														</a>
+													@endif
 												</div>                                                
 											</td>
 	
@@ -657,7 +665,7 @@
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
-															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('kemaskini-klien') }}" method="post">
+															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
 																@csrf
 	
 																<input type="hidden" name="id" value="{{ $user1->id }}">
@@ -706,8 +714,8 @@
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="password{{$user1->id}}" name="password" />
-																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('password{{$user1->id}}')">Jana Kata Laluan</button>
+																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="passwordKlien{{$user1->id}}" name="password" />
+																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
 																	</div>
 																	<!--end::Input group-->
@@ -734,6 +742,118 @@
 												<!--end::Modal dialog-->
 											</div>
 											<!--end::Modal - Kemaskini Klien-->
+
+											<!--begin::Modal - Daftar Klien-->
+											<div class="modal fade" id="modal_daftar_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
+												<!--begin::Modal dialog-->
+												<div class="modal-dialog modal-dialog-centered mw-650px">
+													<!--begin::Modal content-->
+													<div class="modal-content">
+														<!--begin::Modal header-->
+														<div class="modal-header">
+															<!--begin::Modal title-->
+															<h2>Pendaftaran Akaun Klien</h2>
+															<!--end::Modal title-->
+															<!--begin::Close-->
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
+															</div>
+															<!--end::Close-->
+														</div>
+														<!--end::Modal header-->
+	
+														<!--begin::Modal body-->
+														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+															<!--begin::Form-->
+															<form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
+																@csrf
+	
+																<input type="hidden" name="id" value="{{ $user1->id }}">
+																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" name="name" value="{{$user1->nama}}" readonly/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">No. Telefon
+																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																					<span class="path1"></span>
+																					<span class="path2"></span>
+																					<span class="path3"></span>
+																				</i>
+																			</span>
+																		</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric"/>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2">E-mel</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="{{$user1->emel}}" />
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																	<!--begin::Input group-->
+																	<div class="fv-row mb-5">
+																		<!--begin::Label-->
+																		<label class="fs-6 fw-semibold mb-2 required">Kata Laluan Baharu</label>
+																		<!--end::Label-->
+																		<!--begin::Input-->
+																		<div class="input-group">
+																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="passwordDaftarKlien{{$user1->id}}" name="password" />
+																			<button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien{{$user1->id}}')">Jana Kata Laluan</button>
+																		</div>
+																		<!--end::Input-->
+																	</div>
+																	<!--end::Input group-->
+																</div>
+	
+																<!--begin::Actions-->
+																<div class="text-center pt-15">
+																	<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+	
+																	<button type="submit" id="daftarBtn" class="btn btn-primary">
+																		<span class="indicator-label">Daftar</span>
+																		<span class="indicator-progress">Sila tunggu...
+																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+																	</button>
+																</div>
+																<!--end::Actions-->
+															</form>
+															<!--end::Form-->
+														</div>
+														<!--end::Modal body-->
+													</div>
+													<!--end::Modal content-->
+												</div>
+												<!--end::Modal dialog-->
+											</div>
+											<!--end::Modal - Daftar Klien-->
 										</tr>
 									@endforeach
 								</tbody>
@@ -923,16 +1043,7 @@
 	{{-- Popup alert success/error message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () 
-		{
-            @if(session('message'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berjaya Dikemaskini!',
-                    text: '{!! session('message') !!}',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-
+        {
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
@@ -947,6 +1058,24 @@
                     icon: 'error',
                     title: 'Tidak Didaftarkan!',
                     text: '{!! session('error') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if(session('message'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berjaya Dikemaskini!',
+                    text: '{!! session('message') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if(session('warning'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Tidak Dikemaskini!',
+                    text: '{!! session('warning') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -992,18 +1121,39 @@
 			const allCharacters = lowercase + uppercase + numbers + symbols;
 			let password = '';
 			
-			// Ensure the password contains at least one character from each category
 			password += lowercase[Math.floor(Math.random() * lowercase.length)];
 			password += uppercase[Math.floor(Math.random() * uppercase.length)];
 			password += numbers[Math.floor(Math.random() * numbers.length)];
 			password += symbols[Math.floor(Math.random() * symbols.length)];
 			
-			// Fill the remaining length of the password with random characters from all categories
 			for (let i = 4; i < length; i++) {
 				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
 			}
 			
-			// Shuffle the password to ensure a random order
+			password = password.split('').sort(() => 0.5 - Math.random()).join('');
+			
+			document.getElementById(inputId).value = password;
+		}
+
+		function generatePasswordDaftarKlien(inputId) {
+			const length = 6;
+			const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			const numbers = '0123456789';
+			const symbols = '!@#$%^&*()-_+=<>?';
+			
+			const allCharacters = lowercase + uppercase + numbers + symbols;
+			let password = '';
+			
+			password += lowercase[Math.floor(Math.random() * lowercase.length)];
+			password += uppercase[Math.floor(Math.random() * uppercase.length)];
+			password += numbers[Math.floor(Math.random() * numbers.length)];
+			password += symbols[Math.floor(Math.random() * symbols.length)];
+			
+			for (let i = 4; i < length; i++) {
+				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
+			}
+			
 			password = password.split('').sort(() => 0.5 - Math.random()).join('');
 			
 			document.getElementById(inputId).value = password;
