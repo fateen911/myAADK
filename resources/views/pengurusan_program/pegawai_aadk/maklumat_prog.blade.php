@@ -71,13 +71,13 @@
             <!--end:::Tab item-->
             <!--begin:::Tab item-->
             <li class="nav-item">
-                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Pengesahan Kehadiran</a>
+                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Maklum Balas Kehadiran</a>
             </li>
             <!--end:::Tab item-->
             @if($program->status != "BELUM SELESAI")
             <!--begin:::Tab item-->
             <li class="nav-item">
-                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Perekodan Kehadiran</a>
+                <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Kehadiran</a>
             </li>
             <!--end:::Tab item-->
             @endif
