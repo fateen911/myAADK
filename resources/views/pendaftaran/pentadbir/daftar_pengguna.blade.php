@@ -53,14 +53,12 @@
 			flex: 1;
 		}
 
-		/* General styles for input, textarea, and select */
 		input.form-control.form-control-solid.custom-form,
         textarea.form-control.form-control-solid.custom-form {
             background-color: #e0e0e0;
             color: #45505b;
         }
 
-        /* Focus state for input, textarea, and select */
         input.form-control.form-control-solid.custom-form:focus,
         textarea.form-control.form-control-solid.custom-form:focus {
             background-color: #d0d0d0;
@@ -196,11 +194,8 @@
 															<!--end::Modal title-->
 
 															<!--begin::Close-->
-															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-																<i class="ki-duotone ki-cross fs-1">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
 															</div>
 															<!--end::Close-->
 														</div>
@@ -449,11 +444,8 @@
 															<h2>Kemaskini Maklumat Akaun Pegawai</h2>
 															<!--end::Modal title-->
 															<!--begin::Close-->
-															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-																<i class="ki-duotone ki-cross fs-1">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
 															</div>
 															<!--end::Close-->
 														</div>
@@ -623,9 +615,7 @@
 									@foreach ($klien as $user1)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-											$tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : null;
-											// $tkh_daftar = DB::table('users')->where('no_kp', $user1->no_kp)->value('users.updated_at');
-											// $tarikh_daftar1 = Carbon::parse($tkh_daftar)->format('d-m-Y');
+											$tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : null;											
 										@endphp
 	
 										<tr>
@@ -657,11 +647,8 @@
 															<h2>Kemaskini Maklumat Akaun Klien</h2>
 															<!--end::Modal title-->
 															<!--begin::Close-->
-															<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-																<i class="ki-duotone ki-cross fs-1">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
 															</div>
 															<!--end::Close-->
 														</div>

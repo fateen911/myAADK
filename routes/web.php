@@ -115,6 +115,7 @@ Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPen
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
 Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class, 'pegawaiKemaskiniKlien'])->name('pegawai-kemaskini-klien');
+Route::post('/pegawai-daerah/daftar/klien', [DaftarPenggunaController::class, 'pegawaiDaftarKlien'])->name('pegawai-daftar-klien');
 
 // PENTADBIR - PENGURUSAN PROFIL KLIEN
 Route::get('/pentadbir/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');

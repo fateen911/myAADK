@@ -31,12 +31,12 @@ class DaftarPenggunaController extends Controller
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
 
         if ($pegawaiDaerah) {
-            $klien = User::where('tahap_pengguna', '=', '2')
-                        ->join('klien', 'users.no_kp', '=', 'klien.no_kp')
+            $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+                        ->select('klien.*', 'users.updated_at as user_updated_at')
                         ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                        ->orderBy('users.updated_at', 'desc')
-                        ->get(['users.*', 'klien.no_tel', 'klien.emel']);
-
+                        ->orderBy('user_updated_at', 'desc')
+                        ->get();
+                        
             return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien'));
         }
     }
@@ -44,47 +44,113 @@ class DaftarPenggunaController extends Controller
     public function pegawaiKemaskiniKlien(Request $request)
     {
         // Retrieve the user by their ID
-        $user = User::find($request->id);
+        $user = User::where('no_kp', $request->no_kp)->first();
 
         // Retrieve the corresponding Klien record by no_kp
-        $klien = Klien::where('no_kp', $user->no_kp)->first();
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
 
+        // Check if klien already registered or not
         if ($user) 
         {
-            // Prepare the data for update
-            $updateData = [
-                'name'  => strtoupper($request->name),
+            // Check if a new password has been generated
+            if ($request->filled('password')) 
+            {
+                $updateData['password'] = Hash::make($request->password);
+
+                // Update in table users
+                $updateData = [
+                    'email' => $request->email,
+                    'updated_at' => now(),
+                ];
+
+                $user->update($updateData);
+
+                // Send email notification if user has an email
+                if ($user->email) 
+                {
+                    Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+                    return redirect()->route(route: 'daftar-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
+                }
+
+                // Check if the Klien exists and update the no_tel and email in table klien
+                if ($klien) 
+                {
+                    $klien->update([
+                        'no_tel' => $request->no_tel,
+                        'emel' => $request->email,
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+            else
+            {
+                // Update in table users
+                $updateData = [
+                    'email' => $request->email,
+                    'updated_at' => now(),
+                ];
+
+                $user->update($updateData);
+
+                // Check if the Klien exists and update the no_tel and email in table klien
+                if ($klien) {
+                    $klien->update([
+                        'no_tel' => $request->no_tel,
+                        'emel' => $request->email,
+                        'updated_at' => now(),
+                    ]);
+                }
+                return redirect()->route(route: 'daftar-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
+            }
+        }
+        else{
+            return redirect()->route(route: 'daftar-klien')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
+        }
+    }
+
+    public function pegawaiDaftarKlien(Request $request)
+    {
+        // Retrieve the user by their ID
+        $user = User::where('no_kp', $request->no_kp)->first();
+
+        // Retrieve the corresponding Klien record by no_kp
+        $klien = Klien::where('no_kp', $request->no_kp)->first();
+        
+        // Check if a password has been provided
+        if (!$request->filled('password')) {
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+        }
+        else
+        {
+            $createData = [
+                'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
+                'tahap_pengguna' => 2,   // Set default user level
+                'status' => 0,           // Set default status
+                'password' => Hash::make($request->password),
+                'created_at' => now(),
                 'updated_at' => now(),
             ];
 
-            // Check if a new password has been provided
-            if ($request->filled('password')) {
-                $updateData['password'] = Hash::make($request->password);
+            // Create the new user
+            $user = User::create($createData);
+        
+            // Update in table klien
+            $klien->update([
+                'no_tel' => $request->no_tel,
+                'emel' => $request->email,
+                'updated_at' => now(),
+            ]);
+            
+            if ($request->email){
+                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->password));
+                return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
             }
-
-            // Update user details
-            $user->update($updateData);
-
-            // Send email notification if password was updated and user has an email
-            if ($request->filled('password') && $user->email) {
-                Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
+            else{
+                return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
             }
-
-            // Check if the Klien exists and update the no_tel and email
-            if ($klien) {
-                $klien->update([
-                    'no_tel' => $request->no_tel,
-                    'emel' => $request->email,
-                    'updated_at' => now(),
-                ]);
-            }
-
-            return redirect()->route('daftar-klien')->with('message', 'Akaun pengguna ' . $request->name . ' telah dikemaskini. Notifikasi e-mel telah dihantar kepada pemohon.');
         } 
-
-        return redirect()->route('daftar-klien')->with('error', 'Sila semak maklumat yang dimasukkan.');
     }
 
     // PENTADBIR
