@@ -17,6 +17,8 @@
     <!-- Include Select2 JS from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="/assets/css/customAADK.css">
+    <!-- Mobile view -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -108,7 +110,7 @@
                         <div class="fv-row mb-8">
                             <!--begin::Input-->
                             <label class="required form-label">No. Kad Pengenalan (Tanpa '-')</label>
-                            <input type="number" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" required/>
+                            <input type="text" placeholder="No. Kad Pengenalan" name="no_kp" autocomplete="off" class="form-control" maxlength="12" onkeypress="return isNumberKey(event)" required/>
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-8">
@@ -155,3 +157,17 @@
 </body>
 <!--end::Body-->
 </html>
+<script>
+    function isNumberKey(evt) {
+        // Get the ASCII code of the key pressed
+        var charCode = evt.which ? evt.which : evt.keyCode;
+
+        // Allow only numbers (0-9), and prevent others
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+
+        // If the character is a valid number, allow it
+        return true;
+    }
+</script>
