@@ -186,7 +186,7 @@
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="number" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 601134789594" value="{{$program->no_tel_dihubungi}}" required/>
+                                                <input type="text" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 601134789594" value="{{$program->no_tel_dihubungi}}" maxlength="11" onkeypress="return isNumberKey(event)" required/>
                                             </div>
                                         </div>
 
@@ -275,6 +275,21 @@
         //     var content_2 = document.getElementById('ql-kt_docs_quill_basic_2').children[0].innerHTML;
         //     document.getElementById('catatan').value = content_2;
         // };
+    </script>
+
+    <script>
+        function isNumberKey(evt) {
+            // Get the ASCII code of the key pressed
+            var charCode = evt.which ? evt.which : evt.keyCode;
+
+            // Allow only numbers (0-9), and prevent others
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+
+            // If the character is a valid number, allow it
+            return true;
+        }
     </script>
 
     <script>
