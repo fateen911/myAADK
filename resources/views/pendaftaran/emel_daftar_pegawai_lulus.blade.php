@@ -6,9 +6,9 @@
     <p>Tuan/Puan,</p>
     <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
     <br>
-    <p><b>Nama Pegawai :</b> {{strtoupper($nama)}}</p>
-    <p><b>No Kad Pengenalan :</b> {{$no_kp}}
-    <p><b>Kata Laluan :</b> {{$password}}
+    <p style="padding-top: 10px"><b>Nama Pegawai :</b> {{strtoupper($nama)}}</p>
+    <p><b>No. Kad Pengenalan :</b> {{$no_kp}}
+    <p style="padding-bottom: 10px;"><b>Kata Laluan :</b> {{$password}}
     <p>Sila klik pada pautan yang diberikan untuk mengesahkan emel anda dan log masuk ke dalam sistem.
         @component('mail::button', ['url' => $verificationUrl])
         @endcomponent
