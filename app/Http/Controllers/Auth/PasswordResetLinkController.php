@@ -66,7 +66,8 @@ class PasswordResetLinkController extends Controller
             } else {
                 return redirect()->back()->with('failed', 'E-mel pengguna tersebut tidak dijumpai dalam sistem.');
             }
-        } else {
+        } 
+        else {
             return view('auth.challenge-form');
         }
     }

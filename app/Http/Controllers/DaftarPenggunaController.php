@@ -468,6 +468,7 @@ class DaftarPenggunaController extends Controller
     //     return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
     // }
 
+
     public function daftarPegawai(Request $request)
     {
         // Combine email name and domain
