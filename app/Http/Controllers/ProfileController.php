@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Klien;
 
 class ProfileController extends Controller
 {
@@ -44,14 +45,12 @@ class ProfileController extends Controller
             if ($request->email !== $user->email) {
                 // Validate email uniqueness
                 $request->validate([
-                    'email' => 'required|email|unique:users,email',
+                    'email' => 'nullable|string',
                 ]);
                 
                 User::where('no_kp',Auth::user()->no_kp)
                 ->update([
                     'gambar_profil' => $filename,
-                    'name' => $request->name,
-                    'no_kp' => $request->no_kp,
                     $user->email => $request->email,
                 ]);
             }
@@ -59,8 +58,6 @@ class ProfileController extends Controller
                 User::where('no_kp',Auth::user()->no_kp)
                 ->update([
                     'gambar_profil' => $filename,
-                    'name' => $request->name,
-                    'no_kp' => $request->no_kp,
                 ]);
             }
         }
@@ -68,24 +65,22 @@ class ProfileController extends Controller
             if ($request->email !== $user->email) {
                 // Validate email uniqueness
                 $request->validate([
-                    'email' => 'required|email|unique:users,email',
+                    'email' => 'nullable|string',
                 ]);
                 
                 User::where('no_kp',Auth::user()->no_kp)
                 ->update([
-                    'name' => $request->name,
-                    'no_kp' => $request->no_kp,
                     'email' => $request->email,
                 ]);
             }
-            else{
+        }
 
-                User::where('no_kp',Auth::user()->no_kp)
+        if($user->tahap_pengguna == 2 && $request->email !== $user->email)
+        {
+            Klien::where('no_kp',Auth::user()->no_kp)
                 ->update([
-                    'name' => $request->name,
-                    'no_kp' => $request->no_kp,
+                    'emel' => $request->email,
                 ]);
-            }
         }
         
         return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');

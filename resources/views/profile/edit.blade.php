@@ -27,6 +27,17 @@
         .input-group input:focus + .toggle-password {
             z-index: 11; /* Ensure the icon remains on top even when typing */
         }
+
+        input.form-control.form-control-solid.custom-form {
+            background-color: #e0e0e0;
+            color: #45505b;
+        }
+
+        input.form-control.form-control-solid:focus.custom-form {
+            background-color: #d0d0d0;
+            color: #333333;
+            box-shadow: none;
+        }
     </style>
 
     <!--begin::Page title-->
@@ -75,107 +86,161 @@
                     <form method="post" action="{{ route('profile.update') }}" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
-                        <!--begin::Card body-->
-                        <div class="card-body border-top p-9">
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-semibold fs-6">Gambar Profil</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/default.png')">
-                                        <!--begin::Preview existing avatar-->
-                                        @if(Auth::user()->gambar_profil !== null)
-                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/gambar_profil/{{$user->gambar_profil}}')"></div>
-                                        @else
-                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/default.png)"></div>
-                                        @endif
-                                        <!--end::Preview existing avatar-->
-                                        <!--begin::Label-->
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                                            <i class="ki-duotone ki-pencil fs-7">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <!--begin::Inputs-->
-                                            <input type="file" name="gambar_profil" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="gambar_profil" />
-                                            <!--end::Inputs-->
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                                            <i class="ki-duotone ki-cross fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                                            <i class="ki-duotone ki-cross fs-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </span>
-                                        <!--end::Remove-->
+
+                        @if(Auth::user()->tahap_pengguna == 2)
+                            {{-- KLIEN --}}
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Nama Penuh</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nama Penuh" value="{{ $user->name }}" readonly/>
                                     </div>
-                                    <!--end::Image input-->
-                                    <!--begin::Hint-->
-                                    <div class="form-text">Format fail yang dibenarkan untuk dimuat naik: png, jpg, jpeg.</div>
-                                    <!--end::Hint-->
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Nama Penuh</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nama Penuh" value="{{ $user->name }}"/>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">No. Kad Pengenalan</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="number" name="no_kp" class="form-control form-control-lg form-control-solid" placeholder="No Kad Pengenalan" value="{{ $user->no_kp }}" inputmode="numeric" readonly/>
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">No. Kad Pengenalan
-                                    <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
-                                        <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span> 
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="number" name="no_kp" class="form-control form-control-lg form-control-solid" placeholder="No Kad Pengenalan" value="{{ $user->no_kp }}" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" maxlength="12" required/>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">E-mel</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="email" name="email" class="form-control form-control-lg form-control-solid custom-form" placeholder="Emel" value="{{ $user->email }}" />
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
+                                <!--end::Input group-->
                             </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">E-mel</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Emel" value="{{ $user->email }}" />
+                            <!--end::Card body-->
+                        @else
+                            {{-- PEGAWAI --}}
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Gambar Profil</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/default.png')">
+                                            <!--begin::Preview existing avatar-->
+                                            @if(Auth::user()->gambar_profil !== null)
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/gambar_profil/{{$user->gambar_profil}}')"></div>
+                                            @else
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/default.png)"></div>
+                                            @endif
+                                            <!--end::Preview existing avatar-->
+                                            <!--begin::Label-->
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                <i class="ki-duotone ki-pencil fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                                <!--begin::Inputs-->
+                                                <input type="file" name="gambar_profil" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="gambar_profil" />
+                                                <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                <i class="ki-duotone ki-cross fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                <i class="ki-duotone ki-cross fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                        <!--begin::Hint-->
+                                        <div class="form-text">Format fail yang dibenarkan untuk dimuat naik: png, jpg, jpeg.</div>
+                                        <!--end::Hint-->
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Nama Penuh</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Nama Penuh" value="{{ $user->name }}" readonly/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">No. Kad Pengenalan</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="number" name="no_kp" class="form-control form-control-lg form-control-solid" placeholder="No Kad Pengenalan" value="{{ $user->no_kp }}" inputmode="numeric" readonly/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">Peranan</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        @php
+                                            $peranan = DB::table('tahap_pengguna')->where('id', $user->tahap_pengguna)->value('peranan');
+                                        @endphp
+                                        <input type="text" name="peranan" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $peranan }}" readonly/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">E-mel</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Emel" value="{{ $user->email }}" readonly/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
                             </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Card body-->
+                            <!--end::Card body-->
+                        @endif
+
 
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -209,17 +274,10 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Semasa</span>
-                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip1">
-                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
                                     <div class="input-group">
-                                        <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Kata Laluan Semasa" id="currentPassword" />
+                                        <input type="password" name="current_password" class="form-control form-control-lg form-control-solid custom-form" placeholder="Kata Laluan Semasa" id="currentPassword" />
                                         <span class="toggle-password" onclick="togglePassword('currentPassword')">
                                             <i class="fa fa-eye-slash eye-icon"></i>
                                         </span>
@@ -231,17 +289,10 @@
                             <div class="row mb-6">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Kata Laluan Baharu</span>
-                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip2">
-                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
                                     <div class="input-group">
-                                        <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="Kata Laluan Baharu" id="newPassword"/>
+                                        <input type="password" name="password" class="form-control form-control-lg form-control-solid custom-form" placeholder="Kata Laluan Baharu" id="newPassword"/>
                                         <span class="toggle-password" onclick="togglePassword('newPassword')">
                                             <i class="fa fa-eye-slash eye-icon"></i>
                                         </span>
@@ -272,17 +323,10 @@
                             <div class="row">
                                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                     <span class="required">Sahkan Kata Laluan Baharu</span>
-                                    {{-- <span class="ms-1" data-bs-toggle="tooltip" id="tooltip3">
-                                        <i class="ki-duotone ki-information-5 text-gray-500 fs-7">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                            <span class="path3"></span>
-                                        </i>
-                                    </span> --}}
                                 </label>
                                 <div class="col-lg-8 fv-row position-relative">
                                     <div class="input-group">
-                                        <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
+                                        <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid custom-form" placeholder="Sahkan Kata Laluan Baharu" id="confirmPassword"/>
                                         <span class="toggle-password" onclick="togglePassword('confirmPassword')">
                                             <i class="fa fa-eye-slash eye-icon"></i>
                                         </span>
