@@ -8,6 +8,7 @@ use App\Models\DaerahPejabat;
 use App\Models\KategoriProgram;
 use App\Models\Klien;
 use App\Models\Negeri;
+use App\Models\NegeriPejabat;
 use App\Models\Pegawai;
 use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
@@ -117,7 +118,7 @@ class PengurusanProgController extends Controller
         // Loop through each pengesahan to fetch negeri and daerah
         foreach ($pengesahan as $item) {
             // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-            $negeri = Negeri::where('id', $item->klien->negeri_pejabat)->first();
+            $negeri = NegeriPejabat::where('id', $item->klien->negeri_pejabat)->first();
             $daerah = DaerahPejabat::where('kod', $item->klien->daerah_pejabat)->first();
 
             // Add the negeri and daerah information to each pengesahan
@@ -771,7 +772,7 @@ class PengurusanProgController extends Controller
 
         if ($program) {
             if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
-                $negeri = Negeri::all();
+                $negeri = NegeriPejabat::all();
                 return view('pengurusan_program.hebahan.papar_hebahan_semua', compact('program','negeri'));
             }
             else if ($user->tahap_pengguna == '4') {//pegawai negeri
@@ -788,7 +789,7 @@ class PengurusanProgController extends Controller
 
     public function paparSms($id)
     {
-        $negeri = Negeri::all();
+        $negeri = NegeriPejabat::all();
         $program = Program::with('kategori')->find($id);
         if ($program) {
             return view('pengurusan_program.hebahan.papar_sms', compact('program','negeri'));
@@ -799,7 +800,7 @@ class PengurusanProgController extends Controller
 
     public function paparEmel($id)
     {
-        $negeri = Negeri::all();
+        $negeri = NegeriPejabat::all();
         $user_id = Auth::id();
         $user = User::find($user_id);
         $program = Program::with('kategori')->find($id);
@@ -822,7 +823,7 @@ class PengurusanProgController extends Controller
 
     public function paparTelegram($id)
     {
-        $negeri = Negeri::all();
+        $negeri = NegeriPejabat::all();
         $program = Program::with('kategori')->find($id);
         if ($program) {
             return view('pengurusan_program.hebahan.papar_telegram', compact('program','negeri'));
@@ -987,7 +988,7 @@ class PengurusanProgController extends Controller
         // Loop through each pengesahan to fetch negeri and daerah
         foreach ($pengesahan_data as $item) {
             // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-            $negeri = Negeri::where('id', $item->klien->negeri_pejabat)->first();
+            $negeri = NegeriPejabat::where('id', $item->klien->negeri_pejabat)->first();
             $daerah = DaerahPejabat::where('kod', $item->klien->daerah_pejabat)->first();
 
             // Add the negeri and daerah information to each pengesahan

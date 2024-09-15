@@ -82,18 +82,14 @@
                 method: 'GET',
                 success: function(response) {
                     let rows = '';
-                    let emel = '';
                     $.each(response, function(index, klien) {
-                        if(klien.emel == null){
-                            emel = 'Tiada';
-                        }
-                        else{
-                            emel = klien.emel;
-                        }
+                        let emel = klien.emel ? klien.emel : 'TIADA';  // Handle null
+                        let no_tel = klien.no_tel ? klien.no_tel : 'TIADA';  // Handle null
+
                         rows += '<tr>';
                         rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + klien.id + '" multiple></td>';
                         rows += '<td class="text-uppercase">' + klien.nama + '</td>';
-                        rows += '<td class="text-uppercase">' + klien.no_tel + '</td>';
+                        rows += '<td class="text-uppercase">' + no_tel + '</td>';
                         rows += '<td>' + emel + '</td>';
                         rows += '</tr>';
                     });
@@ -138,18 +134,14 @@
             },
             success: function(response) {
                 let rows = '';
-                let emel = '';
                 $.each(response, function(index, filter) {
-                    if(filter.emel == null){
-                        emel = 'Tiada';
-                    }
-                    else{
-                        emel = filter.emel;
-                    }
+                    let emel = filter.emel ? filter.emel : 'TIADA';  // Handle null
+                    let no_tel = filter.no_tel ? filter.no_tel : 'TIADA';  // Handle null
+
                     rows += '<tr>';
                     rows += '<td class="text-center"><input type="checkbox" name="pilihan[]" value="' + filter.id + '"></td>';
                     rows += '<td class="text-uppercase">' + filter.nama + '</td>';
-                    rows += '<td class="text-uppercase">' + filter.no_tel + '</td>';
+                    rows += '<td class="text-uppercase">' + no_tel + '</td>';
                     rows += '<td>' + emel + '</td>';
                     rows += '</tr>';
                 });
