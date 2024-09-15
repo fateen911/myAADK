@@ -32,13 +32,13 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
 
-    Route::get('/view/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'showChallengeForm'])->name('password.challenge');
+    // Route::get('/view/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'showChallengeForm'])->name('password.challenge');
 
-    Route::post('/check/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'checkChallengeAnswer'])->name('check.challenge.form');
+    // Route::post('/check/forgot-password/challenge', [PasswordResetChallengeFormController::class, 'checkChallengeAnswer'])->name('check.challenge.form');
 
-    Route::get('/reset-password-challenge', [PasswordResetChallengeFormController::class, 'viewResetPasswordChallenge'])->name('reset.password.challenge');
+    // Route::get('/reset-password-challenge', [PasswordResetChallengeFormController::class, 'viewResetPasswordChallenge'])->name('reset.password.challenge');
 
-    Route::post('/store/reset-password/challenge', [PasswordResetChallengeFormController::class, 'storeResetPasswordChallenge'])->name('store.reset.password.challenge');
+    // Route::post('/store/reset-password/challenge', [PasswordResetChallengeFormController::class, 'storeResetPasswordChallenge'])->name('store.reset.password.challenge');
 
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
                 ->name('password.reset');

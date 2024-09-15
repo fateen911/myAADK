@@ -63,12 +63,14 @@ class PasswordResetLinkController extends Controller
                 // Send the email with the reset link and token
                 Mail::to($emel)->send(new SetSemulaKataLaluan($token));
                 return redirect()->back()->with('success', 'E-mel tetapan semula kata laluan telah berjaya dihantar.');
-            } else {
+            } 
+            else {
                 return redirect()->back()->with('failed', 'E-mel pengguna tersebut tidak dijumpai dalam sistem.');
             }
         } 
         else {
-            return view('auth.challenge-form');
+            return redirect()->back()->with('failed', 'Sila hubungi Pentadbir Sistem atau Pegawai Daerah untuk jana kata laluan baharu.');
+            // return view('auth.challenge-form');
         }
     }
 }
