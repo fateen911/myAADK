@@ -115,7 +115,7 @@
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td class="d-flex justify-content-center">
+                                                <td style="text-align: center">
                                                     @if ($response->status == 'Selesai')
                                                         <span class="badge text-white" style="background-color: cadetblue; padding:10px;">{{ strtoupper($response->status) }}</span>
                                                     @else

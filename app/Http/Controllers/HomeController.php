@@ -509,7 +509,6 @@ class HomeController extends Controller
                                         })
                                         ->where(function ($query) use ($sixMonthsAgo) {
                                             $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                                ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
                                                 ->orWhere(function ($query) use ($sixMonthsAgo) {
                                                     $query->whereNotNull('kk.klien_id')
                                                         ->where('kk.updated_at', '<=', $sixMonthsAgo);

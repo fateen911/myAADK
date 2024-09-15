@@ -177,7 +177,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('maklum.balas.kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan') }}';">
                             <span class="menu-icon">
@@ -640,7 +640,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.brpp') }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.brpp') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('maklum.balas.kepulihan.brpp') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.brpp') }}';">
                             <span class="menu-icon">
@@ -656,39 +656,6 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Soal Selidik Kepulihan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.brpp') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan.brpp')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklum Balas</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -874,7 +841,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('maklum.balas.kepulihan.negeri') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.negeri') }}';">
                             <span class="menu-icon">
@@ -890,39 +857,6 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Soal Selidik Kepulihan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan.negeri')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklum Balas</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -1138,7 +1072,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('maklum.balas.kepulihan.daerah') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.daerah') }}';">
                             <span class="menu-icon">
@@ -1154,39 +1088,6 @@
                         </a>
                         <!--end:Menu link-->
                     </div>
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Soal Selidik Kepulihan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan.daerah')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklum Balas</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div> --}}
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
