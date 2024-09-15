@@ -24,12 +24,12 @@ class FreezeInactiveUsers extends Command
         // Find users who have been inactive for more than 3 months
         $inactiveUsers = User::where('last_active_at', '<', $threeMonthsAgo)
             ->orWhereNull('last_active_at') // Never active users
-            ->where('acc_status', 'ACTIVE') // Only active users
+            ->where('acc_status', 'AKTIF') // Only active users
             ->get();
 
         foreach ($inactiveUsers as $user) {
             // Freeze the user's account by updating their status
-            $user->update(['acc_status' => 'FROZEN']);
+            $user->update(['acc_status' => 'DIBEKUKAN']);
 
             // Log output
             $this->info("User {$user->name} has been frozen due to inactivity.");

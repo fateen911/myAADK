@@ -8,7 +8,7 @@
 
 <head>
 	<!--begin::Vendor Stylesheets(used for this page only)-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -44,7 +44,7 @@
 		}
 
 		.input-group-text {
-			background-color: #f3f3f3; 
+			background-color: #f3f3f3;
 			padding: 0.75rem 0.75rem;
 			margin-left: -1px;
 		}
@@ -121,7 +121,7 @@
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="klien-tab" data-toggle="tab" data-target="#klien" type="button" role="tab" aria-controls="klien" aria-selected="true">Klien AADK</button>
 					</li>
-				</ul>			
+				</ul>
 
 				{{-- Content Navigation Bar --}}
 				<div class="tab-content mt-0" id="myTabContent">
@@ -134,7 +134,7 @@
 								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu serta luluskan permohonan pendaftaran sebagai pengguna sistem.</small>
 							</div>
 						</div>
-						
+
 						<!--begin::Card body-->
 						<div class="body">
 							<!--begin::Table-->
@@ -156,7 +156,7 @@
 											$negeriB = $user3['negeri_bertugas'] ? DB::table('senarai_negeri_pejabat')->where('negeri_id', $user3['negeri_bertugas'])->value('negeri') : null;
 											$daerahB = $user3['daerah_bertugas'] ? DB::table('senarai_daerah_pejabat')->where('kod', $user3['daerah_bertugas'])->value('daerah') : null;
 										@endphp
-	
+
 										<tr>
 											<td>{{ $user3->nama }}</td>
 											<td>{{ $user3->no_kp }}</td>
@@ -164,7 +164,7 @@
 											<td>{{ $peranan }}</td>
 											<td>
 												@if ($negeriB !== null)
-        											{{ $negeriB }} 
+        											{{ $negeriB }}
 													@if ($daerahB !== null)
 														({{ $daerahB }})
 													@endif
@@ -178,9 +178,9 @@
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
 													</a>
-												</div>                                                     
+												</div>
 											</td>
-	
+
 											<!--begin::Modal - Permohonan Pegawai-->
 											<div class="modal fade" id="modal_permohonan_pegawai{{$user3->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
@@ -200,13 +200,13 @@
 															<!--end::Close-->
 														</div>
 														<!--end::Modal header-->
-	
+
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
 															<form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $user3->id]) }}" method="post">
 																@csrf
-	
+
 																<input type="hidden" name="id" value="{{ $user3->id }}">
 																<div class="scroll-y me-n7 pe-7" id="modal_permohonan_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_permohonan_pegawai_header" data-kt-scroll-wrappers="#modal_permohonan_pegawai_scroll" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
@@ -237,7 +237,7 @@
 																			<span class="input-group-text">@adk.gov.my</span>
 																			{{-- <input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" /> --}}
 																		</div>
-																	</div>																	
+																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
@@ -284,7 +284,7 @@
 																					<option value="{{ $item1->negeri_id}}" {{$user3->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
 																				@endforeach
 																			</select>
-																		</div>	
+																		</div>
 																	@endif
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -332,21 +332,21 @@
 															<i class="ki-solid ki-cross-circle fs-1"></i>
 														</div>
 													</div>
-										
+
 													<div class="modal-body">
 														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
 															@csrf
 															<!-- Dynamic Rejection Reasons Input -->
 															<div id="dynamicFields">
 																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
-																
+
 																<!-- First input field with only a plus button -->
 																<div class="input-group mb-2 reason-row">
 																	<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Contoh: Sila isi nama seperti kad pengenalan">
 																	<button type="button" class="btn btn-info addField">+</button>
 																</div>
 															</div>
-										
+
 															<!-- Form actions -->
 															<div class="text-center pt-3">
 																<button type="submit" class="btn btn-primary">Hantar</button>
@@ -363,7 +363,7 @@
 							<!--end::Table-->
 						</div>
 						<!--end::Card body-->
-					</div> 
+					</div>
 
 					{{-- PEGAWAI --}}
 					<div class="tab-pane fade" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
@@ -373,16 +373,16 @@
 								<h2>Senarai Keseluruhan Pegawai</h2>
 								<small>Sila klik pada butang "Tambah Pengguna" untuk mendaftar pegawai baharu dan klik pada ikon pensil untuk kemaskini akaun pegawai.</small>
 							</div>
-						
+
 							<!--begin::Card toolbar-->
 							<div class="col-auto">
 								<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
-									<i class="bi bi-plus-circle"></i> &nbsp;Daftar Pegawai 
+									<i class="bi bi-plus-circle"></i> &nbsp;Daftar Pegawai
 								</button>
 							</div>
 							<!--end::Card toolbar-->
 						</div>
-						
+
 						<!--begin::Card body-->
 						<div class="body">
 							<!--begin::Table-->
@@ -406,7 +406,7 @@
 											$negeriB = $user2['negeri_bertugas'] ? DB::table('senarai_negeri_pejabat')->where('negeri_id', $user2['negeri_bertugas'])->value('negeri') : null;
 											$daerahB = $user2['daerah_bertugas'] ? DB::table('senarai_daerah_pejabat')->where('kod', $user2['daerah_bertugas'])->value('daerah') : null;
 										@endphp
-	
+
 										<tr>
 											<td>{{ $user2->name }}</td>
 											<td>{{ $user2->no_kp }}</td>
@@ -414,7 +414,7 @@
 											<td>{{ $peranan }}</td>
 											<td>
 												@if ($negeriB !== null)
-        											{{ $negeriB }} 
+        											{{ $negeriB }}
 													@if ($daerahB !== null)
 														({{ $daerahB }})
 													@endif
@@ -429,9 +429,9 @@
 															<i class="ki-duotone bi bi-pencil fs-3"></i>
 														</span>
 													</a>
-												</div>                                                
+												</div>
 											</td>
-	
+
 											<!--begin::Modal - Kemaskini Pegawai-->
 											<div class="modal fade" id="modal_kemaskini_pegawai{{$user2->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
@@ -450,16 +450,28 @@
 															<!--end::Close-->
 														</div>
 														<!--end::Modal header-->
-	
+
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
 															<form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">
 																@csrf
-	
+
 																<input type="hidden" name="id" value="{{ $user2->id }}">
 																<div class="scroll-y me-n7 pe-7" id="modal_kemaskini_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_kemaskini_pegawai_header" data-kt-scroll-wrappers="#modal_kemaskini_pegawai_scroll" data-kt-scroll-offset="300px">
-																	<!--begin::Input group-->
+                                                                    <!--begin::Input group-->
+                                                                    @php
+                                                                        $status_ak_2 = DB::table('users')->where('id', $user2->users_id)->value('acc_status');
+                                                                    @endphp
+                                                                    <div class="fv-row mb-7">
+                                                                        <label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
+                                                                        <select id="statusAk2" class="form-select form-select-solid custom-select" name="status_ak" required>
+                                                                            <option value="AKTIF" {{ $status_ak_2 == 'AKTIF' ? 'selected' : '' }}>AKTIF</option>
+                                                                            <option value="DIBEKUKAN" {{ $status_ak_2 == 'DIBEKUKAN' ? 'selected' : '' }}>DIBEKUKAN</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <!--end::Input group-->
+                                                                    <!--begin::Input group-->
 																	<div class="fv-row mb-7">
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
 																		<input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$user2->name}}" style="text-transform: uppercase;" required/>
@@ -486,7 +498,7 @@
 																			<input type="text" class="form-control form-control-solid custom-form" id="emel" name="emel" value="{{ explode('@', $user2->email)[0] }}" required/>
 																			<span class="input-group-text">@adk.gov.my</span>
 																		</div>
-																	</div>																	
+																	</div>
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
 																	<div class="fv-row mb-5">
@@ -533,7 +545,7 @@
 																					<option value="{{ $item1->negeri_id}}" {{$user2->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
 																				@endforeach
 																			</select>
-																		</div>	
+																		</div>
 																	@endif
 																	<!--end::Input group-->
 																	<!--begin::Input group-->
@@ -595,7 +607,7 @@
 					<div class="tab-pane fade" id="klien" role="tabpanel" aria-labelledby="klien-tab">
 						<!--begin::Card title-->
 						<div class="header ml-5">
-							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk daftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>	
+							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk daftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
 						</div>
 
 						<!--begin::Card body-->
@@ -615,9 +627,9 @@
 									@foreach ($klien as $user1)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-											$tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : null;											
+											$tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : null;
 										@endphp
-	
+
 										<tr>
 											<td>{{ $user1->nama }}</td>
 											<td>{{ $user1->no_kp }}</td>
@@ -640,9 +652,9 @@
 															</span>
 														</a>
 													@endif
-												</div>                                                
+												</div>
 											</td>
-	
+
 											<!--begin::Modal - Kemaskini Klien-->
 											<div class="modal fade" id="modal_kemaskini_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
 												<!--begin::Modal dialog-->
@@ -661,16 +673,28 @@
 															<!--end::Close-->
 														</div>
 														<!--end::Modal header-->
-	
+
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
 															<form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
 																@csrf
-	
+
 																<input type="hidden" name="id" value="{{ $user1->id }}">
 																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
-																	<!--begin::Input group-->
+                                                                    <!--begin::Input group-->
+                                                                    @php
+                                                                        $status_ak_1 = DB::table('users')->where('no_kp', $user1->no_kp)->value('acc_status');
+                                                                    @endphp
+                                                                    <div class="fv-row mb-7">
+                                                                        <label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
+                                                                        <select id="statusAk2" class="form-select form-select-solid custom-select" name="status_ak" required>
+                                                                            <option value="AKTIF" {{ $status_ak_1 == 'AKTIF' ? 'selected' : '' }}>AKTIF</option>
+                                                                            <option value="DIBEKUKAN" {{ $status_ak_1 == 'DIBEKUKAN' ? 'selected' : '' }}>DIBEKUKAN</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <!--end::Input group-->
+                                                                    <!--begin::Input group-->
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
 																		<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->nama}}" readonly/>
@@ -720,7 +744,7 @@
 																	</div>
 																	<!--end::Input group-->
 																</div>
-	
+
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
 																	<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
@@ -761,13 +785,13 @@
 															<!--end::Close-->
 														</div>
 														<!--end::Modal header-->
-	
+
 														<!--begin::Modal body-->
 														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
 															<!--begin::Form-->
 															<form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
 																@csrf
-	
+
 																<input type="hidden" name="id" value="{{ $user1->id }}">
 																<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
 																	<!--begin::Input group-->
@@ -832,11 +856,11 @@
 																	</div>
 																	<!--end::Input group-->
 																</div>
-	
+
 																<!--begin::Actions-->
 																<div class="text-center pt-15">
 																	<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-	
+
 																	<button type="submit" id="daftarBtn" class="btn btn-primary">
 																		<span class="indicator-label">Daftar</span>
 																		<span class="indicator-progress">Sila tunggu...
@@ -861,7 +885,7 @@
 							<!--end::Table-->
 						</div>
 						<!--end::Card body-->
-					</div> 
+					</div>
 				</div>
 
 
@@ -1039,10 +1063,10 @@
 			}
 		});
     </script>
-	
+
 	{{-- Popup alert success/error message --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () 
+        document.addEventListener('DOMContentLoaded', function ()
         {
             @if(session('success'))
                 Swal.fire({
@@ -1090,24 +1114,24 @@
 			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			const numbers = '0123456789';
 			const symbols = '!@#$%^&*()-_+=<>?';
-			
+
 			const allCharacters = lowercase + uppercase + numbers + symbols;
 			let password = '';
-			
+
 			// Ensure the password contains at least one character from each category
 			password += lowercase[Math.floor(Math.random() * lowercase.length)];
 			password += uppercase[Math.floor(Math.random() * uppercase.length)];
 			password += numbers[Math.floor(Math.random() * numbers.length)];
 			password += symbols[Math.floor(Math.random() * symbols.length)];
-			
+
 			// Fill the remaining length of the password with random characters from all categories
 			for (let i = 4; i < length; i++) {
 				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
 			}
-			
+
 			// Shuffle the password to ensure a random order
 			password = password.split('').sort(() => 0.5 - Math.random()).join('');
-			
+
 			document.getElementById(inputId).value = password;
 		}
 
@@ -1117,21 +1141,21 @@
 			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			const numbers = '0123456789';
 			const symbols = '!@#$%^&*()-_+=<>?';
-			
+
 			const allCharacters = lowercase + uppercase + numbers + symbols;
 			let password = '';
-			
+
 			password += lowercase[Math.floor(Math.random() * lowercase.length)];
 			password += uppercase[Math.floor(Math.random() * uppercase.length)];
 			password += numbers[Math.floor(Math.random() * numbers.length)];
 			password += symbols[Math.floor(Math.random() * symbols.length)];
-			
+
 			for (let i = 4; i < length; i++) {
 				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
 			}
-			
+
 			password = password.split('').sort(() => 0.5 - Math.random()).join('');
-			
+
 			document.getElementById(inputId).value = password;
 		}
 
@@ -1141,24 +1165,24 @@
 			const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			const numbers = '0123456789';
 			const symbols = '!@#$%^&*()-_+=<>?';
-			
+
 			const allCharacters = lowercase + uppercase + numbers + symbols;
 			let password = '';
-			
+
 			password += lowercase[Math.floor(Math.random() * lowercase.length)];
 			password += uppercase[Math.floor(Math.random() * uppercase.length)];
 			password += numbers[Math.floor(Math.random() * numbers.length)];
 			password += symbols[Math.floor(Math.random() * symbols.length)];
-			
+
 			for (let i = 4; i < length; i++) {
 				password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
 			}
-			
+
 			password = password.split('').sort(() => 0.5 - Math.random()).join('');
-			
+
 			document.getElementById(inputId).value = password;
 		}
-	</script>	
+	</script>
 
 	{{-- Display field bertugas based on peranan and filter daerah based on negeri --}}
 	<script>
@@ -1168,7 +1192,7 @@
 			const daerahField = document.getElementById('daftar_daerah_field');
 			const negeriSelect = document.getElementById('daftar_negeri_bertugas');
 			const daerahSelect = document.getElementById('daftar_daerah_bertugas');
-		
+
 			// Function to toggle visibility of fields based on peranan
 			function toggleFields() {
 				const peranan = parseInt(perananField.value);
@@ -1186,7 +1210,7 @@
 					daerahField.style.display = 'none';
 				}
 			}
-		
+
 			// Function to filter daerah options based on selected negeri and kod_daerah_pejabat
 			function filterDaerahOptions() {
 				const selectedNegeriId = negeriSelect.options[negeriSelect.selectedIndex].getAttribute('data-id');
@@ -1197,13 +1221,13 @@
 						option.style.display = 'none';
 					}
 				});
-				daerahSelect.value = ''; 
+				daerahSelect.value = '';
 			}
-		
+
 			// Event listeners
 			perananField.addEventListener('change', toggleFields);
 			negeriSelect.addEventListener('change', filterDaerahOptions);
-		
+
 			// Initial setup
 			toggleFields();
 			filterDaerahOptions();
@@ -1308,7 +1332,7 @@
 				rows.forEach((row, index) => {
 					const addButton = row.querySelector('.addField');
 					const removeButton = row.querySelector('.removeField');
-					
+
 					if (index === rows.length - 1) {
 						addButton.style.display = 'inline-block';
 						if (rows.length > 1) {
@@ -1345,7 +1369,7 @@
 						<button type="button" class="btn btn-info addField">+</button>
 						<button type="button" class="btn btn-danger removeField">-</button>
 					`;
-					console.log(newField);  
+					console.log(newField);
 					dynamicFieldsContainer.appendChild(newField);
 					updateButtons();
 				}

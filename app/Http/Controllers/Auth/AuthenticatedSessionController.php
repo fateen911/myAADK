@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         // Update last_active_at field for the authenticated user
         $user = Auth::user();
         $user->update([
-            'acc_status' => 'ACTIVE',
+            'acc_status' => 'AKTIF',
             'last_active_at' => now(),
         ]);
 

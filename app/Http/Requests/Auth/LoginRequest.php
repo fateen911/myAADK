@@ -60,7 +60,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if ($user->acc_status == 'FROZEN') {
+        if ($user->acc_status == 'DIBEKUKAN') {
             throw ValidationException::withMessages([
                 'no_kp' => ['Akaun anda telah dibekukan. Sila hubungi pejabat berdekatan.'],
             ]);
