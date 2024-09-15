@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command('program:update-status')->everyMinute();
+Schedule::command('users:freeze-inactive')->daily();
