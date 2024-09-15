@@ -316,8 +316,6 @@ class ModalKepulihanController extends Controller
                                                     ->orderBy('updated_at', 'desc')
                                                     ->first();
 
-        // dd($latestSessionKeputusan);
-
         // Determine the session to use
         if ($latestSessionKeputusan) {
             $newSession = $latestSessionKeputusan->sesi;
@@ -564,7 +562,6 @@ class ModalKepulihanController extends Controller
             )
             ->where(function ($query) use ($sixMonthsAgo) {
                 $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                    ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
                     ->orWhere(function ($query) use ($sixMonthsAgo) {
                         $query->whereNotNull('kk.klien_id')
                             ->where('kk.updated_at', '<=', $sixMonthsAgo);
@@ -628,7 +625,6 @@ class ModalKepulihanController extends Controller
             )
             ->where(function ($query) use ($sixMonthsAgo) {
                 $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                    ->where('rk.tkh_tamat_pengawasan', '<=', $sixMonthsAgo)
                     ->orWhere(function ($query) use ($sixMonthsAgo) {
                         $query->whereNotNull('kk.klien_id')
                             ->where('kk.updated_at', '<=', $sixMonthsAgo);
@@ -656,8 +652,6 @@ class ModalKepulihanController extends Controller
                     ->where('kk.klien_id', $klien_id)
                     ->orderBy('kk.updated_at', 'desc')
                     ->get();
-
-        // dd($sejarah);
 
         return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah'));
     }

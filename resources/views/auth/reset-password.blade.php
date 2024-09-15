@@ -27,8 +27,14 @@
         </style>
     </head>
 
+    <div class="text-center">
+        <a href="/">
+            <x-application-logo class="w-10 h-10 fill-current text-gray-500" />
+        </a>
+    </div>
+
     <!--begin::Heading-->
-    <div class="text-center mb-10">
+    <div class="text-center">
         <!--begin::Title-->
         <h1 class="text-dark fw-bolder mb-3">Lupa Kata Laluan ?</h1>
         <!--end::Title-->
@@ -46,15 +52,8 @@
         <input type="hidden" name="token" value="{{ $token }}">
         <input type="hidden" name="email" value="{{ $email }}">
 
-        <!-- Email Address -->
-        {{-- <div>
-            <x-input-label for="email" :value="__('Emel')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div> --}}
-
         <!-- Password -->
-        <div class="mt-4">
+        <div>
             <x-input-label for="password" :value="__('Kata Laluan')" />
 
             <div class="relative flex items-center">

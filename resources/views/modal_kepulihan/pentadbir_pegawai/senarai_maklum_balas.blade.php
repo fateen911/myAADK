@@ -92,13 +92,15 @@
                                             <th style="text-align: center; width: 13%;">AADK Daerah & Pusat RPDK</th>
                                             <th style="text-align: center; width: 13%;">AADK Negeri</th>
                                             <th style="text-align: center; width: 12%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 13%;">Status</th> 
+                                            <th style="text-align: center; width: 13%;">Status</th>
+                                            <th style="text-align: center; width: 17%;">Tahap Kepulihan</th>  
                                             <th style="text-align: center; width: 9%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($responses as $response)
                                             @php
+                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
@@ -113,11 +115,24 @@
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td class="d-flex justify-content-center">
+                                                <td style="text-align: center">
                                                     @if ($response->status == 'Selesai')
                                                         <span class="badge text-white" style="background-color: cadetblue; padding:10px;">{{ strtoupper($response->status) }}</span>
                                                     @else
                                                         <span class="badge text-white" style="background-color: cornflowerblue; padding:10px;">{{ strtoupper($response->status) }}</span>
+                                                    @endif
+                                                </td>
+                                                <td style="text-align: center">   
+                                                    @if ($response->tahap_kepulihan_id)
+                                                        @if ($response->tahap_kepulihan_id == 1)
+                                                            <badge class="badge text-white" style="background-color: red; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                        @elseif ($response->tahap_kepulihan_id == 2)
+                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                        @elseif ($response->tahap_kepulihan_id == 3)
+                                                            <badge class="badge text-white bg-warning" style="padding: 10px;">{{ $tahap_kepulihan }}</badge>   
+                                                        @else
+                                                            <badge class="badge text-white" style="background-color: green; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                        @endif
                                                     @endif
                                                 </td>
                                                 <td style="text-align: center;">
