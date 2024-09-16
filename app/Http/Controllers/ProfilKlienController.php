@@ -1028,7 +1028,7 @@ class ProfilKlienController extends Controller
                 'daerah_klien'              => 'required|string|max:255',
                 'negeri_klien'              => 'required|string|max:255',
                 'tahap_pendidikan'          => 'required|string|max:255',
-                'status_kesihatan_mental'   => 'required|string|max:255',
+                'penyakit'   => 'required|string|max:255',
                 'status_oku'                => 'required|string|max:255',
             ]);
         } 
@@ -1046,7 +1046,7 @@ class ProfilKlienController extends Controller
             'daerah'                   => $validatedData['daerah_klien'],
             'negeri'                   => $validatedData['negeri_klien'],
             'tahap_pendidikan'         => $validatedData['tahap_pendidikan'],
-            'status_kesihatan_mental'  => $validatedData['status_kesihatan_mental'],
+            'penyakit'  => $validatedData['penyakit'],
             'status_oku'               => $validatedData['status_oku'],
         ];
 
@@ -1443,6 +1443,8 @@ class ProfilKlienController extends Controller
         $namaKerja = NamaPekerjaan::all();
         $majikan = NamaMajikan::all();
 
+        // dd($bidangKerja, $namaKerja);
+
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
@@ -1512,7 +1514,7 @@ class ProfilKlienController extends Controller
             'jantina', 
             'agama', 
             'bangsa', 
-            'status_kesihatan_mental', 
+            'penyakit', 
             'status_oku', 
             'skor_ccri'
         ])->toArray();

@@ -994,6 +994,8 @@
                                             <option value="PENGANGGUR" {{ $pekerjaan->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                             <option value="PELAJAR" {{ $pekerjaan->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
                                             <option value="PESAKIT" {{ $pekerjaan->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
+                                            <option value="SURI RUMAH TANGGA" {{ $butiranKlien->alasan_tidak_kerja == 'SURI RUMAH TANGGA' ? 'selected' : '' }}>SURI RUMAH TANGGA</option>
+                                            <option value="LAIN-LAIN" {{ $butiranKlien->alasan_tidak_kerja == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                         </select>
                                     </div>
                                 </div>

@@ -753,9 +753,9 @@
                                     </div>
                                     <div class="col-md-8">
                                         @php
-                                            $bidangKerja = DB::table('senarai_bidang_pekerjaan')->where('id', $butiranKlien->bidang_kerja)->value('senarai_bidang_pekerjaan.bidang');
+                                            $bidangPekerjaan = DB::table('senarai_bidang_pekerjaan')->where('id', $butiranKlien->bidang_kerja)->value('senarai_bidang_pekerjaan.bidang');
                                         @endphp
-                                        <span class="fs-6 form-control-plaintext">{{$bidangKerja}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$bidangPekerjaan}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -768,9 +768,9 @@
                                     </div>
                                     <div class="col-md-8">
                                         @php
-                                            $namaKerja = DB::table('senarai_pekerjaan')->where('id', $butiranKlien->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
+                                            $namaPekerjaan = DB::table('senarai_pekerjaan')->where('id', $butiranKlien->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
                                         @endphp
-                                        <span class="fs-6 form-control-plaintext">{{$namaKerja}}</span>
+                                        <span class="fs-6 form-control-plaintext">{{$namaPekerjaan}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -895,7 +895,7 @@
                             <div id="tidakBekerjaFields" style="display:none;">
                                 <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
-                                        <label class="fs-6 fw-semibold form-label mt-3">Status Tidak Bekerja</label>
+                                        <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                     </div>
                                     <div class="col-md-8">
                                         <span class="fs-6 form-control-plaintext">{{$butiranKlien->alasan_tidak_kerja}}</span>
@@ -960,6 +960,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="true" >
+                                                            <option>Pilih Bidang Pekerjaan</option>
                                                             @foreach ($bidangKerja as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
                                                             @endforeach
@@ -972,8 +973,9 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="true" >
-                                                            @foreach ($namaKerja as $item)
-                                                                <option value="{{ $item->id }}" {{ $butiranKlien->nama_kerja == $item->id ? 'selected' : '' }}>{{ $item->pekerjaan }}</option>
+                                                            <option>Pilih Nama Pekerjaan</option>
+                                                            @foreach ($namaKerja as $item2)
+                                                                <option value="{{ $item2->id }}" {{ $butiranKlien->nama_kerja == $item2->id ? 'selected' : '' }}>{{ $item2->pekerjaan }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -1012,6 +1014,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="true" >
+                                                            <option>Pilih Nama Majikan</option>
                                                             @foreach ($majikan as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
                                                             @endforeach
@@ -1090,6 +1093,8 @@
                                                             <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                                             <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
                                                             <option value="PESAKIT" {{ $butiranKlien->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
+                                                            <option value="SURI RUMAH TANGGA" {{ $butiranKlien->alasan_tidak_kerja == 'SURI RUMAH TANGGA' ? 'selected' : '' }}>SURI RUMAH TANGGA</option>
+                                                            <option value="LAIN-LAIN" {{ $butiranKlien->alasan_tidak_kerja == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                         </select>
                                                     </div>
                                                 </div>
