@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('agama');
             $table->string('bangsa');
             $table->string('tahap_pendidikan')->nullable();
-            $table->string('status_kesihatan_mental')->nullable();
+            $table->string('penyakit')->nullable();
             $table->string('status_oku')->nullable();
             $table->double('skor_ccri')->nullable();
             $table->string('daerah_pejabat')->nullable();

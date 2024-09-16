@@ -321,7 +321,10 @@
                                 </div>
                                 <div class="col-md-7">
                                     <!--begin::Input-->
-                                    <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
+                                    @php
+                                        $penyakitKlien = DB::table('senarai_penyakit')->where('id', $butiranKlien->penyakit)->value('senarai_penyakit.penyakit');
+                                    @endphp
+                                    <span class="fs-6 form-control-plaintext">{{$penyakitKlien}}</span>
                                     <!--end::Input-->
                                 </div>
                             </div>
@@ -580,7 +583,10 @@
                                                     <label class="fs-6 fw-semibold form-label mt-3">Penyakit</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$butiranKlien->status_kesihatan_mental}}</span>
+                                                    @php
+                                                        $penyakitKlien = DB::table('senarai_penyakit')->where('id', $butiranKlien->penyakit)->value('senarai_penyakit.penyakit');
+                                                    @endphp
+                                                    <span id="penyakit" class="fs-6 form-control-plaintext">{{$penyakitKlien}}</span>
                                                 </div>
                                             </div>
                                             <div class="row fv-row">
@@ -746,7 +752,10 @@
                                         </label>
                                     </div>
                                     <div class="col-md-8">
-                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->bidang_kerja}}</span>
+                                        @php
+                                            $bidangKerja = DB::table('senarai_bidang_pekerjaan')->where('id', $butiranKlien->bidang_kerja)->value('senarai_bidang_pekerjaan.bidang');
+                                        @endphp
+                                        <span class="fs-6 form-control-plaintext">{{$bidangKerja}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -758,7 +767,10 @@
                                         </label>
                                     </div>
                                     <div class="col-md-8">
-                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_kerja}}</span>
+                                        @php
+                                            $namaKerja = DB::table('senarai_pekerjaan')->where('id', $butiranKlien->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
+                                        @endphp
+                                        <span class="fs-6 form-control-plaintext">{{$namaKerja}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -797,7 +809,10 @@
                                         </label>
                                     </div>
                                     <div class="col-md-8">
-                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->nama_majikan}}</span>
+                                        @php
+                                            $namaMajikan = DB::table('senarai_majikan')->where('id', $butiranKlien->nama_majikan)->value('senarai_majikan.majikan');
+                                        @endphp
+                                        <span class="fs-6 form-control-plaintext">{{$namaMajikan}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -944,7 +959,11 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$butiranKlien->bidang_kerja}}" style="text-transform: uppercase;"/>
+                                                        <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="true" >
+                                                            @foreach ($bidangKerja as $item)
+                                                                <option value="{{ $item->id }}" {{ $butiranKlien->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -952,7 +971,11 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$butiranKlien->nama_kerja}}" style="text-transform: uppercase;"/>
+                                                        <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="true" >
+                                                            @foreach ($namaKerja as $item)
+                                                                <option value="{{ $item->id }}" {{ $butiranKlien->nama_kerja == $item->id ? 'selected' : '' }}>{{ $item->pekerjaan }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -977,9 +1000,8 @@
                                                             <option>Pilih Kategori Majikan</option>
                                                             <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                                             <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
-                                                            <option value="BADAN BERKANUN" {{ $butiranKlien->kategori_majikan == 'BADAN BERKANUN' ? 'selected' : '' }}>BADAN BERKANUN</option>
                                                             <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
-                                                            <option value="RAHSIA" {{ $butiranKlien->kategori_majikan == 'RAHSIA' ? 'selected' : '' }}>RAHSIA</option>
+                                                            <option value="BADAN BERKANUN" {{ $butiranKlien->kategori_majikan == 'BADAN BERKANUN' ? 'selected' : '' }}>BADAN BERKANUN</option>
                                                             <option value="LAIN-LAIN" {{ $butiranKlien->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                                         </select>
                                                     </div>
@@ -989,7 +1011,11 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{ $butiranKlien->nama_majikan }}" style="text-transform: uppercase;"/>
+                                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="true" >
+                                                            @foreach ($majikan as $item)
+                                                                <option value="{{ $item->id }}" {{ $butiranKlien->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">

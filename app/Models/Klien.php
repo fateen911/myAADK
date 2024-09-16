@@ -24,7 +24,7 @@ class Klien extends Model
         'agama',
         'bangsa',
         'tahap_pendidikan',
-        'status_kesihatan_mental',
+        'penyakit',
         'status_oku',
         'skor_ccri',
         'daerah_pejabat',

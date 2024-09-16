@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BidangPekerjaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -16,10 +17,13 @@ use App\Models\RawatanKlien;
 use App\Models\WarisKlien;
 use App\Models\KlienUpdateRequest;
 use App\Models\KeluargaKlienUpdateRequest;
+use App\Models\NamaMajikan;
+use App\Models\NamaPekerjaan;
 use App\Models\Pegawai;
 use App\Models\PekerjaanKlienUpdateRequest;
 use App\Models\Pendapatan;
 use App\Models\Pendidikan;
+use App\Models\Penyakit;
 use App\Models\RawatanKlienUpdateRequest;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
@@ -27,7 +31,6 @@ use Illuminate\Support\Facades\Log;
 
 class ProfilKlienController extends Controller
 {
-
     public function getDaerah($idnegeri=0)
     {
         $daerahList['data'] = Daerah::orderby("daerah","asc")
@@ -402,6 +405,10 @@ class ProfilKlienController extends Controller
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
         $tahapPendidikan = Pendidikan::all();
         $pendapatan = Pendapatan::all();
+        $penyakit = Penyakit::all();
+        $bidangKerja = BidangPekerjaan::all();
+        $namaKerja = NamaPekerjaan::all();
+        $majikan = NamaMajikan::all();
 
         // PERIBADI
         $klien = Klien::where('id', $id)->first();
@@ -445,7 +452,7 @@ class ProfilKlienController extends Controller
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
                                                                         'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa','statusBapa','updateRequestIbu','requestedDataIbu','statusIbu','updateRequestPenjaga','requestedDataPenjaga','statusPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan','pendapatan','tahapPendidikan'));
+                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan'));
     }
 
     // PEGAWAI/PENTADBIR : APPROVAL CLIENT'S REQUEST
@@ -1431,6 +1438,10 @@ class ProfilKlienController extends Controller
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
         $tahapPendidikan = Pendidikan::all();
         $pendapatan = Pendapatan::all();
+        $penyakit = Penyakit::all();
+        $bidangKerja = BidangPekerjaan::all();
+        $namaKerja = NamaPekerjaan::all();
+        $majikan = NamaMajikan::all();
 
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1454,7 +1465,7 @@ class ProfilKlienController extends Controller
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                         'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga',
-                                                        'tahapPendidikan','pendapatan'));
+                                                        'tahapPendidikan','pendapatan','majikan','namaKerja','bidangKerja','penyakit'));
     }
 
     public function muatTurunProfilDiri()

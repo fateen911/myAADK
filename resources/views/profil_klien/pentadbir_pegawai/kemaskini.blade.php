@@ -453,7 +453,11 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control form-control-solid" id="status_kesihatan_mental" name="status_kesihatan_mental" value="{{$klien->status_kesihatan_mental}}"/>
+                                    <select class="form-select form-select-solid custom-select" id="penyakit" name="penyakit"  data-control="select2" data-hide-search="true" >
+                                        @foreach ($penyakit as $item)
+                                            <option value="{{ $item->id }}" {{ $klien->penyakit == $item->id ? 'selected' : '' }}>{{ $item->penyakit }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -511,6 +515,7 @@
                                                     $negeriRumahKlien = DB::table('senarai_negeri')->where('id', $klien->negeri)->value('senarai_negeri.negeri');
                                                     $bangsaKlien = DB::table('senarai_bangsa')->where('id', $klien->bangsa)->value('senarai_bangsa.bangsa');
                                                     $agamaKlien = DB::table('senarai_agama')->where('id', $klien->agama)->value('senarai_agama.agama');
+                                                    $penyakitKlien = DB::table('senarai_penyakit')->where('id', $klien->penyakit)->value('senarai_penyakit.penyakit');
                                                     $requestedPendidikan = DB::table('senarai_pendidikan')->where('id', $requestedDataKlien['tahap_pendidikan'])->value('senarai_pendidikan.pendidikan');
                                                     $pendidikanKlien = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
                                                 @endphp
@@ -520,7 +525,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="nama" class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$klien->nama}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -544,7 +549,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Jantina</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="jantina" class="fs-6 form-control-plaintext">{{$klien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN'}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$klien->jantina == 'L' ? 'LELAKI' : 'PEREMPUAN'}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row">
@@ -552,7 +557,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Agama</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="agama" class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$agamaKlien}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">
@@ -560,7 +565,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Bangsa</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$bangsaKlien}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">
@@ -568,7 +573,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Skor CCRI</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="skor_ccri" class="fs-6 form-control-plaintext">
+                                                        <span class="fs-6 form-control-plaintext">
                                                             {{$klien->skor_ccri}}
                                                             @if($klien->skor_ccri < 40)
                                                                 (TIDAK MEMUASKAN)
@@ -587,7 +592,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Penyakit</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="status_kesihatan_mental" class="fs-6 form-control-plaintext">{{$klien->status_kesihatan_mental}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$penyakitKlien}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-5">
@@ -595,7 +600,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3">Status Orang Kurang Upaya</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <span id="status_oku" class="fs-6 form-control-plaintext">{{$klien->status_oku}}</span>
+                                                        <span class="fs-6 form-control-plaintext">{{$klien->status_oku}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -782,7 +787,11 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control form-control-solid" id="bidang_kerja" name="bidang_kerja" value="{{$pekerjaan->bidang_kerja}}" style="text-transform: uppercase;"/>
+                                        <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="true" >
+                                            @foreach ($bidangKerja as $item)
+                                                <option value="{{ $item->id }}" {{ $pekerjaan->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -796,7 +805,11 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control form-control-solid" id="nama_kerja" name="nama_kerja" value="{{$pekerjaan->nama_kerja}}" style="text-transform: uppercase;"/>
+                                        <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="true" >
+                                            @foreach ($namaKerja as $item)
+                                                <option value="{{ $item->id }}" {{ $pekerjaan->nama_kerja == $item->id ? 'selected' : '' }}>{{ $item->pekerjaan }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -834,8 +847,10 @@
                                         <!--begin::Input-->
                                         <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
                                             <option>Pilih Kategori Majikan</option>
-                                            <option value="KERAJAAN" {{ $pekerjaan->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                            <option value="SENDIRI" {{ $pekerjaan->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                             <option value="SWASTA" {{ $pekerjaan->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
+                                            <option value="KERAJAAN" {{ $pekerjaan->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
+                                            <option value="BADAN BERKANUN" {{ $pekerjaan->kategori_majikan == 'BADAN BERKANUN' ? 'selected' : '' }}>BADAN BERKANUN</option>
                                             <option value="LAIN-LAIN" {{ $pekerjaan->kategori_majikan == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
                                         </select>
                                         <!--end::Input-->
@@ -853,7 +868,11 @@
                                     </div>
                                     <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" id="nama_majikan" name="nama_majikan" value="{{$pekerjaan->nama_majikan}}" style="text-transform: uppercase;"/>
+                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="true" >
+                                            @foreach ($majikan as $item)
+                                                <option value="{{ $item->id }}" {{ $pekerjaan->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
+                                            @endforeach
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -1018,6 +1037,12 @@
                                                     $negeriKerja = DB::table('senarai_negeri')->where('id', $pekerjaan->negeri_kerja)->value('senarai_negeri.negeri');
                                                     $requestedPendapatan = DB::table('senarai_pendapatan')->where('id', $requestedDataPekerjaan['pendapatan'])->value('senarai_pendapatan.pendapatan');
                                                     $pendapatan = DB::table('senarai_pendapatan')->where('id', $pekerjaan->pendapatan)->value('senarai_pendapatan.pendapatan');
+                                                    $requestedBidangKerja = DB::table('senarai_bidang_pekerjaan')->where('id', $requestedDataPekerjaan['bidang_kerja'])->value('senarai_bidang_pekerjaan.bidang');
+                                                    $bidangKerja = DB::table('senarai_bidang_pekerjaan')->where('id', $pekerjaan->bidang_kerja)->value('senarai_bidang_pekerjaan.bidang');
+                                                    $requestedNamaMajikan = DB::table('senarai_majikan')->where('id', $requestedDataPekerjaan['nama_majikan'])->value('senarai_majikan.majikan');
+                                                    $namaMajikan = DB::table('senarai_majikan')->where('id', $pekerjaan->nama_majikan)->value('senarai_majikan.majikan');
+                                                    $requestedNamaKerja = DB::table('senarai_pekerjaan')->where('id', $requestedDataPekerjaan['nama_kerja'])->value('senarai_pekerjaan.pekerjaan');
+                                                    $namaKerja = DB::table('senarai_pekerjaan')->where('id', $pekerjaan->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
                                                 @endphp
                                         
                                                 <div class="row fv-row mb-7">
@@ -1036,7 +1061,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['bidang_kerja'] != $pekerjaan->bidang_kerja ? 'border-danger' : '' }}" name="bidang_kerja" value="{{ $requestedDataPekerjaan['bidang_kerja'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedBidangKerja != $bidangKerja ? 'border-danger' : '' }}" name="bidang_kerja" value="{{ $requestedBidangKerja }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1044,7 +1069,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_kerja'] != $pekerjaan->nama_kerja ? 'border-danger' : '' }}" name="nama_kerja" value="{{ $requestedDataPekerjaan['nama_kerja'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNamaKerja != $namaKerja ? 'border-danger' : '' }}" name="nama_kerja" value="{{ $requestedNamaKerja }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -1068,7 +1093,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['nama_majikan'] != $pekerjaan->nama_majikan ? 'border-danger' : '' }}" name="nama_majikan" value="{{ $requestedDataPekerjaan['nama_majikan'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" name="nama_majikan" value="{{ $requestedNamaMajikan }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -3309,7 +3334,7 @@
                 negeri_klien: "{{ $klien->negeri }}",
                 daerah_klien: "{{ $klien->daerah }}",
                 tahap_pendidikan: "{{ $klien->tahap_pendidikan }}",
-                status_kesihatan_mental: "{{ $klien->status_kesihatan_mental }}",
+                penyakit: "{{ $klien->penyakit }}",
                 status_oku: "{{ $klien->status_oku }}",
             };
     
@@ -3322,7 +3347,7 @@
                 negeri_klien: document.getElementById('negeri_klien').value,
                 daerah_klien: document.getElementById('daerah_klien').value,
                 tahap_pendidikan: document.getElementById('tahap_pendidikan').value,
-                status_kesihatan_mental: document.getElementById('status_kesihatan_mental').value,
+                penyakit: document.getElementById('penyakit').value,
                 status_oku: document.getElementById('status_oku').value,
             };
     
