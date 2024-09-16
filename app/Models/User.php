@@ -26,6 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'tahap_pengguna',
         'gambar_profil',
         'status',
+        'acc_status',
+        'last_active_at',
     ];
 
     public function username()
@@ -72,6 +74,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // public function klien()
     // {
-    //     return $this->hasOne(Klien::class, 'users_id'); 
+    //     return $this->hasOne(Klien::class, 'users_id');
     // }
 }

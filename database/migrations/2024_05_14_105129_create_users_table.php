@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('gambar_profil')->nullable();
             $table->string('status')->default('0');
             $table->rememberToken();
+            $table->string('acc_status')->default('AKTIF');
+            $table->timestamp('last_active_at')->nullable();
             $table->timestamps();
         });
 

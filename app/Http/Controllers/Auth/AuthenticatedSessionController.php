@@ -29,6 +29,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Update last_active_at field for the authenticated user
+        $user = Auth::user();
+        $user->update([
+            'acc_status' => 'AKTIF',
+            'last_active_at' => now(),
+        ]);
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

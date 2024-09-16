@@ -50,6 +50,22 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        // Retrieve the user by their 'no_kp'
+        $user = \App\Models\User::where('no_kp', $this->input('no_kp'))->first();
+
+        // Check if the user exists and their status is 'active'
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'no_kp' => ['Akaun tidak dijumpai.'],
+            ]);
+        }
+
+        if ($user->acc_status == 'DIBEKUKAN') {
+            throw ValidationException::withMessages([
+                'no_kp' => ['Akaun anda telah dibekukan. Sila hubungi pejabat berdekatan.'],
+            ]);
+        }
+
         if (! Auth::attempt($this->only('no_kp', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
