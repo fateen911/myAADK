@@ -2,8 +2,16 @@
 
 @section('content')
     <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
         <style>
             .form-select.custom-select {
@@ -93,7 +101,7 @@
                                         <span class="required">Negeri Pejabat Pengawasan Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select" id="negeri_baharu" name="negeri_baharu" data-control="select2">
+                                        <select class="form-select form-select-solid custom-select" id="negeri_baru" name="negeri_baharu" data-control="select2">
                                             <option value="">Pilih Negeri</option>
                                             @foreach ($senaraiNegeri as $item1)
                                                 <option value="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
@@ -149,34 +157,73 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('Script Loaded Successfully');
-                const negeriSelect = document.getElementById('negeri_baharu'); // Negeri dropdown
-                const daerahSelect = document.getElementById('daerah_baharu'); // Daerah dropdown
+                console.log('JavaScript is loaded!');  // Log when JavaScript is loaded
 
-                console.log('Negeri Select Element:', negeriSelect);
-                // Function to filter daerah options based on selected negeri
+                const negeriDropdown = document.querySelector('#negeri_baru');
+                const daerahDropdown = document.querySelector('#daerah_baharu');
+
+                // Check if negeri_baharu dropdown is found
+                if (negeriDropdown) {
+                    console.log('negeri_baharu dropdown found!');
+
+                    function filterDaerahOptions() {
+                        const selectedIndex = negeriDropdown.selectedIndex;  // Get selected index
+                        const selectedNegeriId = negeriDropdown.options[selectedIndex].value;  // Get the selected value
+                        
+                        console.log('Selected Negeri ID:', selectedNegeriId);  // Log the selected negeri_id
+
+                        // Filter daerah based on selected negeri_id
+                        Array.from(daerahDropdown.options).forEach(option => {
+                            if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
+                                option.style.display = 'block';  // Show matching daerah
+                            } else {
+                                option.style.display = 'none';  // Hide non-matching daerah
+                            }
+                        });
+                        daerahDropdown.value = '';  // Reset daerah dropdown value
+                    }
+
+                    // Event listener for changes in negeri dropdown
+                    negeriDropdown.addEventListener('change', function() {
+                        console.log('Change event detected for negeri_baharu');  // Log when the change event is detected
+                        filterDaerahOptions();  // Filter daerah options
+                    });
+
+                    // Initial filtering on page load
+                    filterDaerahOptions();
+                } else {
+                    console.log('negeri_baharu dropdown NOT found!');
+                }
+            });
+        </script>
+        {{-- <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('JavaScript is loaded!');
+
+                const negeriDropdown = document.querySelector('#negeri_baru');
+                const daerahDropdown = document.querySelector('#daerah_baharu');
+
                 function filterDaerahOptions() {
-                    const selectedNegeriId = negeriSelect.value; // Get the selected negeri_id
-                    console.log('Selected Negeri ID:', selectedNegeriId); 
-                    // Show/Hide daerah options based on the selected negeri
-                    Array.from(daerahSelect.options).forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId) {
-                            option.style.display = 'block';  // Show matching daerah
+                    const selectedNegeriId = negeriDropdown.value;  // Use the value of the selected negeri
+                    console.log('Selected Negeri ID:', selectedNegeriId);  // Log to check if it's being picked up correctly
+                    
+                    Array.from(daerahDropdown.options).forEach(option => {
+                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
+                            option.style.display = 'block';  // Show options matching the negeri_id or the default option
                         } else {
-                            option.style.display = 'none';   // Hide non-matching daerah
+                            option.style.display = 'none';  // Hide options that don't match
                         }
                     });
 
-                    // Reset the daerah selection
-                    daerahSelect.value = ''; 
+                    daerahDropdown.value = '';  // Reset daerah dropdown
                 }
 
-                // Event listener for negeri dropdown change
-                negeriSelect.addEventListener('change', filterDaerahOptions);
+                // Event listener for negeri dropdown changes
+                negeriDropdown.addEventListener('change', filterDaerahOptions);
 
-                // Initial setup to hide non-matching daerah options (if there's a default selected negeri)
+                // Ensure options are filtered on initial page load (if required)
                 filterDaerahOptions();
             });
-        </script>
+        </script> --}}
     </body>
 @endsection

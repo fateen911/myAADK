@@ -772,7 +772,7 @@
 																	<div class="fv-row mb-5">
 																		<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="passwordKlien{{$user1->id}}" name="password" />
+																			<input type="text" class="form-control form-control-solid custom-form" id="passwordKlien{{$user1->id}}" name="passwordKemaskini" />
 																			<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
 																	</div>
@@ -883,7 +883,7 @@
 																		<!--end::Label-->
 																		<!--begin::Input-->
 																		<div class="input-group">
-																			<input type="text" maxlength="12" class="form-control form-control-solid custom-form" placeholder="" id="passwordDaftarKlien{{$user1->id}}" name="password" />
+																			<input type="text" class="form-control form-control-solid custom-form" id="passwordDaftarKlien{{$user1->id}}" name="passwordDaftar" />
 																			<button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien{{$user1->id}}')">Jana Kata Laluan</button>
 																		</div>
 																		<!--end::Input-->

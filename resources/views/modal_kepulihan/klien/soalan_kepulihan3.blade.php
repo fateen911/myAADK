@@ -90,7 +90,7 @@
 
                     <div style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; padding-top: 30px;">
                         <p style="font-style: italic;">Nota : Soal selidik ini mengandungi 25 soalan. Sila jawab semua soalan.</p>
-                        <p style="font-weight: bold; font-size:16px;"><span id="answeredCount">0</span>/25</p>
+                        {{-- <p style="font-weight: bold; font-size:16px;"><span id="answeredCount">0</span>/25</p> --}}
                     </div>
 
                     <div class="card-body">

@@ -43,6 +43,8 @@ class DaftarPenggunaController extends Controller
 
     public function pegawaiKemaskiniKlien(Request $request)
     {
+        // dd($request->all());
+
         // Retrieve the user by their ID
         $user = User::where('no_kp', $request->no_kp)->first();
 
@@ -53,9 +55,9 @@ class DaftarPenggunaController extends Controller
         if ($user)
         {
             // Check if a new password has been generated
-            if ($request->filled('password'))
+            if ($request->filled('passwordKemaskini'))
             {
-                $updateData['password'] = Hash::make($request->password);
+                $updateData['password'] = Hash::make($request->passwordKemaskini);
 
                 // Update in table users
                 $updateData = [
@@ -65,13 +67,6 @@ class DaftarPenggunaController extends Controller
 
                 $user->update($updateData);
 
-                // Send email notification if user has an email
-                if ($user->email)
-                {
-                    Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
-                    return redirect()->route(route: 'daftar-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
-                }
-
                 // Check if the Klien exists and update the no_tel and email in table klien
                 if ($klien)
                 {
@@ -80,6 +75,16 @@ class DaftarPenggunaController extends Controller
                         'emel' => $request->email,
                         'updated_at' => now(),
                     ]);
+                }
+
+                // Send email notification if user has an email
+                if ($user->email)
+                {
+                    Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->passwordKemaskini, $user->no_kp));
+                    return redirect()->route(route: 'daftar-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
+                }
+                else{
+                    return redirect()->route(route: 'daftar-klien')->with('warning', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
                 }
             }
             else
@@ -117,7 +122,7 @@ class DaftarPenggunaController extends Controller
         $klien = Klien::where('no_kp', $request->no_kp)->first();
 
         // Check if a password has been provided
-        if (!$request->filled('password')) {
+        if (!$request->filled('passwordDaftar')) {
             return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
         }
         else
@@ -126,9 +131,9 @@ class DaftarPenggunaController extends Controller
                 'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
-                'tahap_pengguna' => 2,   // Set default user level
-                'status' => 0,           // Set default status
-                'password' => Hash::make($request->password),
+                'tahap_pengguna' => 2,   
+                'status' => 0,          
+                'password' => Hash::make($request->passwordDaftar),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -144,7 +149,7 @@ class DaftarPenggunaController extends Controller
             ]);
 
             if ($request->email){
-                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->password));
+                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
                 return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
             }
             else{
@@ -187,66 +192,116 @@ class DaftarPenggunaController extends Controller
         // Retrieve the corresponding Klien record by no_kp
         $klien = Klien::where('no_kp', $request->no_kp)->first();
 
+        // dd($request->all());
+
         // Check if klien already registered or not
-        if ($user)
-        {
-            // Check if a new password has been generated
-            if ($request->filled('password'))
-            {
-                $updateData['password'] = Hash::make($request->password);
+        if ($user) {
+            // Prepare update data
+            $updateData = [
+                'email' => $request->email,
+                'acc_status' => $request->status_ak,
+                'updated_at' => now(),
+            ];
 
-                // Update in table users
-                $updateData = [
-                    'email' => $request->email,
-                    'acc_status' => $request->status_ak,
-                    'updated_at' => now(),
-                ];
-
-                $user->update($updateData);
-
-                // Send email notification if user has an email
-                if ($user->email)
-                {
-                    Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->password, $user->no_kp));
-                    return redirect()->route(route: 'senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
-                }
-
-                // Check if the Klien exists and update the no_tel and email in table klien
-                if ($klien)
-                {
-                    $klien->update([
-                        'no_tel' => $request->no_tel,
-                        'emel' => $request->email,
-                        'updated_at' => now(),
-                    ]);
-                }
+            // Include password if `passwordKemaskini` is provided
+            if ($request->filled('passwordKemaskini')) {
+                $updateData['password'] = Hash::make($request->passwordKemaskini);
             }
-            else
-            {
-                // Update in table users
-                $updateData = [
-                    'email' => $request->email,
-                    'acc_status' => $request->status_ak,
+
+            // Update user with the new data
+            $user->update($updateData);
+
+            // Update Klien if exists
+            if ($klien) {
+                $klien->update([
+                    'no_tel' => $request->no_tel,
+                    'emel' => $request->email,
                     'updated_at' => now(),
-                ];
-
-                $user->update($updateData);
-
-                // Check if the Klien exists and update the no_tel and email in table klien
-                if ($klien) {
-                    $klien->update([
-                        'no_tel' => $request->no_tel,
-                        'emel' => $request->email,
-                        'updated_at' => now(),
-                    ]);
-                }
-                return redirect()->route(route: 'senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
+                ]);
             }
-        }
-        else{
-            return redirect()->route(route: 'senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
+
+            // Send email notification if the user has an email and passwordKemaskini is filled
+            if ($user->email && $request->filled('passwordKemaskini')) {
+                Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->passwordKemaskini, $user->no_kp));
+                return redirect()->route('senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
+            }
+            else{
+                return redirect()->route('senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
+            }
+        } 
+        else {
+            return redirect()->route('senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
     }
+
+    // public function pentadbirKemaskiniKlien(Request $request)
+    // {
+    //     // Retrieve the user by their ID
+    //     $user = User::where('no_kp', $request->no_kp)->first();
+
+    //     // Retrieve the corresponding Klien record by no_kp
+    //     $klien = Klien::where('no_kp', $request->no_kp)->first();
+
+    //     // Check if klien already registered or not
+    //     if ($user)
+    //     {
+    //         // Check if a new password has been generated
+    //         if ($request->filled('passwordKemaskini'))
+    //         {
+    //             $updateData['password'] = Hash::make($request->passwordKemaskini);
+
+    //             // Update in table users
+    //             $updateData = [
+    //                 'email' => $request->email,
+    //                 'acc_status' => $request->status_ak,
+    //                 'updated_at' => now(),
+    //             ];
+
+    //             $user->update($updateData);
+
+    //             // Send email notification if user has an email
+    //             if ($user->email)
+    //             {
+    //                 Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->passwordKemaskini, $user->no_kp));
+    //                 return redirect()->route(route: 'senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
+    //             }
+
+    //             // Check if the Klien exists and update the no_tel and email in table klien
+    //             if ($klien)
+    //             {
+    //                 $klien->update([
+    //                     'no_tel' => $request->no_tel,
+    //                     'emel' => $request->email,
+    //                     'updated_at' => now(),
+    //                 ]);
+    //             }
+    //         }
+    //         else
+    //         {
+    //             // Update in table users
+    //             $updateData = [
+    //                 'email' => $request->email,
+    //                 'acc_status' => $request->status_ak,
+    //                 'updated_at' => now(),
+    //             ];
+
+    //             $user->update($updateData);
+
+    //             // Check if the Klien exists and update the no_tel and email in table klien
+    //             if ($klien) {
+    //                 $klien->update([
+    //                     'no_tel' => $request->no_tel,
+    //                     'emel' => $request->email,
+    //                     'updated_at' => now(),
+    //                 ]);
+    //             }
+    //             return redirect()->route(route: 'senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
+    //         }
+    //     }
+    //     else{
+    //         return redirect()->route(route: 'senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
+    //     }
+    // }
 
     public function pentadbirDaftarKlien(Request $request)
     {
@@ -257,7 +312,7 @@ class DaftarPenggunaController extends Controller
         $klien = Klien::where('no_kp', $request->no_kp)->first();
 
         // Check if a password has been provided
-        if (!$request->filled('password')) {
+        if (!$request->filled('passwordDaftar')) {
             return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
         }
         else
@@ -268,7 +323,7 @@ class DaftarPenggunaController extends Controller
                 'email' => $request->email,
                 'tahap_pengguna' => 2,   // Set default user level
                 'status' => 0,           // Set default status
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($request->passwordDaftar),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -284,7 +339,7 @@ class DaftarPenggunaController extends Controller
             ]);
 
             if ($request->email){
-                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->password));
+                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
                 return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
             }
             else{
@@ -446,33 +501,6 @@ class DaftarPenggunaController extends Controller
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
     }
-
-
-    // public function permohonanPegawaiDitolak(Request $request, $id)
-    // {
-    //     // Fetch the staff request data
-    //     $pegawaiDitolak = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
-
-    //     // Split the input by commas and trim any spaces
-    //     $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
-    //     $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
-
-    //     // Encode the alasan_ditolak array as JSON before saving
-    //     $pegawaiDitolak->alasan_ditolak = json_encode($alasanDitolak);
-    //     $pegawaiDitolak->status = 'Ditolak';
-    //     $pegawaiDitolak->updated_at = now();
-    //     $pegawaiDitolak->save();
-
-
-    //     $defaultEmail = 'fateennashuha9@gmail.com';
-
-    //     // Send rejection email to the staff
-    //     Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
-    //     // Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiDitolak));
-
-    //     return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' gagal untuk didaftarkan sebagai pengguna sistem ini.');
-    // }
-
 
     public function daftarPegawai(Request $request)
     {
