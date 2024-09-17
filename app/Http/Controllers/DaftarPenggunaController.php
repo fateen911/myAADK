@@ -428,7 +428,9 @@ class DaftarPenggunaController extends Controller
         $pegawaiDitolak = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
 
         // Get the input directly as an array from the form
-        $alasanDitolak = $request->input('alasan_ditolak');
+        // Split the input by commas and trim any spaces
+        $alasanDitolak = explode(',', $request->input('alasan_ditolak'));
+        $alasanDitolak = array_map('trim', $alasanDitolak); // Trim spaces from each reason
 
         // Encode the alasan_ditolak array as JSON before saving
         $pegawaiDitolak->alasan_ditolak = json_encode($alasanDitolak);

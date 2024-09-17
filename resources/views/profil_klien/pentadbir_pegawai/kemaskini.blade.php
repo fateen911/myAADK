@@ -720,7 +720,7 @@
                             
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
-                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                     <div class="input-group mb-2 catatan-row">
                                                         <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila semak alamat emel, Semak tahap pendidikan"></textarea>
                                                     </div>
@@ -1196,7 +1196,7 @@
                             
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
-                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                     <div class="input-group mb-2 catatan-row">
                                                         <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Poskod tempat kerja salah, Isi maklumat majikan"></textarea>
                                                     </div>
@@ -2012,7 +2012,7 @@
                                     
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
-                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                             <div class="input-group mb-2 catatan-row">
                                                                 <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila pilih status bapa, Poskod salah"></textarea>
                                                             </div>
@@ -2161,7 +2161,7 @@
                                     
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
-                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                             <div class="input-group mb-2 catatan-row">
                                                                 <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila pilih status ibu, Poskod salah"></textarea>
                                                             </div>
@@ -2318,7 +2318,7 @@
                                     
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
-                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                            <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                             <div class="input-group mb-2 catatan-row">
                                                                 <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila masukkan hubungan penjaga, Poskod salah"></textarea>
                                                             </div>
@@ -2786,7 +2786,7 @@
                             
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
-                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak dan sila pisahkan setiap alasan dengan koma:</label>
+                                                    <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
                                                     <div class="input-group mb-2 catatan-row">
                                                         <textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Masukkan no.telefon peribadi pasangan, Poskod salah"></textarea>
                                                     </div>

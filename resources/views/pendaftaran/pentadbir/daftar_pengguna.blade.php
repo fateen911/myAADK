@@ -327,6 +327,40 @@
 											<div class="modal-dialog modal-dialog-centered mw-650px">
 												<div class="modal-content">
 													<div class="modal-header">
+														<h2 style="text-align: center !important;">Permohonan Pendaftaran Pegawai Ditolak</h2>
+														<div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
+															<i class="ki-solid ki-cross-circle fs-1"></i>
+														</div>
+													</div>
+			
+													<div class="modal-body">
+														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
+															@csrf
+															<input type="hidden" name="status" value="Ditolak">
+															<input type="hidden" name="id" value="{{ $user3->id }}">
+										
+															<!-- Begin Rejection Reasons Input -->
+															<div id="dynamicFields">
+																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak :</label>
+																<div class="input-group mb-2 catatan-row">
+																	<textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila isi nama seperti kad pengenalan, Peranan tidak benar"></textarea>
+																</div>
+															</div>
+															<!-- End Rejection Reasons Input -->
+										
+															<!-- Form actions -->
+															<div class="text-center pt-3">
+																<button type="submit" class="btn btn-primary">Hantar</button>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+										{{-- <div class="modal fade" id="modal_permohonan_ditolak{{$user3->id}}" tabindex="-1" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered mw-650px">
+												<div class="modal-content">
+													<div class="modal-header">
 														<h2 style="text-align: center !important;">Alasan Permohonan Pegawai Ditolak</h2>
 														<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
 															<i class="ki-solid ki-cross-circle fs-1"></i>
@@ -355,7 +389,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> --}}
 										<!--end::Modal Ditolak-->
 									@endforeach
 								</tbody>
@@ -1322,7 +1356,7 @@
 	</script>
 
 	<!-- JavaScript to handle dynamic fields for reason of rejection -->
-	<script>
+	{{-- <script>
 		document.addEventListener('DOMContentLoaded', function () {
 			const dynamicFieldsContainer = document.getElementById('dynamicFields');
 
@@ -1385,5 +1419,5 @@
 
 			updateButtons(); // Initial update for buttons
 		});
-	</script>
+	</script> --}}
 @endsection
