@@ -31,6 +31,17 @@
             .input-group input:focus + .toggle-password {
                 z-index: 11; /* Ensure the icon remains on top even when typing */
             }
+
+            input.form-control.form-control-solid {
+                background-color: #e0e0e0;
+                color: #45505b;
+            }
+
+            input.form-control.form-control-solid:focus {
+                background-color: #d0d0d0;
+                color: #333333;
+                box-shadow: none;
+            }
         </style>
     </head>
 

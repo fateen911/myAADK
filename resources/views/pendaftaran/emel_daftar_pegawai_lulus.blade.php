@@ -4,8 +4,7 @@
     <h3>PENDAFTARAN PEGAWAI SEBAGAI PENGGUNA SISTEM MySupport AADK DILULUSKAN</h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <p>Tuan/Puan,</p>
-    <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
-    <br>
+    <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah <b>diluluskan</b>. Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
     <p style="padding-top: 10px"><b>Nama Pegawai :</b> {{strtoupper($nama)}}</p>
     <p><b>No. Kad Pengenalan :</b> {{$no_kp}}
     <p style="padding-bottom: 10px;"><b>Kata Laluan :</b> {{$password}}

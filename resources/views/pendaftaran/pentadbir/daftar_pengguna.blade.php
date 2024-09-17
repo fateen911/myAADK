@@ -343,7 +343,7 @@
 															<div id="dynamicFields">
 																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak :</label>
 																<div class="input-group mb-2 catatan-row">
-																	<textarea class="form-control" name="alasan_ditolak" placeholder="Contoh: Sila isi nama seperti kad pengenalan, Peranan tidak benar"></textarea>
+																	<textarea class="form-control form-control-solid custom-form" name="alasan_ditolak" placeholder="Contoh: Sila isi nama seperti kad pengenalan, Peranan tidak benar"></textarea>
 																</div>
 															</div>
 															<!-- End Rejection Reasons Input -->
