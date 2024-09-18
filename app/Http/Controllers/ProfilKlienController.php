@@ -1443,8 +1443,6 @@ class ProfilKlienController extends Controller
         $namaKerja = NamaPekerjaan::all();
         $majikan = NamaMajikan::all();
 
-        // dd($bidangKerja, $namaKerja);
-
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
@@ -1462,8 +1460,6 @@ class ProfilKlienController extends Controller
         $resultRequestBapa = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 1)->first();
         $resultRequestIbu = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 2)->first();
         $resultRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 3)->first();
-
-        // dd($butiranKlien);
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                         'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga',

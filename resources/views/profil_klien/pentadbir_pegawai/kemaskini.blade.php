@@ -2973,7 +2973,7 @@
             @if(session('success'))
                 Swal.fire({
                     icon: 'success',
-                    title: 'Berjaya!',
+                    title: 'Berjaya Dikemaskini!',
                     text: '{!! session('success') !!}',
                     confirmButtonText: 'OK'
                 });
@@ -2983,7 +2983,7 @@
             @if(session('error'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Tidak Berjaya!',
+                    title: 'Tidak Berjaya Dikemaskini!',
                     text: '{!! session('error') !!}',
                     confirmButtonText: 'OK'
                 });
@@ -2993,7 +2993,7 @@
             @if(session('errorProfil'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Tidak Berjaya!',
+                    title: 'Tidak Berjaya Dikemaskini!',
                     text: '{!! session('errorProfil') !!}',
                     confirmButtonText: 'OK'
                 });
