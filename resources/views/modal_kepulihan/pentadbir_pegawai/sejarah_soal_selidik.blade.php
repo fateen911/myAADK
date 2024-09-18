@@ -169,123 +169,69 @@
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                    <tbody>
-                                                                        @if ($clientModals->count())
-                                                                            @foreach ($clientModals->groupBy('sesi') as $sesi => $modalData)
-                                                                                <h6>Sesi: {{ $sesi }}</h6>
-                                                                                <table class="table table-bordered">
-                                                                                    <thead>
+                                                                @if ($clientModals->count())
+                                                                    @foreach ($clientModals->groupBy('sesi') as $sesi => $modalData)
+                                                                        @if ($sesi == $response->sesi)
+                                                                            <h6>Sesi: {{ $sesi }}</h6>
+                                                                            <table class="table table-bordered">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Modal</th>
+                                                                                        <th>Skor</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    @foreach ($modalData as $modalSkor)
                                                                                         <tr>
-                                                                                            <th>Modal</th>
-                                                                                            <th>Skor</th>
+                                                                                            <td>Modal Fizikal</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_fizikal, 2) }}</td>
                                                                                         </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        @foreach ($modalData as $modalSkor)
-                                                                                            <tr>
-                                                                                                <td>Modal Fizikal</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_fizikal, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Psikologi</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_psikologi, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Sosial</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_sosial, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Persekitaran</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_persekitaran, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Insaniah</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_insaniah, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Strategi Daya Tahan</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Resiliensi</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_resiliensi, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Spiritual</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_spiritual, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Rawatan</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_rawatan, 2) }}</td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Modal Kesihatan</td>
-                                                                                                <td>{{ number_format($modalSkor->modal_kesihatan, 2) }}</td>
-                                                                                            </tr>
-                                                                                        @endforeach
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            @endforeach
+                                                                                        <tr>
+                                                                                            <td>Modal Psikologi</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_psikologi, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Sosial</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_sosial, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Persekitaran</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_persekitaran, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Insaniah</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_insaniah, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Strategi Daya Tahan</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Resiliensi</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_resiliensi, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Spiritual</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_spiritual, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Rawatan</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_rawatan, 2) }}</td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Modal Kesihatan</td>
+                                                                                            <td>{{ number_format($modalSkor->modal_kesihatan, 2) }}</td>
+                                                                                        </tr>
+                                                                                    @endforeach
+                                                                                </tbody>
+                                                                            </table>
                                                                         @else
-                                                                            <p>Tiada skor modal untuk klien ini.</p>
+                                                                            <p>Tiada skor modal untuk klien ini.</p>    
                                                                         @endif
-                                                                        {{-- @if(isset($modalScores[$response->sesi]))
-                                                                            @foreach($modalScores[$response->sesi] as $score)
-                                                                                <tr>
-                                                                                    <td>{{ $score->modal }}</td>
-                                                                                    <td>{{ $score->skor }}</td>
-                                                                                </tr>
-                                                                            @endforeach
-                                                                        @else --}}
-                                                                        {{-- @if(isset($modalScores[$response->sesi]))
-                                                                        @foreach($modalScores as $score)
-                                                                            <tr>
-                                                                                <td>Modal Fizikal</td>
-                                                                                <td>{{ $score->modal_fizikal }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Psikologi</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_psikologi'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Sosial</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_sosial'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Persekitaran</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_persekitaran'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Insaniah</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_insaniah'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Spiritual</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_spiritual'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Rawatan</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_rawatan'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Kesihatan</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_kesihatan'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Strategi Daya Tahan</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_strategi_daya_tahan'] }}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Modal Resiliensi</td>
-                                                                                <td>{{ $modalScores[$response->sesi]['modal_resiliensi'] }}</td>
-                                                                            </tr>
-                                                                        @endforeach
-                                                                        @else
-                                                                            <tr>
-                                                                                <td colspan="2">Tiada rekod skor modal bagi sesi ini.</td>
-                                                                            </tr>
-                                                                        @endif --}}
-                                                                    </tbody>
+                                                                    @endforeach
+                                                                @else
+                                                                    <p>Tiada skor modal untuk klien ini.</p>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
