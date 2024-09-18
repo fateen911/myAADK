@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="m-5">
-        <br><h2 class="my-3 text-center text-uppercase">Senarai Pengesahan Kehadiran</h2>
+        <br><h2 class="my-3 text-center text-uppercase">Senarai Maklum Balas Kehadiran</h2>
 
         <hr class="border-0 h-1px bg-black mt-10 mb-8">
         <input type="hidden" id="programId" value="{{$program->id}}">

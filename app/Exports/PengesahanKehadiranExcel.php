@@ -92,7 +92,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
      */
     public function title(): string
     {
-        return 'SENARAI PENGESAHAN KEHADIRAN';
+        return 'SENARAI MAKLUM BALAS KEHADIRAN';
     }
 
     /**
@@ -102,8 +102,8 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
     public function styles(Worksheet $sheet)
     {
         // Title row style
-        $sheet->mergeCells('A1:F1');
-        $sheet->setCellValue('A1', 'SENARAI PENGESAHAN KEHADIRAN');
+        $sheet->mergeCells('A1:H1');
+        $sheet->setCellValue('A1', 'SENARAI MAKLUM BALAS KEHADIRAN');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
 

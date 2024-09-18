@@ -983,7 +983,8 @@ class PengurusanProgController extends Controller
         $data = ['title' => 'Senarai Pengesahan Kehadiran', 'perekodan' => $perekodan, 'program' => $program];
         $pdf = PDF::loadView('pengurusan_program.pdf_perekodan', $data)->setPaper('a4');
 
-        return $pdf->download('senarai_perekodan_kehadiran.pdf');
+        $nama_pdf = 'senarai_perekodan_kehadiran_'.$program->custom_id.'.pdf';
+        return $pdf->download($nama_pdf);
     }
 
     public function pdfPengesahan($id)
@@ -1018,7 +1019,7 @@ class PengurusanProgController extends Controller
         $data = ['title' => 'Senarai Pengesahan Kehadiran', 'pengesahan' => $pengesahan, 'program' => $program];
         $pdf = PDF::loadView('pengurusan_program.pdf_pengesahan', $data)->setPaper('a4','landscape');
 
-        $nama_pdf = 'senarai_perekodan_kehadiran_'.$program->custom_id.'.pdf';
+        $nama_pdf = 'senarai_maklum_balas_kehadiran_'.$program->custom_id.'.pdf';
         return $pdf->download($nama_pdf);
     }
 
@@ -1027,7 +1028,7 @@ class PengurusanProgController extends Controller
         $program = Program::with('kategori')->find($id);
         $pengesahan = PengesahanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
 
-        $nama_excel = 'senarai_perekodan_kehadiran_'.$program->custom_id.'.xlsx';
+        $nama_excel = 'senarai_maklum_balas_kehadiran_'.$program->custom_id.'.xlsx';
         return Excel::download(new PengesahanKehadiranExcel($program, $pengesahan), $nama_excel);
     }
 
@@ -1035,6 +1036,7 @@ class PengurusanProgController extends Controller
     {
         $program = Program::with('kategori')->find($id);
         $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('program_id',$id)->get();
-        return Excel::download(new PerekodanKehadiranExcel($program, $perekodan), 'senarai_perekodan_kehadiran.xlsx');
+        $nama_excel = 'senarai_perekodan_kehadiran_'.$program->custom_id.'.xlsx';
+        return Excel::download(new PerekodanKehadiranExcel($program, $perekodan), $nama_excel);
     }
 }
