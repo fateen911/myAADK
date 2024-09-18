@@ -9,6 +9,7 @@ use App\Http\Controllers\PengurusanProgController;
 use App\Http\Controllers\ModalKepulihanController;
 use App\Http\Controllers\TelegramBotController;
 use App\Http\Controllers\PejabatPengawasanController;
+use App\Http\Controllers\NotifikasiController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -193,5 +194,11 @@ Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanContro
 // KLIEN - PERTUKARAN PEJABAT
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
 Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
+
+// KLIEN - NOTIFIKASI
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notifications', [NotifikasiController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read/{id}', [NotifikasiController::class, 'markAsRead'])->name('notifications.read');
+});
 
 require __DIR__.'/auth.php';

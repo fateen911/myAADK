@@ -8,6 +8,7 @@ use App\Models\PegawaiMohonDaftar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Klien;
+use App\Models\Notifikasi;
 use App\Models\PekerjaanKlien;
 use App\Models\ResponDemografi;
 use App\Models\ResponModalKepulihan;
@@ -220,7 +221,16 @@ class HomeController extends Controller
                     // Handle the case where no KeputusanKepulihan record exists
                     $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->updated_at->addMonths(6) : null;
 
-                    return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan','responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan'));
+                    // Assuming you have a Notification model or a way to get notifications
+                    $unreadCount = Notifikasi::where('klien_id', $klienId)->where('is_read', null)->count();
+
+                    $notifications = Notifikasi::where('klien_id', $klienId)
+                                                ->orderBy('created_at', 'desc')
+                                                ->get();
+
+                    return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan',
+                                                                                'responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan',
+                                                                                'unreadCount','notifications'));
                 }
                 else if($tahap == 3)
                 {
