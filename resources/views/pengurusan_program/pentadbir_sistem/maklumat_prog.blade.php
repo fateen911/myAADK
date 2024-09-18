@@ -121,7 +121,7 @@
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
                                 <input type="text" id="link_1" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
-                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard1()">
+                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" id="clipboard1">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
                             </div>
@@ -333,7 +333,7 @@
                             <!--begin::Link-->
                             <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
                                 <input type="text" id="link_2" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_pengesahan}}" disabled/>
-                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard2()">
+                                <button type="button" class="btn btn-sm btn-icon btn-light-dark" id="clipboard2">
                                     <i class="bi bi-clipboard-fill fs-2"></i>
                                 </button>
                             </div>
@@ -520,7 +520,7 @@
                                 <!--begin::Link-->
                                 <div data-repeater-item="" class="form-group d-flex flex-wrap align-items-center gap-2">
                                     <input type="text" id="link_3" name="product_name" class="form-control mw-100 w-185px" placeholder="Link" value="{{$program->pautan_perekodan}}" disabled/>
-                                    <button type="button" class="btn btn-sm btn-icon btn-light-dark" onclick="copyToClipboard3()">
+                                    <button type="button" class="btn btn-sm btn-icon btn-light-dark" id="clipboard3">
                                         <i class="bi bi-clipboard-fill fs-2"></i>
                                     </button>
                                 </div>
@@ -788,7 +788,7 @@
     <!--begin::Javascript-->
 
     <script>
-        function copyToClipboard1() {
+        $(document).on('click', '#clipboard1', function() {
             const inputField = document.getElementById('link_1');
             // Temporarily enable the input field to access its value
             inputField.disabled = false;
@@ -805,9 +805,8 @@
                 .catch(err => {
                     console.error('Failed to copy: ', err);
                 });
-        }
-
-        function copyToClipboard2() {
+        });
+        $(document).on('click', '#clipboard2', function() {
             const inputField = document.getElementById('link_2');
             // Temporarily enable the input field to access its value
             inputField.disabled = false;
@@ -824,9 +823,9 @@
                 .catch(err => {
                     console.error('Failed to copy: ', err);
                 });
-        }
+        });
 
-        function copyToClipboard3() {
+        $(document).on('click', '#clipboard3', function() {
             const inputField = document.getElementById('link_3');
             // Temporarily enable the input field to access its value
             inputField.disabled = false;
@@ -843,7 +842,7 @@
                 .catch(err => {
                     console.error('Failed to copy: ', err);
                 });
-        }
+        });
     </script>
 
     <script>var hostUrl = "assets/";</script>
