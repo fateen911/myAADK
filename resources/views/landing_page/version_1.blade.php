@@ -47,7 +47,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Header Section-->
     <div class="mb-0" id="home">
         <!--begin::Wrapper-->
-        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light landing-img">
+        <div class="">
             <!--begin::Header-->
             <div class="landing-header landing-darkblue">
                 <!--begin::Container-->
@@ -84,7 +84,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
                                         <a href="https://wa.me/60196262233" class="btn landing-darkblue py-3 px-4 px-xxl-6 btn-active-red" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                                            <i class="bi bi-whatsapp fs-2 text-white"></i>&nbsp; 60196262233
+                                            <i class="bi bi-whatsapp fs-2 text-white"></i>&nbsp; 019 626 2233
                                         </a>
                                         <!--end::Menu link-->
                                     </div>
@@ -118,41 +118,45 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-flex flex-column w-100 min-h-350px min-h-lg-500px p-10 ">
-                <!--end::Heading-->
-                <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-20">
-                    <div class="d-flex gap-2 mb-8">
+            <div class="d-flex w-100 min-h-500px min-h-lg-700px landing-img">
+                <!--end::Content-->
+                <div class="text-start mb-5 mb-lg-10 mx-30 py-10">
+                    <div class="d-flex gap-5 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
                     </div>
-                    <hr style="width: 35%">
+                </div>
+                <!--end::Content-->
+
+                <!--end::Content-->
+                <div class="text-start mb-5 mb-lg-10 pt-p-17 ms-p-32">
                     <!--begin::Title-->
-                    <h1 class="lh-base fw-bold fs-3x fs-lg-3x my-8">SELAMAT DATANG KE</h1>
-                    <div class="gap-2 mb-8 w-30 text-center">
-                        <img alt="Logo" src="/logo/MySupport.png" class="logo-default h-150px h-lg-200px"/>
-                    </div>
-
+                    <h3 class=>
+                        <p><i>“Aku, AADK & Keluarga”</i></p>
+                    </h3>
+                    <h3 class="fw-medium">
+                        Kepulihan adalah satu perjalanan dan manifesto sokongan <br>
+                        antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju <br>
+                        kejayaan yang besar. <br>
+                    </h3>
+                    <br>
+                    <h3 class="fw-medium">
+                        My Support merupakan sistem maklumat klien AADK yang telah tamat <br>
+                        mengikuti program. Ia mengandungi butir-butir peribadi klien dan <br>
+                        maklumat khusus berkaitan status kepulihan mereka. Kepentingan <br>
+                        pangkalan data adalah untuk memberi sokongan kepulihan yang <br>
+                        berterusan pasca pemulihan pada bila-bila masa dengan cepat <br>
+                        dan mesra.
+                    </h3>
                     <!--end::Title-->
-                    <!--begin::Action-->
-                    <h3 class="color-gray-landing">
-                        <p><i>"Pemulihan dengan Tujuan, Hidup dengan Makna"</i></p>
-                    </h3>
-                    <h3 class="color-gray-landing fw-medium">
-                        Setiap langkah pemulihan diambil dengan tujuan yang jelas,<br>
-                        membawa anda ke arah kehidupan yang lebih bermakna dan <br>
-                        penuh harapan.<br>
-                    </h3>
 
-
-                    <!--end::Action-->
-                    <div class="d-flex gap-4 my-20">
+                    <div class="d-flex gap-4 my-10">
                         <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-dadah-terkawal-2025.png" class="logo-default h-10px h-lg-30px"/>
                         <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-lebih-baik-cegah.png" class="logo-default h-10px h-lg-30px"/>
                         <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-malaysia-madani.png" class="logo-default h-10px h-lg-30px"/>
                     </div>
                 </div>
-                <!--end::Heading-->
-
+                <!--end::Content-->
             </div>
             <!--end::Landing hero-->
         </div>

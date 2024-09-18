@@ -9237,6 +9237,11 @@ textarea.form-control-lg {
   margin-left: 5rem !important;
 }
 
+.mx-30 {
+    margin-right: 8rem !important;
+    margin-left: 8rem !important;
+}
+
 .mx-auto {
   margin-right: auto !important;
   margin-left: auto !important;
@@ -9699,6 +9704,11 @@ textarea.form-control-lg {
 .ms-20 {
   margin-left: 5rem !important;
 }
+
+.ms-p-32 {
+    margin-left: 32% !important;
+}
+
 
 .ms-auto {
   margin-left: auto !important;
@@ -10680,6 +10690,10 @@ textarea.form-control-lg {
 
 .pt-20 {
   padding-top: 5rem !important;
+}
+
+.pt-p-17 {
+    padding-top: 17% !important;
 }
 
 .pe-0 {
@@ -47381,7 +47395,7 @@ a:hover {
 }
 
 .landing-img{
-    background-image: url('/assets/media/illustrations/therapy/therapy-6.png');
+    background-image: url('/logo/background-landing.png');
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
