@@ -499,7 +499,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat peribadi klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat peribadi klien telah berjaya diluluskan.');
         } 
     }
 
@@ -546,7 +546,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat peribadi klien tidak berjaya dikemaskini.');
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat peribadi klien ditolak.');
     }
 
     public function approveUpdatePekerjaan(Request $request, $id)
@@ -592,7 +592,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat pekerjaan klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat pekerjaan klien telah berjaya diluluskan.');
         }  
     }
 
@@ -639,7 +639,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat pekerjaan klien tidak berjaya dikemaskini.');
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat pekerjaan klien ditolak.');
     }
 
     public function approveUpdateKeluarga(Request $request, $id)
@@ -685,7 +685,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat pasangan klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat keluarga klien telah berjaya diluluskan.');
         }  
     }
 
@@ -732,7 +732,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat pasangan klien tidak berjaya dikemaskini.');
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat keluarga klien ditolak.');
     }
 
     public function approveUpdateBapa(Request $request, $id)
@@ -778,7 +778,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat bapa klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat bapa klien telah berjaya diluluskan.');
         }  
     }
 
@@ -825,7 +825,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat bapa klien tidak berjaya dikemaskini.');       
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat bapa klien ditolak.');       
     }
 
     public function approveUpdateIbu(Request $request, $id)
@@ -871,7 +871,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat ibu klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat ibu klien telah berjaya diluluskan.');
         }   
     }
 
@@ -918,7 +918,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat ibu klien tidak berjaya dikemaskini.');
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat ibu klien ditolak.');
     }
 
     public function approveUpdatePenjaga(Request $request, $id)
@@ -964,7 +964,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat penjaga klien telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Permohonan kemaskini maklumat penjaga klien telah berjaya diluluskan.');
         } 
     }
 
@@ -1011,7 +1011,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Maklumat penjaga klien tidak berjaya dikemaskini.');
+        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat penjaga klien ditolak.');
     }
 
 
@@ -1077,7 +1077,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat profil telah berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Maklumat profil klien telah berjaya dikemaskini.');
         } 
         else {
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
@@ -1228,7 +1228,7 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Maklumat pasangan klien berjaya dikemaskini.');
+            return redirect()->back()->with('success', 'Maklumat keluarga klien berjaya dikemaskini.');
         } 
         else {
             return redirect()->back()->with('error', 'Klien tidak dijumpai.');
@@ -1448,11 +1448,11 @@ class ProfilKlienController extends Controller
 
         // Join tables and get the client's details
         $butiranKlien = Klien::leftJoin('pekerjaan_klien', 'klien.id', '=', 'pekerjaan_klien.klien_id')
-            ->leftJoin('waris_klien', 'klien.id', '=', 'waris_klien.klien_id')
-            ->leftJoin('keluarga_klien', 'klien.id', '=', 'keluarga_klien.klien_id')
-            ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
-            ->where('klien.id', $clientId)
-            ->first();
+                            ->leftJoin('waris_klien', 'klien.id', '=', 'waris_klien.klien_id')
+                            ->leftJoin('keluarga_klien', 'klien.id', '=', 'keluarga_klien.klien_id')
+                            ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
+                            ->where('klien.id', $clientId)
+                            ->first();
                 
         $resultRequestPasangan = KeluargaKlienUpdateRequest::where('klien_id', $clientId)->first();
         $resultRequestPekerjaan = PekerjaanKlienUpdateRequest::where('klien_id', $clientId)->first();

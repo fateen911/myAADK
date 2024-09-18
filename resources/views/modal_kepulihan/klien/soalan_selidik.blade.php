@@ -94,8 +94,8 @@
             <div class="card-header">
                 <i class="fas fa-user profile-icon"></i>
                 <div>
-                    <h3>NAMA PENUH: {{$klien->nama}} </h3>
-                    <p>NO KAD PENGENALAN: {{$klien->no_kp}}</p>
+                    <h3>{{$klien->nama}} </h3>
+                    <p>{{$klien->no_kp}}</p>
                 </div>
             </div>
             <!--end::Card header-->

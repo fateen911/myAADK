@@ -41,24 +41,22 @@
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
                 {{-- Notifikasi Klien --}}
-                @if(Auth::user()->tahap_pengguna == 2) 
-                    {{-- <li> --}}
-                        <a class="nav-link" href="#"  role="button" data-toggle="dropdown">
-                            <i class="fas fa-bell fs-2 text-white" style="padding-top: 28px; padding-right:12px;"></i>
-                            @if($unreadCount > 0)
-                                <span class="badge badge-danger">{{ $unreadCount }}</span>
-                            @endif
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            @foreach($notifications as $notification)
-                                <a class="dropdown-item" href="#">
-                                    <strong>{{ $notification->title }}</strong>
-                                    <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
-                                </a>
-                            @endforeach
-                        </div>
-                    {{-- </li>                     --}}
-                @endif
+                {{-- @if(Auth::user()->tahap_pengguna == 2) 
+                    <a class="nav-link" href="#"  role="button" data-toggle="dropdown">
+                        <i class="fas fa-bell fs-2 text-white" style="padding-top: 28px; padding-right:12px;"></i>
+                        @if($unreadCount > 0)
+                            <span class="badge badge-danger">{{ $unreadCount }}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        @foreach($notifications as $notification)
+                            <a class="dropdown-item" href="#">
+                                <strong>{{ $notification->title }}</strong>
+                                <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif --}}
 
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
