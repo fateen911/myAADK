@@ -19,7 +19,7 @@ class KemaskiniStatusProg extends Command
     {
         // Your logic to update the program status
         $currentTime = now();
-        $program_mula = Program::where('tarikh_mula', '>=', $currentTime)
+        $program_mula = Program::where('tarikh_mula', '<=', $currentTime)
             ->where('status', '=', 'BELUM SELESAI')
             ->get();
 

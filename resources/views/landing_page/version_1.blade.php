@@ -68,7 +68,7 @@ License: For each use you must have a valid license purchased only from above li
                             <a href="{{url('/landing-page/version-2')}}">
                                 <div class="d-flex gap-2">
                                     <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                                        <span id="kt_landing_hero_text" class="h1">MySupport AADK</span>
+                                        <span id="kt_landing_hero_text" class="h1">MySupport</span>
                                     </span>
                                 </div>
                             </a>

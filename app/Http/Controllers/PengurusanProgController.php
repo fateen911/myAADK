@@ -629,7 +629,12 @@ class PengurusanProgController extends Controller
         $program = Program::find($id);
 
         if ($program) {
-            return view('pengurusan_program.klien.daftar_kehadiran', compact('program'));
+            if ($program->status == 'SEDANG BERLANGSUNG'){
+                return view('pengurusan_program.klien.daftar_kehadiran', compact('program'));
+            }
+            else{
+                return view('pengurusan_program.klien.perekodan_tutup', compact('program'));
+            }
         } else {
             return redirect()->back()->with('error', 'Program tidak wujud.');
         }
@@ -715,7 +720,12 @@ class PengurusanProgController extends Controller
         $program = Program::find($id);
 
         if ($program) {
-            return view('pengurusan_program.klien.pengesahan_kehadiran', compact('program'));
+            if ($program->status == 'BELUM SELESAI'){
+                return view('pengurusan_program.klien.pengesahan_kehadiran', compact('program'));
+            }
+            else{
+                return view('pengurusan_program.klien.pengesahan_tutup', compact('program'));
+            }
         } else {
             return redirect()->back()->with('error', 'Program tidak wujud.');
         }
