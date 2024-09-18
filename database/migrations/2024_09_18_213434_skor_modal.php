@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('skor_modal', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->double('sesi');
+            $table->string('sesi');
             $table->double('modal_fizikal');
             $table->double('modal_psikologi');
             $table->double('modal_sosial');

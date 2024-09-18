@@ -29,9 +29,10 @@
 
         header {
             font-family: 'Montserrat', sans-serif;
-            color: #444;
+            color: white;
+            padding: 10px;
             font-size: 1.8em;
-            background-color: lightgrey;
+            background-color: #363062;
             width: 94%;
             margin: 0 auto; /* Center the header */
             border-radius: 8px; /* Optional: Add rounded corners */

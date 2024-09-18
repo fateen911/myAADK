@@ -221,6 +221,8 @@ class HomeController extends Controller
                     // Handle the case where no KeputusanKepulihan record exists
                     $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->updated_at->addMonths(6) : null;
 
+                    // $tarikhTidakMenjawabKepulihan = Carbon::now();
+
                     // Assuming you have a Notification model or a way to get notifications
                     $unreadCount = Notifikasi::where('klien_id', $klienId)->where('is_read', null)->count();
 

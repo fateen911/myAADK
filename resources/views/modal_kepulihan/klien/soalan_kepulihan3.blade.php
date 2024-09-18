@@ -14,10 +14,11 @@
 
             header {
                 font-family: 'Montserrat', sans-serif;
-                color: black;
+                color: white;
                 padding: 10px;
                 font-size: 1.8em;
-                background-image: linear-gradient(to right,indianred,coral,yellow, mediumseagreen);
+                background-color: #363062;
+                /* background-image: linear-gradient(to right,indianred,coral,yellow, mediumseagreen); */
                 width: 94%;
                 margin: 0 auto; /* Center the header */
                 border-radius: 8px; /* Optional: Add rounded corners */
@@ -130,10 +131,10 @@
 
                             <div class="pagination-buttons">
                                 @if ($currentPage > 1)
-                                    <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage - 1 }})" style="font-weight: bold;">Halaman Sebelum</button>
+                                    <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage - 1 }})" style="font-weight: bold;">Halaman Sebelum {{$currentPage}}/3</button>
                                 @endif
                                 @if ($currentPage < 3)
-                                    <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage + 1 }})" style="font-weight: bold;">Seterusnya</button>
+                                    <button type="button" class="btn btn-secondary btn-active-primary" onclick="changePage({{ $currentPage + 1 }})" style="font-weight: bold;">Seterusnya {{$currentPage}}/3</button>
                                 @endif
                             </div>
                         </form>

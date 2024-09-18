@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\ResponDemografi;
 use App\Models\Klien;
 use App\Models\ResponModalKepulihan;
+use App\Models\SkorModal;
 use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
@@ -467,6 +468,53 @@ class ModalKepulihanController extends Controller
             ['tahap_kepulihan_id' => $tahapKepulihanId, 'skor' => $skor, 'status' => 'Selesai', 'updated_at' => now()]
         );
 
+        // Modal calculation logic
+        $modalMappings = [
+            'modal_fizikal' => [1, 2, 3],
+            'modal_psikologi' => [4, 5, 6, 7, 8, 9, 10],
+            'modal_sosial' => [11, 12, 13, 14, 15],
+            'modal_persekitaran' => [16, 17, 18],
+            'modal_insaniah' => [19, 20],
+            'modal_strategi_daya_tahan' => [24, 25, 26],
+            'modal_resiliensi' => [27, 28],
+            'modal_spiritual' => [21],
+            'modal_rawatan' => [22],
+            'modal_kesihatan' => [23],
+        ];
+
+        $modalAverages = [];
+
+        foreach ($modalMappings as $modal => $soalanIds) {
+            // Get the sum of 'skala' values for the given soalan_ids
+            $sumSkala = DB::table('respon_modal_kepulihan')
+                        ->whereIn('soalan_id', $soalanIds)
+                        ->where('klien_id', $clientId)
+                        ->sum('skala_id');
+            
+            // Calculate the average (sum / count of soalan_ids)
+            $average = $sumSkala / count($soalanIds);
+            $modalAverages[$modal] = round($average, 2);
+        }
+
+        // Insert modal averages into 'skor_modal' table
+        DB::table('skor_modal')->updateOrInsert(
+            ['klien_id' => $clientId, 'sesi' => $newSession],
+            [
+                'modal_fizikal' => $modalAverages['modal_fizikal'],
+                'modal_psikologi' => $modalAverages['modal_psikologi'],
+                'modal_sosial' => $modalAverages['modal_sosial'],
+                'modal_persekitaran' => $modalAverages['modal_persekitaran'],
+                'modal_insaniah' => $modalAverages['modal_insaniah'],
+                'modal_strategi_daya_tahan' => $modalAverages['modal_strategi_daya_tahan'],
+                'modal_resiliensi' => $modalAverages['modal_resiliensi'],
+                'modal_spiritual' => $modalAverages['modal_spiritual'],
+                'modal_rawatan' => $modalAverages['modal_rawatan'],
+                'modal_kesihatan' => $modalAverages['modal_kesihatan'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
         // Check if a response demografi already exists for the current session
         $existingResponseDemografi = ResponDemografi::where('klien_id', $clientId)
                                     ->where('sesi', $newSession)
@@ -727,6 +775,7 @@ class ModalKepulihanController extends Controller
 
     public function sejarahSoalSelidik($klien_id)
     {
+        // Fetch the main history data
         $sejarah = DB::table('keputusan_kepulihan_klien as kk')
                     ->join('klien as u', 'kk.klien_id', '=', 'u.id')
                     ->select(
@@ -735,13 +784,17 @@ class ModalKepulihanController extends Controller
                         'kk.skor',
                         'kk.tahap_kepulihan_id',
                         'kk.status',
-                        'kk.updated_at'
+                        'kk.updated_at',
+                        'kk.klien_id',
+                        'kk.sesi'
                     )
                     ->where('kk.klien_id', $klien_id)
                     ->orderBy('kk.updated_at', 'desc')
                     ->get();
 
-        return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah'));
+        $clientModals = SkorModal::where('klien_id', $klien_id)->orderBy('sesi')->get();
+
+        return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah', 'clientModals'));
     }
 
 }
