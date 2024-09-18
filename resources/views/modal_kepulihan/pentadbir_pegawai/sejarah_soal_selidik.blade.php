@@ -152,7 +152,7 @@
                                                                 @if ($clientModals->count())
                                                                     @foreach ($clientModals->groupBy('sesi') as $sesi => $modalData)
                                                                         @if ($sesi == $response->sesi)
-                                                                            <h6>Status Kesuluruhan Modal Kepulihan: 
+                                                                            <h6>Status Keseluruhan Modal Kepulihan: 
                                                                                 @if ($response->tahap_kepulihan_id == 1)
                                                                                     <badge class="badge text-white" style="background-color: red; padding:10px;">{{ $tahap_kepulihan }}</badge>
                                                                                 @elseif ($response->tahap_kepulihan_id == 2)
