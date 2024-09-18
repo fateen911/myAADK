@@ -122,41 +122,21 @@
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
-                                                        {{-- <button type="button" class="btn btn-sm" style="background-color: red; padding:10px;" data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}">
-                                                            {{ $tahap_kepulihan }}
-                                                        </button> --}}
-                                                        {{-- <badge class="badge text-white" style="background-color: red; padding:10px;">{{ $tahap_kepulihan }}</badge> --}}
                                                     @elseif ($response->tahap_kepulihan_id == 2)
                                                         <button type="button" class="btn btn-sm" style="background-color: darkorange; padding:10px;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
-                                                        {{-- <button type="button" class="btn btn-sm" style="background-color: darkorange; padding:10px;" data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}">
-                                                            {{ $tahap_kepulihan }}
-                                                        </button> --}}
-                                                        {{-- <badge class="badge text-white" style="background-color: darkorange; padding:10px;">{{ $tahap_kepulihan }}</badge> --}}
                                                     @elseif ($response->tahap_kepulihan_id == 3)
                                                         <button type="button" class="btn btn-warning btn-sm" style="padding:10px;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
-                                                        {{-- <button type="button" class="btn btn-warning btn-sm" style="padding:10px;" data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}">
-                                                            {{ $tahap_kepulihan }}
-                                                        </button> --}}
-                                                        {{-- <badge class="badge text-white bg-warning" style="padding: 10px;">{{ $tahap_kepulihan }}</badge>    --}}
                                                     @else
                                                         <button type="button" class="btn btn-sm" style="background-color: green; padding:10px;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
-                                                        {{-- <button type="button" class="btn btn-sm" style="background-color: green; padding:10px;" 
-                                                            data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
-                                                            {{ $tahap_kepulihan }}
-                                                        </button> --}}
-                                                        {{-- <button type="button" class="btn btn-sm" style="background-color: green; padding:10px;" data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}">
-                                                            {{ $tahap_kepulihan }}
-                                                        </button> --}}
-                                                        {{-- <badge class="badge text-white" style="background-color: green; padding:10px;">{{ $tahap_kepulihan }}</badge> --}}
                                                     @endif
                                                 @endif
 
@@ -172,55 +152,284 @@
                                                                 @if ($clientModals->count())
                                                                     @foreach ($clientModals->groupBy('sesi') as $sesi => $modalData)
                                                                         @if ($sesi == $response->sesi)
-                                                                            <h6>Sesi: {{ $sesi }}</h6>
+                                                                            <h6>Status Kesuluruhan Modal Kepulihan: 
+                                                                                @if ($response->tahap_kepulihan_id == 1)
+                                                                                    <badge class="badge text-white" style="background-color: red; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                                                @elseif ($response->tahap_kepulihan_id == 2)
+                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                                                @elseif ($response->tahap_kepulihan_id == 3)
+                                                                                    <badge class="badge text-white bg-warning" style="padding: 10px;">{{ $tahap_kepulihan }}</badge> 
+                                                                                @else
+                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                                                @endif
+                                                                            </h6>
                                                                             <table class="table table-bordered">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>Modal</th>
-                                                                                        <th>Skor</th>
+                                                                                        <th style="text-align: center">Modal</th>
+                                                                                        <th style="text-align: center">Skor</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     @foreach ($modalData as $modalSkor)
                                                                                         <tr>
                                                                                             <td>Modal Fizikal</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_fizikal, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_fizikal >= 1.0 && $modalSkor->modal_fizikal <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_fizikal, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_fizikal > 1.5 && $modalSkor->modal_fizikal <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_fizikal, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_fizikal > 2.5 && $modalSkor->modal_fizikal <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_fizikal, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_fizikal > 3.5 && $modalSkor->modal_fizikal <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_fizikal, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Psikologi</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_psikologi, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_psikologi >= 1.0 && $modalSkor->modal_psikologi <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_psikologi, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_psikologi > 1.5 && $modalSkor->modal_psikologi <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_psikologi, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_psikologi > 2.5 && $modalSkor->modal_psikologi <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_psikologi, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_psikologi > 3.5 && $modalSkor->modal_psikologi <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_psikologi, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Sosial</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_sosial, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_sosial >= 1.0 && $modalSkor->modal_sosial <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_sosial, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_sosial > 1.5 && $modalSkor->modal_sosial <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_sosial, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_sosial > 2.5 && $modalSkor->modal_sosial <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_sosial, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_sosial > 3.5 && $modalSkor->modal_sosial <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_sosial, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Persekitaran</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_persekitaran, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_persekitaran >= 1.0 && $modalSkor->modal_persekitaran <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_persekitaran, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_persekitaran > 1.5 && $modalSkor->modal_persekitaran <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_persekitaran, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_persekitaran > 2.5 && $modalSkor->modal_persekitaran <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_persekitaran, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_persekitaran > 3.5 && $modalSkor->modal_persekitaran <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_persekitaran, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Insaniah</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_insaniah, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_insaniah >= 1.0 && $modalSkor->modal_insaniah <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_insaniah, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_insaniah > 1.5 && $modalSkor->modal_insaniah <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_insaniah, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_insaniah > 2.5 && $modalSkor->modal_insaniah <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_insaniah, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_insaniah > 3.5 && $modalSkor->modal_insaniah <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_insaniah, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Strategi Daya Tahan</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_strategi_daya_tahan >= 1.0 && $modalSkor->modal_strategi_daya_tahan <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_strategi_daya_tahan > 1.5 && $modalSkor->modal_strategi_daya_tahan <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_strategi_daya_tahan > 2.5 && $modalSkor->modal_strategi_daya_tahan <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_strategi_daya_tahan > 3.5 && $modalSkor->modal_strategi_daya_tahan <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Resiliensi</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_resiliensi, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_resiliensi >= 1.0 && $modalSkor->modal_resiliensi <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_resiliensi, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_resiliensi > 1.5 && $modalSkor->modal_resiliensi <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_resiliensi, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_resiliensi > 2.5 && $modalSkor->modal_resiliensi <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_resiliensi, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_resiliensi > 3.5 && $modalSkor->modal_resiliensi <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_resiliensi, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Spiritual</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_spiritual, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_spiritual >= 1.0 && $modalSkor->modal_spiritual <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_spiritual, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_spiritual > 1.5 && $modalSkor->modal_spiritual <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_spiritual, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_spiritual > 2.5 && $modalSkor->modal_spiritual <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_spiritual, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_spiritual > 3.5 && $modalSkor->modal_spiritual <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_spiritual, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Rawatan</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_rawatan, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_rawatan >= 1.0 && $modalSkor->modal_rawatan <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_rawatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_rawatan > 1.5 && $modalSkor->modal_rawatan <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_rawatan, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_rawatan > 2.5 && $modalSkor->modal_rawatan <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_rawatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_rawatan > 3.5 && $modalSkor->modal_rawatan <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_rawatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td>Modal Kesihatan</td>
-                                                                                            <td>{{ number_format($modalSkor->modal_kesihatan, 2) }}</td>
+                                                                                            <td>
+                                                                                                @if($modalSkor->modal_kesihatan >= 1.0 && $modalSkor->modal_kesihatan <= 1.5)
+                                                                                                    <badge class="badge badge-danger"class="badge text-white" style="background-color: red; padding:10px;">
+                                                                                                        SANGAT TIDAK MEMUASKAN <br><br> 
+                                                                                                        {{ number_format($modalSkor->modal_kesihatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_kesihatan > 1.5 && $modalSkor->modal_kesihatan <= 2.5)
+                                                                                                    <badge class="badge text-white" style="background-color: darkorange; padding:10px;">
+                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_kesihatan, 2) }} ()
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_kesihatan > 2.5 && $modalSkor->modal_kesihatan <= 3.5)
+                                                                                                    <badge class="badge text-white bg-warning" style="padding:10px;">
+                                                                                                        MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_kesihatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @elseif($modalSkor->modal_kesihatan > 3.5 && $modalSkor->modal_kesihatan <= 4.0)
+                                                                                                    <badge class="badge text-white" style="background-color: green; padding:10px;">
+                                                                                                        SANGAT MEMUASKAN <br><br>
+                                                                                                        {{ number_format($modalSkor->modal_kesihatan, 2) }}
+                                                                                                    </badge>
+                                                                                                @endif
+                                                                                            </td>
                                                                                         </tr>
                                                                                     @endforeach
                                                                                 </tbody>
