@@ -144,7 +144,15 @@
 
         $pendidikan = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
     
-        $pendapatanKlien = DB::table('senarai_pendapatan')->where('id', $pekerjaan->pendapatan)->value('senarai_pendapatan.pendapatan');
+        $penyakitKlien = DB::table('senarai_penyakit')->where('id', $klien->penyakit)->value('senarai_penyakit.penyakit');
+
+        $bidangKerja = $pekerjaan && isset($pekerjaan['bidang_kerja']) ? DB::table('senarai_bidang_pekerjaan')->where('id', $pekerjaan['bidang_kerja'])->value('senarai_bidang_pekerjaan.bidang') : null;
+
+        $namaKerja = $pekerjaan && isset($pekerjaan['nama_kerja']) ? DB::table('senarai_pekerjaan')->where('id', $pekerjaan['nama_kerja'])->value('senarai_pekerjaan.pekerjaan') : null;
+
+        $pendapatanKlien = $pekerjaan && isset($pekerjaan['pendapatan']) ? DB::table('senarai_pendapatan')->where('id', $pekerjaan['pendapatan'])->value('senarai_pendapatan.pendapatan') : null;
+
+        $namaMajikan = $pekerjaan && isset($pekerjaan['nama_majikan']) ? DB::table('senarai_majikan')->where('id', $pekerjaan['nama_majikan'])->value('senarai_majikan.majikan') : null;
     @endphp
 
     <table class="profile-form no-break">
@@ -198,9 +206,9 @@
                 <td>{{$bangsaKlien}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Status Kesihatan Mental</td>
+                <td style="width: 35%">Penyakit</td>
                 <td style="width: 2%">:</td>
-                <td>{{$klien->status_kesihatan_mental}}</td>
+                <td>{{$penyakitKlien}}</td>
             </tr>
             <tr class="gap-left">
                 <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
@@ -455,12 +463,12 @@
                 <tr class="gap-left">
                     <td style="width: 35%" class="gap-top">Bidang Pekerjaan</td>
                     <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{$pekerjaan->bidang_kerja ?? ''}}</td>
+                    <td class="gap-top">{{$bidangKerja}}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 35%" class="gap-top">Nama Pekerjaan</td>
                     <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{$pekerjaan->nama_kerja ?? ''}}</td>
+                    <td class="gap-top">{{$namaKerja}}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 35%">Pendapatan Bulanan (RM)</td>
@@ -475,7 +483,7 @@
                 <tr class="gap-left">
                     <td style="width: 35%">Nama Majikan</td>
                     <td style="width: 2%">:</td>
-                    <td>{{$pekerjaan->nama_majikan ?? ''}}</td>
+                    <td>{{$namaMajikan}}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 35%">No. Telefon Majikan</td>
