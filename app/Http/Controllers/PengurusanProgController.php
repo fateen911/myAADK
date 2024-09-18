@@ -674,7 +674,8 @@ class PengurusanProgController extends Controller
         $perekodan->klien_id            =   $klien_id;
         $perekodan->tarikh_perekodan    =   $tarikh_perekodan;
         $perekodan->save();
-        return redirect()->back()->with('success', 'Kehadiran berjaya direkodkan.');
+
+        return view('pengurusan_program.klien.perekodan_berjaya', compact('program'));
     }
 
     public function postDaftarKehadiran2(Request $request, $id) //perekodan
@@ -769,7 +770,7 @@ class PengurusanProgController extends Controller
         $pengesahan->save();
 
 
-        return redirect()->back()->with('success', 'Berjaya dihantar.');
+        return view('pengurusan_program.klien.pengesahan_berjaya', compact('program'));
     }
 
     //HEBAHAN
@@ -878,7 +879,7 @@ class PengurusanProgController extends Controller
 
                 $message = "Salam Sejahtera,\n\n" .
                     "Anda dijemput untuk menyertai program\n\n" .
-                    "NAMA PROGRAM: " . strtoupper($program->nama) . "\n" .
+                    "NAMA AKTIVITI: " . strtoupper($program->nama) . "\n" .
                     "TARIKH MULA: " . date('d/m/Y, h:iA', strtotime($program->tarikh_mula)) . "\n" .
                     "TARIKH TAMAT: " . date('d/m/Y, h:iA', strtotime($program->tarikh_tamat)) . "\n" .
                     "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
@@ -1006,7 +1007,7 @@ class PengurusanProgController extends Controller
                 'klien' => $item->klien->nama,
                 'no_kp' => $item->klien->no_kp,
                 'alamat' => $item->klien->alamat_rumah,
-                'no_tel' => $item->klien->no_tel,
+                'no_tel' => $item->klien->no_tel ? $item->klien->no_tel : 'TIADA',
                 'keputusan' => $item->keputusan,
                 'negeri' => $negeri ? $negeri->negeri : 'TIADA',
                 'daerah' => $daerah ? $daerah->daerah : 'TIADA',

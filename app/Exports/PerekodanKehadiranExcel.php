@@ -38,7 +38,7 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
         $data = [
             [''], // Empty row for spacing
             [''], // Empty row for spacing
-            ['NAMA PROGRAM: ' . $this->nama],
+            ['NAMA AKTIVITI: ' . $this->nama],
             ['TARIKH/MASA MULA: ' . $this->tarikh_mula],
             ['TARIKH/MASA TAMAT: ' . $this->tarikh_tamat],
             ['TEMPAT: ' . $this->tempat],

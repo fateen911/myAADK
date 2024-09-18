@@ -14,7 +14,7 @@
         <div class="d-table w-100">
             <div class="d-table-row">
                 <div class="d-table-cell text-left w-50">
-                    <p class="text-uppercase">Nama Program: {{$program->nama}}</p>
+                    <p class="text-uppercase">Nama Aktiviti: {{$program->nama}}</p>
                 </div>
                 <div class="d-table-cell text-right w-50">
                     <p class="text-uppercase">Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</p>

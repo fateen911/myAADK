@@ -10,13 +10,13 @@
 <form method="post" action="{{url('/pengurusan-program/hebahan/emel/'.$program->id)}}">
     @csrf
     <div class="h-500px">
-        <b class="text-uppercase fw-medium">NAMA PROGRAM: {{$program->nama}}</b> <br>
+        <b class="text-uppercase fw-medium">NAMA AKTIVITI: {{$program->nama}}</b> <br>
         <b class="text-uppercase fw-medium">TARIKH/MASA MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b><br>
         <b class="text-uppercase fw-medium">TARIKH/MASA TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</b><br>
         <b class="text-uppercase fw-medium">TEMPAT: {{$program->tempat}}</b><br>
         <br>
         <hr>
-        <p>Sila pilih klien untuk hebahan program:</p>
+        <p>Sila pilih klien untuk hebahan aktiviti:</p>
 
         <input type="hidden" name="daerah" id="daerah" value="{{$daerah}}">
         <!--begin::Table-->

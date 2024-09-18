@@ -6,7 +6,7 @@
 <body>
 <p>Assalamualaikum dan Salam Sejahtera,<br>
 <p>Dengan segala hormatnya, kami ingin menjemput pihak tuan/puan untuk menghadiri program berikut:</p> <br>
-<p><b>NAMA PROGRAM: {{strtoupper($program->nama)}}</b></p>
+<p><b>NAMA AKTIVITI: {{strtoupper($program->nama)}}</b></p>
 <p><b>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b></p>
 <p><b>TARIKH TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</b></p>
 <p><b>TEMPAT: {{strtoupper($program->tempat)}}</b></p>

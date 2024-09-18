@@ -65,10 +65,10 @@ License: For each use you must have a valid license purchased only from above li
                             </button>
                             <!--end::Mobile menu toggle-->
                             <!--begin::Logo image-->
-                            <a href="{{url('/landing-page/version-2')}}">
+                            <a href="{{url('/landing-page/version-1')}}">
                                 <div class="d-flex gap-2">
-                                    <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                                        <span id="kt_landing_hero_text" class="h1">MySupport</span>
+                                    <span>
+                                        <span id="kt_landing_hero_text" class="fs-1" style="color: white!important;">My Support</span>
                                     </span>
                                 </div>
                             </a>
@@ -127,12 +127,11 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <hr style="width: 35%">
                     <!--begin::Title-->
-                    <h1 class="lh-base fw-bold fs-3x fs-lg-3x my-8">SELAMAT DATANG KE
-                        <br>
-                        <span class="fs-4x" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                            <span id="kt_landing_hero_text">MySupport AADK</span>
-                        </span>
-                    </h1>
+                    <h1 class="lh-base fw-bold fs-3x fs-lg-3x my-8">SELAMAT DATANG KE</h1>
+                    <div class="gap-2 mb-8 w-30 text-center">
+                        <img alt="Logo" src="/logo/MySupport.png" class="logo-default h-150px h-lg-200px"/>
+                    </div>
+
                     <!--end::Title-->
                     <!--begin::Action-->
                     <h3 class="color-gray-landing">

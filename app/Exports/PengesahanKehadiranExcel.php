@@ -47,7 +47,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
                 'klien' => $item->klien->nama,
                 'no_kp' => $item->klien->no_kp,
                 'alamat' => $item->klien->alamat_rumah,
-                'no_tel' => $item->klien->no_tel,
+                'no_tel' => $item->klien->no_tel ? $item->klien->no_tel : 'TIADA',
                 'keputusan' => $item->keputusan,
                 'negeri' => $negeri ? $negeri->negeri : 'TIADA',
                 'daerah' => $daerah ? $daerah->daerah : 'TIADA',
@@ -66,7 +66,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         $data = [
             [''], // Empty row for spacing
             [''], // Empty row for spacing
-            ['NAMA PROGRAM: ' . $this->nama],
+            ['NAMA AKTIVITI: ' . $this->nama],
             ['TARIKH/MASA MULA: ' . $this->tarikh_mula],
             ['TARIKH/MASA TAMAT: ' . $this->tarikh_tamat],
             ['TEMPAT: ' . $this->tempat],

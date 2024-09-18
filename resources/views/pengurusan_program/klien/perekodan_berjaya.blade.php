@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder mb-7">Borang Kehadiran</h1>
+                    <h2 class="fw-bolder mb-7">Borang kehadiran berjaya dihantar.</h2>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
@@ -81,17 +81,9 @@
                         Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}} <br>
                         Tarikh/Masa Tamat: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}} <br>
                         Tempat: {{$program->tempat}} <br>
-                        @if($program->penganjur!=null)
-                            Penganjur: {{$program->penganjur}} <br>
-                        @endif
-                        Pegawai AADK: {{$program->nama_pegawai}} <br>
-                        Sila Hubungi: {{$program->no_tel_dihubungi}} <br>
                         <br>
                         <hr>
-
-                        <div class="alert alert-danger p-2" role="alert">
-                            <span class="fs-3">Borang kehadiran telah ditutup. Aktiviti telah tamat.</span>
-                        </div>
+                        <a href="{{url('/pengurusan-program/klien/daftar-kehadiran/'.$program->id)}}">Klik sini untuk kehadiran yang lain.</a>
                     </div>
                     <!--end::Text-->
                 </div>

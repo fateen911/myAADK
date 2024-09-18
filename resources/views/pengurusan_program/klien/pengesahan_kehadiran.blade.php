@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder text-gray-900 mb-7">Pengesahan Kehadiran</h1>
+                    <h1 class="fw-bolder text-gray-900 mb-7">Borang Maklum Balas Kehadiran</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
@@ -77,7 +77,7 @@
                     <!--end::Counter-->
                     <!--begin::Text-->
                     <div class="w-md-350px mb-2 mx-auto fw-semibold fs-6 mb-7 ">
-                        Nama Program: {{$program->nama}} <br>
+                        Nama Aktiviti: {{$program->nama}} <br>
                         Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}} <br>
                         Tarikh/Masa Tamat: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}} <br>
                         Tempat: {{$program->tempat}} <br>
@@ -99,7 +99,7 @@
                             </div>
                         @endif
                         <div class="fw-semibold fs-6 text-black mb-7">
-                            Lengkapkan maklumat berikut untuk mengesahkan kehadiran<br>
+                            Lengkapkan maklumat berikut untuk maklum balas kehadiran<br>
                         </div>
                     </div>
                     <!--end::Text-->
