@@ -375,7 +375,7 @@ class DaftarPenggunaController extends Controller
 
             // Send notification email to the staff
             // Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
-            Mail::to($request->emelPegawai)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
             return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
@@ -401,7 +401,7 @@ class DaftarPenggunaController extends Controller
 
         // Send rejection email to the staff
         // Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
-        Mail::to($request->emelPegawai)->send(new PegawaiRejected($pegawaiDitolak));
+        Mail::to($pegawaiDitolak->emel)->send(new PegawaiRejected($pegawaiDitolak));
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
     }
