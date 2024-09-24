@@ -787,7 +787,8 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="true" >
+                                        <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="false" >
+                                            <option>Pilih Bidang Pekerjaan</option>
                                             @foreach ($bidangKerja as $item)
                                                 <option value="{{ $item->id }}" {{ $pekerjaan->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
                                             @endforeach
@@ -805,7 +806,8 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="true" >
+                                        <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="false" >
+                                            <option>Pilih Nama Pekerjaan</option>
                                             @foreach ($namaKerja as $item)
                                                 <option value="{{ $item->id }}" {{ $pekerjaan->nama_kerja == $item->id ? 'selected' : '' }}>{{ $item->pekerjaan }}</option>
                                             @endforeach
@@ -824,7 +826,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
+                                        <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="false">
                                             <option>Pilih Julat Pendapatan</option>
                                             @foreach ($pendapatan as $item)
                                                 <option value="{{ $item->id }}" {{ $pekerjaan->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
@@ -845,7 +847,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
+                                        <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="false">
                                             <option>Pilih Kategori Majikan</option>
                                             <option value="SENDIRI" {{ $pekerjaan->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                             <option value="SWASTA" {{ $pekerjaan->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
@@ -868,7 +870,8 @@
                                     </div>
                                     <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="true" >
+                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="false" >
+                                            <option>Pilih Nama Majikan</option>
                                             @foreach ($majikan as $item)
                                                 <option value="{{ $item->id }}" {{ $pekerjaan->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
                                             @endforeach
@@ -946,8 +949,8 @@
                                     <div class="col-md-9">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
-                                                <option>Pilih negeri</option>
+                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2">
+                                                <option>Pilih Negeri</option>
                                                 @foreach ($negeriKerja as $negeriK)
                                                     <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                                 @endforeach
@@ -970,7 +973,7 @@
                                         <div class="w-100">
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                <option>Pilih daerah</option>
+                                                <option>Pilih Daerah</option>
                                                 @foreach ($daerahKerja as $daerahK)
                                                     <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                                 @endforeach
@@ -989,8 +992,8 @@
                                         <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="true">
-                                            <option>Pilih Alasan</option>
+                                        <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="false">
+                                            <option>Pilih Alasan Tidak Bekerja</option>
                                             <option value="PENGANGGUR" {{ $pekerjaan->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                             <option value="PELAJAR" {{ $pekerjaan->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
                                             <option value="PESAKIT" {{ $pekerjaan->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
@@ -2856,7 +2859,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     @php
-                                        $daerah_pejabat = DB::table('senarai_daerah_pejabat')->where('kod', $rawatan->pejabat)->value('senarai_daerah_pejabat.daerah');
+                                        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $rawatan->klien_id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                        $daerah_pejabat = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
                                     @endphp
                                     <span class="fs-6 form-control-plaintext">{{$daerah_pejabat}}</span>
                                 </div>
@@ -3427,25 +3431,62 @@
                 alasan_tidak_kerja: "{{ $pekerjaan->alasan_tidak_kerja }}"  // This could be null
             };
 
+            console.log(originalData);
+
             // Get current form data
             let alasan_tidak_kerja = document.getElementById('alasan_tidak_kerja') ? document.getElementById('alasan_tidak_kerja').value : '';
-            if (alasan_tidak_kerja === 'Pilih Alasan') {
-                alasan_tidak_kerja = null;  // Treat "Pilih Alasan" as null
+            if (alasan_tidak_kerja === 'Pilih Alasan Tidak Bekerja') {
+                alasan_tidak_kerja = null;  // Treat as null
+            }
+
+            let negeri_kerja = document.getElementById('negeri_kerja') ? document.getElementById('negeri_kerja').value : '';
+            if (negeri_kerja === 'Pilih Negeri') {
+                negeri_kerja = null;  // Treat as null
+            }
+
+            let daerah_kerja = document.getElementById('daerah_kerja') ? document.getElementById('daerah_kerja').value : '';
+            if (daerah_kerja === 'Pilih Daerah') {
+                daerah_kerja = null;  // Treat as null
+            }
+
+            let pendapatan = document.getElementById('pendapatan') ? document.getElementById('pendapatan').value : '';
+            if (pendapatan === 'Pilih Julat Pendapatan') {
+                pendapatan = null;  // Treat as null
+            }
+
+            let bidang_kerja = document.getElementById('bidang_kerja') ? document.getElementById('bidang_kerja').value : '';
+            if (bidang_kerja === 'Pilih Bidang Pekerjaan') {
+                bidang_kerja = null;  // Treat as null
+            }
+
+            let nama_kerja = document.getElementById('nama_kerja') ? document.getElementById('nama_kerja').value : '';
+            if (nama_kerja === 'Pilih Nama Pekerjaan') {
+                nama_kerja = null;  // Treat as null
+            }
+
+            let kategori_majikan = document.getElementById('kategori_majikan') ? document.getElementById('kategori_majikan').value : '';
+            if (kategori_majikan === 'Pilih Kategori Majikan') {
+                kategori_majikan = null;  // Treat as null
+            }
+
+            let nama_majikan = document.getElementById('nama_majikan') ? document.getElementById('nama_majikan').value : '';
+            if (nama_majikan === 'Pilih Nama Majikan') {
+                nama_majikan = null;  // Treat as null
             }
 
             const currentData = {
                 status_kerja: document.getElementById('status_kerja').value,
-                bidang_kerja: document.getElementById('bidang_kerja').value,
-                nama_kerja: document.getElementById('nama_kerja').value,
-                pendapatan: document.getElementById('pendapatan').value,
-                kategori_majikan: document.getElementById('kategori_majikan').value,
-                nama_majikan: document.getElementById('nama_majikan').value,
+                bidang_kerja: bidang_kerja,
+                nama_kerja: nama_kerja,
+                pendapatan: pendapatan,
+                kategori_majikan: kategori_majikan,
+                nama_majikan: nama_majikan,
                 no_tel_majikan: document.getElementById('no_tel_majikan').value,
                 alamat_kerja: document.getElementById('alamat_kerja').value,
                 poskod_kerja: document.getElementById('poskod_kerja').value,
-                negeri_kerja: document.getElementById('negeri_kerja').value,
-                daerah_kerja: document.getElementById('daerah_kerja').value,
-                alasan_tidak_kerja: alasan_tidak_kerja  // Use the updated value
+                negeri_kerja: negeri_kerja,
+                daerah_kerja: daerah_kerja,
+                alasan_tidak_kerja: alasan_tidak_kerja 
             };
 
             // Handle poskod_kerja as a string for comparison
@@ -3475,7 +3516,9 @@
                 e.preventDefault(); 
                 return;
             } 
-            else {
+            else { 
+                console.log('Form data is being submitted with the following values:', currentData);
+
                 // Allow form submission
                 document.getElementById('pekerjaanKlienForm').submit();
             }
