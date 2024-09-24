@@ -1295,12 +1295,14 @@
 	<script>
 		document.querySelectorAll('input[name="nama"]').forEach(function(input) {
 			input.addEventListener('input', function() {
-				this.value = this.value.replace(/[^a-zA-Z\s@]/g, '');
+				// Allow letters, spaces, and single quotes
+				this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
 			});
 		});
 
 		document.getElementById('name').addEventListener('input', function (e) {
-			this.value = this.value.replace(/[^a-zA-Z\s@]/g, '');
+			// Allow letters, spaces, and single quotes
+			this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
 		});
 
 		document.addEventListener('DOMContentLoaded', function() {

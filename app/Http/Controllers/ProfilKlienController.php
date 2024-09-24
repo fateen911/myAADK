@@ -546,7 +546,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat peribadi klien ditolak.');
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat peribadi klien ditolak.');
     }
 
     public function approveUpdatePekerjaan(Request $request, $id)
@@ -639,7 +639,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat pekerjaan klien ditolak.');
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat pekerjaan klien ditolak.');
     }
 
     public function approveUpdateKeluarga(Request $request, $id)
@@ -732,7 +732,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat keluarga klien ditolak.');
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat keluarga klien ditolak.');
     }
 
     public function approveUpdateBapa(Request $request, $id)
@@ -825,7 +825,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat bapa klien ditolak.');       
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat bapa klien ditolak.');       
     }
 
     public function approveUpdateIbu(Request $request, $id)
@@ -918,7 +918,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat ibu klien ditolak.');
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat ibu klien ditolak.');
     }
 
     public function approveUpdatePenjaga(Request $request, $id)
@@ -1011,7 +1011,7 @@ class ProfilKlienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('error', 'Permohonan kemaskini maklumat penjaga klien ditolak.');
+        return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat penjaga klien ditolak.');
     }
 
 
@@ -1039,15 +1039,15 @@ class ProfilKlienController extends Controller
 
         // Map the validated data to the original field names
         $updateData = [
-            'no_tel'                   => $validatedData['no_tel'],
-            'emel'                     => $validatedData['emel'],
-            'alamat_rumah'             => $validatedData['alamat_rumah_klien'],
-            'poskod'                   => $validatedData['poskod_klien'],
-            'daerah'                   => $validatedData['daerah_klien'],
-            'negeri'                   => $validatedData['negeri_klien'],
-            'tahap_pendidikan'         => $validatedData['tahap_pendidikan'],
-            'penyakit'  => $validatedData['penyakit'],
-            'status_oku'               => $validatedData['status_oku'],
+            'no_tel'            => $validatedData['no_tel'],
+            'emel'              => $validatedData['emel'],
+            'alamat_rumah'      => $validatedData['alamat_rumah_klien'],
+            'poskod'            => $validatedData['poskod_klien'],
+            'daerah'            => $validatedData['daerah_klien'],
+            'negeri'            => $validatedData['negeri_klien'],
+            'tahap_pendidikan'  => $validatedData['tahap_pendidikan'],
+            'penyakit'          => $validatedData['penyakit'],
+            'status_oku'        => $validatedData['status_oku'],
         ];
 
         // Find the client

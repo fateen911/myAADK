@@ -2993,8 +2993,18 @@
             @if(session('errorProfil'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Tidak Berjaya Dikemaskini!',
+                    title: 'Kemaskini Ditolak!',
                     text: '{!! session('errorProfil') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            // Check if there is a flash error message
+            @if(session('errorPermohonan'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Permohonan Kemaskini Ditolak!',
+                    text: '{!! session('errorPermohonan') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
