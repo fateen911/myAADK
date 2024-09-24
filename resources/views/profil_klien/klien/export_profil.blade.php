@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <head>
-    <title>{{ config('app.name', 'SistemAADK') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -33,7 +32,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('logo/aadk-removebg.png');
+            background-image: url('logo/mySupport-bw.png');
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -153,13 +152,21 @@
         $pendapatanKlien = $pekerjaan && isset($pekerjaan['pendapatan']) ? DB::table('senarai_pendapatan')->where('id', $pekerjaan['pendapatan'])->value('senarai_pendapatan.pendapatan') : null;
 
         $namaMajikan = $pekerjaan && isset($pekerjaan['nama_majikan']) ? DB::table('senarai_majikan')->where('id', $pekerjaan['nama_majikan'])->value('senarai_majikan.majikan') : null;
+
+        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+
+        $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
+
+        $daerah_semasa = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_baru');
+
+        $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('senarai_daerah_pejabat.daerah');
     @endphp
 
     <table class="profile-form no-break">
         <tr class="no-break">
             <td class="text-center" colspan="3" style="text-align: center;">
                 <div class="header">
-                    <img src="{{ public_path('logo/aadk.png') }}" alt="Logo AADK" style="width: 15%; height: 10%;">
+                    <img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 18%; height: 12%;">
                     <h3>AGENSI ANTIDADAH KEBANGSAAN (AADK)</h3>
                     <b>MAKLUMAT PROFIL PERIBADI</b>
                 </div>
@@ -206,21 +213,6 @@
                 <td>{{$bangsaKlien}}</td>
             </tr>
             <tr class="gap-left">
-                <td style="width: 35%">Penyakit</td>
-                <td style="width: 2%">:</td>
-                <td>{{$penyakitKlien}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
-                <td style="width: 2%">:</td>
-                <td>{{$klien->status_oku}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Skor CCRI</td>
-                <td style="width: 2%">:</td>
-                <td>{{$klien->skor_ccri}}</td>
-            </tr>
-            <tr class="gap-left">
                 <td style="width: 35%">Alamat Rumah</td>
                 <td style="width: 2%">:</td>
                 <td>{{$klien->alamat_rumah}}</td>
@@ -244,6 +236,31 @@
                 <td style="width: 35%">Tahap Pendidikan</td>
                 <td style="width: 2%">:</td>
                 <td class="gap-bottom">{{$pendidikan}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Penyakit</td>
+                <td style="width: 2%">:</td>
+                <td>{{$penyakitKlien}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Status Orang Kurang Upaya (OKU)</td>
+                <td style="width: 2%">:</td>
+                <td>{{$klien->status_oku}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Skor CCRI</td>
+                <td style="width: 2%">:</td>
+                <td>{{$klien->skor_ccri}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Tamat RPDK</td>
+                <td style="width: 2%">:</td>
+                <td class="gap-bottom">{{$tamatRPDK}}</td>
+            </tr>
+            <tr class="gap-left">
+                <td style="width: 35%">Daerah Semasa PCCP</td>
+                <td style="width: 2%">:</td>
+                <td>{{$daerahPCCP}}</td>
             </tr>
 
             <tr>

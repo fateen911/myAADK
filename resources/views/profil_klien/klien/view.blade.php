@@ -132,7 +132,7 @@
         <div class="d-flex align-items-center gap-2 gap-lg-3">
             <!--begin::primary button-->
             <a href="{{ route('export.profil.diri') }}" class="btn btn-sm fw-bold btn-primary">
-                <i class="fas fa-download"></i> Muat Turun
+                <i class="fas fa-file-pdf"></i> PDF
             </a>
             <!--end::primary button-->
         </div>    
