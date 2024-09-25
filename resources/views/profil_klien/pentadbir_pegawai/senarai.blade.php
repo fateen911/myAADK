@@ -102,15 +102,10 @@
                                                     </a>
                                 
                                                     <!-- PDF icon for muat turun -->
-                                                    <a href="{{ url('muat-turun/profil-klien/'. $user1['id']) }}">
+                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user1['id']) }}">
                                                         <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
                                                     </a>
                                                 </td>
-                                                {{-- <td style="text-align: center;">
-                                                    <a href="{{ url('muat-turun/profil-klien/'. $user1['id']) }}" class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-download" style="color: white !important;"></i> Muat Turun
-                                                    </a>
-                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -157,7 +152,7 @@
                                                         <i class="fas fa-pencil" style="color:blueviolet; padding-right:28px; font-size:18px;"></i>
                                                     </a>
                                 
-                                                    <a href="{{ url('muat-turun/profil-klien/'. $user2['id']) }}">
+                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user2['id']) }}">
                                                         <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
                                                     </a>
                                                 </td>

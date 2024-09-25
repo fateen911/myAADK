@@ -305,7 +305,7 @@
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
-                            <div class="row fv-row mb-2">
+                            <div class="row fv-row">
                                 <div class="col-md-4 text-md-start">
                                     <label class="fs-6 fw-semibold form-label mt-3">
                                         <span>Skor CCRI</span>
@@ -324,6 +324,42 @@
                                             (CEMERLANG)
                                         @endif
                                     </span>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row">
+                                <div class="col-md-4 text-md-start">
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Tamat RPDK</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="w-100">
+                                        @php
+                                            $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                            $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
+                                        @endphp
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$tamatRPDK}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row fv-row mb-2">
+                                <div class="col-md-4 text-md-start">
+                                    <label class="fs-6 fw-semibold form-label mt-3">
+                                        <span>Daerah Semasa PCCP</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="w-100">
+                                        @php
+                                            $daerah_semasa = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_baru');
+                                            $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('senarai_daerah_pejabat.daerah');
+                                        @endphp
+                                        <span id="bangsa" class="fs-6 form-control-plaintext">{{$daerahPCCP}}</span>
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -518,6 +554,10 @@
                                                     $penyakitKlien = DB::table('senarai_penyakit')->where('id', $klien->penyakit)->value('senarai_penyakit.penyakit');
                                                     $requestedPendidikan = DB::table('senarai_pendidikan')->where('id', $requestedDataKlien['tahap_pendidikan'])->value('senarai_pendidikan.pendidikan');
                                                     $pendidikanKlien = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
+                                                    $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                                    $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
+                                                    $daerah_semasa = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_baru');
+                                                    $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('senarai_daerah_pejabat.daerah');
                                                 @endphp
                                         
                                                 <div class="row fv-row">
@@ -585,6 +625,22 @@
                                                                 (CEMERLANG)
                                                             @endif
                                                         </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-2">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Tamat RPDK</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <span class="fs-6 form-control-plaintext">{{$tamatRPDK}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-5">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah Semasa PCCP</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <span class="fs-6 form-control-plaintext">{{$daerahPCCP}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-2">

@@ -423,61 +423,64 @@
                 <td style="width: 2%">:</td>
                 <td>{{$pasangan->status_perkahwinan}}</td>
             </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Nama Pasangan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pasangan->nama_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">No. Telefon Pasangan</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pasangan->no_tel_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Bilangan Anak</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pasangan->bilangan_anak}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 35%">Alamat Rumah Pasangan</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td>{{$pasangan->alamat_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Poskod</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pasangan->poskod_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Daerah</td>
-                <td style="width: 2%">:</td>
-                <td>{{$daerahPasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Negeri</td>
-                <td style="width: 2%">:</td>
-                <td>{{$negeriPasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td class="gap-bottom" style="width: 35%">Alamat Tempat Kerja Pasangan</td>
-                <td class="gap-bottom" style="width: 2%">:</td>
-                <td>{{$pasangan->alamat_kerja_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Poskod</td>
-                <td style="width: 2%">:</td>
-                <td>{{$pasangan->poskod_kerja_pasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Daerah</td>
-                <td style="width: 2%">:</td>
-                <td>{{$daerahKerjaPasangan}}</td>
-            </tr>
-            <tr class="gap-left">
-                <td style="width: 35%">Negeri</td>
-                <td style="width: 2%">:</td>
-                <td class="gap-bottom">{{$negeriKerjaPasangan}}</td>
-            </tr>
+
+            @if ($pasangan->status_perkahwinan == 'BERKAHWIN')
+                <tr class="gap-left">
+                    <td style="width: 35%">Nama Pasangan</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pasangan->nama_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">No. Telefon Pasangan</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pasangan->no_tel_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Bilangan Anak</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pasangan->bilangan_anak}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td class="gap-bottom" style="width: 35%">Alamat Rumah Pasangan</td>
+                    <td class="gap-bottom" style="width: 2%">:</td>
+                    <td>{{$pasangan->alamat_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Poskod</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pasangan->poskod_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Daerah</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$daerahPasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Negeri</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$negeriPasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td class="gap-bottom" style="width: 35%">Alamat Tempat Kerja Pasangan</td>
+                    <td class="gap-bottom" style="width: 2%">:</td>
+                    <td>{{$pasangan->alamat_kerja_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Poskod</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$pasangan->poskod_kerja_pasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Daerah</td>
+                    <td style="width: 2%">:</td>
+                    <td>{{$daerahKerjaPasangan}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%">Negeri</td>
+                    <td style="width: 2%">:</td>
+                    <td class="gap-bottom">{{$negeriKerjaPasangan}}</td>
+                </tr>
+            @endif
 
             <tr>
                 <td class="header-part" colspan="3">D. MAKLUMAT PEKERJAAN</td>
