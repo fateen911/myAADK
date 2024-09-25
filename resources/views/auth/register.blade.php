@@ -14,7 +14,7 @@
             </a>
         </div>
     
-        <form method="POST" action="{{ route('register') }}" id="pegawai_mohon_daftar_form">
+        <form method="POST" action="{{ route('register') }}" id="pegawai_mohon_daftar_form" novalidate>
             @csrf
             <!-- Nama -->
             <div class="mt-2">
@@ -147,15 +147,23 @@
                     if (peranan === 3) {
                         negeriField.style.display = 'none';
                         daerahField.style.display = 'none';
+                        negeriSelect.required = false;
+                        daerahSelect.required = false;
                     } else if (peranan === 4) {
                         negeriField.style.display = 'block';
                         daerahField.style.display = 'none';
+                        negeriSelect.required = true;
+                        daerahSelect.required = false;
                     } else if (peranan === 5) {
                         negeriField.style.display = 'block';
                         daerahField.style.display = 'block';
+                        negeriSelect.required = true;
+                        daerahSelect.required = true;
                     } else {
                         negeriField.style.display = 'none';
                         daerahField.style.display = 'none';
+                        negeriSelect.required = false;
+                        daerahSelect.required = false;
                     }
                 }
 
@@ -181,23 +189,34 @@
                 filterDaerahOptions();
             });
 
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(event) {
-                    var emailInput = document.getElementById('emelPegawai').value;
-                    if (emailInput.includes('@')) {
-                        alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
-                        event.preventDefault();
-                    }
-                });
-            });
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(event) {
+            //         const peranan = parseInt(perananField.value);
+
+            //         // Check if required fields are filled based on peranan
+            //         if (peranan === 4 && negeriSelect.value === '') { // Pegawai AADK Negeri
+            //             alert('Sila pilih Negeri Bertugas untuk Pegawai AADK Negeri.');
+            //             event.preventDefault();
+            //         } else if (peranan === 5 && (negeriSelect.value === '' || daerahSelect.value === '')) { // Pegawai AADK Daerah
+            //             alert('Sila pilih Negeri dan Daerah Bertugas untuk Pegawai AADK Daerah.');
+            //             event.preventDefault();
+            //         }
+
+            //         var emailInput = document.getElementById('emelPegawai').value;
+            //         if (emailInput.includes('@')) {
+            //             alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
+            //             event.preventDefault();
+            //         }
+            //     });
+            // });
         </script>
 
         <script>
             // Prevent typing numeric characters
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('nama').addEventListener('input', function (e) {
-                this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
-            });
+                    this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
+                });
 
                 // Restrict input to digits by listening for input event
                 document.getElementById('no_kp').addEventListener('input', function (e) {
@@ -216,20 +235,69 @@
 
                 // Add event listener to form submission
                 document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
+                    const nama = document.getElementById('nama').value;
                     const noKp = document.getElementById('no_kp').value;
+                    const emel = document.getElementById('emelPegawai').value;
                     const noTel = document.getElementById('no_tel').value;
-                    
-                    // Check if no_kp is exactly 12 digits
-                    if (noKp.length !== 12) {
-                        alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
-                        e.preventDefault();  // Prevent form submission
+                    const jawatan = document.getElementById('jawatan').value;
+                    const peranan = document.getElementById('peranan').value;
+                    const negeriBertugas = document.getElementById('negeri_bertugas').value;
+                    const daerahBertugas = document.getElementById('daerah_bertugas').value;
+
+                    // Custom validation and error messages
+                    if (!nama) {
+                        alert('Sila masukkan nama penuh anda.');
+                        e.preventDefault(); // Prevent form submission
                         return false;
                     }
 
-                    // Check if no_tel is between 10 to 11 digits
-                    if (noTel.length < 10 || noTel.length > 11) {
+                    if (!noKp || noKp.length !== 12) {
+                        alert('Sila masukkan no kad pengenalan yang sah (12 digit).');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    if (!emel) {
+                        alert('Sila masukkan domain emel rasmi @adk.gov.my.');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    var emailInput = document.getElementById('emelPegawai').value;
+                    if (emailInput.includes('@')) {
+                        alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
+                        event.preventDefault();
+                    }
+
+                    if (!noTel || noTel.length < 10 || noTel.length > 11) {
                         alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
-                        e.preventDefault();  // Prevent form submission
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    if (!jawatan) {
+                        alert('Sila pilih jawatan anda bekerja.');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    if (!peranan) {
+                        alert('Sila pilih peranan anda sebagai pengguna sistem ini.');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    // Validate 'negeri_bertugas' if peranan is 4 or 5
+                    if ((peranan == '4' || peranan == '5') && !negeriBertugas) {
+                        alert('Sila pilih pejabat AADK negeri yang anda bertugas.');
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    // Validate 'daerah_bertugas' if peranan is 5
+                    if (peranan == '5' && !daerahBertugas) {
+                        alert('Sila pilih pejabat AADK daerah yang anda bertugas.');
+                        e.preventDefault();
                         return false;
                     }
                 });
