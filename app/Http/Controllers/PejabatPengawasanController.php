@@ -26,7 +26,14 @@ class PejabatPengawasanController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
+        // Validation rules for fields that users can update
+        $validatedData = $request->validate([
+            'negeri_baharu' => 'required',
+            'daerah_baharu' => 'required',
+        ], [
+            'negeri_baharu.required' => 'Sila pilih Pejabat AADK Negeri Baharu.',
+            'daerah_baharu.required' => 'Sila pilih Pejabat AADK Daerah Baharu.',
+        ]);
 
         // Retrieve the client's id based on their no_kp
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -36,8 +43,8 @@ class PejabatPengawasanController extends Controller
         // If PejabatPengawasanKlien exists, update it
         if ($pejabatBaharuKlien) {
             $pejabatBaharuKlien->update([
-                'negeri_baru' => $request->negeri_baharu,
-                'daerah_baru' => $request->daerah_baharu, 
+                'negeri_baru' => $validatedData['negeri_baharu'],
+                'daerah_baru' => $validatedData['daerah_baharu'],
                 'updated_at' => now(),
             ]);
         } else {
@@ -46,8 +53,8 @@ class PejabatPengawasanController extends Controller
                 'klien_id' => $klienId,
                 'negeri_asal' => $klien->negeri_pejabat,
                 'daerah_asal' => $klien->daerah_pejabat,
-                'negeri_baru' => $request->negeri_baharu,
-                'daerah_baru' => $request->daerah_baharu,
+                'negeri_baru' => $validatedData['negeri_baharu'],
+                'daerah_baru' => $validatedData['daerah_baharu'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -55,40 +62,11 @@ class PejabatPengawasanController extends Controller
 
         // Update the klien table
         $klien->update([
-            'daerah_pejabat' => $request->daerah_baharu,
-            'negeri_pejabat' => $request->negeri_baharu,
+            'daerah_pejabat' => $validatedData['daerah_baharu'],
+            'negeri_pejabat' => $validatedData['negeri_baharu'],
         ]);
 
-        // Return view with all required data
+        // Return view with success message
         return redirect()->back()->with('success', 'Pertukaran pejabat pengawasan telah berjaya dikemaskini.');
     }
-
-
-    // public function update(Request $request)
-    // {
-    //     // Retrieve the client's id based on their no_kp
-    //     $klienId = Klien::where('no_kp',Auth::user()->no_kp)->value('id');
-    //     $klien = Klien::where('id', $klienId)->first();
-    //     $pejabatBaharuKlien = PejabatPengawasanKlien::where('klien_id', $klienId)->first();
-
-    //     // dd($request->all());
-
-    //     if ($pejabatBaharuKlien)
-    //     {
-    //         $pejabatBaharuKlien->update([
-    //             'negeri_baru' => $request->negeri_baharu,
-    //             'daerah_baru' => $request->daerah_baharu, 
-    //             'updated_at' => now(),
-    //         ]);
-
-    //         $klien->update([
-    //             'daerah_pejabat' => $request->daerah_baharu,
-    //             'negeri_pejabat' => $request->negeri_baharu,
-    //         ]);
-    //     }
-
-    //     // Return view with all required data
-    //     return redirect()->back()->with('success', 'Pertukaran pejabat pengawasan telah berjaya dikemaskini.');
-    // }
-
 }

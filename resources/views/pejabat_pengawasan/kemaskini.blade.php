@@ -30,13 +30,13 @@
         <!--begin::Page title-->
         <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
             <!--begin::Title-->
-            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pejabat Pengawasan</h1>
+            <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pejabat AADK</h1>
             <!--end::Title-->
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">
-                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pejabat Pengawasan</a>
+                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pejabat AADK</a>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
@@ -61,7 +61,7 @@
                     <!--begin::Card header-->
                     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Kemaskini Pejabat Pengawasan</h3>
+                            <h3 class="fw-bold m-0">Kemaskini Pejabat AADK</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -80,7 +80,7 @@
                                 <!-- Pejabat Pengawasan Semasa -->
                                 <div class="row mb-6">
                                     <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span>Negeri Pejabat Pengawasan Semasa</span>
+                                        <span>Pejabat AADK Negeri Semasa</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
                                         <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$negeriSemasa}}</span>
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="row mb-6">
                                     <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span>Daerah Pejabat Pengawasan Semasa</span>
+                                        <span>Pejabat AADK Daerah Semasa</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
                                         <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$daerahSemasa}}</span>
@@ -98,13 +98,14 @@
                                 <!-- Pejabat Pengawasan Baru -->
                                 <div class="row mb-6">
                                     <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span class="required">Negeri Pejabat Pengawasan Baharu</span>
+                                        <span class="required">Pejabat AADK Negeri Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select" id="negeri_baru" name="negeri_baharu" data-control="select2">
+                                        
+                                        <select class="form-select form-select-solid custom-select" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
                                             <option value="">Pilih Negeri</option>
                                             @foreach ($senaraiNegeri as $item1)
-                                                <option value="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
+                                                <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -112,10 +113,10 @@
                                 
                                 <div class="row mb-6">
                                     <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span class="required">Daerah Pejabat Pengawasan Baharu</span>
+                                        <span class="required">Pejabat AADK Daerah Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select" name="daerah_baharu" id="daerah_baharu" data-control="select2">
+                                        <select class="form-select form-select-solid custom-select" name="daerah_baharu" id="daerah_baharu" data-control="select2" required>
                                             <option value="">Pilih Daerah</option>
                                             @foreach ($senaraiDaerah as $item2)
                                                 <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
@@ -152,78 +153,65 @@
                         confirmButtonText: 'OK'
                     });
                 @endif
+
+                @if(session('error'))
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Tidak Berjaya!',
+                        text: '{{ session('error') }}',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+            });
+        </script>
+
+        <script>
+            document.getElementById('kt_account_profile_details_submit').addEventListener('click', function(event) {
+                let negeriBaharu = document.getElementById('negeri_baharu').value;
+                let daerahBaharu = document.getElementById('daerah_baharu').value;
+
+                // Check if both fields are not selected
+                if (negeriBaharu === 'Pilih Negeri' || !negeriBaharu || daerahBaharu === 'Pilih Daerah' || !daerahBaharu) {
+                    event.preventDefault(); // Prevent form submission
+                    alert('Sila pilih pejabat baharu bagi kedua-dua negeri dan daerah baharu sebelum hantar.'); // Show an error message
+                }
             });
         </script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('JavaScript is loaded!');  // Log when JavaScript is loaded
+                const negeriSelect = document.getElementById('negeri_baharu');
+                const daerahSelect = document.getElementById('daerah_baharu');
 
-                const negeriDropdown = document.querySelector('#negeri_baru');
-                const daerahDropdown = document.querySelector('#daerah_baharu');
+                // Debugging: Log when the DOM is ready
+                console.log("DOM Loaded");
 
-                // Check if negeri_baharu dropdown is found
-                if (negeriDropdown) {
-                    console.log('negeri_baharu dropdown found!');
-
-                    function filterDaerahOptions() {
-                        const selectedIndex = negeriDropdown.selectedIndex;  // Get selected index
-                        const selectedNegeriId = negeriDropdown.options[selectedIndex].value;  // Get the selected value
-                        
-                        console.log('Selected Negeri ID:', selectedNegeriId);  // Log the selected negeri_id
-
-                        // Filter daerah based on selected negeri_id
-                        Array.from(daerahDropdown.options).forEach(option => {
-                            if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
-                                option.style.display = 'block';  // Show matching daerah
-                            } else {
-                                option.style.display = 'none';  // Hide non-matching daerah
-                            }
-                        });
-                        daerahDropdown.value = '';  // Reset daerah dropdown value
-                    }
-
-                    // Event listener for changes in negeri dropdown
-                    negeriDropdown.addEventListener('change', function() {
-                        console.log('Change event detected for negeri_baharu');  // Log when the change event is detected
-                        filterDaerahOptions();  // Filter daerah options
-                    });
-
-                    // Initial filtering on page load
-                    filterDaerahOptions();
-                } else {
-                    console.log('negeri_baharu dropdown NOT found!');
-                }
-            });
-        </script>
-        {{-- <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log('JavaScript is loaded!');
-
-                const negeriDropdown = document.querySelector('#negeri_baru');
-                const daerahDropdown = document.querySelector('#daerah_baharu');
-
+                // Function to filter daerah options based on selected negeri
                 function filterDaerahOptions() {
-                    const selectedNegeriId = negeriDropdown.value;  // Use the value of the selected negeri
-                    console.log('Selected Negeri ID:', selectedNegeriId);  // Log to check if it's being picked up correctly
-                    
-                    Array.from(daerahDropdown.options).forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
-                            option.style.display = 'block';  // Show options matching the negeri_id or the default option
+                    const selectedNegeriId = negeriSelect.value; // Use value to get the selected negeri_id
+
+                    // Debugging: Log the selected negeri_id
+                    console.log("Selected Negeri ID:", selectedNegeriId);
+
+                    Array.from(daerahSelect.options).forEach(option => {
+                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === "") {
+                            // Show option if it belongs to the selected negeri or is the placeholder option
+                            option.style.display = 'block';
                         } else {
-                            option.style.display = 'none';  // Hide options that don't match
+                            // Hide other options
+                            option.style.display = 'none';
                         }
                     });
-
-                    daerahDropdown.value = '';  // Reset daerah dropdown
+                    // Reset daerah value when negeri changes
+                    daerahSelect.value = ''; 
                 }
 
-                // Event listener for negeri dropdown changes
-                negeriDropdown.addEventListener('change', filterDaerahOptions);
+                // Event listeners
+                negeriSelect.addEventListener('change', filterDaerahOptions);
 
-                // Ensure options are filtered on initial page load (if required)
+                // Initial setup
                 filterDaerahOptions();
             });
-        </script> --}}
+        </script>
     </body>
 @endsection
