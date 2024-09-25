@@ -88,12 +88,12 @@
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 25%;">Nama</th>
-                                            <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 13%;">AADK Daerah & Pusat RPDK</th>
+                                            <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 13%;">AADK Daerah</th>
                                             <th style="text-align: center; width: 13%;">AADK Negeri</th>
                                             <th style="text-align: center; width: 12%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 13%;">Status</th>
-                                            <th style="text-align: center; width: 17%;">Tahap Kepulihan</th>  
+                                            <th style="text-align: center; width: 14%;">Status</th>
+                                            <th style="text-align: center; width: 19%;">Tahap Kepulihan</th>  
                                             <th style="text-align: center; width: 9%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
@@ -117,21 +117,21 @@
                                                 <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td style="text-align: center">
                                                     @if ($response->status == 'Selesai')
-                                                        <span class="badge text-white" style="background-color: cadetblue; padding:10px;">{{ strtoupper($response->status) }}</span>
+                                                        <span class="badge text-white" style="background-color: cadetblue; padding-top:10px; padding-bottom:10px; width:100px; display: inline-block; text-align: center;">{{ strtoupper($response->status) }}</span>
                                                     @else
-                                                        <span class="badge text-white" style="background-color: cornflowerblue; padding:10px;">{{ strtoupper($response->status) }}</span>
+                                                        <span class="badge text-white" style="background-color: cornflowerblue; padding-top:10px; padding-bottom:10px; width:100px; display: inline-block; text-align: center;">{{ strtoupper($response->status) }}</span>
                                                     @endif
                                                 </td>
                                                 <td style="text-align: center">   
                                                     @if ($response->tahap_kepulihan_id)
                                                         @if ($response->tahap_kepulihan_id == 1)
-                                                            <badge class="badge text-white" style="background-color: red; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @elseif ($response->tahap_kepulihan_id == 2)
-                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @elseif ($response->tahap_kepulihan_id == 3)
-                                                            <badge class="badge text-white bg-warning" style="padding: 10px;">{{ $tahap_kepulihan }}</badge>   
+                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
                                                         @else
-                                                            <badge class="badge text-white" style="background-color: green; padding:10px;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @endif
                                                     @endif
                                                 </td>
