@@ -175,16 +175,16 @@
                     <div class="mb-4">
                         <label for="rawatan"><b>1) Di manakah anda pernah menerima rawatan ?</b></label><br>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN" id="rawatan1" {{ isset($latestRespon) && $latestRespon->rawatan == 'PUSPEN' ? 'checked' : '' }} required>
+                            <input class="form-check-input" type="radio" name="rawatan" value="AADK Daerah" id="rawatan1" {{ isset($latestRespon) && $latestRespon->rawatan == 'AADK Daerah' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="rawatan3">Pusat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
+                        </div>
+                        <div class="radio-group">
+                            <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN" id="rawatan2" {{ isset($latestRespon) && $latestRespon->rawatan == 'PUSPEN' ? 'checked' : '' }} required>
                             <label class="form-check-label" for="rawatan1">PUSPEN</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="rawatan" value="PPDP" id="rawatan2" {{ isset($latestRespon) && $latestRespon->rawatan == 'PPDP' ? 'checked' : '' }} required>
+                            <input class="form-check-input" type="radio" name="rawatan" value="PPDP" id="rawatan3" {{ isset($latestRespon) && $latestRespon->rawatan == 'PPDP' ? 'checked' : '' }} required>
                             <label class="form-check-label" for="rawatan2">PPDP</label>
-                        </div>
-                        <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="rawatan" value="CCSC" id="rawatan3" {{ isset($latestRespon) && $latestRespon->rawatan == 'CCSC' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="rawatan3">CCSC</label>
                         </div>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="rawatan" value="Lain-lain" id="rawatan4" {{ isset($latestRespon) && $latestRespon->rawatan == 'Lain-lain' ? 'checked' : '' }} required>
@@ -196,16 +196,20 @@
                     <div  class="mb-4">
                         <label for="pusat_rawatan"><b>2) Di manakah pusat rawatan terkini anda ?</b></label><br>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN" id="pusat_rawatan1" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'PUSPEN' ? 'checked' : '' }} required>
+                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="AADK Daerah" id="pusat_rawatan1" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'AADK Daerah' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="pusat_rawatan3">Pusat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
+                        </div>
+                        <div class="radio-group">
+                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN" id="pusat_rawatan2" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'PUSPEN' ? 'checked' : '' }} required>
                             <label class="form-check-label" for="pusat_rawatan1">PUSPEN</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PPDP" id="pusat_rawatan2" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'PPDP' ? 'checked' : '' }} required>
+                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="PPDP" id="pusat_rawatan3" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'PPDP' ? 'checked' : '' }} required>
                             <label class="form-check-label" for="pusat_rawatan2">PPDP</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="AADK Daerah" id="pusat_rawatan3" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'AADK Daerah' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="pusat_rawatan3">AADK Daerah</label>
+                            <input class="form-check-input" type="radio" name="pusat_rawatan" value="Tiada" id="pusat_rawatan4" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'Tiada' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="pusat_rawatan3">Tiada</label>
                         </div>
                     </div>
 
