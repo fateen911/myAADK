@@ -165,6 +165,7 @@
                                                                                     <badge class="badge text-white" style="background-color: green; padding:5px;">{{ $tahap_kepulihan }}</badge>
                                                                                 @endif
                                                                             </h6>
+
                                                                             <table class="table table-bordered">
                                                                                 <thead>
                                                                                     <tr>
@@ -446,6 +447,11 @@
                                                                                     @endforeach
                                                                                 </tbody>
                                                                             </table>
+
+                                                                            <p>1.0 - 1.5 (SANGAT TIDAK MEMUASKAN)</p>
+                                                                            <p>1.51 - 2.5 (BAIK)</p>
+                                                                            <p>2.51 - 3.5 (MEMUASKAN)</p>
+                                                                            <p>3.51 - 4.0 (SANGAT MEMUASKAN)</p>
                                                                         @else
                                                                             <p>Tiada skor modal untuk klien ini.</p>    
                                                                         @endif
