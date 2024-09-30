@@ -2,7 +2,7 @@
 <html lang="en">
 <!--begin::Head-->
 <head>
-    <title>MySupport | AADK</title>
+    <title>MySupport</title>
     <meta charset="utf-8" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
