@@ -198,6 +198,26 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.f-brush {
+    font-family: "Brush Script MT", cursive; /* Brush Script MT with a cursive fallback */
+}
+
+.f-calibri {
+    font-family: "Calibri", "Arial", sans-serif; /* Calibri with Arial and sans-serif fallbacks */
+}
+
+.f-book {
+    font-family: "Book Antiqua", "Palatino Linotype", serif; /* Book Antiqua with fallbacks */
+}
+
+.no-space{
+    white-space: nowrap;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -9705,6 +9725,30 @@ textarea.form-control-lg {
   margin-left: 5rem !important;
 }
 
+.ms-25 {
+    margin-left: 6.6rem !important;
+}
+
+.ms-30 {
+    margin-left: 7.5rem !important;
+}
+
+.ms-40 {
+    margin-left: 10rem !important;
+}
+
+.ms-43 {
+    margin-left: 10.8rem !important;
+}
+
+.ms-50 {
+    margin-left: 12.5rem !important;
+}
+
+.ms-60 {
+    margin-left: 15rem !important;
+}
+
 .ms-p-32 {
     margin-left: 32% !important;
 }
@@ -15991,6 +16035,18 @@ textarea.form-control-lg {
   .w-md-25 {
     width: 25% !important;
   }
+  .w-md-30 {
+    width: 30% !important;
+  }
+  .w-md-38 {
+    width: 38% !important;
+  }
+  .w-md-40 {
+    width: 40% !important;
+  }
+  .w-md-45 {
+    width: 45% !important;
+  }
   .w-md-50 {
     width: 50% !important;
   }
@@ -19046,6 +19102,12 @@ textarea.form-control-lg {
   }
   .w-lg-25 {
     width: 25% !important;
+  }
+  .w-lg-30 {
+    width: 30% !important;
+  }
+  .w-lg-40 {
+    width: 40% !important;
   }
   .w-lg-50 {
     width: 50% !important;

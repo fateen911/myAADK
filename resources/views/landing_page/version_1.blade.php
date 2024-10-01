@@ -73,37 +73,36 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                             </a>
                             <!--end::Logo image-->
-                            <!--begin::Menu wrapper-->
-                            <div class="d-lg-block" id="kt_header_nav_wrapper">
-                                <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
-                                    <!--begin::Menu-->
-                                    <div class="gap-5 menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item">
-                                            <!--begin::Menu link-->
-                                            <a href="https://wa.me/60196262233" class="btn landing-darkblue py-3 px-4 px-xxl-6 btn-active-red" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                                                <i class="bi bi-whatsapp fs-2 text-white"></i>&nbsp; 019 626 2233
-                                            </a>
-                                            <!--end::Menu link-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item">
-                                            <!--begin::Menu link-->
-                                            <a href="tel:1-800-22-2235" class="btn landing-darkblue py-3 px-4 px-xxl-6 btn-active-red" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                                                <i class="bi bi-telephone-fill fs-2 text-white"></i>&nbsp; 1800-22-2235
-                                            </a>
-                                            <!--end::Menu link-->
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </div>
-                            </div>
-                            <!--end::Menu wrapper-->
                         </div>
                         <!--end::Logo-->
-
+                        <!--begin::Menu wrapper-->
+                        <div class="d-lg-block" id="kt_header_nav_wrapper">
+                            <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+                                <!--begin::Menu-->
+                                <div class="gap-5 menu menu-column flex-nowrap menu-rounded menu-lg-row menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a href="https://wa.me/60196262233" class="btn landing-darkblue py-3 px-4 px-xxl-6 btn-active-red" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                            <i class="bi bi-whatsapp fs-2 text-white"></i>&nbsp; 019 626 2233
+                                        </a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a href="tel:1-800-22-2235" class="btn landing-darkblue py-3 px-4 px-xxl-6 btn-active-red" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                            <i class="bi bi-telephone-fill fs-2 text-white"></i>&nbsp; 1800-22-2235
+                                        </a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                        </div>
+                        <!--end::Menu wrapper-->
                         <!--begin::Toolbar-->
                         <div class="flex-equal text-end ms-1">
                             <a href="{{url('/login')}}" class="btn landing-darkblue btn-active-red">
@@ -150,6 +149,12 @@ License: For each use you must have a valid license purchased only from above li
                         dan mesra.
                     </h3>
                     <!--end::Title-->
+
+                    <div class="d-flex gap-4 my-10">
+                        <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-dadah-terkawal-2025.png" class="logo-default h-10px h-lg-30px"/>
+                        <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-lebih-baik-cegah.png" class="logo-default h-10px h-lg-30px"/>
+                        <img alt="Logo" src="/assets/media/illustrations/i-cari/logo-malaysia-madani.png" class="logo-default h-10px h-lg-30px"/>
+                    </div>
                 </div>
                 <!--end::Content-->
             </div>
