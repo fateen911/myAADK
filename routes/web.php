@@ -30,6 +30,7 @@ Route::get('/pengurusan-program/try',[PengurusanProgController::class, 'try'])->
 //LANDING PAGE
 Route::get('/landing-page/version-1', [LandingPageController::class, 'landingV1'])->name('landing_page.version_1');
 Route::get('/landing-page/version-2', [LandingPageController::class, 'landingV2'])->name('landing_page.version_2');
+Route::get('/landing-page/version-3', [LandingPageController::class, 'landingV3'])->name('landing_page.version_3');
 
 // PENGURUSAN PROGRAM - QR CODE
 Route::get('/pengurusan-program/qr-code/{id}',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');

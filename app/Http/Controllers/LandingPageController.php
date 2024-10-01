@@ -12,4 +12,7 @@ class LandingPageController extends Controller
     public function landingV2(){
         return view('landing_page.version_2');
     }
+    public function landingV3(){
+        return view('landing_page.version_3');
+    }
 }
