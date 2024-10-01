@@ -47477,11 +47477,21 @@ a:hover {
     background-repeat: no-repeat!important; /* Prevent repeating the image */
 }
 
+.landing-img-3{
+    background-image: url('/assets/media/illustrations/healthy/health-1.png');
+    background-position: center!important; /* Center the image */
+    background-repeat: no-repeat!important; /* Prevent repeating the image */
+}
+
 .landing-bg-white{
     background-color: rgba(245, 245, 245, 0.87) !important;
     border-radius: 10px;
     padding-left: 5%!important;
     padding-right: 5%!important;
+}
+
+.landing-bg-gray{
+    background-color: rgb(237, 239, 243) !important;
 }
 
 .landing-light {

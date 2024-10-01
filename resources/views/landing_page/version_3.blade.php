@@ -46,7 +46,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Header Section-->
     <div class="mb-0" id="home">
         <!--begin::Wrapper-->
-        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light landing-img">
+        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light">
             <!--begin::Header-->
             <div class="landing-header landing-darkblue">
                 <!--begin::Container-->
@@ -122,8 +122,8 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-md-flex w-100 min-h-350px min-h-lg-500px p-lg-10 p-2">
-                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-lg-20 mx-10 w-90">
+            <div class="d-md-flex w-100 min-h-350px min-h-lg-500px p-lg-10 p-2 landing-bg-gray">
+                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-lg-20 mx-10 w-90 order-1">
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
@@ -154,8 +154,14 @@ License: For each use you must have a valid license purchased only from above li
                         kejayaan yang besar.
                     </h3>
                 </div>
-                <div class="text-left flex-md-root">
-                    <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
+                <div class="flex-md-root landing-img-3 order-2">
+                    <div class="w-80 m-20 landing-bg-blue">
+                        h3>Nama Aktiviti: </h3>
+                        <h3>Tarikh/Masa Mula:</h3>
+                        <h3>Tarikh/Masa Tamat: </h3>
+                        <h3>Tempat:</h3>
+                        <h3>Pautan: </h3>
+                    </div>
                 </div>
             </div>
             <!--end::Landing hero-->
