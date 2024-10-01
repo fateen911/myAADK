@@ -122,16 +122,16 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-flex w-100 min-h-350px min-h-lg-500px p-lg-10 p-2">
-                <div class="text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-lg-20 mx-10 w-100">
+            <div class="d-md-flex w-100 min-h-350px min-h-lg-500px p-lg-10 p-2">
+                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-lg-20 mx-10 w-90">
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
                     </div>
-                    <hr class="w-100 w-md-45">
+                    <hr class="w-100 w-md-90">
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-45 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
                         My Support merupakan sistem maklumat klien AADK yang telah tamat
                         mengikuti program. Ia mengandungi butir-butir peribadi klien dan
                         maklumat khusus berkaitan status kepulihan mereka. Kepentingan
@@ -140,20 +140,22 @@ License: For each use you must have a valid license purchased only from above li
                         dan mesra.
                     </h3>
                     <br>
-                    <div class="w-md-40">
-                        <h2 class="f-book mx-auto w-md-40 w-50 ps-lg-10">
+                    <div>
+                        <h2 class="f-book mx-auto w-50 ps-lg-10">
                             <span class="ms-0">“Aku,</span><br>
                             <span class="ms-12">AADK & </span><br>
                             <span class="ms-25">Keluarga”</span>
                         </h2>
                     </div>
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-45 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
                         Kepulihan adalah satu perjalanan dan manifesto sokongan
                         antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju
                         kejayaan yang besar.
                     </h3>
-
+                </div>
+                <div class="text-left flex-md-root">
+                    <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
                 </div>
             </div>
             <!--end::Landing hero-->

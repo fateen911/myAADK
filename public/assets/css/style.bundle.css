@@ -7924,6 +7924,10 @@ textarea.form-control-lg {
   width: 50% !important;
 }
 
+.w-60 {
+    width: 60% !important;
+}
+
 .w-75 {
   width: 75% !important;
 }
@@ -16052,6 +16056,9 @@ textarea.form-control-lg {
   }
   .w-md-75 {
     width: 75% !important;
+  }
+  .w-md-90 {
+    width: 90% !important;
   }
   .w-md-100 {
     width: 100% !important;
@@ -47461,6 +47468,20 @@ a:hover {
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
+}
+
+.landing-img-2{
+    background-image: url('/assets/media/illustrations/healthy/health-2.jpeg');
+    background-size: cover!important; /* Scale the image to cover the entire viewport */
+    background-position: center!important; /* Center the image */
+    background-repeat: no-repeat!important; /* Prevent repeating the image */
+}
+
+.landing-bg-white{
+    background-color: rgba(245, 245, 245, 0.87) !important;
+    border-radius: 10px;
+    padding-left: 5%!important;
+    padding-right: 5%!important;
 }
 
 .landing-light {
