@@ -6069,3 +6069,108 @@
     <!--end::Card body-->
 </div>
 <!--end::Timeline-->
+
+<!--begin::Notifications-->
+<div class="app-navbar-item ms-1 ms-md-4">
+    <!--begin::Menu- wrapper-->
+    <div class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
+        <i class="ki-duotone ki-notification-status fs-2">
+            <span class="path1"></span>
+            <span class="path2"></span>
+            <span class="path3"></span>
+            <span class="path4"></span>
+        </i>
+    </div>
+    <!--begin::Menu-->
+    <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true" id="kt_menu_notifications">
+        <!--begin::Heading-->
+        <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-image:url('assets/media/misc/menu-header-bg.jpg')">
+            <!--begin::Title-->
+            <h3 class="text-white fw-semibold px-9 mt-10 mb-6">Notifications
+            <span class="fs-8 opacity-75 ps-3">24 reports</span></h3>
+            <!--end::Title-->
+        </div>
+        <!--end::Heading-->
+
+        <!--begin::Tab content-->
+        <div class="tab-content">
+            <!--begin::Tab panel-->
+            <div class="tab-pane fade" id="kt_topbar_notifications_1" role="tabpanel">
+                <!--begin::Items-->
+                <div class="scroll-y mh-325px my-5 px-8">
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack py-4">
+                        <!--begin::Section-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-35px me-4">
+                                <span class="symbol-label bg-light-danger">
+                                    <i class="ki-duotone ki-information fs-2 text-danger">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Title-->
+                            <div class="mb-0 me-2">
+                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">HR Confidential</a>
+                                <div class="text-gray-400 fs-7">Confidential staff documents</div>
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Section-->
+                        <!--begin::Label-->
+                        <span class="badge badge-light fs-8">2 hrs</span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                    
+                    <!--begin::Item-->
+                    <div class="d-flex flex-stack py-4">
+                        <!--begin::Section-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Symbol-->
+                            <div class="symbol symbol-35px me-4">
+                                <span class="symbol-label bg-light-success">
+                                    <i class="ki-duotone ki-abstract-12 fs-2 text-success">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </span>
+                            </div>
+                            <!--end::Symbol-->
+                            <!--begin::Title-->
+                            <div class="mb-0 me-2">
+                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">Project Redux</a>
+                                <div class="text-gray-400 fs-7">New frontend admin theme</div>
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Section-->
+                        <!--begin::Label-->
+                        <span class="badge badge-light fs-8">2 days</span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <!--end::Items-->
+                <!--begin::View more-->
+                <div class="py-3 text-center border-top">
+                    <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">View All
+                    <i class="ki-duotone ki-arrow-right fs-5">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i></a>
+                </div>
+                <!--end::View more-->
+            </div>
+            <!--end::Tab panel-->
+        </div>
+        <!--end::Tab content-->
+    </div>
+    <!--end::Menu-->
+    <!--end::Menu wrapper-->
+</div>
+<!--end::Notifications-->
