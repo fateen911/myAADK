@@ -94,47 +94,51 @@
                             </div>
                             <!--end::Heading-->
                     
-                            <!--begin::Tab content-->
-                            <div class="tab-content notification-item">
-                                <!--begin::Tab panel-->
-                                <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
-                                    <!--begin::Items-->
-                                    <div class="scroll-y mh-325px my-5 px-8">
-                                        @foreach($notifications as $notification)
-                                        <!--begin::Item-->
-                                        <div class="d-flex flex-stack py-4">
-                                            <!--begin::Section-->
-                                            <div class="d-flex align-items-center">
-                                                <!--begin::Title-->
-                                                <div class="mb-0 me-2">
-                                                    <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
-                                                    <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
-                                                    <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
+                            @if ($notifications->count())
+                                <!--begin::Tab content-->
+                                <div class="tab-content notification-item">
+                                    <!--begin::Tab panel-->
+                                    <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                        <!--begin::Items-->
+                                        <div class="scroll-y mh-250px my-5 px-8">
+                                            @foreach($notifications as $notification)
+                                                <!--begin::Item-->
+                                                <div class="d-flex flex-stack py-4">
+                                                    <!--begin::Section-->
+                                                    <div class="d-flex align-items-center">
+                                                        <!--begin::Title-->
+                                                        <div class="mb-0 me-2">
+                                                            <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
+                                                            <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
+                                                            <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
+                                                        </div>
+                                                        <!--end::Title-->
+                                                    </div>
+                                                    <!--end::Section-->
                                                 </div>
-                                                <!--end::Title-->
-                                            </div>
-                                            <!--end::Section-->
+                                                <!--end::Item-->
+                                            @endforeach
                                         </div>
-                                        <!--end::Item-->
-                                        @endforeach
+                                        <!--end::Items-->
+                        
+                                        <!--begin::View more-->
+                                        <div class="py-3 text-center border-top">
+                                            <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
+                                                Lihat Semua
+                                                <i class="ki-duotone ki-arrow-right fs-5">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <!--end::View more-->
                                     </div>
-                                    <!--end::Items-->
-                    
-                                    <!--begin::View more-->
-                                    <div class="py-3 text-center border-top">
-                                        <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
-                                            Lihat Semua
-                                            <i class="ki-duotone ki-arrow-right fs-5">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                        </a>
-                                    </div>
-                                    <!--end::View more-->
+                                    <!--end::Tab panel-->
                                 </div>
-                                <!--end::Tab panel-->
-                            </div>
-                            <!--end::Tab content-->
+                                <!--end::Tab content-->
+                            @else
+                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi lagi untuk klien ini.</p>
+                            @endif
                         </div>
                         <!--end::Menu-->
                         <!--end::Menu wrapper-->
