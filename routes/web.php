@@ -94,6 +94,7 @@ Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah'
 Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
 Route::get('/kategori-data/{id}', [PengurusanProgController::class, 'kategoriData']);
 Route::get('/program/{id}', [PengurusanProgController::class, 'program']);
+Route::get('/program-dianjurkan', [PengurusanProgController::class, 'programDianjurkan']);
 Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);

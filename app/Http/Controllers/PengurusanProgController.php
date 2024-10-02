@@ -80,6 +80,12 @@ class PengurusanProgController extends Controller
         return response()->json($kategori);
     }
 
+    public function programDianjurkan()
+    {
+        $program = Program::where('status','BELUM SELESAI')->get();
+        return response()->json($program);
+    }
+
     public function program($id)
     {
         $user = User::find($id);

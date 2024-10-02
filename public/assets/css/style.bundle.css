@@ -7931,7 +7931,16 @@ textarea.form-control-lg {
 .w-75 {
   width: 75% !important;
 }
+.w-80 {
+    width: 80% !important;
+}
+.w-85 {
+    width: 85% !important;
+}
 
+.w-97 {
+    width: 97% !important;
+}
 .w-100 {
   width: 100% !important;
 }
@@ -11292,6 +11301,10 @@ textarea.form-control-lg {
   font-size: 0.5rem !important;
 }
 
+.fs-15 {
+    font-size: 0.75rem !important;
+}
+
 .fs-sm {
   font-size: 0.95rem !important;
 }
@@ -11567,6 +11580,11 @@ textarea.form-control-lg {
 .text-white {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-white-2 {
+    --bs-text-opacity: 0.8;
+    color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-body {
@@ -18564,6 +18582,9 @@ textarea.form-control-lg {
   }
   .fs-md-10 {
     font-size: 0.5rem !important;
+  }
+  .fs-md-15 {
+    font-size: 0.75rem !important;
   }
   .fs-md-sm {
     font-size: 0.95rem !important;
@@ -47497,7 +47518,9 @@ a:hover {
 .landing-light {
     background-color: white!important;
 }
-
+.landing-light-2 {
+    background-color: rgba(255, 255, 255, 0.94) !important;
+}
 .landing-darkblue {
     background-color: #333367!important;
     color:white!important;
@@ -47516,6 +47539,11 @@ a:hover {
 .landing-red {
     background-color: #991b1e!important;
     color:white!important;
+}
+
+.landing-red-op {
+    box-shadow: 5px 5px 5px #ffffff;
+    background-color: #991b1e !important;
 }
 
 .btn-active-red:hover {

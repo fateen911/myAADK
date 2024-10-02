@@ -94,12 +94,13 @@ License: For each use you must have a valid license purchased only from above li
                             <div class="">
                                 <!--begin::Logo image-->
                                 <a href="{{url('/landing-page/version-2')}}">
-                                    <div class="d-flex gap-2">
-                                    <span class="fs-3x text-white">
-                                        <span class="no-space m-0 p-0" id="kt_landing_hero_text">
-                                            <span class="f-brush m-0 p-0">My</span><span class="f-calibri m-0 p-0">Support</span>
+                                    <div>
+                                        <span class="fs-2hx fs-md-3x text-white">
+                                            <span class="no-space m-0 p-0" id="kt_landing_hero_text">
+                                                <span class="f-brush m-0 p-0">My</span><span class="f-calibri m-0 p-0">Support</span>
+                                            </span>
                                         </span>
-                                    </span>
+                                        <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda <i>Priority</i> AADK</p>
                                     </div>
                                 </a>
                                 <!--end::Logo image-->
