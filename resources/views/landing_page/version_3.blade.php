@@ -36,6 +36,20 @@ License: For each use you must have a valid license purchased only from above li
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 </head>
 <!--end::Head-->
+<style>
+    /* Custom Arrow Styling */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgb(193, 196, 204); /* Change the arrow color */
+        border-radius: 50%; /* Make it round */
+        padding: 10px; /* Add padding for larger buttons */
+    }
+
+    .carousel-control-prev-icon:hover,
+    .carousel-control-next-icon:hover {
+        background-color: rgb(145, 148, 159); /* Change color on hover */
+    }
+</style>
 <!--begin::Body-->
 <body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" class="bg-body position-relative app-blank">
 <!--begin::Theme mode setup on page load-->
@@ -123,16 +137,16 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-md-flex w-100 min-h-350px min-h-lg-500px p-lg-10 p-2 landing-bg-gray">
-                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-lg-20 mx-lg-20 mx-10 w-90 order-1">
+            <div class="d-md-flex w-85 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2 landing-bg-gray">
+                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-md-20 mx-lg-20 mx-10 w-90 order-1">
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
                     </div>
-                    <hr class="w-100 w-md-90">
+                    <hr class="w-85 w-md-90">
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
+                    <h3 class="fw-medium text-justify w-85 w-md-90 f-calibri">
                         My Support merupakan sistem maklumat klien AADK yang telah tamat
                         mengikuti program. Ia mengandungi butir-butir peribadi klien dan
                         maklumat khusus berkaitan status kepulihan mereka. Kepentingan
@@ -149,19 +163,40 @@ License: For each use you must have a valid license purchased only from above li
                         </h2>
                     </div>
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
+                    <h3 class="fw-medium text-justify w-85 w-md-90 f-calibri">
                         Kepulihan adalah satu perjalanan dan manifesto sokongan
                         antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju
                         kejayaan yang besar.
                     </h3>
                 </div>
-                <div class="flex-md-root landing-img-3 order-2">
-                    <div class="w-80 m-20 landing-bg-blue">
-                        h3>Nama Aktiviti: </h3>
-                        <h3>Tarikh/Masa Mula:</h3>
-                        <h3>Tarikh/Masa Tamat: </h3>
-                        <h3>Tempat:</h3>
-                        <h3>Pautan: </h3>
+                <div class="flex-md-root order-2">
+                    <div class="container landing-img-3 shadow w-80 h-50 w-md-90 h-md-100 my-auto mx-10">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-root">
+                                <h3 class="mt-5 ms-3">Pengumuman Aktiviti</h3>
+                            </div>
+                            <div class="flex-root d-flex gap-2 mt-4 justify-content-end me-5">
+                                <i class="bi bi-circle-fill text-success"></i>
+                                <i class="bi bi-circle-fill text-warning"></i>
+                                <i class="bi bi-circle-fill text-danger"></i>
+                            </div>
+                        </div>
+                        <div id="programCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner" id="carousel-content">
+                                <!-- Dynamic program content will be inserted here -->
+                                <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black shadow-sm">
+                                    <h3 class="p-2">Tiada Aktiviti</h3>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#programCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#programCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -337,6 +372,46 @@ License: For each use you must have a valid license purchased only from above li
 <script src="/assets/js/custom/landing.js"></script>
 <script src="/assets/js/custom/pages/pricing/general.js"></script>
 <!--end::Custom Javascript-->
+<!--program-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Function to format date in d/m/Y, h:iA format
+        function formatDate(dateStr) {
+            const options = {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', hour12: true
+            };
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-GB', options);
+        }
+
+        // Fetch programs with AJAX
+        $.ajax({
+            url: '/program-dianjurkan',
+            method: 'GET',
+            success: function (data) {
+                let carouselContent = '';
+                $.each(data, function (index, program) {
+                    carouselContent += `
+                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                            <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black">
+                                <h3 class="p-2">${program.nama}</h3>
+                                <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
+                                <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>
+                                <p class="m-0 p-0">Tempat: ${program.tempat}</p>
+                                <p class="m-0 p-0">Pautan: <a href="${program.pautan_pengesahan}">Klik di sini</a></p>
+                            </div>
+                        </div>
+                    `;
+                });
+                $('#carousel-content').html(carouselContent);
+            }
+        });
+    });
+</script>
+<!--end::Javascript-->
 <!--end::Javascript-->
 </body>
 <!--end::Body-->
