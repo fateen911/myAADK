@@ -502,7 +502,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $klien->id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Peribadi Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat peribadi anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -557,7 +557,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $klien->id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Peribadi Ditolak',
             'message' => 'Permohonan kemaskini maklumat peribadi anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
@@ -611,7 +611,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $pekerjaanKlien->klien_id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Pekerjaan Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -666,7 +666,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $pekerjaanKlien->klien_id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Pekerjaan Ditolak',
             'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
@@ -720,7 +720,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $pasanganKlien->klien_id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Keluarga Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat keluarga anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -775,7 +775,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $pasanganKlien->klien_id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Keluarga Ditolak',
             'message' => 'Permohonan kemaskini maklumat keluarga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
@@ -829,7 +829,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $warisKlien->klien_id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Bapa Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat bapa anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -884,7 +884,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $warisKlien->klien_id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Bapa Ditolak',
             'message' => 'Permohonan kemaskini maklumat bapa anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
@@ -938,7 +938,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $warisKlien->klien_id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Ibu Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat ibu anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -993,7 +993,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $warisKlien->klien_id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Ibu Ditolak',
             'message' => 'Permohonan kemaskini maklumat ibu anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
@@ -1047,7 +1047,7 @@ class ProfilKlienController extends Controller
             // Add notification for approval
             Notifikasi::create([
                 'klien_id' => $warisKlien->klien_id,
-                'status' => 'Lulus',
+                'status' => 'Kemaskini Maklumat Penjaga Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat penjaga anda telah diluluskan.',
                 'is_read' => false,
             ]);
@@ -1102,7 +1102,7 @@ class ProfilKlienController extends Controller
         // Add notification for rejection
         Notifikasi::create([
             'klien_id' => $warisKlien->klien_id,
-            'status' => 'Ditolak',
+            'status' => 'Kemaskini Maklumat Penjaga Ditolak',
             'message' => 'Permohonan kemaskini maklumat penjaga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
