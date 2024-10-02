@@ -1,4 +1,8 @@
 <head>
+    <!-- Include Bootstrap JS, Popper.js, and jQuery (if not already included) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         .profile-picture {
             width: 40px !important; /* Adjust the width as needed */
@@ -13,6 +17,64 @@
             cursor: pointer;
             display: flex;
             align-items: center;
+        }
+
+        .notification-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .notification-icon {
+            cursor: pointer;
+            position: relative;
+            padding-right: 10px;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: 20px;
+            color: black;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+
+        .notification-header {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .notification-footer {
+            padding: 10px;
+            text-align: center;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ddd;
+        }
+
+        .notification-container:hover .notification-dropdown {
+            display: block;
         }
     </style>
 </head>
@@ -41,20 +103,125 @@
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
                 {{-- Notifikasi Klien --}}
+                @if(Auth::user()->tahap_pengguna == 2) 
+                    <div class="app-navbar-item ms-1 ms-md-4">
+                        <!--begin::Menu wrapper-->
+                        <div class="btn btn-icon btn-custom btn-icon-dark btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
+                            <i class="ki-duotone ki-notification-status fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                                <span class="path4"></span>
+                            </i>
+                        </div>
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true" id="kt_menu_notifications">
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:black;">
+                                <!--begin::Title-->
+                                <h3 class="text-white fw-semibold px-9 mt-10 mb-6">
+                                    {{ $unreadCount }} Notifikasi baharu
+                                </h3>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                    
+                            <!--begin::Tab content-->
+                            <div class="tab-content">
+                                <!--begin::Tab panel-->
+                                <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                    <!--begin::Items-->
+                                    <div class="scroll-y mh-325px my-5 px-8">
+                                        @foreach($notifications as $notification)
+                                        <!--begin::Item-->
+                                        <div class="d-flex flex-stack py-4">
+                                            <!--begin::Section-->
+                                            <div class="d-flex align-items-center">
+                                                <!--begin::Title-->
+                                                <div class="mb-0 me-2">
+                                                    <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
+                                                    <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
+                                                </div>
+                                                <!--end::Title-->
+                                            </div>
+                                            <!--end::Section-->
+                                            <!--begin::Label-->
+                                            <span class="badge badge-light fs-8">{{ $notification->created_at->diffForHumans() }}</span>
+                                            <!--end::Label-->
+                                        </div>
+                                        <!--end::Item-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Items-->
+                    
+                                    <!--begin::View more-->
+                                    <div class="py-3 text-center border-top">
+                                        <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
+                                            View All
+                                            <i class="ki-duotone ki-arrow-right fs-5">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                            </i>
+                                        </a>
+                                    </div>
+                                    <!--end::View more-->
+                                </div>
+                                <!--end::Tab panel-->
+                            </div>
+                            <!--end::Tab content-->
+                        </div>
+                        <!--end::Menu-->
+                        <!--end::Menu wrapper-->
+                    </div>                
+
+                    {{-- <div class="notification-container">
+                        <div class="notification-icon">
+                            <i class="fas fa-bell fs-3 text-black" style="padding-top: 28px;"></i>
+                            <span class="notification-count">{{ $unreadCount }}</span>
+                        </div>
+                        <!-- Dropdown for notifications -->
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h5>Notifikasi</h5>
+                            </div>
+                            <div class="notification-content">
+                                @foreach($notifications as $notification)
+                                    <a class="dropdown-item" href="#">
+                                        <strong>{{ $notification->message }}</strong>
+                                        <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">Lihat semua notifikasi</a>
+                            </div>
+                        </div>
+                    </div> --}}
+                @endif
+
                 {{-- @if(Auth::user()->tahap_pengguna == 2) 
-                    <a class="nav-link" href="#"  role="button" data-toggle="dropdown">
-                        <i class="fas fa-bell fs-2 text-white" style="padding-top: 28px; padding-right:12px;"></i>
-                        @if($unreadCount > 0)
-                            <span class="badge badge-danger">{{ $unreadCount }}</span>
-                        @endif
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        @foreach($notifications as $notification)
-                            <a class="dropdown-item" href="#">
-                                <strong>{{ $notification->title }}</strong>
-                                <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
-                            </a>
-                        @endforeach
+                    <div class="notification-container">
+                        <div class="notification-icon">
+                            <i class="fas fa-bell fs-3 text-black" style="padding-top: 28px;"></i>
+                            <span class="notification-count">{{ $unreadCount }}</span>
+                        </div>
+                        <!-- Dropdown for notifications -->
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h5>Notifikasi</h5>
+                            </div>
+                            <div class="notification-content">
+                                @foreach($notifications as $notification)
+                                    <a class="dropdown-item" href="#">
+                                        <strong>{{ $notification->message }}</strong>
+                                        <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">Lihat semua notifikasi</a>
+                            </div>
+                        </div>
                     </div>
                 @endif --}}
 
@@ -112,7 +279,6 @@
                         <!--end::Menu item-->
                     </div>
                     <!--end::User account menu-->
-                    <!--end::Menu wrapper-->
                 </div>
                 <!--end::User menu-->
             </div>

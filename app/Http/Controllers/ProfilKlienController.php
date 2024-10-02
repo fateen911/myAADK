@@ -24,7 +24,7 @@ use App\Models\PekerjaanKlienUpdateRequest;
 use App\Models\Pendapatan;
 use App\Models\Pendidikan;
 use App\Models\Penyakit;
-use App\Models\RawatanKlienUpdateRequest;
+use App\Models\Notifikasi;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
 use Illuminate\Support\Facades\Log;
@@ -499,6 +499,14 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $klien->id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat anda telah diluluskan.',
+                'is_read' => false,
+            ]);
+
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat peribadi klien telah berjaya diluluskan.');
         } 
     }
@@ -545,6 +553,14 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
         }
+
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $klien->id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
 
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat peribadi klien ditolak.');
     }

@@ -223,12 +223,20 @@ class HomeController extends Controller
 
                     // $tarikhTidakMenjawabKepulihan = Carbon::now();
 
-                    // Assuming you have a Notification model or a way to get notifications
-                    $unreadCount = Notifikasi::where('klien_id', $klienId)->where('is_read', null)->count();
+                    $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-                    $notifications = Notifikasi::where('klien_id', $klienId)
-                                                ->orderBy('created_at', 'desc')
-                                                ->get();
+                    // Fetch notifications for the client
+                    $notifications = Notifikasi::where('klien_id', $clientId)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+                    // Count unread notifications
+                    $unreadCount = Notifikasi::where('klien_id', $clientId)
+                        ->where('is_read', false)
+                        ->count();
+
+                    // dd($unreadCount);
+                    // dd($notifications);
 
                     return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan',
                                                                                 'responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan',
