@@ -19,62 +19,22 @@
             align-items: center;
         }
 
-        .notification-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .notification-icon {
-            cursor: pointer;
-            position: relative;
-            padding-right: 10px;
-        }
-
         .notification-count {
             position: absolute;
             top: 20px;
+            padding-left: 20px;
             color: black;
             font-size: 12px;
             font-weight: bold;
         }
 
-        .notification-dropdown {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 0;
-            background-color: white;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 250px;
-            border-radius: 5px;
-            z-index: 100;
+        /* Change notification count color on hover */
+        #kt_menu_item_wow:hover .notification-count {
+            color: #0d6efd; /* Primary color (Bootstrap 5 default) */
         }
 
-        .notification-header {
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .notification-content {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .notification-item {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .notification-footer {
-            padding: 10px;
-            text-align: center;
-            background-color: #f1f1f1;
-            border-top: 1px solid #ddd;
-        }
-
-        .notification-container:hover .notification-dropdown {
-            display: block;
+        #kt_menu_notifications:hover .notification-count {
+            color: #0d6efd; /* Primary color (Bootstrap 5 default) */
         }
     </style>
 </head>
@@ -107,19 +67,15 @@
                     <div class="app-navbar-item ms-1 ms-md-4">
                         <!--begin::Menu wrapper-->
                         <div class="btn btn-icon btn-custom btn-icon-dark btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
-                            <i class="ki-duotone ki-notification-status fs-2">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                                <span class="path3"></span>
-                                <span class="path4"></span>
-                            </i>
+                            <i class="ki-solid ki-notification-on fs-2"></i>
+                            <span class="notification-count">{{ $unreadCount }}</span>
                         </div>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true" id="kt_menu_notifications">
                             <!--begin::Heading-->
-                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:black;">
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:#363062;">
                                 <!--begin::Title-->
-                                <h3 class="text-white fw-semibold px-9 mt-10 mb-6">
+                                <h3 class="text-white fw-semibold px-9 mt-5 mb-5">
                                     {{ $unreadCount }} Notifikasi baharu
                                 </h3>
                                 <!--end::Title-->
@@ -157,7 +113,7 @@
                                     <!--begin::View more-->
                                     <div class="py-3 text-center border-top">
                                         <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
-                                            View All
+                                            Baca Semua
                                             <i class="ki-duotone ki-arrow-right fs-5">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>

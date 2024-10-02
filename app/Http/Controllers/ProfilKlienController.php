@@ -503,7 +503,7 @@ class ProfilKlienController extends Controller
             Notifikasi::create([
                 'klien_id' => $klien->id,
                 'status' => 'Lulus',
-                'message' => 'Permohonan kemaskini maklumat anda telah diluluskan.',
+                'message' => 'Permohonan kemaskini maklumat peribadi anda telah diluluskan.',
                 'is_read' => false,
             ]);
 
@@ -558,7 +558,7 @@ class ProfilKlienController extends Controller
         Notifikasi::create([
             'klien_id' => $klien->id,
             'status' => 'Ditolak',
-            'message' => 'Permohonan kemaskini maklumat anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'message' => 'Permohonan kemaskini maklumat peribadi anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
             'is_read' => false,
         ]);
 
@@ -608,6 +608,14 @@ class ProfilKlienController extends Controller
                 ]);
             }
 
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $pekerjaanKlien->klien_id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah diluluskan.',
+                'is_read' => false,
+            ]);
+
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat pekerjaan klien telah berjaya diluluskan.');
         }  
     }
@@ -655,6 +663,14 @@ class ProfilKlienController extends Controller
             ]);
         }
 
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $pekerjaanKlien->klien_id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
+
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat pekerjaan klien ditolak.');
     }
 
@@ -700,6 +716,14 @@ class ProfilKlienController extends Controller
                     'updated_at' => now(),
                 ]);
             }
+
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $pasanganKlien->klien_id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat keluarga anda telah diluluskan.',
+                'is_read' => false,
+            ]);
 
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat keluarga klien telah berjaya diluluskan.');
         }  
@@ -748,6 +772,14 @@ class ProfilKlienController extends Controller
             ]);
         }
 
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $pasanganKlien->klien_id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat keluarga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
+
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat keluarga klien ditolak.');
     }
 
@@ -793,6 +825,14 @@ class ProfilKlienController extends Controller
                     'updated_at' => now(),
                 ]);
             }
+
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat bapa anda telah diluluskan.',
+                'is_read' => false,
+            ]);
 
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat bapa klien telah berjaya diluluskan.');
         }  
@@ -841,6 +881,14 @@ class ProfilKlienController extends Controller
             ]);
         }
 
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $warisKlien->klien_id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat bapa anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
+
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat bapa klien ditolak.');       
     }
 
@@ -886,6 +934,14 @@ class ProfilKlienController extends Controller
                     'updated_at' => now(),
                 ]);
             }
+
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat ibu anda telah diluluskan.',
+                'is_read' => false,
+            ]);
 
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat ibu klien telah berjaya diluluskan.');
         }   
@@ -934,6 +990,14 @@ class ProfilKlienController extends Controller
             ]);
         }
 
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $warisKlien->klien_id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat ibu anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
+
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat ibu klien ditolak.');
     }
 
@@ -979,6 +1043,14 @@ class ProfilKlienController extends Controller
                     'updated_at' => now(),
                 ]);
             }
+
+            // Add notification for approval
+            Notifikasi::create([
+                'klien_id' => $warisKlien->klien_id,
+                'status' => 'Lulus',
+                'message' => 'Permohonan kemaskini maklumat penjaga anda telah diluluskan.',
+                'is_read' => false,
+            ]);
 
             return redirect()->back()->with('success', 'Permohonan kemaskini maklumat penjaga klien telah berjaya diluluskan.');
         } 
@@ -1026,6 +1098,14 @@ class ProfilKlienController extends Controller
                 'updated_at' => now(),
             ]);
         }
+
+        // Add notification for rejection
+        Notifikasi::create([
+            'klien_id' => $warisKlien->klien_id,
+            'status' => 'Ditolak',
+            'message' => 'Permohonan kemaskini maklumat penjaga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
+            'is_read' => false,
+        ]);
 
         return redirect()->back()->with('errorPermohonan', 'Permohonan kemaskini maklumat penjaga klien ditolak.');
     }

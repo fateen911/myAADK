@@ -235,9 +235,6 @@ class HomeController extends Controller
                         ->where('is_read', false)
                         ->count();
 
-                    // dd($unreadCount);
-                    // dd($notifications);
-
                     return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan',
                                                                                 'responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan',
                                                                                 'unreadCount','notifications'));
