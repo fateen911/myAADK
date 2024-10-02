@@ -19,22 +19,34 @@
             align-items: center;
         }
 
+        /* Notification count badge styling */
         .notification-count {
             position: absolute;
-            top: 20px;
-            padding-left: 20px;
-            color: black;
-            font-size: 12px;
+            top: -5px; /* Adjust this value to move the badge higher */
+            right: -5px; /* Adjust this value to move the badge to the right */
+            background-color: red; /* Red background for badge */
+            color: white; /* White text for better contrast */
+            border-radius: 50%; /* Makes the badge circular */
+            font-size: 10px; /* Smaller font size */
             font-weight: bold;
+            width: 18px; /* Set a fixed width for consistency */
+            height: 18px; /* Set a fixed height for consistency */
+            display: flex; /* Flexbox for centering text inside the badge */
+            align-items: center; /* Vertically center the text */
+            justify-content: center; /* Horizontally center the text */
+            padding: 2px; /* Optional padding for text inside badge */
         }
 
-        /* Change notification count color on hover */
-        #kt_menu_item_wow:hover .notification-count {
-            color: #0d6efd; /* Primary color (Bootstrap 5 default) */
-        }
-
-        #kt_menu_notifications:hover .notification-count {
-            color: #0d6efd; /* Primary color (Bootstrap 5 default) */
+        /* Icon styling with rounded background */
+        #kt_menu_item_wow {
+            position: relative; /* Required for absolute positioning of .notification-count */
+            border-radius: 50% !important;
+            background-color: lightgray;
+            width: 40px; /* Width of the button */
+            height: 40px; /* Height of the button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -66,7 +78,7 @@
                 @if(Auth::user()->tahap_pengguna == 2) 
                     <div class="app-navbar-item ms-1 ms-md-4">
                         <!--begin::Menu wrapper-->
-                        <div class="btn btn-icon btn-custom btn-icon-dark btn-active-light btn-active-color-primary w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
+                        <div class="btn btn-icon btn-custom btn-icon-dark w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
                             <i class="ki-solid ki-notification-on fs-2"></i>
                             <span class="notification-count">{{ $unreadCount }}</span>
                         </div>
@@ -76,14 +88,14 @@
                             <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:#363062;">
                                 <!--begin::Title-->
                                 <h3 class="text-white fw-semibold px-9 mt-5 mb-5">
-                                    {{ $unreadCount }} Notifikasi baharu
+                                    Semua Notifikasi
                                 </h3>
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
                     
                             <!--begin::Tab content-->
-                            <div class="tab-content">
+                            <div class="tab-content notification-item">
                                 <!--begin::Tab panel-->
                                 <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
                                     <!--begin::Items-->
@@ -97,13 +109,11 @@
                                                 <div class="mb-0 me-2">
                                                     <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
                                                     <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
+                                                    <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
                                                 </div>
                                                 <!--end::Title-->
                                             </div>
                                             <!--end::Section-->
-                                            <!--begin::Label-->
-                                            <span class="badge badge-light fs-8">{{ $notification->created_at->diffForHumans() }}</span>
-                                            <!--end::Label-->
                                         </div>
                                         <!--end::Item-->
                                         @endforeach
@@ -113,7 +123,7 @@
                                     <!--begin::View more-->
                                     <div class="py-3 text-center border-top">
                                         <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
-                                            Baca Semua
+                                            Lihat Semua
                                             <i class="ki-duotone ki-arrow-right fs-5">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -129,30 +139,6 @@
                         <!--end::Menu-->
                         <!--end::Menu wrapper-->
                     </div>                
-
-                    {{-- <div class="notification-container">
-                        <div class="notification-icon">
-                            <i class="fas fa-bell fs-3 text-black" style="padding-top: 28px;"></i>
-                            <span class="notification-count">{{ $unreadCount }}</span>
-                        </div>
-                        <!-- Dropdown for notifications -->
-                        <div class="notification-dropdown">
-                            <div class="notification-header">
-                                <h5>Notifikasi</h5>
-                            </div>
-                            <div class="notification-content">
-                                @foreach($notifications as $notification)
-                                    <a class="dropdown-item" href="#">
-                                        <strong>{{ $notification->message }}</strong>
-                                        <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
-                                    </a>
-                                @endforeach
-                            </div>
-                            <div class="notification-footer">
-                                <a href="#">Lihat semua notifikasi</a>
-                            </div>
-                        </div>
-                    </div> --}}
                 @endif
 
                 {{-- @if(Auth::user()->tahap_pengguna == 2) 
