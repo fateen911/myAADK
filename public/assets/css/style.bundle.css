@@ -47505,6 +47505,13 @@ a:hover {
     background-repeat: no-repeat!important; /* Prevent repeating the image */
 }
 
+.landing-img-4{
+    background-image: url('/assets/media/illustrations/background/bg-img-2.png');
+    background-size: cover!important; /* Scale the image to cover the entire viewport */
+    background-position: center!important; /* Center the image */
+    background-repeat: no-repeat!important; /* Prevent repeating the image */
+}
+
 .landing-bg-white{
     background-color: rgba(245, 245, 245, 0.87) !important;
     border-radius: 10px;

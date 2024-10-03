@@ -60,7 +60,7 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Header Section-->
     <div class="mb-0" id="home">
         <!--begin::Wrapper-->
-        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light">
+        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-light landing-img-4">
             <!--begin::Header-->
             <div class="landing-header landing-darkblue">
                 <!--begin::Container-->
@@ -137,7 +137,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-md-flex w-85 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2 landing-bg-gray">
+            <div class="d-md-flex w-85 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2">
                 <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-md-20 mx-lg-20 mx-10 w-90 order-1">
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
