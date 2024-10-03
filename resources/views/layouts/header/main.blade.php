@@ -76,7 +76,7 @@
             <div class="app-navbar flex-shrink-0">
                 {{-- Notifikasi Klien --}}
                 @if(Auth::user()->tahap_pengguna == 2) 
-                    <div class="app-navbar-item ms-1 ms-md-4">
+                    <div class="app-navbar-item ms-1 ms-md-4" style="margin-right: 10px;">
                         <!--begin::Menu wrapper-->
                         <div class="btn btn-icon btn-custom btn-icon-dark w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
                             <i class="ki-solid ki-notification-on fs-2"></i>
@@ -123,7 +123,7 @@
                         
                                         <!--begin::View more-->
                                         <div class="py-3 text-center border-top">
-                                            <a href="../../demo1/dist/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
+                                            <a href="{{ route('notifications.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">
                                                 Lihat Semua
                                                 <i class="ki-duotone ki-arrow-right fs-5">
                                                     <span class="path1"></span>
@@ -145,40 +145,18 @@
                     </div>                
                 @endif
 
-                {{-- @if(Auth::user()->tahap_pengguna == 2) 
-                    <div class="notification-container">
-                        <div class="notification-icon">
-                            <i class="fas fa-bell fs-3 text-black" style="padding-top: 28px;"></i>
-                            <span class="notification-count">{{ $unreadCount }}</span>
-                        </div>
-                        <!-- Dropdown for notifications -->
-                        <div class="notification-dropdown">
-                            <div class="notification-header">
-                                <h5>Notifikasi</h5>
-                            </div>
-                            <div class="notification-content">
-                                @foreach($notifications as $notification)
-                                    <a class="dropdown-item" href="#">
-                                        <strong>{{ $notification->message }}</strong>
-                                        <span class="small">{{ $notification->created_at->diffForHumans() }}</span>
-                                    </a>
-                                @endforeach
-                            </div>
-                            <div class="notification-footer">
-                                <a href="#">Lihat semua notifikasi</a>
-                            </div>
-                        </div>
-                    </div>
-                @endif --}}
-
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                     <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:white;">
-                        @if(Auth::user()->gambar_profil)
-                            <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
-                            {{ strtoupper(Auth::user()->name) }}
+                        @if(Auth::user()->tahap_pengguna != 2) 
+                            @if(Auth::user()->gambar_profil)
+                                <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
+                                {{ strtoupper(Auth::user()->name) }}
+                            @else
+                                <i class="fa fa-user" style="color: white; padding-right:10px; font-size:16px;"></i>
+                                {{ strtoupper(Auth::user()->name) }}
+                            @endif
                         @else
-                            <i class="fa fa-user" style="color: white; padding-right:10px; font-size:16px;"></i>
                             {{ strtoupper(Auth::user()->name) }}
                         @endif
                     </div>

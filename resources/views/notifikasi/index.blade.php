@@ -14,14 +14,35 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
         <style>
-            .form-select.custom-select {
-                background-color: #e0e0e0 !important;
-                color: #222222 !important;
+            .notification-item {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
             }
-
-            .form-select.custom-select option {
-                background-color: #f5f5f5 !important;
-                color: #222222 !important;
+        
+            .notification-item p {
+                margin: 0;
+            }
+        
+            .notification-date-time {
+                color: #666;
+            }
+        
+            .notification-item ul {
+                margin: 0;
+                padding-left: 20px;
+            }
+        
+            .notification-item ul li {
+                list-style-type: none;
+                position: relative;
+                padding-left: 15px;
+            }
+        
+            .notification-item ul li:before {
+                content: "\2022";
+                position: absolute;
+                left: 0;
+                color: #363062;
             }
         </style>
     </head>
@@ -36,16 +57,8 @@
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">
-                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Notifikasi</a>
+                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Senarai Notifikasi</a>
                 </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item">
-                    <span class="bullet bg-gray-400 w-5px h-2px"></span>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">Kemaskini Profil</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->
@@ -56,42 +69,68 @@
         <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
             <!--begin::Content container-->
             <div id="kt_app_content_container" class="app-container container-xxl" style="width: 80%;">
-                <!--begin::Sign-in Method-->
                 <div class="card mb-5 mb-xl-10">
                     <!--begin::Card header-->
-                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
+                    <div class="card-header border-0" style="background-color: #363062;">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Kemaskini Pejabat Pengawasan</h3>
+                            <h3 class="fw-bold m-0" style="color: white;">Notifikasi Anda</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
         
-                    <!--begin::Content-->
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-toggle" id="notificationsDropdown" data-toggle="dropdown" aria-expanded="false">
-                            Notifikasi <span class="badge">{{ count($notifications) }}</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
+                    <!--begin::Notifications List-->
+                    <div class="card-body">
+                        <div class="list-group">
                             @forelse($notifications as $notification)
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge {{ $notification->is_read ? 'badge-light' : 'badge-info' }}">
-                                            {{ $notification->created_at->diffForHumans() }}
-                                        </span>
-                                        <div class="ml-3">
-                                            <strong>{{ $notification->title }}</strong>
-                                            <p>{{ $notification->message }}</p>
+                                <div class="list-group-item">
+                                    <div class="notification-item">
+                    
+                                        <!-- Notification status and date/time in the same row -->
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <!-- Left: Status -->
+                                            <p style="font-weight: bold;">
+                                                {{ $notification->status }}
+                                            </p>
+                    
+                                            <!-- Right: Created date and time -->
+                                            <p class="notification-date-time" style="font-size: 0.9rem;">
+                                                {{ $notification->created_at->format('d/m/Y h:i A') }}
+                                            </p>
                                         </div>
+                    
+                                        <!-- Notification message -->
+                                        @php
+                                            // Split the message at the word "Alasan" if it exists
+                                            $message_parts = explode('Alasan:', $notification->message);
+                                        @endphp
+                    
+                                        <!-- First part is the main message -->
+                                        <p style="font-size: 1rem;">
+                                            {{ $message_parts[0] }}
+                                        </p>
+                    
+                                        <!-- If there is an 'Alasan' part, we display it -->
+                                        @if(count($message_parts) > 1)
+                                            <p style="font-style: italic; margin-top: 0.5rem;">
+                                                <strong>Alasan:</strong>
+                                                <ul style="padding-left: 50px;">
+                                                    @foreach(explode(',', trim($message_parts[1])) as $reason)
+                                                        <li>{{ trim($reason) }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </p>
+                                        @endif
                                     </div>
-                                </a>
+                                </div>
                             @empty
-                                <a href="#" class="dropdown-item">Tiada notifikasi baharu</a>
+                                <div class="list-group-item">
+                                    <p class="text-center">Tiada notifikasi baharu</p>
+                                </div>
                             @endforelse
                         </div>
-                    </div>  
-                    <!--end::Content-->
+                    </div>
+                    <!--end::Notifications List-->
                 </div>
-                <!--end::Sign-in Method-->
             </div>
             <!--end::Content container-->
         </div>    

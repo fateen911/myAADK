@@ -34,7 +34,7 @@ class NotifikasiController extends Controller
             ->where('is_read', false)
             ->count();
 
-        dd($unreadCount);
+        // dd($unreadCount);
         
         // Pass both notifications and unread count to the view
         return view('notifikasi.index', compact('notifications', 'unreadCount'));
