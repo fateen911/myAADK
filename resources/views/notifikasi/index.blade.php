@@ -57,7 +57,7 @@
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">
-                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Semua Notifikasi</a>
+                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Senarai Notifikasi</a>
                 </li>
                 <!--end::Item-->
             </ul>
@@ -73,7 +73,7 @@
                     <!--begin::Card header-->
                     <div class="card-header border-0" style="background-color: #363062;">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" style="color: white;">Semua Notifikasi Anda</h3>
+                            <h3 class="fw-bold m-0" style="color: white;">Notifikasi Anda</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -113,7 +113,7 @@
                                         @if(count($message_parts) > 1)
                                             <p style="font-style: italic; margin-top: 0.5rem;">
                                                 <strong>Alasan:</strong>
-                                                <ul style="padding-left: 20px;">
+                                                <ul style="padding-left: 50px;">
                                                     @foreach(explode(',', trim($message_parts[1])) as $reason)
                                                         <li>{{ trim($reason) }}</li>
                                                     @endforeach
