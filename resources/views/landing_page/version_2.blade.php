@@ -141,7 +141,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <hr class="w-100 w-md-100">
                     <br>
-                    <h3 class="fw-medium text-justify w-85 w-md-100 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-100 f-calibri">
                         My Support merupakan sistem maklumat klien AADK yang telah tamat
                         mengikuti program. Ia mengandungi butir-butir peribadi klien dan
                         maklumat khusus berkaitan status kepulihan mereka. Kepentingan
@@ -158,7 +158,7 @@ License: For each use you must have a valid license purchased only from above li
                         </h2>
                     </div>
                     <br>
-                    <h3 class="fw-medium text-justify w-85 w-md-100 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-100 f-calibri">
                         Kepulihan adalah satu perjalanan dan manifesto sokongan
                         antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju
                         kejayaan yang besar.
