@@ -173,12 +173,12 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="container landing-img-3 shadow w-80 h-50 w-md-90 h-md-100 my-auto mx-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="flex-root">
-                                <h3 class="mt-5 ms-3">Pengumuman Aktiviti</h3>
+                                <h3 class="mt-5 ms-3 text-white text-shadow">Pengumuman Aktiviti</h3>
                             </div>
                             <div class="flex-root d-flex gap-2 mt-4 justify-content-end me-5">
-                                <i class="bi bi-circle-fill text-success"></i>
-                                <i class="bi bi-circle-fill text-warning"></i>
-                                <i class="bi bi-circle-fill text-danger"></i>
+                                <i class="bi bi-circle-fill text-success text-shadow"></i>
+                                <i class="bi bi-circle-fill text-warning text-shadow"></i>
+                                <i class="bi bi-circle-fill text-danger text-shadow"></i>
                             </div>
                         </div>
                         <div id="programCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -396,7 +396,7 @@ License: For each use you must have a valid license purchased only from above li
                 $.each(data, function (index, program) {
                     carouselContent += `
                         <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black">
+                            <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white text-black">
                                 <h3 class="p-2">${program.nama}</h3>
                                 <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
                                 <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>

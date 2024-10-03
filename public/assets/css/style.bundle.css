@@ -47499,7 +47499,7 @@ a:hover {
 }
 
 .landing-img-3{
-    background-image: url('/assets/media/illustrations/healthy/health-1.png');
+    background-image: url('/assets/media/illustrations/healthy/health-5.jpg');
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
@@ -47565,6 +47565,10 @@ a:hover {
 
 .color-gray-landing{
     color: #485462 !important;
+}
+
+.text-shadow{
+    text-shadow: 0 0 10px black;
 }
 
 .landing-hr-top {
