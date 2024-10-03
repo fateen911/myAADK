@@ -47484,6 +47484,18 @@ a:hover {
   --bs-stepper-line-border: 1px dashed rgba(255, 255, 255, 0.3);
 }
 
+.responsive-iframe {
+    width: 100%; /* Full width by default */
+    max-width: 380px; /* Maximum width for larger screens */
+}
+
+@media only screen and (min-width: 768px) {
+    .responsive-iframe {
+        width: 330px; /* Set a wider width for larger devices like tablets and desktops */
+    }
+}
+
+
 .landing-img{
     background-image: url('/logo/background-landing.png');
     background-size: cover!important; /* Scale the image to cover the entire viewport */

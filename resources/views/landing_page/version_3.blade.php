@@ -137,16 +137,16 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-md-flex w-85 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2">
-                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-md-20 mx-lg-20 mx-10 w-90 order-1">
+            <div class="d-md-flex w-100 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2">
+                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-md-20 mx-lg-20 mx-10 w-90">
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
                     </div>
-                    <hr class="w-85 w-md-90">
+                    <hr class="w-100 w-md-90">
                     <br>
-                    <h3 class="fw-medium text-justify w-85 w-md-90 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
                         My Support merupakan sistem maklumat klien AADK yang telah tamat
                         mengikuti program. Ia mengandungi butir-butir peribadi klien dan
                         maklumat khusus berkaitan status kepulihan mereka. Kepentingan
@@ -163,14 +163,14 @@ License: For each use you must have a valid license purchased only from above li
                         </h2>
                     </div>
                     <br>
-                    <h3 class="fw-medium text-justify w-85 w-md-90 f-calibri">
+                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
                         Kepulihan adalah satu perjalanan dan manifesto sokongan
                         antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju
                         kejayaan yang besar.
                     </h3>
                 </div>
-                <div class="flex-md-root order-2">
-                    <div class="container landing-img-3 shadow w-80 h-50 w-md-90 h-md-100 my-auto mx-10">
+                <div class="flex-md-root">
+                    <div class="container landing-img-3 shadow w-85 h-50 w-md-90 h-md-100 my-auto mx-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="flex-root">
                                 <h3 class="mt-5 ms-3 text-white text-shadow">Pengumuman Aktiviti</h3>
@@ -219,7 +219,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Block-->
                         <div class="rounded landing-dark-border p-1 mb-2">
                             <!--begin::Text-->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15938.187061609875!2d101.7468338!3d2.9456305!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdc9847e2a657f%3A0xf2b32842ef9d2b51!2sAgensi%20Antidadah%20Kebangsaan!5e0!3m2!1sen!2smy!4v1724031008391!5m2!1sen!2smy" width="350" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15938.187061609875!2d101.7468338!3d2.9456305!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdc9847e2a657f%3A0xf2b32842ef9d2b51!2sAgensi%20Antidadah%20Kebangsaan!5e0!3m2!1sen!2smy!4v1724031008391!5m2!1sen!2smy" width="360" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="responsive-iframe"></iframe>
                             <!--end::Text-->
                         </div>
                         <!--end::Block-->
