@@ -9,22 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class NotifikasiController extends Controller
 {
-    public function view()
-    {
-        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+    // public function view()
+    // {
+    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-        // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
-            ->orderBy('created_at', 'desc')
-            ->get();
+    //     // Fetch notifications for the client
+    //     $notifications = Notifikasi::where('klien_id', $clientId)
+    //         ->orderBy('created_at', 'desc')
+    //         ->get();
 
-        // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
-            ->where('is_read', false)
-            ->count();
+    //     // Count unread notifications
+    //     $unreadCount = Notifikasi::where('klien_id', $clientId)
+    //         ->where('is_read', false)
+    //         ->count();
         
-        return view('layouts.header.main', compact('notifications','unreadCount'));
-    }
+    //     return view('layouts.header.main', compact('notifications','unreadCount'));
+    // }
 
     public function index()
     {
@@ -52,6 +52,7 @@ class NotifikasiController extends Controller
         if ($notification && $notification->klien_id == $clientId) {
             $notification->update(['is_read' => true]);
         }
-        return redirect()->back();
+        
+        return redirect()->route('pengurusan-profil');
     }
 }

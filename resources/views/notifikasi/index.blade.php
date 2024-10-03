@@ -82,15 +82,13 @@
                     <div class="card-body">
                         <div class="list-group">
                             @forelse($notifications as $notification)
-                                <div class="list-group-item">
+                                <div class="list-group-item @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
                                     <div class="notification-item">
                                         <!-- Notification status and date/time in the same row -->
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <!-- Left: Status -->
-                                            <p style="font-weight: bold;">
-                                                {{ $notification->status }}
-                                            </p>
-                    
+                                            <a href="{{ route('notifications.markRead', $notification->id) }}" class="fs-5 text-black text-hover-primary fw-bold">{{ $notification->status }}</a>
+                                            
                                             <!-- Right: Created date and time -->
                                             <p class="notification-date-time" style="font-size: 0.9rem;">
                                                 {{ $notification->created_at->format('d/m/Y h:i A') }}
@@ -118,15 +116,6 @@
                                                     @endforeach
                                                 </ul>
                                             </p>
-                                        @endif
-
-                                        <!-- Mark notification as read link -->
-                                        @if (!$notification->is_read)
-                                            <a href="{{ route('notifications.markRead', $notification->id) }}" class="btn btn-link">
-                                                <i class="ki-duotone ki-arrow-right fs-5"></i> Tanda sebagai Sudah Dibaca
-                                            </a>
-                                        @else
-                                            <span class="badge badge-success">Sudah Dibaca</span>
                                         @endif
                                     </div>
                                 </div>
