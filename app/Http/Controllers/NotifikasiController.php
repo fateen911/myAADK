@@ -9,16 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class NotifikasiController extends Controller
 {
-    // public function index()
-    // {
-    //     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+    public function view()
+    {
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
-    //     $notifications = Notifikasi::where('klien_id', $clientId)
-    //         ->orderBy('created_at', 'desc')
-    //         ->get();
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Count unread notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
         
-    //     return view('notifikasi.index', compact('notifications'));
-    // }
+        return view('layouts.header.main', compact('notifications','unreadCount'));
+    }
 
     public function index()
     {
@@ -33,8 +39,6 @@ class NotifikasiController extends Controller
         $unreadCount = Notifikasi::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
-
-        // dd($unreadCount);
         
         // Pass both notifications and unread count to the view
         return view('notifikasi.index', compact('notifications', 'unreadCount'));

@@ -73,7 +73,7 @@
                     <!--begin::Card header-->
                     <div class="card-header border-0" style="background-color: #363062;">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" style="color: white;">Notifikasi Anda</h3>
+                            <h3 class="fw-bold m-0" style="color: white;">Semua Notifikasi Anda</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -84,7 +84,6 @@
                             @forelse($notifications as $notification)
                                 <div class="list-group-item">
                                     <div class="notification-item">
-                    
                                         <!-- Notification status and date/time in the same row -->
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
                                             <!-- Left: Status -->
@@ -119,6 +118,15 @@
                                                     @endforeach
                                                 </ul>
                                             </p>
+                                        @endif
+
+                                        <!-- Mark notification as read link -->
+                                        @if (!$notification->is_read)
+                                            <a href="{{ route('notifications.markRead', $notification->id) }}" class="btn btn-link">
+                                                <i class="ki-duotone ki-arrow-right fs-5"></i> Tanda sebagai Sudah Dibaca
+                                            </a>
+                                        @else
+                                            <span class="badge badge-success">Sudah Dibaca</span>
                                         @endif
                                     </div>
                                 </div>

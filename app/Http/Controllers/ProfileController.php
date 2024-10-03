@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Klien;
+use App\Models\Notifikasi;
 
 class ProfileController extends Controller
 {
@@ -18,9 +19,30 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        if(Auth::user()->tahap_pengguna == 2)
+        {
+            $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+            // Fetch notifications for the client
+            $notifications = Notifikasi::where('klien_id', $clientId)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            // Count unread notifications
+            $unreadCount = Notifikasi::where('klien_id', $clientId)
+                ->where('is_read', false)
+                ->count();
+
+            return view('profile.edit', compact('notifications', 'unreadCount'), [
+                'user' => $request->user(),
+            ]);
+        }
+        else
+        {
+            return view('profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }
     }
 
     public function updatePassword(Request $request): View

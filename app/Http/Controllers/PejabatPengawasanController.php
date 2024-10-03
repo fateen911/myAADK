@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Klien;
 use App\Models\NegeriPejabat;
 use App\Models\PejabatPengawasanKlien;
+use App\Models\Notifikasi;
 
 class PejabatPengawasanController extends Controller
 {
@@ -20,8 +21,20 @@ class PejabatPengawasanController extends Controller
         $senaraiDaerah = DaerahPejabat::all();
         $senaraiNegeri = NegeriPejabat::all();
 
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Count unread notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
+
         // Return view with all required data
-        return view('pejabat_pengawasan.kemaskini', compact('pejabatKlien', 'senaraiDaerah', 'senaraiNegeri'));
+        return view('pejabat_pengawasan.kemaskini', compact('pejabatKlien', 'senaraiDaerah', 'senaraiNegeri','notifications','unreadCount'));
     }
 
     public function update(Request $request)

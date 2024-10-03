@@ -10,6 +10,7 @@ use App\Models\ResponDemografi;
 use App\Models\Klien;
 use App\Models\ResponModalKepulihan;
 use App\Models\SkorModal;
+use App\Models\Notifikasi;
 use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
@@ -51,7 +52,17 @@ class ModalKepulihanController extends Controller
             }
         }
 
-        return view('modal_kepulihan.klien.soalan_selidik', compact('klien', 'butangMula', 'latestRecordKeputusan', 'latestRecordDemografi'));
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Count unread notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
+
+        return view('modal_kepulihan.klien.soalan_selidik', compact('klien', 'butangMula', 'latestRecordKeputusan', 'latestRecordDemografi', 'notifications', 'unreadCount'));
     }
 
     public function soalanDemografi()
@@ -64,7 +75,18 @@ class ModalKepulihanController extends Controller
             ->orderBy('updated_at', 'desc')
             ->first();
 
-        return view('modal_kepulihan.klien.soalan_demografi', compact('latestRespon'));
+        
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Count unread notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
+
+        return view('modal_kepulihan.klien.soalan_demografi', compact('latestRespon', 'notifications', 'unreadCount'));
     }
 
     // public function autosaveResponSoalanDemografi(Request $request)
@@ -369,8 +391,19 @@ class ModalKepulihanController extends Controller
                                 ->where('klien_id', $clientId)
                                 ->pluck('skala_id', 'soalan_id')
                                 ->toArray();
+        
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('modal_kepulihan.klien.soalan_kepulihan3', [
+        // Count unread notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
+
+            
+        return view('modal_kepulihan.klien.soalan_kepulihan3', compact('notifications', 'unreadCount'), [
             'questions' => $questions,
             'autosavedAnswers' => $autosavedAnswers,
             'currentPage' => $currentPage

@@ -200,7 +200,8 @@ Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanCont
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
     Route::get('/notifications', [NotifikasiController::class, 'index'])->name('notifications.index');
-    Route::post('/notifications/read/{id}', [NotifikasiController::class, 'markAsRead'])->name('notifications.read');
+    Route::get('/view/notifications', [NotifikasiController::class, 'view'])->name('notifications.view');
+    Route::get('/notifications/read/{id}', [NotifikasiController::class, 'markAsRead'])->name('notifications.markRead');
 });
 
 require __DIR__.'/auth.php';
