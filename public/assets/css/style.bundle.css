@@ -7908,6 +7908,9 @@ textarea.form-control-lg {
 .w-10 {
     width: 10% !important;
 }
+.w-20 {
+    width: 20% !important;
+}
 .w-25 {
   width: 25% !important;
 }
@@ -8167,6 +8170,12 @@ textarea.form-control-lg {
 
 .w-1000px {
   width: 1000px !important;
+}
+.w-1200px {
+    width: 1200px !important;
+}
+.w-1500px {
+    width: 1500px !important;
 }
 
 .mw-unset {
@@ -16250,6 +16259,9 @@ textarea.form-control-lg {
   .w-md-1000px {
     width: 1000px !important;
   }
+    .w-md-1200px {
+        width: 1200px !important;
+    }
   .mw-md-unset {
     max-width: unset !important;
   }
