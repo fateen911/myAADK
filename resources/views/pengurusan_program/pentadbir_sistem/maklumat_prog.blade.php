@@ -22,6 +22,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- Bootstrap JS -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <style>
             .btn-icon {
@@ -780,59 +781,47 @@
 
     <script>
         $(document).on('click', '#clipboard1', function() {
-            const inputField = document.getElementById('link_1');
-            // Temporarily enable the input field to access its value
-            inputField.disabled = false;
-            const inputFieldValue = inputField.value;
-            inputField.disabled = true;
+            // Get the text field
+            var copyText = document.getElementById('link_1');
 
-            navigator.clipboard.writeText(inputFieldValue)
-                .then(() => {
-                    document.getElementById('message').innerText = 'Copied to clipboard!';
-                    setTimeout(() => {
-                        document.getElementById('message').innerText = '';
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+            // Alert the copied text
+            alert("Menyalin teks: " + copyText.value);
         });
         $(document).on('click', '#clipboard2', function() {
-            const inputField = document.getElementById('link_2');
-            // Temporarily enable the input field to access its value
-            inputField.disabled = false;
-            const inputFieldValue = inputField.value;
-            inputField.disabled = true;
+            // Get the text field
+            var copyText = document.getElementById('link_2');
 
-            navigator.clipboard.writeText(inputFieldValue)
-                .then(() => {
-                    document.getElementById('message').innerText = 'Copied to clipboard!';
-                    setTimeout(() => {
-                        document.getElementById('message').innerText = '';
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+            // Alert the copied text
+            alert("Menyalin teks: " + copyText.value);
         });
 
         $(document).on('click', '#clipboard3', function() {
-            const inputField = document.getElementById('link_3');
-            // Temporarily enable the input field to access its value
-            inputField.disabled = false;
-            const inputFieldValue = inputField.value;
-            inputField.disabled = true;
+            // Get the text field
+            var copyText = document.getElementById('link_3');
 
-            navigator.clipboard.writeText(inputFieldValue)
-                .then(() => {
-                    document.getElementById('message').innerText = 'Copied to clipboard!';
-                    setTimeout(() => {
-                        document.getElementById('message').innerText = '';
-                    }, 2000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+            // Alert the copied text
+            alert("Menyalin teks: " + copyText.value);
         });
     </script>
 
