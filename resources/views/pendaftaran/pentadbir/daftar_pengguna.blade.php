@@ -657,6 +657,21 @@
 										<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
 									</tr>
 								</thead>
+								<tbody id="pengguna-table-body" class="fw-semibold text-gray-600">
+									<!-- Data will be injected here by AJAX -->
+								</tbody>
+							</table>
+							
+							{{-- <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+								<thead>
+									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+										<th class="min-w-250px">Nama</th>
+										<th class="min-w-50px">No. Kad Pengenalan</th>
+										<th class="min-w-50px">E-mel</th>
+										<th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
+										<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
+									</tr>
+								</thead>
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($klien as $user1)
 										@php
@@ -915,13 +930,12 @@
 										</tr>
 									@endforeach
 								</tbody>
-							</table>
+							</table> --}}
 							<!--end::Table-->
 						</div>
 						<!--end::Card body-->
 					</div>
 				</div>
-
 
 				<!--begin::Modal - Daftar Pegawai-->
 				<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
@@ -1066,6 +1080,7 @@
 
     <!--begin::Javascript-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1357,69 +1372,279 @@
 		});
 	</script>
 
-	<!-- JavaScript to handle dynamic fields for reason of rejection -->
-	{{-- <script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const dynamicFieldsContainer = document.getElementById('dynamicFields');
+	<script>
+		$(document).ready(function() {
+			// Load client data using AJAX
+			$.ajax({
+				url: "{{ route('senarai-klien-data') }}", // Route for fetching data
+				method: 'GET',
+				success: function(response) {
+					// Clear existing table rows
+					$('#pengguna-table-body').empty();
 
-			// Function to update buttons visibility
-			function updateButtons() {
-				const rows = dynamicFieldsContainer.querySelectorAll('.reason-row');
-				rows.forEach((row, index) => {
-					const addButton = row.querySelector('.addField');
-					const removeButton = row.querySelector('.removeField');
+					// Loop through the data and append to the table
+					response.forEach(function(user1) {
+						let tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : 'N/A';
 
-					if (index === rows.length - 1) {
-						addButton.style.display = 'inline-block';
-						if (rows.length > 1) {
-							if (!removeButton) {
-								const newRemoveButton = document.createElement('button');
-								newRemoveButton.type = 'button';
-								newRemoveButton.className = 'btn btn-danger removeField';
-								newRemoveButton.innerHTML = '-';
-								row.appendChild(newRemoveButton);
-								attachRemoveListener(newRemoveButton);
+						let tableRow = `
+							<tr>
+								<td>${user1.nama}</td>
+								<td>${user1.no_kp}</td>
+								<td>${user1.emel}</td>
+								<td style="text-align: center;">${tarikhDaftar}</td>
+								<td style="text-align: center;">
+									<div class="d-flex justify-content-center align-items-center">
+										${user1.updated_at !== null ? 
+											`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien${user1.id}">
+												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+													<i class="ki-duotone bi bi-pencil fs-3"></i>
+												</span>
+											</a>` 
+											: 
+											`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_daftar_klien${user1.id}">
+												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+													<i class="ki-duotone bi bi-pencil fs-3"></i>
+												</span>
+											</a>`
+										}
+									</div>
+
+									<!--begin::Modal - Kemaskini Klien-->
+									<div class="modal fade" id="modal_kemaskini_klien${user1.id}" tabindex="-1" aria-hidden="true">
+										<!--begin::Modal dialog-->
+										<div class="modal-dialog modal-dialog-centered mw-650px">
+											<!--begin::Modal content-->
+											<div class="modal-content">
+												<!--begin::Modal header-->
+												<div class="modal-header">
+													<!--begin::Modal title-->
+													<h2>Kemaskini Maklumat Akaun Klien</h2>
+													<!--end::Modal title-->
+													<!--begin::Close-->
+													<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+														<i class="ki-solid ki-cross-circle fs-1"></i>
+													</div>
+													<!--end::Close-->
+												</div>
+												<!--end::Modal header-->
+
+												<!--begin::Modal body-->
+												<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+													<!--begin::Form-->
+													<form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
+														@csrf
+
+														<input type="hidden" name="id" value="${user1.id}">
+														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">															
+															<div class="fv-row mb-7">
+																<label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
+																<select id="statusAk2_${user1.no_kp}" class="form-select form-select-solid custom-select" name="status_ak" required>
+																	<!-- Options will be populated dynamically -->
+																</select>
+															</div>
+
+															<div class="fv-row mb-5">
+																<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
+																<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="${user1.nama}" readonly/>
+															</div>
+
+															<div class="fv-row mb-5">
+																<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
+																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<input type="text" class="form-control form-control-solid" name="no_kp" value="${user1.no_kp}" readonly/>
+															</div>
+
+															<div class="fv-row mb-5">
+																<label class="fs-6 fw-semibold mb-2">No. Telefon
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="${user1.no_tel}" inputmode="numeric" maxlength="11"/>
+															</div>
+
+															<div class="fv-row mb-5">
+																<label class="fs-6 fw-semibold mb-2">E-mel</label>
+																<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="${user1.emel}" />
+															</div>
+															
+															<div class="fv-row mb-5">
+																<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
+																<div class="input-group">
+																	<input type="text" class="form-control form-control-solid custom-form" id="passwordKlien${user1.id}" name="passwordKemaskini" />
+																	<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien${user1.id}')">Jana Kata Laluan</button>
+																</div>
+															</div>
+														</div>
+
+														<!--begin::Actions-->
+														<div class="text-center pt-15">
+															<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+
+															<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+																<span class="indicator-label">Simpan</span>
+																<span class="indicator-progress">Sila tunggu...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+															</button>
+														</div>
+														<!--end::Actions-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Modal body-->
+											</div>
+											<!--end::Modal content-->
+										</div>
+										<!--end::Modal dialog-->
+									</div>
+									<!--end::Modal - Kemaskini Klien-->
+
+									<!--begin::Modal - Daftar Klien-->
+									<div class="modal fade" id="modal_daftar_klien${user1.id}" tabindex="-1" aria-hidden="true">
+										<!--begin::Modal dialog-->
+										<div class="modal-dialog modal-dialog-centered mw-650px">
+											<!--begin::Modal content-->
+											<div class="modal-content">
+												<!--begin::Modal header-->
+												<div class="modal-header">
+													<!--begin::Modal title-->
+													<h2>Pendaftaran Akaun Klien</h2>
+													<!--end::Modal title-->
+													<!--begin::Close-->
+													<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+														<i class="ki-solid ki-cross-circle fs-1"></i>
+													</div>
+													<!--end::Close-->
+												</div>
+												<!--end::Modal header-->
+
+												<!--begin::Modal body-->
+												<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+													<!--begin::Form-->
+													<form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
+														@csrf
+
+														<input type="hidden" name="id" value="${user1.id}">
+														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
+															<!--begin::Input group-->
+															<div class="fv-row mb-5">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="name" value="${user1.nama}" readonly/>
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-5">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="no_kp" value="${user1.no_kp}" readonly/>
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-5">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2">No. Telefon
+																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+																			<span class="path1"></span>
+																			<span class="path2"></span>
+																			<span class="path3"></span>
+																		</i>
+																	</span>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="${user1.no_tel}" inputmode="numeric"/>
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-5">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2">E-mel</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="${user1.emel}" />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+															<!--begin::Input group-->
+															<div class="fv-row mb-5">
+																<!--begin::Label-->
+																<label class="fs-6 fw-semibold mb-2 required">Kata Laluan Baharu</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<div class="input-group">
+																	<input type="text" class="form-control form-control-solid custom-form" id="passwordDaftarKlien${user1.id}" name="passwordDaftar" />
+																	<button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien${user1.id}')">Jana Kata Laluan</button>
+																</div>
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
+
+														<!--begin::Actions-->
+														<div class="text-center pt-15">
+															<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+
+															<button type="submit" id="daftarBtn" class="btn btn-primary">
+																<span class="indicator-label">Daftar</span>
+																<span class="indicator-progress">Sila tunggu...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+															</button>
+														</div>
+														<!--end::Actions-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Modal body-->
+											</div>
+											<!--end::Modal content-->
+										</div>
+										<!--end::Modal dialog-->
+									</div>
+									<!--end::Modal - Daftar Klien-->
+								</td>
+							</tr>
+						`;
+
+						// Append the row to the table body
+						$('#pengguna-table-body').append(tableRow);
+
+						// Make an AJAX call to get the account status for each user
+						$.ajax({
+							url: `/get-status-ak/${user1.no_kp}`,
+							method: 'GET',
+							success: function(status_ak) {
+								let statusSelect = $(`#statusAk2_${user1.no_kp}`);
+								statusSelect.empty();
+								statusSelect.append(`<option value="AKTIF" ${status_ak == 'AKTIF' ? 'selected' : ''}>AKTIF</option>`);
+								statusSelect.append(`<option value="DIBEKUKAN" ${status_ak == 'DIBEKUKAN' ? 'selected' : ''}>DIBEKUKAN</option>`);
 							}
-						}
-					} else {
-						addButton.style.display = 'none';
-						if (!removeButton) {
-							const newRemoveButton = document.createElement('button');
-							newRemoveButton.type = 'button';
-							newRemoveButton.className = 'btn btn-danger removeField';
-							newRemoveButton.innerHTML = '-';
-							row.appendChild(newRemoveButton);
-							attachRemoveListener(newRemoveButton);
-						}
-					}
-				});
-			}
-
-			// Add new input field
-			dynamicFieldsContainer.addEventListener('click', function (e) {
-				if (e.target.classList.contains('addField')) {
-					const newField = document.createElement('div');
-					newField.classList.add('input-group', 'mb-2', 'reason-row');
-					newField.innerHTML = `
-						<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Contoh: Sila isi nama seperti kad pengenalan">
-						<button type="button" class="btn btn-info addField">+</button>
-						<button type="button" class="btn btn-danger removeField">-</button>
-					`;
-					console.log(newField);
-					dynamicFieldsContainer.appendChild(newField);
-					updateButtons();
+						});
+					});
+				},
+				error: function(xhr) {
+					console.log(xhr.responseText); // Log any errors
 				}
 			});
-
-			// Remove input field
-			function attachRemoveListener(button) {
-				button.addEventListener('click', function () {
-					button.closest('.reason-row').remove();
-					updateButtons();
-				});
-			}
-
-			updateButtons(); // Initial update for buttons
 		});
-	</script> --}}
+	</script>
 @endsection

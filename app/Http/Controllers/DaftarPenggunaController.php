@@ -132,13 +132,29 @@ class DaftarPenggunaController extends Controller
     }
 
     // PENTADBIR
-    public function senaraiPengguna()
+    public function getPenggunaData()
     {
-        // $klien = Klien::orderBy('updated_at', 'desc')->get();
         $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
                         ->select('klien.*', 'users.updated_at as user_updated_at')
                         ->orderBy('user_updated_at', 'desc')
                         ->get();
+                        
+        return response()->json($klien); // Return the data as JSON
+    }
+
+    public function getStatusAk($no_kp)
+    {
+        $status_ak = User::where('no_kp', $no_kp)->value('acc_status');
+        return response()->json($status_ak);
+    }
+
+    public function senaraiPengguna()
+    {
+        // $klien = Klien::orderBy('updated_at', 'desc')->get();
+        // $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+        //                 ->select('klien.*', 'users.updated_at as user_updated_at')
+        //                 ->orderBy('user_updated_at', 'desc')
+        //                 ->get();
 
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                         ->whereIn('tahap_pengguna', [3, 4, 5])
@@ -153,7 +169,7 @@ class DaftarPenggunaController extends Controller
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.pentadbir.daftar_pengguna', compact('klien', 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
+        return view ('pendaftaran.pentadbir.daftar_pengguna', compact( 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     // PENTADBIR : DAFTAR / KEMASKINI AKAUN KLIEN
@@ -164,8 +180,6 @@ class DaftarPenggunaController extends Controller
 
         // Retrieve the corresponding Klien record by no_kp
         $klien = Klien::where('no_kp', $request->no_kp)->first();
-
-        // dd($request->all());
 
         // Check if klien already registered or not
         if ($user) {
