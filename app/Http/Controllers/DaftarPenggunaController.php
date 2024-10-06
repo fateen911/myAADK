@@ -148,13 +148,36 @@ class DaftarPenggunaController extends Controller
         return response()->json($status_ak);
     }
 
+    public function getDataPegawai()
+    {
+        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
+                        ->whereIn('tahap_pengguna', [3, 4, 5])
+                        ->orderBy('users.updated_at', 'desc')
+                        ->get();
+
+        // Convert the necessary related data to JSON as well
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        // Return all necessary data as JSON
+        return response()->json([
+            'pegawai' => $pegawai,
+            'negeri' => $negeri,
+            'daerah' => $daerah,
+            'tahap' => $tahap,
+            'jawatan' => $jawatan
+        ]);
+    }
+
     public function senaraiPengguna()
     {
-        // $klien = Klien::orderBy('updated_at', 'desc')->get();
-        // $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
-        //                 ->select('klien.*', 'users.updated_at as user_updated_at')
-        //                 ->orderBy('user_updated_at', 'desc')
-        //                 ->get();
+        $klien = Klien::orderBy('updated_at', 'desc')->get();
+        $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+                        ->select('klien.*', 'users.updated_at as user_updated_at')
+                        ->orderBy('user_updated_at', 'desc')
+                        ->get();
 
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
                         ->whereIn('tahap_pengguna', [3, 4, 5])

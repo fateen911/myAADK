@@ -433,6 +433,26 @@
 									</tr>
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
+									<!-- Data will be populated here by AJAX -->
+								</tbody>
+							</table>
+
+							<!-- Add this empty container for dynamic modals -->
+							<div id="modalContainer"></div>
+
+							{{-- <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+								<thead>
+									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+										<th class="min-w-150px">Nama</th>
+										<th class="min-w-125px">No. Kad Pengenalan</th>
+										<th class="min-w-100px">E-mel</th>
+										<th class="min-w-100px">Peranan</th>
+										<th class="min-w-150px">Negeri Bertugas (Daerah Bertugas)</th>
+										<th class="min-w-75px">Tarikh Daftar</th>
+										<th class="min-w-50px">Kemaskini</th>
+									</tr>
+								</thead>
+								<tbody class="fw-semibold text-gray-600">
 									@foreach ($pegawai as $user2)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user2['tahap_pengguna'])->value('peranan');
@@ -631,7 +651,7 @@
 										</tr>
 									@endforeach
 								</tbody>
-							</table>
+							</table> --}}
 							<!--end::Table-->
 						</div>
 						<!--end::Card body-->
@@ -1080,7 +1100,7 @@
 
     <!--begin::Javascript-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1372,6 +1392,7 @@
 		});
 	</script>
 
+	{{-- AJAX TABLE SENARAI KLIEN --}}
 	<script>
 		$(document).ready(function() {
 			// Load client data using AJAX
@@ -1390,7 +1411,7 @@
 							<tr>
 								<td>${user1.nama}</td>
 								<td>${user1.no_kp}</td>
-								<td>${user1.emel}</td>
+								<td>${user1.emel ? user1.emel : ''}</td>
 								<td style="text-align: center;">${tarikhDaftar}</td>
 								<td style="text-align: center;">
 									<div class="d-flex justify-content-center align-items-center">
@@ -1471,12 +1492,12 @@
 																		</i>
 																	</span>
 																</label>
-																<input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="${user1.no_tel}" inputmode="numeric" maxlength="11"/>
+																<input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="${user1.no_tel ? user1.no_tel : ''}" inputmode="numeric" maxlength="11"/>
 															</div>
 
 															<div class="fv-row mb-5">
 																<label class="fs-6 fw-semibold mb-2">E-mel</label>
-																<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="${user1.emel}" />
+																<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="${user1.emel ? user1.emel : ''}" />
 															</div>
 															
 															<div class="fv-row mb-5">
@@ -1571,7 +1592,7 @@
 																</label>
 																<!--end::Label-->
 																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="${user1.no_tel}" inputmode="numeric"/>
+																<input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="${user1.no_tel ? user1.no_tel : ''}" inputmode="numeric"/>
 																<!--end::Input-->
 															</div>
 															<!--end::Input group-->
@@ -1581,7 +1602,7 @@
 																<label class="fs-6 fw-semibold mb-2">E-mel</label>
 																<!--end::Label-->
 																<!--begin::Input-->
-																<input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="${user1.emel}" />
+																<input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="${user1.emel ? user1.emel : ''}" />
 																<!--end::Input-->
 															</div>
 															<!--end::Input group-->
@@ -1643,6 +1664,90 @@
 				},
 				error: function(xhr) {
 					console.log(xhr.responseText); // Log any errors
+				}
+			});
+		});
+	</script>
+
+	{{-- AJAX TABLE SENARAI PEGAWAI --}}
+	<script>
+		$(document).ready(function() {
+			// Fetch Pegawai data via AJAX
+			$.ajax({
+				url: "{{ route('senarai-pegawai') }}",
+				method: 'GET',
+				dataType: 'json',
+				success: function(response) {
+					var pegawaiList = response.pegawai;
+					var tableBody = '';
+					var modalContainer = ''; // To store modals
+
+					$.each(pegawaiList, function(index, user2) {
+						var peranan = user2.tahap_pengguna;
+						var tarikhDaftar = new Date(user2.created_at).toLocaleDateString('en-GB');
+						var negeriB = user2.negeri_bertugas ? user2.negeri_bertugas : '';
+						var daerahB = user2.daerah_bertugas ? user2.daerah_bertugas : '';
+
+						// Populate table rows
+						tableBody += `<tr>
+										<td>${user2.name}</td>
+										<td>${user2.no_kp}</td>
+										<td>${user2.email}</td>
+										<td>${peranan}</td>
+										<td>${negeriB} ${daerahB ? '(' + daerahB + ')' : ''}</td>
+										<td>${tarikhDaftar}</td>
+										<td>
+											<div class="d-flex justify-content-center align-items-center">
+												<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_pegawai${user2.id}">
+													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+														<i class="ki-duotone bi bi-pencil fs-3"></i>
+													</span>
+												</a>
+											</div>
+										</td>
+									</tr>`;
+
+						// Populate modal for each user
+						modalContainer += `
+							<div class="modal fade" id="modal_kemaskini_pegawai${user2.id}" tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered mw-650px">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h2>Kemaskini Maklumat Akaun Pegawai</h2>
+											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+												<i class="ki-solid ki-cross-circle fs-1"></i>
+											</div>
+										</div>
+										<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+											<form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">
+												@csrf
+												<input type="hidden" name="id" value="${user2.id}">
+												
+												<!-- Add the form fields as per your modal structure -->
+
+												<div class="text-center pt-15">
+													<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
+													<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
+														<span class="indicator-label">Simpan</span>
+														<span class="indicator-progress">Sila tunggu...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>`;
+					});
+
+					// Append the rows to the table body
+					$('#sortTable2 tbody').html(tableBody);
+					
+					// Append the modals to a container
+					$('#modalContainer').html(modalContainer);
+				},
+				error: function(error) {
+					console.error("Error fetching data", error);
 				}
 			});
 		});

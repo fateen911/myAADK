@@ -119,7 +119,7 @@ Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPen
 // AJAX PENDAFTARAN
 Route::get('/senarai-klien/data', [DaftarPenggunaController::class, 'getPenggunaData'])->name('senarai-klien-data');
 Route::get('/get-status-ak/{no_kp}', [DaftarPenggunaController::class, 'getStatusAk'])->name('get-status-ak');
-
+Route::get('/pentadbir/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('senarai-pegawai');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
