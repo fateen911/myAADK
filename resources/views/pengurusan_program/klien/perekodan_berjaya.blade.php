@@ -44,7 +44,7 @@
                 <div class="card-body py-15 py-lg-20">
                     <!--begin::Logo-->
                     <div class="mb-13">
-                        <img alt="Logo" src="/logo/aadk.png" class="h-125px" />
+                        <img alt="Logo" src="/logo/mySupport.png" class="h-125px" />
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
