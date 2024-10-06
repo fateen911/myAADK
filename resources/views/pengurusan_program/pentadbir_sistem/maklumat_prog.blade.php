@@ -361,20 +361,17 @@
                         <!--begin::Col-->
                         <div class="col-4">
                             <!--begin::Items-->
-                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-steelblue">
+                            <div class="px-6 pt-5 card-rounded h-140px w-100 card theme-dark-bg-body bg-steelblue">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-list-task text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Keseluruhan</span>
+                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Responden</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
-                                    <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$keseluruhan}}</span>
-                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                    </a>
+                                    <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 keseluruhanIPTS">{{$keseluruhan}}</span>
                                 </div>
                                 <!--end::Stats-->
                             </div>
@@ -385,7 +382,7 @@
                         <!--begin::Col-->
                         <div class="col-4">
                             <!--begin::Items-->
-                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-mediumseagreen">
+                            <div class="px-6 pt-5 card-rounded h-140px w-100 card theme-dark-bg-body bg-mediumseagreen">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-check-circle-fill text-light" style="font-size: 20px;">
@@ -395,10 +392,7 @@
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
-                                    <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 derafIPTS">{{$hadir}}</span>
-                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                    </a>
+                                    <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 derafIPTS">{{$hadir}}</span>
                                 </div>
                                 <!--end::Stats-->
                             </div>
@@ -409,7 +403,7 @@
                         <!--begin::Col-->
                         <div class="col-4">
                             <!--begin::Items-->
-                            <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body bg-palevioletred">
+                            <div class="px-6 pt-5 card-rounded h-140px w-100 card theme-dark-bg-body bg-palevioletred">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-x-circle-fill text-light" style="font-size: 20px;">
@@ -419,10 +413,7 @@
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
-                                    <a href={{ route('senarai-pengguna') }}>
-                                        <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$tdk_hadir}}</span>
-                                        <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
-                                    </a>
+                                    <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 keseluruhanIPTS">{{$tdk_hadir}}</span>
                                 </div>
                                 <!--end::Stats-->
                             </div>
