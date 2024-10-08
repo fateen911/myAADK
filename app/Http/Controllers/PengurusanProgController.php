@@ -782,7 +782,6 @@ class PengurusanProgController extends Controller
     //HEBAHAN
     public function paparHebahan($id)
     {
-
         $user_id = Auth::id();
         $user = User::find($user_id);
         $program = Program::with('kategori')->find($id);

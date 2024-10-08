@@ -104,8 +104,8 @@ class DaftarPenggunaController extends Controller
                 'name' => strtoupper($request->name),
                 'no_kp' => $request->no_kp,
                 'email' => $request->email,
-                'tahap_pengguna' => 2,   
-                'status' => 0,          
+                'tahap_pengguna' => 2,
+                'status' => 0,
                 'password' => Hash::make($request->passwordDaftar),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -138,7 +138,7 @@ class DaftarPenggunaController extends Controller
                         ->select('klien.*', 'users.updated_at as user_updated_at')
                         ->orderBy('user_updated_at', 'desc')
                         ->get();
-                        
+
         return response()->json($klien); // Return the data as JSON
     }
 
@@ -238,7 +238,7 @@ class DaftarPenggunaController extends Controller
             else{
                 return redirect()->route('senarai-pengguna')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
             }
-        } 
+        }
         else {
             return redirect()->route('senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
@@ -287,6 +287,17 @@ class DaftarPenggunaController extends Controller
                 return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
             }
         }
+    }
+
+    public function modalKemaskiniPegawai($id)
+    {
+        $pegawai = Pegawai::find($id);
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        return view('pendaftaran.pentadbir.modal_kemaskini_pegawai', compact('pegawai','negeri','daerah','tahap','jawatan'));
     }
 
     public function kemaskiniPegawai(Request $request)

@@ -99,6 +99,9 @@ Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
 
+// KEMASKINI MODAL
+Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
+
 // KEMASKINI PROFIL AKAUN PENGGUNA
 Route::middleware('auth')->group(function () {
     Route::get('/kemaskini/kata-laluan', [ProfileController::class, 'updatePassword'])->name('update.password');

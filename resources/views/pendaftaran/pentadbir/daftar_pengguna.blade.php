@@ -332,13 +332,13 @@
 															<i class="ki-solid ki-cross-circle fs-1"></i>
 														</div>
 													</div>
-			
+
 													<div class="modal-body">
 														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
 															@csrf
 															<input type="hidden" name="status" value="Ditolak">
 															<input type="hidden" name="id" value="{{ $user3->id }}">
-										
+
 															<!-- Begin Rejection Reasons Input -->
 															<div id="dynamicFields">
 																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak :</label>
@@ -347,7 +347,7 @@
 																</div>
 															</div>
 															<!-- End Rejection Reasons Input -->
-										
+
 															<!-- Form actions -->
 															<div class="text-center pt-3">
 																<button type="submit" class="btn btn-primary">Hantar</button>
@@ -434,12 +434,38 @@
 								</thead>
 								<tbody class="fw-semibold text-gray-600">
 									<!-- Data will be populated here by AJAX -->
+                                    <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+                                        <td class="min-w-150px">null</td>
+                                        <td class="min-w-125px">null</td>
+                                        <td class="min-w-100px">null</td>
+                                        <td class="min-w-100px">null</td>
+                                        <td class="min-w-150px">null</td>
+                                        <td class="min-w-75px">null</td>
+                                        <td class="min-w-50px">null</td>
+                                    </tr>
 								</tbody>
 							</table>
 
 							<!-- Add this empty container for dynamic modals -->
-							<div id="modalContainer"></div>
+{{--							<div id="modalContainer"></div>--}}
+                            <!-- Modal-->
+                            <div class="modal fade modal-lg" id="modal_kemaskini_pegawai" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">KEMASKINI MAKLUMAT PEGAWAI</h5>
+                                            <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="bi bi-x-lg"></i>
+                                            </button>
+                                        </div>
 
+                                        <div class="modal-body" id="modalBodyPegawai">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
 							{{-- <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
@@ -681,7 +707,7 @@
 									<!-- Data will be injected here by AJAX -->
 								</tbody>
 							</table>
-							
+
 							{{-- <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
@@ -1116,14 +1142,6 @@
 			}
 		});
 
-		$('#sortTable2').DataTable({
-			ordering: true,
-			order: [],
-			language: {
-				url: "/assets/lang/Malay.json"
-			}
-		});
-
 		$('#sortTable3').DataTable({
 			ordering: true,
 			order: [],
@@ -1391,7 +1409,126 @@
 			});
 		});
 	</script>
+    {{-- AJAX TABLE SENARAI PEGAWAI --}}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch Pegawai data via AJAX
+            $.ajax({
+                url: "{{ route('senarai-pegawai') }}",
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    var pegawaiList = response.pegawai;
+                    var rows = '';
+                    var modalContainer = ''; // To store modals
+                    // Clear the existing rows before appending new ones
+                    $('#sortTable2 tbody').empty();
 
+                    $.each(pegawaiList, function(index, user2) {
+                        var peranan = user2.tahap_pengguna;
+                        var tarikhDaftar = new Date(user2.created_at).toLocaleDateString('en-GB');
+                        var negeriB = user2.negeri_bertugas ? user2.negeri_bertugas : '';
+                        var daerahB = user2.daerah_bertugas ? user2.daerah_bertugas : '';
+                        // Populate table rows
+                        rows += '<tr>';
+                        rows +=				'<td>'+user2.name+'</td>';
+                        rows +=				'<td>'+user2.no_kp+'</td>';
+                        rows +=				'<td>'+user2.email+'</td>';
+                        rows +=				'<td>'+peranan+'</td>';
+                        rows +=				'<td>'+negeriB+'</td>';
+                        rows +=				'<td>'+tarikhDaftar+'</td>'
+                        rows +=				`<td>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user2.id + `" data-bs-target="#modal_kemaskini_pegawai">
+                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+                                                            <i class="ki-duotone bi bi-pencil fs-3"></i>
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </td>`;
+                        rows +=			'</tr>';
+
+                        // Populate modal for each user
+                        {{--modalContainer += `--}}
+                        {{--        <div class="modal fade" id="modal_kemaskini_pegawai${user2.id}" tabindex="-1" aria-hidden="true">--}}
+                        {{--            <div class="modal-dialog modal-dialog-centered mw-650px">--}}
+                        {{--                <div class="modal-content">--}}
+                        {{--                    <div class="modal-header">--}}
+                        {{--                        <h2>Kemaskini Maklumat Akaun Pegawai</h2>--}}
+                        {{--                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">--}}
+                        {{--                            <i class="ki-solid ki-cross-circle fs-1"></i>--}}
+                        {{--                        </div>--}}
+                        {{--                    </div>--}}
+                        {{--                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">--}}
+                        {{--                        <form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">--}}
+                        {{--                            @csrf--}}
+                        {{--<input type="hidden" name="id" value="${user2.id}">--}}
+
+                        {{--                            <!-- Add the form fields as per your modal structure -->--}}
+
+                        {{--                            <div class="text-center pt-15">--}}
+                        {{--                                <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>--}}
+                        {{--                                <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">--}}
+                        {{--                                    <span class="indicator-label">Simpan</span>--}}
+                        {{--                                    <span class="indicator-progress">Sila tunggu...--}}
+                        {{--                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>--}}
+                        {{--                                </button>--}}
+                        {{--                            </div>--}}
+                        {{--                        </form>--}}
+                        {{--                    </div>--}}
+                        {{--                </div>--}}
+                        {{--            </div>--}}
+                        {{--        </div>`;--}}
+                    });
+
+                    // Append the rows to the table body
+                    $('#sortTable2 tbody').html(rows);
+
+                    // Append the modals to a container
+                    $('#modalContainer').html(modalContainer);
+                    // Check if DataTable is already initialized before destroying it
+                    if ($.fn.DataTable.isDataTable('#sortTable2')) {
+                        $('#sortTable2').DataTable().destroy(); // Destroy the existing DataTable instance
+                    }
+
+                    // Initialize DataTable with the new data
+                    $('#sortTable2').DataTable({
+                        ordering: true,
+                        order: [], // Default order (no sorting initially)
+                        language: {
+                            url: "/assets/lang/Malay.json" // Path to the language file
+                        },
+                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                            '<"row"<"col-sm-12 my-0"tr>>' +
+                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        responsive: true
+                    });
+
+                },
+                error: function(error) {
+                    console.error("Error fetching data", error);
+                }
+            });
+        });
+    </script>
+
+    <!-- Modal Pegawai -->
+    <script>
+        $(document).on('click', '#pegawaiModal', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/modal/kemaskini-pegawai/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyPegawai').html(response);
+                },
+                error: function() {
+                    $('#modalBodyPegawai').html('Error loading content.'+id);
+                }
+            });
+        });
+    </script>
 	{{-- AJAX TABLE SENARAI KLIEN --}}
 	<script>
 		$(document).ready(function() {
@@ -1415,13 +1552,13 @@
 								<td style="text-align: center;">${tarikhDaftar}</td>
 								<td style="text-align: center;">
 									<div class="d-flex justify-content-center align-items-center">
-										${user1.updated_at !== null ? 
+										${user1.updated_at !== null ?
 											`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien${user1.id}">
 												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
 												</span>
-											</a>` 
-											: 
+											</a>`
+											:
 											`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_daftar_klien${user1.id}">
 												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
@@ -1456,7 +1593,7 @@
 														@csrf
 
 														<input type="hidden" name="id" value="${user1.id}">
-														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">															
+														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
 															<div class="fv-row mb-7">
 																<label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
 																<select id="statusAk2_${user1.no_kp}" class="form-select form-select-solid custom-select" name="status_ak" required>
@@ -1499,7 +1636,7 @@
 																<label class="fs-6 fw-semibold mb-2">E-mel</label>
 																<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="${user1.emel ? user1.emel : ''}" />
 															</div>
-															
+
 															<div class="fv-row mb-5">
 																<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
 																<div class="input-group">
@@ -1649,6 +1786,7 @@
 						// Append the row to the table body
 						$('#pengguna-table-body').append(tableRow);
 
+
 						// Make an AJAX call to get the account status for each user
 						$.ajax({
 							url: `/get-status-ak/${user1.no_kp}`,
@@ -1669,87 +1807,5 @@
 		});
 	</script>
 
-	{{-- AJAX TABLE SENARAI PEGAWAI --}}
-	<script>
-		$(document).ready(function() {
-			// Fetch Pegawai data via AJAX
-			$.ajax({
-				url: "{{ route('senarai-pegawai') }}",
-				method: 'GET',
-				dataType: 'json',
-				success: function(response) {
-					var pegawaiList = response.pegawai;
-					var tableBody = '';
-					var modalContainer = ''; // To store modals
 
-					$.each(pegawaiList, function(index, user2) {
-						var peranan = user2.tahap_pengguna;
-						var tarikhDaftar = new Date(user2.created_at).toLocaleDateString('en-GB');
-						var negeriB = user2.negeri_bertugas ? user2.negeri_bertugas : '';
-						var daerahB = user2.daerah_bertugas ? user2.daerah_bertugas : '';
-
-						// Populate table rows
-						tableBody += `<tr>
-										<td>${user2.name}</td>
-										<td>${user2.no_kp}</td>
-										<td>${user2.email}</td>
-										<td>${peranan}</td>
-										<td>${negeriB} ${daerahB ? '(' + daerahB + ')' : ''}</td>
-										<td>${tarikhDaftar}</td>
-										<td>
-											<div class="d-flex justify-content-center align-items-center">
-												<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_pegawai${user2.id}">
-													<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-														<i class="ki-duotone bi bi-pencil fs-3"></i>
-													</span>
-												</a>
-											</div>
-										</td>
-									</tr>`;
-
-						// Populate modal for each user
-						modalContainer += `
-							<div class="modal fade" id="modal_kemaskini_pegawai${user2.id}" tabindex="-1" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered mw-650px">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h2>Kemaskini Maklumat Akaun Pegawai</h2>
-											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-												<i class="ki-solid ki-cross-circle fs-1"></i>
-											</div>
-										</div>
-										<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-											<form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">
-												@csrf
-												<input type="hidden" name="id" value="${user2.id}">
-												
-												<!-- Add the form fields as per your modal structure -->
-
-												<div class="text-center pt-15">
-													<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-													<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-														<span class="indicator-label">Simpan</span>
-														<span class="indicator-progress">Sila tunggu...
-														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-													</button>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>`;
-					});
-
-					// Append the rows to the table body
-					$('#sortTable2 tbody').html(tableBody);
-					
-					// Append the modals to a container
-					$('#modalContainer').html(modalContainer);
-				},
-				error: function(error) {
-					console.error("Error fetching data", error);
-				}
-			});
-		});
-	</script>
 @endsection
