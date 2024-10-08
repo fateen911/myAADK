@@ -59,7 +59,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
-            <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">MySupport</span>
         </a>
 
@@ -397,7 +397,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
-            <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">MySupport</span>
         </a>
 
@@ -550,7 +550,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
-            <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">MySupport</span>
         </a>
 
@@ -751,7 +751,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
-            <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">MySupport</span>
         </a>
 
@@ -952,7 +952,7 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
-            <img alt="Logo" src="{{ asset('logo/aadk.png') }}" class="h-50px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <span class="myaadk-text">MySupport</span>
         </a>
 
