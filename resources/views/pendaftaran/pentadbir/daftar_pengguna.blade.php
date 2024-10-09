@@ -477,37 +477,33 @@
 								<tbody class="fw-semibold text-gray-600">
 									<!-- Data will be populated here by AJAX -->
                                     <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-                                        <td class="min-w-150px">null</td>
-                                        <td class="min-w-125px">null</td>
-                                        <td class="min-w-100px">null</td>
-                                        <td class="min-w-100px">null</td>
-                                        <td class="min-w-150px">null</td>
-                                        <td class="min-w-75px">null</td>
-                                        <td class="min-w-50px">null</td>
+                                        <td class="min-w-150px">Tiada</td>
+                                        <td class="min-w-125px">Tiada</td>
+                                        <td class="min-w-100px">Tiada</td>
+                                        <td class="min-w-100px">Tiada</td>
+                                        <td class="min-w-150px">Tiada</td>
+                                        <td class="min-w-75px">Tiada</td>
+                                        <td class="min-w-50px">Tiada</td>
                                     </tr>
 								</tbody>
 							</table>
 
-							<!-- Add this empty container for dynamic modals -->
-{{--							<div id="modalContainer"></div>--}}
                             <!-- Modal-->
                             <div class="modal fade modal-lg" id="modal_kemaskini_pegawai" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">KEMASKINI MAKLUMAT PEGAWAI</h5>
-                                            <button type="button" class="close border-0 bg-transparent" data-dismiss="modal" aria-label="Close">
-                                                <i aria-hidden="true" class="bi bi-x-lg"></i>
-                                            </button>
+                                            <h3 class="modal-title" id="exampleModalLabel">KEMASKINI MAKLUMAT PEGAWAI</h3>
+											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+												<i class="ki-solid ki-cross-circle fs-1"></i>
+											</div>
                                         </div>
 
-                                        <div class="modal-body" id="modalBodyPegawai">
-
-                                        </div>
-
+                                        <div class="modal-body" id="modalBodyPegawai"></div>
                                     </div>
                                 </div>
                             </div>
+
 							{{-- <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
 								<thead>
 									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
@@ -541,8 +537,8 @@
 														({{ $daerahB }})
 													@endif
 												@else
-											</td>
-											@endif
+												@endif
+											</td>	
 											<td>{{ $tarikh_daftar }}</td>
 											<td>
 												<div class="d-flex justify-content-center align-items-center">
@@ -1475,56 +1471,26 @@
                         var tarikhDaftar = new Date(user2.created_at).toLocaleDateString('en-GB');
                         var negeriB = user2.negeri_bertugas ? user2.negeri_bertugas : '';
                         var daerahB = user2.daerah_bertugas ? user2.daerah_bertugas : '';
+						var pegawaiId = user2.pegawai_id; 
+
                         // Populate table rows
                         rows += '<tr>';
-                        rows +=				'<td>'+user2.name+'</td>';
-                        rows +=				'<td>'+user2.no_kp+'</td>';
-                        rows +=				'<td>'+user2.email+'</td>';
-                        rows +=				'<td>'+peranan+'</td>';
-                        rows +=				'<td>'+negeriB+'</td>';
-                        rows +=				'<td>'+tarikhDaftar+'</td>'
-                        rows +=				`<td>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user2.id + `" data-bs-target="#modal_kemaskini_pegawai">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-                                                            <i class="ki-duotone bi bi-pencil fs-3"></i>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </td>`;
-                        rows +=			'</tr>';
-
-                        // Populate modal for each user
-                        {{--modalContainer += `--}}
-                        {{--        <div class="modal fade" id="modal_kemaskini_pegawai${user2.id}" tabindex="-1" aria-hidden="true">--}}
-                        {{--            <div class="modal-dialog modal-dialog-centered mw-650px">--}}
-                        {{--                <div class="modal-content">--}}
-                        {{--                    <div class="modal-header">--}}
-                        {{--                        <h2>Kemaskini Maklumat Akaun Pegawai</h2>--}}
-                        {{--                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">--}}
-                        {{--                            <i class="ki-solid ki-cross-circle fs-1"></i>--}}
-                        {{--                        </div>--}}
-                        {{--                    </div>--}}
-                        {{--                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">--}}
-                        {{--                        <form class="form" id="modal_kemaskini_pegawai_form" action="{{ route('kemaskini-pegawai') }}" method="post">--}}
-                        {{--                            @csrf--}}
-                        {{--<input type="hidden" name="id" value="${user2.id}">--}}
-
-                        {{--                            <!-- Add the form fields as per your modal structure -->--}}
-
-                        {{--                            <div class="text-center pt-15">--}}
-                        {{--                                <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>--}}
-                        {{--                                <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">--}}
-                        {{--                                    <span class="indicator-label">Simpan</span>--}}
-                        {{--                                    <span class="indicator-progress">Sila tunggu...--}}
-                        {{--                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>--}}
-                        {{--                                </button>--}}
-                        {{--                            </div>--}}
-                        {{--                        </form>--}}
-                        {{--                    </div>--}}
-                        {{--                </div>--}}
-                        {{--            </div>--}}
-                        {{--        </div>`;--}}
+                        rows +=	'<td>' + user2.name + '</td>';
+                        rows +=	'<td>' + user2.no_kp + '</td>';
+                        rows +=	'<td>' + user2.email + '</td>';
+                        rows +=	'<td>' + user2.peranan; + '</td>';
+						rows += '<td>' + negeriB + (daerahB ? ' (' + daerahB + ')' : '') + '</td>'; // Display Negeri and Daerah
+                        rows +=	'<td>' + tarikhDaftar + '</td>'
+                        rows +=	`<td>
+									<div class="d-flex justify-content-center align-items-center">
+										<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + pegawaiId + `" data-bs-target="#modal_kemaskini_pegawai">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>
+									</div>
+								</td>`;
+                        rows +=	'</tr>';
                     });
 
                     // Append the rows to the table body

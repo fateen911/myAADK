@@ -151,6 +151,10 @@ class DaftarPenggunaController extends Controller
     public function getDataPegawai()
     {
         $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
+                        ->leftJoin('tahap_pengguna', 'users.tahap_pengguna', '=', 'tahap_pengguna.id') // Join for Peranan
+                        ->leftJoin('senarai_negeri_pejabat', 'pegawai.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
+                        ->leftJoin('senarai_daerah_pejabat', 'pegawai.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
+                        ->select('users.*', 'pegawai.id as pegawai_id', 'tahap_pengguna.peranan', 'senarai_negeri_pejabat.negeri as negeri_bertugas', 'senarai_daerah_pejabat.daerah as daerah_bertugas') // Include pegawai.id
                         ->whereIn('tahap_pengguna', [3, 4, 5])
                         ->orderBy('users.updated_at', 'desc')
                         ->get();
