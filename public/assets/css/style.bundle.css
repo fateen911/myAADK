@@ -49516,6 +49516,11 @@ body,
         width: 300px;
     }
 }
+@media only screen and (min-width: 501px) and (max-width: 767px) {
+    .mx-w-450 {
+        width: 450px;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .text-center-range{
         text-align: center;
@@ -49523,6 +49528,9 @@ body,
     }
     .mw-r-650{
         max-width: 650px !important;
+    }
+    .mw-r-700{
+        max-width: 700px !important;
     }
 }
 

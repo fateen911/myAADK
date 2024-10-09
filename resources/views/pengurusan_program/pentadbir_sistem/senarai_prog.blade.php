@@ -58,7 +58,7 @@
     <!--end::Page title-->
 
     <!--begin::Body-->
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mx-w-300 mx-w-450 mw-r-700">
         <div class="table-responsive">
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -77,14 +77,14 @@
                             <div class="d-flex justify-content-end gap-3" data-kt-customer-table-toolbar="base">
                                 <!--begin::Add Aktiviti-->
                                 <a href={{url('/pengurusan-program/pentadbir-sistem/daftar-prog')}}>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
+                                    <button type="button" class="btn btn-primary btn-sm p-3 px-md-5" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Aktiviti &nbsp;
                                     </button>
                                 </a>
                                 <!--end::Add Aktiviti-->
                                 <!--begin::Add category-->
                                 <a href={{url('/pengurusan-program/pentadbir-sistem/tambah-kategori')}}>
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
+                                    <button type="button" class="btn btn-primary btn-sm px-3 px-md-5" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">
                                         <i class="bi bi-plus-circle"></i> Kategori &nbsp;
                                     </button>
                                 </a>

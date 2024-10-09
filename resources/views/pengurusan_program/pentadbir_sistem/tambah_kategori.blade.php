@@ -66,7 +66,7 @@
         <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-tambah-kategori') }}" method="POST">
             @csrf
             <!--begin::Main column-->
-            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-400px">
+            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-lg-400px">
                 <!--begin::General options-->
                 <div class="card card-flush py-4">
                     <!--begin::Card header-->
