@@ -70,9 +70,9 @@
 
     <!--begin::Body-->
     <!--begin::Main-->
-    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <div class="app-main mx-w-300" id="kt_app_main">
         <!--begin::Content wrapper-->
-        <div class="d-flex flex-column flex-column-fluid">
+        <div class="d-md-flex flex-md-column flex-md-column-fluid">
             <!--begin::Content-->
             <div id="kt_app_content" class="app-content flex-column-fluid">
                 <!--begin::Content container-->

@@ -8171,6 +8171,9 @@ textarea.form-control-lg {
 .w-1000px {
   width: 1000px !important;
 }
+.w-1150px {
+    width: 1150px !important;
+}
 .w-1200px {
     width: 1200px !important;
 }
@@ -16259,9 +16262,9 @@ textarea.form-control-lg {
   .w-md-1000px {
     width: 1000px !important;
   }
-    .w-md-1200px {
-        width: 1200px !important;
-    }
+.w-md-1200px {
+    width: 1200px !important;
+}
   .mw-md-unset {
     max-width: unset !important;
   }
@@ -49504,6 +49507,13 @@ body,
     right: 40px;
   }
 }
+
+@media (max-width: 500px) {
+    .mx-w-300 {
+        width: 300px;
+    }
+}
+
 [data-bs-theme=light] {
   --bs-app-header-light-separator-color: #E4E6EF;
   --bs-app-sidebar-base-toggle-btn-box-shadow: 0px 8px 14px rgba(15, 42, 81, 0.04);
