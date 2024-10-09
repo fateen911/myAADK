@@ -56,11 +56,11 @@
 
                     <div class="tab-content mt-0" id="myTabContent">
                         <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
-                            <!--begin::Card header-->
-                            <div class="header">
-                                <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                            <div class="header row align-items-center">
+                                <div class="col">
+                                    <h2>Senarai Permohonan Klien yang Telah Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                </div>
                             </div>
-                            <!--end::Card header-->
 
                             <!--begin::Card body-->
                             <div class="body">
@@ -109,11 +109,11 @@
                         </div>
 
                         <div class="tab-pane fade show active" id="belumSelesai" role="tabpanel" aria-labelledby="belumSelesai-tab">
-                            <!--begin::Card header-->
-                            <div class="header">
-                                <h2>Senarai Permohonan Klien yang Belum Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                            <div class="header row align-items-center">
+                                <div class="col">
+                                    <h2>Senarai Permohonan Klien yang Belum Selesai Kemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                </div>
                             </div>
-                            <!--end::Card header-->
 
                             <!--begin::Card body-->
                             <div class="body">

@@ -62,11 +62,11 @@
 
                     <div class="tab-content mt-0" id="myTabContent">
                         <div class="tab-pane fade show active" id="dikemaskini" role="tabpanel" aria-labelledby="dikemaskini-tab">
-                            <!--begin::Card header-->
-                            <div class="header">
-                                <h2>Senarai Klien yang Telah Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                            <div class="header row align-items-center">
+                                <div class="col">
+                                    <h2>Senarai Klien yang Telah Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                </div>
                             </div>
-                            <!--end::Card header-->
 
                             <!--begin::Card body-->
                             <div class="body">
@@ -116,11 +116,11 @@
                         </div>
 
                         <div class="tab-pane fade" id="belumDikemaskini" role="tabpanel" aria-labelledby="belumDikemaskini-tab">
-                            <!--begin::Card header-->
-                            <div class="header">
-                                <h2>Senarai Klien yang Belum Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                            <div class="header row align-items-center">
+                                <div class="col">
+                                    <h2>Senarai Klien yang Belum Mengemaskini Profil<br><small>Klik pada nama klien untuk mengemaskini maklumat peribadi mereka.</small></h2>
+                                </div>
                             </div>
-                            <!--end::Card header-->
 
                             <!--begin::Card body-->
                             <div class="body">

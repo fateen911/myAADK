@@ -73,11 +73,14 @@
                     <div class="tab-content mt-0" id="myTabContent">
                         <div class="tab-pane fade show active scrollable-container" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
                             <!--begin::Card header-->
-                            <div class="header">
-                                <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
-                                    <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
-                                    <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
-                                </h2>
+                            <div class="header row align-items-center">
+                                <!--begin::Card title-->
+                                <div class="col">
+                                    <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
+                                        <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
+                                        <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
+                                    </h2>
+                                </div>
                             </div>
                             <!--end::Card header-->
 
@@ -151,7 +154,7 @@
 
                         <div class="tab-pane fade" id="tidakMenjawab" role="tabpanel" aria-labelledby="tidakMenjawab-tab">
                             <!--begin::Card header-->
-                            <div class="header">
+                            <div class="header" style="padding-left: 10px;">
                                 <h2>Senarai Klien Tidak Menjawab Soal Selidik Modal Kepulihan
                                     <br><small>Senarai klien menjawab soal selidik pada kali terakhir telah melebihi tempoh enam (6) bulan.</small>
                                 </h2>

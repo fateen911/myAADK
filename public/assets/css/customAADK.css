@@ -716,3 +716,56 @@ article p{
     display: none;
 }
 
+.nav{
+    margin-left: 22px!important;
+}
+
+/* Nav items styles */
+.nav-item {
+    margin: 0 10px;
+    background-color: lightgray;
+}
+
+.nav-link {
+    font-size: 14px;
+    color: #6c757d;
+    background-color: none;
+    border: 1px solid transparent; /* Remove solid border */
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for buttons */
+}
+
+/* Active Nav Link Styling */
+.nav-link.active {
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1); /* Enhanced shadow effect */
+    border-bottom: none; /* Remove bottom border */
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+/* Hover Effects */
+.nav-link:hover {
+    background-color: darkgray;
+    color: white;
+    border-color: darkgray;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1); /* Hover shadow effect */
+}
+
+/* Remove Bottom Border of Nav Bar */
+.nav-tabs {
+    border-bottom: none; /* Remove bottom border */
+}
+
+/* Add Underline on Hover for Active Elements */
+.nav-link.active:hover {
+    text-decoration: underline; /* Subtle underline for active item */
+}
+

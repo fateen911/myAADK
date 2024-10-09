@@ -34,10 +34,6 @@
 			display: none;
 		}
 
-		.nav{
-			margin-left: 20px!important;
-		}
-
 		.input-group {
 			display: flex;
 			align-items: center;
@@ -128,7 +124,6 @@
 					{{-- PERMOHONAN DAFTAR PEGAWAI --}}
 					<div class="tab-pane fade show active" id="permohonan-pegawai" role="tabpanel" aria-labelledby="permohonan-pegawai-tab">
 						<div class="header row align-items-center">
-							<!--begin::Card title-->
 							<div class="col">
 								<h2>Senarai Permohonan Pendaftaran Pegawai sebagai Pengguna Baharu Sistem</h2>
 								<small>Sila klik pada ikon pensil untuk lihat maklumat pegawai baharu serta luluskan permohonan pendaftaran sebagai pengguna sistem.</small>
@@ -402,7 +397,6 @@
 					{{-- PEGAWAI --}}
 					<div class="tab-pane fade" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
 						<div class="header row align-items-center">
-							<!--begin::Card title-->
 							<div class="col">
 								<h2>Senarai Keseluruhan Pegawai</h2>
 								<small>Sila klik pada butang "Tambah Pengguna" untuk mendaftar pegawai baharu dan klik pada ikon pensil untuk kemaskini akaun pegawai.</small>
@@ -685,9 +679,11 @@
 
 					{{-- KLIEN --}}
 					<div class="tab-pane fade" id="klien" role="tabpanel" aria-labelledby="klien-tab">
-						<!--begin::Card title-->
-						<div class="header ml-5">
-							<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk daftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
+						<div class="header row align-items-center">
+							<!--begin::Card title-->
+							<div class="col">
+								<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk daftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
+							</div>
 						</div>
 
 						<!--begin::Card body-->
@@ -1409,6 +1405,7 @@
 			});
 		});
 	</script>
+
     {{-- AJAX TABLE SENARAI PEGAWAI --}}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
@@ -1529,8 +1526,9 @@
             });
         });
     </script>
+
 	{{-- AJAX TABLE SENARAI KLIEN --}}
-	<script>
+	{{-- <script>
 		$(document).ready(function() {
 			// Load client data using AJAX
 			$.ajax({
@@ -1805,7 +1803,5 @@
 				}
 			});
 		});
-	</script>
-
-
+	</script> --}}
 @endsection
