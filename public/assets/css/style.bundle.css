@@ -19261,6 +19261,9 @@ textarea.form-control-lg {
   .w-lg-175px {
     width: 175px !important;
   }
+  .w-lg-185px {
+    width: 185px !important;
+  }
   .w-lg-200px {
     width: 200px !important;
   }
@@ -49511,6 +49514,15 @@ body,
 @media (max-width: 500px) {
     .mx-w-300 {
         width: 300px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .text-center-range{
+        text-align: center;
+        margin: auto;
+    }
+    .mw-r-650{
+        max-width: 650px !important;
     }
 }
 

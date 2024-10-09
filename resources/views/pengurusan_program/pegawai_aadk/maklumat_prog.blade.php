@@ -62,7 +62,7 @@
     <!--end::Page title-->
 
     <!--begin::Body-->
-    <div class="my-10">
+    <div class="my-10 mx-w-300">
         <!--begin:::Tabs-->
         <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 ">
             <!--begin:::Tab item-->
@@ -87,7 +87,7 @@
     </div>
 
     <!--begin::Tab content-->
-    <div class="tab-content">
+    <div class="tab-content mx-w-300">
         <!--begin::Tab pane-->
         <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general" role="tab-panel">
             <!--begin::Content container-->
@@ -114,7 +114,7 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body text-center pt-0">
+                        <div class="card-body text-center pt-0 text-center-range">
                             <!--begin::Image input-->
                             {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
@@ -131,7 +131,7 @@
                         <input type="hidden" id="programId" value="{{$program->id}}">
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-4">
+                        <div class="card-body pt-2 text-center-range">
                             <!--begin::Share-->
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
@@ -326,7 +326,7 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body text-center pt-0">
+                        <div class="card-body text-center pt-0 text-center-range">
                             <!--begin::Image input-->
                             {!! QrCode::size(200)->generate($program->pautan_pengesahan); !!}
                             <!--end::Image input-->
@@ -342,7 +342,7 @@
                         </div>
                         <!--end::Card body-->
                         <!--begin::Card body-->
-                        <div class="card-body pt-4">
+                        <div class="card-body pt-2 text-center-range">
                             <!--begin::Share-->
                             <b class="fs-5">Hebahan:</b> &nbsp;
                             <!--end::Share-->
@@ -356,7 +356,7 @@
 
                 </div>
                 <!--end::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-md-700px w-lg-800px mx-w-300 mt-20 mt-md-0">
                     <!--begin::Card-->
                     <div class="row g-4 text-center mb-0">
                         <!--begin::Col-->
@@ -366,13 +366,13 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-list-task text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Responden</span>
+                                        <span class="fw-semibold me-1 align-self-center fs-6 fs-md-2 px-auto" style="padding-bottom: 5px; font-family:sans-serif;">Responden</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Stats-->
                                 <div class="m-0">
-                                    <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1 keseluruhanIPTS">{{$keseluruhan}}</span>
+                                    <span class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$keseluruhan}}</span>
                                 </div>
                                 <!--end::Stats-->
                             </div>
@@ -387,7 +387,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-check-circle-fill text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Hadir</span>
+                                        <span class="fw-semibold me-1 align-self-center fs-6 fs-md-2 px-auto" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Hadir</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
@@ -408,7 +408,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-30px me-0 mb-5">
                                     <i class="fas bi bi-x-circle-fill text-light" style="font-size: 20px;">
-                                        <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Hadir</span>
+                                        <span class="fw-semibold me-1 align-self-center fs-6 fs-md-2 px-auto" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Hadir</span>
                                     </i>
                                 </div>
                                 <!--end::Symbol-->
@@ -496,7 +496,7 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
-                        <div class="card-body text-center pt-0">
+                        <div class="card-body text-center pt-0 text-center-range">
                             <!--begin::Image input-->
                             {!! QrCode::size(200)->generate($program->pautan_perekodan); !!}
                             <!--end::Image input-->
@@ -527,7 +527,7 @@
                     <!--end::QR code settings-->
                 </div>
                 <!--end::Aside column-->
-                <div class="d-flex flex-column gap-7 gap-lg-10 w-800px">
+                <div class="d-flex flex-column gap-7 gap-lg-10 w-lg-800px mx-w-300">
                     @if($program->status == "SEDANG BERLANGSUNG")
                     <!--begin::Rekod Kehadiran-->
                     <div class="card card-flush py-4">
@@ -615,7 +615,7 @@
     <!--begin::Modal - maklumat-->
     <div class="modal fade" id="kt_modal_maklumat" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-750px">
+        <div class="modal-dialog modal-dialog-centered mw-lg-750px mw-r-650 mw-350px">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Modal header-->
@@ -628,7 +628,7 @@
                 </div>
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15" id="qr-code">
                     <!--begin::Content-->
                     <!--begin::Image input-->
                     {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
@@ -647,7 +647,7 @@
     <!--begin::Modal - pengesahan-->
     <div class="modal fade" id="kt_modal_pengesahan" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-750px">
+        <div class="modal-dialog modal-dialog-centered mw-lg-750px mw-r-650 mw-350px">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Modal header-->
@@ -660,7 +660,7 @@
                 </div>
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15" id="qr-code-2">
                     <!--begin::Content-->
                     <!--begin::Image input-->
                     {!! QrCode::size(570)->generate($program->pautan_pengesahan); !!}
@@ -678,7 +678,7 @@
     <!--begin::Modal - perekodan-->
     <div class="modal fade" id="kt_modal_perekodan" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
-        <div class="modal-dialog modal-dialog-centered mw-750px">
+        <div class="modal-dialog modal-dialog-centered mw-lg-750px mw-r-650 mw-350px">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Modal header-->
@@ -691,7 +691,7 @@
                 </div>
                 <!--begin::Modal header-->
                 <!--begin::Modal body-->
-                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15">
+                <div class="modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15" id="qr-code-3">
                     <!--begin::Content-->
                     <!--begin::Image input-->
                     {!! QrCode::size(570)->generate($program->pautan_perekodan); !!}
@@ -1148,5 +1148,22 @@
             });
         });
     </script>
+    <script>
+        function adjustQRCode() {
+            const qrCode = document.getElementById('qr-code');
+            const qrCode2 = document.getElementById('qr-code-2');
+            const qrCode3 = document.getElementById('qr-code-3');
+            const screenWidth = window.innerWidth;
 
+            if (screenWidth <= 500) {
+                qrCode.innerHTML = `{!! QrCode::size(270)->generate($program->pautan_pengesahan); !!}`;
+                qrCode2.innerHTML = `{!! QrCode::size(270)->generate($program->pautan_pengesahan); !!}`;
+                qrCode3.innerHTML = `{!! QrCode::size(270)->generate($program->pautan_perekodan); !!}`;
+            }
+        }
+
+        // Run the function when the page loads and when the window is resized
+        window.addEventListener('load', adjustQRCode);
+        window.addEventListener('resize', adjustQRCode);
+    </script>
 @endsection
