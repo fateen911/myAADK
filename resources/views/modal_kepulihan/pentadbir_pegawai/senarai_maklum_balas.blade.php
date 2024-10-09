@@ -18,6 +18,7 @@
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
         <!-- Custom AADK CSS -->
         <link rel="stylesheet" href="/assets/css/customAADK.css">
 
@@ -25,6 +26,54 @@
             .scrollable-container {
                 max-width: 1100px; /* Adjust the height as needed */
                 overflow-x: auto;
+            }
+
+            .nav{
+                margin-left: 22px!important;
+            }
+
+            /* Base styles for all tabs */
+            .nav-tabs .nav-item {
+                margin-bottom: -1px; /* Prevent bottom margin */
+            }
+
+            .nav-link {
+                font-size: 14px;
+                color: #6c757d; 
+                background-color: none;
+                border: 1px solid transparent; 
+                padding: 10px 15px;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            /* Inactive tabs (flat) */
+            .nav-link {
+                background-color: transparent;
+                color: gray;
+                border: none;
+                border-bottom: 2px solid transparent;
+            }
+
+            /* Active tab with color and shadow */
+            .nav-link.active {
+                color: darkslateblue !important;
+                box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
+                background-color: whitesmoke !important; /* Light blue background for active tab */
+                color: #8800ff; /* Bold blue font for active tab */
+                border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
+                font-weight: bold; /* Make font bold */
+                border-radius: 4px 4px 0 0; /* Slight rounding at top of active tab */
+            }
+
+            /* Add hover effect to inactive tabs */
+            .nav-link:hover {
+                border-bottom: 2px solid lightgray;
+                color: #007bff;
+            }
+
+            /* Remove default border */
+            .nav-tabs {
+                border-bottom: 2px solid lightgray; /* Bottom border for tab container */
             }
         </style>
     </head>
@@ -71,16 +120,13 @@
                     </ul>	
 
                     <div class="tab-content mt-0" id="myTabContent">
-                        <div class="tab-pane fade show active scrollable-container" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
+                        <div class="tab-pane fade show active" id="menjawab" role="tabpanel" aria-labelledby="menjawab-tab">
                             <!--begin::Card header-->
-                            <div class="header row align-items-center">
-                                <!--begin::Card title-->
-                                <div class="col">
-                                    <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
-                                        <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
-                                        <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
-                                    </h2>
-                                </div>
+                            <div class="header" style="padding-left: 10px;">
+                                <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
+                                    <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
+                                    <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
+                                </h2>
                             </div>
                             <!--end::Card header-->
 

@@ -71,6 +71,54 @@
             background-color: #f5f5f5 !important;
             color: #222222 !important;
         }
+
+		.nav{
+			margin-left: 22px!important;
+		}
+
+		/* Base styles for all tabs */
+		.nav-tabs .nav-item {
+			margin-bottom: -1px; /* Prevent bottom margin */
+		}
+
+		.nav-link {
+			font-size: 14px;
+			color: #6c757d; 
+			background-color: none;
+			border: 1px solid transparent; 
+			padding: 10px 15px;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		/* Inactive tabs (flat) */
+		.nav-link {
+			background-color: transparent;
+			color: gray;
+			border: none;
+			border-bottom: 2px solid transparent;
+		}
+
+		/* Active tab with color and shadow */
+		.nav-link.active {
+			color: darkslateblue !important;
+    		box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
+			background-color: whitesmoke !important; /* Light blue background for active tab */
+			color: #8800ff; /* Bold blue font for active tab */
+			border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
+			font-weight: bold; /* Make font bold */
+			border-radius: 4px 4px 0 0; /* Slight rounding at top of active tab */
+		}
+
+		/* Add hover effect to inactive tabs */
+		.nav-link:hover {
+			border-bottom: 2px solid lightgray;
+			color: #007bff;
+		}
+
+		/* Remove default border */
+		.nav-tabs {
+			border-bottom: 2px solid lightgray; /* Bottom border for tab container */
+		}
 	</style>
 </head>
 

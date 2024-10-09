@@ -8,15 +8,65 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/lang/Malay.json"></script>
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <script src="/assets/lang/Malay.json"></script>
+
         <!-- Custom AADK CSS -->
 		<link rel="stylesheet" href="/assets/css/customAADK.css">
+
+        <style>
+            .nav{
+                margin-left: 22px!important;
+            }
+
+            /* Base styles for all tabs */
+            .nav-tabs .nav-item {
+                margin-bottom: -1px; /* Prevent bottom margin */
+            }
+
+            .nav-link {
+                font-size: 14px;
+                color: #6c757d; 
+                background-color: none;
+                border: 1px solid transparent; 
+                padding: 10px 15px;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            /* Inactive tabs (flat) */
+            .nav-link {
+                background-color: transparent;
+                color: gray;
+                border: none;
+                border-bottom: 2px solid transparent;
+            }
+
+            /* Active tab with color and shadow */
+            .nav-link.active {
+                color: darkslateblue !important;
+                box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
+                background-color: whitesmoke !important; /* Light blue background for active tab */
+                color: #8800ff; /* Bold blue font for active tab */
+                border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
+                font-weight: bold; /* Make font bold */
+                border-radius: 4px 4px 0 0; /* Slight rounding at top of active tab */
+            }
+
+            /* Add hover effect to inactive tabs */
+            .nav-link:hover {
+                border-bottom: 2px solid lightgray;
+                color: #007bff;
+            }
+
+            /* Remove default border */
+            .nav-tabs {
+                border-bottom: 2px solid lightgray; /* Bottom border for tab container */
+            }
+        </style>
     </head>
 
     <!--begin::Page title-->
