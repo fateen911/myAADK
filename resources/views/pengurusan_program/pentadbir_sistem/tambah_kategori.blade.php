@@ -66,7 +66,7 @@
         <form class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-tambah-kategori') }}" method="POST">
             @csrf
             <!--begin::Main column-->
-            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-lg-400px">
+            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mb-7 me-lg-10 h-100px w-md-400px mx-w-300 mx-w-450">
                 <!--begin::General options-->
                 <div class="card card-flush py-4">
                     <!--begin::Card header-->
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10 mx-w-300 mt-80 mt-lg-0 mx-w-450">
                 <div class="card card-flush py-4 d-flex flex-column">
                     <!--begin::Card header-->
                     <div class="card-header">
@@ -220,7 +220,7 @@
                             rows += '<td class="text-uppercase" id="nama">' + kategori.nama + '</td>';
                             rows += '<td class="text-uppercase" id="kod">' + kategori.kod + '</td>';
                             rows += '<td class="text-gray-600 fw-bold">' + formattedDate + '</td>';
-                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm" id="padam"> &nbsp;<i class="bi bi-trash3-fill fs-3"></i></a></td>';
+                            rows += '<td><a id="kategori" class="btn btn-icon btn-warning btn-sm btn-xsm" data-bs-toggle="modal" data-bs-target="#kt_modal_1" data-id="' + kategori.id + '"><i class="bi bi-pencil-fill fs-md-3"></i></a><a href="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-kategori/')}}/' + kategori.id + '" class="btn btn-icon btn-danger btn-sm btn-xsm" id="padam"> &nbsp;<i class="bi bi-trash3-fill fs-md-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#items-table-body').html(rows);
