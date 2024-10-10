@@ -132,7 +132,20 @@ class DaftarPenggunaController extends Controller
     }
 
     // PENTADBIR
-    public function getPenggunaData()
+    public function senaraiPengguna()
+    {
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')->orderBy('updated_at', 'desc')->get();
+
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
+
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        return view ('pendaftaran.pentadbir.daftar_pengguna', compact( 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
+    }
+
+    public function getDataKlien()
     {
         $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
                         ->select('klien.*', 'users.updated_at as user_updated_at')
@@ -173,30 +186,6 @@ class DaftarPenggunaController extends Controller
             'tahap' => $tahap,
             'jawatan' => $jawatan
         ]);
-    }
-
-    public function senaraiPengguna()
-    {
-        $klien = Klien::orderBy('updated_at', 'desc')->get();
-        $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
-                        ->select('klien.*', 'users.updated_at as user_updated_at')
-                        ->orderBy('user_updated_at', 'desc')
-                        ->get();
-
-        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
-                        ->whereIn('tahap_pengguna', [3, 4, 5])
-                        ->orderBy('users.updated_at', 'desc')
-                        ->get();
-
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')->orderBy('updated_at', 'desc')->get();
-
-        $negeri = NegeriPejabat::all()->sortBy('negeri');
-        $daerah = DaerahPejabat::all()->sortBy('daerah');
-
-        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
-        $jawatan = JawatanAADK::all();
-
-        return view ('pendaftaran.pentadbir.daftar_pengguna', compact( 'pegawai', 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
     }
 
     // PENTADBIR : DAFTAR / KEMASKINI AKAUN KLIEN

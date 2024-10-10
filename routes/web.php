@@ -120,7 +120,7 @@ Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarP
 Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
 // AJAX PENDAFTARAN
-Route::get('/senarai-klien/data', [DaftarPenggunaController::class, 'getPenggunaData'])->name('senarai-klien-data');
+Route::get('/senarai-klien/data', [DaftarPenggunaController::class, 'getDataKlien'])->name('senarai-klien-data');
 Route::get('/get-status-ak/{no_kp}', [DaftarPenggunaController::class, 'getStatusAk'])->name('get-status-ak');
 Route::get('/pentadbir/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('senarai-pegawai');
 

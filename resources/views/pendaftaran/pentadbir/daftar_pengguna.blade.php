@@ -192,6 +192,7 @@
 										<th class="min-w-50px">Kelulusan</th>
 									</tr>
 								</thead>
+
 								<tbody class="fw-semibold text-gray-600">
 									@foreach ($permohonan_pegawai as $user3)
 										@php
@@ -474,6 +475,7 @@
 										<th class="min-w-50px">Kemaskini</th>
 									</tr>
 								</thead>
+
 								<tbody class="fw-semibold text-gray-600">
 									<!-- Data will be populated here by AJAX -->
                                     <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
@@ -743,8 +745,14 @@
 										<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
 									</tr>
 								</thead>
-								<tbody id="pengguna-table-body" class="fw-semibold text-gray-600">
+
+								<tbody class="fw-semibold text-gray-600">
 									<!-- Data will be injected here by AJAX -->
+									<td class="min-w-250px">Tiada</td>
+                                    <td class="min-w-50px">Tiada</td>
+                                    <td class="min-w-50px">Tiada</td>
+                                    <td class="min-w-60px">Tiada</td>
+                                    <td class="min-w-40px">Tiada</td>
 								</tbody>
 							</table>
 
@@ -1165,8 +1173,8 @@
 </div>
 
     <!--begin::Javascript-->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1174,14 +1182,6 @@
 
 	{{-- Table sorting --}}
     <script>
-        $('#sortTable1').DataTable({
-			ordering: true,
-			order: [],
-			language: {
-				url: "/assets/lang/Malay.json"
-			}
-		});
-
 		$('#sortTable3').DataTable({
 			ordering: true,
 			order: [],
@@ -1451,7 +1451,6 @@
 	</script>
 
     {{-- AJAX TABLE SENARAI PEGAWAI --}}
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function() {
             // Fetch Pegawai data via AJAX
@@ -1480,7 +1479,7 @@
                         rows +=	'<td>' + user2.email + '</td>';
                         rows +=	'<td>' + user2.peranan; + '</td>';
 						rows += '<td>' + negeriB + (daerahB ? ' (' + daerahB + ')' : '') + '</td>'; // Display Negeri and Daerah
-                        rows +=	'<td>' + tarikhDaftar + '</td>'
+                        rows +=	'<td style="text-align: center;">' + tarikhDaftar + '</td>'
                         rows +=	`<td>
 									<div class="d-flex justify-content-center align-items-center">
 										<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + pegawaiId + `" data-bs-target="#modal_kemaskini_pegawai">
@@ -1524,7 +1523,7 @@
         });
     </script>
 
-    <!-- Modal Pegawai -->
+    <!-- Modal Kemaskini Pegawai -->
     <script>
         $(document).on('click', '#pegawaiModal', function() {
             var id = $(this).data('id');
@@ -1542,29 +1541,98 @@
     </script>
 
 	{{-- AJAX TABLE SENARAI KLIEN --}}
+	<script>
+		$(document).ready(function() {
+			// Load client data using AJAX
+			$.ajax({
+				url: "{{ route('senarai-klien-data') }}", // Route for fetching data
+				method: 'GET',
+				dataType: 'json',
+				success: function(response) {
+					var klienList = response;
+					var rows = '';
+					
+					// Clear the existing rows before appending new ones
+					$('#sortTable1 tbody').empty();
+
+					$.each(klienList, function(index, user1) {
+						var tarikhDaftar = user1.updated_at ? new Date(user1.updated_at).toLocaleDateString('en-GB') : ''; // Display blank if null
+
+						rows += '<tr>';
+						rows += '<td>' + (user1.nama ? user1.nama : '') + '</td>';
+						rows += '<td>' + (user1.no_kp ? user1.no_kp : '') + '</td>';
+						rows += '<td>' + (user1.emel ? user1.emel : '') + '</td>';
+						rows += '<td style="text-align: center;">' + tarikhDaftar + '</td>';
+						rows += `<td style="text-align: center;">
+									${user1.updated_at !== null ? 
+										`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien${user1.id}">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>` 
+										: 
+										`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_daftar_klien${user1.id}">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>`
+									}
+								</td>`;
+						rows += '</tr>';
+					});
+
+					// Append the rows to the table body
+					$('#sortTable1 tbody').html(rows);
+
+					// Reinitialize DataTable
+					if ($.fn.DataTable.isDataTable('#sortTable1')) {
+						$('#sortTable1').DataTable().destroy(); // Destroy existing instance
+					}
+
+					// Initialize DataTable with the new data
+					$('#sortTable1').DataTable({
+						ordering: true,
+						order: [],
+						language: {
+							url: "/assets/lang/Malay.json"
+						},
+						dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+							'<"row"<"col-sm-12 my-0"tr>>' +
+							'<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+						responsive: true
+					});
+				},
+				error: function(error) {
+					console.error("Error fetching data", error);
+				}
+			});
+		});
+	</script>
+
 	{{-- <script>
 		$(document).ready(function() {
 			// Load client data using AJAX
 			$.ajax({
 				url: "{{ route('senarai-klien-data') }}", // Route for fetching data
 				method: 'GET',
-				success: function(response) {
-					// Clear existing table rows
-					$('#pengguna-table-body').empty();
+				dataType: 'json',
+                success: function(response) {
+                    var klienList = response.klien;
+                    var rows = '';
+                    var modalContainer = ''; // To store modals
+                    // Clear the existing rows before appending new ones
+                    $('#sortTable1 tbody').empty();
 
-					// Loop through the data and append to the table
-					response.forEach(function(user1) {
-						let tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : 'N/A';
+                    $.each(klienList, function(index, user1) {
+                        var tarikhDaftar = new Date(user1.created_at).toLocaleDateString('en-GB');
 
-						let tableRow = `
-							<tr>
-								<td>${user1.nama}</td>
-								<td>${user1.no_kp}</td>
-								<td>${user1.emel ? user1.emel : ''}</td>
-								<td style="text-align: center;">${tarikhDaftar}</td>
-								<td style="text-align: center;">
-									<div class="d-flex justify-content-center align-items-center">
-										${user1.updated_at !== null ?
+                        rows += '<tr>';
+                        rows +=	'<td>' + user1.nama + '</td>';
+                        rows +=	'<td>' + user1.no_kp + '</td>';
+                        rows +=	'<td>' + user1.emel ? user1.emel : '' + '</td>';
+                        rows +=	'<td>' + tarikhDaftar + '</td>';
+                        rows +=	`<td>
+									${user1.updated_at !== null ?
 											`<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien${user1.id}">
 												<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
@@ -1576,245 +1644,36 @@
 													<i class="ki-duotone bi bi-pencil fs-3"></i>
 												</span>
 											</a>`
-										}
-									</div>
+									}
+								</td>`;
+                        rows +=	'</tr>';
+                    });
 
-									<!--begin::Modal - Kemaskini Klien-->
-									<div class="modal fade" id="modal_kemaskini_klien${user1.id}" tabindex="-1" aria-hidden="true">
-										<!--begin::Modal dialog-->
-										<div class="modal-dialog modal-dialog-centered mw-650px">
-											<!--begin::Modal content-->
-											<div class="modal-content">
-												<!--begin::Modal header-->
-												<div class="modal-header">
-													<!--begin::Modal title-->
-													<h2>Kemaskini Maklumat Akaun Klien</h2>
-													<!--end::Modal title-->
-													<!--begin::Close-->
-													<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-														<i class="ki-solid ki-cross-circle fs-1"></i>
-													</div>
-													<!--end::Close-->
-												</div>
-												<!--end::Modal header-->
+                    // Append the rows to the table body
+                    $('#sortTable1 tbody').html(rows);
 
-												<!--begin::Modal body-->
-												<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-													<!--begin::Form-->
-													<form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
-														@csrf
+                    // Check if DataTable is already initialized before destroying it
+                    if ($.fn.DataTable.isDataTable('#sortTable1')) {
+                        $('#sortTable1').DataTable().destroy(); // Destroy the existing DataTable instance
+                    }
 
-														<input type="hidden" name="id" value="${user1.id}">
-														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
-															<div class="fv-row mb-7">
-																<label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
-																<select id="statusAk2_${user1.no_kp}" class="form-select form-select-solid custom-select" name="status_ak" required>
-																	<!-- Options will be populated dynamically -->
-																</select>
-															</div>
+                    // Initialize DataTable with the new data
+                    $('#sortTable1').DataTable({
+                        ordering: true,
+                        order: [],
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                            '<"row"<"col-sm-12 my-0"tr>>' +
+                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        responsive: true
+                    });
 
-															<div class="fv-row mb-5">
-																<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																<input type="text" class="form-control form-control-solid" placeholder="" name="name" value="${user1.nama}" readonly/>
-															</div>
-
-															<div class="fv-row mb-5">
-																<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
-																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
-																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-																</label>
-																<input type="text" class="form-control form-control-solid" name="no_kp" value="${user1.no_kp}" readonly/>
-															</div>
-
-															<div class="fv-row mb-5">
-																<label class="fs-6 fw-semibold mb-2">No. Telefon
-																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-																</label>
-																<input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="${user1.no_tel ? user1.no_tel : ''}" inputmode="numeric" maxlength="11"/>
-															</div>
-
-															<div class="fv-row mb-5">
-																<label class="fs-6 fw-semibold mb-2">E-mel</label>
-																<input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="${user1.emel ? user1.emel : ''}" />
-															</div>
-
-															<div class="fv-row mb-5">
-																<label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
-																<div class="input-group">
-																	<input type="text" class="form-control form-control-solid custom-form" id="passwordKlien${user1.id}" name="passwordKemaskini" />
-																	<button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien${user1.id}')">Jana Kata Laluan</button>
-																</div>
-															</div>
-														</div>
-
-														<!--begin::Actions-->
-														<div class="text-center pt-15">
-															<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-
-															<button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-																<span class="indicator-label">Simpan</span>
-																<span class="indicator-progress">Sila tunggu...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-															</button>
-														</div>
-														<!--end::Actions-->
-													</form>
-													<!--end::Form-->
-												</div>
-												<!--end::Modal body-->
-											</div>
-											<!--end::Modal content-->
-										</div>
-										<!--end::Modal dialog-->
-									</div>
-									<!--end::Modal - Kemaskini Klien-->
-
-									<!--begin::Modal - Daftar Klien-->
-									<div class="modal fade" id="modal_daftar_klien${user1.id}" tabindex="-1" aria-hidden="true">
-										<!--begin::Modal dialog-->
-										<div class="modal-dialog modal-dialog-centered mw-650px">
-											<!--begin::Modal content-->
-											<div class="modal-content">
-												<!--begin::Modal header-->
-												<div class="modal-header">
-													<!--begin::Modal title-->
-													<h2>Pendaftaran Akaun Klien</h2>
-													<!--end::Modal title-->
-													<!--begin::Close-->
-													<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-														<i class="ki-solid ki-cross-circle fs-1"></i>
-													</div>
-													<!--end::Close-->
-												</div>
-												<!--end::Modal header-->
-
-												<!--begin::Modal body-->
-												<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-													<!--begin::Form-->
-													<form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
-														@csrf
-
-														<input type="hidden" name="id" value="${user1.id}">
-														<div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
-															<!--begin::Input group-->
-															<div class="fv-row mb-5">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="name" value="${user1.nama}" readonly/>
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="fv-row mb-5">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid" name="no_kp" value="${user1.no_kp}" readonly/>
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="fv-row mb-5">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold mb-2">No. Telefon
-																	<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-																		<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																			<span class="path1"></span>
-																			<span class="path2"></span>
-																			<span class="path3"></span>
-																		</i>
-																	</span>
-																</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="${user1.no_tel ? user1.no_tel : ''}" inputmode="numeric"/>
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="fv-row mb-5">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold mb-2">E-mel</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="${user1.emel ? user1.emel : ''}" />
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-															<!--begin::Input group-->
-															<div class="fv-row mb-5">
-																<!--begin::Label-->
-																<label class="fs-6 fw-semibold mb-2 required">Kata Laluan Baharu</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<div class="input-group">
-																	<input type="text" class="form-control form-control-solid custom-form" id="passwordDaftarKlien${user1.id}" name="passwordDaftar" />
-																	<button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien${user1.id}')">Jana Kata Laluan</button>
-																</div>
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-														</div>
-
-														<!--begin::Actions-->
-														<div class="text-center pt-15">
-															<button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-
-															<button type="submit" id="daftarBtn" class="btn btn-primary">
-																<span class="indicator-label">Daftar</span>
-																<span class="indicator-progress">Sila tunggu...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-															</button>
-														</div>
-														<!--end::Actions-->
-													</form>
-													<!--end::Form-->
-												</div>
-												<!--end::Modal body-->
-											</div>
-											<!--end::Modal content-->
-										</div>
-										<!--end::Modal dialog-->
-									</div>
-									<!--end::Modal - Daftar Klien-->
-								</td>
-							</tr>
-						`;
-
-						// Append the row to the table body
-						$('#pengguna-table-body').append(tableRow);
-
-
-						// Make an AJAX call to get the account status for each user
-						$.ajax({
-							url: `/get-status-ak/${user1.no_kp}`,
-							method: 'GET',
-							success: function(status_ak) {
-								let statusSelect = $(`#statusAk2_${user1.no_kp}`);
-								statusSelect.empty();
-								statusSelect.append(`<option value="AKTIF" ${status_ak == 'AKTIF' ? 'selected' : ''}>AKTIF</option>`);
-								statusSelect.append(`<option value="DIBEKUKAN" ${status_ak == 'DIBEKUKAN' ? 'selected' : ''}>DIBEKUKAN</option>`);
-							}
-						});
-					});
-				},
-				error: function(xhr) {
-					console.log(xhr.responseText); // Log any errors
-				}
+                },
+                error: function(error) {
+                    console.error("Error fetching data", error);
+                }
 			});
 		});
 	</script> --}}
