@@ -99,9 +99,6 @@ Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
 Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
 Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
 
-// KEMASKINI MODAL
-Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
-
 // KEMASKINI PROFIL AKAUN PENGGUNA
 Route::middleware('auth')->group(function () {
     Route::get('/kemaskini/kata-laluan', [ProfileController::class, 'updatePassword'])->name('update.password');
@@ -120,9 +117,11 @@ Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarP
 Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
 // AJAX PENDAFTARAN
-Route::get('/senarai-klien/data', [DaftarPenggunaController::class, 'getDataKlien'])->name('senarai-klien-data');
-Route::get('/get-status-ak/{no_kp}', [DaftarPenggunaController::class, 'getStatusAk'])->name('get-status-ak');
-Route::get('/pentadbir/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('senarai-pegawai');
+Route::get('/pentadbir/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlien'])->name('ajax-senarai-klien');
+Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlien'])->name('modal-kemaskini-klien');
+Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
+Route::get('/pentadbir/ajax/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('ajax-senarai-pegawai');
+Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
