@@ -47521,6 +47521,11 @@ a:hover {
     }
 }
 
+.logo-position{
+    position: absolute;
+    top: 28%;
+    left: 13%;
+}
 
 .landing-img{
     background-image: url('/logo/background-landing.png');
