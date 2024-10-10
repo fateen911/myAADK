@@ -47535,14 +47535,14 @@ a:hover {
 }
 
 .landing-img-2{
-    background-image: url('/assets/media/illustrations/healthy/health-2.jpeg');
+    background-image: url('/assets/media/illustrations/background/aadk-watermark.png');
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
 }
 
 .landing-img-3{
-    background-image: url('/assets/media/illustrations/healthy/health-5.jpg');
+    background-image: url('/assets/media/illustrations/background/aadk-watermark.png');
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
