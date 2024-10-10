@@ -518,9 +518,10 @@ td button{
     font-size: 18px;
     color: rgb(102, 102, 102);
 }
-
-#kt_app_sidebar_mobile_toggle{
-    display: none;
+@media (min-width: 992px){
+    #kt_app_sidebar_mobile_toggle{
+        display: none;
+    }
 }
 
 /* date range picker */
