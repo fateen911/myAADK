@@ -11,12 +11,9 @@
         }
 
         a .myaadk-text {
-            font-family:Georgia, 'Times New Roman', Times, serif;
-            font-size: 24px;
-            margin-left: 10px;  /* Adjust the space between the logo and the text */
-            padding-top: 5px;
-            color: lightgray;  /* Optional: Set the text color */
-            font-weight: bold;  /* Optional: Make the text bold */
+            font-size: 28px;
+            color: lightgray;  
+            font-weight: bold;  
         }
 
         a.logo-container img {
@@ -60,7 +57,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MySupport</span>
+            <span class="myaadk-text f-brush" style="padding-left: 15px !important;">My</span><span class="myaadk-text f-calibri">Support</span>
         </a>
 
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -398,7 +395,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MySupport</span>
+            <span class="myaadk-text f-brush" style="padding-left: 15px !important;">My</span><span class="myaadk-text f-calibri">Support</span>
         </a>
 
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -551,7 +548,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MySupport</span>
+            <span class="myaadk-text f-brush" style="padding-left: 15px !important;">My</span><span class="myaadk-text f-calibri">Support</span>
         </a>
 
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -752,7 +749,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MySupport</span>
+            <span class="myaadk-text f-brush" style="padding-left: 15px !important;">My</span><span class="myaadk-text f-calibri">Support</span>
         </a>
 
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
@@ -953,7 +950,7 @@
         <!--begin::Logo image-->
         <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
-            <span class="myaadk-text">MySupport</span>
+            <span class="myaadk-text f-brush" style="padding-left: 15px !important;">My</span><span class="myaadk-text f-calibri">Support</span>
         </a>
 
         <div id="kt_app_sidebar_toggle" class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="app-sidebar-minimize">
