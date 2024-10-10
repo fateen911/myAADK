@@ -57,14 +57,14 @@
         <!--begin::Sidebar mobile toggle-->
         <div class="d-flex align-items-center d-lg-none ms-n3 me-1 me-md-2" title="Show sidebar menu">
             <div class="btn btn-icon btn-active-color-primary w-35px h-35px" id="kt_app_sidebar_mobile_toggle">
-                <i class="ki-duotone ki-abstract-14 fs-2 fs-md-1">
+                <i class="bi bi-list fs-3qx fs-md-3hx text-white">
                     <span class="path1"></span>
                     <span class="path2"></span>
                 </i>
             </div>
         </div>
         <!--end::Sidebar mobile toggle-->
-        
+
         <!--begin::Header wrapper-->
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
             <!--begin::Menu wrapper-->
@@ -75,7 +75,7 @@
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
                 {{-- Notifikasi Klien --}}
-                @if(Auth::user()->tahap_pengguna == 2) 
+                @if(Auth::user()->tahap_pengguna == 2)
                     <div class="app-navbar-item ms-1 ms-md-4" style="margin-right: 10px;">
                         <!--begin::Menu wrapper-->
                         <div class="btn btn-icon btn-custom btn-icon-dark w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
@@ -93,7 +93,7 @@
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
-                    
+
                             @if ($notifications->count())
                                 <!--begin::Tab content-->
                                 <div class="tab-content notification-item">
@@ -120,7 +120,7 @@
                                             @endforeach
                                         </div>
                                         <!--end::Items-->
-                        
+
                                         <!--begin::View more-->
                                         <div class="py-3 text-center border-top">
                                             <a href="{{ route('notifications.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">
@@ -142,13 +142,13 @@
                         </div>
                         <!--end::Menu-->
                         <!--end::Menu wrapper-->
-                    </div>                
+                    </div>
                 @endif
 
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                     <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:white;">
-                        @if(Auth::user()->tahap_pengguna != 2) 
+                        @if(Auth::user()->tahap_pengguna != 2)
                             @if(Auth::user()->gambar_profil)
                                 <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
                                 {{ strtoupper(Auth::user()->name) }}
@@ -171,7 +171,7 @@
                                         {{ substr(Auth::user()->name,0,1) }}
                                     </div>
                                 </div>
-                    
+
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bold d-flex align-items-center fs-6">{{Auth::user()->name}}</div>
@@ -211,4 +211,4 @@
         <!--end::Header wrapper-->
     </div>
     <!--end::Header container-->
-</div> 
+</div>
