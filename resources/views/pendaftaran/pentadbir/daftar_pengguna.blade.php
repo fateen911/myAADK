@@ -501,7 +501,7 @@
 											</div>
                                         </div>
 
-                                        <div class="modal-body" id="modalBodyPegawai"></div>
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyPegawai"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1577,7 +1577,7 @@
                     $('#modalBodyPegawai').html(response);
                 },
                 error: function() {
-                    $('#modalBodyPegawai').html('Error loading content.'+id);
+                    $('#modalBodyPegawai').html('Ralat kandungan.'+id);
                 }
             });
         });
@@ -1667,7 +1667,7 @@
                     $('#modalBodyKemaskiniKlien').html(response);
                 },
                 error: function() {
-                    $('#modalBodyKemaskiniKlien').html('Error loading content.'+id);
+                    $('#modalBodyKemaskiniKlien').html('Ralat kandungan.'+id);
                 }
             });
         });
@@ -1684,7 +1684,7 @@
                     $('#modalBodyDaftarKlien').html(response);
                 },
                 error: function() {
-                    $('#modalBodyDaftarKlien').html('Error loading content.'+id);
+                    $('#modalBodyDaftarKlien').html('Ralat kandungan.'+id);
                 }
             });
         });

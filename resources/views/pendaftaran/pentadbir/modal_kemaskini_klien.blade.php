@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html>
-    {{-- <head>
-        <link rel="stylesheet" href="/assets/plugins/custom/datatables/datatables.bundle.css">
-        <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="/assets/css/style.bundle.css">
-        <link rel="stylesheet" href="/assets/css/customAADK.css">
-
-        
-    </head> --}}
-
     <body>
         <!--begin::Modal - Kemaskini Pegawai-->
         <form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
             @csrf
 
-            <input type="hidden" name="id" value="{{ $user1->id }}">
+            <input type="hidden" name="id" value="{{ $klien->id }}">
             <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
                 <!--begin::Input group-->
                 @php
-                    $status_ak_1 = DB::table('users')->where('no_kp', $user1->no_kp)->value('acc_status');
+                    $status_ak_1 = DB::table('users')->where('no_kp', $klien->no_kp)->value('acc_status');
                 @endphp
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
@@ -31,7 +22,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
                     <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-                    <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$user1->nama}}" readonly/>
+                    <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$klien->nama}}" readonly/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -45,7 +36,7 @@
                             </i>
                         </span>
                     </label>
-                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
+                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$klien->no_kp}}" readonly/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -59,21 +50,21 @@
                             </i>
                         </span>
                     </label>
-                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="{{$user1->no_tel}}" inputmode="numeric" maxlength="11"/>
+                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="{{$klien->no_tel}}" inputmode="numeric" maxlength="11"/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
                     <label class="fs-6 fw-semibold mb-2">E-mel</label>
-                    <input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="{{$user1->emel}}" />
+                    <input type="email" class="form-control form-control-solid custom-form" placeholder="" name="email" value="{{$klien->emel}}" />
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
                     <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-solid custom-form" id="passwordKlien{{$user1->id}}" name="passwordKemaskini" />
-                        <button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$user1->id}}')">Jana Kata Laluan</button>
+                        <input type="text" class="form-control form-control-solid custom-form" id="passwordKlien{{$klien->id}}" name="passwordKemaskini" />
+                        <button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$klien->id}}')">Jana Kata Laluan</button>
                     </div>
                 </div>
                 <!--end::Input group-->
