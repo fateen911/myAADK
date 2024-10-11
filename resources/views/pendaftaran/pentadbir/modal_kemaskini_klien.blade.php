@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <!--begin::Modal - Kemaskini Pegawai-->
+        <!--begin::Modal - Kemaskini Klien-->
         <form class="form" id="modal_kemaskini_klien_form" action="{{ route('pentadbir-kemaskini-klien') }}" method="post">
             @csrf
 
@@ -82,11 +82,77 @@
             </div>
             <!--end::Actions-->
         </form>
-        <!--end::Modal -  Kemaskini Pegawai-->
+        <!--end::Modal -  Kemaskini Klien-->
+
+        <!--generate table-->
+        <script src="/assets/plugins/global/plugins.bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        {{-- Control input type --}}
+        <script>
+            document.querySelectorAll('input[name="nama"]').forEach(function(input) {
+                input.addEventListener('input', function() {
+                    // Allow letters, spaces, and single quotes
+                    this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
+                });
+            });
+
+            document.getElementById('name').addEventListener('input', function (e) {
+                // Allow letters, spaces, and single quotes
+                this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Select all elements with name 'no_kp' and 'no_tel'
+                const noKpElements = document.querySelectorAll('[name="no_kp"]');
+                const noTelElements = document.querySelectorAll('[name="no_tel"]');
+
+                // Restrict input to digits for 'no_kp' elements
+                noKpElements.forEach(function(element) {
+                    element.addEventListener('input', function (e) {
+                        this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                        if (this.value.length > 12) {                // Limit to 12 digits
+                            this.value = this.value.slice(0, 12);
+                        }
+                    });
+                });
+
+                // Restrict input to digits for 'no_tel' elements
+                noTelElements.forEach(function(element) {
+                    element.addEventListener('input', function (e) {
+                        this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
+                        if (this.value.length > 11) {                // Limit to 11 digits
+                            this.value = this.value.slice(0, 11);
+                        }
+                    });
+                });
+
+                // Add event listener to form submission
+                document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
+                    let valid = true;
+
+                    // Validate each 'no_kp' field
+                    noKpElements.forEach(function(element) {
+                        if (element.value.length !== 12) {
+                            alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
+                            valid = false;
+                        }
+                    });
+
+                    // Validate each 'no_tel' field
+                    noTelElements.forEach(function(element) {
+                        if (element.value.length < 10 || element.value.length > 11) {
+                            alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+                            valid = false;
+                        }
+                    });
+
+                    if (!valid) {
+                        e.preventDefault();  // Prevent form submission if any validation fails
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
-
-<!--generate table-->
-<script src="/assets/plugins/global/plugins.bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 

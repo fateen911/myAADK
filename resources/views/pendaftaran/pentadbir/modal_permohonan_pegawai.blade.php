@@ -1,23 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-xxmKFEQkNx7xGsz0zAQ8WoJC5PnxVXBn0TEVpZTJGzVRwq1zxFqKxVf5dyglrb4M" crossorigin="anonymous">
-
-        <!-- Bootstrap JS (Ensure it's included after jQuery if you're using it) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93HQF7OH19qRxThM8WpUpPUcp8SwDwv2ORn1zYgkCr/5hgRROlJMuL+0I5Q0E5" crossorigin="anonymous"></script>
-
-        <style>
-            .modal {
-                z-index: 1050;
-            }
-
-            .modal-backdrop {
-                z-index: 1040;
-            }
-        </style>
-    </head>
-
     <body>
         <form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $permohonan_pegawai->id]) }}" method="post">
             @csrf
@@ -118,51 +100,12 @@
             <!--end::Scroll-->
 
             <!--begin::Actions-->
-            <div class="text-center pt-15">
+            <div class="text-center pt-5">
                 <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
                 <button type="button" class="btn btn-danger" data-id="{{ $permohonan_pegawai->id }}" id="permohonanPegawaiDitolakModal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak">Ditolak</button>
-                <!-- Close the first modal before opening the second one -->
-                {{-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak{{$permohonan_pegawai->id}}">Ditolak</button> --}}
             </div>
             <!--end::Actions-->
         </form>
-
-        <!--begin::Modal Ditolak-->
-        {{-- <div class="modal fade" id="modal_permohonan_ditolak{{$permohonan_pegawai->id}}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered mw-650px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 style="text-align: center !important;">Permohonan Pendaftaran Pegawai Ditolak</h2>
-                        <div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
-                            <i class="ki-solid ki-cross-circle fs-1"></i>
-                        </div>
-                    </div>
-
-                    <div class="modal-body">
-                        <form id="rejection_form_{{$permohonan_pegawai->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $permohonan_pegawai->id]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="status" value="Ditolak">
-                            <input type="hidden" name="id" value="{{ $permohonan_pegawai->id }}">
-
-                            <!-- Begin Rejection Reasons Input -->
-                            <div id="dynamicFields">
-                                <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak :</label>
-                                <div class="input-group mb-2 catatan-row">
-                                    <textarea class="form-control form-control-solid custom-form" name="alasan_ditolak" placeholder="Contoh: Sila isi nama seperti kad pengenalan, Peranan tidak benar"></textarea>
-                                </div>
-                            </div>
-                            <!-- End Rejection Reasons Input -->
-
-                            <!-- Form actions -->
-                            <div class="text-center pt-3">
-                                <button type="submit" class="btn btn-primary">Hantar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!--end::Modal Ditolak-->
     </body>
 </html>
 

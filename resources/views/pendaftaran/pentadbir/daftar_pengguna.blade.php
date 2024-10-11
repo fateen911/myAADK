@@ -429,7 +429,7 @@
 											</div>
                                         </div>
 
-                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyPermohonanPegawai"></div>
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyPermohonanPegawai"></div>
                                     </div>
                                 </div>
                             </div>

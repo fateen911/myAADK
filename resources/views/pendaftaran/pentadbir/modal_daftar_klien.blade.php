@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <!--begin::Modal - Kemaskini Pegawai-->
+        <!--begin::Modal - Daftar Klien -->
         <form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
             @csrf
 
@@ -82,11 +82,54 @@
             </div>
             <!--end::Actions-->
         </form>
-        <!--end::Modal -  Kemaskini Pegawai-->
+        <!--end::Modal -  Daftar Klien -->
+
+        <!--generate table-->
+        <script src="/assets/plugins/global/plugins.bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        {{-- Control input type --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Control input for 'no_kp' (Kad Pengenalan)
+                document.querySelectorAll('[name="no_kp"]').forEach(function(input) {
+                    input.addEventListener('input', function() {
+                        this.value = this.value.replace(/\D/g, ''); // Allow only digits
+                        if (this.value.length > 12) {
+                            this.value = this.value.slice(0, 12); // Limit to 12 digits
+                        }
+                    });
+                });
+    
+                // Control input for 'no_tel' (No. Telefon)
+                document.querySelectorAll('[name="no_tel"]').forEach(function(input) {
+                    input.addEventListener('input', function() {
+                        this.value = this.value.replace(/\D/g, ''); // Allow only digits
+                        if (this.value.length > 11) {
+                            this.value = this.value.slice(0, 11); // Limit to 11 digits
+                        }
+                    });
+                });
+    
+                // Validate form submission
+                document.getElementById('modal_daftar_klien_form').addEventListener('submit', function(e) {
+                    const noKp = document.querySelector('[name="no_kp"]').value;
+                    const noTel = document.querySelector('[name="no_tel"]').value;
+    
+                    if (noKp.length !== 12) {
+                        alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
+                        e.preventDefault();  // Stop form submission if invalid
+                    }
+    
+                    if (noTel.length < 10 || noTel.length > 11) {
+                        alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
+                        e.preventDefault();  // Stop form submission if invalid
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
 
-<!--generate table-->
-<script src="/assets/plugins/global/plugins.bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 
