@@ -194,6 +194,18 @@
 								</thead>
 
 								<tbody class="fw-semibold text-gray-600">
+									<!-- Data will be populated here by AJAX -->
+                                    <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+                                        <td class="min-w-175px">Tiada</td>
+                                        <td class="min-w-125px">Tiada</td>
+                                        <td class="min-w-125px">Tiada</td>
+                                        <td class="min-w-125px">Tiada</td>
+                                        <td class="min-w-150px">Tiada</td>
+                                        <td class="min-w-50px">Tiada</td>
+                                    </tr>
+								</tbody>
+
+								{{-- <tbody class="fw-semibold text-gray-600">
 									@foreach ($permohonan_pegawai as $user3)
 										@php
 											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
@@ -279,7 +291,6 @@
 																		<div class="input-group">
 																			<input type="text" class="form-control form-control-solid custom-form" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" required/>
 																			<span class="input-group-text">@adk.gov.my</span>
-																			{{-- <input type="hidden" id="emelPegawai" name="emelPegawai" value="{{ $user3->emel }}" /> --}}
 																		</div>
 																	</div>
 																	<!--end::Input group-->
@@ -401,47 +412,31 @@
 												</div>
 											</div>
 										</div>
-										{{-- <div class="modal fade" id="modal_permohonan_ditolak{{$user3->id}}" tabindex="-1" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered mw-650px">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h2 style="text-align: center !important;">Alasan Permohonan Pegawai Ditolak</h2>
-														<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-															<i class="ki-solid ki-cross-circle fs-1"></i>
-														</div>
-													</div>
-
-													<div class="modal-body">
-														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
-															@csrf
-															<!-- Dynamic Rejection Reasons Input -->
-															<div id="dynamicFields">
-																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
-
-																<!-- First input field with only a plus button -->
-																<div class="input-group mb-2 reason-row">
-																	<input type="text" class="form-control" name="alasan_ditolak[]" placeholder="Contoh: Sila isi nama seperti kad pengenalan">
-																	<button type="button" class="btn btn-info addField">+</button>
-																</div>
-															</div>
-
-															<!-- Form actions -->
-															<div class="text-center pt-3">
-																<button type="submit" class="btn btn-primary">Hantar</button>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div> --}}
 										<!--end::Modal Ditolak-->
 									@endforeach
-								</tbody>
+								</tbody> --}}
 							</table>
 							<!--end::Table-->
+
+							<!-- Modal-->
+                            <div class="modal fade modal-lg" id="modal_permohonan_pegawai" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="exampleModalLabel">LULUSKAN PERMOHONAN PEGAWAI</h3>
+											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+												<i class="ki-solid ki-cross-circle fs-1"></i>
+											</div>
+                                        </div>
+
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyPermohonanPegawai"></div>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 						<!--end::Card body-->
 					</div>
+
 
 					{{-- PEGAWAI --}}
 					<div class="tab-pane fade" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
@@ -1222,17 +1217,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--end::Javascript-->
 
-	{{-- Table sorting --}}
-    <script>
-		$('#sortTable3').DataTable({
-			ordering: true,
-			order: [],
-			language: {
-				url: "/assets/lang/Malay.json"
-			}
-		});
-    </script>
-
 	{{-- Popup alert success/error message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function ()
@@ -1492,6 +1476,95 @@
 		});
 	</script>
 
+	{{-- AJAX TABLE SENARAI PERMOHONAN PEGAWAI --}}
+    <script>
+        $(document).ready(function() {
+            // Fetch Pegawai data via AJAX
+            $.ajax({
+                url: "{{ route('ajax-senarai-permohonan-pegawai') }}",
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    var permohonanPegawaiList = response.permohonan_pegawai;
+                    var rows = '';
+                    var modalContainer = ''; // To store modals
+                    // Clear the existing rows before appending new ones
+                    $('#sortTable3 tbody').empty();
+
+                    $.each(permohonanPegawaiList, function(index, user3) {
+                        var peranan = user3.tahap_pengguna;
+                        var tarikhDaftar = new Date(user3.created_at).toLocaleDateString('en-GB');
+                        var negeriB = user3.negeri_bertugas ? user3.negeri_bertugas : '';
+                        var daerahB = user3.daerah_bertugas ? user3.daerah_bertugas : '';
+						var permohonanPegawaiId = user3.id; 
+
+                        // Populate table rows
+                        rows += '<tr>';
+                        rows +=	'<td>' + user3.nama + '</td>';
+                        rows +=	'<td>' + user3.no_kp + '</td>';
+                        rows +=	'<td>' + user3.emel + '</td>';
+                        rows +=	'<td>' + user3.peranan; + '</td>';
+						rows += '<td>' + negeriB + (daerahB ? ' (' + daerahB + ')' : '') + '</td>'; // Display Negeri and Daerah
+                        rows +=	`<td>
+									<div class="d-flex justify-content-center align-items-center">
+										<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + permohonanPegawaiId + `" data-bs-target="#modal_permohonan_pegawai">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>
+									</div>
+								</td>`;
+                        rows +=	'</tr>';
+                    });
+
+                    // Append the rows to the table body
+                    $('#sortTable3 tbody').html(rows);
+
+                    // Append the modals to a container
+                    $('#modalContainer').html(modalContainer);
+
+                    // Check if DataTable is already initialized before destroying it
+                    if ($.fn.DataTable.isDataTable('#sortTable3')) {
+                        $('#sortTable3').DataTable().destroy(); // Destroy the existing DataTable instance
+                    }
+
+                    // Initialize DataTable with the new data
+                    $('#sortTable3').DataTable({
+                        ordering: true,
+                        order: [], // Default order (no sorting initially)
+                        language: {
+                            url: "/assets/lang/Malay.json" // Path to the language file
+                        },
+                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                            '<"row"<"col-sm-12 my-0"tr>>' +
+                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        responsive: true
+                    });
+                },
+                error: function(error) {
+                    console.error("Ralat semasa mengambil data", error);
+                }
+            });
+        });
+    </script>
+
+    <!-- Modal Luluskan Permohonan Pegawai -->
+    <script>
+        $(document).on('click', '#permohonanPegawaiModal', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/modal/luluskan-pegawai/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyPermohonanPegawai').html(response);
+                },
+                error: function() {
+                    $('#modalBodyPermohonanPegawai').html('Ralat kandungan.'+id);
+                }
+            });
+        });
+    </script>
+
     {{-- AJAX TABLE SENARAI PEGAWAI --}}
     <script>
         $(document).ready(function() {
@@ -1557,10 +1630,9 @@
                             '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                         responsive: true
                     });
-
                 },
                 error: function(error) {
-                    console.error("Error fetching data", error);
+                    console.error("Ralat semasa mengambil data", error);
                 }
             });
         });
@@ -1650,7 +1722,7 @@
 					});
 				},
 				error: function(error) {
-					console.error("Error fetching data", error);
+					console.error("Ralat semasa mengambil data", error);
 				}
 			});
 		});

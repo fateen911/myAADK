@@ -134,15 +134,13 @@ class DaftarPenggunaController extends Controller
     // PENTADBIR
     public function senaraiPengguna()
     {
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')->orderBy('updated_at', 'desc')->get();
-
         $negeri = NegeriPejabat::all()->sortBy('negeri');
         $daerah = DaerahPejabat::all()->sortBy('daerah');
 
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.pentadbir.daftar_pengguna', compact( 'permohonan_pegawai', 'tahap', 'daerah', 'negeri','jawatan'));
+        return view ('pendaftaran.pentadbir.daftar_pengguna', compact('tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function getDataKlien()
@@ -153,12 +151,6 @@ class DaftarPenggunaController extends Controller
                         ->get();
 
         return response()->json($klien); // Return the data as JSON
-    }
-
-    public function getStatusAk($no_kp)
-    {
-        $status_ak = User::where('no_kp', $no_kp)->value('acc_status');
-        return response()->json($status_ak);
     }
 
     public function getDataPegawai()
@@ -188,17 +180,42 @@ class DaftarPenggunaController extends Controller
         ]);
     }
 
+    public function getDataPermohonanPegawai()
+    {
+        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
+                                                ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
+                                                ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
+                                                ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
+                                                ->select(
+                                                    'pegawai_mohon_daftar.*', 
+                                                    'tahap_pengguna.peranan', 
+                                                    'senarai_negeri_pejabat.negeri as negeri_bertugas', 
+                                                    'senarai_daerah_pejabat.daerah as daerah_bertugas'
+                                                )
+                                                ->orderBy('pegawai_mohon_daftar.updated_at', 'desc') // Order by updated_at
+                                                ->get();
+
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
+
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        // Return all necessary data as JSON
+        return response()->json([
+            'permohonan_pegawai' => $permohonan_pegawai,
+            'negeri' => $negeri,
+            'daerah' => $daerah,
+            'tahap' => $tahap,
+            'jawatan' => $jawatan
+        ]);
+    }
+
     // PENTADBIR : DAFTAR / KEMASKINI PEGAWAI & KLIEN
     public function modalKemaskiniKlien($id)
     {
         $klien = Klien::find($id);
         return view('pendaftaran.pentadbir.modal_kemaskini_klien', compact('klien'));
-    }
-
-    public function modalDaftarKlien($id)
-    {
-        $klien = Klien::find($id);
-        return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
     }
 
     public function pentadbirKemaskiniKlien(Request $request)
@@ -247,6 +264,12 @@ class DaftarPenggunaController extends Controller
         else {
             return redirect()->route('senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
+    }
+
+    public function modalDaftarKlien($id)
+    {
+        $klien = Klien::find($id);
+        return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
     }
 
     public function pentadbirDaftarKlien(Request $request)
@@ -359,6 +382,17 @@ class DaftarPenggunaController extends Controller
         }
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
+    }
+
+    public function modalPermohonanPegawai($id)
+    {
+        $permohonan_pegawai = PegawaiMohonDaftar::find($id);
+        $negeri = NegeriPejabat::all()->sortBy('negeri');
+        $daerah = DaerahPejabat::all()->sortBy('daerah');
+        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+        $jawatan = JawatanAADK::all();
+
+        return view('pendaftaran.pentadbir.modal_permohonan_pegawai', compact('permohonan_pegawai','negeri','daerah','tahap','jawatan'));
     }
 
     public function permohonanPegawaiLulus(Request $request, $id)

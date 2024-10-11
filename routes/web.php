@@ -122,6 +122,8 @@ Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'mod
 Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
 Route::get('/pentadbir/ajax/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('ajax-senarai-pegawai');
 Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
+Route::get('/pentadbir/ajax/senarai-permohonan-pegawai', [DaftarPenggunaController::class, 'getDataPermohonanPegawai'])->name('ajax-senarai-permohonan-pegawai');
+Route::get('/modal/luluskan-pegawai/{id}', [DaftarPenggunaController::class, 'modalPermohonanPegawai'])->name('modal-luluskan-pegawai');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
