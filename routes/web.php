@@ -124,6 +124,7 @@ Route::get('/pentadbir/ajax/senarai-pegawai', [DaftarPenggunaController::class, 
 Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
 Route::get('/pentadbir/ajax/senarai-permohonan-pegawai', [DaftarPenggunaController::class, 'getDataPermohonanPegawai'])->name('ajax-senarai-permohonan-pegawai');
 Route::get('/modal/luluskan-pegawai/{id}', [DaftarPenggunaController::class, 'modalPermohonanPegawai'])->name('modal-luluskan-pegawai');
+Route::get('/modal/alasan-ditolak/pegawai/{id}', [DaftarPenggunaController::class, 'modalPermohonanPegawaiDitolak'])->name('modal-permohonan-pegawai-ditolak');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');

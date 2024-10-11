@@ -468,6 +468,12 @@ class DaftarPenggunaController extends Controller
         }
     }
 
+    public function modalPermohonanPegawaiDitolak($id)
+    {
+        $permohonan_pegawai = PegawaiMohonDaftar::find($id);
+        return view('pendaftaran.pentadbir.modal_permohonan_pegawai_ditolak', compact('permohonan_pegawai'));
+    }
+
     public function permohonanPegawaiDitolak(Request $request, $id)
     {
         // Fetch the staff request data

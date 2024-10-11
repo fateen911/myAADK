@@ -129,13 +129,13 @@
     <!--end::Scroll-->
 
     <!--begin::Actions-->
-    <div class="text-center pt-15">
+    <div class="text-center">
         <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
 
         <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
             <span class="indicator-label">Simpan</span>
             <span class="indicator-progress">Sila tunggu...
-																		<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+			<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
         </button>
     </div>
     <!--end::Actions-->

@@ -423,7 +423,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h3 class="modal-title" id="exampleModalLabel">LULUSKAN PERMOHONAN PEGAWAI</h3>
+                                            <h3 class="modal-title" style="padding-left: 50px !important;">Semakan Permohonan Pegawai</h3>
 											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
 												<i class="ki-solid ki-cross-circle fs-1"></i>
 											</div>
@@ -433,6 +433,22 @@
                                     </div>
                                 </div>
                             </div>
+
+							<!-- Modal-->
+							<div class="modal fade modal-lg" id="modal_permohonan_ditolak" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h3 class="modal-title" style="padding-left: 50px !important;">Alasan Permohonan Pegawai Ditolak</h3>
+											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+												<i class="ki-solid ki-cross-circle fs-1"></i>
+											</div>
+										</div>
+							
+										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyPermohonanPegawaiDitolak"></div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<!--end::Card body-->
 					</div>
@@ -490,13 +506,13 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h3 class="modal-title" id="exampleModalLabel">KEMASKINI MAKLUMAT PEGAWAI</h3>
+                                            <h3 class="modal-title" style="padding-left: 50px !important;">Kemaskini Maklumat Pegawai</h3>
 											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
 												<i class="ki-solid ki-cross-circle fs-1"></i>
 											</div>
                                         </div>
 
-                                        <div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyPegawai"></div>
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyPegawai"></div>
                                     </div>
                                 </div>
                             </div>
@@ -757,7 +773,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<!--begin::Modal title-->
-											<h2>Kemaskini Maklumat Akaun Klien</h2>
+											<h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
 											<!--end::Modal title-->
 											<!--begin::Close-->
 											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -766,7 +782,7 @@
 											<!--end::Close-->
 										</div>
 
-										<div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyKemaskiniKlien"></div>
+										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
 									</div>
 								</div>
 							</div>
@@ -778,7 +794,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<!--begin::Modal title-->
-											<h2>Pendaftaran Akaun Klien</h2>
+											<h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
 											<!--end::Modal title-->
 											<!--begin::Close-->
 											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -787,7 +803,7 @@
 											<!--end::Close-->
 										</div>
 
-										<div class="modal-body scroll-y mx-5 mx-xl-15 my-7" id="modalBodyDaftarKlien"></div>
+										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
 									</div>
 								</div>
 							</div>
@@ -1080,7 +1096,7 @@
 								<!--begin::Modal header-->
 								<div class="modal-header" id="kt_modal_add_customer_header">
 									<!--begin::Modal title-->
-									<h2 class="fw-bold">Daftar Pegawai Baharu</h2>
+									<h2 class="fw-bold" style="padding-left: 40px !important;">Pendaftaran Pegawai Baharu</h2>
 									<!--end::Modal title-->
 									<!--begin::Close-->
 									<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
@@ -1191,7 +1207,8 @@
 									<button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
 										<span class="indicator-label">Hantar</span>
 										<span class="indicator-progress">Tunggu sebentar...
-										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+											<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+										</span>
 									</button>
 									<!--end::Button-->
 								</div>
@@ -1564,6 +1581,24 @@
             });
         });
     </script>
+
+	<!-- Modal Alasan Tolak Permohonan Pegawai -->
+	<script>
+		$(document).on('click', '#permohonanPegawaiDitolakModal', function() {
+			var id = $(this).data('id');
+			$.ajax({
+				url: '/modal/alasan-ditolak/pegawai/'+ id, // Laravel route with dynamic ID
+				method: 'GET',
+				success: function(response) {
+					$('#modalBodyPermohonanPegawaiDitolak').html(response);
+					$('#modal_permohonan_ditolak').modal('show'); // Open the modal
+				},
+				error: function() {
+					$('#modalBodyPermohonanPegawaiDitolak').html('Ralat kandungan.'+id);
+				}
+			});
+		});
+	</script>
 
     {{-- AJAX TABLE SENARAI PEGAWAI --}}
     <script>

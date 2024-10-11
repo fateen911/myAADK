@@ -71,7 +71,7 @@
             </div>
 
             <!--begin::Actions-->
-            <div class="text-center pt-15">
+            <div class="text-center">
                 <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
 
                 <button type="submit" id="daftarBtn" class="btn btn-primary">
