@@ -1407,16 +1407,6 @@
 	{{-- Control domain email --}}
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			document.getElementById('modal_kemaskini_pegawai_form').addEventListener('submit', function(event) {
-				var emailInput = document.getElementById('emel').value;
-				if (emailInput.includes('@')) {
-					alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
-					event.preventDefault();
-				}
-			});
-		});
-
-		document.addEventListener('DOMContentLoaded', function() {
 			document.getElementById('kt_modal_add_customer_form').addEventListener('submit', function(event) {
 				var emailInput = document.getElementById('emailPegawai').value;
 				if (emailInput.includes('@')) {
@@ -1464,31 +1454,6 @@
 						this.value = this.value.slice(0, 11);
 					}
 				});
-			});
-
-			// Add event listener to form submission
-			document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
-				let valid = true;
-
-				// Validate each 'no_kp' field
-				noKpElements.forEach(function(element) {
-					if (element.value.length !== 12) {
-						alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
-						valid = false;
-					}
-				});
-
-				// Validate each 'no_tel' field
-				noTelElements.forEach(function(element) {
-					if (element.value.length < 10 || element.value.length > 11) {
-						alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
-						valid = false;
-					}
-				});
-
-				if (!valid) {
-					e.preventDefault();  // Prevent form submission if any validation fails
-				}
 			});
 		});
 	</script>

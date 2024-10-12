@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    
     <body>
         <form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $permohonan_pegawai->id]) }}" method="post">
             @csrf
@@ -9,7 +13,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-                    <input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$permohonan_pegawai->nama}}" style="text-transform: uppercase;" required/>
+                    <input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$permohonan_pegawai->nama}}" style="text-transform: uppercase;" oninput="validateNama(this)" required/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -23,7 +27,7 @@
                             </i>
                         </span>
                     </label>
-                    <input type="text" class="form-control form-control-solid custom-form" id="no_kp_pegawai_mohon" name="no_kp" value="{{$permohonan_pegawai->no_kp}}" inputmode="numeric" maxlength="12" required/>
+                    <input type="text" class="form-control form-control-solid custom-form" id="no_kp_pegawai_mohon" name="no_kp" value="{{$permohonan_pegawai->no_kp}}" inputmode="numeric" maxlength="12" oninput="validateNoKp(this)" required/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -46,7 +50,7 @@
                             </i>
                         </span>
                     </label>
-                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_pegawai_mohon" name="no_tel" value="{{$permohonan_pegawai->no_tel}}" inputmode="numeric" maxlength="11" required/>
+                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_pegawai_mohon" name="no_tel" value="{{$permohonan_pegawai->no_tel}}" inputmode="numeric" maxlength="11" oninput="validateNoTel(this)" required/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -101,15 +105,83 @@
 
             <!--begin::Actions-->
             <div class="text-center pt-5">
-                <button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
-                <button type="button" class="btn btn-danger" data-id="{{ $permohonan_pegawai->id }}" id="permohonanPegawaiDitolakModal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak">Ditolak</button>
+                <button type="submit" name="status" value="Lulus" class="btn btn-success me-3" onclick="return validateEmailDomain()">Diluluskan</button>
+                <button type="button" class="btn btn-danger" data-id="{{ $permohonan_pegawai->id }}" id="permohonanPegawaiDitolakModal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak" onclick="checkEmailAndOpenModal(event)">Ditolak</button>
             </div>
             <!--end::Actions-->
         </form>
+
+        <script>
+            // Function to validate 'Nama' field
+            function validateNama(input) {
+                // Allow only alphabets, @, and ' characters
+                input.value = input.value.replace(/[^a-zA-Z@' ]/g, '');
+            }
+
+            // Function to validate 'No. Telefon' field
+            function validateNoTel(input) {
+                // Remove all non-numeric characters
+                input.value = input.value.replace(/\D/g, '');
+
+                // Limit the input length to 11 characters
+                if (input.value.length > 11) {
+                    input.value = input.value.slice(0, 11);
+                }
+            }
+
+            // Function to validate 'No. Kad Pengenalan' field
+            function validateNoKp(input) {
+                // Remove all non-numeric characters
+                input.value = input.value.replace(/\D/g, '');
+
+                // Ensure the input length is exactly 12 characters
+                if (input.value.length > 12) {
+                    input.value = input.value.slice(0, 12);
+                }
+            }
+        </script>
+
+        <script>
+            function validateEmailDomain() {
+                const emailInput = document.getElementById('emelPegawai').value;
+                const domain = '@adk.gov.my';
+                
+                // Check if email is empty
+                if (emailInput.trim() === '') {
+                    alert('Sila masukkan emel.');
+                    return false; // Prevent form submission
+                }
+            
+                // Check the email domain
+                if (!emailInput.endsWith(domain)) {
+                    alert(`Sila masukkan nama e-mel pegawai sahaja tanpa domain.`);
+                    return false; // Prevent form submission
+                }
+            
+                return true; // Allow form submission if email is valid
+            }
+
+            function checkEmailAndOpenModal(event) {
+                const emailInput = document.getElementById('emelPegawai').value;
+                const domain = '@adk.gov.my';
+
+                // Check if email is empty
+                if (emailInput.trim() === '') {
+                    alert('Sila masukkan emel.');
+                    return; // Stay on the form
+                }
+
+                // Check the email domain
+                if (!emailInput.endsWith(domain)) {
+                    alert(`Sila masukkan nama e-mel pegawai sahaja tanpa domain.`);
+                    // return; // Stay on the form
+                }
+
+                // If the email is valid, open the rejection modal
+                const modal = new bootstrap.Modal(document.getElementById('permohonanPegawaiDitolakModal'));
+                modal.show();
+            }
+        </script>
     </body>
 </html>
-
-<!--generate table-->
-<script src="/assets/plugins/global/plugins.bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 

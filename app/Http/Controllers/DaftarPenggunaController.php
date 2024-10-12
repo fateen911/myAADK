@@ -458,11 +458,11 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            // $defaultEmail = 'fateennashuha9@gmail.com';
+            $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send notification email to the staff
-            // Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
-            Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
             return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
@@ -489,11 +489,11 @@ class DaftarPenggunaController extends Controller
         $pegawaiDitolak->updated_at = now();
         $pegawaiDitolak->save();
 
-        // $defaultEmail = 'fateennashuha9@gmail.com';
+        $defaultEmail = 'fateennashuha9@gmail.com';
 
         // Send rejection email to the staff
-        // Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
-        Mail::to($pegawaiDitolak->emel)->send(new PegawaiRejected($pegawaiDitolak));
+        Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
+        // Mail::to($pegawaiDitolak->emel)->send(new PegawaiRejected($pegawaiDitolak));
 
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
     }
@@ -545,10 +545,10 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            // $defaultEmail = 'fateenashuha2000@gmail.com';
+            $defaultEmail = 'fateenashuha2000@gmail.com';
 
-            Mail::to($email)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
-            // Mail::to($defaultEmail)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
+            // Mail::to($email)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
 
             return redirect()->route('senarai-pengguna')->with('success', 'Pegawai telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pegawai.');
         }
