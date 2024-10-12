@@ -21,6 +21,7 @@ class ModalKepulihanController extends Controller
         $klien = Klien::where('no_kp', Auth::user()->no_kp)->first();
         $clientId = $klien->id;
         $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $unreadCount = 0;
 
         // Fetch the latest record from keputusan_kepulihan_klien for this client within 6 months
         $latestRecordKeputusan = DB::table('keputusan_kepulihan_klien')

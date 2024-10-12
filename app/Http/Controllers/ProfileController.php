@@ -47,9 +47,22 @@ class ProfileController extends Controller
 
     public function updatePassword(Request $request): View
     {
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $unreadCount = 0;
+
+        // Fetch notifications for the client
+        $notifications = Notifikasi::where('klien_id', $clientId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Ensure $unreadCount is defined even when there are no notifications
+        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        ->where('is_read', false)
+        ->count();
+
         return view('profile.update_password', [
             'user' => $request->user(),
-        ]);
+        ], compact('unreadCount'));
     }
 
     /**

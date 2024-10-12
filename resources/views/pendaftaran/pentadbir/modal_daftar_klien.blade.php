@@ -41,7 +41,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$klien->no_tel}}" inputmode="numeric"/>
+                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$klien->no_tel}}" oninput="validateNoTel(this)" inputmode="numeric"/>
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -90,43 +90,15 @@
 
         {{-- Control input type --}}
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Control input for 'no_kp' (Kad Pengenalan)
-                document.querySelectorAll('[name="no_kp"]').forEach(function(input) {
-                    input.addEventListener('input', function() {
-                        this.value = this.value.replace(/\D/g, ''); // Allow only digits
-                        if (this.value.length > 12) {
-                            this.value = this.value.slice(0, 12); // Limit to 12 digits
-                        }
-                    });
-                });
-    
-                // Control input for 'no_tel' (No. Telefon)
-                document.querySelectorAll('[name="no_tel"]').forEach(function(input) {
-                    input.addEventListener('input', function() {
-                        this.value = this.value.replace(/\D/g, ''); // Allow only digits
-                        if (this.value.length > 11) {
-                            this.value = this.value.slice(0, 11); // Limit to 11 digits
-                        }
-                    });
-                });
-    
-                // Validate form submission
-                document.getElementById('modal_daftar_klien_form').addEventListener('submit', function(e) {
-                    const noKp = document.querySelector('[name="no_kp"]').value;
-                    const noTel = document.querySelector('[name="no_tel"]').value;
-    
-                    if (noKp.length !== 12) {
-                        alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
-                        e.preventDefault();  // Stop form submission if invalid
-                    }
-    
-                    if (noTel.length < 10 || noTel.length > 11) {
-                        alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
-                        e.preventDefault();  // Stop form submission if invalid
-                    }
-                });
-            });
+            function validateNoTel(input) {
+                // Remove all non-numeric characters
+                input.value = input.value.replace(/\D/g, '');
+
+                // Limit the input length to 11 characters
+                if (input.value.length > 11) {
+                    input.value = input.value.slice(0, 11);
+                }
+            }
         </script>
     </body>
 </html>

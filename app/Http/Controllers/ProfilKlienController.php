@@ -1538,6 +1538,7 @@ class ProfilKlienController extends Controller
 
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $unreadCount = 0;
 
         // Join tables and get the client's details
         $butiranKlien = Klien::leftJoin('pekerjaan_klien', 'klien.id', '=', 'pekerjaan_klien.klien_id')

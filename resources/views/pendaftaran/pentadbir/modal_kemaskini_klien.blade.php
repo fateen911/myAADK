@@ -8,18 +8,6 @@
             <input type="hidden" name="id" value="{{ $klien->id }}">
             <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
                 <!--begin::Input group-->
-                @php
-                    $status_ak_1 = DB::table('users')->where('no_kp', $klien->no_kp)->value('acc_status');
-                @endphp
-                <div class="fv-row mb-7">
-                    <label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
-                    <select id="statusAk2" class="form-select form-select-solid custom-select" name="status_ak" required>
-                        <option value="AKTIF" {{ $status_ak_1 == 'AKTIF' ? 'selected' : '' }}>AKTIF</option>
-                        <option value="DIBEKUKAN" {{ $status_ak_1 == 'DIBEKUKAN' ? 'selected' : '' }}>DIBEKUKAN</option>
-                    </select>
-                </div>
-                <!--end::Input group-->
-                <!--begin::Input group-->
                 <div class="fv-row mb-5">
                     <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
                     <input type="text" class="form-control form-control-solid" placeholder="" name="name" value="{{$klien->nama}}" readonly/>
@@ -50,7 +38,7 @@
                             </i>
                         </span>
                     </label>
-                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="{{$klien->no_tel}}" inputmode="numeric" maxlength="11"/>
+                    <input type="text" class="form-control form-control-solid custom-form" id="no_tel_klien" name="no_tel" value="{{$klien->no_tel}}" oninput="validateNoTel(this)" inputmode="numeric" maxlength="11"/>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -66,6 +54,18 @@
                         <input type="text" class="form-control form-control-solid custom-form" id="passwordKlien{{$klien->id}}" name="passwordKemaskini" />
                         <button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$klien->id}}')">Jana Kata Laluan</button>
                     </div>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                @php
+                    $status_ak_1 = DB::table('users')->where('no_kp', $klien->no_kp)->value('acc_status');
+                @endphp
+                <div class="fv-row mb-7">
+                    <label class="fs-6 fw-semibold mb-2 required">Status Akaun</label>
+                    <select id="statusAk2" class="form-select form-select-solid custom-select" name="status_ak" required>
+                        <option value="AKTIF" {{ $status_ak_1 == 'AKTIF' ? 'selected' : '' }}>AKTIF</option>
+                        <option value="DIBEKUKAN" {{ $status_ak_1 == 'DIBEKUKAN' ? 'selected' : '' }}>DIBEKUKAN</option>
+                    </select>
                 </div>
                 <!--end::Input group-->
             </div>
@@ -90,68 +90,15 @@
 
         {{-- Control input type --}}
         <script>
-            document.querySelectorAll('input[name="nama"]').forEach(function(input) {
-                input.addEventListener('input', function() {
-                    // Allow letters, spaces, and single quotes
-                    this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
-                });
-            });
+            function validateNoTel(input) {
+                // Remove all non-numeric characters
+                input.value = input.value.replace(/\D/g, '');
 
-            document.getElementById('name').addEventListener('input', function (e) {
-                // Allow letters, spaces, and single quotes
-                this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
-            });
-
-            document.addEventListener('DOMContentLoaded', function() {
-                // Select all elements with name 'no_kp' and 'no_tel'
-                const noKpElements = document.querySelectorAll('[name="no_kp"]');
-                const noTelElements = document.querySelectorAll('[name="no_tel"]');
-
-                // Restrict input to digits for 'no_kp' elements
-                noKpElements.forEach(function(element) {
-                    element.addEventListener('input', function (e) {
-                        this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
-                        if (this.value.length > 12) {                // Limit to 12 digits
-                            this.value = this.value.slice(0, 12);
-                        }
-                    });
-                });
-
-                // Restrict input to digits for 'no_tel' elements
-                noTelElements.forEach(function(element) {
-                    element.addEventListener('input', function (e) {
-                        this.value = this.value.replace(/\D/g, '');  // Remove non-digit characters
-                        if (this.value.length > 11) {                // Limit to 11 digits
-                            this.value = this.value.slice(0, 11);
-                        }
-                    });
-                });
-
-                // Add event listener to form submission
-                document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(e) {
-                    let valid = true;
-
-                    // Validate each 'no_kp' field
-                    noKpElements.forEach(function(element) {
-                        if (element.value.length !== 12) {
-                            alert('No. Kad Pengenalan mesti mempunyai 12 digit.');
-                            valid = false;
-                        }
-                    });
-
-                    // Validate each 'no_tel' field
-                    noTelElements.forEach(function(element) {
-                        if (element.value.length < 10 || element.value.length > 11) {
-                            alert('Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.');
-                            valid = false;
-                        }
-                    });
-
-                    if (!valid) {
-                        e.preventDefault();  // Prevent form submission if any validation fails
-                    }
-                });
-            });
+                // Limit the input length to 11 characters
+                if (input.value.length > 11) {
+                    input.value = input.value.slice(0, 11);
+                }
+            }
         </script>
     </body>
 </html>

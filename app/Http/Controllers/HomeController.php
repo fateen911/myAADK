@@ -33,8 +33,26 @@ class HomeController extends Controller
 
             if ($status == 0)
             {
-                session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
-                return view('profile.update_password');
+                if($tahap == 2)
+                {
+                    $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+                    $unreadCount = 0;
+
+                    $notifications = Notifikasi::where('klien_id', $clientId)
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+                    $unreadCount = Notifikasi::where('klien_id', $clientId)
+                    ->where('is_read', false)
+                    ->count();
+
+                    session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
+                    return view('profile.update_password', compact('unreadCount','notifications'));
+                }
+                else{
+                    session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
+                    return view('profile.update_password');
+                }
             }
             else
             {
@@ -197,6 +215,9 @@ class HomeController extends Controller
                     $waris = WarisKlien::where('klien_id',$klienId)->first();
                     $pasangan = KeluargaKlien::where('klien_id',$klienId)->first();
 
+                    // Ensure $unreadCount is initialized
+                    $unreadCount = 0; 
+
                     $responDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
                     $latestResponDemografi = ResponDemografi::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->first();
                     $keputusanKepulihan = KeputusanKepulihan::where('klien_id', $klienId)->orderBy('updated_at', 'desc')->get();
@@ -221,8 +242,6 @@ class HomeController extends Controller
                     // Handle the case where no KeputusanKepulihan record exists
                     $tarikhTidakMenjawabKepulihan = $latestKeputusanKepulihan ? $latestKeputusanKepulihan->updated_at->addMonths(6) : null;
 
-                    // $tarikhTidakMenjawabKepulihan = Carbon::now();
-
                     $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
                     // Fetch notifications for the client
@@ -230,10 +249,10 @@ class HomeController extends Controller
                         ->orderBy('created_at', 'desc')
                         ->get();
 
-                    // Count unread notifications
+                    // Ensure $unreadCount is defined even when there are no notifications
                     $unreadCount = Notifikasi::where('klien_id', $clientId)
-                        ->where('is_read', false)
-                        ->count();
+                    ->where('is_read', false)
+                    ->count();
 
                     return view('dashboard.klien.dashboard', compact('klien','pekerjaan','waris','pasangan',
                                                                                 'responDemografi','latestResponDemografi','keputusanKepulihan','latestKeputusanKepulihan','tidakMenjawabKepulihan','tarikhTidakMenjawabKepulihan',

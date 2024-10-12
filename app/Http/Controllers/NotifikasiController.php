@@ -29,7 +29,8 @@ class NotifikasiController extends Controller
     public function index()
     {
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-
+        $unreadCount = 0;
+        
         // Fetch notifications for the client
         $notifications = Notifikasi::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
