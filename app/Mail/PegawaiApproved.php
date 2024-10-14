@@ -36,7 +36,7 @@ class PegawaiApproved extends Mailable
         return $this->subject($subject)
                     ->view('pendaftaran.emel_daftar_pegawai_lulus')
                     ->with([
-                        'nama' => $this->pegawaiBaharu->nama,
+                        'nama' => $this->pegawaiBaharu->name,
                         'no_kp' => $this->pegawaiBaharu->no_kp,
                         'password' => $this->password,
                         'verificationUrl' => $this->verificationUrl,
