@@ -41,13 +41,20 @@ class PasswordResetLinkController extends Controller
         return response()->json(['success' => $success, 'email' => $email]);
     }
 
-
     public function store(Request $request)
     {
+        // Find the user by no_kp
         $user = User::where('no_kp', $request->no_kp)->first();
+
+        // Check if the user exists
+        if (!$user) {
+            return redirect()->back()->with('failed', 'Pengguna tidak didaftarkan di dalam sistem ini.');
+        }
+
         $jenis_pengguna = $user->tahap_pengguna;
 
-        if ($jenis_pengguna != 2) {
+        if ($jenis_pengguna != 2) 
+        {
             $emel = $user->email;
 
             if ($emel) {
@@ -70,7 +77,6 @@ class PasswordResetLinkController extends Controller
         } 
         else {
             return redirect()->back()->with('failed', 'Sila hubungi Pentadbir Sistem atau Pegawai Daerah untuk jana kata laluan baharu.');
-            // return view('auth.challenge-form');
         }
     }
 }

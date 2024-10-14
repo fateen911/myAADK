@@ -26,7 +26,18 @@
         @csrf
 
         <div>
-            <x-text-input id="no_kp" class="block w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="no_kp" placeholder="{{ __('No Kad Pengenalan') }}"/>
+            <x-text-input 
+                id="no_kp" 
+                class="block w-full pr-10" 
+                type="text" 
+                name="no_kp" 
+                :value="old('no_kp')" 
+                required 
+                autofocus 
+                autocomplete="no_kp" 
+                placeholder="{{ __('No Kad Pengenalan') }}"
+                oninput="validateInput(this)"
+            />
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
 
@@ -55,5 +66,25 @@
                 confirmButtonText: 'OK'
             });
         @endif
+    </script>
+
+    <script>
+        function validateInput(input) {
+            // Remove any non-numeric characters from the input
+            input.value = input.value.replace(/\D/g, '');
+
+            // Limit the input to a maximum of 12 digits
+            if (input.value.length > 12) {
+                input.value = input.value.slice(0, 12);
+            }
+
+            // Optional: Update the error message dynamically
+            const errorElement = document.getElementById('no_kp_error');
+            if (input.value.length < 12) {
+                errorElement.textContent = 'No Kad Pengenalan mesti mempunyai 12 digit.';
+            } else {
+                errorElement.textContent = ''; // Clear the error message when valid
+            }
+        }
     </script>
 </x-guest-layout>
