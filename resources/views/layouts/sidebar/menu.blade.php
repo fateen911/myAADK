@@ -333,9 +333,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item">
                         <!--begin:Menu link-->
-                        <span class="menu-link">
+                        <a class="menu-link" href="{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -346,39 +346,29 @@
                                     <span class="path6"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Jana Laporan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
+                            <span class="menu-title">Modal Kepulihan</span>
+                        </a>
                         <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
 
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-modal-kepulihan') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Modal Kepulihan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                            <!--begin:Menu item-->
-                            <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('laporan-program-kepulihan') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Program Kepulihan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-graph-up fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Aktiviti</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
                 </div>
