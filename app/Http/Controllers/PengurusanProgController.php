@@ -83,9 +83,7 @@ class PengurusanProgController extends Controller
     public function programDianjurkan()
     {
         $program = Program::where('status','BELUM SELESAI')->get();
-        if ($program->isEmpty()) {
-            $program = null;
-        }
+        
         return response()->json($program);
     }
 
