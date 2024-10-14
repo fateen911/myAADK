@@ -114,7 +114,7 @@ License: For each use you must have a valid license purchased only from above li
                                                 <span class="f-brush m-0 p-0">My</span><span class="f-calibri m-0 p-0">Support</span>
                                             </span>
                                         </span>
-                                        <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda <i>Priority</i> AADK</p>
+                                        <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda Prioriti AADK</p>
                                     </div>
                                 </a>
                                 <!--end::Logo image-->
@@ -243,7 +243,7 @@ License: For each use you must have a valid license purchased only from above li
                             <p class="fs-5">
                                 Tel : 03 – 8911 2200 <br>
                                 Faks : 03 – 8926 2055 <br>
-                                Emel : webmaster.adk.gov.my <br>
+                                Emel : webmaster[at]adk[dot]gov[dot]my <br>
                                 <br>
                                 Hotline AADK : 1-800-22-2235 / 019 – 626 2233
                             </p>
@@ -276,7 +276,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Link-->
                                 <a href="https://x.com/aadkmalaysia" class="mb-6">
                                     <img src="/assets/media/logos/twitter-x-black.png" class="h-20px me-2" alt="" />
-                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">X</span>
                                 </a>
                                 <!--end::Link-->
                                 <!--begin::Link-->
