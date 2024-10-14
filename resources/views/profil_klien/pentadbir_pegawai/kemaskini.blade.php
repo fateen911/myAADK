@@ -355,8 +355,9 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         @php
-                                            $daerah_semasa = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_baru');
-                                            $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('senarai_daerah_pejabat.daerah');
+                                            $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_baru', 'daerah_asal')->first();
+                                            $daerah_semasa = $daerah1->daerah_baru ?? $daerah1->daerah_asal;
+                                            $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('daerah');
                                         @endphp
                                         <span id="bangsa" class="fs-6 form-control-plaintext">{{$daerahPCCP}}</span>
                                     </div>
@@ -556,8 +557,6 @@
                                                     $pendidikanKlien = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
                                                     $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
                                                     $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
-                                                    $daerah_semasa = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_baru');
-                                                    $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('senarai_daerah_pejabat.daerah');
                                                 @endphp
                                         
                                                 <div class="row fv-row">
