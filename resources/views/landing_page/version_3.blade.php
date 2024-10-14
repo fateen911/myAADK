@@ -105,15 +105,11 @@ License: For each use you must have a valid license purchased only from above li
                                 </i>
                             </button>
                             <!--end::Mobile menu toggle-->
-                            <div class="">
+                            <div class="mt-2">
                                 <!--begin::Logo image-->
-                                <a href="{{url('/landing-page/version-2')}}">
+                                <a href="{{url('/landing-page/version-3')}}">
                                     <div>
-                                        <span class="fs-2hx fs-md-3x text-white">
-                                            <span class="no-space m-0 p-0" id="kt_landing_hero_text">
-                                                <span class="f-brush m-0 p-0">My</span><span class="f-calibri m-0 p-0">Support</span>
-                                            </span>
-                                        </span>
+                                        <img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-30px h-lg-50px mx-auto"/>
                                         <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda Prioriti AADK</p>
                                     </div>
                                 </a>
