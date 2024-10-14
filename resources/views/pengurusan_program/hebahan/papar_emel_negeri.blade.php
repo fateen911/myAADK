@@ -40,7 +40,7 @@
 
         <!--begin::Table-->
         <div class="container">
-            <div class="mh-sm-350px overflow-y-auto">
+            <div class="mh-sm-350px mh-xsm-290px overflow-y-auto">
                 <table class="table" id="modalHebahan">
                     <thead>
                     <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">

@@ -49538,6 +49538,11 @@ body,
         width: 450px;
     }
 }
+@media only screen and (max-width: 575px) {
+    .mh-xsm-290px {
+        max-height: 290px !important;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .text-center-range{
         text-align: center;
