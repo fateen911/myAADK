@@ -19,31 +19,47 @@
             margin-left: 200px;
             width: 60%;
         }
+
         .card {
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
+
         .card-body {
             padding: 20px;
             text-align: center;
         }
+
         .card-header {
             display: flex;
-            align-items: center;
-            padding: 20px;
-            margin-top: 20px;
+            align-items: center !important; /* Vertically align items */
+            padding: 15px;
+            margin-top: 15px;
             border-bottom: 1px solid #f0f0f0;
         }
+
+        .profile-icon {
+            font-size: 24px; /* Adjust icon size */
+            margin-right: 10px; /* Space between the icon and name */
+        }
+
+        .profile-name h2 {
+            margin: 0; /* Remove default margin from h2 */
+            font-size: 18px; /* Adjust the name font size */
+        }
+
         .card-header .profile-icon {
-            font-size: 40px;
+            font-size: 30px;
             color: #000;
             margin-right: 20px;
         }
+
         .card-header div {
             flex-grow: 1;
         }
+
         .status {
             color: white;
             background-color: cornflowerblue;
@@ -93,12 +109,12 @@
             <!--begin::Card header-->
             <div class="card-header">
                 <i class="fas fa-user profile-icon"></i>
-                <div>
-                    <h3>{{$klien->nama}} </h3>
-                    <p>{{$klien->no_kp}}</p>
+                <div class="profile-name">
+                    <h2>{{$klien->nama}}</h2>
                 </div>
-            </div>
+            </div>            
             <!--end::Card header-->
+
             <!--begin::Card body-->
             <div class="card-body">
                 @if(isset($latestRecordKeputusan))

@@ -70,7 +70,6 @@ class DaftarPenggunaController extends Controller
                 $klien->update([
                     'no_tel' => $request->no_tel,
                     'emel' => $request->email,
-                    'updated_at' => now(),
                 ]);
             }
 
@@ -118,10 +117,10 @@ class DaftarPenggunaController extends Controller
             $klien->update([
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
-                'updated_at' => now(),
             ]);
 
-            if ($request->email){
+            if ($request->email)
+            {
                 Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
                 return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
             }
@@ -248,8 +247,8 @@ class DaftarPenggunaController extends Controller
                 $klien->update([
                     'no_tel' => $request->no_tel,
                     'emel' => $request->email,
-                    'updated_at' => now(),
                 ]);
+                // dd($klien);
             }
 
             // Send email notification if the user has an email and passwordKemaskini is filled
@@ -304,8 +303,9 @@ class DaftarPenggunaController extends Controller
             $klien->update([
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
-                'updated_at' => now(),
             ]);
+
+            // dd($klien);
 
             if ($request->email){
                 Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
