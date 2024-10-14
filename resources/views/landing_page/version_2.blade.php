@@ -388,9 +388,9 @@ License: For each use you must have a valid license purchased only from above li
             method: 'GET',
             success: function (data) {
                 let carouselContent = '';
-                if (data === null) {
+                if (data === null || data.length === 0) {
                     carouselContent = `
-                        <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black shadow-sm">
+                        <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white text-black">
                             <h3 class="p-2">Tiada Aktiviti Buat Masa Ini</h3>
                         </div>
                     `;
