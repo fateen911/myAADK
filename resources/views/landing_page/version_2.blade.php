@@ -142,7 +142,7 @@ License: For each use you must have a valid license purchased only from above li
                     <hr class="w-100 w-md-100">
                     <br>
                     <h3 class="fw-medium text-justify w-100 w-md-100 f-calibri">
-                        My Support merupakan sistem maklumat klien AADK yang telah tamat
+                        MySupport merupakan sistem maklumat klien AADK yang telah tamat
                         mengikuti program. Ia mengandungi butir-butir peribadi klien dan
                         maklumat khusus berkaitan status kepulihan mereka. Kepentingan
                         pangkalan data adalah untuk memberi sokongan kepulihan yang
@@ -388,19 +388,27 @@ License: For each use you must have a valid license purchased only from above li
             method: 'GET',
             success: function (data) {
                 let carouselContent = '';
-                $.each(data, function (index, program) {
-                    carouselContent += `
-                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black">
-                                <h3 class="p-2">${program.nama}</h3>
-                                <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
-                                <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>
-                                <p class="m-0 p-0">Tempat: ${program.tempat}</p>
-                                <p class="m-0 p-0">Pautan: <a href="${program.pautan_pengesahan}">Klik di sini</a></p>
-                            </div>
+                if (data === null) {
+                    carouselContent = `
+                        <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black shadow-sm">
+                            <h3 class="p-2">Tiada Aktiviti Buat Masa Ini</h3>
                         </div>
                     `;
-                });
+                } else {
+                    $.each(data, function (index, program) {
+                        carouselContent += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white text-black">
+                                    <h3 class="p-2">${program.nama}</h3>
+                                    <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
+                                    <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>
+                                    <p class="m-0 p-0">Tempat: ${program.tempat}</p>
+                                    <p class="m-0 p-0">Pautan: <a href="${program.pautan_pengesahan}">Klik di sini</a></p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
                 $('#carousel-content').html(carouselContent);
             }
         });

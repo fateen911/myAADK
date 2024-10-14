@@ -10,19 +10,7 @@
 </head>
 <body>
 <div class="container mt-5 landing-red rounded-3">
-    <div id="programCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner" id="carousel-content">
-            <!-- Dynamic program content will be inserted here -->
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#programCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#programCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+    <p>{{$program}}</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
