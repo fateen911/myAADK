@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder mb-7">Borang Kehadiran</h1>
+                    <h1 class="fw-bolder mb-7">Rekod Kehadiran</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)

@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder text-gray-900 mb-7">Borang maklum balas kehadiran telah berjaya dihantar.</h1>
+                    <h1 class="fw-bolder text-gray-900 mb-7">Maklum balas kehadiran telah berjaya dihantar.</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)

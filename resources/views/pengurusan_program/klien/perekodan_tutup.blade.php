@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h1 class="fw-bolder mb-7">Borang Kehadiran</h1>
+                    <h1 class="fw-bolder mb-7">Rekod Kehadiran</h1>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
@@ -90,7 +90,7 @@
                         <hr>
 
                         <div class="alert alert-danger p-2" role="alert">
-                            <span class="fs-3">Borang kehadiran telah ditutup. Aktiviti telah tamat.</span>
+                            <span class="fs-3">Rekod kehadiran telah ditutup. Aktiviti telah tamat.</span>
                         </div>
                     </div>
                     <!--end::Text-->

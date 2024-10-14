@@ -48,7 +48,7 @@
                     </div>
                     <!--end::Logo-->
                     <!--begin::Title-->
-                    <h2 class="fw-bolder mb-7">Borang kehadiran berjaya dihantar.</h2>
+                    <h2 class="fw-bolder mb-7">Kehadiran berjaya direkodkan.</h2>
                     <!--end::Title-->
                     <!--begin::Counter-->
                     <!--(uncomment to display coming soon counter)
