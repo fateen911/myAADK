@@ -453,7 +453,6 @@
 						<!--end::Card body-->
 					</div>
 
-
 					{{-- PEGAWAI --}}
 					<div class="tab-pane fade" id="pegawai" role="tabpanel" aria-labelledby="pegawai-tab">
 						<div class="header row align-items-center">
@@ -1672,7 +1671,7 @@
 					$('#sortTable1 tbody').empty();
 
 					$.each(klienList, function(index, user1) {
-						var tarikhDaftar = user1.updated_at ? new Date(user1.updated_at).toLocaleDateString('en-GB') : ''; // Display blank if null
+						var tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : ''; 
 
 						rows += '<tr>';
 						rows += '<td>' + (user1.nama ? user1.nama : '') + '</td>';
@@ -1680,7 +1679,7 @@
 						rows += '<td>' + (user1.emel ? user1.emel : '') + '</td>';
 						rows += '<td style="text-align: center;">' + tarikhDaftar + '</td>';
 						rows += `<td style="text-align: center;">
-									${user1.updated_at !== null ? 
+									${user1.user_updated_at !== null ? 
 										`<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_kemaskini_klien">
 											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 												<i class="ki-duotone bi bi-pencil fs-3"></i>

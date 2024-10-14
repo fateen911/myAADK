@@ -172,7 +172,7 @@
                 }
 
                 // Check the email domain
-                if (!emailInput.endsWith(domain)) {
+                if (emailInput.endsWith(domain)) {
                     alert(`Sila masukkan nama e-mel pegawai sahaja tanpa domain.`);
                     // return; // Stay on the form
                 }

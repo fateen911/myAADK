@@ -65,6 +65,9 @@ class DaftarPenggunaController extends Controller
             // Update user in the users table
             $user->update($updateData);
 
+            // Disable timestamps temporarily
+            $klien->timestamps = false;
+
             // Check if the Klien exists and update the no_tel and email in the klien table
             if ($klien) {
                 $klien->update([
@@ -112,6 +115,9 @@ class DaftarPenggunaController extends Controller
 
             // Create the new user
             $user = User::create($createData);
+
+            // Disable timestamps temporarily
+            $klien->timestamps = false;
 
             // Update in table klien
             $klien->update([
@@ -242,13 +248,15 @@ class DaftarPenggunaController extends Controller
             // Update user with the new data
             $user->update($updateData);
 
+            // Disable timestamps temporarily
+            $klien->timestamps = false;
+
             // Update Klien if exists
             if ($klien) {
                 $klien->update([
                     'no_tel' => $request->no_tel,
                     'emel' => $request->email,
                 ]);
-                // dd($klien);
             }
 
             // Send email notification if the user has an email and passwordKemaskini is filled
@@ -299,13 +307,14 @@ class DaftarPenggunaController extends Controller
             // Create the new user
             $user = User::create($createData);
 
+            // Disable timestamps temporarily
+            $klien->timestamps = false;
+
             // Update in table klien
             $klien->update([
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
             ]);
-
-            // dd($klien);
 
             if ($request->email){
                 Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));

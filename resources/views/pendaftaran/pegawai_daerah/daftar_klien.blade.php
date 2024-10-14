@@ -124,21 +124,22 @@
                                 @foreach ($klien as $user1)
                                     @php
                                         $peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-                                        $tarikh_daftar1 = Carbon::parse($user1->updated_at)->format('d-m-Y');
+                                        // $tarikh_daftar1 = Carbon::parse($user1->updated_at)->format('d-m-Y');
+                                        $tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : 'N/A';
                                     @endphp
 
                                     <tr>
                                         <td>{{ $user1->nama }}</td>
                                         <td>{{ $user1->no_kp }}</td>
                                         <td>{{ $user1->emel }}</td>
-                                        @if ( $user1->updated_at !== null)
+                                        @if ( $user1->user_updated_at !== null)
                                             <td style="text-align: center;">{{ $tarikh_daftar1}}</td>
                                         @else
                                             <td style="text-align: center;">N/A</td>
                                         @endif
                                         <td style="text-align: center;">
                                             <div class="d-flex justify-content-center align-items-center">
-                                                @if ( $user1->updated_at !== null)
+                                                @if ( $user1->user_updated_at !== null)
                                                     <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
                                                         <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
                                                             <i class="ki-duotone bi bi-pencil fs-3"></i>
