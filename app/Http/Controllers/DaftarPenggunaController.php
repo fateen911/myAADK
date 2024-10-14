@@ -470,10 +470,10 @@ class DaftarPenggunaController extends Controller
             $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send notification email to the staff
-            Mail::to($defaultEmail)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
             // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
-            return redirect()->back()->with('success', 'Pegawai ' . $pegawaiBaharu->nama . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
+            return redirect()->back()->with('success', 'Pegawai ' . $user->name . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
     }
 
