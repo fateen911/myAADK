@@ -1760,4 +1760,53 @@
             });
         });
     </script>
+
+	{{-- Form vaidation for Daftar Pegawai --}}
+	<script>
+		document.getElementById('kt_modal_add_customer_submit').addEventListener('click', function (event) {
+			// Prevent form submission
+			event.preventDefault();
+	
+			// Get form elements
+			const name = document.getElementById('name').value.trim();
+			const no_kp = document.getElementById('no_kp_pegawai_baru').value.trim();
+			const email = document.getElementById('emailPegawai').value.trim();
+			const no_tel = document.getElementById('no_tel_pegawai_baru').value.trim();
+			const jawatan = document.getElementById('jawatan').value;
+			const peranan_pegawai = document.getElementById('peranan_pegawai').value;
+			const negeri_bertugas = document.getElementById('daftar_negeri_bertugas').value;
+			const daerah_bertugas = document.getElementById('daftar_daerah_bertugas').value;
+	
+			// Validation logic based on peranan_pegawai
+			let errorMessage = '';
+	
+			// Common required field check
+			if (!name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
+				errorMessage = 'Sila isi semua medan yang diperlukan.';
+			} else {
+				// Additional validation based on peranan_pegawai
+				if (peranan_pegawai == 3) {
+					// For peranan_pegawai == 3, negeri_bertugas and daerah_bertugas are not required
+				} else if (peranan_pegawai == 4) {
+					// For peranan_pegawai == 4, only negeri_bertugas is required
+					if (!negeri_bertugas) {
+						errorMessage = 'Sila pilih Negeri Bertugas untuk Pegawai Negeri.';
+					}
+				} else if (peranan_pegawai == 5) {
+					// For peranan_pegawai == 5, both negeri_bertugas and daerah_bertugas are required
+					if (!negeri_bertugas || !daerah_bertugas) {
+						errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas untuk Pegawai Daerah.';
+					}
+				}
+			}
+	
+			// If there's an error message, display it. Otherwise, submit the form.
+			if (errorMessage) {
+				alert(errorMessage);
+			} else {
+				// If all required fields are filled, submit the form
+				document.getElementById('kt_modal_add_customer_form').submit();
+			}
+		});
+	</script>	
 @endsection
