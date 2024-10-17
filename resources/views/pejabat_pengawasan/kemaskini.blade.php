@@ -102,7 +102,7 @@
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
                                         
-                                        <select class="form-select form-select-solid custom-select" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
+                                        <select class="form-select form-select-solid custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
                                             <option value="">Pilih Negeri</option>
                                             @foreach ($senaraiNegeri as $item1)
                                                 <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
@@ -116,8 +116,8 @@
                                         <span class="required">Pejabat AADK Daerah Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select" name="daerah_baharu" id="daerah_baharu" data-control="select2" required>
-                                            <option value="">Pilih Daerah</option>
+                                        <select class="form-select form-select-solid custom-select" name="daerah_baharu" id="daerah_baharu" required>
+                                            <option value="" data-negeri-id="">Pilih Daerah</option>
                                             @foreach ($senaraiDaerah as $item2)
                                                 <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
                                             @endforeach
@@ -179,39 +179,48 @@
         </script>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const negeriSelect = document.getElementById('negeri_baharu');
-                const daerahSelect = document.getElementById('daerah_baharu');
-
-                // Debugging: Log when the DOM is ready
-                console.log("DOM Loaded");
-
-                // Function to filter daerah options based on selected negeri
-                function filterDaerahOptions() {
-                    const selectedNegeriId = negeriSelect.value; // Use value to get the selected negeri_id
-
-                    // Debugging: Log the selected negeri_id
-                    console.log("Selected Negeri ID:", selectedNegeriId);
-
-                    Array.from(daerahSelect.options).forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === "") {
-                            // Show option if it belongs to the selected negeri or is the placeholder option
-                            option.style.display = 'block';
-                        } else {
-                            // Hide other options
-                            option.style.display = 'none';
-                        }
-                    });
-                    // Reset daerah value when negeri changes
-                    daerahSelect.value = ''; 
-                }
-
-                // Event listeners
-                negeriSelect.addEventListener('change', filterDaerahOptions);
-
-                // Initial setup
+            $(document).ready(function() {
+                // Initialize Select2
+                $('#daerah_baharu').select2();
+            
+                $('#negeri_baharu').change(filterDaerahOptions);
+            
+                // Initial setup to filter options if needed
                 filterDaerahOptions();
             });
+            
+            function filterDaerahOptions() {
+                const selectedNegeriId = $('#negeri_baharu').val(); // Get the selected negeri_id
+                console.log("Selected Negeri ID:", selectedNegeriId);
+            
+                const daerahSelect = $('#daerah_baharu');
+                console.log("Daerah Dropdown:", daerahSelect);
+            
+                // Clear current options
+                daerahSelect.empty(); 
+            
+                // Add the placeholder option
+                daerahSelect.append('<option value="" data-negeri-id="">Pilih Daerah</option>');
+            
+                // If no state is selected, disable the dropdown
+                if (!selectedNegeriId) {
+                    daerahSelect.prop('disabled', true).val('').trigger('change'); // Reset and trigger change
+                    return; // Exit the function
+                } else {
+                    daerahSelect.prop('disabled', false);
+                }
+            
+                // Iterate through each district and add only matching options
+                @foreach ($senaraiDaerah as $item2)
+                    if ("{{ $item2->negeri_id }}" === selectedNegeriId) {
+                        daerahSelect.append('<option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>');
+                    }
+                @endforeach
+            
+                // Reinitialize Select2 to reflect the changes in the dropdown
+                daerahSelect.select2().trigger('change');
+            }
         </script>
+    
     </body>
 @endsection
