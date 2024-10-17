@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'MySupport') }}</title>
+        <link rel="shortcut icon" href="{{asset('assets')}}/media/logos/favicon.ico" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
