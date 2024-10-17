@@ -1126,7 +1126,7 @@
 													</i>
 												</span>
 											</label>
-											<input type="number" class="form-control form-control-solid custom-form" placeholder="Contoh: 950506019001" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
+											<input type="text" class="form-control form-control-solid custom-form" placeholder="Contoh: 950506019001" id="no_kp_pegawai_baru" name="no_kp" inputmode="numeric" pattern="[0-9]*" pattern="\d{12}" required/>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
@@ -1149,7 +1149,7 @@
 													</i>
 												</span>
 											</label>
-											<input type="number" class="form-control form-control-solid custom-form" placeholder="Contoh: 0139001234" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
+											<input type="text" class="form-control form-control-solid custom-form" placeholder="Contoh: 0139001234" id="no_tel_pegawai_baru" name="no_tel" inputmode="numeric" pattern="\d{10,11}" required/>
 										</div>
 										<!--end::Input group-->
 										<!--begin::Input group-->
@@ -1400,19 +1400,6 @@
 			// Initial setup
 			toggleFields();
 			filterDaerahOptions();
-		});
-	</script>
-
-	{{-- Control domain email --}}
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			document.getElementById('kt_modal_add_customer_form').addEventListener('submit', function(event) {
-				var emailInput = document.getElementById('emailPegawai').value;
-				if (emailInput.includes('@')) {
-					alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
-					event.preventDefault();
-				}
-			});
 		});
 	</script>
 
@@ -1766,7 +1753,7 @@
 		document.getElementById('kt_modal_add_customer_submit').addEventListener('click', function (event) {
 			// Prevent form submission
 			event.preventDefault();
-	
+
 			// Get form elements
 			const name = document.getElementById('name').value.trim();
 			const no_kp = document.getElementById('no_kp_pegawai_baru').value.trim();
@@ -1776,17 +1763,17 @@
 			const peranan_pegawai = document.getElementById('peranan_pegawai').value;
 			const negeri_bertugas = document.getElementById('daftar_negeri_bertugas').value;
 			const daerah_bertugas = document.getElementById('daftar_daerah_bertugas').value;
-	
+
 			// Validation logic based on peranan_pegawai
 			let errorMessage = '';
-	
+
 			// Common required field check
 			if (!name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
-				errorMessage = 'Sila isi semua medan yang diperlukan.';
+				errorMessage = 'Sila isi semua medan yang bertanda *.';
 			} else {
 				// Additional validation based on peranan_pegawai
 				if (peranan_pegawai == 3) {
-					// For peranan_pegawai == 3, negeri_bertugas and daerah_bertugas are not required
+					// No additional checks for peranan_pegawai == 3
 				} else if (peranan_pegawai == 4) {
 					// For peranan_pegawai == 4, only negeri_bertugas is required
 					if (!negeri_bertugas) {
@@ -1799,14 +1786,26 @@
 					}
 				}
 			}
-	
-			// If there's an error message, display it. Otherwise, submit the form.
-			if (errorMessage) {
-				alert(errorMessage);
-			} else {
-				// If all required fields are filled, submit the form
-				document.getElementById('kt_modal_add_customer_form').submit();
+
+			// Validate email
+			if (validateEmailDomain(email)) {
+				if (errorMessage) {
+					alert(errorMessage);
+				} else {
+					// If all required fields are filled and email is valid, submit the form
+					document.getElementById('kt_modal_add_customer_form').submit();
+				}
 			}
 		});
-	</script>	
+
+		function validateEmailDomain(emailInput) {
+			// Check if email contains '@'
+			if (emailInput.includes('@')) {
+				alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
+				return false; // Prevent form submission
+			}
+
+			return true; // Allow form submission if email is valid
+		}
+	</script>
 @endsection

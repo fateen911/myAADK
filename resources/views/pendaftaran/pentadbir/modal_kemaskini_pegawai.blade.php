@@ -176,21 +176,20 @@
 
         <script>
             function validateEmailDomain() {
-                const emailInput = document.getElementById('emelPegawai').value;
-                const domain = '@adk.gov.my';
-                
+                const emailInput = document.getElementById('emel').value;
+
                 // Check if email is empty
                 if (emailInput.trim() === '') {
                     alert('Sila masukkan emel.');
                     return false; // Prevent form submission
                 }
             
-                // Check the email domain
-                if (!emailInput.endsWith(domain)) {
-                    alert(`Sila masukkan nama e-mel pengguna sahaja tanpa domain.`);
+                // Check if email contains '@'
+                if (emailInput.includes('@')) {
+                    alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
                     return false; // Prevent form submission
                 }
-            
+
                 return true; // Allow form submission if email is valid
             }
         </script>
