@@ -144,7 +144,6 @@
         <script>
             function validateEmailDomain() {
                 const emailInput = document.getElementById('emelPegawai').value;
-                const domain = '@adk.gov.my';
                 
                 // Check if email is empty
                 if (emailInput.trim() === '') {
@@ -152,9 +151,9 @@
                     return false; // Prevent form submission
                 }
             
-                // Check the email domain
-                if (emailInput.endsWith(domain)) {
-                    alert(`Sila masukkan nama e-mel pegawai sahaja tanpa domain.`);
+                // Check if email contains '@'
+                if (emailInput.includes('@')) {
+                    alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
                     return false; // Prevent form submission
                 }
             
@@ -163,7 +162,6 @@
 
             function checkEmailAndOpenModal(event) {
                 const emailInput = document.getElementById('emelPegawai').value;
-                const domain = '@adk.gov.my';
 
                 // Check if email is empty
                 if (emailInput.trim() === '') {
@@ -171,10 +169,10 @@
                     return; // Stay on the form
                 }
 
-                // Check the email domain
-                if (emailInput.endsWith(domain)) {
-                    alert(`Sila masukkan nama e-mel pegawai sahaja tanpa domain.`);
-                    // return; // Stay on the form
+                // Check if email contains '@'
+                if (emailInput.includes('@')) {
+                    alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
+                    return false; // Prevent form submission
                 }
 
                 // If the email is valid, open the rejection modal
