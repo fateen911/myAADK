@@ -507,64 +507,6 @@ class DaftarPenggunaController extends Controller
         return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
     }
 
-    // public function daftarPegawai(Request $request)
-    // {
-    //     // Combine email name and domain
-    //     $email = $request->emailPegawai . '@adk.gov.my';
-
-    //     // Check if the user already exists
-    //     $user = User::where('no_kp', '=', $request->no_kp)->first();
-    //     $pegawai = Pegawai::where('no_kp', '=', $request->no_kp)->first();
-
-    //     $password_length = 12;
-    //     $password = $this->generatePassword($password_length);
-
-    //     if ($user === null || $pegawai === null) {
-    //         $userData = [
-    //             'name' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $email,
-    //             'tahap_pengguna' => $request->peranan_pegawai,
-    //             'password' => Hash::make($password),
-    //             'profil_pengguna' => null,
-    //             'status' => '0',
-    //         ];
-
-    //         $user = User::create($userData);
-
-    //         $pegawaiData = [
-    //             'users_id' => $user->id,
-    //             'nama' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'emel' => $email,
-    //             'no_tel' => $request->no_tel,
-    //             'jawatan' => $request->jawatan,
-    //             'peranan' => $request->peranan_pegawai,
-    //             'negeri_bertugas' => $request->daftar_negeri_bertugas,
-    //             'daerah_bertugas' => $request->daftar_daerah_bertugas,
-    //         ];
-
-    //         $pegawai = Pegawai::create($pegawaiData);
-
-    //         // Generate the email verification URL
-    //         event(new Registered($user));
-    //         $verificationUrl = URL::temporarySignedRoute(
-    //             'verification.verify',
-    //             now()->addMinutes(60),
-    //             ['id' => $user->id, 'hash' => sha1($user->email)]
-    //         );
-
-    //         $defaultEmail = 'fateenashuha2000@gmail.com';
-
-    //         // Mail::to($email)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
-    //         Mail::to($defaultEmail)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
-
-    //         return redirect()->route('senarai-pengguna')->with('success', 'Pegawai telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pegawai.');
-    //     }
-    //     else {
-    //         return redirect()->route('senarai-pengguna')->with('error', 'No kad pengenalan ' . $request->no_kp . ' telah didaftarkan dalam sistem ini.');
-    //     }
-    // }
 
     public function daftarPegawai(Request $request)
     {

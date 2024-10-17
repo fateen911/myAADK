@@ -1782,7 +1782,7 @@
 	
 			// Common required field check
 			if (!name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
-				errorMessage = 'Sila isi semua medan yang diperlukan.';
+				errorMessage = 'Sila isi semua medan yang bertanda *.';
 			} else {
 				// Additional validation based on peranan_pegawai
 				if (peranan_pegawai == 3) {
