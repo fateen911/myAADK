@@ -55,7 +55,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
+        <a href="#" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -384,7 +384,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
+        <a href="#" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -409,7 +409,7 @@
                 <!--begin::Menu-->
                 <div class="menu menu-column menu-rounded menu-sub-indention fw-semibold fs-6" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('dashboard') }}" onclick="event.preventDefault(); window.location.href='{{ route('dashboard') }}';">
                             <span class="menu-icon">
@@ -538,7 +538,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
+        <a href="#" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -740,7 +740,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
+        <a href="#" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -942,7 +942,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="https://www.adk.gov.my/?lang=en" class="logo-container">
+        <a href="#" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
