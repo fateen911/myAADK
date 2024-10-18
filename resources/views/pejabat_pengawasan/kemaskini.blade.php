@@ -35,9 +35,7 @@
             <!--begin::Breadcrumb-->
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">
-                    <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pejabat AADK</a>
-                </li>
+                <li class="breadcrumb-item text-muted">Pejabat AADK</li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="breadcrumb-item">
@@ -127,7 +125,7 @@
                             </div>
         
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Hantar</button>
+                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan</button>
                             </div>
                         </form>
                     </div>

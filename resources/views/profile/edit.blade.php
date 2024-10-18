@@ -48,9 +48,7 @@
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Menu</a>
-            </li>
+            <li class="breadcrumb-item text-muted">Akaun Pengguna</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -58,7 +56,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Profil Pengguna</li>
+            <li class="breadcrumb-item text-muted">Kemaskini</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->

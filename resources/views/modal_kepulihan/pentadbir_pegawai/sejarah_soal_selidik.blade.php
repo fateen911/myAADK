@@ -37,9 +37,7 @@
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pengurusan</a>
-            </li>
+            <li class="breadcrumb-item text-muted">Pengurusan</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -55,7 +53,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soal Selidik</li>
+            <li class="breadcrumb-item text-muted">Soal Selidik Klien</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -73,9 +71,7 @@
                     <div class="tab-content mt-0" id="myTabContent">
                         <!--begin::Card header-->
                         <div class="header mt-10">
-                            <h2>Sejarah Klien Menjawab Soal Selidik Modal Kepulihan
-                                {{-- <br><small>Senarai keputusan kepulihan klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small> --}}
-                            </h2>
+                            <h2>Sejarah Klien Menjawab Soal Selidik Modal Kepulihan</h2>
                         </div>
                         <!--end::Card header-->
 
