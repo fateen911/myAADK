@@ -35,7 +35,7 @@
                 required 
                 autofocus 
                 autocomplete="no_kp" 
-                placeholder="{{ __('No Kad Pengenalan') }}"
+                placeholder="{{ __('No. Kad Pengenalan') }}"
                 oninput="validateInput(this)"
             />
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />

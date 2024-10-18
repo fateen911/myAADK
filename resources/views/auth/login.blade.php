@@ -41,7 +41,7 @@
 
         <!-- No Kad Pengenalan -->
         <div>
-            <x-input-label for="no_kp" :value="__('No Kad Pengenalan')" />
+            <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" />
             <x-text-input id="no_kp" class="block mt-1 w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
