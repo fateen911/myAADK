@@ -191,15 +191,23 @@
                         $('#sortTable1').DataTable().destroy();
                         let rows = '';
                         let color = '';
+                        let btn = '';
                         $.each(response, function(index, program) {
-                            if(program.status=='SELESAI')
+                            if(program.status=='SELESAI'){
                                 color = "badge-light-success text-seagreen";
+                                btn   = " ";
+                            }
 
-                            else if(program.status=='SEDANG BERLANGSUNG')
+                            else if(program.status=='SEDANG BERLANGSUNG'){
                                 color = "badge-light-warning text-darkorange";
+                                btn   = " ";
+                            }
 
-                            else if(program.status=='BELUM SELESAI')
+                            else if(program.status=='BELUM SELESAI'){
                                 color = "badge-light-primary text-royalblue";
+                                btn   = "disabled";
+                            }
+
 
                             rows += '<tr>';
                             rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/maklumat-prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
@@ -207,7 +215,7 @@
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
-                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm '+btn+'" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#sortTable1 tbody').html(rows);
