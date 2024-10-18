@@ -11,7 +11,7 @@
         <br>    
         <p>Permohonan untuk set semula kata laluan telah diterima.</p>
         <p>
-            Set semula kata laluan anda dengan mengklik pautan berikut:
+            Set semula kata laluan anda dengan klik pada pautan berikut:
             <a href="{{ route('password.reset', ['token' => $token]) }}">Set Semula Kata Laluan</a>
         </p>
         <p>Jika anda tidak meminta set semula kata laluan, tiada tindakan lanjut diperlukan.</p>

@@ -6,12 +6,12 @@
     </div>
 
     <!--begin::Heading-->
-    <div class="text-center mb-5">
+    <div class="text-center mb-2">
         <!--begin::Title-->
         <h1 class="text-dark fw-bolder mb-4">Lupa Kata Laluan ?</h1>
         <!--end::Title-->
 
-       <div class="mb-2 text-sm text-gray-600 justify-center">
+       <div class="text-sm text-gray-600 justify-center">
             {{ __('Sila masukkan No. Kad Pengenalan anda untuk menetapkan semula kata laluan.') }}
         </div>
     </div>
