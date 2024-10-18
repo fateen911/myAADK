@@ -12,7 +12,7 @@
 </style>
 <body>
 <div class="center">
-    <h1>PENDAFTARAN PROGRAM</h1>
+    <h1>PENDAFTARAN AKTIVITI</h1>
     <br>
     <br>
     <div>
