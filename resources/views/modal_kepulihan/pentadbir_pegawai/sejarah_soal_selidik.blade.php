@@ -141,10 +141,13 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">
-                                                                    Skor Modal untuk {{ $response->nama }} <br> (Sesi {{ $response->sesi }})
-                                                                </h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                <h3 class="modal-title" style="text-align: center !important;">
+                                                                    Skor Setiap Modal Kepulihan (Sesi {{ $response->sesi }})
+                                                                </h3>
+                                                                <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                                                    <i class="ki-solid ki-cross-circle fs-3"></i>
+                                                                </div>
+                                                                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                                                             </div>
                                                             <div class="modal-body">
                                                                 @if ($clientModals->count())
