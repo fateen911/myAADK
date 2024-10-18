@@ -66,11 +66,12 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if (! Auth::attempt($this->only('no_kp', 'password'), $this->boolean('remember'))) {
+        // If 'no_kp' is correct, but the password is wrong, show error only for password
+        if (!Auth::attempt($this->only('no_kp', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'no_kp' => trans('auth.failed'),
+                'password' => ['Sila masukkan Kata Laluan yang betul.'],  // Error for password only
             ]);
         }
 
