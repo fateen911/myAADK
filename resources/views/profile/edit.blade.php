@@ -148,7 +148,7 @@
                                             @endif
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Label-->
-                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Tukar Gambar">
                                                 <i class="ki-duotone ki-pencil fs-7">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -160,7 +160,7 @@
                                             </label>
                                             <!--end::Label-->
                                             <!--begin::Cancel-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Batal">
                                                 <i class="ki-duotone ki-cross fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -168,12 +168,13 @@
                                             </span>
                                             <!--end::Cancel-->
                                             <!--begin::Remove-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Buang gambar">
                                                 <i class="ki-duotone ki-cross fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </i>
                                             </span>
+                                            <input type="hidden" name="remove_gambar_profil" id="remove_gambar_profil" value="0">
                                             <!--end::Remove-->
                                         </div>
                                         <!--end::Image input-->
@@ -545,30 +546,9 @@
         });
     </script>
 
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var tahapPengguna = {{ Auth::user()->tahap_pengguna }};
-            var tooltips = [
-                document.getElementById("tooltip1"),
-                document.getElementById("tooltip2"),
-                document.getElementById("tooltip3")
-            ];
-            
-            if (tahapPengguna === 2) {
-                tooltips.forEach(function(tooltip) {
-                    tooltip.setAttribute("title", "Minimum 6 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
-                });
-            } else {
-                tooltips.forEach(function(tooltip) {
-                    tooltip.setAttribute("title", "Minimum 12 aksara, dan kombinasi huruf besar, huruf kecil, nombor dan simbol.");
-                });
-            }
-
-            // Reinitialize tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            })
+    <script>
+        document.querySelector('[data-kt-image-input-action="remove"]').addEventListener('click', function() {
+            document.getElementById('remove_gambar_profil').value = 1;
         });
-    </script> --}}
+    </script>
 @endsection
