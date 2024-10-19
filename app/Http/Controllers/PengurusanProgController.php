@@ -930,7 +930,7 @@ class PengurusanProgController extends Controller
         if ($user->tahap_pengguna == '1') {//pentadbir
             $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
         }
-        else if ($user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai negeri or pegawai brpp
+        else if ($user->tahap_pengguna == '5' || $user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai daerah, negeri, brpp
             $direct = "/pengurusan-program/pegawai-aadk/senarai-prog/";
         }
 
@@ -1005,64 +1005,12 @@ class PengurusanProgController extends Controller
         if ($user->tahap_pengguna == '1') {//pentadbir
             $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
         }
-        else if ($user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai negeri or pegawai brpp
+        else if ($user->tahap_pengguna == '5'|| $user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai daerah, negeri or pegawai brpp
             $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
         }
 
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
-    //HEBAHAN - EMEL
-
-    public function hebahanEmel(Request $request, $id) //pentadbir
-    {
-        // Validate that the choices array is required and must have at least one selected value.
-        $request->validate([
-            'pilihan' => 'required|array|min:1',
-            'pilihan.*' => 'exists:klien,id',
-        ], [
-            'pilihan.required' => 'You must select at least one choice.',
-            'pilihan.min' => 'You must select at least one choice.',
-        ]);
-
-        $klien = Klien::whereIn('id', $request->pilihan)->get();
-
-        // Send communication based on the selected method
-        foreach ($klien as $item) {
-            if($item->emel != null){
-                $recipient = $item->emel;
-                Mail::to($recipient)->send(new HebahanMail($id));
-            }
-        }
-
-        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
-        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
-    }
-
-    public function hebahanEmel2(Request $request, $id) //pegawai
-    {
-        // Validate that the choices array is required and must have at least one selected value.
-        $request->validate([
-            'pilihan' => 'required|array|min:1',
-            'pilihan.*' => 'exists:klien,id',
-        ], [
-            'pilihan.required' => 'You must select at least one choice.',
-            'pilihan.min' => 'You must select at least one choice.',
-        ]);
-
-        $klien = Klien::whereIn('id', $request->pilihan)->get();
-
-        // Send communication based on the selected method
-        foreach ($klien as $item) {
-            if($item->emel != null){
-                $recipient = $item->emel;
-                Mail::to($recipient)->send(new HebahanMail($id));
-            }
-        }
-
-        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
-        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
-    }
-
 
     public function pdfPerekodan($id)
     {
