@@ -163,7 +163,7 @@ License: For each use you must have a valid license purchased only from above li
                     <br>
                     <h3 class="fw-medium text-justify w-100 f-calibri">
                         Kepulihan adalah satu perjalanan dan manifesto
-                        sokongan antara <img alt="Logo" src="/logo/pccp-slogan.png" class="logo-default h-20px h-lg-20px mx-auto pb-1-5 pb-md-1"/>. <br>
+                        sokongan antara <img alt="Logo" src="/logo/pccp-slogan.png" class="logo-default h-17px mx-auto pb-1"/>. <br>
 
                     </h3>
                 </div>
