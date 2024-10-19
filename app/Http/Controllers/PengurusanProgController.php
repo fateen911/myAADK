@@ -924,10 +924,93 @@ class PengurusanProgController extends Controller
             }
         }
 
-        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        if ($user->tahap_pengguna == '1') {//pentadbir
+            $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
+        }
+        else if ($user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai negeri or pegawai brpp
+            $direct = "/pengurusan-program/pegawai-aadk/senarai-prog/";
+        }
+
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
     }
+    public function jenisHebahan2(Request $request, $id)
+    {
+        // Validate that the choices array is required and must have at least one selected value.
+        $request->validate([
+            'pilihan' => 'required|array|min:1',
+            'pilihan.*' => 'exists:klien,id',
+        ], [
+            'pilihan.required' => 'You must select at least one choice.',
+            'pilihan.min' => 'You must select at least one choice.',
+        ]);
 
+        $program = Program::with('kategori')->find($id);
+        $kaedah = $request->input('kaedah');
+
+        $klien = Klien::whereIn('id', $request->pilihan)->get();
+
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            if ($kaedah == 'sms') {
+
+                $message = "Salam Sejahtera,\n\n" .
+                    "Anda dijemput untuk menyertai program\n\n" .
+                    "NAMA AKTIVITI: " . strtoupper($program->nama) . "\n" .
+                    "TARIKH MULA: " . date('d/m/Y, h:iA', strtotime($program->tarikh_mula)) . "\n" .
+                    "TARIKH TAMAT: " . date('d/m/Y, h:iA', strtotime($program->tarikh_tamat)) . "\n" .
+                    "TEMPAT: " . strtoupper($program->tempat) . "\n\n" .
+                    "Sila layari pautan berikut untuk pengesahan kehadiran program: " . $program->pautan_pengesahan;
+
+                $this->sendSms($item->no_tel, $message);
+            }
+            elseif ($kaedah == 'emel') {
+                if($item->emel != null){
+                    $recipient = $item->emel;
+                    Mail::to($recipient)->send(new HebahanMail($id));
+                }
+            }
+            elseif ($kaedah == 'telegram') {
+                // Telegram Bot API endpoint
+                $telegramToken = '7424416504:AAFBsucOUhWLVOaLXOWCvrr2AaC6_ZlaHrk';
+                $telegramEndpoint = "https://api.telegram.org/bot{$telegramToken}/sendPhoto";
+                $chatId = 490430239; //618021127 - syafiqah
+
+                // Public path to the image file
+                $imagePath = public_path('qr_codes/qrcode.png');
+
+                // Check if the image file exists
+                if (!file_exists($imagePath)) {
+                    return "Image file not found.";
+                }
+
+                // Send image file
+                $response = Http::attach(
+                    'photo',
+                    file_get_contents($imagePath),
+                    'qrcode.png'
+                )->post($telegramEndpoint, [
+                    'chat_id' => $chatId,
+                    'caption' => 'Your QR code:',
+                ]);
+            }
+        }
+
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        if ($user->tahap_pengguna == '1') {//pentadbir
+            $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        }
+        else if ($user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai negeri or pegawai brpp
+            $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
+        }
+
+        return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');
+    }
     //HEBAHAN - EMEL
 
     public function hebahanEmel(Request $request, $id) //pentadbir

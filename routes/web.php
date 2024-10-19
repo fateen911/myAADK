@@ -73,8 +73,7 @@ Route::get('/pengurusan-program/hebahan/papar-emel/{id}', [PengurusanProgControl
 Route::get('/pengurusan-program/hebahan/papar-telegram/{id}', [PengurusanProgController::class, 'paparTelegram'])->name('pengurusan_program.papar_telegram');
 Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter_hebahan');
 Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis_hebahan');
-Route::post('/pengurusan-program/hebahan/emel/{id}', [PengurusanProgController::class, 'hebahanEmel'])->name('pengurusan_program.hebahan_emel'); //pentadbir
-Route::post('/pengurusan-program/hebahan/emel2/{id}', [PengurusanProgController::class, 'hebahanEmel2'])->name('pengurusan_program.hebahan_emel2'); //pegawai aadk
+Route::post('/pengurusan-program/hebahan/jenis-hebahan-2/{id}', [PengurusanProgController::class, 'jenisHebahan2'])->name('pengurusan_program.jenis_hebahan_2');
 Route::post('/pengurusan-program/hebahan/sms/{id}', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan_sms');
 Route::post('/pengurusan-program/hebahan/telegram/{id}', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan_telegram');
 Route::post('/pengurusan-program/hebahan/telegram/webhook', [PengurusanProgController::class, 'handleWebhook']);

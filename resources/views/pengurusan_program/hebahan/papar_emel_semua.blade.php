@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/customAADK.css">
 </head>
 <body>
-<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan/'.$program->id)}}">
+<form method="post" action="{{url('/pengurusan-program/hebahan/jenis-hebahan-2/'.$program->id)}}">
     @csrf
     <div class="h-500px">
         <b class="text-uppercase fw-medium">NAMA AKTIVITI: {{$program->nama}}</b> <br>
