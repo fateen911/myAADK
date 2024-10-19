@@ -373,8 +373,8 @@
 
                 {{-- Soal Selidik --}}
                 <div class="tab-pane fade" id="soalSelidik" role="tabpanel" aria-labelledby="soalSelidik-tab">
-                     <!--Status Menjawab-->
-                     <div class="header pt-5 mb-5">
+                    <!--Status Menjawab-->
+                    <div class="header pt-5 mb-5">
                         <h2>Status Klien Menjawab Soal Selidik Kepulihan</h2>
                     </div>
                     <div class="body">
@@ -395,7 +395,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Selesai']) }}">
                                             <span id="selesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$selesai_menjawab}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -422,7 +422,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Belum Selesai']) }}">
                                             <span id="belumSelesaiMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$belum_selesai_menjawab}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -484,7 +484,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Selesai', 'tahap_kepulihan_id' => '4']) }}">
                                             <span id="cemerlangCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$cemerlang}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -511,7 +511,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Selesai', 'tahap_kepulihan_id' => '3']) }}">
                                             <span id="baikCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$baik}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -537,7 +537,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Selesai', 'tahap_kepulihan_id' => '2']) }}">
                                             <span id="memuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
@@ -564,7 +564,7 @@
                                     <!--end::Symbol-->
                                     <!--begin::Stats-->
                                     <div class="m-0">
-                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                        <a href="{{ route('maklum.balas.kepulihan', ['status' => 'Selesai', 'tahap_kepulihan_id' => '1']) }}">
                                             <span id="tidakMemuaskanCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_memuaskan}}</span>
                                             <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
                                         </a>
