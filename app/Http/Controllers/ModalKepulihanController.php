@@ -405,9 +405,11 @@ class ModalKepulihanController extends Controller
     }
 
     // PENTADBIR ATAU PEGAWAI
-    public function maklumBalasKepulihan()
+    public function maklumBalasKepulihan(Request $request)
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $status = $request->input('status');
+        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
 
         // Fetch clients who have responded within the last 6 months
         $responses = DB::table('keputusan_kepulihan_klien as kk')
@@ -418,7 +420,7 @@ class ModalKepulihanController extends Controller
                         'u.no_kp',
                         'u.daerah_pejabat',
                         'u.negeri_pejabat',
-                        DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
+                        DB::raw('ROUND(kk.skor, 3) as skor'),
                         'kk.tahap_kepulihan_id',
                         'kk.status',
                         'kk.updated_at'
@@ -429,6 +431,12 @@ class ModalKepulihanController extends Controller
                             ->from('keputusan_kepulihan_klien')
                             ->whereColumn('klien_id', 'kk.klien_id')
                             ->groupBy('klien_id');
+                    })
+                    ->when($status, function ($query, $status) {
+                        return $query->where('kk.status', $status);
+                    })
+                    ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                        return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
                     })
                     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                     ->orderBy('kk.updated_at', 'desc')
@@ -453,10 +461,10 @@ class ModalKepulihanController extends Controller
                             'kk.updated_at'
                         )
                         ->where(function ($query) use ($sixMonthsAgo) {
-                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
+                            $query->whereNull('kk.klien_id')
                                 ->orWhere(function ($query) use ($sixMonthsAgo) {
                                     $query->whereNotNull('kk.klien_id')
-                                            ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months
+                                            ->where('kk.updated_at', '<=', $sixMonthsAgo);
                                 });
                         })
                         ->orderBy('kk.updated_at', 'desc')
@@ -464,6 +472,66 @@ class ModalKepulihanController extends Controller
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
     }
+
+    // public function maklumBalasKepulihan()
+    // {
+    //     $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+    //     // Fetch clients who have responded within the last 6 months
+    //     $responses = DB::table('keputusan_kepulihan_klien as kk')
+    //                 ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //                 ->select(
+    //                     'u.id as klien_id',
+    //                     'u.nama',
+    //                     'u.no_kp',
+    //                     'u.daerah_pejabat',
+    //                     'u.negeri_pejabat',
+    //                     DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
+    //                     'kk.tahap_kepulihan_id',
+    //                     'kk.status',
+    //                     'kk.updated_at'
+    //                 )
+    //                 ->where('kk.updated_at', '>=', $sixMonthsAgo)
+    //                 ->whereIn('kk.updated_at', function ($query) {
+    //                     $query->select(DB::raw('MAX(updated_at)'))
+    //                         ->from('keputusan_kepulihan_klien')
+    //                         ->whereColumn('klien_id', 'kk.klien_id')
+    //                         ->groupBy('klien_id');
+    //                 })
+    //                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+    //                 ->orderBy('kk.updated_at', 'desc')
+    //                 ->get();
+
+    //     // Fetch clients who have not responded yet or their last response was over 6 months ago
+    //     $tidakMenjawab = DB::table('klien as u')
+    //                     ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+    //                     ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+    //                         $join->on('u.id', '=', 'kk.klien_id')
+    //                             ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+    //                     })
+    //                     ->select(
+    //                         'u.id as klien_id',
+    //                         'u.nama',
+    //                         'u.no_kp',
+    //                         'u.daerah_pejabat',
+    //                         'u.negeri_pejabat',
+    //                         'rk.tkh_tamat_pengawasan',
+    //                         DB::raw('ROUND(kk.skor, 3) as skor'),
+    //                         'kk.tahap_kepulihan_id',
+    //                         'kk.updated_at'
+    //                     )
+    //                     ->where(function ($query) use ($sixMonthsAgo) {
+    //                         $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
+    //                             ->orWhere(function ($query) use ($sixMonthsAgo) {
+    //                                 $query->whereNotNull('kk.klien_id')
+    //                                         ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months
+    //                             });
+    //                     })
+    //                     ->orderBy('kk.updated_at', 'desc')
+    //                     ->get();
+
+    //     return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
+    // }
 
     public function maklumBalasKepulihanBrpp()
     {
