@@ -47631,7 +47631,7 @@ a:hover {
 }
 
 .text-shadow{
-    text-shadow: 0 0 10px black;
+    text-shadow: 0 0 5px black, 0 0 20px black, 0 0 0 black, 0 0 50px black !important;
 }
 
 .landing-hr-top {
