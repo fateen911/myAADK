@@ -111,8 +111,8 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Logo image-->
                                 <a href="{{url('/landing-page/version-3')}}">
                                     <div>
-                                        <img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-30px h-lg-50px mx-auto"/>
-                                        <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda Prioriti AADK</p>
+                                        <img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px h-lg-80px mx-auto"/>
+                                        <p class="text-white f-arial-narrow fs-15 fs-md-sm">Sokongan Untuk Kepulihan Anda Prioriti AADK</p>
                                     </div>
                                 </a>
                                 <!--end::Logo image-->
@@ -135,40 +135,40 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
 
             <!--begin::Landing hero-->
-            <div class="d-md-flex w-100 w-md-100 min-h-350px min-h-lg-500px p-md-10 p-2">
-                <div class="flex-md-root text-left mb-5 mb-lg-10 py-10 py-md-20 mx-lg-20 mx-10 w-90">
-                    <div class="d-flex gap-2 mb-8">
+            <div class="d-md-flex w-100 w-md-100 min-h-350px min-h-lg-500px p-md-10 mt-10 mt-md-0 p-2">
+                <div class="flex-md-root text-center mb-5 mb-lg-10 py-3 py-md-5 mx-lg-20 mx-10 w-90">
+                    <img alt="Logo" src="/logo/selamat-datang.png" class="h-40px h-lg-70px text-center"/>
+                    <div class="d-flex gap-2 mb-8 justify-content-center align-items-center mt-10">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
                     </div>
-                    <hr class="w-100 w-md-90">
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
-                        MySupport merupakan sistem maklumat klien AADK yang telah tamat
-                        mengikuti program. Ia mengandungi butir-butir peribadi klien dan
-                        maklumat khusus berkaitan status kepulihan mereka. Kepentingan
-                        pangkalan data adalah untuk memberi sokongan kepulihan yang
-                        berterusan pasca pemulihan pada bila-bila masa dengan cepat
-                        dan mesra.
+                    <h3 class="fw-medium w-100 f-calibri">
+                        <img alt="Logo" src="/logo/mySupport-huruf-2.png" class="logo-default h-25px h-lg-25px mx-auto pb-1-5 pb-md-1"/>
+                        merupakan sistem maklumat klien
+                        pasca pemulihan AADK yang telah tamat mengikuti
+                        program Rawatan dan Pemulihan Dalam Komuniti.
+                        Kepentingan pangkalan data inia dalah untuk memberi
+                        sokongan kepulihan yang berterusan kepada klien
+                        pasca pemulihan pada bila-bila
+                        masa dengan cepat dan mesra.
                     </h3>
                     <br>
                     <div>
-                        <h2 class="f-book mx-auto w-50 ps-lg-10">
-                            <span class="ms-0">“Aku,</span><br>
-                            <span class="ms-12">AADK & </span><br>
-                            <span class="ms-25">Keluarga”</span>
-                        </h2>
+                        <h1 class="f-book mx-auto text-orange text-uppercase">
+                            <img alt="Logo" src="/logo/pccp-slogan.png" class="logo-default h-20px h-lg-30px mx-auto"/>
+                        </h1>
                     </div>
                     <br>
-                    <h3 class="fw-medium text-justify w-100 w-md-90 f-calibri">
-                        Kepulihan adalah satu perjalanan dan manifesto sokongan
-                        antara Aku, AADK & Keluarga. Satu langkah yang kecil menuju
-                        kejayaan yang besar.
+                    <h3 class="fw-medium text-justify w-100 f-calibri">
+                        Kepulihan adalah satu perjalanan dan manifesto
+                        sokongan antara <img alt="Logo" src="/logo/pccp-slogan.png" class="logo-default h-20px h-lg-20px mx-auto pb-1-5 pb-md-1"/>. <br>
+
                     </h3>
                 </div>
-                <div class="flex-md-root">
-                    <div class="container landing-img-3 shadow w-85 h-50 w-md-90 h-md-100 my-auto mx-10">
+                <div class="flex-md-root pb-10 pb-md-0">
+                    <div class="container landing-img-3 shadow w-85 h-50 h-md-100 my-auto mx-auto">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="flex-root">
                                 <h3 class="mt-5 ms-3 text-white text-shadow">Pengumuman Aktiviti</h3>

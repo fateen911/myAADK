@@ -210,12 +210,24 @@ body {
     font-family: "Book Antiqua", "Palatino Linotype", serif; /* Book Antiqua with fallbacks */
 }
 
+.f-arial-narrow {
+    font-family: "Arial Narrow", Arial, sans-serif;
+}
+
 .no-space{
     white-space: nowrap;
 }
 
 .text-justify{
-    text-align: justify;
+    text-align: center;
+}
+
+.text-orange{
+    color: orange!important;
+}
+
+.text-darkblue{
+    color: #333366 !important;
 }
 
 hr {
@@ -10863,6 +10875,10 @@ textarea.form-control-lg {
 
 .pb-1 {
   padding-bottom: 0.25rem !important;
+}
+
+.pb-1-5 {
+    padding-bottom: 0.35rem !important;
 }
 
 .pb-2 {
