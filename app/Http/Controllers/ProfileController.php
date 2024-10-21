@@ -72,102 +72,49 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Check if the user wants to remove the profile photo
-        if ($request->remove_gambar_profil == 1) {
-            if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
-                // Delete the old photo from the server
-                unlink(public_path('assets/gambar_profil/' . $user->gambar_profil));
-                
-                // Set the gambar_profil to null in the database
-                User::where('no_kp', Auth::user()->no_kp)->update([
-                    'gambar_profil' => null,
-                ]);
-            }
-        } else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
-            // Save the new photo
-            $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
-            $request->gambar_profil->move('assets/gambar_profil', $filename);
-
-            User::where('no_kp', Auth::user()->no_kp)
-                ->update([
-                    'gambar_profil' => $filename,
-                ]);
-        }
-
         // Update email if it is changed
-        if ($request->email !== $user->email) {
-            $request->validate([
-                'email' => 'nullable|string',
-            ]);
+        if($user->tahap_pengguna == 2)
+        {
+            if($request->email !== $user->email)
+            {
+                User::where('no_kp', Auth::user()->no_kp)
+                    ->update([
+                        'email' => $request->email,
+                    ]);
 
-            User::where('no_kp', Auth::user()->no_kp)
-                ->update([
-                    'email' => $request->email,
-                ]);
-
-            if ($user->tahap_pengguna == 2) {
-                Klien::where('no_kp', Auth::user()->no_kp)
+                Klien::where('no_kp',Auth::user()->no_kp)
                     ->update([
                         'emel' => $request->email,
+                    ]);
+            }
+        }
+        else{
+            // Check if the user wants to remove the profile photo
+            if ($request->remove_gambar_profil == 1) {
+                if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
+                    // Delete the old photo from the server
+                    unlink(public_path('assets/gambar_profil/' . $user->gambar_profil));
+                    
+                    // Set the gambar_profil to null in the database
+                    User::where('no_kp', Auth::user()->no_kp)->update([
+                        'gambar_profil' => null,
+                    ]);
+                }
+            } 
+            else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
+                // Save the new photo
+                $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
+                $request->gambar_profil->move('assets/gambar_profil', $filename);
+
+                User::where('no_kp', Auth::user()->no_kp)
+                    ->update([
+                        'gambar_profil' => $filename,
                     ]);
             }
         }
 
         return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
-
-    // public function update(ProfileUpdateRequest $request): RedirectResponse
-    // {
-    //     $user = Auth::user();
-
-    //     if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) 
-    //     {
-    //         $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
-    //         $request->gambar_profil->move('assets/gambar_profil',$filename);
-
-    //         if ($request->email !== $user->email) {
-    //             // Validate email uniqueness
-    //             $request->validate([
-    //                 'email' => 'nullable|string',
-    //             ]);
-                
-    //             User::where('no_kp',Auth::user()->no_kp)
-    //             ->update([
-    //                 'gambar_profil' => $filename,
-    //                 $user->email => $request->email,
-    //             ]);
-    //         }
-    //         else{
-    //             User::where('no_kp',Auth::user()->no_kp)
-    //             ->update([
-    //                 'gambar_profil' => $filename,
-    //             ]);
-    //         }
-    //     }
-    //     else{
-    //         if ($request->email !== $user->email) {
-    //             // Validate email uniqueness
-    //             $request->validate([
-    //                 'email' => 'nullable|string',
-    //             ]);
-                
-    //             User::where('no_kp',Auth::user()->no_kp)
-    //             ->update([
-    //                 'email' => $request->email,
-    //             ]);
-    //         }
-    //     }
-
-    //     if($user->tahap_pengguna == 2 && $request->email !== $user->email)
-    //     {
-    //         Klien::where('no_kp',Auth::user()->no_kp)
-    //             ->update([
-    //                 'emel' => $request->email,
-    //             ]);
-    //     }
-        
-    //     return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
-    // }
 
     /**
      * Delete the user's account.

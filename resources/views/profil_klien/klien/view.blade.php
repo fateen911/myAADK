@@ -28,14 +28,6 @@
             width: 100%;
         }
 
-        /* Flexbox settings for the tab content container */
-        /* .tab-pane {
-            display: flex;
-            justify-content: center;
-            align-items: start; 
-            min-height: 100vh; 
-        } */
-
         /* Centered form settings */
         .centered-form {
             width: 100%;

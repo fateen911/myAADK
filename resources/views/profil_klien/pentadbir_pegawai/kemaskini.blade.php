@@ -1164,10 +1164,11 @@
                                                     </div>
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat</label>
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                            <textarea class="form-control form-control-solid {{ trim($requestedDataPekerjaan['alamat_kerja'] ?? '') != trim($pekerjaan->alamat_kerja ?? '') ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
+                                                            {{-- <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
