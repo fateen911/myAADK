@@ -35,7 +35,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
 
         // Initialize empty arrays for storing negeri and daerah values
         $pengesahan = [];
-
+        $count = 1;
         // Loop through each pengesahan to fetch negeri and daerah
         foreach ($pengesahan_data as $item) {
             // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
@@ -44,6 +44,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
 
             // Add the negeri and daerah information to each pengesahan
             $pengesahan[] = [
+                'count' => $count,
                 'klien' => $item->klien->nama,
                 'no_kp' => $item->klien->no_kp,
                 'alamat' => $item->klien->alamat_rumah,
@@ -53,6 +54,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
                 'daerah' => $daerah ? $daerah->daerah : 'TIADA',
                 'catatan' => $item->catatan ? $item->catatan : 'TIADA',
             ];
+            $count++;
         }
 
         $this->pengesahan = $pengesahan;
@@ -71,7 +73,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
             ['TARIKH/MASA TAMAT: ' . $this->tarikh_tamat],
             ['TEMPAT: ' . $this->tempat],
             [''], // Empty row for spacing
-            ['NAMA', 'NO. KAD PENGENALAN', 'ALAMAT', 'NO. TELEFON', 'PENGESAHAN','NEGERI', 'DAERAH','CATATAN']
+            ['BIL.','NAMA', 'NO. KAD PENGENALAN', 'ALAMAT', 'NO. TELEFON', 'PENGESAHAN','NEGERI', 'DAERAH','CATATAN']
         ];
 
         $data[] = $this->pengesahan;
@@ -102,7 +104,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
     public function styles(Worksheet $sheet)
     {
         // Title row style
-        $sheet->mergeCells('A1:H1');
+        $sheet->mergeCells('A1:I1');
         $sheet->setCellValue('A1', 'SENARAI MAKLUM BALAS KEHADIRAN');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
@@ -122,6 +124,7 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         $sheet->getStyle('F8')->getFont()->setBold(true);
         $sheet->getStyle('G8')->getFont()->setBold(true);
         $sheet->getStyle('H8')->getFont()->setBold(true);
+        $sheet->getStyle('I8')->getFont()->setBold(true);
 
         // Style the table with borders
         $highestRow = $sheet->getHighestRow(); // Get the highest row number
@@ -143,19 +146,20 @@ class PengesahanKehadiranExcel implements FromArray, WithHeadings, WithStyles, W
         ]);
 
         // Set national ID column to text
-        $nationalIdColumn = 'B'; // National ID is in column B
+        $nationalIdColumn = 'C'; // National ID is in column C
         for ($row = 8; $row <= $highestRow; $row++) {
             $sheet->setCellValueExplicit($nationalIdColumn . $row, $sheet->getCell($nationalIdColumn . $row)->getValue(), DataType::TYPE_STRING);
         }
         // Adjust column widths
-        $sheet->getColumnDimension('A')->setWidth(40);
-        $sheet->getColumnDimension('B')->setWidth(20);
-        $sheet->getColumnDimension('C')->setWidth(50);
-        $sheet->getColumnDimension('D')->setWidth(20);
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(40);
+        $sheet->getColumnDimension('C')->setWidth(20);
+        $sheet->getColumnDimension('D')->setWidth(50);
         $sheet->getColumnDimension('E')->setWidth(20);
         $sheet->getColumnDimension('F')->setWidth(20);
         $sheet->getColumnDimension('G')->setWidth(20);
         $sheet->getColumnDimension('H')->setWidth(20);
+        $sheet->getColumnDimension('I')->setWidth(20);
     }
 }
 

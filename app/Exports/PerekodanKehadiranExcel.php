@@ -43,15 +43,18 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
             ['TARIKH/MASA TAMAT: ' . $this->tarikh_tamat],
             ['TEMPAT: ' . $this->tempat],
             [''], // Empty row for spacing
-            ['NAMA', 'NO. KAD PENGENALAN', 'TARIKH/MASA']
+            ['BIL.','NAMA', 'NO. KAD PENGENALAN', 'TARIKH/MASA']
         ];
 
+        $count = 1;
         foreach ($this->perekodan as $item) {
             $data[] = [
+                $count,
                 $item->klien->nama,
                 $item->klien->no_kp,
                 $item->tarikh_perekodan ? Carbon::parse($item->tarikh_perekodan)->format('d/m/Y H:i:s') : null, // Format date
             ];
+            $count++;
         }
 
         return $data;
@@ -80,8 +83,8 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
     public function styles(Worksheet $sheet)
     {
         // Title row style
-        $sheet->mergeCells('A1:C1');
-        $sheet->setCellValue('A1', 'SENARAI PEREKODAN KEHADIRAN');
+        $sheet->mergeCells('A1:D1');
+        $sheet->setCellValue('A1', 'SENARAI KEHADIRAN KLIEN');
         $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
 
@@ -95,6 +98,7 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
         $sheet->getStyle('A8')->getFont()->setBold(true);
         $sheet->getStyle('B8')->getFont()->setBold(true);
         $sheet->getStyle('C8')->getFont()->setBold(true);
+        $sheet->getStyle('D8')->getFont()->setBold(true);
 
         // Style the table with borders
         $highestRow = $sheet->getHighestRow(); // Get the highest row number
@@ -116,15 +120,16 @@ class PerekodanKehadiranExcel implements FromArray, WithHeadings, WithStyles, Wi
         ]);
 
         // Set national ID column to text
-        $nationalIdColumn = 'B'; // National ID is in column B
+        $nationalIdColumn = 'C'; // National ID is in column C
         for ($row = 8; $row <= $highestRow; $row++) {
             $sheet->setCellValueExplicit($nationalIdColumn . $row, $sheet->getCell($nationalIdColumn . $row)->getValue(), DataType::TYPE_STRING);
         }
 
         // Adjust column widths
-        $sheet->getColumnDimension('A')->setWidth(40);
-        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('A')->setWidth(5);
+        $sheet->getColumnDimension('B')->setWidth(40);
         $sheet->getColumnDimension('C')->setWidth(20);
+        $sheet->getColumnDimension('D')->setWidth(20);
     }
 }
 
