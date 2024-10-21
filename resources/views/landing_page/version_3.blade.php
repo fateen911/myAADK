@@ -149,7 +149,7 @@ License: For each use you must have a valid license purchased only from above li
                         merupakan sistem maklumat klien
                         pasca pemulihan AADK yang telah tamat mengikuti
                         program Rawatan dan Pemulihan Dalam Komuniti.
-                        Kepentingan pangkalan data inia dalah untuk memberi
+                        Kepentingan pangkalan data ini adalah untuk memberi
                         sokongan kepulihan yang berterusan kepada klien
                         pasca pemulihan pada bila-bila
                         masa dengan cepat dan mesra.
