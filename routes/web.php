@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
@@ -205,6 +206,10 @@ Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanContro
 // KLIEN - PERTUKARAN PEJABAT
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
 Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
+
+// PELAPORAN
+Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihan'])->name('pelaporan.modal_kepulihan');
+Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->name('pelaporan.aktiviti');
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
