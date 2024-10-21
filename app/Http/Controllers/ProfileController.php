@@ -88,13 +88,14 @@ class ProfileController extends Controller
                     ]);
             }
         }
-        else{
-            // Check if the user wants to remove the profile photo
+        else if ($user->tahap_pengguna == 1 || $user->tahap_pengguna == 3 || $user->tahap_pengguna == 4 || $user->tahap_pengguna == 5) 
+        {
+            // The existing file upload logic
             if ($request->remove_gambar_profil == 1) {
                 if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
                     // Delete the old photo from the server
                     unlink(public_path('assets/gambar_profil/' . $user->gambar_profil));
-                    
+        
                     // Set the gambar_profil to null in the database
                     User::where('no_kp', Auth::user()->no_kp)->update([
                         'gambar_profil' => null,
@@ -104,15 +105,15 @@ class ProfileController extends Controller
             else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
                 // Save the new photo
                 $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
-                $request->gambar_profil->move('assets/gambar_profil', $filename);
-
+                $request->gambar_profil->move(public_path('assets/gambar_profil'), $filename);
+        
                 User::where('no_kp', Auth::user()->no_kp)
                     ->update([
                         'gambar_profil' => $filename,
                     ]);
             }
         }
-
+        
         return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
     }
 

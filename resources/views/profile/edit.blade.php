@@ -155,7 +155,7 @@
                                                 </i>
                                                 <!--begin::Inputs-->
                                                 <input type="file" name="gambar_profil" accept=".png, .jpg, .jpeg" />
-                                                <input type="hidden" name="gambar_profil" />
+                                                {{-- <input type="hidden" name="gambar_profil" /> --}}
                                                 <!--end::Inputs-->
                                             </label>
                                             <!--end::Label-->
