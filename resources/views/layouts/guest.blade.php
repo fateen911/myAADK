@@ -18,7 +18,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            body { 
+            body {
                 background-image: url('/assets/media/auth/bg13.jpg')!important;
                 background-size: cover!important; /* Scale the image to cover the entire viewport */
                 background-position: center!important; /* Center the image */
@@ -38,13 +38,31 @@
                 z-index: -1; /* Place it behind the content of the body */
                 pointer-events: none; /* Ensures the overlay does not interfere with interactions */
             }
+
             [data-bs-theme="dark"] body { background-image: url('/assets/media/auth/bg9-dark.jpg')!important; }
+
+            @media (max-width: 500px) {
+                .cs-w-300 {
+                    width: 300px;
+                    margin: auto;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            @media only screen and (min-width: 501px) and (max-width: 767px) {
+                .c-w-450 {
+                    width: 450px;
+                    margin: auto;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
         </style>
     </head>
 
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-            <div class="w-full sm:max-w-md px-6 py-4 dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg" style="background:white; margin-top: 20px !important; margin-bottom: 20px !important;">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 cs-w-300 c-w-450">
+            <div class="w-full sm:max-w-md px-6 py-4 dark:bg-gray-800 shadow-md overflow-hidden rounded-lg" style="background:white; margin-top: 20px !important; margin-bottom: 20px !important;">
                 {{ $slot }}
             </div>
         </div>
