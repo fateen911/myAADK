@@ -42,7 +42,7 @@
         <!-- No Kad Pengenalan -->
         <div>
             <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" />
-            <x-text-input id="no_kp" class="block mt-1 w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" />
+            <x-text-input id="no_kp" class="block mt-1 w-full pr-10" type="text" name="no_kp" :value="old('no_kp')" required autofocus autocomplete="username" oninput="validateNoKp(this)" />
             <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
         </div>
 
@@ -129,5 +129,18 @@
                 }
             });
         });
-    </script>        
+    </script>  
+    
+    <script>
+        // Function to validate 'No. Kad Pengenalan' field
+        function validateNoKp(input) {
+            // Remove all non-numeric characters
+            input.value = input.value.replace(/\D/g, '');
+
+            // Ensure the input length is exactly 12 characters
+            if (input.value.length > 12) {
+                input.value = input.value.slice(0, 12);
+            }
+        }
+    </script>
 </x-guest-layout>
