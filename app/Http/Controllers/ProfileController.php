@@ -68,7 +68,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
         $user = Auth::user();
 
@@ -90,6 +90,7 @@ class ProfileController extends Controller
         }
         else if ($user->tahap_pengguna == 1 || $user->tahap_pengguna == 3 || $user->tahap_pengguna == 4 || $user->tahap_pengguna == 5) 
         {
+            
             // The existing file upload logic
             if ($request->remove_gambar_profil == 1) {
                 if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
