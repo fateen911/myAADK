@@ -85,7 +85,13 @@
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->
             <div id="kt_app_content_container" class="app-container container-fluid">
-
+                <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://app.powerbi.com/view?r=your-generated-embed-url"
+                    frameborder="0"
+                    allowFullScreen="true">
+                </iframe>
             </div>
             <!--end::Content container-->
         </div>
