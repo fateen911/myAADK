@@ -465,11 +465,11 @@
                                                                                 </badge>
                                                                             </div>
                                                                         @else
-                                                                            <p>Tiada skor modal untuk klien ini.</p>    
+                                                                            <p>Tiada skor modal untuk sesi ini.</p>    
                                                                         @endif
                                                                     @endforeach
                                                                 @else
-                                                                    <p>Tiada skor modal untuk klien ini.</p>
+                                                                    <p>Tiada skor untuk setiap modal kepulihan kerana ini adalah data perintis.</p>
                                                                 @endif
                                                             </div>
                                                         </div>
