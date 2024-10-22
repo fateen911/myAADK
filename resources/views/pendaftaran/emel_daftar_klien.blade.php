@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h3>PENDAFTARAN SEBAGAI PENGGUNA SISTEM MySupport AADK DILULUSKAN</h3>
+    <h3>PENDAFTARAN SEBAGAI PENGGUNA SISTEM MySupport AADK</h3>
     <p>Assalamualaikum WBT & Salam Sejahtera,</p>
     <p>Tuan/Puan,</p>
     <p>Dimaklumkan bahawa pendaftaran akaun tuan/puan telah diterima. Sila gunakan maklumat yang disertakan di bawah untuk mendaftar masuk ke dalam sistem tersebut:</p>
