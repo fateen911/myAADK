@@ -184,7 +184,7 @@
                                                                                                     </span>
                                                                                                 @elseif($modalSkor->modal_fizikal > 1.5 && $modalSkor->modal_fizikal <= 2.5)
                                                                                                     <span class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_fizikal, 2) }}
                                                                                                     </span>
                                                                                                 @elseif($modalSkor->modal_fizikal > 2.5 && $modalSkor->modal_fizikal <= 3.5)
@@ -211,7 +211,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_psikologi > 1.5 && $modalSkor->modal_psikologi <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_psikologi, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_psikologi > 2.5 && $modalSkor->modal_psikologi <= 3.5)
@@ -238,7 +238,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_sosial > 1.5 && $modalSkor->modal_sosial <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_sosial, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_sosial > 2.5 && $modalSkor->modal_sosial <= 3.5)
@@ -265,7 +265,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_persekitaran > 1.5 && $modalSkor->modal_persekitaran <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_persekitaran, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_persekitaran > 2.5 && $modalSkor->modal_persekitaran <= 3.5)
@@ -292,7 +292,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_insaniah > 1.5 && $modalSkor->modal_insaniah <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_insaniah, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_insaniah > 2.5 && $modalSkor->modal_insaniah <= 3.5)
@@ -319,7 +319,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_strategi_daya_tahan > 1.5 && $modalSkor->modal_strategi_daya_tahan <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_strategi_daya_tahan, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_strategi_daya_tahan > 2.5 && $modalSkor->modal_strategi_daya_tahan <= 3.5)
@@ -346,7 +346,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_resiliensi > 1.5 && $modalSkor->modal_resiliensi <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_resiliensi, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_resiliensi > 2.5 && $modalSkor->modal_resiliensi <= 3.5)
@@ -373,7 +373,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_spiritual > 1.5 && $modalSkor->modal_spiritual <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_spiritual, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_spiritual > 2.5 && $modalSkor->modal_spiritual <= 3.5)
@@ -400,7 +400,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_rawatan > 1.5 && $modalSkor->modal_rawatan <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_rawatan, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_rawatan > 2.5 && $modalSkor->modal_rawatan <= 3.5)
@@ -427,7 +427,7 @@
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_kesihatan > 1.5 && $modalSkor->modal_kesihatan <= 2.5)
                                                                                                     <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:180px; display: inline-block; text-align: center;">
-                                                                                                        TIDAK MEMUASKAN <br><br>
+                                                                                                        BAIK <br><br>
                                                                                                         {{ number_format($modalSkor->modal_kesihatan, 2) }}
                                                                                                     </badge>
                                                                                                 @elseif($modalSkor->modal_kesihatan > 2.5 && $modalSkor->modal_kesihatan <= 3.5)
