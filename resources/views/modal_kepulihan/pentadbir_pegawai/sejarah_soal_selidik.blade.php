@@ -457,11 +457,11 @@
                                                                                 </badge>
                                                                                 <br>
                                                                                 <badge class="badge text-white bg-warning" style="padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
-                                                                                    {{ '2.51 - 3.5 (SANGAT TIDAK MEMUASKAN)' }}
+                                                                                    {{ '2.51 - 3.5 (MEMUASKAN)' }}
                                                                                 </badge>
                                                                                 <br>
                                                                                 <badge class="badge text-white" style="background-color: green; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
-                                                                                    {{ '3.51 - 4.0 (SANGAT TIDAK MEMUASKAN)' }}
+                                                                                    {{ '3.51 - 4.0 (SANGAT MEMUASKAN)' }}
                                                                                 </badge>
                                                                             </div>
                                                                         @else
