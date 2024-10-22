@@ -98,7 +98,7 @@ class DaftarPenggunaController extends Controller
 
         // Check if a password has been provided
         if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu untuk mendaftarkan klien.');
         }
         else
         {

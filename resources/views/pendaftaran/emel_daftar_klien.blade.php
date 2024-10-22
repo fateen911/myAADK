@@ -8,6 +8,7 @@
     <p style="padding-top: 10px"><b>Nama :</b> {{strtoupper($nama)}}</p>
     <p><b>No. Kad Pengenalan :</b> {{$no_kp}}
     <p style="padding-bottom: 10px;"><b>Kata Laluan :</b> {{$password}}
+    <p>Sila <a href="https://mysupport.aadk.gov.my/login">klik di sini </a>untuk log masuk ke dalam sistem.</p> 
     <br>
     <p>Jika mempunyai sebarang pertanyaan, sila hubungi <i>hotline</i> di talian 1-800-22-2235 / 019 – 626 2233 atau e-mel ke webmaster@adk.gov.my </p>
     <p>Untuk maklumat lanjut, sila layari https://www.adk.gov.my </p>
