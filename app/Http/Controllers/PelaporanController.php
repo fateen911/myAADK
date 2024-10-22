@@ -10,6 +10,7 @@ class PelaporanController extends Controller
     {
         return view('pelaporan.modal_kepulihan');
     }
+    
     public function aktiviti()
     {
         return view('pelaporan.aktiviti');
