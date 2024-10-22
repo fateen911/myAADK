@@ -85,13 +85,7 @@
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->
             <div id="kt_app_content_container" class="app-container container-fluid">
-                <iframe
-                    width="1200"
-                    height="600"
-                    src="https://app.powerbi.com/view?r=eyJrIjoiMjlhNDczYWUtNTUwNy00ODk4LWI4ODEtYzhkYzExMTUzMTc4IiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D"
-                    frameborder="0"
-                    allowFullScreen="true">
-                </iframe>
+                <iframe title="mysupport01" width="1200" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiM2RkZDk2YWMtODUxNC00MjQ2LWFmNzQtYzBlYjg2MTQ3Yzg1IiwidCI6IjBlMGRiMmFkLWM0MTYtNDdjNy04OGVjLWNlYWM0ZWU3Njc2NyIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
             </div>
             <!--end::Content container-->
         </div>
