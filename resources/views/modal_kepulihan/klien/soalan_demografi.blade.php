@@ -174,7 +174,7 @@
                         <label for="rawatan"><b>1) Di manakah anda pernah menerima rawatan ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="rawatan" value="AADK Daerah" id="rawatan1" {{ isset($latestRespon) && $latestRespon->rawatan == 'AADK Daerah' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="rawatan3">Pusat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
+                            <label class="form-check-label" for="rawatan3">Pejabat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
                         </div>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="rawatan" value="PUSPEN" id="rawatan2" {{ isset($latestRespon) && $latestRespon->rawatan == 'PUSPEN' ? 'checked' : '' }} required>
@@ -195,7 +195,7 @@
                         <label for="pusat_rawatan"><b>2) Di manakah pusat rawatan terkini anda ?</b></label><br>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="pusat_rawatan" value="AADK Daerah" id="pusat_rawatan1" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'AADK Daerah' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="pusat_rawatan3">Pusat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
+                            <label class="form-check-label" for="pusat_rawatan3">Pejabat AADK Daerah & Pusat Rawatan dan Pemulihan dalam Komuniti</label>
                         </div>
                         <div class="radio-group">
                             <input class="form-check-input" type="radio" name="pusat_rawatan" value="PUSPEN" id="pusat_rawatan2" {{ isset($latestRespon) && $latestRespon->pusat_rawatan == 'PUSPEN' ? 'checked' : '' }} required>
