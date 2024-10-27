@@ -104,7 +104,9 @@ License: For each use you must have a valid license purchased only from above li
                                 <!--begin::Logo image-->
                                 <a href="{{url('/landing-page/version-2')}}">
                                     <div>
-                                        <img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-30px h-lg-50px mx-auto"/>
+                                        <a href="/">
+                                            <img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-30px h-lg-50px mx-auto"/>
+                                        </a>
                                         <p class="text-white fs-10 fs-md-15">Sokongan Untuk Kepulihan Anda Prioriti AADK</p>
                                     </div>
                                 </a>
@@ -133,7 +135,9 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="d-flex gap-2 mb-8">
                         <img alt="Logo" src="/logo/jata_negara.png" class="logo-default h-50px h-lg-80px"/>
                         <img alt="Logo" src="/logo/aadk.png" class="logo-default h-50px h-lg-80px"/>
-                        <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
+                        <a href="/">
+                            <img alt="Logo" src="/logo/mySupport.png" class="logo-default h-50px h-lg-80px"/>
+                        </a>
                     </div>
                     <hr class="w-100 w-md-100">
                     <br>

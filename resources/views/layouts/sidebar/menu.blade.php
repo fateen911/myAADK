@@ -55,7 +55,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="#" class="logo-container">
+        <a href="/" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -384,7 +384,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="#" class="logo-container">
+        <a href="/" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -538,7 +538,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="#" class="logo-container">
+        <a href="/" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -730,7 +730,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="#" class="logo-container">
+        <a href="/" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
@@ -922,7 +922,7 @@
     <!--begin::Logo-->
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo" class="logo-container">
         <!--begin::Logo image-->
-        <a href="#" class="logo-container">
+        <a href="/" class="logo-container">
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="h-50px app-sidebar-logo-default" />
             <img alt="Logo" src="{{ asset('logo/mySupport-bg.png') }}" class="logo-position h-35px app-sidebar-logo-minimize" />
             <span class="app-sidebar-logo-default"><img alt="Logo" src="/logo/mySupport-huruf.png" class="logo-default h-40px mx-auto"/></span>
