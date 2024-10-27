@@ -534,7 +534,7 @@
                     </div>
                     <!--end::Aside column-->
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-lg-800px mx-w-300">
-                        @if($program->status == "SEDANG BERLANGSUNG")
+                        @if($program->status != "BELUM SELESAI")
                         <!--begin::Rekod Kehadiran-->
                         <div class="card card-flush py-4">
                             <!--begin::Card header-->
