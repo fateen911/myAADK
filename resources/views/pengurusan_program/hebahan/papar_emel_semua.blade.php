@@ -56,7 +56,7 @@
                         </th>
                         <th class="min-w-250px">Nama</th>
                         <th class="min-w-125px">No. Telefon</th>
-                        <th class="min-w-200px">Email</th>
+                        <th class="min-w-200px">Emel</th>
                     </tr>
                     </thead>
                     <tbody class="fw-semibold text-gray-600">

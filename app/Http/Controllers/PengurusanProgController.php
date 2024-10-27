@@ -52,19 +52,19 @@ class PengurusanProgController extends Controller
     //JSON
     public function klienSemua()//semua
     {
-        $klien = Klien::all();
+        $klien = Klien::whereNotNull('emel')->get();
         return response()->json($klien);
     }
 
     public function klienNegeri($id)//negeri
     {
-        $klien = Klien::where('negeri_pejabat',$id)->get();
+        $klien = Klien::where('negeri_pejabat',$id)->whereNotNull('emel')->get();
         return response()->json($klien);
     }
 
     public function klienDaerah($id)//daerah
     {
-        $klien = Klien::where('daerah_pejabat',$id)->get();
+        $klien = Klien::where('daerah_pejabat',$id)->whereNotNull('emel')->get();
         return response()->json($klien);
     }
 
