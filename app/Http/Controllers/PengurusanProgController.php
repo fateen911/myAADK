@@ -853,7 +853,7 @@ class PengurusanProgController extends Controller
         $negeri_id = $request->input('negeri');
         $daerah_id = $request->input('daerah');
 
-        $filter = Klien::where('negeri_pejabat',$negeri_id)->where('daerah_pejabat',$daerah_id)->get();
+        $filter = Klien::where('negeri_pejabat',$negeri_id)->where('daerah_pejabat',$daerah_id)->whereNotNull('emel')->get();
 
         if ($filter) {
             return response()->json($filter);

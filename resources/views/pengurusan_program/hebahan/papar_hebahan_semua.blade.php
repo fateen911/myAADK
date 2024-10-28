@@ -79,6 +79,12 @@
 <!--generate table-->
 <script src="/assets/plugins/global/plugins.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<!-- jQuery (required for DataTables) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JS and CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function(){
         fetchItems();
@@ -101,6 +107,17 @@
                         rows += '</tr>';
                     });
                     $('#modalHebahan tbody').html(rows);
+                    $('#modalHebahan').DataTable({
+                        ordering: true,
+                        order: [],
+                        language: {
+                            url: "/assets/lang/Malay.json"
+                        },
+                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                            '<"row"<"col-sm-12 my-0"tr>>' +
+                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                        responsive: true
+                    });
                 }
             });
         }
@@ -145,6 +162,7 @@
             },
             success: function(response) {
                 let rows = '';
+                $('#modalHebahan').DataTable().destroy();
                 $.each(response, function(index, filter) {
                     let emel = filter.emel ? filter.emel : 'TIADA';  // Handle null
                     let no_tel = filter.no_tel ? filter.no_tel : 'TIADA';  // Handle null
@@ -157,6 +175,17 @@
                     rows += '</tr>';
                 });
                 $('#modalHebahan tbody').html(rows);
+                $('#modalHebahan').DataTable({
+                    ordering: true,
+                    order: [],
+                    language: {
+                        url: "/assets/lang/Malay.json"
+                    },
+                    dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                        '<"row"<"col-sm-12 my-0"tr>>' +
+                        '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                    responsive: true
+                });
             }
         });
     });
