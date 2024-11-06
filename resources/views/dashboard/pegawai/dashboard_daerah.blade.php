@@ -75,7 +75,18 @@
         </li>
         <!--end::Item-->
         <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Pegawai Daerah AADK</li>
+        @php
+            $daerah = DB::table('pegawai')->where('no_kp', Auth::user()->no_kp)->value('pegawai.daerah_bertugas');
+            $nama_daerah = DB::table('senarai_daerah_pejabat')->where('kod', $daerah)->value('senarai_daerah_pejabat.daerah');
+
+            // Remove "AADK DAERAH" prefix if it exists and convert to title case
+            if (strpos($nama_daerah, 'AADK DAERAH') === 0) {
+                $nama_daerah = trim(str_replace('AADK DAERAH', '', $nama_daerah));
+            }
+
+            $nama_daerah = ucwords(strtolower($nama_daerah));
+        @endphp
+        <li class="breadcrumb-item text-muted">Pegawai AADK Daerah {{$nama_daerah}}</li>
         <!--end::Item-->
     </ul>
     <!--end::Breadcrumb-->
