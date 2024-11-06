@@ -24,6 +24,15 @@ use App\Models\TahapPengguna;
 
 class DaftarPenggunaController extends Controller
 {
+    public function getDaerahBertugas($negeri_id)
+    {
+        // Fetch daerah based on negeri_id
+        $daerah = DaerahPejabat::where('negeri_id', $negeri_id)->get();
+
+        // Return JSON response
+        return response()->json($daerah);
+    }
+
     // PEGAWAI DAERAH
     public function senaraiDaftarKlien()
     {

@@ -117,6 +117,7 @@ Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarP
 Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
 // AJAX PENDAFTARAN
+Route::get('/get-daerah-bertugas/{negeri_id}', [DaftarPenggunaController::class, 'getDaerahBertugas'])->name('get-daerah-bertugas');
 Route::get('/pentadbir/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlien'])->name('ajax-senarai-klien');
 Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlien'])->name('modal-kemaskini-klien');
 Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
