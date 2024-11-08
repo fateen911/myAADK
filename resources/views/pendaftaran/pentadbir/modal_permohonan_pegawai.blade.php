@@ -67,7 +67,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-                    <select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
+                    <select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid custom-select" onchange="toggleFields()">
                         @foreach ($tahap as $tahap1)
                             <option value="{{$tahap1->id}}" {{$permohonan_pegawai->peranan == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
                         @endforeach
@@ -76,7 +76,7 @@
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 @if ($permohonan_pegawai->negeri_bertugas != null)
-                    <div class="fv-row mb-5">
+                    <div class="fv-row mb-5" id="kemaskini_negeri_field">
                         <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
                         <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
                             <option value="">Pilih Negeri Bertugas</option>
@@ -89,7 +89,7 @@
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 @if ($permohonan_pegawai->daerah_bertugas != null)
-                    <div class="fv-row mb-5">
+                    <div class="fv-row mb-5" id="kemaskini_daerah_field">
                         <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
                         <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
                             <option value="">Pilih Daerah Bertugas</option>
@@ -179,6 +179,30 @@
                 const modal = new bootstrap.Modal(document.getElementById('permohonanPegawaiDitolakModal'));
                 modal.show();
             }
+        </script>
+
+        {{-- Display field tempat bertugas based on peranan --}}
+        <script>
+            // Function to toggle fields based on peranan_pengguna value
+            function toggleFields() {
+                const tahapPengguna = document.getElementById('peranan_pengguna').value;
+                const negeriField = document.getElementById('kemaskini_negeri_field');
+                const daerahField = document.getElementById('kemaskini_daerah_field');
+
+                // Show or hide the "Negeri Bertugas" field if peranan_pengguna is 4 or 5
+                negeriField.style.display = (tahapPengguna == 4 || tahapPengguna == 5) ? 'block' : 'none';
+
+                // Show or hide the "Daerah Bertugas" field if peranan_pengguna is 5
+                daerahField.style.display = (tahapPengguna == 5) ? 'block' : 'none';
+            }
+
+            // Run the toggle function when the modal is opened
+            document.addEventListener('DOMContentLoaded', function() {
+                toggleFields(); // Initial check to set the correct display based on peranan_pengguna
+            });
+
+            // Also run the toggle function whenever peranan_pengguna is changed
+            document.getElementById('peranan_pengguna').addEventListener('change', toggleFields);
         </script>
     </body>
 </html>

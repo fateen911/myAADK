@@ -99,7 +99,6 @@
                                         <span class="required">Pejabat AADK Negeri Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        
                                         <select class="form-select form-select-solid custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
                                             <option value="">Pilih Negeri</option>
                                             @foreach ($senaraiNegeri as $item1)
@@ -219,6 +218,5 @@
                 daerahSelect.select2().trigger('change');
             }
         </script>
-    
     </body>
 @endsection

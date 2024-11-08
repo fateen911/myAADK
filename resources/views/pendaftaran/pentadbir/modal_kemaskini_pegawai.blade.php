@@ -5,8 +5,6 @@
         <link rel="stylesheet" href="/assets/plugins/custom/datatables/datatables.bundle.css">
         <link rel="stylesheet" href="/assets/css/style.bundle.css">
         <link rel="stylesheet" href="/assets/css/customAADK.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </head>
 
     <body>
@@ -97,7 +95,7 @@
                 @if ($pegawai->negeri_bertugas != null)
                     <div class="fv-row mb-5" id="kemaskini_negeri_field">
                         <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-                        <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
+                        <select class="form-select form-select-solid custom-select filterDaerahOptions" name="negeri_bertugas" id="negeri_bertugas" data-control="select2">
                             <option value="">Pilih Negeri Bertugas</option>
                             @foreach ($negeri as $item1)
                                 <option value="{{ $item1->negeri_id }}" {{ $pegawai->negeri_bertugas == $item1->negeri_id ? 'selected' : '' }} data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
@@ -110,13 +108,15 @@
                 @if ($pegawai->daerah_bertugas != null)
                     <div class="fv-row mb-5" id="kemaskini_daerah_field">
                         <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-                        <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
-                            <option value="">Pilih Daerah Bertugas</option>
+                        <select class="form-select form-select-solid custom-select" name="daerah_bertugas" id="daerah_bertugas">
+                            <option value="" data-negeri-id="">Pilih Daerah Bertugas</option>
                             @foreach ($daerah as $item2)
-                                <option value="{{ $item2->kod }}" {{ $pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }} data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+                                <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}" {{ $pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
+                                    {{ $item2->daerah }}
+                                </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div>                
                 @endif
 
                 <!--begin::Input group-->
@@ -144,6 +144,9 @@
             <!--end::Actions-->
         </form>
         <!--end::Modal -  Kemaskini Pegawai-->
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         {{-- Validate input --}}
         <script>
@@ -197,7 +200,7 @@
             }
         </script>
 
-        {{-- Display field bertugas based on peranan --}}
+        {{-- Display field tempat bertugas based on peranan --}}
         <script>
             // Function to toggle fields based on tahap_pengguna value
             function toggleFields() {
@@ -223,60 +226,35 @@
 
         {{-- Filter daerah based on negeri --}}
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const negeriSelect = document.getElementById('negeri_bertugas');
                 const daerahSelect = document.getElementById('daerah_bertugas');
-            
-                negeriSelect.addEventListener('change', function() {
-                    const negeriId = this.value;
-            
-                    // Clear previous daerah options
-                    daerahSelect.innerHTML = '<option value="">Pilih Daerah Bertugas</option>';
-            
-                    if (negeriId) {
-                        // Fetch daerah based on selected negeri_id
-                        fetch(`/get-daerah-bertugas/${negeriId}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                data.forEach(daerah => {
-                                    const option = document.createElement('option');
-                                    option.value = daerah.kod; // Adjust to your 'kod' column
-                                    option.text = daerah.daerah; // Adjust to your 'daerah' column
-                                    daerahSelect.appendChild(option);
-                                });
-                            })
-                            .catch(error => {
-                                console.error('Error fetching daerah:', error);
-                            });
-                    }
-                });
-            });
-        </script>
+                const allDaerahOptions = Array.from(daerahSelect.options);
 
-        {{-- Display field bertugas based on peranan and filter daerah based on negeri --}}
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const negeriSelect = document.getElementById('negeri_bertugas');
-                const daerahSelect = document.getElementById('daerah_bertugas');
+                negeriSelect.addEventListener('change', function () {
+                    const selectedNegeriId = negeriSelect.value;
 
-                // Function to filter daerah options based on selected negeri and kod_daerah_pejabat
-                function filterDaerahOptions() {
-                    const selectedNegeriId = negeriSelect.options[negeriSelect.selectedIndex].getAttribute('data-id');
-                    Array.from(daerahSelect.options).forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId  && option.value !== '') {
-                            option.style.display = 'block';
-                        } else {
-                            option.style.display = 'none';
+                    // Clear current daerah options
+                    daerahSelect.innerHTML = '';
+
+                    // Add an empty default option
+                    const defaultOption = document.createElement('option');
+                    defaultOption.value = '';
+                    defaultOption.text = 'Pilih Daerah Bertugas';
+                    daerahSelect.appendChild(defaultOption);
+
+                    // Filter and add options based on selected negeri
+                    allDaerahOptions.forEach(option => {
+                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
+                            daerahSelect.appendChild(option.cloneNode(true));
                         }
                     });
-                    daerahSelect.value = '';
+                });
+
+                // Trigger change event on page load to initialize daerah options if a negeri is already selected
+                if (negeriSelect.value) {
+                    negeriSelect.dispatchEvent(new Event('change'));
                 }
-
-                // Event listeners
-                negeriSelect.addEventListener('change', filterDaerahOptions);
-
-                // Initial setup
-                filterDaerahOptions();
             });
         </script>
     </body>
