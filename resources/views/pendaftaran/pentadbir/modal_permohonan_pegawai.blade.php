@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <!--end::Input group-->
-
+                <!--begin::Input group-->
                 <div class="fv-row mb-5" id="permohonan_pegawai_negeri_field" style="display: {{ $permohonan_pegawai->negeri_bertugas != null ? 'block' : 'none' }}">
                     <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
                     <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
@@ -86,7 +86,8 @@
                         @endforeach
                     </select>
                 </div>
-
+                <!--end::Input group-->
+                <!--begin::Input group-->
                 <div class="fv-row mb-5" id="permohonan_pegawai_daerah_field" style="display: {{ $permohonan_pegawai->daerah_bertugas != null ? 'block' : 'none' }}">
                     <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
                     <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
@@ -98,6 +99,7 @@
                         @endforeach
                     </select>
                 </div>
+                <!--end::Input group-->
             </div>
             <!--end::Scroll-->
 
@@ -109,6 +111,50 @@
             <!--end::Actions-->
         </form>
 
+        {{-- Form vaidation for Permohonan Pegawai --}}
+        <script>
+            document.getElementById('modal_permohonan_pegawai_form').addEventListener('submit', function (event) {
+                // Get form elements
+                const name = document.getElementById('nama').value.trim();
+                const no_kp = document.getElementById('no_kp_pegawai_mohon').value.trim();
+                const email = document.getElementById('emelPegawai').value.trim();
+                const no_tel = document.getElementById('no_tel_pegawai_mohon').value.trim();
+                const jawatan = document.getElementById('jawatan').value;
+                const peranan_pegawai = document.getElementById('peranan_pengguna').value;
+                const negeri_bertugas = document.getElementById('negeri_bertugas').value;
+                const daerah_bertugas = document.getElementById('daerah_bertugas').value;
+            
+                // Initialize error message
+                let errorMessage = '';
+            
+                // Common required field check
+                if (!name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
+                    errorMessage = 'Sila isi semua medan yang bertanda *.';
+                } else {
+                    if (peranan_pegawai == 3) {
+                        // No additional checks for peranan_pegawai == 3
+                    } else if (peranan_pegawai == 4) {
+                        // For peranan_pegawai == 4, only negeri_bertugas is required
+                        if (!negeri_bertugas) {
+                            errorMessage = 'Sila pilih Negeri Bertugas untuk Pegawai Negeri.';
+                        }
+                    } else if (peranan_pegawai == 5) {
+                        // For peranan_pegawai == 5, both negeri_bertugas and daerah_bertugas are required
+                        if (!negeri_bertugas || !daerah_bertugas) {
+                            errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas untuk Pegawai Daerah.';
+                        }
+                    }
+                }
+            
+                // If there is an error message, prevent form submission and display the message
+                if (errorMessage) {
+                    event.preventDefault();  // Prevent form submission
+                    alert(errorMessage);     // Display the error message to the user (or use another method to show it on the form)
+                }
+            });
+        </script>            
+
+        {{-- Control input nama, no_tel, no_kp --}}
         <script>
             // Function to validate 'Nama' field
             function validateNama(input) {
@@ -139,6 +185,7 @@
             }
         </script>
 
+        {{-- Validate emelPegawai --}}
         <script>
             function validateEmailDomain() {
                 const emailInput = document.getElementById('emelPegawai').value;
@@ -205,7 +252,7 @@
                 // Call toggleFields on page load to set initial state
                 toggleFields();
             });
-        </script>       
+        </script> 
     </body>
 </html>
 

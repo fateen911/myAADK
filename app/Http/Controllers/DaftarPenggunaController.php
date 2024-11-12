@@ -405,7 +405,7 @@ class DaftarPenggunaController extends Controller
     public function modalPermohonanPegawai($id)
     {
         $permohonan_pegawai = PegawaiMohonDaftar::find($id);
-        
+
         $negeri = NegeriPejabat::all()->sortBy('negeri');
         $daerah = DaerahPejabat::all()->sortBy('daerah');
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
@@ -459,8 +459,22 @@ class DaftarPenggunaController extends Controller
             $pegawai->no_tel = $validatedData['no_tel'];
             $pegawai->jawatan = $validatedData['jawatan'];
             $pegawai->peranan = $validatedData['peranan_pengguna'];
-            $pegawai->negeri_bertugas = $validatedData['negeri_bertugas'] ?? null;
-            $pegawai->daerah_bertugas = $validatedData['daerah_bertugas'] ?? null;
+
+            // Set negeri_bertugas and daerah_bertugas based on peranan_pengguna
+            if ($validatedData['peranan_pengguna'] == "3") {
+                // If peranan_pengguna is 3, set both fields to null
+                $pegawai->negeri_bertugas = null;
+                $pegawai->daerah_bertugas = null;
+            } elseif ($validatedData['peranan_pengguna'] == "4") {
+                // If peranan_pengguna is 4, set daerah_bertugas to null and update negeri_bertugas
+                $pegawai->negeri_bertugas = $request->input('negeri_bertugas');
+                $pegawai->daerah_bertugas = null;
+            } elseif ($validatedData['peranan_pengguna'] == "5") {
+                // If peranan_pengguna is 5, update based on request input
+                $pegawai->negeri_bertugas = $request->input('negeri_bertugas');
+                $pegawai->daerah_bertugas = $request->input('daerah_bertugas');
+            }
+
             $pegawai->updated_at = now();
             $pegawai->save();
 
@@ -469,24 +483,90 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->updated_at = now();
             $pegawaiBaharu->save();
 
-            // Generate the email verification URL
-            event(new Registered($user));
-            $verificationUrl = URL::temporarySignedRoute(
-                'verification.verify',
-                now()->addMinutes(60),
-                ['id' => $user->id, 'hash' => sha1($user->email)]
-            );
-
             // $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send notification email to the staff
             // Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
-            Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
             return redirect()->back()->with('success', 'Pegawai ' . $user->name . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
     }
 
+    // public function permohonanPegawaiLulus(Request $request, $id)
+    // {
+    //     // Add server-side validation for input fields
+    //     $validatedData = $request->validate([
+    //         'nama' => 'required|string|max:255',
+    //         'no_kp' => 'required|string|max:12',  // Must be exactly 12 digits
+    //         'emelPegawai' => 'required|string',
+    //         'no_tel' => 'nullable|string|max:11',  // Not more than 11 digits
+    //         'jawatan' => 'required|string',
+    //         'peranan_pengguna' => 'required|string',
+    //         'negeri_bertugas' => 'nullable|string', // If this can be optional, use nullable
+    //         'daerah_bertugas' => 'nullable|string',
+    //     ]);
+
+    //     // Fetch keputusan permohonan
+    //     $keputusan = $request->input('status');
+
+    //     // Fetch the staff request data
+    //     $pegawaiBaharu = PegawaiMohonDaftar::where('id', $id)->firstOrFail();
+
+    //     if ($keputusan == 'Lulus') {
+    //         // Generate a random password
+    //         $password_length = 12;
+    //         $password = $this->generatePassword($password_length);
+
+    //         // Store user information in users table
+    //         $user = new User();
+    //         $user->name = $validatedData['nama'];
+    //         $user->no_kp = $validatedData['no_kp'];
+    //         $user->email = $validatedData['emelPegawai'] . '@adk.gov.my';
+    //         $user->password = bcrypt($password);
+    //         $user->tahap_pengguna = $validatedData['peranan_pengguna'];
+    //         $user->status = '0';
+    //         $user->updated_at = now();
+    //         $user->save();
+
+    //         // Store additional staff information in pegawai table
+    //         $pegawai = new Pegawai();
+    //         $pegawai->users_id = $user->id;
+    //         $pegawai->no_kp = $validatedData['no_kp'];
+    //         $pegawai->nama = $validatedData['nama'];
+    //         $pegawai->emel = $validatedData['emelPegawai'] . '@adk.gov.my';
+    //         $pegawai->no_tel = $validatedData['no_tel'];
+    //         $pegawai->jawatan = $validatedData['jawatan'];
+    //         $pegawai->peranan = $validatedData['peranan_pengguna'];
+    //         $pegawai->negeri_bertugas = $validatedData['negeri_bertugas'] ?? null;
+    //         $pegawai->daerah_bertugas = $validatedData['daerah_bertugas'] ?? null;
+    //         $pegawai->updated_at = now();
+    //         $pegawai->save();
+
+    //         // Update the status in pegawai_mohon_daftar table
+    //         $pegawaiBaharu->status = 'Lulus';
+    //         $pegawaiBaharu->updated_at = now();
+    //         $pegawaiBaharu->save();
+
+    //         // Generate the email verification URL
+    //         // event(new Registered($user));
+    //         // $verificationUrl = URL::temporarySignedRoute(
+    //         //     'verification.verify',
+    //         //     now()->addMinutes(60),
+    //         //     ['id' => $user->id, 'hash' => sha1($user->email)]
+    //         // );
+
+    //         // $defaultEmail = 'fateennashuha9@gmail.com';
+
+    //         // Send notification email to the staff
+    //         // Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
+    //         // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+
+    //         return redirect()->back()->with('success', 'Pegawai ' . $user->name . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
+    //     }
+    // }
+
+    
     public function modalPermohonanPegawaiDitolak($id)
     {
         $permohonan_pegawai = PegawaiMohonDaftar::find($id);
