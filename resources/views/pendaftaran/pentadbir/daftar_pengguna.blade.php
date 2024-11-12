@@ -1775,12 +1775,12 @@
 				} else if (peranan_pegawai == 4) {
 					// For peranan_pegawai == 4, only negeri_bertugas is required
 					if (!negeri_bertugas) {
-						errorMessage = 'Sila pilih Negeri Bertugas untuk Pegawai Negeri.';
+						errorMessage = 'Sila pilih Negeri Bertugas.';
 					}
 				} else if (peranan_pegawai == 5) {
 					// For peranan_pegawai == 5, both negeri_bertugas and daerah_bertugas are required
 					if (!negeri_bertugas || !daerah_bertugas) {
-						errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas untuk Pegawai Daerah.';
+						errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas.';
 					}
 				}
 			}

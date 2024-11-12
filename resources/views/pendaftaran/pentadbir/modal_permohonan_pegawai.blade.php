@@ -77,7 +77,7 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-5" id="permohonan_pegawai_negeri_field" style="display: {{ $permohonan_pegawai->negeri_bertugas != null ? 'block' : 'none' }}">
                     <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-                    <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
+                    <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select" onchange="filterDaerahOptions()">
                         <option value="">Pilih Negeri Bertugas</option>
                         @foreach ($negeri as $item1)
                             <option value="{{ $item1->negeri_id }}" {{ $permohonan_pegawai->negeri_bertugas == $item1->negeri_id ? 'selected' : '' }}>
@@ -93,7 +93,7 @@
                     <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
                         <option value="">Pilih Daerah Bertugas</option>
                         @foreach ($daerah as $item2)
-                            <option value="{{ $item2->kod }}" {{ $permohonan_pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
+                            <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}" {{ $permohonan_pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
                                 {{ $item2->daerah }}
                             </option>
                         @endforeach
@@ -136,12 +136,12 @@
                     } else if (peranan_pegawai == 4) {
                         // For peranan_pegawai == 4, only negeri_bertugas is required
                         if (!negeri_bertugas) {
-                            errorMessage = 'Sila pilih Negeri Bertugas untuk Pegawai Negeri.';
+                            errorMessage = 'Sila pilih Negeri Bertugas.';
                         }
                     } else if (peranan_pegawai == 5) {
                         // For peranan_pegawai == 5, both negeri_bertugas and daerah_bertugas are required
                         if (!negeri_bertugas || !daerah_bertugas) {
-                            errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas untuk Pegawai Daerah.';
+                            errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas.';
                         }
                     }
                 }
@@ -253,6 +253,32 @@
                 toggleFields();
             });
         </script> 
+
+        <script>
+            // Function to filter daerah options based on selected negeri
+            function filterDaerahOptions() {
+                const negeriSelect = document.getElementById('negeri_bertugas');
+                const daerahSelect = document.getElementById('daerah_bertugas');
+                const selectedNegeriId = negeriSelect.value;
+                
+                console.log("Selected Negeri ID:", selectedNegeriId);
+
+                Array.from(daerahSelect.options).forEach(option => {
+                    if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
+                        option.hidden = false;
+                    } else {
+                        option.hidden = true;
+                    }
+                });
+
+                daerahSelect.value = ''; // Reset daerah selection
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Call toggleFields on page load to set initial state
+                filterDaerahOptions();
+            });
+        </script>
     </body>
 </html>
 
