@@ -405,6 +405,7 @@ class DaftarPenggunaController extends Controller
     public function modalPermohonanPegawai($id)
     {
         $permohonan_pegawai = PegawaiMohonDaftar::find($id);
+        
         $negeri = NegeriPejabat::all()->sortBy('negeri');
         $daerah = DaerahPejabat::all()->sortBy('daerah');
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');

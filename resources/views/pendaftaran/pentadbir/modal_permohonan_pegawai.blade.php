@@ -74,32 +74,30 @@
                     </select>
                 </div>
                 <!--end::Input group-->
-                <!--begin::Input group-->
-                @if ($permohonan_pegawai->negeri_bertugas != null)
-                    <div class="fv-row mb-5" id="kemaskini_negeri_field">
-                        <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-                        <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
-                            <option value="">Pilih Negeri Bertugas</option>
-                            @foreach ($negeri as $item1)
-                                <option value="{{ $item1->negeri_id}}" {{$permohonan_pegawai->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
-                <!--end::Input group-->
-                <!--begin::Input group-->
-                @if ($permohonan_pegawai->daerah_bertugas != null)
-                    <div class="fv-row mb-5" id="kemaskini_daerah_field">
-                        <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-                        <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
-                            <option value="">Pilih Daerah Bertugas</option>
-                            @foreach ($daerah as $item2)
-                                <option value="{{ $item2->kod }}" {{$permohonan_pegawai->daerah_bertugas == $item2->kod  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
-                <!--end::Input group-->
+
+                <div class="fv-row mb-5" id="permohonan_pegawai_negeri_field" style="display: {{ $permohonan_pegawai->negeri_bertugas != null ? 'block' : 'none' }}">
+                    <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
+                    <select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
+                        <option value="">Pilih Negeri Bertugas</option>
+                        @foreach ($negeri as $item1)
+                            <option value="{{ $item1->negeri_id }}" {{ $permohonan_pegawai->negeri_bertugas == $item1->negeri_id ? 'selected' : '' }}>
+                                {{ $item1->negeri }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="fv-row mb-5" id="permohonan_pegawai_daerah_field" style="display: {{ $permohonan_pegawai->daerah_bertugas != null ? 'block' : 'none' }}">
+                    <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
+                    <select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
+                        <option value="">Pilih Daerah Bertugas</option>
+                        @foreach ($daerah as $item2)
+                            <option value="{{ $item2->kod }}" {{ $permohonan_pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
+                                {{ $item2->daerah }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <!--end::Scroll-->
 
@@ -183,27 +181,31 @@
 
         {{-- Display field tempat bertugas based on peranan --}}
         <script>
-            // Function to toggle fields based on peranan_pengguna value
+            // Define toggleFields globally so it's accessible from inline onchange
             function toggleFields() {
                 const tahapPengguna = document.getElementById('peranan_pengguna').value;
-                const negeriField = document.getElementById('kemaskini_negeri_field');
-                const daerahField = document.getElementById('kemaskini_daerah_field');
-
-                // Show or hide the "Negeri Bertugas" field if peranan_pengguna is 4 or 5
-                negeriField.style.display = (tahapPengguna == 4 || tahapPengguna == 5) ? 'block' : 'none';
-
-                // Show or hide the "Daerah Bertugas" field if peranan_pengguna is 5
-                daerahField.style.display = (tahapPengguna == 5) ? 'block' : 'none';
+                const negeriField = document.getElementById('permohonan_pegawai_negeri_field');
+                const daerahField = document.getElementById('permohonan_pegawai_daerah_field');
+                
+                if (negeriField && daerahField) {
+                    if (tahapPengguna === "3") {
+                        negeriField.style.display = 'none';
+                        daerahField.style.display = 'none';
+                    } else if (tahapPengguna === "4") {
+                        negeriField.style.display = 'block';
+                        daerahField.style.display = 'none';
+                    } else if (tahapPengguna === "5") {
+                        negeriField.style.display = 'block';
+                        daerahField.style.display = 'block';
+                    }
+                }
             }
-
-            // Run the toggle function when the modal is opened
+        
             document.addEventListener('DOMContentLoaded', function() {
-                toggleFields(); // Initial check to set the correct display based on peranan_pengguna
+                // Call toggleFields on page load to set initial state
+                toggleFields();
             });
-
-            // Also run the toggle function whenever peranan_pengguna is changed
-            document.getElementById('peranan_pengguna').addEventListener('change', toggleFields);
-        </script>
+        </script>       
     </body>
 </html>
 
