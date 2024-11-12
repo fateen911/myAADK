@@ -483,11 +483,19 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->updated_at = now();
             $pegawaiBaharu->save();
 
+            // Generate the email verification URL
+            event(new Registered($user));
+            $verificationUrl = URL::temporarySignedRoute(
+                'verification.verify',
+                now()->addMinutes(60),
+                ['id' => $user->id, 'hash' => sha1($user->email)]
+            );
+
             // $defaultEmail = 'fateennashuha9@gmail.com';
 
             // Send notification email to the staff
             // Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
-            // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
             return redirect()->back()->with('success', 'Pegawai ' . $user->name . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
