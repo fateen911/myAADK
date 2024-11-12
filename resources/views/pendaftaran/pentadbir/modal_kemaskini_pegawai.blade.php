@@ -80,7 +80,6 @@
                     </select>
                 </div>
                 <!--end::Input group-->
-
                 <!-- Tahap Pengguna -->
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2 required">Peranan</label>
@@ -90,35 +89,28 @@
                         @endforeach
                     </select>
                 </div>
-
                 <!-- Negeri Bertugas -->
-                @if ($pegawai->negeri_bertugas != null)
-                    <div class="fv-row mb-5" id="kemaskini_negeri_field">
-                        <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-                        <select class="form-select form-select-solid custom-select filterDaerahOptions" name="negeri_bertugas" id="negeri_bertugas" data-control="select2">
-                            <option value="">Pilih Negeri Bertugas</option>
-                            @foreach ($negeri as $item1)
-                                <option value="{{ $item1->negeri_id }}" {{ $pegawai->negeri_bertugas == $item1->negeri_id ? 'selected' : '' }} data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
-
+                <div class="fv-row mb-5" id="kemaskini_negeri_field" style="display: {{ $pegawai->negeri_bertugas != null ? 'block' : 'none' }}">
+                    <label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
+                    <select class="form-select form-select-solid custom-select" name="negeri_bertugas" id="negeri_bertugas" data-control="select2" onchange="filterDaerahOptions()">>
+                        <option value="">Pilih Negeri Bertugas</option>
+                        @foreach ($negeri as $item1)
+                            <option value="{{ $item1->negeri_id }}" {{ $pegawai->negeri_bertugas == $item1->negeri_id ? 'selected' : '' }}>{{ $item1->negeri }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <!-- Daerah Bertugas -->
-                @if ($pegawai->daerah_bertugas != null)
-                    <div class="fv-row mb-5" id="kemaskini_daerah_field">
-                        <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-                        <select class="form-select form-select-solid custom-select" name="daerah_bertugas" id="daerah_bertugas">
-                            <option value="" data-negeri-id="">Pilih Daerah Bertugas</option>
-                            @foreach ($daerah as $item2)
-                                <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}" {{ $pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
-                                    {{ $item2->daerah }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>                
-                @endif
-
+                <div class="fv-row mb-5" id="kemaskini_daerah_field" style="display: {{ $pegawai->daerah_bertugas != null ? 'block' : 'none' }}">
+                    <label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
+                    <select class="form-select form-select-solid custom-select" name="daerah_bertugas" id="daerah_bertugas" data-control="select2">
+                        <option value="">Pilih Daerah Bertugas</option>
+                        @foreach ($daerah as $item2)
+                            <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}" {{ $pegawai->daerah_bertugas == $item2->kod ? 'selected' : '' }}>
+                                {{ $item2->daerah }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>                
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
@@ -147,6 +139,51 @@
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        {{-- Form vaidation for Kemaskini Akaun Pegawai --}}
+        <script>
+            document.getElementById('modal_kemaskini_pegawai_form').addEventListener('submit', function (event) {
+                // Get form elements
+                const status = document.getElementById('statusAk2').value.trim();
+                const name = document.getElementById('nama').value.trim();
+                const no_kp = document.getElementById('no_kp_pegawai').value.trim();
+                const email = document.getElementById('emel').value.trim();
+                const no_tel = document.getElementById('no_tel_pegawai').value.trim();
+                const jawatan = document.getElementById('jawatan').value;
+                const peranan_pegawai = document.getElementById('tahap_pengguna').value;
+                const negeri_bertugas = document.getElementById('negeri_bertugas').value;
+                const daerah_bertugas = document.getElementById('daerah_bertugas').value;
+            
+                // Initialize error message
+                let errorMessage = '';
+            
+                // Common required field check
+                if (!status || !name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
+                    errorMessage = 'Sila isi semua medan yang bertanda *.';
+                } 
+                else {
+                    if (peranan_pegawai == 3) {
+                        // No additional checks for peranan_pegawai == 3
+                    } else if (peranan_pegawai == 4) {
+                        // For peranan_pegawai == 4, only negeri_bertugas is required
+                        if (!negeri_bertugas) {
+                            errorMessage = 'Sila pilih Negeri Bertugas.';
+                        }
+                    } else if (peranan_pegawai == 5) {
+                        // For peranan_pegawai == 5, both negeri_bertugas and daerah_bertugas are required
+                        if (!negeri_bertugas || !daerah_bertugas) {
+                            errorMessage = 'Sila pilih Negeri Bertugas dan Daerah Bertugas.';
+                        }
+                    }
+                }
+            
+                // If there is an error message, prevent form submission and display the message
+                if (errorMessage) {
+                    event.preventDefault();  // Prevent form submission
+                    alert(errorMessage);     // Display the error message to the user 
+                }
+            });
+        </script>   
 
         {{-- Validate input --}}
         <script>
@@ -202,61 +239,57 @@
 
         {{-- Display field tempat bertugas based on peranan --}}
         <script>
-            // Function to toggle fields based on tahap_pengguna value
+            // Define toggleFields globally so it's accessible from inline onchange
             function toggleFields() {
                 const tahapPengguna = document.getElementById('tahap_pengguna').value;
                 const negeriField = document.getElementById('kemaskini_negeri_field');
                 const daerahField = document.getElementById('kemaskini_daerah_field');
-
-                // Show or hide the "Negeri Bertugas" field if tahap_pengguna is 4 or 5
-                negeriField.style.display = (tahapPengguna == 4 || tahapPengguna == 5) ? 'block' : 'none';
-
-                // Show or hide the "Daerah Bertugas" field if tahap_pengguna is 5
-                daerahField.style.display = (tahapPengguna == 5) ? 'block' : 'none';
+                
+                if (negeriField && daerahField) {
+                    if (tahapPengguna === "3") {
+                        negeriField.style.display = 'none';
+                        daerahField.style.display = 'none';
+                    } else if (tahapPengguna === "4") {
+                        negeriField.style.display = 'block';
+                        daerahField.style.display = 'none';
+                    } else if (tahapPengguna === "5") {
+                        negeriField.style.display = 'block';
+                        daerahField.style.display = 'block';
+                    }
+                }
             }
-
-            // Run the toggle function when the modal is opened
+        
             document.addEventListener('DOMContentLoaded', function() {
-                toggleFields(); // Initial check to set the correct display based on tahap_pengguna
+                // Call toggleFields on page load to set initial state
+                toggleFields();
             });
-
-            // Also run the toggle function whenever tahap_pengguna is changed
-            document.getElementById('tahap_pengguna').addEventListener('change', toggleFields);
-        </script>
+        </script> 
 
         {{-- Filter daerah based on negeri --}}
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            // Function to filter daerah options based on selected negeri
+            function filterDaerahOptions() {
                 const negeriSelect = document.getElementById('negeri_bertugas');
                 const daerahSelect = document.getElementById('daerah_bertugas');
-                const allDaerahOptions = Array.from(daerahSelect.options);
+                const selectedNegeriId = negeriSelect.value;
+                
+                console.log("Selected Negeri ID:", selectedNegeriId);
 
-                negeriSelect.addEventListener('change', function () {
-                    const selectedNegeriId = negeriSelect.value;
-
-                    // Clear current daerah options
-                    daerahSelect.innerHTML = '';
-
-                    // Add an empty default option
-                    const defaultOption = document.createElement('option');
-                    defaultOption.value = '';
-                    defaultOption.text = 'Pilih Daerah Bertugas';
-                    daerahSelect.appendChild(defaultOption);
-
-                    // Filter and add options based on selected negeri
-                    allDaerahOptions.forEach(option => {
-                        if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
-                            daerahSelect.appendChild(option.cloneNode(true));
-                        }
-                    });
+                Array.from(daerahSelect.options).forEach(option => {
+                    if (option.getAttribute('data-negeri-id') === selectedNegeriId || option.value === '') {
+                        option.hidden = false;
+                    } else {
+                        option.hidden = true;
+                    }
                 });
 
-                // Trigger change event on page load to initialize daerah options if a negeri is already selected
-                if (negeriSelect.value) {
-                    negeriSelect.dispatchEvent(new Event('change'));
-                }
+                daerahSelect.value = ''; // Reset daerah selection
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Call toggleFields on page load to set initial state
+                filterDaerahOptions();
             });
         </script>
-    </body>
 </html>
 

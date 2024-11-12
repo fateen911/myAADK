@@ -355,8 +355,7 @@ class DaftarPenggunaController extends Controller
         $pegawai = Pegawai::find($request->id);
         $user = User::where('id', $pegawai->users_id)->first();
 
-        if ($user && $pegawai)
-        {
+        if ($user && $pegawai) {
             // Prepare the data for update in table users
             $updateDataUsers = [
                 'name' => strtoupper($request->nama),
@@ -388,10 +387,23 @@ class DaftarPenggunaController extends Controller
                 'no_tel' => $request->no_tel,
                 'jawatan' => $request->jawatan,
                 'peranan' => $request->tahap_pengguna,
-                'negeri_bertugas' => $request->negeri_bertugas,
-                'daerah_bertugas' => $request->daerah_bertugas,
                 'updated_at' => now(),
             ];
+
+            // Update `negeri_bertugas` and `daerah_bertugas` based on `tahap_pengguna`
+            if ($request->tahap_pengguna == 3) {
+                // If tahap_pengguna is 3, set both to null
+                $updateDataPegawai['negeri_bertugas'] = null;
+                $updateDataPegawai['daerah_bertugas'] = null;
+            } elseif ($request->tahap_pengguna == 4) {
+                // If tahap_pengguna is 4, set daerah_bertugas to null, keep negeri_bertugas from request
+                $updateDataPegawai['negeri_bertugas'] = $request->negeri_bertugas;
+                $updateDataPegawai['daerah_bertugas'] = null;
+            } elseif ($request->tahap_pengguna == 5) {
+                // If tahap_pengguna is 5, use both negeri_bertugas and daerah_bertugas from request
+                $updateDataPegawai['negeri_bertugas'] = $request->negeri_bertugas;
+                $updateDataPegawai['daerah_bertugas'] = $request->daerah_bertugas;
+            }
 
             // Update pegawai details
             $pegawai->update($updateDataPegawai);
