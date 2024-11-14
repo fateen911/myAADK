@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\ModalKepulihanController;
 use App\Http\Controllers\TelegramBotController;
 use App\Http\Controllers\PejabatPengawasanController;
 use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\PelaporanController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {

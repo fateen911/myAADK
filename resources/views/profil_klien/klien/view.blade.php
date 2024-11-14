@@ -8,6 +8,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
@@ -960,8 +961,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Bidang Pekerjaan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="true" >
-                                                                <option>Pilih Bidang Pekerjaan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="false" >
+                                                                <option value="" disabled selected hidden>Pilih Bidang Pekerjaan</option>
                                                                 @foreach ($bidangKerja as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
                                                                 @endforeach
@@ -973,8 +974,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Pekerjaan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="true" >
-                                                                <option>Pilih Nama Pekerjaan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="false" >
+                                                                <option value="" disabled selected hidden>Pilih Nama Pekerjaan</option>
                                                                 @foreach ($namaKerja as $item2)
                                                                     <option value="{{ $item2->id }}" {{ $butiranKlien->nama_kerja == $item2->id ? 'selected' : '' }}>{{ $item2->pekerjaan }}</option>
                                                                 @endforeach
@@ -986,8 +987,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Pendapatan (RM)</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="true">
-                                                                <option>Pilih Julat Pendapatan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="false">
+                                                                <option value="" disabled selected hidden>Pilih Julat Pendapatan</option>
                                                                 @foreach ($pendapatan as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
                                                                 @endforeach
@@ -999,8 +1000,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Kategori Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="true">
-                                                                <option>Pilih Kategori Majikan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="false">
+                                                                <option value="" disabled selected hidden>Pilih Kategori Majikan</option>
                                                                 <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                                                 <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
                                                                 <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
@@ -1014,8 +1015,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="true" >
-                                                                <option>Pilih Nama Majikan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan" data-control="select2">
+                                                                <option value="" disabled selected hidden>Pilih Nama Majikan</option>
                                                                 @foreach ($majikan as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
                                                                 @endforeach
@@ -1060,7 +1061,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2">
-                                                                <option>Pilih Negeri</option>
+                                                                <option value="" disabled selected hidden>Pilih Negeri</option>
                                                                 @foreach ($negeriKerja as $negeriK)
                                                                     <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                                                 @endforeach
@@ -1073,7 +1074,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                                <option>Pilih Daerah</option>
+                                                                <option value="" disabled selected hidden>Pilih Daerah</option>
                                                                 @foreach ($daerahKerja as $daerahK)
                                                                     <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                                                 @endforeach
@@ -1089,7 +1090,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="true">
+                                                            <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih Alasan</option>
                                                                 <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                                                 <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>

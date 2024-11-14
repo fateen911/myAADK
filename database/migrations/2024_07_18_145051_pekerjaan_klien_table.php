@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('pendapatan')->nullable();
             $table->string('kategori_majikan')->nullable();
             $table->string('nama_majikan')->nullable();
+            $table->string('lain_lain_majikan')->nullable();
             $table->string('no_tel_majikan')->nullable();
             $table->string('alamat_kerja')->nullable();
             $table->integer('poskod_kerja')->nullable();

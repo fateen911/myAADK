@@ -20,6 +20,7 @@ class PekerjaanKlien extends Model
         'pendapatan',
         'kategori_majikan',
         'nama_majikan',
+        'lain_lain_majikan',
         'no_tel_majikan',
         'alamat_kerja',
         'poskod_kerja',
