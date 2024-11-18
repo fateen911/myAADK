@@ -496,7 +496,7 @@ class DaftarPenggunaController extends Controller
             $pegawaiBaharu->save();
 
             // Generate the email verification URL
-            event(new Registered($user));
+            // event(new Registered($user));
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
                 now()->addMinutes(60),
@@ -595,7 +595,7 @@ class DaftarPenggunaController extends Controller
             $pegawai = Pegawai::create($pegawaiData);
 
             // Generate the email verification URL
-            event(new Registered($user));
+            // event(new Registered($user));
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
                 now()->addMinutes(60),
