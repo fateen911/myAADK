@@ -148,7 +148,7 @@ License: For each use you must have a valid license purchased only from above li
                         <img alt="Logo" src="/logo/mySupport-huruf-2.png" class="logo-default h-25px h-lg-25px mx-auto pb-1-5 pb-md-1"/>
                         merupakan sistem maklumat klien
                         pasca pemulihan AADK yang telah tamat mengikuti
-                        program Rawatan dan Pemulihan Dalam Komuniti.
+                        program Rawatan dan Pemulihan Dalam Komuniti dan Institusi.
                         Kepentingan pangkalan data ini adalah untuk memberi
                         sokongan kepulihan yang berterusan kepada klien
                         pasca pemulihan pada bila-bila
@@ -162,7 +162,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <br>
                     <h3 class="fw-medium text-justify w-100 f-calibri">
-                        Kepulihan adalah satu perjalanan dan manifesto
+                        Kepulihan adalah satu perjalanan dan manifestasi
                         sokongan antara <img alt="Logo" src="/logo/pccp-slogan.png" class="logo-default h-17px mx-auto pb-1"/>. <br>
 
                     </h3>
@@ -171,18 +171,18 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="container landing-img-3 shadow w-85 h-50 h-md-100 my-auto mx-auto">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="flex-root">
-                                <h3 class="mt-5 ms-3 text-white text-shadow">Pengumuman Aktiviti</h3>
+                                <h3 class="mt-5 ms-3">Pengumuman Aktiviti</h3>
                             </div>
                             <div class="flex-root d-flex gap-2 mt-4 justify-content-end me-5">
-                                <i class="bi bi-circle-fill text-success text-shadow"></i>
-                                <i class="bi bi-circle-fill text-warning text-shadow"></i>
-                                <i class="bi bi-circle-fill text-danger text-shadow"></i>
+                                <i class="bi bi-circle-fill text-success"></i>
+                                <i class="bi bi-circle-fill text-warning"></i>
+                                <i class="bi bi-circle-fill text-danger"></i>
                             </div>
                         </div>
                         <div id="programCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner" id="carousel-content">
                                 <!-- Dynamic program content will be inserted here -->
-                                <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white text-black shadow-sm">
+                                <div class="d-block mx-2 mt-2 mb-5 w-97 text-center p-5 landing-bg-white-2 text-black">
                                     <h3 class="p-2">Tiada Aktiviti</h3>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@ License: For each use you must have a valid license purchased only from above li
                         <!--begin::Block-->
                         <div class="rounded landing-dark-border p-1 mb-2">
                             <!--begin::Title-->
-                            <h4 class="text-white">AGENSI ANTIDADAH KEBANGSAAN MALAYSIA <br>KEMENTERIAN DALAM NEGERI</h4>
+                            <h4 class="text-white">AGENSI ANTIDADAH KEBANGSAAN<br>KEMENTERIAN DALAM NEGERI</h4>
                             <!--end::Title-->
                             <!--begin::Text-->
                             <p class="fs-5">Jalan Maktab Perguruan Islam <br>43000 Kajang, Selangor </p>
@@ -401,7 +401,7 @@ License: For each use you must have a valid license purchased only from above li
                     $.each(data, function (index, program) {
                         carouselContent += `
                             <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                                <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white text-black">
+                                <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white-2 text-black">
                                     <h3 class="p-2">${program.nama}</h3>
                                     <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
                                     <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>

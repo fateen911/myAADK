@@ -47567,7 +47567,7 @@ a:hover {
 }
 
 .landing-img-3{
-    background-image: url('/assets/media/illustrations/background/bg-img-7.jpeg');
+    background-image: url('/assets/media/illustrations/background/bg-img-8.png');
     background-size: cover!important; /* Scale the image to cover the entire viewport */
     background-position: center!important; /* Center the image */
     background-repeat: no-repeat!important; /* Prevent repeating the image */
@@ -47585,6 +47585,15 @@ a:hover {
     border-radius: 10px;
     padding-left: 5%!important;
     padding-right: 5%!important;
+}
+
+.landing-bg-white-2{
+    background-color: rgba(245, 245, 245, 0.87) !important;
+    border-radius: 10px;
+    border: solid 1px rgba(197, 224, 246, 0.99);
+    padding-left: 5%!important;
+    padding-right: 5%!important;
+    box-shadow: 0 0 5px 5px rgba(197, 224, 246, 0.55)!important;
 }
 
 .landing-bg-gray{
@@ -47636,7 +47645,7 @@ a:hover {
 }
 
 .text-shadow{
-    text-shadow: 0 0 5px black, 0 0 20px black, 0 0 0 black, 0 0 50px black !important;
+    text-shadow: 0 0 1px #3178b8, 0 0 5px #3178b8, 0 0 0 #3178b8, 0 0 0 #3178b8 !important;
 }
 
 .landing-hr-top {
