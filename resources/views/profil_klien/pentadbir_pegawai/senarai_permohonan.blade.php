@@ -119,7 +119,7 @@
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th style="width:25% !important;">Nama</th>
                                             <th style="width:15% !important; text-align: center;">No. Kad Pengenalan</th>
-                                            <th style="width:20% !important; text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th style="width:20% !important; text-align: center;">Pejabat AADK Daerah</th>
                                             <th style="width:15% !important; text-align: center;">AADK Negeri</th>
                                             <th style="width:15% !important; text-align: center;">Pengemaskini</th> 
                                             <th style="width:10% !important; text-align: center;">Tindakan</th>
@@ -172,7 +172,7 @@
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th class="min-w-100px" style="text-align: center;">Pejabat AADK Daerah</th>
                                             <th class="min-w-100px" style="text-align: center;">AADK Negeri</th>
                                             <th class="min-w-30px" style="text-align: center;">Tindakan</th></th>
                                         </tr>
