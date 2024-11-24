@@ -1681,18 +1681,19 @@ class ProfilKlienController extends Controller
         try {
             // Validation rules for fields that users can update
             $validatedData = $request->validate([
-                'status_kerja'      => 'required|string|max:255',
-                'alasan_tidak_kerja'=> 'nullable|string|max:255',
-                'bidang_kerja'      => 'nullable|string|max:255',
-                'nama_kerja'        => 'nullable|string|max:255',
-                'pendapatan'        => 'nullable|string|max:255',
-                'kategori_majikan'  => 'nullable|string|max:255',
-                'nama_majikan'      => 'nullable|string|max:255',
-                'no_tel_majikan'    => 'nullable|string|max:11',
-                'alamat_kerja'      => 'nullable|string|max:255',
-                'poskod_kerja'      => 'nullable|integer',
-                'daerah_kerja'      => 'nullable|string|max:255',
-                'negeri_kerja'      => 'nullable|string|max:255',
+                'status_kerja'          => 'required|string|max:255',
+                'alasan_tidak_kerja'    => 'nullable|string|max:255',
+                'bidang_kerja'          => 'nullable|string|max:255',
+                'nama_kerja'            => 'nullable|string|max:255',
+                'pendapatan'            => 'nullable|string|max:255',
+                'kategori_majikan'      => 'nullable|string|max:255',
+                'nama_majikan'          => 'nullable|string|max:255',
+                'lain_lain_nama_majikan'=> 'nullable|string|max:255',
+                'no_tel_majikan'        => 'nullable|string|max:11',
+                'alamat_kerja'          => 'nullable|string|max:255',
+                'poskod_kerja'          => 'nullable|integer',
+                'daerah_kerja'          => 'nullable|string|max:255',
+                'negeri_kerja'          => 'nullable|string|max:255',
             ]); 
         } 
         catch (\Illuminate\Validation\ValidationException $e) {
@@ -1701,17 +1702,19 @@ class ProfilKlienController extends Controller
         }  
 
         // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
-        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
-            $validatedData['bidang_kerja'] = null;
-            $validatedData['nama_kerja'] = null;
-            $validatedData['pendapatan'] = null;
-            $validatedData['kategori_majikan'] = null;
-            $validatedData['nama_majikan'] = null;
-            $validatedData['no_tel_majikan'] = null;
-            $validatedData['alamat_kerja'] = null;
-            $validatedData['poskod_kerja'] = null;
-            $validatedData['daerah_kerja'] = null;
-            $validatedData['negeri_kerja'] = null;
+        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') 
+        {
+            $validatedData['bidang_kerja']          = null;
+            $validatedData['nama_kerja']            = null;
+            $validatedData['pendapatan']            = null;
+            $validatedData['kategori_majikan']      = null;
+            $validatedData['nama_majikan']          = null;
+            $validatedData['lain_lain_nama_majikan']= null;
+            $validatedData['no_tel_majikan']        = null;
+            $validatedData['alamat_kerja']          = null;
+            $validatedData['poskod_kerja']          = null;
+            $validatedData['daerah_kerja']          = null;
+            $validatedData['negeri_kerja']          = null;
         }
 
         // dd($validatedData);

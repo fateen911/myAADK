@@ -13,12 +13,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
     <style>
         /* Flexbox settings for the wrapper */
@@ -822,6 +821,7 @@
                                         </div>
                                     </div>
                                     <!--end::Input group-->
+                                    <!--begin::Input group-->
                                     <div class="row fv-row" id="lainLainMajikanNonModal" style="display:none;">
                                         <div class="col-md-4 text-md-start">
                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
@@ -830,10 +830,11 @@
                                             <span class="fs-6 form-control-plaintext">{{$butiranKlien->lain_lain_majikan}}</span>
                                         </div>
                                     </div>   
+                                    <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row">
                                         <div class="col-md-4 text-md-start">
-                                            <label class="fs-6 fw-semibold form-label mt-3">
+                                            <label class="fs-6 fw-semibold form-label">
                                                 <span>Nombor Telefon Majikan</span>
                                             </label>
                                         </div>
@@ -1036,14 +1037,16 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="row fv-row mb-7" id="lainLainMajikanModal" style="display:none;">
-                                                        <div class="col-md-4 text-md-start">
-                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                                    <div id="lainLainMajikanModal">
+                                                        <div class="row fv-row mb-7">
+                                                            <div class="col-md-4 text-md-start">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" class="form-control form-control-solid" id="lain_lain_nama_majikan" name="lain_lain_nama_majikan" value="{{$butiranKlien->lain_lain_majikan}}" style="text-transform: uppercase;"/>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid" id="lain_lain_nama_majikan" name="lain_lain_nama_majikan" style="text-transform: uppercase;"/>
-                                                        </div>
-                                                    </div>       
+                                                    </div>
 
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
@@ -3293,6 +3296,7 @@
                 pendapatan: "{{ $butiranKlien->pendapatan }}",
                 kategori_majikan: "{{ $butiranKlien->kategori_majikan }}",
                 nama_majikan: "{{ $butiranKlien->nama_majikan }}",
+                lain_lain_majikan: "{{ $butiranKlien->lain_lain_majikan }}",
                 no_tel_majikan: "{{ $butiranKlien->no_tel_majikan }}",
                 alamat_kerja: "{{ $butiranKlien->alamat_kerja }}",
                 poskod_kerja: "{{ $butiranKlien->poskod_kerja }}",
@@ -3314,6 +3318,7 @@
                 pendapatan: document.getElementById('pendapatan').value,
                 kategori_majikan: document.getElementById('kategori_majikan').value,
                 nama_majikan: document.getElementById('nama_majikan').value,
+                lain_lain_majikan: document.getElementById('lain_lain_nama_majikan').value,
                 no_tel_majikan: document.getElementById('no_tel_majikan').value,
                 alamat_kerja: document.getElementById('alamat_kerja').value,
                 poskod_kerja: document.getElementById('poskod_kerja').value,
@@ -3705,9 +3710,8 @@
         });
     </script>
 
-    {{-- Lain-lain majikan --}}
+    {{-- Lain-lain majikan Modal --}}
     <script>
-        // Function to show or hide fields based on status_kerja
         function LainMajikanModal() 
         {
             const namaMajikanDropdown = document.getElementById('nama_majikan');
@@ -3721,7 +3725,7 @@
             else {
                 lainLainNamaMajikanModal.style.display = 'none';
                 // lainLainNamaMajikanInput.removeAttribute('required');
-                lainLainNamaMajikanInput.value = ''; // Clear input value
+                // lainLainNamaMajikanInput.value = ''; // Clear input value
             }
         }
 
@@ -3731,6 +3735,7 @@
         });
     </script>
 
+    {{-- Lain-lain majikan Non Modal --}}
     <script>
         function LainMajikanNonModal() {
             const namaMajikanNonModal = document.getElementById('nama_majikan_non_modal');
