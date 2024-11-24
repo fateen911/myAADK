@@ -1746,7 +1746,7 @@
         });
     </script>
 
-	{{-- Form vaidation for Daftar Pegawai --}}
+	{{-- Form validation for Daftar Pegawai --}}
 	<script>
 		document.getElementById('kt_modal_add_customer_submit').addEventListener('click', function (event) {
 			// Prevent form submission

@@ -100,6 +100,10 @@
             font-weight: bold;
             color: #007bff !important;
         }
+
+        .select2-container {
+            z-index: 9999 !important; /* Higher than the modal z-index */
+        }
     </style>
 </head>
 
@@ -199,7 +203,7 @@
                     
                     <!--begin:::Tab content-->
                     <div class="tab-content" id="myTabContent">
-                        <!--begin:::Tab pane-->
+                        <!--begin:::Tab pane Peribadi-->
                         <div class="tab-pane fade show active" id="kt_ecommerce_settings_general" role="tabpanel">
                             <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
                                 <!--begin::Heading-->
@@ -804,7 +808,7 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row">
+                                    <div class="row fv-row mb-2">
                                         <div class="col-md-4 text-md-start">
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Nama Majikan</span>
@@ -814,10 +818,18 @@
                                             @php
                                                 $namaMajikan = DB::table('senarai_majikan')->where('id', $butiranKlien->nama_majikan)->value('senarai_majikan.majikan');
                                             @endphp
-                                            <span class="fs-6 form-control-plaintext">{{$namaMajikan}}</span>
+                                            <span id="nama_majikan_non_modal" class="fs-6 form-control-plaintext">{{$namaMajikan}}</span>
                                         </div>
                                     </div>
                                     <!--end::Input group-->
+                                    <div class="row fv-row" id="lainLainMajikanNonModal" style="display:none;">
+                                        <div class="col-md-4 text-md-start">
+                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->lain_lain_majikan}}</span>
+                                        </div>
+                                    </div>   
                                     <!--begin::Input group-->
                                     <div class="row fv-row">
                                         <div class="col-md-4 text-md-start">
@@ -1010,19 +1022,29 @@
                                                             </select>
                                                         </div>
                                                     </div>
+
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan" data-control="select2">
-                                                                <option value="" disabled selected hidden>Pilih Nama Majikan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan" data-control="select2" onchange="LainMajikanModal() ">
+                                                                <option disabled selected hidden>Pilih Nama Majikan</option>
                                                                 @foreach ($majikan as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div class="row fv-row mb-7" id="lainLainMajikanModal" style="display:none;">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid" id="lain_lain_nama_majikan" name="lain_lain_nama_majikan" style="text-transform: uppercase;"/>
+                                                        </div>
+                                                    </div>       
+
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon Majikan
@@ -2365,10 +2387,21 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     {{-- Script for select2 --}}
-    <script>
+    {{-- <script>
         $(document).ready(function() {
 			$('.js-example-basic-single').select2();
 		});
+    </script> --}}
+
+    <script>
+        $('#requestPeribadiKlien').on('shown.bs.modal', function() {
+            console.log("Initializing Select2...");
+            $('#negeri, #daerah, #tahap_pendidikan').select2({
+                placeholder: "Pilih...",
+                allowClear: true,
+                dropdownParent: $('#requestPeribadiKlien') // Attach to modal
+            });
+        });
     </script>
     
     {{-- Success / Error Message --}}
@@ -2816,13 +2849,6 @@
                     }
                 });
             }
-        });
-    </script>
-
-    {{-- Search in dropdown button --}}
-    <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
         });
     </script>
 
@@ -3676,6 +3702,51 @@
                 // Allow form submission
                 document.getElementById('penjagaKlienForm').submit();
             }
+        });
+    </script>
+
+    {{-- Lain-lain majikan --}}
+    <script>
+        // Function to show or hide fields based on status_kerja
+        function LainMajikanModal() 
+        {
+            const namaMajikanDropdown = document.getElementById('nama_majikan');
+            const lainLainNamaMajikanModal = document.getElementById('lainLainMajikanModal');
+            const lainLainNamaMajikanInput = document.getElementById('lain_lain_nama_majikan');
+
+            if (namaMajikanDropdown.value === '829') { // Check if value matches ID 829 (LAIN-LAIN)
+                lainLainNamaMajikanModal.style.display = 'block';
+                // lainLainNamaMajikanInput.setAttribute('required', 'required');
+            } 
+            else {
+                lainLainNamaMajikanModal.style.display = 'none';
+                // lainLainNamaMajikanInput.removeAttribute('required');
+                lainLainNamaMajikanInput.value = ''; // Clear input value
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Call toggleFields on page load to set initial state
+            LainMajikanModal();
+        });
+    </script>
+
+    <script>
+        function LainMajikanNonModal() {
+            const namaMajikanNonModal = document.getElementById('nama_majikan_non_modal');
+            const lainLainNamaMajikanNonModal = document.getElementById('lainLainMajikanNonModal');
+
+            // Use innerText or textContent to get the displayed value
+            if (namaMajikanNonModal.innerText === 'LAIN-LAIN' || namaMajikanNonModal.textContent === 'LAIN-LAIN') { 
+                lainLainNamaMajikanNonModal.style.display = 'block';
+            } else {
+                lainLainNamaMajikanNonModal.style.display = 'none';
+            }
+        }
+
+        // Call the function on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            LainMajikanNonModal();
         });
     </script>
 </body>
