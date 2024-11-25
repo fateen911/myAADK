@@ -923,7 +923,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" data-hide-search="false" >
+                                        <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan"  data-control="select2" onchange="LainMajikanNonModal()" >
                                             <option>Pilih Nama Majikan</option>
                                             @foreach ($majikan as $item)
                                                 <option value="{{ $item->id }}" {{ $pekerjaan->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
@@ -931,6 +931,18 @@
                                         </select>
                                         <!--end::Input-->
                                     </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div id="lainLainMajikanNonModal">
+                                    <div class="row fv-row mb-7">
+                                        <div class="col-md-3 text-md-start">
+                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control form-control-solid" id="lain_lain_majikan" name="lain_lain_majikan" value="{{$pekerjaan->lain_lain_majikan}}" style="text-transform: uppercase;"/>
+                                        </div>
+                                    </div>   
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
@@ -1151,9 +1163,21 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" name="nama_majikan" value="{{ $requestedNamaMajikan }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" name="nama_majikan" id="nama_majikan_modal"  value="{{ $requestedNamaMajikan }}" readonly />
                                                         </div>
                                                     </div>
+                                                    @if ($requestedNamaMajikan == 'LAIN-LAIN')
+                                                        <div id="lainLainMajikanModal">
+                                                            <div class="row fv-row mb-7">
+                                                                <div class="col-md-4 text-md-start">
+                                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" class="form-control form-control-solid {{ trim($requestedDataPekerjaan['lain_lain_nama_majikan'] ?? '') != trim($pekerjaan->lain_lain_majikan ?? '') ? 'border-danger' : '' }}" value="{{ $requestedDataPekerjaan['lain_lain_nama_majikan'] }}" readonly />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Majikan</label>
@@ -1168,7 +1192,6 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <textarea class="form-control form-control-solid {{ trim($requestedDataPekerjaan['alamat_kerja'] ?? '') != trim($pekerjaan->alamat_kerja ?? '') ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea>
-                                                            {{-- <textarea class="form-control form-control-solid {{ $requestedDataPekerjaan['alamat_kerja'] != $pekerjaan->alamat_kerja ? 'border-danger' : '' }}" name="alamat_kerja" readonly>{{ $requestedDataPekerjaan['alamat_kerja'] }}</textarea> --}}
                                                         </div>
                                                     </div>
                                                     <div class="row fv-row mb-7">
@@ -3477,6 +3500,7 @@
                 pendapatan: "{{ $pekerjaan->pendapatan }}",
                 kategori_majikan: "{{ $pekerjaan->kategori_majikan }}",
                 nama_majikan: "{{ $pekerjaan->nama_majikan }}",
+                lain_lain_majikan: "{{ $pekerjaan->lain_lain_majikan }}",
                 no_tel_majikan: "{{ $pekerjaan->no_tel_majikan }}",
                 alamat_kerja: "{{ $pekerjaan->alamat_kerja }}",
                 poskod_kerja: "{{ $pekerjaan->poskod_kerja }}",
@@ -3535,6 +3559,7 @@
                 pendapatan: pendapatan,
                 kategori_majikan: kategori_majikan,
                 nama_majikan: nama_majikan,
+                lain_lain_majikan: document.getElementById('lain_lain_majikan').value,
                 no_tel_majikan: document.getElementById('no_tel_majikan').value,
                 alamat_kerja: document.getElementById('alamat_kerja').value,
                 poskod_kerja: document.getElementById('poskod_kerja').value,
@@ -3927,5 +3952,47 @@
             }
         });
     </script>
+
+    {{-- Lain-lain majikan Non Modal --}}
+    <script>
+        function LainMajikanNonModal() 
+        {
+            const namaMajikanDropdown = document.getElementById('nama_majikan');
+            const lainLainNamaMajikanNonModal = document.getElementById('lainLainMajikanNonModal');
+            const lainLainNamaMajikanInput = document.getElementById('lain_lain_majikan');
+
+            if (namaMajikanDropdown.value === '829') { // Check if value matches ID 829 (LAIN-LAIN)
+                lainLainNamaMajikanNonModal.style.display = 'block';
+            } 
+            else {
+                lainLainNamaMajikanNonModal.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Call toggleFields on page load to set initial state
+            LainMajikanNonModal();
+        });
+    </script>
+
+    {{-- Lain-lain majikan Modal --}}
+    {{-- <script>
+        function LainMajikanModal() {
+            const namaMajikanModal = document.getElementById('nama_majikan_modal');
+            const lainLainNamaMajikanModal = document.getElementById('lainLainMajikanModal');
+
+            // Use innerText or textContent to get the displayed value
+            if (namaMajikanModal.value == '829') { 
+                lainLainNamaMajikanModal.style.display = 'block';
+            } else {
+                lainLainNamaMajikanModal.style.display = 'none';
+            }
+        }
+
+        // Call the function on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            LainMajikanModal();
+        });
+    </script> --}}
 </body>     
 @endsection
