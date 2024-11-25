@@ -507,6 +507,13 @@
                     <td style="width: 2%">:</td>
                     <td>{{$namaMajikan}}</td>
                 </tr>
+                @if ($pekerjaan->lain_lain_majikan !== null)
+                    <tr class="gap-left">
+                        <td style="width: 35%">Nama Majikan (Lain-lain)</td>
+                        <td style="width: 2%">:</td>
+                        <td>{{$pekerjaan->lain_lain_majikan}}</td>
+                    </tr>
+                @endif
                 <tr class="gap-left">
                     <td style="width: 35%">No. Telefon Majikan</td>
                     <td style="width: 2%">:</td>
