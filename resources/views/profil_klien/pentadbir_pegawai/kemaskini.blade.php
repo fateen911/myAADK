@@ -3974,25 +3974,5 @@
             LainMajikanNonModal();
         });
     </script>
-
-    {{-- Lain-lain majikan Modal --}}
-    {{-- <script>
-        function LainMajikanModal() {
-            const namaMajikanModal = document.getElementById('nama_majikan_modal');
-            const lainLainNamaMajikanModal = document.getElementById('lainLainMajikanModal');
-
-            // Use innerText or textContent to get the displayed value
-            if (namaMajikanModal.value == '829') { 
-                lainLainNamaMajikanModal.style.display = 'block';
-            } else {
-                lainLainNamaMajikanModal.style.display = 'none';
-            }
-        }
-
-        // Call the function on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            LainMajikanModal();
-        });
-    </script> --}}
 </body>     
 @endsection

@@ -825,7 +825,7 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row mb-2">
+                                    <div class="row fv-row">
                                         <div class="col-md-4 text-md-start">
                                             <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Nama Majikan</span>
@@ -840,19 +840,21 @@
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row fv-row" id="lainLainMajikanNonModal" style="display:none;">
-                                        <div class="col-md-4 text-md-start">
-                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <span class="fs-6 form-control-plaintext">{{$butiranKlien->lain_lain_majikan}}</span>
-                                        </div>
-                                    </div>   
+                                    <div id="lainLainMajikanNonModal">
+                                        <div class="row fv-row">
+                                            <div class="col-md-4 text-md-start">
+                                                <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <span class="fs-6 form-control-plaintext">{{$butiranKlien->lain_lain_majikan}}</span>
+                                            </div>
+                                        </div>   
+                                    </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
                                     <div class="row fv-row">
                                         <div class="col-md-4 text-md-start">
-                                            <label class="fs-6 fw-semibold form-label">
+                                            <label class="fs-6 fw-semibold form-label mt-3">
                                                 <span>Nombor Telefon Majikan</span>
                                             </label>
                                         </div>

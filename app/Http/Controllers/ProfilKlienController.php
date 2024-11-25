@@ -575,6 +575,11 @@ class ProfilKlienController extends Controller
         {
             $requestedData = json_decode($updateRequestPekerjaan->requested_data, true);
 
+            // Check if nama_majikan is '829' (LAIN-LAIN)
+            if ($requestedData['nama_majikan'] == '829') {
+                $requestedData['lain_lain_majikan'] = $requestedData['lain_lain_nama_majikan'] ?? null;
+            }
+
             // Update the pekerjaan_klien with the requested data
             $pekerjaanKlien->update($requestedData);
 
@@ -1192,6 +1197,7 @@ class ProfilKlienController extends Controller
                 'pendapatan'        => 'nullable|string|max:255',
                 'kategori_majikan'  => 'nullable|string|max:255',
                 'nama_majikan'      => 'nullable|string|max:255',
+                'lain_lain_majikan' => 'nullable|string|max:255',
                 'no_tel_majikan'    => 'nullable|string|max:11',
                 'alamat_kerja'      => 'nullable|string|max:255',
                 'poskod_kerja'      => 'nullable|integer',
@@ -1210,16 +1216,17 @@ class ProfilKlienController extends Controller
         // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
         if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
             $validatedData = array_merge($validatedData, [
-                'bidang_kerja' => null,
-                'nama_kerja' => null,
-                'pendapatan' => null,
-                'kategori_majikan' => null,
-                'nama_majikan' => null,
-                'no_tel_majikan' => null,
-                'alamat_kerja' => null,
-                'poskod_kerja' => null,
-                'daerah_kerja' => null,
-                'negeri_kerja' => null,
+                'bidang_kerja'      => null,
+                'nama_kerja'        => null,
+                'pendapatan'        => null,
+                'kategori_majikan'  => null,
+                'nama_majikan'      => null,
+                'lain_lain_majikan' => null,
+                'no_tel_majikan'    => null,
+                'alamat_kerja'      => null,
+                'poskod_kerja'      => null,
+                'daerah_kerja'      => null,
+                'negeri_kerja'      => null,
             ]);
         } else {
             // Set alasan_tidak_kerja to null if status_kerja is BEKERJA
@@ -1691,7 +1698,7 @@ class ProfilKlienController extends Controller
                 'lain_lain_nama_majikan'=> 'nullable|string|max:255',
                 'no_tel_majikan'        => 'nullable|string|max:11',
                 'alamat_kerja'          => 'nullable|string|max:255',
-                'poskod_kerja'          => 'nullable|integer',
+                'poskod_kerja'          => 'required|string|max:5',
                 'daerah_kerja'          => 'nullable|string|max:255',
                 'negeri_kerja'          => 'nullable|string|max:255',
             ]); 
