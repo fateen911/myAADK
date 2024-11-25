@@ -338,39 +338,39 @@
                     <div class="mb-4">
                         <label for="kawasan_tempat_tinggal"><b>9) Di kawasan manakah anda tinggal ?</b></label><br>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Bandar" id="kawasan1" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Bandar') || old('kawasan_tempat_tinggal') == 'Bandar' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan1">Bandar</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="FELDA" id="kawasan1" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'FELDA') || old('kawasan_tempat_tinggal') == 'FELDA' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan1">FELDA</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Pinggir Bandar" id="kawasan2" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Pinggir Bandar') || old('kawasan_tempat_tinggal') == 'Pinggir Bandar' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan2">Pinggir Bandar</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Hybrid" id="kawasan2" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Hybrid') || old('kawasan_tempat_tinggal') == 'Hybrid' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan2">Hybrid (Penempatan Bercampur)</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Luar Bandar/Kampung" id="kawasan3" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Luar Bandar/Kampung') || old('kawasan_tempat_tinggal') == 'Luar Bandar/Kampung' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan3">Luar Bandar/Kampung</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kampung Nelayan" id="kawasan3" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Kampung Nelayan') || old('kawasan_tempat_tinggal') == 'Kampung Nelayan' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan3">Kampung Nelayan</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Felda" id="kawasan4" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Felda') || old('kawasan_tempat_tinggal') == 'Felda' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan4">Felda</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kampung" id="kawasan4" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Kampung') || old('kawasan_tempat_tinggal') == 'Kampung' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan4">Kampung (Tradisional/Tersusun/Air/Asli/Baru/Estet)</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Felcra" id="kawasan5" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Felcra') || old('kawasan_tempat_tinggal') == 'Felcra' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan5">Felcra</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="PPR/PPRT/PPA" id="kawasan5" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'PPR/PPRT/PPA') || old('kawasan_tempat_tinggal') == 'PPR/PPRT/PPA' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan5">PPR/PPRT/PPA</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kebun Getah" id="kawasan6" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Kebun Getah') || old('kawasan_tempat_tinggal') == 'Kebun Getah' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan6">Kebun Getah</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Taman Perumahan" id="kawasan6" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Taman Perumahan') || old('kawasan_tempat_tinggal') == 'Taman Perumahan' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan6">Taman Perumahan</label>
                         </div>
                         <div class="radio-group">
-                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Kawasan Nelayan" id="kawasan7" 
-                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Kawasan Nelayan') || old('kawasan_tempat_tinggal') == 'Kawasan Nelayan' ? 'checked' : '' }} required>
-                            <label class="form-check-label" for="kawasan7">Kawasan Nelayan</label>
+                            <input class="form-check-input" type="radio" name="kawasan_tempat_tinggal" value="Tiada Kategori Penempatan" id="kawasan7" 
+                                {{ (isset($latestRespon) && $latestRespon->kawasan_tempat_tinggal == 'Tiada Kategori Penempatan') || old('kawasan_tempat_tinggal') == 'Tiada Kategori Penempatan' ? 'checked' : '' }} required>
+                            <label class="form-check-label" for="kawasan7">Tiada Kategori Penempatan</label>
                         </div>
                     </div>
 
