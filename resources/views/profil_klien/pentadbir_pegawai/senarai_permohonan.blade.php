@@ -134,17 +134,17 @@
                                             @endphp
 
                                             <tr>
-                                                <td style="width:25% !important;"><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}" target="_blank">{{$user1->nama}}</a></td>
+                                                <td style="width:25% !important;"><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['klien_id']) }}" target="_blank">{{$user1->nama}}</a></td>
                                                 <td style="width:15% !important; text-align: center;">{{ $user1->no_kp }}</td>
                                                 <td style="width:20% !important; text-align: center;">{{ $daerah }}</td>
                                                 <td style="width:15% !important; text-align: center;">{{ $negeri }}</td>
                                                 <td style="width:15% !important; text-align: center;">{{ $nama_pengemaskini ?? 'N/A' }}</td>
                                                 <td style="width:10% !important; text-align: center;">
-                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">
+                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['klien_id']) }}">
                                                         <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
                                                     </a>
                                 
-                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user1['id']) }}">
+                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user1['klien_id']) }}">
                                                         <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
                                                     </a>
                                                 </td>
