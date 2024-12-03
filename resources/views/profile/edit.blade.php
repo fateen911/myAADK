@@ -155,7 +155,6 @@
                                                 </i>
                                                 <!--begin::Inputs-->
                                                 <input type="file" name="gambar_profil" accept=".png, .jpg, .jpeg" />
-                                                {{-- <input type="hidden" name="gambar_profil" /> --}}
                                                 <!--end::Inputs-->
                                             </label>
                                             <!--end::Label-->
@@ -212,6 +211,18 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">E-mel</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Emel" value="{{ $user->email }}" readonly/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
                                     <label class="col-lg-4 col-form-label fw-semibold fs-6">Peranan</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
@@ -224,22 +235,44 @@
                                     <!--end::Col-->
                                 </div>
                                 <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">E-mel</label>
-                                    <!--end::Label-->
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="Emel" value="{{ $user->email }}" readonly/>
+                                @if (Auth::user()->tahap_pengguna == 4)
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Negeri Bertugas</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            @php
+                                                $nb = DB::table('pegawai')->where('no_kp', Auth::user()->no_kp)->value('negeri_bertugas');
+                                                $negeri_bertugas = DB::table('senarai_negeri_pejabat')->where('negeri_id', $nb)->value('negeri');
+                                            @endphp
+                                            <input type="text" name="negeri_bertugas" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $negeri_bertugas }}" readonly/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
+                                @elseif (Auth::user()->tahap_pengguna == 5)
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">Daerah Bertugas</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            @php
+                                                $db = DB::table('pegawai')->where('no_kp', Auth::user()->no_kp)->value('daerah_bertugas');
+                                                $daerah_bertugas = DB::table('senarai_daerah_pejabat')->where('kod', $db)->value('daerah');
+                                            @endphp
+                                            <input type="text" name="daerah_bertugas" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ $daerah_bertugas }}" readonly/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                @endif
                             </div>
                             <!--end::Card body-->
                         @endif
-
 
                         <!--begin::Actions-->
                         <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -352,64 +385,6 @@
                 <!--end::Content-->
             </div>
             <!--end::Sign-in Method-->
-
-            <!--begin::Deactivate Account-->
-            {{-- <div class="card">
-                <!--begin::Card header-->
-                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_deactivate" aria-expanded="true" aria-controls="kt_account_deactivate">
-                    <div class="card-title m-0">
-                        <h3 class="fw-bold m-0">Padam Akaun</h3>
-                    </div>
-                </div>
-                <!--end::Card header-->
-                <!--begin::Content-->
-                <div id="kt_account_settings_deactivate" class="collapse show">
-                    <!--begin::Form-->
-                    <form id="kt_account_deactivate_form" class="form">
-                        <!--begin::Card body-->
-                        <div class="card-body border-top p-9">
-                            <!--begin::Notice-->
-                            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
-                                <!--begin::Icon-->
-                                <i class="ki-duotone ki-information fs-2tx text-warning me-4">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                </i>
-                                <!--end::Icon-->
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-stack flex-grow-1">
-                                    <!--begin::Content-->
-                                    <div class="fw-semibold">
-                                        <h4 class="text-gray-900 fw-bold">You Are Deactivating Your Account</h4>
-                                        <div class="fs-6 text-gray-700">For extra security, this requires you to confirm your email or phone number when you reset yousignr password.
-                                        <br />
-                                        <a class="fw-bold" href="#">Learn more</a></div>
-                                    </div>
-                                    <!--end::Content-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Notice-->
-                            <!--begin::Form input row-->
-                            <div class="form-check form-check-solid fv-row">
-                                <input name="deactivate" class="form-check-input" type="checkbox" value="" id="deactivate" />
-                                <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">I confirm my account deactivation</label>
-                            </div>
-                            <!--end::Form input row-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--begin::Card footer-->
-                        <div class="card-footer d-flex justify-content-end py-6 px-9">
-                            <button id="kt_account_deactivate_account_submit" type="submit" class="btn btn-danger fw-semibold">Deactivate Account</button>
-                        </div>
-                        <!--end::Card footer-->
-                    </form>
-                    <!--end::Form-->
-                </div>
-                <!--end::Content-->
-            </div> --}}
-            <!--end::Deactivate Account-->
         </div>
         <!--end::Content container-->
     </div>
