@@ -2730,95 +2730,98 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Perkahwinan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['status_perkahwinan'] != $pasangan->status_perkahwinan ? 'border-danger' : '' }}" name="status_perkahwinan" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
+                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['status_perkahwinan'] != $pasangan->status_perkahwinan ? 'border-danger' : '' }}" name="status_perkahwinan" id="status_perkahwinan_modal" value="{{ $requestedDataPasangan['status_perkahwinan'] }}" readonly />
                                                     </div>
                                                 </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
+
+                                                <div id="pasanganFieldsModal">
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['nama_pasangan'] != $pasangan->nama_pasangan ? 'border-danger' : '' }}" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['nama_pasangan'] != $pasangan->nama_pasangan ? 'border-danger' : '' }}" name="nama_pasangan" value="{{ $requestedDataPasangan['nama_pasangan'] }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Pasangan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['no_tel_pasangan'] != $pasangan->no_tel_pasangan ? 'border-danger' : '' }}" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Pasangan</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['bilangan_anak'] != $pasangan->bilangan_anak ? 'border-danger' : '' }}" name="bilangan_anak" value="{{ $requestedDataPasangan['bilangan_anak'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['no_tel_pasangan'] != $pasangan->no_tel_pasangan ? 'border-danger' : '' }}" name="no_tel_pasangan" value="{{ $requestedDataPasangan['no_tel_pasangan'] }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah Pasangan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_pasangan'] != $pasangan->alamat_pasangan ? 'border-danger' : '' }}" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['poskod_pasangan'] != $pasangan->poskod_pasangan ? 'border-danger' : '' }}" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['bilangan_anak'] != $pasangan->bilangan_anak ? 'border-danger' : '' }}" name="bilangan_anak" value="{{ $requestedDataPasangan['bilangan_anak'] }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNegeriPasangan != $negeriPasangan ? 'border-danger' : '' }}" name="negeri_pasangan" value="{{ $requestedNegeriPasangan }}" readonly />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah Pasangan</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDaerahPasangan != $daerahPasangan ? 'border-danger' : '' }}" name="daerah_pasangan" value="{{ $requestedDaerahPasangan }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_pasangan'] != $pasangan->alamat_pasangan ? 'border-danger' : '' }}" name="alamat_pasangan" readonly>{{ $requestedDataPasangan['alamat_pasangan'] }}</textarea>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja Pasangan</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_kerja_pasangan'] != $pasangan->alamat_kerja_pasangan ? 'border-danger' : '' }}" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly />
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDataPasangan['poskod_pasangan'] != $pasangan->poskod_pasangan ? 'border-danger' : '' }}" name="poskod_pasangan" value="{{ $requestedDataPasangan['poskod_pasangan'] }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerjaPasangan != $negeriKerjaPasangan ? 'border-danger' : '' }}" name="negeri_kerja_pasangan" value="{{ $requestedNegeriKerjaPasangan }}" readonly />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedNegeriPasangan != $negeriPasangan ? 'border-danger' : '' }}" name="negeri_pasangan" value="{{ $requestedNegeriPasangan }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDaerahPasangan != $daerahPasangan ? 'border-danger' : '' }}" name="daerah_pasangan" value="{{ $requestedDaerahPasangan }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja Pasangan</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <textarea class="form-control form-control-solid {{ $requestedDataPasangan['alamat_kerja_pasangan'] != $pasangan->alamat_kerja_pasangan ? 'border-danger' : '' }}" name="alamat_kerja_pasangan" readonly>{{ $requestedDataPasangan['alamat_kerja_pasangan'] }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid" name="poskod_kerja_pasangan" value="{{ $requestedDataPasangan['poskod_kerja_pasangan'] }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedNegeriKerjaPasangan != $negeriKerjaPasangan ? 'border-danger' : '' }}" name="negeri_kerja_pasangan" value="{{ $requestedNegeriKerjaPasangan }}" readonly />
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerjaPasangan != $daerahKerjaPasangan ? 'border-danger' : '' }}" name="daerah_kerja_pasangan" value="{{ $requestedDaerahKerjaPasangan }}" readonly />
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-4 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDaerahKerjaPasangan != $daerahKerjaPasangan ? 'border-danger' : '' }}" name="daerah_kerja_pasangan" value="{{ $requestedDaerahKerjaPasangan }}" readonly />
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -3972,6 +3975,47 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Call toggleFields on page load to set initial state
             LainMajikanNonModal();
+        });
+    </script>
+
+    {{-- Display pasangan fields based on status_perkahwinan --}}
+    <script>
+        function togglePasanganFields() {
+            const statusPerkahwinanNonModal = $('#status_perkahwinan').val();
+            const pasanganFields = document.getElementById('pasangan-fields');
+
+            if (statusPerkahwinanNonModal.textContent.trim() === 'BERKAHWIN') {
+                pasanganFields.style.display = 'block'; // Show pasangan fields
+            } else {
+                pasanganFields.style.display = 'none'; // Hide pasangan fields
+            }
+        }
+    
+        $(document).ready(function() {
+            // Call pasanganNonModal on page load
+            togglePasanganFields();
+    
+            // Add event listener for changes
+            $('#status_perkahwinan').on('change', pasanganNonModal);
+        });
+    </script>  
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the element references
+            const statusPerkahwinanModal = $('#status_perkahwinan_modal').val();
+
+            // Function to show or hide
+            function pasanganFields() {
+                if (statusPerkahwinanModal === 'BERKAHWIN') {
+                    $('#pasanganFieldsModal').show();
+                } else {
+                    $('#pasanganFieldsModal').hide();
+                }
+            }
+
+            // Run the function on page load to set the initial state
+            pasanganFields();
         });
     </script>
 </body>     

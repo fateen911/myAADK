@@ -2001,7 +2001,7 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-8">
-                                        <span class="fs-6 form-control-plaintext">{{$butiranKlien->status_perkahwinan}}</span>
+                                        <span class="fs-6 form-control-plaintext" id="status_perkahwinan_non_modal">{{$butiranKlien->status_perkahwinan}}</span>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -2252,128 +2252,131 @@
                                                         <!--end::Select2-->
                                                     </div>
                                                 </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" style="text-transform: uppercase;"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
-                                                            <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                                <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                                    <span class="path1"></span>
-                                                                    <span class="path2"></span>
-                                                                    <span class="path3"></span>
-                                                                </i>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{ $butiranKlien->no_tel_pasangan }}" inputmode="numeric" maxlength="11"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <div class="input-group">
-                                                            <input type="number" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{ $butiranKlien->bilangan_anak }}" min="0" />
+
+                                                <div id="pasanganFieldsModal">
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Pasangan</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control form-control-solid" id="nama_pasangan" name="nama_pasangan" value="{{ $butiranKlien->nama_pasangan }}" style="text-transform: uppercase;"/>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Nombor Telefon
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
+                                                                    <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
+                                                                        <span class="path1"></span>
+                                                                        <span class="path2"></span>
+                                                                        <span class="path3"></span>
+                                                                    </i>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control form-control-solid" id="no_tel_pasangan" name="no_tel_pasangan" value="{{ $butiranKlien->no_tel_pasangan }}" inputmode="numeric" maxlength="11"/>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <div class="d-flex flex-stack">
-                                                            <div class="me-5">
-                                                                <input class="form-check-input-sm" id="alamat_pasangan_sama" name="alamat_pasangan_sama" onclick="alamatPasangan()" type="checkbox" value="1" />
-                                                                <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Bilangan Anak</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control form-control-solid" id="bilangan_anak" name="bilangan_anak" value="{{ $butiranKlien->bilangan_anak }}" min="0" />
                                                             </div>
                                                         </div>
-                                                        <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_pasangan }}</textarea>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Rumah</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <div class="d-flex flex-stack">
+                                                                <div class="me-5">
+                                                                    <input class="form-check-input-sm" id="alamat_pasangan_sama" name="alamat_pasangan_sama" onclick="alamatPasangan()" type="checkbox" value="1" />
+                                                                    <label class="form-label fs-7">Sama seperti Alamat Rumah Klien</label>
+                                                                </div>
+                                                            </div>
+                                                            <textarea class="form-control form-control-solid" id="alamat_partner" name="alamat_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_pasangan }}</textarea>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}" inputmode="numeric" maxlength="5"/>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_partner" name="poskod_pasangan" value="{{ $butiranKlien->poskod_pasangan }}" inputmode="numeric" maxlength="5"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2">
+                                                                <option>Pilih Negeri</option>
+                                                                @foreach ($negeriPasangan as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2">
-                                                            <option>Pilih Negeri</option>
-                                                            @foreach ($negeriPasangan as $item)
-                                                                <option value="{{ $item->id }}" {{ $butiranKlien->negeri_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2">
+                                                                <option>Pilih Daerah</option>
+                                                                @foreach ($daerahPasangan as $daerahP)
+                                                                    <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_kerja_pasangan }}</textarea>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2">
-                                                            <option>Pilih Daerah</option>
-                                                            @foreach ($daerahPasangan as $daerahP)
-                                                                <option value="{{ $daerahP->id }}" {{ $butiranKlien->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <input type="text" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{ $butiranKlien->poskod_kerja_pasangan }}" inputmode="numeric" maxlength="5"/>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Alamat Tempat Kerja</label>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2">
+                                                                <option>Pilih Negeri</option>
+                                                                @foreach ($negeriKerjaPasangan as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-7">
-                                                        <textarea class="form-control form-control-solid" id="alamat_kerja_pasangan" name="alamat_kerja_pasangan" style="text-transform: uppercase;">{{ $butiranKlien->alamat_kerja_pasangan }}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Poskod</label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control form-control-solid" id="poskod_kerja_pasangan" name="poskod_kerja_pasangan" value="{{ $butiranKlien->poskod_kerja_pasangan }}" inputmode="numeric" maxlength="5"/>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Negeri</label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2">
-                                                            <option>Pilih Negeri</option>
-                                                            @foreach ($negeriKerjaPasangan as $item)
-                                                                <option value="{{ $item->id }}" {{ $butiranKlien->negeri_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row mb-7">
-                                                    <div class="col-md-5 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2">
-                                                            <option>Pilih Daerah</option>
-                                                            @foreach ($daerahKerjaPasangan as $item)
-                                                                <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="row fv-row mb-7">
+                                                        <div class="col-md-5 text-md-start">
+                                                            <label class="fs-6 fw-semibold form-label mt-3">Daerah</label>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2">
+                                                                <option>Pilih Daerah</option>
+                                                                @foreach ($daerahKerjaPasangan as $item)
+                                                                    <option value="{{ $item->id }}" {{ $butiranKlien->daerah_kerja_pasangan == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -3780,6 +3783,47 @@
         // Call the function on page load
         document.addEventListener('DOMContentLoaded', function() {
             LainMajikanNonModal();
+        });
+    </script>
+
+    {{-- Display pasangan fields based on status_perkahwinan --}}
+    <script>
+        function pasanganModal() {
+            const statusPerkahwinanModal = $('#status_perkahwinan').val();
+            
+            if (statusPerkahwinanModal === 'BERKAHWIN') {
+                $('#pasanganFieldsModal').show();
+            } else {
+                $('#pasanganFieldsModal').hide();
+            }
+        }
+    
+        $(document).ready(function() {
+            // Call pasanganModal on page load
+            pasanganModal();
+    
+            // Add event listener for changes
+            $('#status_perkahwinan').on('change', pasanganModal);
+        });
+    </script>  
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the element references
+            const statusPerkahwinan = document.getElementById('status_perkahwinan_non_modal');
+            const pasanganFields = document.getElementById('pasangan-fields');
+
+            // Function to toggle the visibility
+            function togglePasanganFields() {
+                if (statusPerkahwinan.textContent.trim() === 'BERKAHWIN') {
+                    pasanganFields.style.display = 'block'; // Show pasangan fields
+                } else {
+                    pasanganFields.style.display = 'none'; // Hide pasangan fields
+                }
+            }
+
+            // Run the function on page load to set the initial state
+            togglePasanganFields();
         });
     </script>
 </body>

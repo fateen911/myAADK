@@ -1798,24 +1798,31 @@ class ProfilKlienController extends Controller
                 'daerah_kerja_pasangan' => 'nullable|string|max:255',
                 'negeri_kerja_pasangan' => 'nullable|string|max:255',
             ]);
-        } 
-        catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             // Redirect back with custom error message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
-        }  
-
-        // Reusable function to check and assign null if the value is not selected
-        function checkAndAssignNull($array, $key, $default) {
-            return isset($array[$key]) && $array[$key] === $default ? null : ($array[$key] ?? null);
         }
 
-        // Apply the function to each field
-        $validatedData['daerah_pasangan'] = checkAndAssignNull($validatedData, 'daerah_pasangan', 'Pilih Daerah');
-        $validatedData['negeri_pasangan'] = checkAndAssignNull($validatedData, 'negeri_pasangan', 'Pilih Negeri');
-        $validatedData['daerah_kerja_pasangan'] = checkAndAssignNull($validatedData, 'daerah_kerja_pasangan', 'Pilih Daerah');
-        $validatedData['negeri_kerja_pasangan'] = checkAndAssignNull($validatedData, 'negeri_kerja_pasangan', 'Pilih Negeri');
+        // Check if status_perkahwinan is not "BERKAHWIN" and update related fields to NULL
+        if ($validatedData['status_perkahwinan'] !== 'BERKAHWIN') {
+            $validatedData['nama_pasangan'] = null;
+            $validatedData['no_tel_pasangan'] = null;
+            $validatedData['bilangan_anak'] = null;
+            $validatedData['alamat_pasangan'] = null;
+            $validatedData['poskod_pasangan'] = null;
+            $validatedData['daerah_pasangan'] = null;
+            $validatedData['negeri_pasangan'] = null;
+            $validatedData['alamat_kerja_pasangan'] = null;
+            $validatedData['poskod_kerja_pasangan'] = null;
+            $validatedData['daerah_kerja_pasangan'] = null;
+            $validatedData['negeri_kerja_pasangan'] = null;
+        }
 
-        // dd($validatedData);
+        // Apply default values for dropdown fields
+        $validatedData['daerah_pasangan'] = $validatedData['daerah_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_pasangan'];
+        $validatedData['negeri_pasangan'] = $validatedData['negeri_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_pasangan'];
+        $validatedData['daerah_kerja_pasangan'] = $validatedData['daerah_kerja_pasangan'] === 'Pilih Daerah' ? null : $validatedData['daerah_kerja_pasangan'];
+        $validatedData['negeri_kerja_pasangan'] = $validatedData['negeri_kerja_pasangan'] === 'Pilih Negeri' ? null : $validatedData['negeri_kerja_pasangan'];
 
         // Proceed with the existing logic
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1826,7 +1833,7 @@ class ProfilKlienController extends Controller
             // Update existing request
             $updateRequest->update([
                 'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
-                'status' => 'Kemaskini', 
+                'status' => 'Kemaskini',
                 'updated_at' => now(),
             ]);
 
@@ -1837,10 +1844,9 @@ class ProfilKlienController extends Controller
                 'bahagian_kemaskini' => 'Keluarga',
                 'updated_at' => now(),
             ]);
-        } 
-        else {
+        } else {
             // Create new request
-           KeluargaKlienUpdateRequest::create([
+            KeluargaKlienUpdateRequest::create([
                 'klien_id' => $klienId,
                 'requested_data' => json_encode($validatedData, JSON_FORCE_OBJECT), // Ensure NULL values are handled
                 'status' => 'Kemaskini',
@@ -1853,7 +1859,7 @@ class ProfilKlienController extends Controller
                     'klien_id' => $klienId,
                     'status_kemaskini' => 'Kemaskini',
                     'bahagian_kemaskini' => 'Keluarga',
-                    'pengemaskini' => null, 
+                    'pengemaskini' => null,
                 ]);
             }
         }
