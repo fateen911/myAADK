@@ -995,7 +995,8 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="bidang_kerja" name="bidang_kerja"  data-control="select2" data-hide-search="false" >
-                                                                <option value="" disabled selected hidden>Pilih Bidang Pekerjaan</option>
+                                                                {{-- <option value="" disabled selected hidden>Pilih Bidang Pekerjaan</option> --}}
+                                                                <option value="">Pilih Bidang Pekerjaan</option>
                                                                 @foreach ($bidangKerja as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->bidang_kerja == $item->id ? 'selected' : '' }}>{{ $item->bidang }}</option>
                                                                 @endforeach
@@ -1008,7 +1009,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="nama_kerja" name="nama_kerja" data-control="select2" data-hide-search="false" >
-                                                                <option value="" disabled selected hidden>Pilih Nama Pekerjaan</option>
+                                                                <option value="">Pilih Nama Pekerjaan</option>
                                                                 @foreach ($namaKerja as $item2)
                                                                     <option value="{{ $item2->id }}" {{ $butiranKlien->nama_kerja == $item2->id ? 'selected' : '' }}>{{ $item2->pekerjaan }}</option>
                                                                 @endforeach
@@ -1021,7 +1022,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="pendapatan" name="pendapatan" data-control="select2" data-hide-search="false">
-                                                                <option value="" disabled selected hidden>Pilih Julat Pendapatan</option>
+                                                                <option value="">Pilih Julat Pendapatan</option>
                                                                 @foreach ($pendapatan as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->pendapatan == $item->id ? 'selected' : '' }}>{{ $item->pendapatan }}</option>
                                                                 @endforeach
@@ -1034,7 +1035,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="kategori_majikan" name="kategori_majikan" data-control="select2" data-hide-search="false">
-                                                                <option value="" disabled selected hidden>Pilih Kategori Majikan</option>
+                                                                <option value="">Pilih Kategori Majikan</option>
                                                                 <option value="SENDIRI" {{ $butiranKlien->kategori_majikan == 'SENDIRI' ? 'selected' : '' }}>SENDIRI</option>
                                                                 <option value="SWASTA" {{ $butiranKlien->kategori_majikan == 'SWASTA' ? 'selected' : '' }}>SWASTA</option>
                                                                 <option value="KERAJAAN" {{ $butiranKlien->kategori_majikan == 'KERAJAAN' ? 'selected' : '' }}>KERAJAAN</option>
@@ -1050,7 +1051,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="nama_majikan" name="nama_majikan" data-control="select2" onchange="LainMajikanModal() ">
-                                                                <option disabled selected hidden>Pilih Nama Majikan</option>
+                                                                <option value="">Pilih Nama Majikan</option>
                                                                 @foreach ($majikan as $item)
                                                                     <option value="{{ $item->id }}" {{ $butiranKlien->nama_majikan == $item->id ? 'selected' : '' }}>{{ $item->majikan }}</option>
                                                                 @endforeach
@@ -1106,7 +1107,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2">
-                                                                <option value="" disabled selected hidden>Pilih Negeri</option>
+                                                                <option value="">Pilih Negeri</option>
                                                                 @foreach ($negeriKerja as $negeriK)
                                                                     <option value="{{ $negeriK->id }}" {{ $butiranKlien->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
                                                                 @endforeach
@@ -1119,7 +1120,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                                <option value="" disabled selected hidden>Pilih Daerah</option>
+                                                                <option value="">Pilih Daerah</option>
                                                                 @foreach ($daerahKerja as $daerahK)
                                                                     <option value="{{ $daerahK->id }}" {{ $butiranKlien->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
                                                                 @endforeach
@@ -1135,8 +1136,8 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="false">
-                                                                <option>Pilih Alasan</option>
+                                                            <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2">
+                                                                <option value="">Pilih Alasan</option>
                                                                 <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
                                                                 <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
                                                                 <option value="PESAKIT" {{ $butiranKlien->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
@@ -2410,7 +2411,7 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
     {{-- Script for select2 --}}
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             // Initialize Select2 and set dropdown parent to the modal
             $("#negeri, #daerah, #tahap_pendidikan").select2({
@@ -2429,7 +2430,7 @@
                 of: $(this)
             });
         });
-    </script>
+    </script> --}}
     
     {{-- <script>
         $(document).ready(function() {

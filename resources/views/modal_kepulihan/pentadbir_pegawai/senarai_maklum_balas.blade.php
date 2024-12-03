@@ -131,7 +131,7 @@
                             <div class="header" style="padding-left: 10px;">
                                 <h2>Senarai Klien Menjawab Soal Selidik Modal Kepulihan
                                     <br><small>Senarai klien yang menjawab soal selidik dalam tempoh enam (6) bulan terkini.</small>
-                                    <small>Sila klik pada nama atau ikon mata untuk melihat sejarah keputusan kepulihan klien.</small>
+                                    <small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
                             </div>
                             <!--end::Card header-->
@@ -209,6 +209,7 @@
                             <div class="header" style="padding-left: 10px;">
                                 <h2>Senarai Klien Tidak Menjawab Soal Selidik Modal Kepulihan
                                     <br><small>Senarai klien menjawab soal selidik pada kali terakhir telah melebihi tempoh enam (6) bulan.</small>
+                                    <small>Sila klik pada ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
                             </div>
                             <!--end::Card header-->

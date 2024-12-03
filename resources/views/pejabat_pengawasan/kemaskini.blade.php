@@ -12,6 +12,7 @@
         <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <style>
             .form-select.custom-select {
@@ -22,6 +23,38 @@
             .form-select.custom-select option {
                 background-color: #f5f5f5 !important;
                 color: #222222 !important;
+            }
+
+            @media (max-width: 768px) {
+                .page-title {
+                    font-size: 1.5rem;
+                }
+                .card {
+                    /* margin: 10px; */
+                    padding-right: none;
+                    padding-left: none;
+                }
+                .form-select {
+                    width: 100% !important;
+                }
+
+                .app-content {
+                    justify-content: flex-start; /* Aligns the content to the left */
+                    align-items: flex-start;  /* Optional: Aligns vertically to the top */
+                }
+                .container-xxl {
+                    width: 100%; /* Ensures the container stretches across the width */
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+                .card {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
+
+            .swal-wide {
+                width: 90% !important;
             }
         </style>
     </head>
@@ -53,7 +86,7 @@
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
             <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container container-xxl" style="width: 80%;">
+            <div id="kt_app_content_container" class="app-container" style="width: 80%;">
                 <!--begin::Sign-in Method-->
                 <div class="card mb-5 mb-xl-10">
                     <!--begin::Card header-->
@@ -99,7 +132,7 @@
                                         <span class="required">Pejabat AADK Negeri Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
+                                        <select class="form-select form-select-solid w-100 custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
                                             <option value="">Pilih Negeri</option>
                                             @foreach ($senaraiNegeri as $item1)
                                                 <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
@@ -113,7 +146,7 @@
                                         <span class="required">Pejabat AADK Daerah Baharu</span>
                                     </label>
                                     <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid custom-select" name="daerah_baharu" id="daerah_baharu" required>
+                                        <select class="form-select form-select-solid w-100 custom-select" name="daerah_baharu" id="daerah_baharu" required>
                                             <option value="" data-negeri-id="">Pilih Daerah</option>
                                             @foreach ($senaraiDaerah as $item2)
                                                 <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>

@@ -7,12 +7,51 @@
     @endphp
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <style>
             .scrollable-container {
-                max-height: 400px;
+                max-height: 60vh;
+                /* max-height: 400px; */
                 overflow-y: auto;
                 margin-right: 10px;
             }
+
+            .d-flex {
+                display: flex;
+                flex-wrap: wrap; /* Allows stacking on smaller screens */
+            }
+
+            .bg-gray-100 {
+                word-wrap: break-word;
+                max-width: 100%;
+            }
+
+            @media (max-width: 768px) {
+                .fs-4 { font-size: 1rem; }
+                .fs-6 { font-size: 0.875rem; }
+                .fs-7 { font-size: 0.75rem; }
+            }
+
+            .text-center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            /* @media (max-width: 768px) {
+                .card-title span {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .symbol-label i {
+                font-size: 1.5rem; 
+            }
+
+            @media (max-width: 768px) {
+                .symbol-label i {
+                    font-size: 1rem; 
+                }
+            } */
         </style>
     </head>
 
@@ -89,7 +128,7 @@
                                 <!--begin::Row-->
                                 <div class="row g-3 g-lg-6">
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol and Text-->
@@ -127,9 +166,33 @@
                                         </div>
                                         <!--end::Items-->
                                     </div>
+                                    {{-- <div class="col-md-6 col-sm-12">
+                                        <div class="bg-gray-100 bg-opacity-70 rounded-2 px-3 py-4 text-center">
+                                            <div class="d-flex justify-content-center align-items-center mb-3">
+                                                <div class="symbol symbol-30px me-3">
+                                                    <i class="ki-solid ki-user-tick fs-1 text-dark"></i>
+                                                </div>
+                                                <span class="text-gray-700 fw-semibold fs-4">Maklumat Peribadi</span>
+                                            </div>
+                                            <span class="text-gray-600 fw-semibold fs-6 d-block">Kemaskini Terakhir</span>
+                                            <span class="text-gray-400 fs-7">{{ $tarikh_update_klien }}</span>
+                                        </div>
+                                    </div> --}}
                                     <!--end::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    {{-- <div class="col-md-6 col-sm-12">
+                                        <div class="bg-gray-100 bg-opacity-70 rounded-2 px-3 py-4 text-center">
+                                            <div class="d-flex justify-content-center align-items-center mb-3">
+                                                <div class="symbol symbol-30px me-3">
+                                                    <i class="ki-solid ki-user-tick fs-1 text-dark"></i>
+                                                </div>
+                                                <span class="text-gray-700 fw-semibold fs-4">Maklumat Peribadi</span>
+                                            </div>
+                                            <span class="text-gray-600 fw-semibold fs-6 d-block">Kemaskini Terakhir</span>
+                                            <span class="text-gray-400 fs-7">{{ $tarikh_update_klien }}</span>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-md-6 col-sm-12">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol and Text-->
@@ -174,7 +237,7 @@
                                 <!--begin::Row-->
                                 <div class="row g-3 g-lg-6 mt-3">
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol and Text-->
@@ -215,7 +278,7 @@
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-6">
+                                    <div class="col-md-6 col-sm-12">
                                         <!--begin::Items-->
                                         <div class="bg-gray-100 bg-opacity-70 rounded-2 px-6 py-5">
                                             <!--begin::Symbol and Text-->

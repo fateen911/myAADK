@@ -71,7 +71,9 @@
                     <div class="tab-content mt-0" id="myTabContent">
                         <!--begin::Card header-->
                         <div class="header mt-10">
-                            <h2>Sejarah Klien Menjawab Soal Selidik Modal Kepulihan</h2>
+                            <h2>Sejarah Klien Menjawab Soal Selidik Modal Kepulihan
+                                <br><small>Sila klik pada butang di kolum 'Tahap Kepulihan' untuk lihat butiran skala bagi setiap modul bagi klien yang selesai menjawab.</small>
+                            </h2>
                         </div>
                         <!--end::Card header-->
 
