@@ -2583,9 +2583,6 @@
                             }
                         }
                     },
-                    error: function () {
-                        alert('Daerah kerja tidak keluar');
-                    }
                 });
             }
         });
