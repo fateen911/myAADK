@@ -3980,26 +3980,31 @@
 
     {{-- Display pasangan fields based on status_perkahwinan --}}
     <script>
-        function togglePasanganFields() {
-            const statusPerkahwinanNonModal = $('#status_perkahwinan').val();
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusPerkahwinan = $('#status_perkahwinan');
             const pasanganFields = document.getElementById('pasangan-fields');
 
-            if (statusPerkahwinanNonModal.textContent.trim() === 'BERKAHWIN') {
-                pasanganFields.style.display = 'block'; // Show pasangan fields
-            } else {
-                pasanganFields.style.display = 'none'; // Hide pasangan fields
+            // Function to toggle pasangan-fields visibility
+            function togglePasanganFields() {
+                const selectedStatus = statusPerkahwinan.val();
+                console.log(selectedStatus);
+                if (selectedStatus === 'BERKAHWIN') {
+                    pasanganFields.style.display = 'block'; // Show the fields
+                } else {
+                    pasanganFields.style.display = 'none'; // Hide the fields
+                }
             }
-        }
-    
-        $(document).ready(function() {
-            // Call pasanganNonModal on page load
-            togglePasanganFields();
-    
-            // Add event listener for changes
-            $('#status_perkahwinan').on('change', pasanganNonModal);
-        });
-    </script>  
 
+            // Initialize on page load
+            togglePasanganFields();
+
+            // Add event listener for Select2 change event
+            statusPerkahwinan.on('change.select2', function() {
+                togglePasanganFields();
+            });
+        });
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Get the element references
