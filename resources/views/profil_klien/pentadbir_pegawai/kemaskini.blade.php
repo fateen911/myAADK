@@ -434,7 +434,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid custom-select" id="negeri_klien" name="negeri_klien"  data-control="select2" data-hide-search="true">
+                                        <select class="form-select form-select-solid custom-select" id="negeri_klien" name="negeri_klien"  data-control="select2" data-hide-search="false">
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
@@ -452,7 +452,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid custom-select" id="daerah_klien" name="daerah_klien"  data-control="select2" data-hide-search="true">
+                                        <select class="form-select form-select-solid custom-select" id="daerah_klien" name="daerah_klien"  data-control="select2" data-hide-search="false">
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
@@ -470,7 +470,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="w-100">
-                                        <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan"  data-control="select2" data-hide-search="true" >
+                                        <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan"  data-control="select2" data-hide-search="false" >
                                             @foreach ($tahapPendidikan as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                             @endforeach
@@ -487,7 +487,7 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-select form-select-solid custom-select" id="penyakit" name="penyakit"  data-control="select2" data-hide-search="true" >
+                                    <select class="form-select form-select-solid custom-select" id="penyakit" name="penyakit"  data-control="select2" data-hide-search="false" >
                                         @foreach ($penyakit as $item)
                                             <option value="{{ $item->id }}" {{ $klien->penyakit == $item->id ? 'selected' : '' }}>{{ $item->penyakit }}</option>
                                         @endforeach
@@ -1488,7 +1488,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_bapa == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1511,7 +1511,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_bapa == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1689,7 +1689,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_ibu == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1712,7 +1712,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_ibu == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -1905,7 +1905,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                                            <select class="form-select form-select-solid custom-select" id="negeri_p" name="negeri_penjaga" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_penjaga == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
@@ -1928,7 +1928,7 @@
                                                     <div class="col-md-7">
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
-                                                            <select class="form-select form-select-solid custom-select" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                                            <select class="form-select form-select-solid custom-select" id="daerah_p" name="daerah_penjaga" data-control="select2" data-hide-search="false">
                                                                 <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_penjaga == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
@@ -2564,7 +2564,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <select class="form-select form-select-solid custom-select" id="negeri_partner" name="negeri_pasangan" data-control="select2" data-hide-search="false">
                                                 <option>Pilih Negeri</option>
                                                 @foreach ($negeriPasangan as $negeriP)
                                                     <option value="{{ $negeriP->id }}" {{ $pasangan->negeri_pasangan == $negeriP->id ? 'selected' : '' }}>{{ $negeriP->negeri }}</option>
@@ -2587,7 +2587,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <select class="form-select form-select-solid custom-select" id="daerah_partner" name="daerah_pasangan" data-control="select2" data-hide-search="false">
                                                 <option>Pilih Daerah</option>
                                                 @foreach ($daerahPasangan as $daerahP)
                                                     <option value="{{ $daerahP->id }}" {{ $pasangan->daerah_pasangan == $daerahP->id ? 'selected' : '' }}>{{ $daerahP->daerah }}</option>
@@ -2645,7 +2645,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih negeri">
+                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja_pasangan" name="negeri_kerja_pasangan" data-control="select2" data-hide-search="false">
                                                 <option>Pilih Negeri</option>
                                                 @foreach ($negeriKerjaPasangan as $negeriKP)
                                                     <option value="{{ $negeriKP->id }}" {{ $pasangan->negeri_kerja_pasangan == $negeriKP->id ? 'selected' : '' }}>{{ $negeriKP->negeri }}</option>
@@ -2668,7 +2668,7 @@
                                     <div class="col-md-8">
                                         <div class="w-100">
                                             <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="true" data-placeholder="Pilih daerah">
+                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="false">
                                                 <option>Pilih Daerah</option>
                                                 @foreach ($daerahKerjaPasangan as $daerahKP)    
                                                     <option value="{{ $daerahKP->id }}" {{ $pasangan->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
@@ -3007,7 +3007,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -3149,7 +3148,6 @@
                                     );
                                 });
                             } else {
-                                console.log("No daerah found for negeri:", idNegeri);
                                 daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
                         },
@@ -3162,356 +3160,299 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri pekerjaan klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri pekerjaan klien --}}
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_kerja').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_kerja').val());
 
             $('#negeri_kerja').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_kerja").empty();
+                // Clear daerah options and poskod
+                $('#daerah_kerja').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_kerja').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_kerja").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_kerja").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_kerja');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>     
 
-    {{-- Display daerah based on negeri bapa klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri bapa klien --}} 
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_b').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_b').val());
 
             $('#negeri_b').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_b").empty();
+                // Clear daerah options and poskod
+                $('#daerah_b').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_b').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_b").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_b").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_b');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                    error: function () {
-                        alert('Daerah bapa tidak keluar');
-                    }
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>    
 
-    {{-- Display daerah based on negeri ibu klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri ibu klien --}}  
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_i').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_i').val());
 
             $('#negeri_i').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_i").empty();
+                // Clear daerah options and poskod
+                $('#daerah_i').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_i').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_i").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_i").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_i');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                    error: function () {
-                        alert('Daerah ibu tidak keluar');
-                    }
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>   
 
-    {{-- Display daerah based on negeri penjaga klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri penjaga klien --}} 
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_p').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_p').val());
 
             $('#negeri_p').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_p").empty();
+                // Clear daerah options and poskod
+                $('#daerah_p').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_p').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_p").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_p").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_p');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                    error: function () {
-                        alert('Daerah penjaga tidak keluar');
-                    }
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>    
 
-    {{-- Display daerah based on negeri pasangan klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri pasangan klien --}}  
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_partner').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_partner').val());
 
             $('#negeri_partner').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_partner").empty();
+                // Clear daerah options and poskod
+                $('#daerah_partner').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_partner').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_partner").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_partner").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_partner');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                    error: function () {
-                        alert('Daerah pasangan tidak keluar');
-                    }
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>   
 
-    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}     
-    {{-- <script>
+    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}  
+    <script>
         $(document).ready(function () {
-            var previousIdNegeri = $('#negeri_kerja_pasangan').val();
-
-            // Initial AJAX request
-            getBandarData(previousIdNegeri);
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_kerja_pasangan').val());
 
             $('#negeri_kerja_pasangan').on('change', function () {
-                var idnegeri = $(this).val();
+                var selectedNegeri = $(this).val();
 
-                // Update the previous value
-                previousIdNegeri = idnegeri;
-
-                // Clear existing options
-                $("#daerah_kerja_pasangan").empty();
+                // Clear daerah options and poskod
+                $('#daerah_kerja_pasangan').empty().append('<option value="">Pilih Daerah</option>');
                 $('#poskod_kerja_pasangan').val('');
 
-
-                // Trigger AJAX request
-                getBandarData(idnegeri);
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
             });
 
-            function getBandarData(idnegeri) {
-                // AJAX request 
-                $.ajax({
-                    url: '/get-daerah/' + idnegeri,
-                    type: 'get',
-                    dataType: 'json',
-                    success: function (response) {
-                        var len = 0;
-                        if (response['data'] != null) {
-                            len = response['data'].length;
-                        }
-
-                        if (len > 0) {
-                            var selectedValue = $("#daerah_kerja_pasangan").val();
-
-                            // Read data and create <option >
-                            for (var i = 0; i < len; i++) {
-                                var id = response['data'][i].id;
-                                var daerah = response['data'][i].daerah;
-
-                                var isSelected = (id == selectedValue);
-
-                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
-
-                                $("#daerah_kerja_pasangan").append(option);
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_kerja_pasangan');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
                             }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
                         }
-                    },
-                    error: function () {
-                        alert('Daerah tempat kerja pasangan tidak keluar');
-                    }
-                });
+                    });
+                }
             }
         });
-    </script> --}}
+    </script>   
 
     {{-- Checkbox alamat --}}
     <script>
