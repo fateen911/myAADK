@@ -8,7 +8,6 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
@@ -3004,8 +3003,11 @@
     </div>
     <!--end::Content-->
 
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    {{-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -3095,7 +3097,7 @@
         });
     </script>
 
-    {{-- Open modal nased on data-target --}}
+    {{-- Open modal based on data-target --}}
     <script>
         document.querySelectorAll('.modal-trigger').forEach(function(trigger) {
             trigger.addEventListener('click', function() {
@@ -3109,6 +3111,407 @@
             $('[data-bs-toggle="tooltip"]').tooltip(); 
         });
     </script>
+
+    {{-- Display daerah based on negeri klien --}}     
+    <script>
+        $(document).ready(function () {
+            // Trigger initial population
+            updateDaerahDropdown($('#negeri_klien').val());
+
+            $('#negeri_klien').on('change', function () {
+                var selectedNegeri = $(this).val();
+
+                // Clear daerah options and poskod
+                $('#daerah_klien').empty().append('<option value="">Pilih Daerah</option>');
+                $('#poskod_k').val('');
+
+                // Update daerah dropdown
+                updateDaerahDropdown(selectedNegeri);
+            });
+
+            function updateDaerahDropdown(idNegeri) {
+                if (idNegeri) {
+                    $.ajax({
+                        url: '/get-daerah/' + idNegeri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (response) {
+                            console.log("AJAX Success Response:", response);
+                            var daerahDropdown = $('#daerah_klien');
+                            if (response.data && response.data.length) {
+                                response.data.forEach(function (item) {
+                                    daerahDropdown.append(
+                                        $('<option>', {
+                                            value: item.id,
+                                            text: item.daerah,
+                                            selected: item.id == daerahDropdown.data('selected'),
+                                        })
+                                    );
+                                });
+                            } else {
+                                console.log("No daerah found for negeri:", idNegeri);
+                                daerahDropdown.append('<option value="">Tiada Daerah</option>');
+                            }
+                        },
+                        error: function () {
+                            alert('Gagal memuatkan senarai daerah.');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+
+    {{-- Display daerah based on negeri pekerjaan klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_kerja').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_kerja').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_kerja").empty();
+                $('#poskod_kerja').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_kerja").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_kerja").append(option);
+                            }
+                        }
+                    },
+                });
+            }
+        });
+    </script> --}}
+
+    {{-- Display daerah based on negeri bapa klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_b').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_b').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_b").empty();
+                $('#poskod_b').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_b").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_b").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah bapa tidak keluar');
+                    }
+                });
+            }
+        });
+    </script> --}}
+
+    {{-- Display daerah based on negeri ibu klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_i').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_i').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_i").empty();
+                $('#poskod_i').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_i").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_i").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah ibu tidak keluar');
+                    }
+                });
+            }
+        });
+    </script> --}}
+
+    {{-- Display daerah based on negeri penjaga klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_p').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_p').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_p").empty();
+                $('#poskod_p').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_p").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_p").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah penjaga tidak keluar');
+                    }
+                });
+            }
+        });
+    </script> --}}
+
+    {{-- Display daerah based on negeri pasangan klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_partner').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_partner').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_partner").empty();
+                $('#poskod_partner').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_partner").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_partner").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah pasangan tidak keluar');
+                    }
+                });
+            }
+        });
+    </script> --}}
+
+    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}     
+    {{-- <script>
+        $(document).ready(function () {
+            var previousIdNegeri = $('#negeri_kerja_pasangan').val();
+
+            // Initial AJAX request
+            getBandarData(previousIdNegeri);
+
+            $('#negeri_kerja_pasangan').on('change', function () {
+                var idnegeri = $(this).val();
+
+                // Update the previous value
+                previousIdNegeri = idnegeri;
+
+                // Clear existing options
+                $("#daerah_kerja_pasangan").empty();
+                $('#poskod_kerja_pasangan').val('');
+
+
+                // Trigger AJAX request
+                getBandarData(idnegeri);
+            });
+
+            function getBandarData(idnegeri) {
+                // AJAX request 
+                $.ajax({
+                    url: '/get-daerah/' + idnegeri,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response['data'] != null) {
+                            len = response['data'].length;
+                        }
+
+                        if (len > 0) {
+                            var selectedValue = $("#daerah_kerja_pasangan").val();
+
+                            // Read data and create <option >
+                            for (var i = 0; i < len; i++) {
+                                var id = response['data'][i].id;
+                                var daerah = response['data'][i].daerah;
+
+                                var isSelected = (id == selectedValue);
+
+                                var option = "<option value='" + id + "'" + (isSelected ? " selected" : "") + ">" + daerah + "</option>";
+
+                                $("#daerah_kerja_pasangan").append(option);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('Daerah tempat kerja pasangan tidak keluar');
+                    }
+                });
+            }
+        });
+    </script> --}}
 
     {{-- Checkbox alamat --}}
     <script>
