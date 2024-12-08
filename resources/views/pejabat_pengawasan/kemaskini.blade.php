@@ -86,7 +86,7 @@
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
             <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container" style="width: 80%;">
+            <div id="kt_app_content_container" class="app-container" style="width: 80%; padding-top:50px;">
                 <!--begin::Sign-in Method-->
                 <div class="card mb-5 mb-xl-10">
                     <!--begin::Card header-->
