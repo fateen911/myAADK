@@ -936,10 +936,10 @@
                                 <div id="lainLainMajikanNonModal">
                                     <div class="row fv-row mb-7">
                                         <div class="col-md-3 text-md-start">
-                                            <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                            {{-- <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label> --}}
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control form-control-solid" id="lain_lain_majikan" name="lain_lain_majikan" value="{{$pekerjaan->lain_lain_majikan}}" style="text-transform: uppercase;"/>
+                                            <input type="text" class="form-control form-control-solid" id="lain_lain_majikan" name="lain_lain_majikan" placeholder="Sila Nyatakan (Lain-Lain)" value="{{$pekerjaan->lain_lain_majikan}}" style="text-transform: uppercase;"/>
                                         </div>
                                     </div>   
                                 </div>
@@ -1162,21 +1162,14 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" name="nama_majikan" id="nama_majikan_modal"  value="{{ $requestedNamaMajikan }}" readonly />
+                                                            <input type="text" 
+                                                                   class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" 
+                                                                   name="nama_majikan" 
+                                                                   id="nama_majikan_modal"  
+                                                                   value="{{ $requestedNamaMajikan == 'LAIN-LAIN' ? $requestedNamaMajikan . ' (' . ($requestedDataPekerjaan['lain_lain_nama_majikan'] ?? '') . ')' : $requestedNamaMajikan }}" 
+                                                                   readonly />
                                                         </div>
                                                     </div>
-                                                    @if ($requestedNamaMajikan == 'LAIN-LAIN')
-                                                        <div id="lainLainMajikanModal">
-                                                            <div class="row fv-row mb-7">
-                                                                <div class="col-md-4 text-md-start">
-                                                                    <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
-                                                                </div>
-                                                                <div class="col-md-8">
-                                                                    <input type="text" class="form-control form-control-solid {{ trim($requestedDataPekerjaan['lain_lain_nama_majikan'] ?? '') != trim($pekerjaan->lain_lain_majikan ?? '') ? 'border-danger' : '' }}" value="{{ $requestedDataPekerjaan['lain_lain_nama_majikan'] }}" readonly />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endif
                                                     <div class="row fv-row mb-7">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">No. Telefon Majikan</label>

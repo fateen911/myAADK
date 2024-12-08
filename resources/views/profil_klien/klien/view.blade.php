@@ -835,20 +835,10 @@
                                             @php
                                                 $namaMajikan = DB::table('senarai_majikan')->where('id', $butiranKlien->nama_majikan)->value('senarai_majikan.majikan');
                                             @endphp
-                                            <span id="nama_majikan_non_modal" class="fs-6 form-control-plaintext">{{$namaMajikan}}</span>
+                                            <span id="nama_majikan_non_modal" class="fs-6 form-control-plaintext">
+                                                {{ $namaMajikan == 'LAIN-LAIN' ? $namaMajikan . ' (' . ($butiranKlien->lain_lain_majikan ?? '') . ')' : $namaMajikan }}
+                                            </span>
                                         </div>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div id="lainLainMajikanNonModal">
-                                        <div class="row fv-row">
-                                            <div class="col-md-4 text-md-start">
-                                                <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <span class="fs-6 form-control-plaintext">{{$butiranKlien->lain_lain_majikan}}</span>
-                                            </div>
-                                        </div>   
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
@@ -1061,10 +1051,10 @@
                                                     <div id="lainLainMajikanModal">
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label>
+                                                                {{-- <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan (Lain-lain)</label> --}}
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <input type="text" class="form-control form-control-solid" id="lain_lain_nama_majikan" name="lain_lain_nama_majikan" value="{{$butiranKlien->lain_lain_majikan}}" style="text-transform: uppercase;"/>
+                                                                <input type="text" class="form-control form-control-solid" id="lain_lain_nama_majikan" name="lain_lain_nama_majikan" placeholder="Sila Nyatakan (Lain-Lain)" value="{{$butiranKlien->lain_lain_majikan}}" style="text-transform: uppercase;"/>
                                                             </div>
                                                         </div>
                                                     </div>
