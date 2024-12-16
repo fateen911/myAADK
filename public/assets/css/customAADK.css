@@ -149,6 +149,21 @@
 .text-darkorange{
     color: darkorange !important;
 }
+.badge-light-red{
+    background-color: rgba(255, 229, 229, 0.78);
+}
+
+.text-darkred{
+    color: darkred !important;
+}
+
+.badge-light-yellow{
+    background-color: rgba(253, 243, 177, 0.78);
+}
+
+.text-darkyellow{
+    color: #85731e !important;
+}
 
 .text-royalblue{
     color: royalblue !important;

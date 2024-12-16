@@ -327,14 +327,30 @@ class PengurusanProgController extends Controller
 
     public function batalProgPA($id){
         $program = Program::find($id);
+        $program->update([
+            'status' => "BATAL",
+        ]);
 
-        if ($program) {
-            $program->delete();
-            $direct = "/pengurusan-program/pegawai-aadk/senarai-prog/";
-            return redirect()->to($direct)->with('success', 'Aktiviti berjaya dipadam.');
-        } else {
-            return redirect()->back()->with('error', 'Aktiviti gagal dipadam.');
+        if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
+            $klien = Klien::all();
         }
+        elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
+            $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->get();
+        }
+        else {
+            $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->get();
+        }
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            if($item->emel != null){
+                $recipient = $item->emel;
+                Mail::to($recipient)->send(new HebahanBatalMail($id));
+            }
+        }
+
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dibatalkan.');
     }
 
     public function maklumatProgPA($id)
@@ -551,15 +567,32 @@ class PengurusanProgController extends Controller
     }
 
     public function batalProgPS($id){
-        $program = Program::find($id);
 
-        if ($program) {
-            $program->delete();
-            $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
-            return redirect()->to($direct)->with('success', 'Aktiviti berjaya dipadam.');
-        } else {
-            return redirect()->back()->with('error', 'Aktiviti gagal dipadam.');
+        $program = Program::find($id);
+        $program->update([
+            'status' => "BATAL",
+        ]);
+
+        if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
+            $klien = Klien::all();
         }
+        elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
+            $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->get();
+        }
+        else {
+            $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->get();
+        }
+
+        // Send communication based on the selected method
+        foreach ($klien as $item) {
+            if($item->emel != null){
+                $recipient = $item->emel;
+                Mail::to($recipient)->send(new HebahanBatalMail($id));
+            }
+        }
+
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
+        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dibatalkan.');
     }
 
     public function maklumatProgPS($id)

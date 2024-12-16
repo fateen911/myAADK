@@ -201,6 +201,16 @@
                                 btn   = "disabled";
                             }
 
+                            else if(program.status=='BATAL'){
+                                color = "badge-light-red text-darkred";
+                                btn   = "disabled";
+                            }
+
+                            else if(program.status=='PINDA'){
+                                color = "badge-light-yellow text-darkyellow";
+                                btn   = " ";
+                            }
+
                             rows += '<tr>';
                             rows += '<td><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
                             rows += '<td class="text-uppercase">' + program.nama + '</td>';

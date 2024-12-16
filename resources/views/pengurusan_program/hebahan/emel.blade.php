@@ -4,7 +4,7 @@
     <title>Hebahan</title>
 </head>
 <body>
-<p>Assalamualaikum dan Salam Sejahtera,<br>
+<p>Assalamualaikum dan Salam Sejahtera,</p><br>
 <p>Dengan segala hormatnya, kami ingin menjemput pihak tuan/puan untuk menghadiri aktiviti berikut:</p> <br>
 <p><b>NAMA AKTIVITI: {{strtoupper($program->nama)}}</b></p>
 <p><b>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b></p>
