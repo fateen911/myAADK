@@ -42,7 +42,7 @@ Route::get('/pengurusan-program/pegawai-aadk/daftar-prog',[PengurusanProgControl
 Route::post('/pengurusan-program/pegawai-aadk/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
 Route::get('/pengurusan-program/pegawai-aadk/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
 Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
-Route::get('/pengurusan-program/pegawai-aadk/padam-prog/{id}',[PengurusanProgController::class, 'padamProgPA'])->name('pengurusan_program.pegawai_aadk.padam_prog');
+Route::get('/pengurusan-program/pegawai-aadk/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPA'])->name('pengurusan_program.pegawai_aadk.batal_prog');
 Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
 Route::get('/pengurusan-program/pegawai-aadk/senarai-prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
 
@@ -52,7 +52,7 @@ Route::get('/pengurusan-program/pentadbir-sistem/daftar-prog',[PengurusanProgCon
 Route::post('/pengurusan-program/pentadbir-sistem/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
 Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/padam-prog/{id}',[PengurusanProgController::class, 'padamProgPS'])->name('pengurusan_program.pentadbir_sistem.padam_prog');
+Route::get('/pengurusan-program/pentadbir-sistem/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPS'])->name('pengurusan_program.pentadbir_sistem.batal_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/senarai-prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
 Route::get('/pengurusan-program/pentadbir-sistem/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');

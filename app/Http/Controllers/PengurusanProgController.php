@@ -325,7 +325,7 @@ class PengurusanProgController extends Controller
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
     }
 
-    public function padamProgPA($id){
+    public function batalProgPA($id){
         $program = Program::find($id);
 
         if ($program) {
@@ -550,7 +550,7 @@ class PengurusanProgController extends Controller
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
     }
 
-    public function padamProgPS($id){
+    public function batalProgPS($id){
         $program = Program::find($id);
 
         if ($program) {

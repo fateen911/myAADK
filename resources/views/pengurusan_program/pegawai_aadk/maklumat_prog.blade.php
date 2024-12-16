@@ -179,14 +179,16 @@
                             <div class="card-title">
                                 <h2>Maklumat Aktiviti</h2>
                             </div>
-                            <div class="card-title">
-                                <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
-                                    Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <a href="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" id="padam" data-link="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
-                                    Padam <i class="bi bi-trash3-fill"></i>
-                                </a>
-                            </div>
+                            @if($program->status == "BELUM SELESAI")
+                                <div class="card-title">
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
+                                        Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/batal-prog/'.$program->id)}}" id="padam" data-link="{{url('/pengurusan-program/pegawai-aadk/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                        Batal <i class="bi bi-trash3-fill"></i>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card body-->
