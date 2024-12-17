@@ -125,7 +125,7 @@
 </head>
 
 <body>
-    <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+    {{-- <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack"> --}}
         <!--begin::Page title-->
         <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
             <!--begin::Title-->
@@ -158,12 +158,12 @@
             <!--end::primary button-->
         </div>    
         <!--end::Actions-->
-    </div>
+    {{-- </div> --}}
 
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
         <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-xxl">
+        {{-- <div id="kt_app_content_container" class="app-container container-xxl"> --}}
             <!--begin::Card-->
             <div class="card card-flush">
                 <!--begin::Card body-->
@@ -2391,7 +2391,7 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-        </div>
+        {{-- </div> --}}
         <!--end::Content container-->
     </div>
 

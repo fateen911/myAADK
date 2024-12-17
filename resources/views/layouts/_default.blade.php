@@ -19,6 +19,31 @@
     <link href="{{ asset('assets')}}/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets')}}/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+
+    <!-- Custom Responsive Styles -->
+    <style>
+        /* General adjustments for small screens */
+        @media (max-width: 768px) {
+            #kt_app_toolbar_container {
+                flex-direction: column;
+                /* text-align: center; */
+                padding: 10px;
+            }
+
+            #kt_app_content_container {
+                padding: 15px; /* Adjust spacing */
+            }
+
+            .app-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .app-footer .text-dark {
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <!--end::Head-->
 

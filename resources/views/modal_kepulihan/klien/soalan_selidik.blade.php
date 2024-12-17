@@ -15,9 +15,9 @@
             flex-direction: column;
             align-items: center !important;
             justify-content: center !important;
-            margin-top: 100px;
-            margin-left: 200px;
-            width: 60%;
+            margin: 100px auto 0 auto; /* Center horizontally using auto margins */
+            width: auto;
+            max-width: 600px;
         }
 
         .card {
@@ -73,7 +73,7 @@
     </style>
 </head>
 
-<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
+{{-- <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack"> --}}
     <!--begin::Page title-->
     <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
         <!--begin::Title-->
@@ -96,7 +96,7 @@
         <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
-</div>
+{{-- </div> --}}
     
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
