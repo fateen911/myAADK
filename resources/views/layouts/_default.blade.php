@@ -26,7 +26,6 @@
         @media (max-width: 768px) {
             #kt_app_toolbar_container {
                 flex-direction: column;
-                /* text-align: center; */
                 padding: 10px;
             }
 

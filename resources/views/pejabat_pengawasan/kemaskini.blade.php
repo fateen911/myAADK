@@ -15,6 +15,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <style>
+            .card {
+                width: 80%;
+                margin-top: 20px; /* Remove top margin for proper centering */
+            }
+
+            .app-content {
+                display: flex; /* Use Flexbox */
+                justify-content: center; /* Align horizontally to center */
+                align-items: center; /* Align vertically to center */
+                margin: 0; /* Remove margins */
+            }
+
             .form-select.custom-select {
                 background-color: #e0e0e0 !important;
                 color: #222222 !important;
@@ -25,36 +37,47 @@
                 color: #222222 !important;
             }
 
+            .btn-primary {
+                display: block; /* Makes the button a block-level element */
+                margin: 0 auto; /* Centers the button horizontally */
+                width: fit-content; /* Optional: Shrink to fit content */
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .swal-wide {
+                width: 90% !important;
+            }
+
             @media (max-width: 768px) {
                 .page-title {
                     font-size: 1.5rem;
                 }
                 .card {
-                    /* margin: 10px; */
-                    padding-right: none;
-                    padding-left: none;
+                    width: 90%;
+                    margin-top: 20px;
+                }
+                .btn-primary {
+                    display: block; /* Makes the button a block-level element */
+                    margin: 0 auto; /* Centers the button horizontally */
+                    width: fit-content; /* Optional: Shrink to fit content */
+                    margin-bottom: 20px;
+                    text-align: center;
                 }
                 .form-select {
                     width: 100% !important;
                 }
-
                 .app-content {
-                    justify-content: flex-start; /* Aligns the content to the left */
-                    align-items: flex-start;  /* Optional: Aligns vertically to the top */
+                    display: flex; /* Use Flexbox */
+                    justify-content: center; /* Align horizontally to center */
+                    align-items: center; /* Align vertically to center */
+                    margin: 0 !important; /* Remove margins */
                 }
                 .container-xxl {
                     width: 100%; /* Ensures the container stretches across the width */
                     padding-left: 0;
                     padding-right: 0;
                 }
-                .card {
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-            }
-
-            .swal-wide {
-                width: 90% !important;
             }
         </style>
     </head>
@@ -83,91 +106,85 @@
         </div>
         <!--end::Page title-->
 
-        <!--begin::Content-->
-        <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
-            <!--begin::Content container-->
-            <div id="kt_app_content_container" class="app-container" style="width: 80%; padding-top:50px;">
-                <!--begin::Sign-in Method-->
-                <div class="card mb-5 mb-xl-10">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
-                        <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Kemaskini Pejabat AADK</h3>
-                        </div>
+        <!--begin::Content container-->
+        <div class="app-content">
+            <!--begin::Sign-in Method-->
+            <div class="card">
+                <!--begin::Card header-->
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_signin_method">
+                    <div class="card-title m-0">
+                        <h3 class="fw-bold m-0">Kemaskini Pejabat AADK</h3>
                     </div>
-                    <!--end::Card header-->
-        
-                    <!--begin::Content-->
-                    <div id="kt_account_settings_signin_method" class="collapse show">
-                        <form method="POST" action="{{ route('kemaskini.pejabat-pengawasan') }}" id="pejabatPengawasanForm">
-                            @csrf
-        
-                            @php
-                                $daerahSemasa = DB::table('senarai_daerah_pejabat')->where('kod', $pejabatKlien->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                $negeriSemasa = DB::table('senarai_negeri_pejabat')->where('negeri_id', $pejabatKlien->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                            @endphp
-                            
-                            <div class="card-body border-top p-9">
-                                <!-- Pejabat Pengawasan Semasa -->
-                                <div class="row mb-6">
-                                    <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span>Pejabat AADK Negeri Semasa</span>
-                                    </label>
-                                    <div class="col-lg-7 fv-row position-relative">
-                                        <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$negeriSemasa}}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-6">
-                                    <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span>Pejabat AADK Daerah Semasa</span>
-                                    </label>
-                                    <div class="col-lg-7 fv-row position-relative">
-                                        <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$daerahSemasa}}</span>
-                                    </div>
-                                </div>
-        
-                                <!-- Pejabat Pengawasan Baru -->
-                                <div class="row mb-6">
-                                    <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span class="required">Pejabat AADK Negeri Baharu</span>
-                                    </label>
-                                    <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid w-100 custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
-                                            <option value="">Pilih Negeri</option>
-                                            @foreach ($senaraiNegeri as $item1)
-                                                <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="row mb-6">
-                                    <label class="col-lg-5 col-form-label fw-semibold fs-6">
-                                        <span class="required">Pejabat AADK Daerah Baharu</span>
-                                    </label>
-                                    <div class="col-lg-7 fv-row position-relative">
-                                        <select class="form-select form-select-solid w-100 custom-select" name="daerah_baharu" id="daerah_baharu" required>
-                                            <option value="" data-negeri-id="">Pilih Daerah</option>
-                                            @foreach ($senaraiDaerah as $item2)
-                                                <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!--end::Content-->
                 </div>
-                <!--end::Sign-in Method-->
+                <!--end::Card header-->
+    
+                <!--begin::Content-->
+                <div id="kt_account_settings_signin_method" class="collapse show">
+                    <form method="POST" action="{{ route('kemaskini.pejabat-pengawasan') }}" id="pejabatPengawasanForm">
+                        @csrf
+    
+                        @php
+                            $daerahSemasa = DB::table('senarai_daerah_pejabat')->where('kod', $pejabatKlien->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
+                            $negeriSemasa = DB::table('senarai_negeri_pejabat')->where('negeri_id', $pejabatKlien->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
+                        @endphp
+                        
+                        <div class="card-body border-top p-9">
+                            <!-- Pejabat Pengawasan Semasa -->
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span>Pejabat AADK Negeri Semasa</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$negeriSemasa}}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span>Pejabat AADK Daerah Semasa</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <span name="negeri_lama" class="fs-6 form-control-plaintext">{{$daerahSemasa}}</span>
+                                </div>
+                            </div>
+    
+                            <!-- Pejabat Pengawasan Baru -->
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Pejabat AADK Negeri Baharu</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <select class="form-select form-select-solid w-100 custom-select filterDaerahOptions" id="negeri_baharu" name="negeri_baharu" data-control="select2" required>
+                                        <option value="">Pilih Negeri</option>
+                                        @foreach ($senaraiNegeri as $item1)
+                                            <option value="{{ $item1->negeri_id }}" data-id="{{ $item1->negeri_id }}">{{ $item1->negeri }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Pejabat AADK Daerah Baharu</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <select class="form-select form-select-solid w-100 custom-select" name="daerah_baharu" id="daerah_baharu" required>
+                                        <option value="" data-negeri-id="">Pilih Daerah</option>
+                                        @foreach ($senaraiDaerah as $item2)
+                                            <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan</button>
+                    </form>
+                </div>
+                <!--end::Content-->
             </div>
-            <!--end::Content container-->
-        </div>    
-        <!--end::Content-->
+            <!--end::Sign-in Method-->
+        </div>
+        <!--end::Content container-->
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
