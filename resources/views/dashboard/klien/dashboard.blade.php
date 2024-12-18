@@ -37,21 +37,6 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            /* @media (max-width: 768px) {
-                .card-title span {
-                    font-size: 1.2rem;
-                }
-            }
-
-            .symbol-label i {
-                font-size: 1.5rem; 
-            }
-
-            @media (max-width: 768px) {
-                .symbol-label i {
-                    font-size: 1rem; 
-                }
-            } */
         </style>
     </head>
 
