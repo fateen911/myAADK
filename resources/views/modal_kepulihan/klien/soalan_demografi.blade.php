@@ -123,6 +123,32 @@
         .input-tahun span{
             font-size: 15px;
         }
+
+        @media (max-width: 768px) {
+            .page-title {
+                display: flex; /* Use flexbox for alignment */
+                justify-content: left; /* Align horizontally center */
+                align-items:flex-start; /* Align vertically center */
+                text-align:left; /* Center the text */
+                margin: 0 auto !important;
+                width: 100%; /* Ensure it takes the full width of the container */
+            }
+
+            .page-heading {
+                margin: 0; /* Remove default heading margin */
+                font-size: 1.5em; /* Adjust the font size for better visibility */
+            }
+
+            .breadcrumb {
+                display: flex;
+                justify-content: center;
+                padding: 0;
+            }
+
+            header {
+                font-size: 1.4em;
+            }
+        }
     </style>
 </head>
 
