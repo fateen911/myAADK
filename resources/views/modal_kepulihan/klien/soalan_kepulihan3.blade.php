@@ -9,44 +9,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/assets/css/questionStyle.css" rel="stylesheet" type="text/css" />
-        <style>
-
-            header {
-                font-family: 'Montserrat', sans-serif;
-                color: white;
-                padding: 10px;
-                font-size: 1.8em;
-                background-color: #363062;
-                /* background-image: linear-gradient(to right,indianred,coral,yellow, mediumseagreen); */
-                width: 94%;
-                margin: 0 auto; /* Center the header */
-                border-radius: 8px; /* Optional: Add rounded corners */
-                text-align: center; /* Center the text inside the header */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a better look */
-            }
-
-            .pagination-buttons {
-                display: flex;
-                justify-content: center;
-            }
-
-            .pagination-buttons button {
-                margin: 0 10px;
-                color: white;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-            .pagination-buttons button:disabled {
-                background-color: #cccccc;
-                cursor: not-allowed;
-            }
-        </style>
+        <link href="/assets/css/questionStyle.css" rel="stylesheet">
     </head>
 
     <body>
-        <div id="kt_app_toolbar_container">
+        <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack">
             <!--begin::Page title-->
             <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
                 <!--begin::Title-->
@@ -81,7 +48,7 @@
 
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->
-            <div id="kt_app_content_container">
+            <div id="kt_app_content_container" class="app-container container-xxl">
                 <!--begin::Card body-->
                 <div class="card card-flush">
                     <br>
@@ -121,7 +88,7 @@
                                             <input type="radio" id="option4[{{ $question->id }}]" name="answer[{{ $question->id }}]" value="4" {{ $savedAnswer == 4 ? 'checked' : '' }}>
                                             <label for="option4[{{ $question->id }}]" class="circle4"></label>
                                         </div>
-                                        <span class="keputusan color-green" >Sangat Setuju</span>
+                                        <span class="keputusan color-green">Sangat Setuju</span>
                                     </div>
                                 </div>
                                 <hr class="hr">
@@ -293,46 +260,5 @@
                 document.getElementById('paginationForm').submit();
             }
         </script>
-
-        {{-- <script>
-            $(document).ready(function() {
-                updateAnsweredCount();
-
-                $('input[type=radio]').change(function() {
-                    // Autosave existing answers (this part is already working in your code)
-                    var formData = {
-                        _token: '{{ csrf_token() }}',
-                        answer: {}
-                    };
-                    $('input[type=radio]:checked').each(function() {
-                        formData.answer[$(this).attr('name').replace('answer[', '').replace(']', '')] = $(this).val();
-                    });
-
-                    $.ajax({
-                        url: '{{ route("klien.autosave.kepulihan") }}',
-                        type: 'POST',
-                        data: formData,
-                        success: function(response) {
-                            console.log('Respon soal selidik kepulihan telah disimpan.');
-                        },
-                        error: function(response) {
-                            console.log('Respon soal selidik kepulihan gagal disimpan.');
-                        }
-                    });
-
-                    // Update the counter whenever an answer is changed
-                    updateAnsweredCount();
-                });
-
-                function updateAnsweredCount() {
-                    // Count the number of checked radio buttons
-                    let answered = $('input[type=radio]:checked').length;
-                    let totalQuestions = 25;  // Set the total number of questions
-
-                    // Update the display of the answered count
-                    $('#answeredCount').text(answered);
-                }
-            });
-        </script> --}}
     </body>
 @endsection

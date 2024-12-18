@@ -1,6 +1,32 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+header {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    padding: 10px;
+    font-size: 1.8em;
+    background-color: #363062;
+    /* background-image: linear-gradient(to right,indianred,coral,yellow, mediumseagreen); */
+    width: 94%;
+    margin: 0 auto; /* Center the header */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    text-align: center; /* Center the text inside the header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a better look */
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-buttons button {
+    margin: 0 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-buttons button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 .question-container {
@@ -162,3 +188,113 @@ input[type="radio"]:checked + .circle1 {
     font-size: 22px;
     color: #424242;
 }
+
+@media (max-width: 768px) {
+    #kt_app_content_container {
+        padding: 0% !important;
+    }
+
+    .page-title {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: left; /* Align horizontally center */
+        align-items:flex-start; /* Align vertically center */
+        text-align:left; /* Center the text */
+        margin: 0 auto !important;
+        width: 100%; /* Ensure it takes the full width of the container */
+    }
+
+    .page-heading {
+        margin: 0; /* Remove default heading margin */
+        font-size: 1.5em; /* Adjust the font size for better visibility */
+    }
+
+    .breadcrumb {
+        display: flex;
+        justify-content: center;
+        padding: 0;
+    }
+
+    /* Header adjustments */
+    header {
+        font-size: 1.4em; /* Smaller font size */
+        padding: 5px;
+        margin: 0 15px; /* Smaller margins */
+        width: auto; /* Use full width */
+    }
+
+    /* Breadcrumb alignment */
+    .breadcrumb {
+        font-size: 0.8em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Question Container */
+    .question-container {
+        padding: 5px;
+        margin-top: 5px;
+    }
+
+    .question {
+        font-size: 14px; /* Reduce question text size */
+    }
+
+    .likert-scale {
+        display: flex;
+        align-items: center; /* Vertically center align items */
+        justify-content: space-between; /* Space out elements horizontally */
+        gap: 4px; /* Space between items */
+    }
+
+    .keputusan {
+        flex: 1; /* Allow text to take up equal space */
+        font-size: 12px;
+        text-align: center; /* Center text horizontally */
+        display: flex; 
+        align-items: center; /* Vertically center text */
+        justify-content: center;
+        line-height: 1.2; /* Maintain good spacing for multiple lines */
+    }
+
+    .likert-option {
+        flex: 0 0 auto; /* Fix the size of radio buttons */
+        display: flex;
+        align-items: center; /* Center radio buttons vertically */
+        justify-content: center;
+    }
+
+    .circle1, .circle2, .circle3, .circle4 {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%; /* Create circular shape */
+        margin: 0; /* Remove unnecessary spacing */
+    }
+
+    /* Pagination Buttons */
+    .pagination-buttons {
+        flex-direction: row; /* Stack buttons vertically */
+        gap: 4px; /* Add spacing between buttons */
+    }
+
+    .pagination-buttons button {
+        margin: 5px 0; /* Smaller spacing */
+        font-size: 0.9em; /* Smaller text */
+    }
+
+    /* Adjust margin for spacing */
+    .mt-40, .mt-50 {
+        margin-top: 20px;
+    }
+
+    /* Responsive text adjustments */
+    p, label {
+        font-size: 12px; /* Reduce paragraph and label sizes */
+    }
+
+    /* Hide unnecessary large elements */
+    .hr {
+        margin: 20px 0; /* Smaller gaps for separators */
+    }
+}
+
