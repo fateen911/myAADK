@@ -138,7 +138,7 @@
                                 </div>
                                 <!--end::Tab content-->
                             @else
-                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi lagi untuk klien ini.</p>
+                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi untuk klien ini.</p>
                             @endif
                         </div>
                         <!--end::Menu-->

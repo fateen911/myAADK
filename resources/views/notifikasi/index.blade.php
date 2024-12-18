@@ -121,7 +121,7 @@
                                 </div>
                             @empty
                                 <div class="list-group-item">
-                                    <p class="text-center">Tiada notifikasi baharu</p>
+                                    <p class="text-center">Tiada notifikasi baharu.</p>
                                 </div>
                             @endforelse
                         </div>

@@ -113,57 +113,88 @@
             overflow-y: auto;
         }
 
+        .select2-container {
+            z-index: 9999 !important; /* Higher than the modal z-index */
+        }
+
+        .nav-item {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-bottom: 1rem !important; /* Consistent padding */
+        }
+
         .nav-link.active {
             font-weight: bold;
             color: #007bff !important;
+            padding-bottom: 1rem !important;
         }
 
-        .select2-container {
-            z-index: 9999 !important; /* Higher than the modal z-index */
+        .nav-link i {
+            font-size: 1.5rem; /* Uniform icon size */
+            line-height: 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-tabs .nav-item {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+
+            /* Reduce padding for the content container */
+            .app-container {
+                padding: 10px !important;
+            }
+
+            /* Stack tabs vertically */
+            .nav-tabs {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            /* Adjust font size for smaller screens */
+            h1.page-heading, .fs-4 {
+                font-size: 1.2rem !important;
+            }
+
+            .btn {
+                width: 100%; /* Make buttons take full width on smaller screens */
+            }
         }
     </style>
 </head>
 
 <body>
-    {{-- <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack"> --}}
-        <!--begin::Page title-->
-        <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
-            <!--begin::Title-->
-            <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
-            <!--end::Title-->
-            <!--begin::Breadcrumb-->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <!-- Page Title -->
+        <div class="page-title flex-column">
+            <h1 class="page-heading text-dark fw-bold fs-3 my-0">Pengurusan</h1>
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">Pengurusan</li>
-                <!--end::Item-->
-                <!--begin::Item-->
                 <li class="breadcrumb-item">
                     <span class="bullet bg-gray-400 w-5px h-2px"></span>
                 </li>
-                <!--end::Item-->
-                <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">Profil Peribadi</li>
-                <!--end::Item-->
             </ul>
-            <!--end::Breadcrumb-->
         </div>
-        <!--end::Page title-->
-        
-        <!--begin::Actions-->
-        <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::primary button-->
+        <!-- PDF Button -->
+        <div>
             <a href="{{ route('export.profil.diri') }}" class="btn btn-sm fw-bold btn-primary">
                 <i class="fas fa-file-pdf"></i> PDF
             </a>
-            <!--end::primary button-->
-        </div>    
-        <!--end::Actions-->
-    {{-- </div> --}}
-
+        </div>
+    </div>
+    
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
         <!--begin::Content container-->
-        {{-- <div id="kt_app_content_container" class="app-container container-xxl"> --}}
+        <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Card-->
             <div class="card card-flush">
                 <!--begin::Card body-->
@@ -171,7 +202,7 @@
                     <!--begin:::Tabs-->
                     <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">
                                 <i class="ki-duotone ki-user-tick fs-2 me-2">
                                     <span class="path1"></span>
@@ -182,7 +213,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
                                 <i class="ki-duotone ki-people fs-2 me-2">
                                     <span class="path1"></span>
@@ -194,7 +225,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
                                 <i class="ki-duotone ki-profile-user fs-2 me-2">
                                     <span class="path1"></span>
@@ -205,7 +236,7 @@
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
-                        <li class="nav-item" style="padding-right: 15px; padding-left: 15px;">
+                        <li class="nav-item">
                             <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
                                 <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                     <span class="path1"></span>
@@ -2391,7 +2422,7 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-        {{-- </div> --}}
+        </div>
         <!--end::Content container-->
     </div>
 
