@@ -41,7 +41,7 @@
                 display: block; /* Makes the button a block-level element */
                 margin: 0 auto; /* Centers the button horizontally */
                 width: fit-content; /* Optional: Shrink to fit content */
-                margin-bottom: 20px;
+                margin-bottom: 40px;
                 text-align: center;
             }
 
@@ -61,7 +61,7 @@
                     display: block; /* Makes the button a block-level element */
                     margin: 0 auto; /* Centers the button horizontally */
                     width: fit-content; /* Optional: Shrink to fit content */
-                    margin-bottom: 20px;
+                    margin-bottom: 40px;
                     text-align: center;
                 }
                 .form-select {

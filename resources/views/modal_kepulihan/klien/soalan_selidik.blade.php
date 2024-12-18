@@ -15,9 +15,10 @@
             flex-direction: column;
             align-items: center !important;
             justify-content: center !important;
-            margin: 100px auto 0 auto; /* Center horizontally using auto margins */
+            margin: 0 auto 0 auto; /* Center horizontally using auto margins */
             width: auto;
             max-width: 600px;
+            margin-top: 60px !important;
         }
 
         .card {
@@ -41,7 +42,7 @@
         }
 
         .profile-icon {
-            font-size: 24px; /* Adjust icon size */
+            transform: scale(0.8);
             margin-right: 10px; /* Space between the icon and name */
         }
 
@@ -70,33 +71,121 @@
             display: inline-block; 
             width: 80%;
         }
+
+        /* Media Query for Small Screens */
+        @media (max-width: 768px) {
+            #kt_app_content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0;
+            }
+
+            .card-flush {
+                margin-top: 0px !important;
+            }
+
+            .card-header {
+                display: flex;
+                flex-direction: row; /* Ensure row layout */
+                align-items: center; /* Align items vertically in center */
+                justify-content: center; /* Center the content horizontally */
+                gap: 5px; /*Ad spacing between icon and text */
+            }
+
+            .profile-icon {
+                transform: scale(0.5); /* Scale down the size */
+                margin: 0 !important; /* Reset margins */
+            }
+
+            .profile-name h2 {
+                font-size: 15px;
+                margin: 0;
+            }
+
+            .card-body {
+                padding: 6px;
+                font-size: 12px;
+            }
+
+            .status {
+                font-size: 12px;
+                padding: 8px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .error-message {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 425px) {
+            #kt_app_content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0;
+            }
+
+            .card-flush {
+                margin-top: 0px !important;
+            }
+
+            .card-header {
+                display: flex;
+                flex-direction: row; /* Ensure row layout */
+                align-items: center; /* Align items vertically in center */
+                justify-content: center; /* Center the content horizontally */
+                padding: 0 !important;
+            }
+
+            .profile-icon {
+                transform: scale(0.4); /* Scale down the size */
+                margin: 0 !important; /* Reset margins */
+            }
+
+            .profile-name h2 {
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .status {
+                font-size: 12px;
+                padding: 8px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .error-message {
+                font-size: 8px !important;
+            }
+        }
     </style>
 </head>
 
-{{-- <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex flex-stack"> --}}
-    <!--begin::Page title-->
-    <div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
-        <!--begin::Title-->
-        <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Modal Kepulihan</h1>
-        <!--end::Title-->
-        <!--begin::Breadcrumb-->
-        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Modal Kepulihan</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soal Selidik</li>
-            <!--end::Item-->
-        </ul>
-        <!--end::Breadcrumb-->
-    </div>
-    <!--end::Page title-->
-{{-- </div> --}}
+<!--begin::Page title-->
+<div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
+    <!--begin::Title-->
+    <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Modal Kepulihan</h1>
+    <!--end::Title-->
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">Modal Kepulihan</li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item">
+            <span class="bullet bg-gray-400 w-5px h-2px"></span>
+        </li>
+        <!--end::Item-->
+        <!--begin::Item-->
+        <li class="breadcrumb-item text-muted">Soal Selidik</li>
+        <!--end::Item-->
+    </ul>
+    <!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
     
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -117,24 +206,24 @@
             <div class="card-body">
                 @if(isset($latestRecordKeputusan))
                     @if($latestRecordKeputusan->status == 'Selesai')
-                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b> {{ Carbon::parse($latestRecordKeputusan->updated_at)->format('d/m/Y') }}</p>
-                        <p class="text-black fs-5"><b>STATUS TERAKHIR SOAL SELIDIK:</b> SELESAI MENJAWAB</p>
+                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b><br> {{ Carbon::parse($latestRecordKeputusan->updated_at)->format('d/m/Y') }}</p>
+                        <p class="text-black fs-5"><b>STATUS TERAKHIR MENJAWAB SOAL SELIDIK:</b><br> SELESAI MENJAWAB</p>
                     @else
                         @if ($latestRecordDemografi)
-                            <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
-                            <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
+                            <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b><br> {{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                            <p class="text-black fs-5"><b>STATUS TERAKHIR MENJAWAB SOAL SELIDIK:</b><br> BELUM SELESAI MENJAWAB</p>
                         @else
                             <p class="text-black fs-5"><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
-                            <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
+                            <p class="text-black fs-5"><b>STATUS MENJAWAB SOAL SELIDIK:</b><br> BELUM MENJAWAB</p>
                         @endif
                     @endif
                 @else
                     @if ($latestRecordDemografi)
-                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b>{{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
-                        <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM SELESAI MENJAWAB</p>
+                        <p class="text-black fs-5"><b>TARIKH TERAKHIR MENJAWAB SOAL SELIDIK:</b><br> {{ Carbon::parse($latestRecordDemografi->updated_at)->format('d/m/Y') }}</p>
+                        <p class="text-black fs-5"><b>STATUS MENJAWAB SOAL SELIDIK:</b><br> BELUM SELESAI MENJAWAB</p>
                     @else
                         <p class="text-black fs-5"><b>TARIKH MENJAWAB SOAL SELIDIK:</b></p>
-                        <p class="text-black fs-5"><b>STATUS SOAL SELIDIK:</b> BELUM MENJAWAB</p>
+                        <p class="text-black fs-5"><b>STATUS MENJAWAB SOAL SELIDIK:</b><br> BELUM MENJAWAB</p>
                     @endif
                 @endif
 
@@ -154,7 +243,6 @@
     </div>
     <!--end::Content container-->
 </div>
-
 <!--end::Content-->
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
