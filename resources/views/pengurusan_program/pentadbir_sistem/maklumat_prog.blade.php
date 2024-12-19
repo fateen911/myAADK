@@ -159,6 +159,10 @@
                                 <p class="badge badge-light-warning text-darkorange fs-6 fw-bold">{{$program->status}}</p>
                             @elseif($program->status == 'SELESAI')
                                 <p class="badge badge-light-success text-seagreen fs-6 fw-bold">{{$program->status}}</p>
+                            @elseif($program->status == 'PINDA')
+                                <p class="badge badge-light-yellow text-darkyellow fs-6 fw-bold">{{$program->status}}</p>
+                            @elseif($program->status == 'BATAL')
+                                <p class="badge badge-light-red text-darkred fs-6 fw-bold">{{$program->status}}</p>
                             @endif
                             <br>
                         </div>
@@ -182,7 +186,7 @@
                                     <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                         Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <a href="{{url('/pengurusan-program/pentadbir-sistem/batal-prog/'.$program->id)}}" id="padam" data-link="{{url('/pengurusan-program/pentadbir-sistem/padam-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                    <a href="{{url('/pengurusan-program/pentadbir-sistem/batal-prog/'.$program->id)}}" id="batal" data-link="{{url('/pengurusan-program/pentadbir-sistem/batal-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
                                         Batal <i class="bi bi-trash3-fill"></i>
                                     </a>
                                 </div>
@@ -1135,7 +1139,7 @@
 
     </script>
     <script>
-        $(document).on('click', '#padam', function(e) {
+        $(document).on('click', '#batal', function(e) {
             e.preventDefault(); // Prevent default action (like submitting a form or following a link)
             var link = $(this).data('link'); // Get the link from the data-link attribute
             Swal.fire({
