@@ -131,7 +131,7 @@
                                             <div id="kt_docs_quill_basic" class="min-h-200px mb-2">
                                                 {!!$program->objektif!!}
                                             </div>
-                                            <input type="hidden" id="objektif" name="objektif">
+                                            <input type="hidden" id="objektif" name="objektif" value="{{$program->objektif}}">
                                             <!--end::Editor-->
                                             {{--                                                            <!--begin::Description-->--}}
                                             {{--                                                            <div class="text-muted fs-7">Berikan catatan anda.</div>--}}
@@ -164,7 +164,7 @@
                                         <div class="form d-flex flex-column flex-lg-row mb-5">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="required form-label">Tempat Aktiviti</label>
-                                                <input type="text" name="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
+                                                <input type="text" name="tempat" id="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
                                                 <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
@@ -215,13 +215,15 @@
                                 </div>
                                 <!--end::Card header-->
                             </div>
+                            <!-- Input bagi hebahan pindaan program -->
+                            <input type="checkbox" id="hebah_pindaan" name="hebah_pindaan" style="display: none;">
                             <!--end::General options-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
                                 <a href="{{ url('pengurusan-program/pegawai-aadk/maklumat-prog/'.$program->id) }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
-                                <button type="submit"  class="btn btn-primary">
+                                <button type="button" id="submitBtn" class="btn btn-primary">
                                     <span class="indicator-label">Kemaskini</span>
                                     <span class="indicator-progress">Sila Tunggu...
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -260,22 +262,51 @@
     <!--end::Javascript-->
 
     <script>
-        document.getElementById('program_form').addEventListener('submit', function(event) {
-            // Get the HTML content inside the div
-            var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
-            var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
+        // Store initial values for comparison
+        const tarikh_mula_asal = "{{ $program->tarikh_mula }}";
+        const tarikh_tamat_asal = "{{ $program->tarikh_tamat }}";
+        const tempat_asal = "{{ $program->tempat }}";
 
-            // Assign the content to a hidden input field
-            document.querySelector('input[name=objektif]').value = quillHtml1;
-            document.querySelector('input[name=catatan]').value = quillHtml2;
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Get current values
+            const tarikh_mula_terkini = document.getElementById('kt_daterangepicker_1').value;
+            const tarikh_tamat_terkini = document.getElementById('kt_daterangepicker_2').value;
+            const tempat_terkini = document.getElementById('tempat').value;
+
+            // Check if date or location has changed
+            if (tarikh_mula_terkini !== tarikh_mula_asal || tarikh_tamat_terkini !== tarikh_tamat_asal || tempat_terkini !== tempat_asal) {
+                Swal.fire({
+                    title: 'Pengesahan Pindaan',
+                    text: "Adakah anda ingin membuat hebahan mengenai perubahan terkini",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hebah dan Kemaskini',
+                    cancelButtonText: 'Kemaskini Sahaja',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Check the checkbox to indicate notification
+                        document.getElementById('hebah_pindaan').checked = true;
+                    }
+                    // Submit the form
+                    var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
+                    var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
+
+                    // Assign the content to a hidden input field
+                    document.querySelector('input[name=objektif]').value = quillHtml1;
+                    document.querySelector('input[name=catatan]').value = quillHtml2;
+                    document.getElementById('program_form').submit();
+                });
+            } else {
+                // If no changes, just submit the form
+                var quillHtml1 = document.getElementById('kt_docs_quill_basic').children[0].innerHTML;
+                var quillHtml2 = document.getElementById('kt_docs_quill_basic_2').children[0].innerHTML;
+
+                // Assign the content to a hidden input field
+                document.querySelector('input[name=objektif]').value = quillHtml1;
+                document.querySelector('input[name=catatan]').value = quillHtml2;
+                document.getElementById('program_form').submit();
+            }
         });
-        // document.getElementById('program_form').onsubmit = function() {
-        //     var content_1 = document.getElementById('ql-kt_docs_quill_basic').children[0].innerHTML;
-        //     document.getElementById('objektif').value = content_1;
-        //
-        //     var content_2 = document.getElementById('ql-kt_docs_quill_basic_2').children[0].innerHTML;
-        //     document.getElementById('catatan').value = content_2;
-        // };
     </script>
 
     <script>
@@ -416,4 +447,5 @@
         );
 
     </script>
+
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exports\PengesahanKehadiranExcel;
 use App\Exports\PerekodanKehadiranExcel;
 use App\Mail\HebahanBatalMail;
+use App\Mail\HebahanPindaMail;
 use App\Models\Daerah;
 use App\Models\DaerahPejabat;
 use App\Models\KategoriProgram;
@@ -299,8 +300,6 @@ class PengurusanProgController extends Controller
 
     public function postkemaskiniProgPA(Request $request,$id)
     {
-        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
-
         //Date format for database
         $format_1 = str_replace("/", "-", $request->tarikh_mula);
         $format_2 = str_replace("/", "-", $request->tarikh_tamat);
@@ -322,8 +321,33 @@ class PengurusanProgController extends Controller
             'catatan'              =>   $request->catatan,
         ]);
 
+        $notif = "Aktiviti berjaya dikemaskini.";
+
+        // Check hebahan
+        if ($request->has('hebah_pindaan')) {
+
+            if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::all();
+            }
+            elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->get();
+            }
+            else {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->get();
+            }
+
+            // Send communication based on the selected method
+            foreach ($klien as $item) {
+                if($item->emel != null){
+                    $recipient = $item->emel;
+                    Mail::to($recipient)->send(new HebahanPindaMail($id));
+                }
+            }
+
+            $notif = "Aktiviti berjaya dikemaskini dan dihebahkan.";
+        }
         $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
+        return redirect()->to($direct)->with('success', $notif);
     }
 
     public function batalProgPA($id){
@@ -540,8 +564,6 @@ class PengurusanProgController extends Controller
 
     public function postkemaskiniProgPS(Request $request,$id)
     {
-        $kategori = KategoriProgram::where('id', $request->kategori)->first()->kod;
-
         //Date format for database
         $format_1 = str_replace("/", "-", $request->tarikh_mula);
         $format_2 = str_replace("/", "-", $request->tarikh_tamat);
@@ -563,8 +585,33 @@ class PengurusanProgController extends Controller
         'catatan'              =>   $request->catatan,
         ]);
 
+        $notif = "Aktiviti berjaya dikemaskini.";
+
+        // Check hebahan
+        if ($request->has('hebah_pindaan')) {
+
+            if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::all();
+            }
+            elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->get();
+            }
+            else {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->get();
+            }
+
+            // Send communication based on the selected method
+            foreach ($klien as $item) {
+                if($item->emel != null){
+                    $recipient = $item->emel;
+                    Mail::to($recipient)->send(new HebahanPindaMail($id));
+                }
+            }
+
+            $notif = "Aktiviti berjaya dikemaskini dan dihebahkan.";
+        }
         $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
-        return redirect()->to($direct)->with('success', 'Aktiviti berjaya dikemaskini.');
+        return redirect()->to($direct)->with('success', $notif);
     }
 
     public function batalProgPS($id){
