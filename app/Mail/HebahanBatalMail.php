@@ -28,13 +28,13 @@ class HebahanBatalMail extends Mailable
     {
         $this->id = $id;
         $this->program = Program::where('id', $id)->first();
-        $this->subject = 'JEMPUTAN KE '.strtoupper($this->program->nama);
+        $this->subject = 'PEMAKLUMAN PEMBATALAN '.strtoupper($this->program->nama);
         $this->pendaftar_prog = User::where('id',$this->program->user_id)->first();
     }
 
     public function build()
     {
-        return $this->subject($this->subject)->view('pengurusan_program.hebahan.emel')
+        return $this->subject($this->subject)->view('pengurusan_program.hebahan.emel_batal')
             ->with('id',[
                 'program' => $this->program,
                 'pendaftar_prog' => $this->pendaftar_prog,

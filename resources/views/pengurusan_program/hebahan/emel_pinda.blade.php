@@ -4,13 +4,12 @@
     <title>Hebahan Pinda</title>
 </head>
 <body>
-<p>Assalamualaikum dan Salam Sejahtera,<br>
+<p>Assalamualaikum dan Salam Sejahtera,</p><br>
 <p>
     Dengan segala hormatnya, kami ingin memaklumkan bahawa aktiviti {{strtoupper($program->nama)}}
     telah dipinda atas sebab-sebab yang tidak dapat dielakkan.
 </p>
-<br>
-<p>Butiran terkini aktiviti adalah seperti berikut:</p>
+<p>Butiran terkini aktiviti adalah seperti berikut:</p><br>
 <p><b>NAMA AKTIVITI: {{strtoupper($program->nama)}}</b></p>
 <p><b>TARIKH MULA: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}}</b></p>
 <p><b>TARIKH TAMAT: {{date('d/m/Y, h:iA', strtotime($program->tarikh_tamat))}}</b></p>
