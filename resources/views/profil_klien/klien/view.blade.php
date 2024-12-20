@@ -7,7 +7,8 @@
 @endphp
 
 <head>
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/profilKlien_klien_view.css" rel="stylesheet">
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -36,138 +37,6 @@
 
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <style>
-        /* Flexbox settings for the wrapper */
-        .form-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        /* Centered form settings */
-        .centered-form {
-            width: 100%;
-            padding-left: 50px; 
-            padding-right: 50px;
-            box-sizing: border-box; 
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        /* General styles for input, textarea, and select */
-        input.form-control.form-control-solid,
-        textarea.form-control.form-control-solid {
-            background-color: #e0e0e0;
-            color: #45505b;
-        }
-
-        /* Focus state for input, textarea, and select */
-        input.form-control.form-control-solid:focus,
-        textarea.form-control.form-control-solid:focus {
-            background-color: #d0d0d0;
-            color: #333333;
-            box-shadow: none;
-        }
-
-        .form-select.custom-select {
-            background-color: #e0e0e0 !important;
-            color: #222222 !important;
-        }
-
-        .form-select.custom-select option {
-            background-color: #f5f5f5 !important;
-            color: #222222 !important;
-        }
-
-        .form-control-plaintext {
-            margin-left: 10px;
-            display: inline-block;
-        }
-
-        .d-flex {
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-light-warning {
-            background-color: #faf5d6;
-            color: #ffbd07;
-            padding: 0.75rem 0.75rem;
-            border-radius: 0.25rem;
-            display: inline-block;
-            text-align: center;
-            margin-left: 10px;
-        }
-
-        .btn-light-warning:hover,
-        .btn-light-warning:focus,
-        .btn-light-warning:active {
-            background-color: #faf5d6;
-            color: #ffbd07; 
-        }
-
-        .scrollable-container {
-            max-height: 375px; 
-            overflow-y: auto;
-        }
-
-        .select2-container {
-            z-index: 9999 !important; /* Higher than the modal z-index */
-        }
-
-        .nav-item {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-bottom: 1rem !important; /* Consistent padding */
-        }
-
-        .nav-link.active {
-            font-weight: bold;
-            color: #007bff !important;
-            padding-bottom: 1rem !important;
-        }
-
-        .nav-link i {
-            font-size: 1.5rem; /* Uniform icon size */
-            line-height: 1;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .nav-tabs .nav-item {
-                padding-left: 10px !important;
-                padding-right: 10px !important;
-            }
-
-            /* Reduce padding for the content container */
-            .app-container {
-                padding: 10px !important;
-            }
-
-            /* Stack tabs vertically */
-            .nav-tabs {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            /* Adjust font size for smaller screens */
-            h1.page-heading, .fs-4 {
-                font-size: 1.2rem !important;
-            }
-
-            .btn {
-                width: 100%; /* Make buttons take full width on smaller screens */
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -203,46 +72,50 @@
                     <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">
+                            <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general" data-short-label="Peribadi">
                                 <i class="ki-duotone ki-user-tick fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
-                                </i>Maklumat Peribadi
+                                </i>
+                                <span>Maklumat Peribadi</span>
                             </a>
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
+                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization" data-short-label="Waris">
                                 <i class="ki-duotone ki-people fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
                                     <span class="path4"></span>
-                                </i>Maklumat Waris
+                                </i>
+                                <span>Maklumat Waris</span>
                             </a>
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store" data-short-label="Keluarga">
                                 <i class="ki-duotone ki-profile-user fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
-                                </i>Maklumat Keluarga
+                                </i>
+                                <span>Maklumat Keluarga</span>
                             </a>
                         </li>
                         <!--end:::Tab item-->
                         <!--begin:::Tab item-->
                         <li class="nav-item">
-                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
+                            <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers" data-short-label="Pekerjaan">
                                 <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
-                                </i>Maklumat Pekerjaan
+                                </i>
+                                <span>Maklumat Pekerjaan</span>
                             </a>
                         </li>
                         <!--end:::Tab item-->
@@ -753,7 +626,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row fv-row mb-2">
+                                                <div class="row fv-row mt-4 mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" id="submitBtnKlien" class="btn btn-primary">Hantar</button>
@@ -1169,7 +1042,7 @@
                                                     </div>
                                                 </div>
                             
-                                                <div class="row fv-row mb-2">
+                                                <div class="row fv-row mt-4 mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" id="submitBtnPekerjaan" class="btn btn-primary">Hantar</button>
@@ -1193,19 +1066,19 @@
                                     <nav class="col-md-2">
                                         <div class="sidebar-sticky">
                                             <ul class="nav flex-column bg-light">
-                                                <li class="nav-item border">
-                                                    <a class="nav-link active fs-4" href="#maklumatBapa" data-toggle="tab">
-                                                        Maklumat Bapa
+                                                <li class="nav-item waris border">
+                                                    <a class="nav-link waris active fs-4" href="#maklumatBapa" data-toggle="tab" data-short-label="Bapa">
+                                                        <span>Maklumat Bapa</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item border">
-                                                    <a class="nav-link fs-4" href="#maklumatIbu" data-toggle="tab">
-                                                        Maklumat Ibu
+                                                <li class="nav-item waris border">
+                                                    <a class="nav-link waris fs-4" href="#maklumatIbu" data-toggle="tab" data-short-label="Ibu">
+                                                        <span>Maklumat Ibu</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item border">
-                                                    <a class="nav-link fs-4" href="#maklumatPenjaga" data-toggle="tab">
-                                                        Maklumat Penjaga
+                                                <li class="nav-item waris border">
+                                                    <a class="nav-link waris fs-4" href="#maklumatPenjaga" data-toggle="tab" data-short-label="Penjaga">
+                                                        <span>Maklumat Penjaga</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -1718,7 +1591,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-2">
+                                                        <div class="row fv-row mt-4 mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" id="submitBtnBapa" class="btn btn-primary">Hantar</button>
@@ -1845,7 +1718,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-2">
+                                                        <div class="row fv-row mt-4 mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" id="submitBtnIbu" class="btn btn-primary">Hantar</button>
@@ -1980,7 +1853,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row fv-row mb-2">
+                                                        <div class="row fv-row mt-4 mb-2">
                                                             <div class="col-md-12">
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <button type="submit" id="submitBtnPenjaga" class="btn btn-primary">Hantar</button>
@@ -2401,7 +2274,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row fv-row mb-2">
+                                                <div class="row fv-row mt-4 mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" id="submitBtnKeluarga" class="btn btn-primary">Hantar</button>

@@ -1,0 +1,227 @@
+/* Flexbox settings for the wrapper */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Centered form settings */
+.centered-form {
+    width: 100%;
+    padding-left: 50px; 
+    padding-right: 50px;
+    box-sizing: border-box; 
+    flex-direction: column;
+    align-items: center; 
+}
+
+/* General styles for input, textarea, and select */
+input.form-control.form-control-solid,
+textarea.form-control.form-control-solid {
+    background-color: #e0e0e0;
+    color: #45505b;
+}
+
+/* Focus state for input, textarea, and select */
+input.form-control.form-control-solid:focus,
+textarea.form-control.form-control-solid:focus {
+    background-color: #d0d0d0;
+    color: #333333;
+    box-shadow: none;
+}
+
+.form-select.custom-select {
+    background-color: #e0e0e0 !important;
+    color: #222222 !important;
+}
+
+.form-select.custom-select option {
+    background-color: #f5f5f5 !important;
+    color: #222222 !important;
+}
+
+.form-control-plaintext {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.btn-light-warning {
+    background-color: #faf5d6;
+    color: #ffbd07;
+    padding: 0.75rem 0.75rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.btn-light-warning:hover,
+.btn-light-warning:focus,
+.btn-light-warning:active {
+    background-color: #faf5d6;
+    color: #ffbd07; 
+}
+
+.scrollable-container {
+    max-height: 375px; 
+    overflow-y: auto;
+}
+
+.select2-container {
+    z-index: 9999 !important; /* Higher than the modal z-index */
+}
+
+.nav-item {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 1rem !important; /* Consistent padding */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #007bff !important;
+    padding-bottom: 1rem !important;
+}
+
+.nav-link i {
+    font-size: 1.5rem; /* Uniform icon size */
+    line-height: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    /* Replace the tab labels with the short version for small screens */
+    .nav-tabs .nav-link::after {
+        content: attr(data-short-label); /* Use the 'data-short-label' attribute for the label */
+        font-size: 1rem; /* Adjust font size if needed */
+    }
+
+    /* Hide the original text */
+    .nav-tabs .nav-link span {
+        display: none !important;
+    }
+
+    .nav-tabs {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .nav-item {
+        text-align: center; /* Center align tab text and icons */
+        padding: 0 5px !important;
+    }
+
+    .nav-link {
+        margin-left: 0 !important;
+    }
+
+    ul{
+        padding-top: 10px;
+        justify-content: center;
+    }
+
+    .app-container {
+        padding: 5px !important;
+    }
+
+    h1.page-heading, .fs-4 {
+        font-size: 1.2rem !important;
+    }
+
+    .form-label {
+        font-size: 1rem;
+    }
+
+    .form-control-plaintext {
+        font-size: 1rem;
+    }
+
+    .btn {
+        width: 100%; 
+    }
+
+    .modal-title {
+        font-size: 1.1rem !important;
+    }
+
+    .card .card-body {
+        padding: 0 !important;
+    }
+
+    .centered-form {
+        width: 100%;
+        padding-left: 25px; 
+        padding-right: 25px;
+    }
+
+    h2{
+        padding-top: 20px;
+        text-align: center !important;
+    }
+
+    label{
+        margin: 0 !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 0 !important;
+    }
+
+    .mb-5 {
+        margin-bottom: 0 !important;
+    }
+
+    .mb-7 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .modal-body {
+        padding-top: 0px !important;
+    }
+
+    .sidebar-sticky {
+        display: flex; /* Set sidebar-sticky to flexbox */
+        flex-direction: row; /* Display items in a row */
+        justify-content: space-around; /* Space out the items evenly */
+        padding: 0; /* Remove extra padding */
+        margin-top: 20px;
+    }
+
+    .nav.flex-column {
+        flex-direction: row !important; /* Change from column to row */
+        margin: 0;
+        padding: 0;
+        list-style: none; /* Optional: Remove default bullet styling */
+    }
+
+    .nav-item .waris {
+        flex: 1; /* Equal width for each nav-item */
+        text-align: center; /* Center align text inside items */
+    }
+
+    .nav-link .waris {
+        font-size: 0.9rem; /* Adjust font size for smaller screens */
+        display: block;
+        padding: 10px; /* Add some padding for spacing */
+    }
+
+    .nav-link span {
+        display: none !important; /* Hide the full text on smaller screens */
+    }
+
+    .nav-link::after {
+        content: attr(data-short-label); /* Show the short label */
+    }
+}
