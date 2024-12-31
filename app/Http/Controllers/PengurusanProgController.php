@@ -326,6 +326,10 @@ class PengurusanProgController extends Controller
         // Check hebahan
         if ($request->has('hebah_pindaan')) {
 
+            $program->update([
+                'status' => "PINDA",
+            ]);
+
             if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
                 $klien = Klien::all();
             }
@@ -589,6 +593,10 @@ class PengurusanProgController extends Controller
 
         // Check hebahan
         if ($request->has('hebah_pindaan')) {
+
+            $program->update([
+                'status' => "PINDA",
+            ]);
 
             if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
                 $klien = Klien::all();

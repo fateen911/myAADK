@@ -266,8 +266,10 @@
 
         document.getElementById('submitBtn').addEventListener('click', function() {
             // Get current values
-            const tarikh_mula_terkini = document.getElementById('kt_daterangepicker_1').value;
-            const tarikh_tamat_terkini = document.getElementById('kt_daterangepicker_2').value;
+            const date_1 = document.getElementById('kt_daterangepicker_1').value;
+            const tarikh_mula_terkini = moment(date_1, 'DD/MM/YYYY hh:mmA').format('YYYY-MM-DD HH:mm:ss');
+            const date_2 = document.getElementById('kt_daterangepicker_2').value;
+            const tarikh_tamat_terkini = moment(date_2, 'DD/MM/YYYY hh:mmA').format('YYYY-MM-DD HH:mm:ss');
             const tempat_terkini = document.getElementById('tempat').value;
 
             // Check if date or location has changed

@@ -181,7 +181,7 @@
                             <div class="card-title">
                                 <h2>Maklumat Aktiviti</h2>
                             </div>
-                            @if($program->status == "BELUM SELESAI")
+                            @if($program->status == "BELUM SELESAI" || $program->status == "PINDA")
                                 <div class="card-title">
                                     <a href="{{url('/pengurusan-program/pentadbir-sistem/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                         Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
