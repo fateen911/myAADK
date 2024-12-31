@@ -349,7 +349,7 @@ class DaftarPenggunaController extends Controller
     public function kemaskiniPegawai(Request $request)
     {
         // Combine email name and domain
-        $email = $request->emel . '@adk.gov.my';
+        $email = $request->emel . '@aadk.gov.my';
 
         // Retrieve pegawai info
         $pegawai = Pegawai::find($request->id);
@@ -455,7 +455,7 @@ class DaftarPenggunaController extends Controller
             $user = new User();
             $user->name = $validatedData['nama'];
             $user->no_kp = $validatedData['no_kp'];
-            $user->email = $validatedData['emelPegawai'] . '@adk.gov.my';
+            $user->email = $validatedData['emelPegawai'] . '@aadk.gov.my';
             $user->password = bcrypt($password);
             $user->tahap_pengguna = $validatedData['peranan_pengguna'];
             $user->status = '0';
@@ -467,7 +467,7 @@ class DaftarPenggunaController extends Controller
             $pegawai->users_id = $user->id;
             $pegawai->no_kp = $validatedData['no_kp'];
             $pegawai->nama = $validatedData['nama'];
-            $pegawai->emel = $validatedData['emelPegawai'] . '@adk.gov.my';
+            $pegawai->emel = $validatedData['emelPegawai'] . '@aadk.gov.my';
             $pegawai->no_tel = $validatedData['no_tel'];
             $pegawai->jawatan = $validatedData['jawatan'];
             $pegawai->peranan = $validatedData['peranan_pengguna'];
@@ -503,11 +503,11 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            // $defaultEmail = 'fateennashuha9@gmail.com';
+            $defaultEmail = 'wsyafiqah4@gmail.com';
 
             // Send notification email to the staff
-            // Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
-            Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new PegawaiApproved($user, $password, $verificationUrl));
+            // Mail::to($pegawai->emel)->send(new PegawaiApproved($pegawaiBaharu, $password, $verificationUrl));
 
             return redirect()->back()->with('success', 'Pegawai ' . $user->name . ' telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
         }
@@ -558,7 +558,7 @@ class DaftarPenggunaController extends Controller
         ]);
 
         // Combine email name and domain
-        $email = $request->emailPegawai . '@adk.gov.my';
+        $email = $request->emailPegawai . '@aadk.gov.my';
 
         // Check if the user already exists
         $user = User::where('no_kp', '=', $request->no_kp)->first();
@@ -602,10 +602,10 @@ class DaftarPenggunaController extends Controller
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
-            // $defaultEmail = 'fateenashuha2000@gmail.com';
+            $defaultEmail = 'wsyafiqah4@gmail.com';
 
-            Mail::to($email)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
-            // Mail::to($defaultEmail)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
+            // Mail::to($email)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
+            Mail::to($defaultEmail)->send(new DaftarPegawai($pegawai, $password, $verificationUrl));
 
             return redirect()->route('senarai-pengguna')->with('success', 'Pegawai telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pegawai.');
         }

@@ -1132,7 +1132,7 @@
 											<label class="fs-6 fw-semibold mb-2 required">E-mel</label>
 											<div class="input-group">
 												<input type="text" class="form-control form-control-solid custom-form" placeholder="contoh12" id="emailPegawai" name="emailPegawai" required />
-												<span class="input-group-text">@adk.gov.my</span>
+												<span class="input-group-text">@aadk.gov.my</span>
 											</div>
 										</div>
 										<!--end::Input group-->
