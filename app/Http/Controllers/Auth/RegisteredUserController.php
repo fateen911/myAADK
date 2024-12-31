@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // Combine email name and domain
-        $email = $request->emelPegawai . '@adk.gov.my';
+        $email = $request->emelPegawai . '@aadk.gov.my';
         
         // Check if the user already exists
         $user = User::where('no_kp', '=', $request->no_kp)->first();

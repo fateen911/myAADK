@@ -35,7 +35,7 @@
                 <x-input-label for="emelPegawai" :value="__('E-mel')" :required="true"/>
                 <div class="input-group">
                     <input type="text" class="form-control w-full" placeholder="contoh12" id="emelPegawai" name="emelPegawai" required />
-                    <span class="input-group-text">@adk.gov.my</span>
+                    <span class="input-group-text">@aadk.gov.my</span>
                 </div>
                 <x-input-error :messages="$errors->get('emelPegawai')" class="mt-2" />
             </div>
@@ -258,7 +258,7 @@
                     }
 
                     if (!emel) {
-                        alert('Sila masukkan domain emel rasmi @adk.gov.my.');
+                        alert('Sila masukkan domain emel rasmi @aadk.gov.my.');
                         e.preventDefault();
                         return false;
                     }
