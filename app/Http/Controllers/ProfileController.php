@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Klien;
-use App\Models\Notifikasi;
+use App\Models\NotifikasiKlien;
 
 class ProfileController extends Controller
 {
@@ -24,12 +24,12 @@ class ProfileController extends Controller
             $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
 
             // Fetch notifications for the client
-            $notifications = Notifikasi::where('klien_id', $clientId)
+            $notifications = NotifikasiKlien::where('klien_id', $clientId)
                 ->orderBy('created_at', 'desc')
                 ->get();
 
             // Count unread notifications
-            $unreadCount = Notifikasi::where('klien_id', $clientId)
+            $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
                 ->where('is_read', false)
                 ->count();
 
@@ -51,12 +51,12 @@ class ProfileController extends Controller
         $unreadCount = 0;
 
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Ensure $unreadCount is defined even when there are no notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
         ->where('is_read', false)
         ->count();
 

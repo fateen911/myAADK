@@ -13,10 +13,18 @@ class PejabatPengawasanKlien extends Model
 
     protected $fillable = [
         'klien_id',
-        'negeri_asal',
-        'negeri_baru',
-        'daerah_asal',
-        'daerah_baru',
+        'negeri_aadk_asal',
+        'daerah_aadk_asal',
+        'alamat_rumah_asal',
+        'poskod_rumah_asal',
+        'negeri_rumah_asal',
+        'daerah_rumah_asal',
+        'negeri_aadk_baru',
+        'daerah_aadk_baru',
+        'alamat_rumah_baru',
+        'poskod_rumah_baru',
+        'negeri_rumah_baru',
+        'daerah_rumah_baru',
     ];
 
     public function klien()

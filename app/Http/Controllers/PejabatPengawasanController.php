@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Klien;
 use App\Models\NegeriPejabat;
 use App\Models\PejabatPengawasanKlien;
-use App\Models\Notifikasi;
+use App\Models\NotifikasiKlien;
 
 class PejabatPengawasanController extends Controller
 {
@@ -25,12 +25,12 @@ class PejabatPengawasanController extends Controller
         $unreadCount = 0;
         
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
 

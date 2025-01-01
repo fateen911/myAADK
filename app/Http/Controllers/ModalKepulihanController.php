@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\ResponDemografi;
 use App\Models\Klien;
 use App\Models\ResponModalKepulihan;
+use App\Models\NotifikasiKlien;
 use App\Models\SkorModal;
-use App\Models\Notifikasi;
 use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
@@ -54,12 +54,12 @@ class ModalKepulihanController extends Controller
         }
 
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
 
@@ -78,12 +78,12 @@ class ModalKepulihanController extends Controller
 
         
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
 
@@ -236,12 +236,12 @@ class ModalKepulihanController extends Controller
                                 ->toArray();
         
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
 

@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notifikasi extends Model
+class NotifikasiPegawaiDaerah extends Model
 {
     use HasFactory;
 
-    protected $table = 'notifikasi';
+    protected $table = 'notifikasi_pegawai_daerah';
 
     protected $fillable = [
         'klien_id',
-        'status',
         'message',
+        'daerah_aadk_baru',
+        'daerah_aadk_asal',
         'is_read',
     ];
 

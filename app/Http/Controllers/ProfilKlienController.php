@@ -24,7 +24,7 @@ use App\Models\PekerjaanKlienUpdateRequest;
 use App\Models\Pendapatan;
 use App\Models\Pendidikan;
 use App\Models\Penyakit;
-use App\Models\Notifikasi;
+use App\Models\NotifikasiKlien;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
 use Illuminate\Support\Facades\Log;
@@ -500,7 +500,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $klien->id,
                 'status' => 'Kemaskini Maklumat Peribadi Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat peribadi anda telah diluluskan.',
@@ -555,7 +555,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $klien->id,
             'status' => 'Kemaskini Maklumat Peribadi Ditolak',
             'message' => 'Permohonan kemaskini maklumat peribadi anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -614,7 +614,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $pekerjaanKlien->klien_id,
                 'status' => 'Kemaskini Maklumat Pekerjaan Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah diluluskan.',
@@ -669,7 +669,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $pekerjaanKlien->klien_id,
             'status' => 'Kemaskini Maklumat Pekerjaan Ditolak',
             'message' => 'Permohonan kemaskini maklumat pekerjaan anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -723,7 +723,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $pasanganKlien->klien_id,
                 'status' => 'Kemaskini Maklumat Keluarga Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat keluarga anda telah diluluskan.',
@@ -778,7 +778,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $pasanganKlien->klien_id,
             'status' => 'Kemaskini Maklumat Keluarga Ditolak',
             'message' => 'Permohonan kemaskini maklumat keluarga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -832,7 +832,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $warisKlien->klien_id,
                 'status' => 'Kemaskini Maklumat Bapa Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat bapa anda telah diluluskan.',
@@ -887,7 +887,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $warisKlien->klien_id,
             'status' => 'Kemaskini Maklumat Bapa Ditolak',
             'message' => 'Permohonan kemaskini maklumat bapa anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -941,7 +941,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $warisKlien->klien_id,
                 'status' => 'Kemaskini Maklumat Ibu Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat ibu anda telah diluluskan.',
@@ -996,7 +996,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $warisKlien->klien_id,
             'status' => 'Kemaskini Maklumat Ibu Ditolak',
             'message' => 'Permohonan kemaskini maklumat ibu anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -1050,7 +1050,7 @@ class ProfilKlienController extends Controller
             }
 
             // Add notification for approval
-            Notifikasi::create([
+            NotifikasiKlien::create([
                 'klien_id' => $warisKlien->klien_id,
                 'status' => 'Kemaskini Maklumat Penjaga Diluluskan',
                 'message' => 'Permohonan kemaskini maklumat penjaga anda telah diluluskan.',
@@ -1105,7 +1105,7 @@ class ProfilKlienController extends Controller
         }
 
         // Add notification for rejection
-        Notifikasi::create([
+        NotifikasiKlien::create([
             'klien_id' => $warisKlien->klien_id,
             'status' => 'Kemaskini Maklumat Penjaga Ditolak',
             'message' => 'Permohonan kemaskini maklumat penjaga anda telah ditolak. Alasan: ' . implode(', ', $alasanDitolak),
@@ -1563,12 +1563,12 @@ class ProfilKlienController extends Controller
         $resultRequestPenjaga = WarisKlienUpdateRequest::where('klien_id', $clientId)->where('waris', 3)->first();
 
         // Fetch notifications for the client
-        $notifications = Notifikasi::where('klien_id', $clientId)
+        $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
             ->get();
 
         // Count unread notifications
-        $unreadCount = Notifikasi::where('klien_id', $clientId)
+        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
             ->where('is_read', false)
             ->count();
 
