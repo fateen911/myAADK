@@ -43,9 +43,9 @@
     <div class="d-flex justify-content-between align-items-center mb-5">
         <!-- Page Title -->
         <div class="page-title flex-column">
-            <h1 class="page-heading text-dark fw-bold fs-3 my-0">Pengurusan</h1>
+            <h1 class="page-heading text-dark fw-bold fs-3 my-0">Pengurusan Profil</h1>
             <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-                <li class="breadcrumb-item text-muted">Pengurusan</li>
+                <li class="breadcrumb-item text-muted">Pengurusan Profil</li>
                 <li class="breadcrumb-item">
                     <span class="bullet bg-gray-400 w-5px h-2px"></span>
                 </li>
