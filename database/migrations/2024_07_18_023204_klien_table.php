@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_tel')->nullable();
             $table->string('emel')->nullable();
             $table->string('alamat_rumah');
-            $table->integer('poskod');
+            $table->string('poskod');
             $table->string('daerah');
             $table->string('negeri');
             $table->string('jantina');
