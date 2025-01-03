@@ -84,7 +84,10 @@ class PengurusanProgController extends Controller
 
     public function programDianjurkan()
     {
-        $program = Program::where('status','BELUM SELESAI')->get();
+        $program = Program::where('status','BELUM SELESAI')
+                    ->orWhere('status','PINDA')
+                    ->orWhere('status','BATAL')
+                    ->get();
         return response()->json($program);
     }
 

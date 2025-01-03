@@ -399,7 +399,8 @@ License: For each use you must have a valid license purchased only from above li
                     `;
                 } else {
                     $.each(data, function (index, program) {
-                        carouselContent += `
+                        if (program.status === 'BELUM SELESAI'){ //belum selesai
+                            carouselContent += `
                             <div class="carousel-item ${index === 0 ? 'active' : ''}">
                                 <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white-2 text-black">
                                     <h3 class="p-2">${program.nama}</h3>
@@ -410,6 +411,33 @@ License: For each use you must have a valid license purchased only from above li
                                 </div>
                             </div>
                         `;
+                        }
+                        else if(program.status === 'PINDA'){ //pinda
+                            carouselContent += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white-2 text-black">
+                                    <h3 class="p-2 text-uppercase">PERHATIAN! ${program.nama} telah dipinda.</h3>
+                                    <h4 class="p-2">Butiran terkini aktiviti adalah seperti berikut:</h4>
+                                    <p class="m-0 p-0">Tarikh/Masa Mula: ${formatDate(program.tarikh_mula)}</p>
+                                    <p class="m-0 p-0">Tarikh/Masa Tamat: ${formatDate(program.tarikh_tamat)}</p>
+                                    <p class="m-0 p-0">Tempat: ${program.tempat}</p>
+                                    <p class="m-0 p-0">Pautan: <a href="${program.pautan_pengesahan}">Klik di sini</a></p>
+                                </div>
+                            </div>
+                        `;
+                        }
+                        else { //batal
+                            carouselContent += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <div class="d-block mx-2 mt-5 mb-5 w-97 text-center px-5 py-10 landing-bg-white-2 text-black">
+                                    <h3 class="p-2 text-uppercase">
+                                        PERHATIAN! ${program.nama} yang dijadualkan
+                                        pada ${formatDate(program.tarikh_mula)} telah dibatalkan.
+                                     </h3>
+                                </div>
+                            </div>
+                        `;
+                        }
                     });
                 }
                 $('#carousel-content').html(carouselContent);
