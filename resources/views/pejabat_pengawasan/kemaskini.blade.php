@@ -27,6 +27,21 @@
                 margin: 0; /* Remove margins */
             }
 
+            /* General styles for input, textarea, and select */
+            input.form-control.form-control-solid,
+            textarea.form-control.form-control-solid {
+                background-color: #e0e0e0;
+                color: #45505b;
+            }
+
+            /* Focus state for input, textarea, and select */
+            input.form-control.form-control-solid:focus,
+            textarea.form-control.form-control-solid:focus {
+                background-color: #d0d0d0;
+                color: #333333;
+                box-shadow: none;
+            }
+
             .form-select.custom-select {
                 background-color: #e0e0e0 !important;
                 color: #222222 !important;
@@ -175,6 +190,52 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Alamat Rumah Baharu</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <textarea class="form-control form-control-solid" id="alamat_rumah" name="alamat_rumah" style="text-transform: uppercase;"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Poskod</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <input type="text" class="form-control form-control-solid" id="poskod" name="poskod" inputmode="numeric"/>
+                                </div>
+                            </div>
+
+                            <div class="row mb-6">
+                                <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Negeri</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <select class="form-select form-select-solid custom-select filterDaerahAlamatOptions" id="negeri" name="negeri" data-control="select2">
+                                        <option value="">Pilih Negeri</option>
+                                        @foreach ($negeri as $item3)
+                                            <option value="{{ $item3->id }}">{{ $item3->negeri }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-6">
+                                 <label class="col-lg-5 col-form-label fw-semibold fs-6">
+                                    <span class="required">Daerah</span>
+                                </label>
+                                <div class="col-lg-7 fv-row position-relative">
+                                    <select class="form-select form-select-solid custom-select" id="daerah" name="daerah" data-control="select2">
+                                        <option value="">Pilih Daerah</option>
+                                        @foreach ($daerah as $item4)
+                                            <option value="{{ $item4->id }}" data-negeri2-id="{{ $item4->negeri_id }}">{{ $item4->daerah }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
     
                         <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Simpan</button>
@@ -212,19 +273,7 @@
             });
         </script>
 
-        <script>
-            document.getElementById('kt_account_profile_details_submit').addEventListener('click', function(event) {
-                let negeriBaharu = document.getElementById('negeri_baharu').value;
-                let daerahBaharu = document.getElementById('daerah_baharu').value;
-
-                // Check if both fields are not selected
-                if (negeriBaharu === 'Pilih Negeri' || !negeriBaharu || daerahBaharu === 'Pilih Daerah' || !daerahBaharu) {
-                    event.preventDefault(); // Prevent form submission
-                    alert('Sila pilih pejabat baharu bagi kedua-dua negeri dan daerah baharu sebelum hantar.'); // Show an error message
-                }
-            });
-        </script>
-
+        {{-- Display daerah pejabat pengawasan based on negeri --}}
         <script>
             $(document).ready(function() {
                 // Initialize Select2
@@ -267,6 +316,99 @@
                 // Reinitialize Select2 to reflect the changes in the dropdown
                 daerahSelect.select2().trigger('change');
             }
+        </script>
+
+        {{-- Display daerah rumah based on negeri --}}
+        <script>
+            $(document).ready(function() {
+                // Initialize Select2
+                $('#daerah').select2();
+            
+                $('#negeri').change(filterDaerahAlamatOptions);
+            
+                // Initial setup to filter options if needed
+                filterDaerahAlamatOptions();
+            });
+            
+            function filterDaerahAlamatOptions() {
+                const selectedNegeriId = $('#negeri').val(); // Get the selected negeri_id
+                console.log("Selected Negeri ID:", selectedNegeriId);
+            
+                const daerahSelect = $('#daerah');
+                console.log("Daerah Dropdown:", daerahSelect);
+            
+                // Clear current options
+                daerahSelect.empty(); 
+            
+                // Add the placeholder option
+                daerahSelect.append('<option value="" data-negeri-id="">Pilih Daerah</option>');
+            
+                // If no state is selected, disable the dropdown
+                if (!selectedNegeriId) {
+                    daerahSelect.prop('disabled', true).val('').trigger('change'); // Reset and trigger change
+                    return; // Exit the function
+                } else {
+                    daerahSelect.prop('disabled', false);
+                }
+            
+                // Iterate through each district and add only matching options
+                @foreach ($daerah as $item4)
+                    if ("{{ $item4->negeri_id }}" === selectedNegeriId) {
+                        daerahSelect.append('<option value="{{ $item4->id }}" data-negeri2-id="{{ $item4->negeri_id }}">{{ $item4->daerah }}</option>');
+                    }
+                @endforeach
+            
+                // Reinitialize Select2 to reflect the changes in the dropdown
+                daerahSelect.select2().trigger('change');
+            }
+        </script>
+
+        {{-- Control input for poskod --}}
+        <script>
+            document.getElementById('poskod').addEventListener('input', function (e) {
+                // Remove any non-numeric characters
+                this.value = this.value.replace(/[^0-9]/g, '');
+
+                // Limit the length to 5 characters
+                if (this.value.length > 5) {
+                    this.value = this.value.slice(0, 5);
+                }
+            });
+        </script>
+
+        {{-- Prevent form from submitted --}}
+        <script>
+            document.getElementById('kt_account_profile_details_submit').addEventListener('click', function(event) {
+                // Get required fields
+                const requiredFields = [
+                    { id: 'negeri_baharu', message: 'Sila pilih negeri pejabat pengawasan baharu.' },
+                    { id: 'daerah_baharu', message: 'Sila pilih daerah pejabat pengawasan baharu.' },
+                    { id: 'alamat_rumah', message: 'Sila masukkan alamat rumah baharu.' },
+                    { id: 'poskod', message: 'Sila masukkan poskod rumah yang sah.' },
+                    { id: 'negeri', message: 'Sila pilih negeri rumah baharu.' },
+                    { id: 'daerah', message: 'Sila pilih daerah rumah baharu.' }
+                ];
+
+                let isValid = true;
+
+                // Loop through all required fields
+                for (const field of requiredFields) {
+                    const element = document.getElementById(field.id);
+                    const value = element.value.trim();
+
+                    if (!value || value === '' || value === 'Pilih Negeri' || value === 'Pilih Daerah') {
+                        alert(field.message); // Show specific error message
+                        element.focus(); // Focus on the invalid field
+                        isValid = false;
+                        break; // Stop validation on the first invalid field
+                    }
+                }
+
+                // If any field is invalid, prevent form submission
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
         </script>
     </body>
 @endsection
