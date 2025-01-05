@@ -214,8 +214,10 @@ Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->nam
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
-    Route::get('/notifications', [NotifikasiController::class, 'index'])->name('notifications.index');
-    Route::get('/notifications/read/{id}', [NotifikasiController::class, 'markAsRead'])->name('notifications.markRead');
+    Route::get('/notifications', [NotifikasiController::class, 'indexKlien'])->name('notifications.index');
+    Route::get('/notifications/read/{id}', [NotifikasiController::class, 'markAsReadKlien'])->name('notifications.markRead');
+    Route::get('/pegawai-daerah/notifications', [NotifikasiController::class, 'fetchNotificationsPD'])->name('notifications.fetchNotificationsPD');
+    Route::get('/pegawai-daerah/notifications/read/{id}', [NotifikasiController::class, 'markAsReadPD'])->name('notifications.markReadPD');
 });
 
 require __DIR__.'/auth.php';

@@ -146,6 +146,77 @@
                     </div>
                 @endif
 
+                {{-- Notifikasi Klien --}}
+                @if(Auth::user()->tahap_pengguna == 5)
+                    <div class="app-navbar-item ms-1 ms-md-4" style="margin-right: 10px;">
+                        <!--begin::Menu wrapper-->
+                        <div class="btn btn-icon btn-custom btn-icon-dark w-35px h-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" id="kt_menu_item_wow">
+                            <i class="ki-solid ki-notification-on fs-2"></i>
+                            <span class="notification-count">{{ $unreadCountPD }}</span>
+                        </div>
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px" data-kt-menu="true" id="kt_menu_notifications">
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:#363062;">
+                                <!--begin::Title-->
+                                <h3 class="text-white fw-semibold px-9 mt-5 mb-5">
+                                    Semua Notifikasi Pegawai Daerah
+                                </h3>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+
+                            @if ($notifications->count())
+                                <!--begin::Tab content-->
+                                <div class="tab-content notification-item">
+                                    <!--begin::Tab panel-->
+                                    <div class="tab-pane fade show active" id="kt_topbar_notifications_1" role="tabpanel">
+                                        <!--begin::Items-->
+                                        <div class="scroll-y mh-250px">
+                                            @foreach($notifications as $notification)
+                                                <!--begin::Item-->
+                                                <div class="d-flex flex-stack px-4 py-4 @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
+                                                    <!--begin::Section-->
+                                                    <div class="d-flex align-items-center">
+                                                        <!--begin::Title-->
+                                                        <div class="mb-0 me-2">
+                                                            <a href="{{ route('notifications.markRead', $notification->id) }}" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
+                                                            <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
+                                                            <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
+                                                        </div>
+                                                        <!--end::Title-->
+                                                    </div>
+                                                    <!--end::Section-->
+                                                </div>
+                                                <!--end::Item-->
+                                            @endforeach
+                                        </div>
+                                        <!--end::Items-->
+
+                                        <!--begin::View more-->
+                                        <div class="py-3 text-center border-top">
+                                            <a href="{{ route('notifications.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">
+                                                Lihat Semua
+                                                <i class="ki-duotone ki-arrow-right fs-5">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </a>
+                                        </div>
+                                        <!--end::View more-->
+                                    </div>
+                                    <!--end::Tab panel-->
+                                </div>
+                                <!--end::Tab content-->
+                            @else
+                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi untuk klien ini.</p>
+                            @endif
+                        </div>
+                        <!--end::Menu-->
+                        <!--end::Menu wrapper-->
+                    </div>
+                @endif
+
                 <!--begin::User menu-->
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                     <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:white;">

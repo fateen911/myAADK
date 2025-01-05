@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Klien;
 use App\Models\NotifikasiKlien;
+use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\PekerjaanKlien;
 use App\Models\ResponDemografi;
 use App\Models\ResponModalKepulihan;
@@ -588,21 +589,6 @@ class HomeController extends Controller
                                 ->where('daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                 ->get();
 
-                    // Count number of clients that profile update statuses is Lulus
-                    // $telahKemaskiniDaerah = DB::table('klien as k')
-                    //                             ->leftJoin('waris_klien as wk', 'k.id', '=', 'wk.klien_id')
-                    //                             ->leftJoin('pekerjaan_klien as pk', 'k.id', '=', 'pk.klien_id')
-                    //                             ->leftJoin('keluarga_klien as kk', 'k.id', '=', 'kk.klien_id')
-                    //                             ->where('k.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                    //                             ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                    //                             ->where(function ($query) {
-                    //                                 $query->where('k.status_kemaskini', 'Lulus')
-                    //                                     ->orWhere('wk.status_kemaskini', 'Lulus')
-                    //                                     ->orWhere('pk.status_kemaskini', 'Lulus')
-                    //                                     ->orWhere('kk.status_kemaskini', 'Lulus');
-                    //                             })
-                    //                             ->count();
-
                     $telahKemaskiniDaerah = $clients->filter(function ($client) {
                                                 return DB::table('sejarah_profil_klien')
                                                     ->where('klien_id', $client->id)
@@ -761,9 +747,27 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
+
+                    // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+                    $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawai->daerah_bertugas)
+                                                                ->select('message1', 'created_at')
+                                                                ->get();
+
+                    // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+                    $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawai->daerah_bertugas)
+                                                                ->select('message2', 'created_at')
+                                                                ->get();
+
+                    // Combine and sort notifications by created_at descending
+                    $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+                    // Count unread notifications where is_read = false
+                    $unreadCountPD = $notifications->where('is_read', false)->count();
+
                     return view('dashboard.pegawai.dashboard_daerah', compact('telahKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
-                                                                              'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
-                                                                              'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan'));
+                                                                                                    'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
+                                                                                                    'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan',
+                                                                                                    'notifications', 'unreadCountPD'));
                 }
             }
         }

@@ -35,7 +35,7 @@
                     <label class="fs-6 fw-semibold mb-2 required">E-mel</label>
                     <div class="input-group">
                         <input type="text" class="form-control form-control-solid custom-form" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $permohonan_pegawai->emel)[0] }}" required/>
-                        <span class="input-group-text">@adk.gov.my</span>
+                        <span class="input-group-text">@aadk.gov.my</span>
                     </div>
                 </div>
                 <!--end::Input group-->
