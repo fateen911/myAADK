@@ -48,11 +48,6 @@ class NotifikasiController extends Controller
         // Get the authenticated pegawai daerah
         $pegawai = Auth::user();
         
-        // Ensure the user is pegawai daerah
-        if ($pegawai->tahap_pengguna != 5) {
-            return redirect()->back()->with('error', 'Anda bukan pegawai daerah.');
-        }
-
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawai->daerah_bertugas)
             ->select('message1', 'created_at')

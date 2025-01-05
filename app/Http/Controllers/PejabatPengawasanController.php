@@ -102,8 +102,8 @@ class PejabatPengawasanController extends Controller
         $daerahBaru = DaerahPejabat::where('kod', $validatedData['daerah_baharu'])->value('daerah');
 
         // Create or update the NotifikasiPegawaiDaerah record
-        $message1 = "Klien {$klien->nama} telah membuat pertukaran pejabat pengawasan daripada daerah {$daerahLama} kepada daerah {$daerahBaru}.";
-        $message2 = "Klien {$klien->nama} telah berpindah masuk ke pejabat pengawasan daerah {$daerahBaru} daripada daerah {$daerahLama}.";
+        $message1 = "Klien {$klien->nama} telah membuat pertukaran pejabat pengawasan daripada {$daerahLama} kepada {$daerahBaru}.";
+        $message2 = "Klien {$klien->nama} telah berpindah masuk ke {$daerahBaru} daripada {$daerahLama}.";
 
         if ($notifikasiPegawaiDaerah) {
             $notifikasiPegawaiDaerah->update([

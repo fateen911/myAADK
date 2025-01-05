@@ -177,14 +177,13 @@
                                                 <!--begin::Item-->
                                                 <div class="d-flex flex-stack px-4 py-4 @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
                                                     <!--begin::Section-->
-                                                    <div class="d-flex align-items-center">
-                                                        <!--begin::Title-->
-                                                        <div class="mb-0 me-2">
-                                                            <a href="{{ route('notifications.markRead', $notification->id) }}" class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->status }}</a>
-                                                            <div class="text-gray-400 fs-7">{{ $notification->message }}</div>
+                                                    <div class="d-flex flex-column w-100">
+                                                        <!-- Notification message -->
+                                                        <div class="fs-6 text-gray-800 text-hover-primary">{{ $notification->message1 ?? $notification->message2 }}</div>
+                                                        <!-- Timestamp aligned to the right -->
+                                                        <div class="d-flex justify-content-end">
                                                             <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
                                                         </div>
-                                                        <!--end::Title-->
                                                     </div>
                                                     <!--end::Section-->
                                                 </div>
