@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use App\Models\Klien;
 use App\Models\NegeriPejabat;
 use App\Models\DaerahPejabat;
@@ -64,10 +63,11 @@ class PejabatPengawasanController extends Controller
             'daerah.required'           => 'Sila pilih daerah rumah baharu anda.',
         ]);
 
-        // Retrieve the client's ID based on their no_kp
+        // Retrieve the client's ID and details based on their no_kp
         $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-        $klien = Klien::where('id', $klienId)->first();
+        $klien = Klien::find($klienId);
         $pejabatBaharuKlien = PejabatPengawasanKlien::where('klien_id', $klienId)->first();
+        $notifikasiPegawaiDaerah = NotifikasiPegawaiDaerah::where('klien_id', $klienId)->first();
 
         // Update or create the PejabatPengawasanKlien record
         if ($pejabatBaharuKlien) {
@@ -98,69 +98,39 @@ class PejabatPengawasanController extends Controller
             ]);
         }
 
+        $daerahLama = DaerahPejabat::where('kod', $klien->daerah_pejabat)->value('daerah');
+        $daerahBaru = DaerahPejabat::where('kod', $validatedData['daerah_baharu'])->value('daerah');
+
+        // Create or update the NotifikasiPegawaiDaerah record
+        $message1 = "Klien {$klien->nama} telah membuat pertukaran pejabat pengawasan daripada daerah {$daerahLama} kepada daerah {$daerahBaru}.";
+        $message2 = "Klien {$klien->nama} telah berpindah masuk ke pejabat pengawasan daerah {$daerahBaru} daripada daerah {$daerahLama}.";
+
+        if ($notifikasiPegawaiDaerah) {
+            $notifikasiPegawaiDaerah->update([
+                'message1' => $message1,
+                'message2' => $message2,
+                'daerah_aadk_baru' => $validatedData['daerah_baharu'],
+                'daerah_aadk_lama' => $klien->daerah_pejabat,
+                'is_read' => false,
+            ]);
+        } else {
+            NotifikasiPegawaiDaerah::create([
+                'klien_id' => $klienId,
+                'message1' => $message1,
+                'message2' => $message2,
+                'daerah_aadk_baru' => $validatedData['daerah_baharu'],
+                'daerah_aadk_lama' => $klien->daerah_pejabat,
+                'is_read' => false,
+            ]);
+        }
+
         // Update the Klien table
         $klien->update([
             'negeri_pejabat' => $validatedData['negeri_baharu'],
             'daerah_pejabat' => $validatedData['daerah_baharu'],
         ]);
 
-        // Create a notification for the new daerah
-        NotifikasiPegawaiDaerah::create([
-            'klien_id' => $klienId,
-            'message' => "Klien {$klien->nama} telah membuat pertukaran pejabat pengawasan.",
-            'daerah_aadk_asal' => $klien->daerah_pejabat,
-            'daerah_aadk_baru' => $validatedData['negeri_baharu'],
-            'is_read' => false,
-        ]);
-
         // Return with success message
         return redirect()->back()->with('success', 'Pertukaran pejabat pengawasan telah berjaya dikemaskini.');
     }
-
-
-    // public function update(Request $request)
-    // {
-    //     // Validation rules for fields that users can update
-    //     $validatedData = $request->validate([
-    //         'negeri_baharu' => 'required',
-    //         'daerah_baharu' => 'required',
-    //     ], [
-    //         'negeri_baharu.required' => 'Sila pilih Pejabat AADK Negeri Baharu.',
-    //         'daerah_baharu.required' => 'Sila pilih Pejabat AADK Daerah Baharu.',
-    //     ]);
-
-    //     // Retrieve the client's id based on their no_kp
-    //     $klienId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
-    //     $klien = Klien::where('id', $klienId)->first();
-    //     $pejabatBaharuKlien = PejabatPengawasanKlien::where('klien_id', $klienId)->first();
-
-    //     // If PejabatPengawasanKlien exists, update it
-    //     if ($pejabatBaharuKlien) {
-    //         $pejabatBaharuKlien->update([
-    //             'negeri_baru' => $validatedData['negeri_baharu'],
-    //             'daerah_baru' => $validatedData['daerah_baharu'],
-    //             'updated_at' => now(),
-    //         ]);
-    //     } else {
-    //         // If PejabatPengawasanKlien does not exist, create a new row
-    //         PejabatPengawasanKlien::create([
-    //             'klien_id' => $klienId,
-    //             'negeri_asal' => $klien->negeri_pejabat,
-    //             'daerah_asal' => $klien->daerah_pejabat,
-    //             'negeri_baru' => $validatedData['negeri_baharu'],
-    //             'daerah_baru' => $validatedData['daerah_baharu'],
-    //             'created_at' => now(),
-    //             'updated_at' => now(),
-    //         ]);
-    //     }
-
-    //     // Update the klien table
-    //     $klien->update([
-    //         'daerah_pejabat' => $validatedData['daerah_baharu'],
-    //         'negeri_pejabat' => $validatedData['negeri_baharu'],
-    //     ]);
-
-    //     // Return view with success message
-    //     return redirect()->back()->with('success', 'Pertukaran pejabat pengawasan telah berjaya dikemaskini.');
-    // }
 }

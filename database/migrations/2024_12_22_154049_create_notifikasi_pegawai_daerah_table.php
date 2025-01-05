@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('notifikasi_pegawai_daerah', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('message');
+            $table->string('message1');
+            $table->string('message2');
             $table->string('daerah_aadk_baru');
-            $table->string('daerah_aadk_asal');
+            $table->string('daerah_aadk_lama');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
 

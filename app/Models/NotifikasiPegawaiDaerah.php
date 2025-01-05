@@ -13,9 +13,10 @@ class NotifikasiPegawaiDaerah extends Model
 
     protected $fillable = [
         'klien_id',
-        'message',
+        'message1',
+        'message2',
         'daerah_aadk_baru',
-        'daerah_aadk_asal',
+        'daerah_aadk_lama',
         'is_read',
     ];
 
