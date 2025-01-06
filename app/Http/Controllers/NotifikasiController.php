@@ -43,6 +43,30 @@ class NotifikasiController extends Controller
 
     public function fetchNotificationsPD()
     {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id',$pegawai->id)->first();
+
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+        ->select('id', 'message1', 'created_at')
+        ->get();
+
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id','message2', 'created_at')
+                ->get();
+                
+        // Combine and sort notifications by created_at descending
+        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+        // Count unread notifications where is_read = false
+        $unreadCountPD = $notifications->where('is_read', false)->count();
+
+        return view('notifikasi.pegawai_daerah', compact('unreadCountPD', 'notifications'));
+    }
+
+    public function senaraiTukarAADKDaerahPD()
+    {
         // Get the authenticated pegawai daerah
         $pegawai = Auth::user();
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
@@ -85,8 +109,6 @@ class NotifikasiController extends Controller
             )
             ->get();
 
-        // dd($klienPindahKeluar);
-
         // Count unread notifications
         $unreadCountPD = NotifikasiPegawaiDaerah::where('is_read', false)
             ->where(function ($query) use ($pegawaiDaerah) {
@@ -109,60 +131,18 @@ class NotifikasiController extends Controller
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
         // Pass the data to the view
-        return view('notifikasi.pegawai_daerah', compact('klienPindahMasuk', 'klienPindahKeluar', 'unreadCountPD', 'notifications'));
+        return view('notifikasi.senarai_tukar_daerah', compact('klienPindahMasuk', 'klienPindahKeluar', 'unreadCountPD', 'notifications'));
     }
 
-    // public function fetchNotificationsPD()
-    // {
-    //     // Get the authenticated pegawai daerah
-    //     $pegawai = Auth::user();
-    //     $pegawaiDaerah = Pegawai::where('users_id',$pegawai->id)->first();
+    public function markAsReadPD($id)
+    {
+        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+        $notification = NotifikasiPegawaiDaerah::find($id);
 
-    //     // Fetch Pindah Masuk (daerah_aadk_baru matches daerah_bertugas)
-    //     $klienPindahMasuk = NotifikasiPegawaiDaerah::where('notifikasi_pegawai_daerah.daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-    //         ->join('pejabat_pengawasan_klien', 'notifikasi_pegawai_daerah.klien_id', '=', 'pejabat_pengawasan_klien.klien_id')
-    //         ->select(
-    //             'pejabat_pengawasan_klien.klien_id',
-    //             'pejabat_pengawasan_klien.alamat_rumah_asal',
-    //             'pejabat_pengawasan_klien.alamat_rumah_baru',
-    //             'pejabat_pengawasan_klien.daerah_aadk_baru',
-    //             'notifikasi_pegawai_daerah.message1',
-    //             'notifikasi_pegawai_daerah.created_at'
-    //         )
-    //         ->get();
-
-    //     // Fetch Pindah Keluar (daerah_aadk_lama matches daerah_bertugas)
-    //     $klienPindahKeluar = NotifikasiPegawaiDaerah::where('notifikasi_pegawai_daerah.daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-    //         ->join('pejabat_pengawasan_klien', 'notifikasi_pegawai_daerah.klien_id', '=', 'pejabat_pengawasan_klien.klien_id')
-    //         ->select(
-    //             'pejabat_pengawasan_klien.klien_id',
-    //             'pejabat_pengawasan_klien.alamat_rumah_asal',
-    //             'pejabat_pengawasan_klien.alamat_rumah_baru',
-    //             'pejabat_pengawasan_klien.daerah_aadk_asal',
-    //             'notifikasi_pegawai_daerah.message2',
-    //             'notifikasi_pegawai_daerah.created_at'
-    //         )
-    //         ->get();
+        if ($notification && $notification->klien_id == $clientId) {
+            $notification->update(['is_read' => true]);
+        }
         
-    //     // dd($klienPindahKeluar);
-
-    //     // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
-    //     $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-    //         ->select('message1', 'created_at')
-    //         ->get();
-
-    //     // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
-    //     $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-    //         ->select('message2', 'created_at')
-    //         ->get();
-
-    //     // Combine and sort notifications by created_at descending
-    //     $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
-
-    //     // Count unread notifications where is_read = false
-    //     $unreadCountPD = $notifications->where('is_read', false)->count();
-
-    //     // Pass the data to the view
-    //     return view('notifikasi.pegawai_daerah', compact('klienPindahMasuk', 'klienPindahKeluar', 'notifications', 'unreadCountPD'));
-    // }
+        return redirect()->route('notifications.senaraiTukarDaerahPD');
+    }
 }

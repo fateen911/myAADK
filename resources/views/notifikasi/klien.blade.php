@@ -140,7 +140,7 @@
                 item.addEventListener('click', function (e) {
                     e.preventDefault();
                     let notificationId = this.getAttribute('data-id');
-                    fetch(`/notifications/read/${notificationId}`, {
+                    fetch(`/notifikasi/${notificationId}`, {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')

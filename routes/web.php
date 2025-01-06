@@ -214,10 +214,11 @@ Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->nam
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
-    Route::get('/notifications', [NotifikasiController::class, 'indexKlien'])->name('notifications.index');
-    Route::get('/notifications/read/{id}', [NotifikasiController::class, 'markAsReadKlien'])->name('notifications.markRead');
-    Route::get('/pegawai-daerah/notifications', [NotifikasiController::class, 'fetchNotificationsPD'])->name('notifications.fetchNotificationsPD');
-    Route::get('/pegawai-daerah/notifications/read/{id}', [NotifikasiController::class, 'markAsReadPD'])->name('notifications.markReadPD');
+    Route::get('/notifikasi', [NotifikasiController::class, 'indexKlien'])->name('notifications.index');
+    Route::get('/notifikasi/{id}', [NotifikasiController::class, 'markAsReadKlien'])->name('notifications.markRead');
+    Route::get('/pegawai-daerah/notifikasi', [NotifikasiController::class, 'fetchNotificationsPD'])->name('notifications.fetchNotificationsPD');
+    Route::get('/pegawai-daerah/notifikasi/{id}', [NotifikasiController::class, 'markAsReadPD'])->name('notifications.markReadPD');
+    Route::get('/pegawai-daerah/senarai-pertukaran-pejabat', [NotifikasiController::class, 'senaraiTukarAADKDaerahPD'])->name('notifications.senaraiTukarDaerahPD');
 });
 
 require __DIR__.'/auth.php';

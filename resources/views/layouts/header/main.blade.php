@@ -179,7 +179,10 @@
                                                     <!--begin::Section-->
                                                     <div class="d-flex flex-column w-100">
                                                         <!-- Notification message -->
-                                                        <div class="fs-6 text-gray-800 text-hover-primary">{{ $notification->message1 ?? $notification->message2 }}</div>
+                                                        <a href="{{ $notification->id ? route('notifications.markReadPD', $notification->id) : '#' }}" class="fs-6 text-gray-800 text-hover-primary">
+                                                            {{ $notification->message1 ?? $notification->message2 }}
+                                                        </a>
+                                                        {{-- <a href="{{ route('notifications.markReadPD', $notification->id) }}" class="fs-6 text-gray-800 text-hover-primary">{{ $notification->message1 ?? $notification->message2 }}</a> --}}
                                                         <!-- Timestamp aligned to the right -->
                                                         <div class="d-flex justify-content-end">
                                                             <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
@@ -194,7 +197,7 @@
 
                                         <!--begin::View more-->
                                         <div class="py-3 text-center border-top">
-                                            <a href="{{ route('notifications.index') }}" class="btn btn-color-gray-600 btn-active-color-primary">
+                                            <a href="{{ route('notifications.fetchNotificationsPD') }}" class="btn btn-color-gray-600 btn-active-color-primary">
                                                 Lihat Semua
                                                 <i class="ki-duotone ki-arrow-right fs-5">
                                                     <span class="path1"></span>
