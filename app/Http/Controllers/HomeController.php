@@ -750,19 +750,17 @@ class HomeController extends Controller
 
                     // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
                     $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                                                ->select('klien_id', 'message1', 'created_at')
+                                                                ->select('id', 'message1', 'created_at')
                                                                 ->get();
 
                     // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
                     $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                                                ->select('klien_id', 'message2', 'created_at')
+                                                                ->select('id', 'message2', 'created_at')
                                                                 ->get();
                                                                 
                                             
                     // Combine and sort notifications by created_at descending
                     $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
-
-                    // dd($notifications);
                     
                     // Count unread notifications where is_read = false
                     $unreadCountPD = $notifications->where('is_read', false)->count();

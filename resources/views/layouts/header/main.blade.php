@@ -179,9 +179,10 @@
                                                     <!--begin::Section-->
                                                     <div class="d-flex flex-column w-100">
                                                         <!-- Notification message -->
-                                                        <a href="{{ $notification->id ? route('notifications.markReadPD', $notification->id) : '#' }}" class="fs-6 text-gray-800 text-hover-primary">
+                                                        <a href="{{ route('notifications.markReadPD', ['id' => $notification->id]) }}" 
+                                                            class="fs-6 text-gray-800 text-hover-primary">
                                                             {{ $notification->message1 ?? $notification->message2 }}
-                                                        </a>
+                                                         </a>
                                                         {{-- <a href="{{ route('notifications.markReadPD', $notification->id) }}" class="fs-6 text-gray-800 text-hover-primary">{{ $notification->message1 ?? $notification->message2 }}</a> --}}
                                                         <!-- Timestamp aligned to the right -->
                                                         <div class="d-flex justify-content-end">

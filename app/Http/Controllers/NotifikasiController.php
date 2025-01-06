@@ -119,12 +119,12 @@ class NotifikasiController extends Controller
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-            ->select('message1', 'created_at')
+            ->select('id', 'message1', 'created_at')
             ->get();
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-            ->select('message2', 'created_at')
+            ->select('id', 'message2', 'created_at')
             ->get();
 
         // Combine and sort notifications by created_at descending
@@ -136,10 +136,9 @@ class NotifikasiController extends Controller
 
     public function markAsReadPD($id)
     {
-        $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $notification = NotifikasiPegawaiDaerah::find($id);
 
-        if ($notification && $notification->klien_id == $clientId) {
+        if ($notification) {
             $notification->update(['is_read' => true]);
         }
         
