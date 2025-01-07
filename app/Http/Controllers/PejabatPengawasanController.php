@@ -111,7 +111,8 @@ class PejabatPengawasanController extends Controller
                 'message2' => $message2,
                 'daerah_aadk_baru' => $validatedData['daerah_baharu'],
                 'daerah_aadk_lama' => $klien->daerah_pejabat,
-                'is_read' => false,
+                'is_read1' => false,
+                'is_read2' => false,
             ]);
         } else {
             NotifikasiPegawaiDaerah::create([
@@ -120,7 +121,8 @@ class PejabatPengawasanController extends Controller
                 'message2' => $message2,
                 'daerah_aadk_baru' => $validatedData['daerah_baharu'],
                 'daerah_aadk_lama' => $klien->daerah_pejabat,
-                'is_read' => false,
+                'is_read1' => false,
+                'is_read2' => false,
             ]);
         }
 

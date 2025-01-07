@@ -17,7 +17,8 @@ class NotifikasiPegawaiDaerah extends Model
         'message2',
         'daerah_aadk_baru',
         'daerah_aadk_lama',
-        'is_read',
+        'is_read1',
+        'is_read2',
     ];
 
     public function klien() {

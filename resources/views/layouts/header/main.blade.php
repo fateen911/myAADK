@@ -175,15 +175,25 @@
                                         <div class="scroll-y mh-250px">
                                             @foreach($notifications as $notification)
                                                 <!--begin::Item-->
-                                                <div class="d-flex flex-stack px-4 py-4 @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
+                                                <div class="d-flex flex-stack px-4 py-4 @if($notification->is_read1 === 0 || $notification->is_read2 === 0) bg-light-primary @else bg-none @endif">
                                                     <!--begin::Section-->
                                                     <div class="d-flex flex-column w-100">
-                                                        <!-- Notification message -->
-                                                        <a href="{{ route('notifications.markReadPD', ['id' => $notification->id]) }}" 
+                                                        <!-- Notification for Message 1 -->
+                                                        @if($notification->message1)
+                                                            <a href="{{ route('notifications.markReadPD', [$notification->id, 'message1']) }}"
+                                                            class="fs-6 text-gray-800 text-hover-primary ">
+                                                                <p>{{ $notification->message1 }}</p>
+                                                            </a>
+                                                        @endif
+                                        
+                                                        <!-- Notification for Message 2 -->
+                                                        @if($notification->message2)
+                                                            <a href="{{ route('notifications.markReadPD', [$notification->id, 'message2']) }}"
                                                             class="fs-6 text-gray-800 text-hover-primary">
-                                                            {{ $notification->message1 ?? $notification->message2 }}
-                                                         </a>
-                                                        {{-- <a href="{{ route('notifications.markReadPD', $notification->id) }}" class="fs-6 text-gray-800 text-hover-primary">{{ $notification->message1 ?? $notification->message2 }}</a> --}}
+                                                                <p>{{ $notification->message2 }}</p>
+                                                            </a>
+                                                        @endif
+
                                                         <!-- Timestamp aligned to the right -->
                                                         <div class="d-flex justify-content-end">
                                                             <span class="badge badge-light text-primary fs-8 mt-2">{{ $notification->created_at->locale('ms')->diffForHumans() }}</span>
@@ -198,7 +208,7 @@
 
                                         <!--begin::View more-->
                                         <div class="py-3 text-center border-top">
-                                            <a href="{{ route('notifications.fetchNotificationsPD') }}" class="btn btn-color-gray-600 btn-active-color-primary">
+                                            <a href="{{ route('notifications.fetchNotificationsPD') }}" class="btn btn-color-gray-600 btn-hover-primary">
                                                 Lihat Semua
                                                 <i class="ki-duotone ki-arrow-right fs-5">
                                                     <span class="path1"></span>

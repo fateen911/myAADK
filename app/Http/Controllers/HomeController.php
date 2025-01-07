@@ -582,6 +582,7 @@ class HomeController extends Controller
                 {
                     $pegawai = Auth::user();
                     $pegawaiDaerah = DB::table('pegawai')->where('users_id',$pegawai->id)->first();
+                    $unreadCountPD = 0;
 
                     // Filter clients based on daerah_bertugas and negeri_bertugas
                     $clients = DB::table('klien')
@@ -750,12 +751,12 @@ class HomeController extends Controller
 
                     // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
                     $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                                                ->select('id', 'message1', 'created_at')
+                                                                ->select('id', 'message1', 'created_at', 'is_read1')
                                                                 ->get();
 
                     // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
                     $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                                                ->select('id', 'message2', 'created_at')
+                                                                ->select('id', 'message2', 'created_at', 'is_read2')
                                                                 ->get();
                                                                 
                                             
@@ -763,7 +764,10 @@ class HomeController extends Controller
                     $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
                     
                     // Count unread notifications where is_read = false
-                    $unreadCountPD = $notifications->where('is_read', false)->count();
+                    $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                                                                            $query->where('is_read1', false)
+                                                                                ->orWhere('is_read2', false);
+                                                                        })->count();
 
                     return view('dashboard.pegawai.dashboard_daerah', compact('telahKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
                                                                                                     'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',

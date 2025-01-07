@@ -48,19 +48,24 @@ class NotifikasiController extends Controller
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-        ->select('id', 'message1', 'created_at')
+        ->select('id', 'message1', 'created_at', 'is_read1')
         ->get();
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                ->select('id','message2', 'created_at')
+                ->select('id','message2', 'created_at', 'is_read2')
                 ->get();
                 
         // Combine and sort notifications by created_at descending
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
         // Count unread notifications where is_read = false
-        $unreadCountPD = $notifications->where('is_read', false)->count();
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                                                    $query->where('is_read1', false)
+                                                        ->orWhere('is_read2', false);
+                                                })->count();
+        // dd($notifications);
+        // dd($unreadCountPD);
 
         return view('notifikasi.pegawai_daerah', compact('unreadCountPD', 'notifications'));
     }
@@ -110,21 +115,19 @@ class NotifikasiController extends Controller
             ->get();
 
         // Count unread notifications
-        $unreadCountPD = NotifikasiPegawaiDaerah::where('is_read', false)
-            ->where(function ($query) use ($pegawaiDaerah) {
-                $query->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                    ->orWhere('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas);
-            })
-            ->count();
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                                                    $query->where('is_read1', false)
+                                                        ->orWhere('is_read2', false);
+                                                })->count();
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-            ->select('id', 'message1', 'created_at')
+            ->select('id', 'message1', 'created_at', 'is_read1')
             ->get();
 
         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-            ->select('id', 'message2', 'created_at')
+            ->select('id', 'message2', 'created_at', 'is_read2')
             ->get();
 
         // Combine and sort notifications by created_at descending
@@ -134,14 +137,19 @@ class NotifikasiController extends Controller
         return view('notifikasi.senarai_tukar_daerah', compact('klienPindahMasuk', 'klienPindahKeluar', 'unreadCountPD', 'notifications'));
     }
 
-    public function markAsReadPD($id)
+    public function markAsReadPD($id, $message)
     {
         $notification = NotifikasiPegawaiDaerah::find($id);
 
         if ($notification) {
-            $notification->update(['is_read' => true]);
+            if ($message === 'message1') {
+                $notification->update(['is_read1' => true]);
+            } elseif ($message === 'message2') {
+                $notification->update(['is_read2' => true]);
+            }
         }
-        
+
         return redirect()->route('notifications.senaraiTukarDaerahPD');
     }
+
 }

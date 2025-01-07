@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('message2');
             $table->string('daerah_aadk_baru');
             $table->string('daerah_aadk_lama');
-            $table->boolean('is_read')->default(false);
+            $table->boolean('is_read1')->default(false);
+            $table->boolean('is_read2')->default(false);
             $table->timestamps();
 
             $table->foreign('klien_id')->references('id')->on('klien')->onDelete('cascade');

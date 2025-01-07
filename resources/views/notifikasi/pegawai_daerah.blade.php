@@ -70,7 +70,7 @@
                     <!--begin::Card header-->
                     <div class="card-header border-0" style="background-color: #363062;">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" style="color: white;">Semua Notifikasi Anda</h3>
+                            <h3 class="fw-bold m-0" style="color: white;">Semua Notifikasi</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -79,17 +79,28 @@
                     <div class="card-body">
                         <div class="list-group">
                             @forelse($notifications as $notification)
-                                <div class="list-group-item @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
+                                <div class="list-group-item @if($notification->is_read1 === 0 || $notification->is_read2 === 0) bg-light-primary @else bg-none @endif">
                                     <div class="notification-item">
                                         <!-- Notification status and date/time in the same row -->
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <!-- Left: Status -->
-                                            <a href="{{ route('notifications.markReadPD', $notification->id) }}" class="fs-7 text-black text-hover-primary">
-                                                <p>{{ $notification->message1 ?? $notification->message2 }}</p>
-                                            </a>
-                                            
-                                            <!-- Right: Created date and time -->
-                                            <p class="notification-date-time" style="font-size: 0.9rem;">
+                                            <!-- Notification for Message 1 -->
+                                            @if($notification->message1)
+                                                <a href="{{ route('notifications.markReadPD', [$notification->id, 'message1']) }}"
+                                                class="fs-6 text-black text-hover-primary w-80">
+                                                    <p>{{ $notification->message1 }}</p>
+                                                </a>
+                                            @endif
+                            
+                                            <!-- Notification for Message 2 -->
+                                            @if($notification->message2)
+                                                <a href="{{ route('notifications.markReadPD', [$notification->id, 'message2']) }}"
+                                                class="fs-6 text-black text-hover-primary w-80">
+                                                    <p>{{ $notification->message2 }}</p>
+                                                </a>
+                                            @endif
+                            
+                                            <!-- Notification Date -->
+                                            <p class="notification-date-time w-20" style="font-size: 0.9rem; padding-left:40px;">
                                                 {{ $notification->created_at->format('d/m/Y h:i A') }}
                                             </p>
                                         </div>
@@ -100,7 +111,31 @@
                                     <p class="text-center">Tiada notifikasi baharu.</p>
                                 </div>
                             @endforelse
-                        </div>
+                        </div>                        
+                        {{-- <div class="list-group">
+                            @forelse($notifications as $notification)
+                                <div class="list-group-item @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
+                                    <div class="notification-item">
+                                        <!-- Notification status and date/time in the same row -->
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <!-- Left: Status -->
+                                            <a href="{{ route('notifications.markReadPD', $notification->id) }}" class="fs-6 text-black text-hover-primary w-80">
+                                                <p>{{ $notification->message1 ?? $notification->message2 }}</p>
+                                            </a>
+                                            
+                                            <!-- Right: Created date and time -->
+                                            <p class="notification-date-time w-20" style="font-size: 0.9rem; padding-left:40px;">
+                                                {{ $notification->created_at->format('d/m/Y h:i A') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="list-group-item">
+                                    <p class="text-center">Tiada notifikasi baharu.</p>
+                                </div>
+                            @endforelse
+                        </div> --}}
                     </div>
                     <!--end::Notifications List-->
                 </div>
@@ -110,6 +145,26 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script>
+            document.querySelectorAll('.notification-link').forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const notificationId = this.getAttribute('data-id');
+                    const messageType = this.getAttribute('data-message');
+
+                    fetch(`/pegawai-daerah/notifikasi/${notificationId}/${messageType}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            this.classList.add('read');
+                        }
+                    });
+                });
+            });
+        </script>
+        {{-- <script>
            document.querySelectorAll('.dropdown-item').forEach(item => {
                 item.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -126,7 +181,7 @@
                     });
                 });
             });
-        </script>
+        </script> --}}
     </body>
 @endsection
 
