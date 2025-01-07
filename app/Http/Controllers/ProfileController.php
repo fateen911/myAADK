@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Klien;
+use App\Models\Pegawai;
+use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\NotifikasiKlien;
 
 class ProfileController extends Controller
@@ -37,6 +39,33 @@ class ProfileController extends Controller
                 'user' => $request->user(),
             ]);
         }
+        elseif (Auth::user()->tahap_pengguna == 5) 
+        {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+
+            return view('profile.edit', compact('notifications', 'unreadCountPD'), [
+                'user' => $request->user(),
+            ]);
+        }
         else
         {
             return view('profile.edit', [
@@ -50,19 +79,49 @@ class ProfileController extends Controller
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
         $unreadCount = 0;
 
-        // Fetch notifications for the client
-        $notifications = NotifikasiKlien::where('klien_id', $clientId)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if(Auth::user()->tahap_pengguna == 2)
+        {
+            // Fetch notifications for the client
+            $notifications = NotifikasiKlien::where('klien_id', $clientId)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
-        // Ensure $unreadCount is defined even when there are no notifications
-        $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
-        ->where('is_read', false)
-        ->count();
+            // Ensure $unreadCount is defined even when there are no notifications
+            $unreadCount = NotifikasiKlien::where('klien_id', $clientId)
+            ->where('is_read', false)
+            ->count();
 
-        return view('profile.update_password', [
-            'user' => $request->user(),
-        ], compact('unreadCount'));
+            return view('profile.update_password', ['user' => $request->user(),], compact('notifications','unreadCount'));
+        }
+        elseif (Auth::user()->tahap_pengguna == 5) 
+        {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+
+            return view('profile.update_password', ['user' => $request->user(),], compact('notifications','unreadCountPD'));
+        }
+        else{
+            return view('profile.update_password', ['user' => $request->user(),]);
+        }
+
     }
 
     /**
