@@ -15,6 +15,7 @@ use App\Models\Pegawai;
 use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
 use App\Models\User;
+use App\Models\NotifikasiPegawaiDaerah;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
@@ -175,8 +176,36 @@ class PengurusanProgController extends Controller
     public function daftarProgPA()
     {
         $kategori = KategoriProgram::all();
+
         if ($kategori) {
-            return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori'));
+            // Notifications and unread count for tahap_pengguna == 5
+            $notifications = null;
+            $unreadCountPD = 0;
+
+            if (Auth::user()->tahap_pengguna == 5) {
+                $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+                // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+                $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                    ->select('id', 'message1', 'created_at', 'is_read1')
+                    ->get();
+
+                // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+                $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                    ->select('id', 'message2', 'created_at', 'is_read2')
+                    ->get();
+
+                // Combine and sort notifications by created_at descending
+                $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+                // Count unread notifications where is_read = false
+                $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                    $query->where('is_read1', false)
+                        ->orWhere('is_read2', false);
+                })->count();
+            }
+
+            return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori', 'notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -294,8 +323,36 @@ class PengurusanProgController extends Controller
     {
         $kategori = KategoriProgram::all();
         $program = Program::with('kategori')->find($id);
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+        }
+
         if ($kategori || $program) {
-            return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program'));
+            return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program', 'notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -392,8 +449,36 @@ class PengurusanProgController extends Controller
         $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
         $tdk_hadir = $pengesahan->where('program_id',$id)->where('keputusan','TIDAK HADIR')->count();
         $keseluruhan = $hadir + $tdk_hadir;
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+        }
+
         if ($program) {
-            return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan'));
+            return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan', 'notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -402,7 +487,35 @@ class PengurusanProgController extends Controller
     public function senaraiProgPA()
     {
         $user_id = Auth::id();
-        return view('pengurusan_program.pegawai_aadk.senarai_prog',compact('user_id'));
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+        }
+
+        return view('pengurusan_program.pegawai_aadk.senarai_prog',compact('user_id', 'notifications', 'unreadCountPD'));
     }
 
 
