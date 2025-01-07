@@ -334,7 +334,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         @php
-                                            $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                            $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_aadk_asal');
                                             $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
                                         @endphp
                                         <span id="bangsa" class="fs-6 form-control-plaintext">{{$tamatRPDK}}</span>
@@ -352,8 +352,8 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         @php
-                                            $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_baru', 'daerah_asal')->first();
-                                            $daerah_semasa = $daerah1->daerah_baru ?? $daerah1->daerah_asal;
+                                            $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_aadk_baru', 'daerah_aadk_asal')->first();
+                                            $daerah_semasa = $daerah1->daerah_aadk_baru ?? $daerah1->daerah_aadk_asal;
                                             $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('daerah');
                                         @endphp
                                         <span id="bangsa" class="fs-6 form-control-plaintext">{{$daerahPCCP}}</span>
@@ -552,7 +552,7 @@
                                                     $penyakitKlien = DB::table('senarai_penyakit')->where('id', $klien->penyakit)->value('senarai_penyakit.penyakit');
                                                     $requestedPendidikan = DB::table('senarai_pendidikan')->where('id', $requestedDataKlien['tahap_pendidikan'])->value('senarai_pendidikan.pendidikan');
                                                     $pendidikanKlien = DB::table('senarai_pendidikan')->where('id', $klien->tahap_pendidikan)->value('senarai_pendidikan.pendidikan');
-                                                    $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                                    $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_aadk_asal');
                                                     $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
                                                 @endphp
                                         
@@ -2931,7 +2931,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     @php
-                                        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $rawatan->klien_id)->value('pejabat_pengawasan_klien.daerah_asal');
+                                        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $rawatan->klien_id)->value('pejabat_pengawasan_klien.daerah_aadk_asal');
                                         $daerah_pejabat = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
                                     @endphp
                                     <span class="fs-6 form-control-plaintext">{{$daerah_pejabat}}</span>

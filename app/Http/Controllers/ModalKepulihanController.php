@@ -11,6 +11,8 @@ use App\Models\Klien;
 use App\Models\ResponModalKepulihan;
 use App\Models\NotifikasiKlien;
 use App\Models\SkorModal;
+use App\Models\NotifikasiPegawaiDaerah;
+use App\Models\Pegawai;
 use Carbon\Carbon;
 
 class ModalKepulihanController extends Controller
@@ -681,7 +683,27 @@ class ModalKepulihanController extends Controller
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->get();
 
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab'));
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+        ->select('id', 'message1', 'created_at', 'is_read1')
+        ->get();
+
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+                
+
+        // Combine and sort notifications by created_at descending
+        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+        // Count unread notifications where is_read = false
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                            $query->where('is_read1', false)
+                                ->orWhere('is_read2', false);
+                        })->count();
+
+        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('responses', 'tidakMenjawab', 'notifications', 'unreadCountPD'));
     }
 
     public function sejarahSoalSelidik($klien_id)
@@ -705,7 +727,34 @@ class ModalKepulihanController extends Controller
 
         $clientModals = SkorModal::where('klien_id', $klien_id)->orderBy('sesi')->get();
 
-        return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah', 'clientModals'));
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+        }
+
+        return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah', 'clientModals', 'notifications', 'unreadCountPD'));
     }
 
 }

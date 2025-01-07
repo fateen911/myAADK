@@ -142,14 +142,14 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout:fixed;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 25%;">Nama</th>
-                                            <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 13%;">AADK Daerah</th>
-                                            <th style="text-align: center; width: 13%;">AADK Negeri</th>
-                                            <th style="text-align: center; width: 12%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 14%;">Status</th>
-                                            <th style="text-align: center; width: 19%;">Tahap Kepulihan</th>  
-                                            <th style="text-align: center; width: 9%;">Sejarah Menjawab</th>
+                                            <th style="width: 20%;">Nama</th>
+                                            <th style="text-align: center; width: 10%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 10%;">AADK Daerah</th>
+                                            <th style="text-align: center; width: 10%;">AADK Negeri</th>
+                                            <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
+                                            <th style="text-align: center; width: 12%;">Status</th>
+                                            <th style="text-align: center; width: 20%;">Tahap Kepulihan</th>  
+                                            <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -180,13 +180,13 @@
                                                 <td style="text-align: center">   
                                                     @if ($response->tahap_kepulihan_id)
                                                         @if ($response->tahap_kepulihan_id == 1)
-                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @elseif ($response->tahap_kepulihan_id == 2)
-                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @elseif ($response->tahap_kepulihan_id == 3)
-                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
+                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
                                                         @else
-                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:140px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
+                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
                                                         @endif
                                                     @endif
                                                 </td>

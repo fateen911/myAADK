@@ -27,7 +27,7 @@ use App\Models\Penyakit;
 use App\Models\NotifikasiKlien;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
-use Illuminate\Support\Facades\Log;
+use App\Models\NotifikasiPegawaiDaerah;
 
 class ProfilKlienController extends Controller
 {
@@ -309,7 +309,27 @@ class ProfilKlienController extends Controller
                                 ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                 ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+        ->select('id', 'message1', 'created_at', 'is_read1')
+        ->get();
+
+        // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+                
+
+        // Combine and sort notifications by created_at descending
+        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+        // Count unread notifications where is_read = false
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                            $query->where('is_read1', false)
+                                ->orWhere('is_read2', false);
+                        })->count();
+
+        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini', 'notifications', 'unreadCountPD'));
     }
 
     public function senaraiPermohonanKlienDaerah()
@@ -372,8 +392,27 @@ class ProfilKlienController extends Controller
                                     })
                                     ->distinct()
                                     ->get();
+
+        // Fetch Notifications for Pegawai Daerah (tahap_pengguna == 5)
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message1', 'created_at', 'is_read1')
+            ->get();
+
+        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message2', 'created_at', 'is_read2')
+            ->get();
+
+        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                                                    $query->where('is_read1', false)
+                                                        ->orWhere('is_read2', false);
+                                                })->count();
                             
-        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai'));
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
     }
 
     public function muatTurunProfilKlien($id)
@@ -447,12 +486,40 @@ class ProfilKlienController extends Controller
         // RAWATAN
         $rawatan = RawatanKlien::where('klien_id',$id)->first();
 
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                $query->where('is_read1', false)
+                    ->orWhere('is_read2', false);
+            })->count();
+        }
+
         return view('profil_klien.pentadbir_pegawai.kemaskini', compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                                         'klien', 'requestKlien', 'updateRequestKlien','requestedDataKlien',
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
                                                                         'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa','statusBapa','updateRequestIbu','requestedDataIbu','statusIbu','updateRequestPenjaga','requestedDataPenjaga','statusPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan'));
+                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan',
+                                                                        'notifications', 'unreadCountPD'));
     }
 
     // PEGAWAI/PENTADBIR : APPROVAL CLIENT'S REQUEST

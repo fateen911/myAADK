@@ -21,6 +21,7 @@ use App\Models\DaerahPejabat;
 use App\Models\JawatanAADK;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
+use App\Models\NotifikasiPegawaiDaerah;
 
 class DaftarPenggunaController extends Controller
 {
@@ -45,8 +46,28 @@ class DaftarPenggunaController extends Controller
                         ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                         ->orderBy('user_updated_at', 'desc')
                         ->get();
+            
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message1', 'created_at', 'is_read1')
+            ->get();
 
-            return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien'));
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->select('id', 'message2', 'created_at', 'is_read2')
+                        ->get();
+                        
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Count unread notifications where is_read = false
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
+                                    $query->where('is_read1', false)
+                                        ->orWhere('is_read2', false);
+                                })->count();
+
+            return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien', 'notifications', 'unreadCountPD'));
         }
     }
 

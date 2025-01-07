@@ -83,12 +83,12 @@
                             <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr class="text-gray-400 fw-bold fs-7">
-                                        <th style="width: 35%;">Nama</th>
+                                        <th style="width: 25%;">Nama</th>
                                         <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
-                                        <th style="text-align: center; width: 13%;">Tarikh Menjawab</th> 
-                                        <th style="text-align: center; width: 13%;">Status</th> 
-                                        <th style="text-align: center; width: 7%;">Skor</th> 
-                                        <th style="text-align: center; width: 17%;">Tahap Kepulihan</th> 
+                                        <th style="text-align: center; width: 15%;">Tarikh Menjawab</th> 
+                                        <th style="text-align: center; width: 15%;">Status</th> 
+                                        <th style="text-align: center; width: 5%;">Skor</th> 
+                                        <th style="text-align: center; width: 25%;">Tahap Kepulihan</th> 
                                     </tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
@@ -116,22 +116,22 @@
                                             <td style="text-align: center">                                        
                                                 @if ($response->tahap_kepulihan_id)
                                                     @if ($response->tahap_kepulihan_id == 1)
-                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: red; padding: 5px 10px !important; width: 150px !important; color:white;" 
+                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: red; padding: 5px 10px !important; width: 250px !important; color:white;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
                                                     @elseif ($response->tahap_kepulihan_id == 2)
-                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: darkorange; padding: 5px 10px !important; width: 150px !important; color:white;" 
+                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: darkorange; padding: 5px 10px !important; width: 250px !important; color:white;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
                                                     @elseif ($response->tahap_kepulihan_id == 3)
-                                                        <button type="button" class="btn btn-warning btn-sm fs-8" style="padding: 5px 10px !important; width: 150px !important; color:white;" 
+                                                        <button type="button" class="btn btn-warning btn-sm fs-8" style="padding: 5px 10px !important; width: 250px !important; color:white;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
                                                     @else
-                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: green; padding: 5px 10px !important; width: 150px !important; color:white;" 
+                                                        <button type="button" class="btn btn-sm fs-8" style="background-color: green; padding: 5px 10px !important; width: 250px !important; color:white;" 
                                                             data-bs-toggle="modal" data-bs-target="#skorModal{{ $response->klien_id }}-{{ $response->sesi }}">
                                                             {{ $tahap_kepulihan }}
                                                         </button>
