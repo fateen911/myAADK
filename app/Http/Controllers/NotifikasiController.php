@@ -64,8 +64,6 @@ class NotifikasiController extends Controller
                                                     $query->where('is_read1', false)
                                                         ->orWhere('is_read2', false);
                                                 })->count();
-        // dd($notifications);
-        // dd($unreadCountPD);
 
         return view('notifikasi.pegawai_daerah', compact('unreadCountPD', 'notifications'));
     }
