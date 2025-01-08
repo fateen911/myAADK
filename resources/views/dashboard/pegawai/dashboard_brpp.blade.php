@@ -55,6 +55,50 @@
 		.nav-tabs {
 			border-bottom: 2px solid lightgray; /* Bottom border for tab container */
 		}
+
+        @media (max-width: 768px) {
+            /* Adjust the cards to stack vertically */
+            .row.g-3, .row.g-lg-6 {
+                flex-direction: column;
+            }
+
+            .row.g-3 .col-4, .row.g-lg-6 .col-4 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            .row.g-3 .col-3, .row.g-lg-6 .col-3 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            /* Reduce card padding and font sizes for better readability */
+            .card {
+                padding: 10px;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+
+            .card .fs-4x {
+                font-size: 2rem;
+            }
+
+            .card .fs-7 {
+                font-size: 0.8rem;
+            }
+
+            /* Adjust symbol/icon sizes */
+            .symbol {
+                margin-bottom: 10px;
+            }
+
+            .symbol i {
+                font-size: 18px !important;
+                margin-bottom: 10px !important;
+            }
+        }
     </style>
 </head>
 

@@ -53,6 +53,82 @@
 		.nav-tabs {
 			border-bottom: 2px solid lightgray; /* Bottom border for tab container */
 		}
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                display: flex;
+                flex-direction: column;
+                gap: 10px; /* Add space between the buttons */
+                width: 100%; /* Ensure it takes full width */
+            }
+
+            .nav-tabs .nav-item {
+                flex: 1; /* Make each item take equal width */
+            }
+
+            .nav-tabs .nav-link {
+                display: block;
+                text-align: center;
+                width: 100%; /* Full width for each button */
+                padding: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                border: none; /* Remove default borders */
+                border-radius: 5px; /* Add rounded corners */
+            }
+
+            .nav-tabs .nav-link.active {
+                background-color: #003366; /* Change active tab background color */
+                color: white; /* Active tab text color */
+            }
+
+            .nav-tabs .nav-link {
+                background-color: #f8f9fa; /* Inactive tab background color */
+                color: black; /* Inactive tab text color */
+            }
+
+            /* Adjust the cards to stack vertically */
+            .row.g-3, .row.g-lg-6 {
+                flex-direction: column;
+            }
+
+            .row.g-3 .col-4, .row.g-lg-6 .col-4 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            .row.g-3 .col-3, .row.g-lg-6 .col-3 {
+                width: 100%; /* Make cards take full width */
+                margin-bottom: 15px;
+            }
+
+            /* Reduce card padding and font sizes for better readability */
+            .card {
+                padding: 10px;
+            }
+
+            .card h2 {
+                font-size: 1.2rem;
+            }
+
+            .card .fs-4x {
+                font-size: 2rem;
+            }
+
+            .card .fs-7 {
+                font-size: 0.8rem;
+            }
+
+            /* Adjust symbol/icon sizes */
+            .symbol {
+                margin-bottom: 10px;
+            }
+
+            .symbol i {
+                font-size: 15px !important;
+                margin-bottom: 10px !important;
+            }
+        }
     </style>
 </head>
 
