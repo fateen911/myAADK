@@ -478,7 +478,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Sangat Memuaskan</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap4))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -505,7 +505,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Memuaskan</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap3))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -531,7 +531,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Baik</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap2))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -553,12 +553,12 @@
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: red !important;">
                                     <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
+                                    <div class="symbol symbol-30px me-0">
                                             <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Memuaskan</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap1))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->

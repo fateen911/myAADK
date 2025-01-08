@@ -13,6 +13,7 @@ use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\PekerjaanKlien;
 use App\Models\ResponDemografi;
 use App\Models\ResponModalKepulihan;
+use App\Models\TahapKepulihan;
 use App\Models\User;
 use App\Models\WarisKlien;
 use Carbon\Carbon;
@@ -203,9 +204,16 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
+                    // Get name of tahap kepulihan
+                    $tahap1 = TahapKepulihan::where('id', 1)->value('tahap');
+                    $tahap2 = TahapKepulihan::where('id', 2)->value('tahap');
+                    $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
+                    $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
+
                     return view('dashboard.pentadbir.dashboard', compact('permohonan_pendaftaran','pegawai','klien',
                                                                         'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
                                                                         'tidak_memuaskan','memuaskan','baik','cemerlang',
+                                                                        'tahap1', 'tahap2', 'tahap3', 'tahap4',
                                                                         'belumKemaskini', 'telahKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai'));
                 }
                 else if($tahap == 2)
@@ -400,9 +408,16 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
+                    // Get name of tahap kepulihan
+                    $tahap1 = TahapKepulihan::where('id', 1)->value('tahap');
+                    $tahap2 = TahapKepulihan::where('id', 2)->value('tahap');
+                    $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
+                    $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
+
                     return view('dashboard.pegawai.dashboard_brpp', compact('belumKemaskini', 'sedangKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai',
                                                                             'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
-                                                                            'tidak_memuaskan','memuaskan','baik','cemerlang'));
+                                                                            'tidak_memuaskan','memuaskan','baik','cemerlang',
+                                                                            'tahap1', 'tahap2', 'tahap3', 'tahap4'));
                 }
                 else if($tahap == 4)
                 {
@@ -574,9 +589,16 @@ class HomeController extends Controller
                     $memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 2)->count();
                     $tidak_memuaskan = $latestTahapKepulihan->where('tahap_kepulihan_id', 1)->count();
 
+                    // Get name of tahap kepulihan
+                    $tahap1 = TahapKepulihan::where('id', 1)->value('tahap');
+                    $tahap2 = TahapKepulihan::where('id', 2)->value('tahap');
+                    $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
+                    $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
+
                     return view('dashboard.pegawai.dashboard_negeri', compact('sedangKemaskiniNegeri','belumKemaskiniNegeri', 'jumlahKlienNegeri', 'jumlahPermohonanNegeri', 'selesaiNegeri', 'belumSelesaiNegeri',
                                                                               'selesai_menjawab_negeri','belum_selesai_menjawab_negeri','tidak_menjawab_negeri',
-                                                                              'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan'));
+                                                                              'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan',
+                                                                            'tahap1', 'tahap2', 'tahap3', 'tahap4'));
                 }
                 else if($tahap == 5)
                 {
@@ -769,9 +791,15 @@ class HomeController extends Controller
                                                                                 ->orWhere('is_read2', false);
                                                                         })->count();
 
+                    // Get name of tahap kepulihan
+                    $tahap1 = TahapKepulihan::where('id', 1)->value('tahap');
+                    $tahap2 = TahapKepulihan::where('id', 2)->value('tahap');
+                    $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
+                    $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
+
                     return view('dashboard.pegawai.dashboard_daerah', compact('telahKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
                                                                                                     'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
-                                                                                                    'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan',
+                                                                                                    'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan', 'tahap1', 'tahap2', 'tahap3', 'tahap4',
                                                                                                     'notifications', 'unreadCountPD'));
                 }
             }
