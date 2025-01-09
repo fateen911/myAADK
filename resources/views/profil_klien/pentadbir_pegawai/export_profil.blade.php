@@ -153,13 +153,13 @@
 
         $namaMajikan = $pekerjaan && isset($pekerjaan['nama_majikan']) ? DB::table('senarai_majikan')->where('id', $pekerjaan['nama_majikan'])->value('senarai_majikan.majikan') : null;
 
-        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_asal');
+        $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_aadk_asal');
 
         $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
 
-        $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_baru', 'daerah_asal')->first();
+        $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_aadk_baru', 'daerah_aadk_asal')->first();
         
-        $daerah_semasa = $daerah1->daerah_baru ?? $daerah1->daerah_asal;
+        $daerah_semasa = $daerah1->daerah_aadk_baru ?? $daerah1->daerah_aadk_asal;
         
         $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('daerah');
     @endphp
