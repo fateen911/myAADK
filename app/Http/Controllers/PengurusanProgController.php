@@ -386,6 +386,14 @@ class PengurusanProgController extends Controller
         // Check hebahan
         if ($request->has('hebah_pindaan')) {
 
+            // Find and delete the record from pengesahan kehadiran
+            $records = PengesahanKehadiranProgram::where('program_id', $id)->get();
+            if ($records){
+                foreach ($records as $record) {
+                    $record->delete();
+                }
+            }
+
             $program->update([
                 'status' => "PINDA",
             ]);
@@ -710,6 +718,14 @@ class PengurusanProgController extends Controller
         // Check hebahan
         if ($request->has('hebah_pindaan')) {
 
+            // Find and delete the record from pengesahan kehadiran
+            $records = PengesahanKehadiranProgram::where('program_id', $id)->get();
+            if ($records){
+                foreach ($records as $record) {
+                    $record->delete();
+                }
+            }
+
             $program->update([
                 'status' => "PINDA",
             ]);
@@ -932,7 +948,7 @@ class PengurusanProgController extends Controller
         $program = Program::find($id);
 
         if ($program) {
-            if ($program->status == 'BELUM SELESAI'){
+            if ($program->status == 'BELUM SELESAI' || $program->status == "PINDA"){
                 return view('pengurusan_program.klien.pengesahan_kehadiran', compact('program'));
             }
             else{
