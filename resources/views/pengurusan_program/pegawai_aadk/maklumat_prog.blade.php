@@ -75,7 +75,7 @@
                 <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Maklum Balas Kehadiran</a>
             </li>
             <!--end:::Tab item-->
-            @if($program->status != "BELUM SELESAI" && $program->status != "PINDA")
+            @if($program->status != "BELUM SELESAI" && $program->status != "PINDA"  && $program->status != "BATAL")
             <!--begin:::Tab item-->
             <li class="nav-item">
                 <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_reviews">Kehadiran</a>

@@ -91,9 +91,19 @@
                         <br>
                         <hr>
 
-                        <div class="alert alert-danger p-2" role="alert">
-                            <span class="fs-3">Rekod kehadiran telah ditutup. Aktiviti telah tamat.</span>
-                        </div>
+                        @if($program->status == "BELUM SELESAI" || $program->status == "PINDA")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Rekod kehadiran belum dibuka.</span>
+                            </div>
+                        @elseif($program->status == "SELESAI")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Rekod kehadiran telah ditutup. Aktiviti telah selesai.</span>
+                            </div>
+                        @elseif($program->status == "BATAL")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Rekod kehadiran telah ditutup. Aktiviti dibatalkan.</span>
+                            </div>
+                        @endif
                     </div>
                     <!--end::Text-->
                 </div>

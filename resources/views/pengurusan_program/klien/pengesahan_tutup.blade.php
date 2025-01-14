@@ -90,9 +90,20 @@
                         Sila Hubungi: {{$program->no_tel_dihubungi}} <br>
                         <br>
                         <hr>
-                        <div class="alert alert-danger p-2" role="alert">
-                            <span class="fs-3">Maklum balas kehadiran telah ditutup. Aktiviti sedang berlangsung.</span>
-                        </div>
+                        @if($program->status == "SEDANG BERLANGSUNG")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Maklum balas kehadiran telah ditutup. Aktiviti sedang berlangsung.</span>
+                            </div>
+                        @elseif($program->status == "SELESAI")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Maklum balas kehadiran telah ditutup. Aktiviti sudah selesai.</span>
+                            </div>
+                        @elseif($program->status == "BATAL")
+                            <div class="alert alert-danger p-2" role="alert">
+                                <span class="fs-3">Maklum balas kehadiran telah ditutup. Aktiviti dibatalkan.</span>
+                            </div>
+                        @endif
+
                     </div>
                     <!--end::Text-->
                 </div>
