@@ -31,6 +31,7 @@ class Program extends Model
         'pautan_perekodan',
         'qr_perekodan',
         'status',
+        'version',
     ];
 
     public function kategori()

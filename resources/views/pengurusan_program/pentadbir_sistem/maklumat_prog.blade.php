@@ -1148,7 +1148,7 @@
                 buttonsStyling: false,
                 showCancelButton: true,
                 confirmButtonText: "Ya",
-                cancelButtonText: 'Batal',
+                cancelButtonText: 'Tidak',
                 customClass: {
                     confirmButton: "btn btn-primary",
                     cancelButton: 'btn btn-danger'

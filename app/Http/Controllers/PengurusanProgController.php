@@ -278,12 +278,13 @@ class PengurusanProgController extends Controller
         $program->pautan_perekodan     =   "tiada";
         $program->qr_perekodan         =   "tiada";
         $program->status               =   "BELUM SELESAI";
+        $program->version              =    1;
         $program->save();
 
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran', ['id' => $program->id]);
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -296,7 +297,7 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran', ['id' => $program->id]);
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version='  . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -394,8 +395,41 @@ class PengurusanProgController extends Controller
                 }
             }
 
+            $version = $program->version + 1;
+            //PENGESAHAN
+            // Generate the unique link with event ID
+            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $version);
+
+            // Generate the QR code for the event link
+            $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
+
+
+            // Save the QR code image to the public directory
+            $filePath = public_path('qr_codes/qr_pengesahan_' . $program->id . '.png');
+            file_put_contents($filePath, $generate_qr_1);
+
+            $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
+
+            //PEREKODAN
+            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $version);
+
+            // Generate the QR code for the event link
+            $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
+
+            // Save the QR code image to the public directory
+            $filePath = public_path('qr_codes/qr_perekodan_' . $program->id . '.png');
+            file_put_contents($filePath, $generate_qr_2);
+
+            $qr_perekodan = 'qr_perekodan_' . $program->id . '.png';
+
+            ///UPDATE
             $program->update([
-                'status' => "PINDA",
+                'pautan_pengesahan' =>  $pautan_pengesahan,
+                'qr_pengesahan'     =>  $qr_pengesahan,
+                'pautan_perekodan'  =>  $pautan_perekodan,
+                'qr_perekodan'      =>  $qr_perekodan,
+                'status'            =>  "PINDA",
+                'version'           =>  $version,
             ]);
 
             if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
@@ -638,12 +672,13 @@ class PengurusanProgController extends Controller
         $program->pautan_perekodan     =   "tiada";
         $program->qr_perekodan         =   "tiada";
         $program->status               =   "BELUM SELESAI";
+        $program->version              =    1;
         $program->save();
 
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran', ['id' => $program->id]);
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -656,7 +691,7 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran', ['id' => $program->id]);
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -726,8 +761,41 @@ class PengurusanProgController extends Controller
                 }
             }
 
+            $version = $program->version + 1;
+            //PENGESAHAN
+            // Generate the unique link with event ID
+            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $version);
+
+            // Generate the QR code for the event link
+            $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
+
+
+            // Save the QR code image to the public directory
+            $filePath = public_path('qr_codes/qr_pengesahan_' . $program->id . '.png');
+            file_put_contents($filePath, $generate_qr_1);
+
+            $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
+
+            //PEREKODAN
+            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $version);
+
+            // Generate the QR code for the event link
+            $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
+
+            // Save the QR code image to the public directory
+            $filePath = public_path('qr_codes/qr_perekodan_' . $program->id . '.png');
+            file_put_contents($filePath, $generate_qr_2);
+
+            $qr_perekodan = 'qr_perekodan_' . $program->id . '.png';
+
+            ///UPDATE
             $program->update([
-                'status' => "PINDA",
+                'pautan_pengesahan' =>  $pautan_pengesahan,
+                'qr_pengesahan'     =>  $qr_pengesahan,
+                'pautan_perekodan'  =>  $pautan_perekodan,
+                'qr_perekodan'      =>  $qr_perekodan,
+                'status'            =>  "PINDA",
+                'version'           =>  $version,
             ]);
 
             if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
@@ -851,9 +919,18 @@ class PengurusanProgController extends Controller
     }
 
     //KLIEN
-    public function daftarKehadiran($id) //perekodan
+    public function daftarKehadiran($id, Request $request) //perekodan
     {
         $program = Program::find($id);
+        if (!$program) {
+            return abort(404, 'Program not found');
+        }
+
+        // Check if version matches or handle as needed
+        $version = $request->query('version');
+        if ($program->version != $version) {
+            return abort(404, 'Program version not found');
+        }
 
         if ($program) {
             if ($program->status == 'SEDANG BERLANGSUNG'){
@@ -943,9 +1020,19 @@ class PengurusanProgController extends Controller
         return redirect()->back()->with('success2', 'Kehadiran berjaya direkodkan.');
     }
 
-    public function pengesahanKehadiran($id)
+    public function pengesahanKehadiran($id, Request $request)
     {
         $program = Program::find($id);
+
+        if (!$program) {
+            return abort(404, 'Program not found');
+        }
+
+        // Check if version matches or handle as needed
+        $version = $request->query('version');
+        if ($program->version != $version) {
+            return abort(404, 'Program version not found');
+        }
 
         if ($program) {
             if ($program->status == 'BELUM SELESAI' || $program->status == "PINDA"){

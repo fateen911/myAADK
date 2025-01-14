@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('pautan_perekodan');
             $table->string('qr_perekodan');
             $table->string('status');
+            $table->integer('version');
             $table->timestamps();
 
             // Add foreign key constraints
