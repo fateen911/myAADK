@@ -80,7 +80,7 @@
     </div>
     <!--end::Page title-->
 
-    <div class="card shadow-sm p-5">
+    <div class="card shadow-sm p-5 mx-w-300 mx-w-450 mw-r-700">
         <!--begin::Content-->
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <!--begin::Content container-->

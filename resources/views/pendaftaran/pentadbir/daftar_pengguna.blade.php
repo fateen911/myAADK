@@ -119,6 +119,26 @@
 		.nav-tabs {
 			border-bottom: 2px solid lightgray; /* Bottom border for tab container */
 		}
+
+		@media (max-width: 768px) {
+			/* Adjust Nav tabs for mobile */
+			.nav-tabs {
+				flex-wrap: wrap; /* Stack tabs vertically */
+			}
+			.nav-tabs .nav-item {
+				flex: 1 1 100% !important; /* Full width for each tab */
+			}
+			.nav-tabs .nav-link {
+				text-align: center;
+				margin-bottom: 5px;
+			}
+			#kt_app_content_container {
+				padding: 0 !important;
+			}
+			.col-auto {
+				padding-top: 10px;
+			}
+		}
 	</style>
 </head>
 
@@ -146,7 +166,7 @@
 <!--end::Page title-->
 
 <!--begin::Body-->
-<div class="card shadow-sm">
+<div class="card shadow-sm mx-w-300 mx-w-450 mw-r-700">
 	<div class="table-responsive">
 		<!--begin::Content-->
 		<div id="kt_app_content" class="app-content flex-column-fluid">
