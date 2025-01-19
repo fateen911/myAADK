@@ -6,6 +6,8 @@
     @endphp
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <!--begin::Vendor Stylesheets(used for this page only)-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -75,6 +77,18 @@
             .nav-tabs {
                 border-bottom: 2px solid lightgray; /* Bottom border for tab container */
             }
+
+            @media (max-width: 768px) {
+                table.dataTable td, table.dataTable th {
+                    font-size: 12px; /* Adjust font size for mobile */
+                    padding: 5px; /* Reduce padding for better fit */
+                }
+
+                .badge {
+                    font-size: 10px;
+                    padding: 3px 6px;
+                }
+            }
         </style>
     </head>
 
@@ -139,7 +153,7 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout:fixed;">
+                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 20%;">Nama</th>
@@ -159,25 +173,24 @@
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
-
                                             <tr>
-                                                <td>
+                                                <td style="width: 20%;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response->klien_id) }}">
                                                         {{ $response->nama }}
                                                     </a>
                                                 </td>
-                                                <td style="text-align: center;">{{ $response->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="text-align: center">
+                                                <td style="width: 10%; text-align: center;">{{ $response->no_kp }}</td>
+                                                <td style="width: 10%; text-align: center;">{{ $daerah }}</td>
+                                                <td style="width: 10%; text-align: center;">{{ $negeri }}</td>
+                                                <td style="width: 10%; text-align: center;">{{ isset($response->updated_at) ? Carbon::parse($response->updated_at)->format('d/m/Y') : 'N/A' }}</td>
+                                                <td style="width: 12%; text-align: center;">
                                                     @if ($response->status == 'Selesai')
                                                         <span class="badge text-white" style="background-color: cadetblue; padding-top:10px; padding-bottom:10px; width:100px; display: inline-block; text-align: center;">{{ strtoupper($response->status) }}</span>
                                                     @else
                                                         <span class="badge text-white" style="background-color: cornflowerblue; padding-top:10px; padding-bottom:10px; width:100px; display: inline-block; text-align: center;">{{ strtoupper($response->status) }}</span>
                                                     @endif
                                                 </td>
-                                                <td style="text-align: center">   
+                                                <td style="width: 20%; text-align: center;">   
                                                     @if ($response->tahap_kepulihan_id)
                                                         @if ($response->tahap_kepulihan_id == 1)
                                                             <badge class="badge text-white" style="background-color: red; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
@@ -190,7 +203,7 @@
                                                         @endif
                                                     @endif
                                                 </td>
-                                                <td style="text-align: center;">
+                                                <td style="width: 8%; text-align: center;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response->klien_id) }}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
@@ -198,7 +211,7 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
+                                </table>                                
                                 <!--end::Table-->
                             </div>                    
                             <!--end::Card body-->
@@ -222,7 +235,7 @@
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-30px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-50px" style="text-align: center;">AADK Daerah & Pusat RPDK</th>
+                                            <th class="min-w-50px" style="text-align: center;">AADK Daerah</th>
                                             <th class="min-w-50px" style="text-align: center;">AADK Negeri</th>
                                             <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
                                             <th class="min-w-50px" style="text-align: center;">Sejarah Menjawab</th>
