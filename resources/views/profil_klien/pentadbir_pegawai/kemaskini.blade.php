@@ -9,128 +9,50 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/assets/css/profilKlien_klien_view.css" rel="stylesheet">
 
     <style>
-        /* Flexbox settings for the wrapper */
-        .form-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        /* Flexbox settings for the tab content container */
-        .tab-pane {
-            display: flex;
-            justify-content: center;
-            align-items: start; 
-            min-height: 100vh; 
-        }
-
-        /* Centered form settings */
-        .centered-form {
-            width: 100%;
-            padding-left: 100px; 
-            padding-right: 100px;
-            box-sizing: border-box; 
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        /* General styles for input, textarea, and select */
-        input.form-control.form-control-solid,
-        textarea.form-control.form-control-solid {
-            background-color: #e0e0e0;
-            color: #45505b;
-        }
-
-        /* Focus state for input, textarea, and select */
-        input.form-control.form-control-solid:focus,
-        textarea.form-control.form-control-solid:focus {
-            background-color: #d0d0d0;
-            color: #333333;
-            box-shadow: none;
-        }
-
-        .form-select.custom-select {
-            background-color: #e0e0e0 !important;
-            color: #222222 !important;
-        }
-
-        .form-select.custom-select option {
-            background-color: #f5f5f5 !important;
-            color: #222222 !important;
-        }
-
-        .form-control-plaintext {
-            margin-left: 10px;
-            display: inline-block;
-        }
-
-        .d-flex {
-            display: flex;
-            align-items: center;
-        }
-
-        .request-update-icon {
-            color: #ffc107 !important; 
-            font-size: 1rem !important;
-            position: relative;
-            top: -8px; 
-            margin-left: 4px;
-        }
-
-        .nav-link.active .request-update-icon {
-            color: #ffc107 !important; 
-        }
-
-        .nav-link.active {
-            font-weight: bold;
-            color: #007bff !important;
-        }
+        @media (max-width: 768px) {
+			#bapaKlienForm, #ibuKlienForm, #penjagaKlienForm{
+                padding-left: 0px !important;
+            }
+		}
     </style>
 </head>
 
 <!--begin::Page title-->
-<div class="page-title flex-column justify-content-center flex-wrap me-3 mb-5">
-    <!--begin::Title-->
-    <h1 class="page-heading text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
-    <!--end::Title-->
-    <!--begin::Breadcrumb-->
-    <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Pengurusan</li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item">
-            <span class="bullet bg-gray-400 w-5px h-2px"></span>
-        </li>
-        <!--end::Item-->
-        <!--begin::Item-->
-        <li class="breadcrumb-item text-muted">Kemaskini Profil Klien</li>
-        <!--end::Item-->
-    </ul>
-    <!--end::Breadcrumb-->
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <!-- Page Title -->
+    <div class="page-title flex-column">
+        <h1 class="page-heading text-dark fw-bold fs-3 my-0">Pengurusan</h1>
+        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+            <li class="breadcrumb-item text-muted">Pengurusan</li>
+            <li class="breadcrumb-item">
+                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+            </li>
+            <li class="breadcrumb-item text-muted">Kemaskini Profil Klien</li>
+        </ul>
+    </div>
 </div>
-<!--end::Page title-->
     
 <body>
     <!--begin::Content-->
-    <div id="kt_app_content" class="app-content flex-column-fluid">
+    <div id="kt_app_content" class="app-content flex-column-fluid mt-5">
         <!--begin::Card-->
         <div class="card card-flush">
             <!--begin::Card body-->
             <div class="card-body">
                 <!--begin:::Tabs-->
-                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-10">
+                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5">
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general" data-short-label="Peribadi">
                             <i class="ki-duotone ki-user-tick fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
-                            </i>Maklumat Peribadi
+                            </i>
+                            <span>Maklumat Peribadi</span>
                             @if($requestKlien)
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                     <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -141,13 +63,14 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_localization" data-short-label="Waris">
                             <i class="ki-duotone ki-people fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
                                 <span class="path4"></span>
-                            </i>Maklumat Waris
+                            </i>
+                            <span>Maklumat Waris</span>
                             @if($requestWaris)
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                     <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -158,12 +81,13 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_store" data-short-label="Keluarga">
                             <i class="ki-duotone ki-profile-user fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
-                            </i>Maklumat Keluarga
+                            </i>
+                            <span>Maklumat Keluarga</span>
                             @if($requestPasangan)
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                     <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -174,12 +98,13 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_customers" data-short-label="Pekerjaan">
                             <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
-                            </i>Maklumat Pekerjaan
+                            </i>
+                            <span>Maklumat Pekerjaan</span>
                             @if($requestPekerjaan)
                                 <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                     <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -190,11 +115,13 @@
                     <!--end:::Tab item-->
                     <!--begin:::Tab item-->
                     <li class="nav-item">
-                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products">
-                            <i class="ki-duotone ki-pulse fs-2 me-2">
+                        <a class="nav-link text-active-primary d-flex align-items-center pb-5" data-bs-toggle="tab" href="#kt_ecommerce_settings_products" data-short-label="RPDK/RPDI">
+                            <i class="ki-duotone ki-brifecase-tick fs-2 me-2">
                                 <span class="path1"></span>
                                 <span class="path2"></span>
-                            </i>Maklumat RPDK/RPDI
+                                <span class="path3"></span>
+                            </i>
+                            <span>Maklumat RPDK/RPDI</span>
                         </a>
                     </li>
                     <!--end:::Tab item-->
@@ -1298,9 +1225,9 @@
                                 <nav class="col-md-2">
                                     <div class="sidebar-sticky">
                                         <ul class="nav flex-column bg-light">
-                                            <li class="nav-item border">
-                                                <a class="nav-link active fs-4 d-flex justify-content-between align-items-center" href="#maklumatBapa" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
-                                                    Maklumat Bapa
+                                            <li class="nav-item waris border">
+                                                <a class="nav-link waris active fs-4" href="#maklumatBapa" data-toggle="tab" data-short-label="Bapa">
+                                                    <span>Maklumat Bapa</span>
                                                     @if($requestedDataBapa && $statusBapa == 'Kemaskini')
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                                             <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -1308,9 +1235,9 @@
                                                     @endif
                                                 </a>
                                             </li>
-                                            <li class="nav-item border">
-                                                <a class="nav-link fs-4 d-flex justify-content-between align-items-center" href="#maklumatIbu" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
-                                                    Maklumat Ibu
+                                            <li class="nav-item waris border">
+                                                <a class="nav-link waris fs-4" href="#maklumatIbu" data-toggle="tab" data-short-label="Ibu">
+                                                    <span>Maklumat Ibu</span>
                                                     @if($requestedDataIbu && $statusIbu == 'Kemaskini')
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                                             <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -1318,9 +1245,9 @@
                                                     @endif
                                                 </a>
                                             </li>
-                                            <li class="nav-item border">
-                                                <a class="nav-link fs-4 d-flex justify-content-between align-items-center" href="#maklumatPenjaga" data-toggle="tab" style="display: flex; justify-content: space-between; align-items: center;">
-                                                    Maklumat Penjaga
+                                            <li class="nav-item waris border">
+                                                <a class="nav-link waris fs-4" href="#maklumatPenjaga" data-toggle="tab" data-short-label="Penjaga">
+                                                    <span>Maklumat Penjaga</span>
                                                     @if($requestedDataPenjaga && $statusPenjaga == 'Kemaskini')
                                                         <span class="ms-1" data-bs-toggle="tooltip" title="Sila semak dan luluskan permohonan klien untuk kemaskini.">
                                                             <i class="fas fa-exclamation-circle request-update-icon" aria-hidden="true"></i>
@@ -1330,7 +1257,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </nav>
+                                </nav>                                
                                 {{-- end::Sidebar --}}
 
                                 <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
