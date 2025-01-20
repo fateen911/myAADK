@@ -76,8 +76,12 @@
                                             @foreach($klienPindahMasuk as $klien)
                                                 @php
                                                     $daerah_lama = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_aadk_asal)->value('senarai_daerah_pejabat.daerah');
-                                                    $alamat_rumah_asal1 = $klien->alamat_rumah_asal . ', ' . $klien->poskod_rumah_asal . ', ' . $klien->daerah_rumah_asal . ', ' . $klien->negeri_rumah_asal;
-                                                    $alamat_rumah_baru1 = $klien->alamat_rumah_baru . ', ' . $klien->poskod_rumah_baru . ', ' . $klien->daerah_rumah_baru . ', ' . $klien->negeri_rumah_baru;
+                                                    $daerah1 = DB::table('senarai_daerah')->where('id', $klien->daerah_rumah_baru)->value('senarai_daerah.daerah');
+                                                    $negeri1 = DB::table('senarai_negeri')->where('id', $klien->negeri_rumah_baru)->value('senarai_negeri.negeri');
+                                                    $daerah2 = DB::table('senarai_daerah')->where('id', $klien->daerah_rumah_asal)->value('senarai_daerah.daerah');
+                                                    $negeri2 = DB::table('senarai_negeri')->where('id', $klien->negeri_rumah_asal)->value('senarai_negeri.negeri');
+                                                    $alamat_rumah_asal1 = $klien->alamat_rumah_asal . ', ' . $klien->poskod_rumah_asal . ', ' . $daerah2 . ', ' . $negeri2;
+                                                    $alamat_rumah_baru1 = $klien->alamat_rumah_baru . ', ' . $klien->poskod_rumah_baru . ', ' . $daerah1 . ', ' . $negeri1;
                                                 @endphp
                                                 <tr>
                                                     <td style="width:20% !important; text-align: center;">{{ $klien->nama }}</td>
