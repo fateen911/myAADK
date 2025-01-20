@@ -59,11 +59,16 @@ class NotifikasiController extends Controller
         // Combine and sort notifications by created_at descending
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-        // Count unread notifications where is_read = false
-        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
-                                                    $query->where('is_read1', false)
-                                                        ->orWhere('is_read2', false);
-                                                })->count();
+        // Correct unread count calculation for logged-in user's daerah_bertugas
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+            $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                    ->where('is_read1', false);
+            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                    ->where('is_read2', false);
+            });
+        })->count();
 
         return view('notifikasi.pegawai_daerah', compact('unreadCountPD', 'notifications'));
     }
@@ -112,12 +117,6 @@ class NotifikasiController extends Controller
             )
             ->get();
 
-        // Count unread notifications
-        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
-                                                    $query->where('is_read1', false)
-                                                        ->orWhere('is_read2', false);
-                                                })->count();
-
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
             ->select('id', 'message1', 'created_at', 'is_read1')
@@ -130,6 +129,17 @@ class NotifikasiController extends Controller
 
         // Combine and sort notifications by created_at descending
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+        // Correct unread count calculation for logged-in user's daerah_bertugas
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                            $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read1', false);
+                            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read2', false);
+                            });
+                        })->count();
 
         // Pass the data to the view
         return view('notifikasi.senarai_tukar_daerah', compact('klienPindahMasuk', 'klienPindahKeluar', 'unreadCountPD', 'notifications'));

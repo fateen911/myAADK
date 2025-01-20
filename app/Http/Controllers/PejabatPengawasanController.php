@@ -130,6 +130,10 @@ class PejabatPengawasanController extends Controller
         $klien->update([
             'negeri_pejabat' => $validatedData['negeri_baharu'],
             'daerah_pejabat' => $validatedData['daerah_baharu'],
+            'alamat_rumah' => $validatedData['alamat_rumah'],
+            'poskod' => $validatedData['poskod'],
+            'negeri' => $validatedData['negeri'],
+            'daerah' => $validatedData['daerah'],
         ]);
 
         // Return with success message

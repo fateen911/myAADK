@@ -323,10 +323,15 @@ class ProfilKlienController extends Controller
         // Combine and sort notifications by created_at descending
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-        // Count unread notifications where is_read = false
-        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
-                            $query->where('is_read1', false)
-                                ->orWhere('is_read2', false);
+        // Correct unread count calculation for logged-in user's daerah_bertugas
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                            $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read1', false);
+                            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read2', false);
+                            });
                         })->count();
 
         return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini', 'notifications', 'unreadCountPD'));
@@ -407,10 +412,16 @@ class ProfilKlienController extends Controller
 
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
-                                                    $query->where('is_read1', false)
-                                                        ->orWhere('is_read2', false);
-                                                })->count();
+        // Correct unread count calculation for logged-in user's daerah_bertugas
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                            $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read1', false);
+                            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                    ->where('is_read2', false);
+                            });
+                        })->count();
                             
         return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
     }
@@ -506,11 +517,16 @@ class ProfilKlienController extends Controller
             // Combine and sort notifications by created_at descending
             $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-            // Count unread notifications where is_read = false
-            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) {
-                $query->where('is_read1', false)
-                    ->orWhere('is_read2', false);
-            })->count();
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                        ->where('is_read1', false);
+                                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                        ->where('is_read2', false);
+                                });
+                            })->count();
         }
 
         return view('profil_klien.pentadbir_pegawai.kemaskini', compact('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',

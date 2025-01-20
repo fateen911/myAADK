@@ -160,7 +160,7 @@
                             <div class="d-flex flex-column bgi-no-repeat rounded-top" style="background-color:#363062;">
                                 <!--begin::Title-->
                                 <h3 class="text-white fw-semibold px-9 mt-5 mb-5">
-                                    Semua Notifikasi Pegawai Daerah
+                                    Notifikasi Pegawai Daerah
                                 </h3>
                                 <!--end::Title-->
                             </div>
@@ -222,7 +222,7 @@
                                 </div>
                                 <!--end::Tab content-->
                             @else
-                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi untuk klien ini.</p>
+                                <p style="text-align: center; padding-top:10px;">Tiada notifikasi untuk pegawai daerah ini.</p>
                             @endif
                         </div>
                         <!--end::Menu-->
