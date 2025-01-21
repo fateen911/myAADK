@@ -1014,11 +1014,9 @@
                                                         <div class="col-md-8">
                                                             <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2">
                                                                 <option value="">Pilih Alasan</option>
-                                                                <option value="PENGANGGUR" {{ $butiranKlien->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
-                                                                <option value="PELAJAR" {{ $butiranKlien->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
-                                                                <option value="PESAKIT" {{ $butiranKlien->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
-                                                                <option value="SURI RUMAH TANGGA" {{ $butiranKlien->alasan_tidak_kerja == 'SURI RUMAH TANGGA' ? 'selected' : '' }}>SURI RUMAH TANGGA</option>
-                                                                <option value="LAIN-LAIN" {{ $butiranKlien->alasan_tidak_kerja == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                                                @foreach ($alasanTidakKerja as $alasanTK)
+                                                                    <option value="{{ $alasanTK->id }}" {{ $butiranKlien->alasan_tidak_kerja == $alasanTK->id ? 'selected' : '' }}>{{ $alasanTK->alasan }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>

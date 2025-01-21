@@ -28,6 +28,7 @@ use App\Models\NotifikasiKlien;
 use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
 use App\Models\NotifikasiPegawaiDaerah;
+use App\Models\TidakKerja;
 
 class ProfilKlienController extends Controller
 {
@@ -459,6 +460,7 @@ class ProfilKlienController extends Controller
         $bidangKerja = BidangPekerjaan::all();
         $namaKerja = NamaPekerjaan::all();
         $majikan = NamaMajikan::all();
+        $alasanTidakKerja = TidakKerja::all();
 
         // PERIBADI
         $klien = Klien::where('id', $id)->first();
@@ -534,7 +536,7 @@ class ProfilKlienController extends Controller
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan', 
                                                                         'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa','statusBapa','updateRequestIbu','requestedDataIbu','statusIbu','updateRequestPenjaga','requestedDataPenjaga','statusPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan',
+                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan','alasanTidakKerja',
                                                                         'notifications', 'unreadCountPD'));
     }
 
@@ -1625,6 +1627,7 @@ class ProfilKlienController extends Controller
         $bidangKerja = BidangPekerjaan::all();
         $namaKerja = NamaPekerjaan::all();
         $majikan = NamaMajikan::all();
+        $alasanTidakKerja = TidakKerja::all();
 
         // Retrieve the client's id based on their no_kp
         $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
@@ -1657,7 +1660,7 @@ class ProfilKlienController extends Controller
 
         return view('profil_klien.klien.view',compact   ('daerah','negeri','daerahKerja','negeriKerja','negeriWaris','daerahWaris','negeriPasangan','daerahPasangan','negeriKerjaPasangan','daerahKerjaPasangan',
                                                         'butiranKlien','resultRequestPasangan','resultRequestPekerjaan','resultRequestKlien','resultRequestBapa','resultRequestIbu','resultRequestPenjaga',
-                                                        'tahapPendidikan','pendapatan','majikan','namaKerja','bidangKerja','penyakit','notifications','unreadCount'));
+                                                        'tahapPendidikan','pendapatan','majikan','namaKerja','bidangKerja','penyakit','alasanTidakKerja','notifications','unreadCount'));
     }
 
     public function muatTurunProfilDiri()
@@ -1768,45 +1771,54 @@ class ProfilKlienController extends Controller
 
     public function pekerjaanKlienRequestUpdate(Request $request)
     {
+        // dd($request->all());
         try {
-            // Validation rules for fields that users can update
-            $validatedData = $request->validate([
+            // Conditional validation rules
+            $rules = [
                 'status_kerja'          => 'required|string|max:255',
                 'alasan_tidak_kerja'    => 'nullable|string|max:255',
-                'bidang_kerja'          => 'nullable|string|max:255',
-                'nama_kerja'            => 'nullable|string|max:255',
-                'pendapatan'            => 'nullable|string|max:255',
-                'kategori_majikan'      => 'nullable|string|max:255',
-                'nama_majikan'          => 'nullable|string|max:255',
-                'lain_lain_nama_majikan'=> 'nullable|string|max:255',
-                'no_tel_majikan'        => 'nullable|string|max:11',
-                'alamat_kerja'          => 'nullable|string|max:255',
-                'poskod_kerja'          => 'required|string|max:5',
-                'daerah_kerja'          => 'nullable|string|max:255',
-                'negeri_kerja'          => 'nullable|string|max:255',
-            ]); 
+            ];
+
+            if ($request->input('status_kerja') !== 'TIDAK BEKERJA') {
+                // Add rules for employed clients
+                $rules = array_merge($rules, [
+                    'bidang_kerja'          => 'nullable|string|max:255',
+                    'nama_kerja'            => 'nullable|string|max:255',
+                    'pendapatan'            => 'nullable|string|max:255',
+                    'kategori_majikan'      => 'nullable|string|max:255',
+                    'nama_majikan'          => 'nullable|string|max:255',
+                    'lain_lain_nama_majikan'=> 'nullable|string|max:255',
+                    'no_tel_majikan'        => 'nullable|string|max:11',
+                    'alamat_kerja'          => 'nullable|string|max:255',
+                    'poskod_kerja'          => 'required|string|max:5',
+                    'daerah_kerja'          => 'nullable|string|max:255',
+                    'negeri_kerja'          => 'nullable|string|max:255',
+                ]);
+            }
+
+            // Validate the request with dynamic rules
+            $validatedData = $request->validate($rules);
         } 
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
-        }  
-
-        // Check if status_kerja is "TIDAK BEKERJA" and set other fields to null
-        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') 
-        {
-            $validatedData['bidang_kerja']          = null;
-            $validatedData['nama_kerja']            = null;
-            $validatedData['pendapatan']            = null;
-            $validatedData['kategori_majikan']      = null;
-            $validatedData['nama_majikan']          = null;
-            $validatedData['lain_lain_nama_majikan']= null;
-            $validatedData['no_tel_majikan']        = null;
-            $validatedData['alamat_kerja']          = null;
-            $validatedData['poskod_kerja']          = null;
-            $validatedData['daerah_kerja']          = null;
-            $validatedData['negeri_kerja']          = null;
         }
 
+        // Logic for handling status_kerja "TIDAK BEKERJA"
+        if ($validatedData['status_kerja'] === 'TIDAK BEKERJA') {
+            $validatedData = array_merge($validatedData, [
+                'bidang_kerja'          => null,
+                'nama_kerja'            => null,
+                'pendapatan'            => null,
+                'kategori_majikan'      => null,
+                'nama_majikan'          => null,
+                'lain_lain_nama_majikan'=> null,
+                'no_tel_majikan'        => null,
+                'alamat_kerja'          => null,
+                'poskod_kerja'          => null,
+                'daerah_kerja'          => null,
+                'negeri_kerja'          => null,
+            ]);
+        }
         // dd($validatedData);
 
         // Set default values to null if they match "Pilih Daerah" or "Pilih Negeri"

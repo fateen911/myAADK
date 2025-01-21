@@ -9,15 +9,7 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="/assets/css/profilKlien_klien_view.css" rel="stylesheet">
-
-    <style>
-        @media (max-width: 768px) {
-			#bapaKlienForm, #ibuKlienForm, #penjagaKlienForm{
-                padding-left: 0px !important;
-            }
-		}
-    </style>
+    <link href="/assets/css/profilKlien_pegawai_kemaskini.css" rel="stylesheet">
 </head>
 
 <!--begin::Page title-->
@@ -920,11 +912,7 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" inputmode="numeric"/>
-                                            <!--end::Select2-->
-                                        </div>
+                                        <input type="text" class="form-control form-control-solid" id="poskod_kerja" name="poskod_kerja" value="{{$pekerjaan->poskod_kerja}}" inputmode="numeric"/>
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -938,16 +926,14 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2">
-                                                <option>Pilih Negeri</option>
-                                                @foreach ($negeriKerja as $negeriK)
-                                                    <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
-                                                @endforeach
-                                            </select>
-                                            <!--end::Select2-->
-                                        </div>
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid custom-select" id="negeri_kerja" name="negeri_kerja" data-control="select2">
+                                            <option>Pilih Negeri</option>
+                                            @foreach ($negeriKerja as $negeriK)
+                                                <option value="{{ $negeriK->id }}" {{ $pekerjaan->negeri_kerja == $negeriK->id ? 'selected' : '' }}>{{ $negeriK->negeri }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -961,16 +947,14 @@
                                         <!--end::Label-->
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="w-100">
-                                            <!--begin::Select2-->
-                                            <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
-                                                <option>Pilih Daerah</option>
-                                                @foreach ($daerahKerja as $daerahK)
-                                                    <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
-                                                @endforeach
-                                            </select>
-                                            <!--end::Select2-->
-                                        </div>
+                                        <!--begin::Select2-->
+                                        <select class="form-select form-select-solid custom-select" id="daerah_kerja" name="daerah_kerja" data-control="select2">
+                                            <option>Pilih Daerah</option>
+                                            @foreach ($daerahKerja as $daerahK)
+                                                <option value="{{ $daerahK->id }}" {{ $pekerjaan->daerah_kerja == $daerahK->id ? 'selected' : '' }}>{{ $daerahK->daerah }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Select2-->
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -985,11 +969,9 @@
                                     <div class="col-md-9">
                                         <select class="form-select form-select-solid custom-select" id="alasan_tidak_kerja" name="alasan_tidak_kerja" data-control="select2" data-hide-search="false">
                                             <option>Pilih Alasan Tidak Bekerja</option>
-                                            <option value="PENGANGGUR" {{ $pekerjaan->alasan_tidak_kerja == 'PENGANGGUR' ? 'selected' : '' }}>PENGANGGUR</option>
-                                            <option value="PELAJAR" {{ $pekerjaan->alasan_tidak_kerja == 'PELAJAR' ? 'selected' : '' }}>PELAJAR</option>
-                                            <option value="PESAKIT" {{ $pekerjaan->alasan_tidak_kerja == 'PESAKIT' ? 'selected' : '' }}>PESAKIT</option>
-                                            <option value="SURI RUMAH TANGGA" {{ $pekerjaan->alasan_tidak_kerja == 'SURI RUMAH TANGGA' ? 'selected' : '' }}>SURI RUMAH TANGGA</option>
-                                            <option value="LAIN-LAIN" {{ $pekerjaan->alasan_tidak_kerja == 'LAIN-LAIN' ? 'selected' : '' }}>LAIN-LAIN</option>
+                                            @foreach ($alasanTidakKerja as $alasanTK)
+                                                <option value="{{ $alasanTK->id }}" {{ $pekerjaan->alasan_tidak_kerja == $alasanTK->id ? 'selected' : '' }}>{{ $alasanTK->alasan }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -1039,6 +1021,7 @@
                                                     $namaMajikan = DB::table('senarai_majikan')->where('id', $pekerjaan->nama_majikan)->value('senarai_majikan.majikan');
                                                     $requestedNamaKerja = DB::table('senarai_pekerjaan')->where('id', $requestedDataPekerjaan['nama_kerja'])->value('senarai_pekerjaan.pekerjaan');
                                                     $namaKerja = DB::table('senarai_pekerjaan')->where('id', $pekerjaan->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
+                                                    $requestedAlasanTK = DB::table('senarai_tidak_kerja')->where('id', $requestedDataPekerjaan['alasan_tidak_kerja'])->value('senarai_tidak_kerja.alasan');
                                                 @endphp
                                         
                                                 <div class="row fv-row mb-7">
@@ -1146,7 +1129,7 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Alasan Tidak Bekerja</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['alasan_tidak_kerja'] != $pekerjaan->alasan_tidak_kerja ? 'border-danger' : '' }}" name="alasan_tidak_kerja" value="{{ $requestedDataPekerjaan['alasan_tidak_kerja'] }}" readonly />
+                                                            <input type="text" class="form-control form-control-solid {{ $requestedDataPekerjaan['alasan_tidak_kerja'] != $pekerjaan->alasan_tidak_kerja ? 'border-danger' : '' }}" name="alasan_tidak_kerja" value="{{ $requestedAlasanTK }}" readonly />
                                                         </div>
                                                     </div>
                                                 </div>
