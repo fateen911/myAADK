@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/css/profilKlien_klien_view.css" rel="stylesheet">
-
+   
     <!-- Select2 CSS & JS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
@@ -132,7 +132,7 @@
                                     <div class="col-md-5 text-md-start">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold form-label mt-3">
-                                            <span>Nombor Kad Pengenalan</span>
+                                            <span>No. Kad Pengenalan</span>
                                         </label>
                                         <!--end::Label-->
                                     </div>
@@ -437,7 +437,7 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
+                                                        <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <span id="no_kp" class="fs-6 form-control-plaintext">{{$butiranKlien->no_kp}}</span>
@@ -571,7 +571,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         {{-- <select name="tahap" id="pilihtahap" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold"> --}}
-                                                        <select class="form-select form-select-solid custom-select" id="negeri" name="negeri" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#requestPeribadiKlien">
+                                                        <select class="form-select form-select-solid custom-select" id="negeri" name="negeri" data-control="select2">
                                                             @foreach ($negeri as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                                             @endforeach
@@ -588,7 +588,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Daerah</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid custom-select" id="daerah" name="daerah" data-control="select2" data-dropdown-parent="#requestPeribadiKlien">
+                                                        <select class="form-select form-select-solid custom-select" id="daerah" name="daerah" data-control="select2">
                                                             @foreach ($daerah as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
                                                             @endforeach
@@ -600,7 +600,7 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Tahap Pendidikan</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#requestPeribadiKlien">
+                                                        <select class="form-select form-select-solid custom-select" id="tahap_pendidikan" name="tahap_pendidikan" data-control="select2">
                                                             @foreach ($tahapPendidikan as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                                             @endforeach
@@ -1090,7 +1090,7 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>No Kad Pengenalan</span>
+                                                                <span>No. Kad Pengenalan</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-8">
@@ -1216,7 +1216,7 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Nombor Kad Pengenalan</span>
+                                                                <span>No. Kad Pengenalan</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-8">
@@ -1352,7 +1352,7 @@
                                                     <div class="row fv-row">
                                                         <div class="col-md-4 text-md-start">
                                                             <label class="fs-6 fw-semibold form-label mt-3">
-                                                                <span>Nombor Kad Pengenalan</span>
+                                                                <span>No. Kad Pengenalan</span>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-8">
@@ -1481,8 +1481,8 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">Nombor Kad Pengenalan</label>
-                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan No. Kad Pengenalan tanpa simbol '-'">
                                                                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                         <span class="path1"></span>
                                                                         <span class="path2"></span>
@@ -1608,8 +1608,8 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
-                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan No. Kad Pengenalan tanpa simbol '-'">
                                                                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                         <span class="path1"></span>
                                                                         <span class="path2"></span>
@@ -1743,8 +1743,8 @@
                                                         </div>
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-3 text-md-start">
-                                                                <label class="fs-6 fw-semibold form-label mt-3">No Kad Pengenalan</label>
-                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor kad pengenalan tanpa simbol '-'">
+                                                                <label class="fs-6 fw-semibold form-label mt-3">No. Kad Pengenalan</label>
+                                                                <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan No. Kad Pengenalan tanpa simbol '-'">
                                                                     <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
                                                                         <span class="path1"></span>
                                                                         <span class="path2"></span>
@@ -2280,32 +2280,28 @@
     </div>
 
     <!--begin::Javascript-->
-	<script>var hostUrl = "assets/";</script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-	<script src="/assets/plugins/global/plugins.bundle.js"></script>
-	<script src="/assets/js/scripts.bundle.js"></script>
-	<!--end::Global Javascript Bundle-->
-	<!--begin::Vendors Javascript(used for this page only)-->
-	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-	<!--end::Vendors Javascript-->
 
     {{-- Script for select2 --}}
     {{-- <script>
         $(document).ready(function () {
-            // Initialize Select2 with the modal parent
-            $('#negeri').select2({
-                dropdownParent: $('#requestPeribadiKlien'), // The modal ID
-                placeholder: "Pilih", // Optional placeholder
-                allowClear: true      // Allows clearing the selection
+            // Reinitialize Select2 each time the modal opens
+            $('#requestPeribadiKlien').on('shown.bs.modal', function () {
+                $('#negeri').select2({
+                    dropdownParent: $('#requestPeribadiKlien'), // Attach to modal container
+                    allowClear: true                          // Allow clearing selection
+                });
+                $('#daerah').select2({
+                    dropdownParent: $('#requestPeribadiKlien'), // Attach to modal container
+                    allowClear: true                          // Allow clearing selection
+                });
+                $('#tahap_pendidikan').select2({
+                    dropdownParent: $('#requestPeribadiKlien'), // Attach to modal container
+                    allowClear: true                          // Allow clearing selection
+                });
             });
         });
-    </script> --}}
-    {{-- <script>
-        $(document).ready(function() {
-			$('.js-example-basic-single').select2();
-		});
     </script> --}}
     
     {{-- Success / Error Message --}}
