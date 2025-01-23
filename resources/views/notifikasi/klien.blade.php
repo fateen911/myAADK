@@ -44,6 +44,50 @@
                 left: 0;
                 color: #363062;
             }
+
+            @media (max-width: 768px) {
+                #kt_app_content_container {
+                    width: 100% !important;
+                    padding: 0 !important;
+                }
+
+                .list-group-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding: 10px;
+                }
+
+                .notification-item {
+                    display: flex;
+                    flex-direction: column; /* Stack messages and date vertically */
+                    width: 100%;
+                }
+
+                .notification-item > div {
+                    display: flex;
+                    flex-direction: column; /* Stack child items vertically */
+                    width: 100%;
+                }
+
+                .notification-item a {
+                    font-size: 1rem; /* Adjust text size for readability */
+                    margin-bottom: 5px; /* Space below the status/message */
+                }
+
+                .notification-item p {
+                    margin-bottom: 10px; /* Add spacing between message and date */
+                }
+
+                .notification-date-time {
+                    font-size: 0.85rem; /* Slightly smaller text for dates */
+                    color: #666; /* Subtle text color */
+                    text-align: right; /* Align date and time to the right */
+                    margin-top: 10px; /* Add spacing above the date and time */
+                    width: 100%; /* Take full width */
+                    white-space: nowrap; /* Prevent line breaks for the date and time */
+                }
+            }
         </style>
     </head>
 
@@ -85,7 +129,7 @@
                                 <div class="list-group-item @if(!$notification->is_read) bg-light-primary @else bg-none @endif">
                                     <div class="notification-item">
                                         <!-- Notification status and date/time in the same row -->
-                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div class="notification-status" style="display: flex; justify-content: space-between; align-items: center;">
                                             <!-- Left: Status -->
                                             <a href="{{ route('notifications.markRead', $notification->id) }}" class="fs-5 text-black text-hover-primary fw-bold">{{ $notification->status }}</a>
                                             

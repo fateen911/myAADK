@@ -35,7 +35,7 @@
         </div>
         <!--end::Page title-->
 
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mx-w-300 mx-w-450 mw-r-700">
             <div class="table-responsive">
                 <!--begin::Content-->
                 <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
