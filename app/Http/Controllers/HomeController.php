@@ -51,6 +51,39 @@ class HomeController extends Controller
                     session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
                     return view('profile.update_password', compact('unreadCount','notifications'));
                 }
+                if($tahap == 5)
+                {
+                    $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+                    $unreadCountPD = 0;
+
+                    // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+                    $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                                                ->select('id', 'message1', 'created_at', 'is_read1')
+                                                                ->get();
+
+                    // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+                    $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                                                ->select('id', 'message2', 'created_at', 'is_read2')
+                                                                ->get();
+                                                                
+                                            
+                    // Combine and sort notifications by created_at descending
+                    $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+                    
+                    // Correct unread count calculation for logged-in user's daerah_bertugas
+                    $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                                        $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                            $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                                ->where('is_read1', false);
+                                        })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                            $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                                ->where('is_read2', false);
+                                        });
+                                    })->count();
+
+                    session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
+                    return view('profile.update_password', compact('unreadCountPD','notifications'));
+                }
                 else{
                     session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
                     return view('profile.update_password');
@@ -795,6 +828,7 @@ class HomeController extends Controller
                                                 ->where('is_read2', false);
                                         });
                                     })->count();
+
 
                     // Get name of tahap kepulihan
                     $tahap1 = TahapKepulihan::where('id', 1)->value('tahap');
