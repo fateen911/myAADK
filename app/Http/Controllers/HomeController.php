@@ -53,7 +53,8 @@ class HomeController extends Controller
                 }
                 if($tahap == 5)
                 {
-                    $clientId = Klien::where('no_kp', Auth::user()->no_kp)->value('id');
+                    $pegawai = Auth::user();
+                    $pegawaiDaerah = DB::table('pegawai')->where('users_id',$pegawai->id)->first();'id');
                     $unreadCountPD = 0;
 
                     // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
