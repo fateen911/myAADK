@@ -61,7 +61,9 @@
 
         <!--end::Table-->
     </div>
-
+    <br>
+    <br>
+    <br>
     <div class="modal-footer">
         <button type="submit" name="kaedah" value="emel" class="btn btn-icon btn-danger btn mx-2 btn-sm" id="share-button"><i class="bi bi-envelope-fill fs-3  text-white"></i></button>
     </div>
