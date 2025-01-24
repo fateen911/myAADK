@@ -282,7 +282,7 @@
                     text: "Adakah anda ingin membuat hebahan mengenai perubahan terkini",
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Hebah dan Kemaskini',
+                    confirmButtonText: 'Kemaskini dan Hebah',
                     cancelButtonText: 'Kemaskini Sahaja',
                 }).then((result) => {
                     if (result.isConfirmed) {
