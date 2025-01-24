@@ -22,13 +22,13 @@ Route::get('/', function () {
 });
 
 //ERROR
-//Route::get('/404-not-found', function () {
-//    return view('error.404_not_found');
-//})->name('error.404_not_found');
-//
-//Route::get('/500-system-error', function () {
-//    return view('error.500_system_error');
-//})->name('error.500_system_error');
+Route::get('/404-not-found', function () {
+    return view('error.404_not_found');
+})->name('error.404_not_found');
+
+Route::get('/500-system-error', function () {
+    return view('error.500_system_error');
+})->name('error.500_system_error');
 
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
