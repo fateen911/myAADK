@@ -450,20 +450,20 @@
                                                                             </table>
 
                                                                             <div style="display: block;">
-                                                                                <badge class="badge text-white" style="background-color: red; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
-                                                                                    {{ '1.0 - 1.5 (SANGAT TIDAK MEMUASKAN)' }}
-                                                                                </badge>
-                                                                                <br>
-                                                                                <badge class="badge text-white" style="background-color: darkorange; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
-                                                                                    {{ '1.51 - 2.5 (KURANG MEMUASKAN)' }}
+                                                                                <badge class="badge text-white" style="background-color: green; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
+                                                                                    {{ '3.51 - 4.0 (SANGAT MEMUASKAN)' }}
                                                                                 </badge>
                                                                                 <br>
                                                                                 <badge class="badge text-white bg-warning" style="padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
                                                                                     {{ '2.51 - 3.5 (MEMUASKAN)' }}
                                                                                 </badge>
                                                                                 <br>
-                                                                                <badge class="badge text-white" style="background-color: green; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
-                                                                                    {{ '3.51 - 4.0 (SANGAT MEMUASKAN)' }}
+                                                                                <badge class="badge text-white" style="background-color: darkorange; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
+                                                                                    {{ '1.51 - 2.5 (KURANG MEMUASKAN)' }}
+                                                                                </badge>
+                                                                                <br>
+                                                                                <badge class="badge text-white" style="background-color: red; padding:5px; display: inline-block; width: 250px; text-align: center; margin-bottom: 5px;">
+                                                                                    {{ '1.0 - 1.5 (SANGAT TIDAK MEMUASKAN)' }}
                                                                                 </badge>
                                                                             </div>
                                                                         @else

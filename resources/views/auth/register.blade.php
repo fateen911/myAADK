@@ -87,7 +87,7 @@
             <div class="mt-4" id="mohon_daerah_field">
                 <x-input-label for="daerah_bertugas" :value="__('Daerah Bertugas')" :required="true"/>
                 <select id="daerah_bertugas" name="daerah_bertugas" class="form-control w-full">
-                    <option value="">{{ __('Select Daerah') }}</option>
+                    <option value="">{{ __('Pilih Daerah') }}</option>
                     @foreach ($daerah as $item2)
                         <option value="{{ $item2->kod }}" data-negeri-id="{{ $item2->negeri_id }}">{{ $item2->daerah }}</option>
                     @endforeach
