@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 class SendProgramInvitations extends Command
 {
     protected $signature = 'send:program-invitations';
-    protected $description = 'Send program invitations for every 7 days.';
+    protected $description = 'Send program invitations 7 days before event start.';
 
     public function __construct()
     {
@@ -21,46 +21,30 @@ class SendProgramInvitations extends Command
 
     public function handle()
     {
-        // Get programs with status 'new' or 'postponed'
-        $programs = Program::whereIn('status', ['BELUM SELESAI', 'PINDA'])
-            ->where('tarikh_tamat', '>=', now()) // Ensure end date is in the future
-            ->get();
-        $currentDate = now();
+        // Fetch programs starting 7 days from now
+        $programs = Program::whereDate('tarikh_mula', now()->addDays(7)->toDateString())->get();
 
         foreach ($programs as $program) {
-            $startDate = Carbon::parse($program->tarikh_mula);
-            $endDate = Carbon::parse($program->tarikh_tamat);
-            $notifDate = $startDate->copy()->addDays(7);
 
-            while ($notifDate <= $endDate){
-                if ($notifDate->toDateString() == $currentDate->toDateString()){
-
-                    // Send the email for each program to related clients
-                    if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
-                        $klien = Klien::whereNotNull('emel')->get();
-                    }
-                    elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
-                        $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->whereNotNull('emel')->get();
-                    }
-                    else {
-                        $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->whereNotNull('emel')->get();
-                    }
-
-                    // Send communication based on the selected method
-                    foreach ($klien as $item) {
-                        if($item->emel != null){
-                            $recipient = $item->emel;
-                            Mail::to($recipient)->send(new HebahanMail($program->id));
-                        }
-                    }
-                    $notifDate = $notifDate->addDays(7); //next notification
-                }
-                else{
-                    $notifDate = $notifDate->addDays(7);
-                }
+            // Send the email for each program to related clients
+            if ($program->negeri_pejabat == "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::whereNotNull('emel')->get();
+            }
+            elseif ($program->negeri_pejabat != "semua" && $program->daerah_pejabat == "semua") {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->whereNotNull('emel')->get();
+            }
+            else {
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->whereNotNull('emel')->get();
             }
 
-            $this->info('Invitation successfully sent');
+            // Send communication based on the selected method
+            foreach ($klien as $item) {
+                if($item->emel != null){
+                    $recipient = $item->emel;
+                    Mail::to($recipient)->send(new HebahanMail($program->id));
+                }
+            }
         }
+        $this->info('Invitation successfully sent');
     }
 }
