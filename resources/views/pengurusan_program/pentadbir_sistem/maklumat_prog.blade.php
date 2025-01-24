@@ -128,16 +128,18 @@
                         </div>
                         <input type="hidden" id="programId" value="{{$program->id}}">
                         <!--end::Card body-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-2 text-center-range">
-                            <!--begin::Share-->
-                            <b class="fs-5">Hebahan:</b> &nbsp;
-                            <!--end::Share-->
-                            <!--begin::Share to-->
+                        @if($program->status == "BELUM SELESAI" || $program->status == "PINDA")
+                            <!--begin::Card body-->
+                            <div class="card-body pt-2 text-center-range">
+                                <!--begin::Share-->
+                                <b class="fs-5">Hebahan:</b> &nbsp;
+                                <!--end::Share-->
+                                <!--begin::Share to-->
                                 <button type="button" id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></button>
-                            <!--end::Share to-->
-                        </div>
-                        <!--end::Card body-->
+                                <!--end::Share to-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
                     </div>
                     <!--end::QR code settings-->
                     <!--begin::Status-->
@@ -345,16 +347,18 @@
                             <!--end::Link-->
                         </div>
                         <!--end::Card body-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-2 text-center-range">
-                            <!--begin::Share-->
-                            <b class="fs-5">Hebahan:</b> &nbsp;
-                            <!--end::Share-->
-                            <!--begin::Share to-->
-                            <a id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></a>
-                            <!--end::Share to-->
-                        </div>
-                        <!--end::Card body-->
+                        @if($program->status == "BELUM SELESAI" || $program->status == "PINDA")
+                            <!--begin::Card body-->
+                            <div class="card-body pt-2 text-center-range">
+                                <!--begin::Share-->
+                                <b class="fs-5">Hebahan:</b> &nbsp;
+                                <!--end::Share-->
+                                <!--begin::Share to-->
+                                <a id="emel" class="btn btn-icon btn-danger mx-1 btn-sm" data-toggle="modal" data-target="#hebahanEmel" data-id="{{$program->id}}"><i class="bi bi-envelope-fill fs-3"></i></a>
+                                <!--end::Share to-->
+                            </div>
+                            <!--end::Card body-->
+                        @endif
                     </div>
                     <!--end::QR code settings-->
 

@@ -185,30 +185,36 @@
                         let rows = '';
                         let color = '';
                         let btn = '';
+                        let btn2 = '';
                         $.each(response, function(index, program) {
                             if(program.status=='SELESAI'){
                                 color = "badge-light-success text-seagreen";
                                 btn   = " ";
+                                btn2   = "disabled";
                             }
 
                             else if(program.status=='SEDANG BERLANGSUNG'){
                                 color = "badge-light-warning text-darkorange";
                                 btn   = " ";
+                                btn2   = "disabled";
                             }
 
                             else if(program.status=='BELUM SELESAI'){
                                 color = "badge-light-primary text-royalblue";
                                 btn   = "disabled";
+                                btn2   = " ";
                             }
 
                             else if(program.status=='BATAL'){
                                 color = "badge-light-red text-darkred";
                                 btn   = "disabled";
+                                btn2   = "disabled";
                             }
 
                             else if(program.status=='PINDA'){
                                 color = "badge-light-yellow text-darkyellow";
                                 btn   = " ";
+                                btn2   = " ";
                             }
 
                             rows += '<tr>';
@@ -216,7 +222,7 @@
                             rows += '<td class="text-uppercase">' + program.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
-                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm '+btn2+'" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
                             rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm '+btn+'" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
