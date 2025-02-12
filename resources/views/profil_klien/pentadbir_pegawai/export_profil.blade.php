@@ -586,7 +586,7 @@
                     $kategori = DB::table('kategori_program')->where('id', $rekod->program->kategori_id)->value('nama');
                 @endphp
                 <tr>
-                    <td class="subheader" colspan="3">{{ toRoman($index+1)}}) {{strtoupper($rekod->program->nama)}}</td>
+                    <td class="subheader" colspan="3"> {{ toRoman($index+1)}}) {{strtoupper($rekod->program->nama)}}</td>
                 </tr>
                 <tr class="gap-left">
                     <td style="width: 35%" class="gap-top">ID</td>
@@ -608,6 +608,7 @@
                     <td style="width: 2%" class="gap-top">:</td>
                     <td class="gap-top">{{date('d/m/Y, h:iA', strtotime($rekod->program->tarikh_mula))}}</td>
                 </tr>
+                <br>
             @endforeach
 
         </tbody>
