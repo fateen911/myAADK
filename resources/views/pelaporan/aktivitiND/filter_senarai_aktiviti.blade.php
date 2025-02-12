@@ -90,54 +90,54 @@
                             <form method="post" action="{{url('/pelaporan/aktivitiND/filter-senarai-aktiviti')}}">
                                 @csrf
                                 <div class="d-flex flex-column flex-row-fluid mb-5">
-                                <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
-                                    <div class="w-13 flex-center">
-                                        <select id="tahun" class="form-select mt-5" name="tahun">
-                                            <option value="">Sila Pilih Tahun</option>
-                                            @foreach($years as $year)
-                                                <option value="{{$year}}">{{$year}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
+                                        <div class="w-13 flex-center">
+                                            <select id="tahun" class="form-select mt-5" name="tahun">
+                                                <option value="">Sila Pilih Tahun</option>
+                                                @foreach($years as $year)
+                                                    <option value="{{$year}}" {{ $tahun == $year ? 'selected' : '' }}>{{$year}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                    <div class="w-13 flex-center">
-                                        <select id="bulan" class="form-select mt-5" name="bulan">
-                                            <option value="">Sila Pilih Bulan</option>
-                                            @for($i=1 ; $i<=12 ; $i++)
-                                                <option value="{{$i}}">{{$i}}</option>
-                                            @endfor
-                                        </select>
-                                    </div>
+                                        <div class="w-13 flex-center">
+                                            <select id="bulan" class="form-select mt-5" name="bulan">
+                                                <option value="">Sila Pilih Bulan</option>
+                                                @for($i=1 ; $i<=12 ; $i++)
+                                                    <option value="{{$i}}" {{ $bulan == $i ? 'selected' : '' }}>{{$i}}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
 
-                                    <div class="w-13 flex-center">
-                                        <select id="kategori" class="form-select mt-5" name="kategori">
-                                            <option value="">Sila Pilih Kategori</option>
-                                            @foreach($kategori as $k)
-                                                <option class="text-uppercase" value="{{$k->id}}">{{$k->nama}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                        <div class="w-13 flex-center">
+                                            <select id="kategori" class="form-select mt-5" name="kategori">
+                                                <option value="">Sila Pilih Kategori</option>
+                                                @foreach($kategori as $k)
+                                                    <option class="text-uppercase" value="{{$k->id}}"{{ $pKategori == $k->id ? 'selected' : '' }}>{{$k->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                    <div class="w-13 flex-center">
-                                        <select id="status" class="form-select mt-5" name="status">
-                                            <option value="">Sila Pilih Status</option>
-                                            <option class="text-uppercase" value="BELUM SELESAI">BELUM SELESAI</option>
-                                            <option class="text-uppercase" value="PINDA">PINDA</option>
-                                            <option class="text-uppercase" value="SEDANG BERLANGSUNG">SEDANG BERLANGSUNG</option>
-                                            <option class="text-uppercase" value="SELESAI">SELESAI</option>
-                                            <option class="text-uppercase" value="BATAL">BATAL</option>
-                                        </select>
-                                    </div>
+                                        <div class="w-13 flex-center">
+                                            <select id="status" class="form-select mt-5" name="status">
+                                                <option value="">Sila Pilih Status</option>
+                                                <option class="text-uppercase" value="BELUM SELESAI"{{ $status == 'BELUM SELESAI' ? 'selected' : '' }}>BELUM SELESAI</option>
+                                                <option class="text-uppercase" value="PINDA"{{ $status == 'PINDA' ? 'selected' : '' }}>PINDA</option>
+                                                <option class="text-uppercase" value="SEDANG BERLANGSUNG"{{ $status == 'SEDANG BERLANGSUNG' ? 'selected' : '' }}>SEDANG BERLANGSUNG</option>
+                                                <option class="text-uppercase" value="SELESAI"{{ $status == 'SELESAI' ? 'selected' : '' }}>SELESAI</option>
+                                                <option class="text-uppercase" value="BATAL"{{ $status == 'BATAL' ? 'selected' : '' }}>BATAL</option>
+                                            </select>
+                                        </div>
 
-                                    <div class="w-13 flex-center mt-5">
-                                        <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
-                                    </div>
+                                        <div class="w-13 flex-center mt-5">
+                                            <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
+                                        </div>
 
-                                    <div class="w-13 flex-center mt-5">
-                                        <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                        <div class="w-13 flex-center mt-5">
+                                            <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </form>
                         </div>
                         <!--begin::Table-->
@@ -193,9 +193,19 @@
             var pegawaiId = $('#pegawaiId').val();
             fetchItems();
             function fetchItems() {
+                let tahun = $("#tahun").val();
+                let bulan = $("#bulan").val();
+                let kategori = $("#kategori").val();
+                let status = $("#status").val();
                 $.ajax({
-                    url: '/program/' + pegawaiId,
+                    url: '/pelaporan/aktivitiND/json-filter-aktiviti/' + pegawaiId,
                     method: 'GET',
+                    data: {
+                        tahun: tahun,
+                        bulan: bulan,
+                        kategori: kategori,
+                        status: status
+                    },
                     success: function(response) {
                         $('#sortTable1').DataTable().destroy();
                         let rows = '';
