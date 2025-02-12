@@ -100,8 +100,8 @@
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
-                                <th class="min-w-40px">ID</th>
                                 <th class="min-w-175px">Nama Aktiviti</th>
+                                <th class="min-w-40px">ID</th>
                                 <th class="min-w-200px">Kategori</th>
                                 <th class="min-w-100px">Status</th>
                                 <th class="min-w-50px">Hebahan</th>
@@ -215,8 +215,8 @@
 
 
                             rows += '<tr>';
-                            rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/maklumat-prog')}}/' + program.id + '">' + program.custom_id + '</a></td>';
-                            rows += '<td class="text-uppercase">' + program.nama + '</td>';
+                            rows += '<td><a href="{{url('/pengurusan-program/pentadbir-sistem/maklumat-prog')}}/' + program.id + '">' + program.nama + '</a></td>';
+                            rows += '<td class="text-uppercase">' + program.custom_id + '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm '+btn2+'" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';

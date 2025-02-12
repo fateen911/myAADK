@@ -99,12 +99,13 @@ class PengurusanProgController extends Controller
 
         if($user){
             if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
-                $program = Program::with('kategori')->get();
+                $program = Program::with('kategori')->orderBy('created_at', 'desc')->get();
                 return response()->json($program);
             }
             else if ($user->tahap_pengguna == '4') {//pegawai negeri
                 $program = Program::with('kategori')
                             ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                            ->orderBy('created_at', 'desc')
                             ->get();
                 return response()->json($program);
             }
@@ -112,6 +113,7 @@ class PengurusanProgController extends Controller
                 $program = Program::with('kategori')
                             ->where('negeri_pejabat',$pegawai->negeri_bertugas)
                             ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                            ->orderBy('created_at', 'desc')
                             ->get();
                 return response()->json($program);
             }
