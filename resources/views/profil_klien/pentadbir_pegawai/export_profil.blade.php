@@ -81,62 +81,62 @@
 
 <body>
     @php
-        $daerahKlien = $klien && isset($klien['daerah']) 
-                        ? DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah') 
+        $daerahKlien = $klien && isset($klien['daerah'])
+                        ? DB::table('senarai_daerah')->where('id', $klien['daerah'])->value('senarai_daerah.daerah')
                         : null;
-        
-        $negeriKlien = $klien && isset($klien['negeri']) 
-                        ? DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri') 
+
+        $negeriKlien = $klien && isset($klien['negeri'])
+                        ? DB::table('senarai_negeri')->where('id', $klien['negeri'])->value('senarai_negeri.negeri')
                         : null;
-        
-        $daerahKerja = $pekerjaan && isset($pekerjaan['daerah_kerja']) 
-                        ? DB::table('senarai_daerah')->where('id', $pekerjaan['daerah_kerja'])->value('senarai_daerah.daerah') 
+
+        $daerahKerja = $pekerjaan && isset($pekerjaan['daerah_kerja'])
+                        ? DB::table('senarai_daerah')->where('id', $pekerjaan['daerah_kerja'])->value('senarai_daerah.daerah')
                         : null;
-        
-        $negeriKerja = $pekerjaan && isset($pekerjaan['negeri_kerja']) 
-                        ? DB::table('senarai_negeri')->where('id', $pekerjaan['negeri_kerja'])->value('senarai_negeri.negeri') 
+
+        $negeriKerja = $pekerjaan && isset($pekerjaan['negeri_kerja'])
+                        ? DB::table('senarai_negeri')->where('id', $pekerjaan['negeri_kerja'])->value('senarai_negeri.negeri')
                         : null;
-        
-        $daerahBapa = $waris && isset($waris['daerah_bapa']) 
-                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_bapa'])->value('senarai_daerah.daerah') 
+
+        $daerahBapa = $waris && isset($waris['daerah_bapa'])
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_bapa'])->value('senarai_daerah.daerah')
                         : null;
-        
-        $negeriBapa = $waris && isset($waris['negeri_bapa']) 
-                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_bapa'])->value('senarai_negeri.negeri') 
+
+        $negeriBapa = $waris && isset($waris['negeri_bapa'])
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_bapa'])->value('senarai_negeri.negeri')
                         : null;
-        
-        $daerahIbu = $waris && isset($waris['daerah_ibu']) 
-                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_ibu'])->value('senarai_daerah.daerah') 
+
+        $daerahIbu = $waris && isset($waris['daerah_ibu'])
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_ibu'])->value('senarai_daerah.daerah')
                         : null;
-        
-        $negeriIbu = $waris && isset($waris['negeri_ibu']) 
-                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_ibu'])->value('senarai_negeri.negeri') 
+
+        $negeriIbu = $waris && isset($waris['negeri_ibu'])
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_ibu'])->value('senarai_negeri.negeri')
                         : null;
-        
-        $daerahPenjaga = $waris && isset($waris['daerah_penjaga']) 
-                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_penjaga'])->value('senarai_daerah.daerah') 
+
+        $daerahPenjaga = $waris && isset($waris['daerah_penjaga'])
+                        ? DB::table('senarai_daerah')->where('id', $waris['daerah_penjaga'])->value('senarai_daerah.daerah')
                         : null;
-        
-        $negeriPenjaga = $waris && isset($waris['negeri_penjaga']) 
-                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_penjaga'])->value('senarai_negeri.negeri') 
+
+        $negeriPenjaga = $waris && isset($waris['negeri_penjaga'])
+                        ? DB::table('senarai_negeri')->where('id', $waris['negeri_penjaga'])->value('senarai_negeri.negeri')
                         : null;
-        
-        $daerahPasangan = $pasangan && isset($pasangan['daerah_pasangan']) 
-                            ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_pasangan'])->value('senarai_daerah.daerah') 
+
+        $daerahPasangan = $pasangan && isset($pasangan['daerah_pasangan'])
+                            ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_pasangan'])->value('senarai_daerah.daerah')
                             : null;
-        
-        $negeriPasangan = $pasangan && isset($pasangan['negeri_pasangan']) 
-                            ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_pasangan'])->value('senarai_negeri.negeri') 
+
+        $negeriPasangan = $pasangan && isset($pasangan['negeri_pasangan'])
+                            ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_pasangan'])->value('senarai_negeri.negeri')
                             : null;
-        
-        $daerahKerjaPasangan = $pasangan && isset($pasangan['daerah_kerja_pasangan']) 
-                                ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah') 
+
+        $daerahKerjaPasangan = $pasangan && isset($pasangan['daerah_kerja_pasangan'])
+                                ? DB::table('senarai_daerah')->where('id', $pasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah')
                                 : null;
-        
-        $negeriKerjaPasangan = $pasangan && isset($pasangan['negeri_kerja_pasangan']) 
-                                ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri') 
+
+        $negeriKerjaPasangan = $pasangan && isset($pasangan['negeri_kerja_pasangan'])
+                                ? DB::table('senarai_negeri')->where('id', $pasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri')
                                 : null;
-        
+
         $agamaKlien = DB::table('senarai_agama')->where('id', $klien->agama)->value('senarai_agama.agama');
 
         $bangsaKlien = DB::table('senarai_bangsa')->where('id', $klien->bangsa)->value('senarai_bangsa.bangsa');
@@ -158,9 +158,9 @@
         $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
 
         $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_aadk_baru', 'daerah_aadk_asal')->first();
-        
+
         $daerah_semasa = $daerah1->daerah_aadk_baru ?? $daerah1->daerah_aadk_asal;
-        
+
         $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('daerah');
     @endphp
 
@@ -174,7 +174,7 @@
                 </div>
             </td>
         </tr>
-        
+
         <tr>
             <td class="header-part" colspan="3">A. MAKLUMAT PERIBADI</td>
         </tr>
@@ -555,7 +555,61 @@
                     <td style="width: 2%" class="gap-top">:</td>
                     <td class="gap-top">{{$pekerjaan->alasan_tidak_kerja ?? ''}}</td>
                 </tr>
-            @endif    
+            @endif
+
+            <!--Aktiviti-->
+            <br>
+            <tr>
+                <td class="header-part" colspan="3">F. REKOD KEHADIRAN AKTIVITI</td>
+            </tr>
+            <br>
+            <!--iteration in roman-->
+            @php
+                function toRoman($num) {
+                    $map = [
+                        'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
+                        'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
+                        'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
+                    ];
+                    $result = '';
+                    foreach ($map as $roman => $value) {
+                        while ($num >= $value) {
+                            $result .= $roman;
+                            $num -= $value;
+                        }
+                    }
+                    return $result;
+                }
+            @endphp
+            @foreach($perekodan as $index => $rekod)
+                @php
+                    $kategori = DB::table('kategori_program')->where('id', $rekod->program->kategori_id)->value('nama');
+                @endphp
+                <tr>
+                    <td class="subheader" colspan="3">{{ toRoman($index+1)}}) {{strtoupper($rekod->program->nama)}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">ID</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{strtoupper($rekod->program->custom_id)}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">Kategori</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{strtoupper($kategori)}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">Tempat</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{strtoupper($rekod->program->tempat)}}</td>
+                </tr>
+                <tr class="gap-left">
+                    <td style="width: 35%" class="gap-top">Tarikh</td>
+                    <td style="width: 2%" class="gap-top">:</td>
+                    <td class="gap-top">{{date('d/m/Y, h:iA', strtotime($rekod->program->tarikh_mula))}}</td>
+                </tr>
+            @endforeach
+
         </tbody>
     </table>
 </body>
