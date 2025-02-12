@@ -218,7 +218,7 @@
                             }
 
                             rows += '<tr>';
-                            rows += '<td><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}/' + program.id + '">' + program.nama + '</a></td>';
+                            rows += '<td class="text-uppercase"><a href="{{url('/pengurusan-program/pegawai-aadk/maklumat-prog')}}/' + program.id + '">' + program.nama + '</a></td>';
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
