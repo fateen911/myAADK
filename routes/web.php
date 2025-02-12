@@ -220,6 +220,7 @@ Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanCont
 // PELAPORAN
 Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihan'])->name('pelaporan.modal_kepulihan');
 Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->name('pelaporan.aktiviti');
+Route::get('/pelaporan/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.senaraiAktiviti');
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
