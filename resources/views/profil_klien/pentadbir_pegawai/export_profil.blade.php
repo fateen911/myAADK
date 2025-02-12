@@ -557,59 +557,61 @@
                 </tr>
             @endif
 
-            <!--Aktiviti-->
-            <br>
-            <tr>
-                <td class="header-part" colspan="3">F. REKOD KEHADIRAN AKTIVITI</td>
-            </tr>
-            <br>
-            <!--iteration in roman-->
-            @php
-                function toRoman($num) {
-                    $map = [
-                        'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
-                        'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
-                        'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
-                    ];
-                    $result = '';
-                    foreach ($map as $roman => $value) {
-                        while ($num >= $value) {
-                            $result .= $roman;
-                            $num -= $value;
-                        }
-                    }
-                    return $result;
-                }
-            @endphp
-            @foreach($perekodan as $index => $rekod)
-                @php
-                    $kategori = DB::table('kategori_program')->where('id', $rekod->program->kategori_id)->value('nama');
-                @endphp
+            @if($perekodan->isNotEmpty())
+                <!--Aktiviti-->
+                <br>
                 <tr>
-                    <td class="subheader" colspan="3"> {{ toRoman($index+1)}}) {{strtoupper($rekod->program->nama)}}</td>
-                </tr>
-                <tr class="gap-left">
-                    <td style="width: 35%" class="gap-top">ID</td>
-                    <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{strtoupper($rekod->program->custom_id)}}</td>
-                </tr>
-                <tr class="gap-left">
-                    <td style="width: 35%" class="gap-top">Kategori</td>
-                    <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{strtoupper($kategori)}}</td>
-                </tr>
-                <tr class="gap-left">
-                    <td style="width: 35%" class="gap-top">Tempat</td>
-                    <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{strtoupper($rekod->program->tempat)}}</td>
-                </tr>
-                <tr class="gap-left">
-                    <td style="width: 35%" class="gap-top">Tarikh</td>
-                    <td style="width: 2%" class="gap-top">:</td>
-                    <td class="gap-top">{{date('d/m/Y, h:iA', strtotime($rekod->program->tarikh_mula))}}</td>
+                    <td class="header-part" colspan="3">F. REKOD KEHADIRAN AKTIVITI</td>
                 </tr>
                 <br>
-            @endforeach
+                <!--iteration in roman-->
+                @php
+                    function toRoman($num) {
+                        $map = [
+                            'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400,
+                            'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40,
+                            'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
+                        ];
+                        $result = '';
+                        foreach ($map as $roman => $value) {
+                            while ($num >= $value) {
+                                $result .= $roman;
+                                $num -= $value;
+                            }
+                        }
+                        return $result;
+                    }
+                @endphp
+                @foreach($perekodan as $index => $rekod)
+                    @php
+                        $kategori = DB::table('kategori_program')->where('id', $rekod->program->kategori_id)->value('nama');
+                    @endphp
+                    <tr>
+                        <td class="subheader" colspan="3"> {{ toRoman($index+1)}}) {{strtoupper($rekod->program->nama)}}</td>
+                    </tr>
+                    <tr class="gap-left">
+                        <td style="width: 35%" class="gap-top">ID</td>
+                        <td style="width: 2%" class="gap-top">:</td>
+                        <td class="gap-top">{{strtoupper($rekod->program->custom_id)}}</td>
+                    </tr>
+                    <tr class="gap-left">
+                        <td style="width: 35%" class="gap-top">Kategori</td>
+                        <td style="width: 2%" class="gap-top">:</td>
+                        <td class="gap-top">{{strtoupper($kategori)}}</td>
+                    </tr>
+                    <tr class="gap-left">
+                        <td style="width: 35%" class="gap-top">Tempat</td>
+                        <td style="width: 2%" class="gap-top">:</td>
+                        <td class="gap-top">{{strtoupper($rekod->program->tempat)}}</td>
+                    </tr>
+                    <tr class="gap-left">
+                        <td style="width: 35%" class="gap-top">Tarikh</td>
+                        <td style="width: 2%" class="gap-top">:</td>
+                        <td class="gap-top">{{date('d/m/Y, h:iA', strtotime($rekod->program->tarikh_mula))}}</td>
+                    </tr>
+                    <br>
+                @endforeach
+            @endif
 
         </tbody>
     </table>
