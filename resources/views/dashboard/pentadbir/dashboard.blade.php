@@ -457,12 +457,12 @@
                         <!--begin::First Row-->
                         <div class="row g-3 g-lg-6" style="text-align: center;">
                             <!--begin::Col-->
-                            <div class="col-4">
+                            <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cadetblue">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:#264653">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 19px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Selesai Menjawab</span>
@@ -483,12 +483,12 @@
                             <!--end::Col-->
 
                             <!--begin::Col-->
-                            <div class="col-4">
+                            <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:cornflowerblue">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:#2a9d8f">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 18px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
@@ -510,15 +510,41 @@
                             <!--end::Col-->
 
                             <!--begin::Col-->
-                            <div class="col-4">
+                            <div class="col-3">
                                 <!--begin::Items-->
-                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:rgb(174, 50, 50)">
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:#6f1d1b">
                                     <!--begin::Symbol-->
                                     <div class="symbol symbol-30px me-0 mb-5">
-                                            <i class="fas fa-file-lines text-light" style="font-size: 20px;">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 18px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Menjawab Melebihi 6 Bulan</span>
+                                            </i>
+                                    </div>
+                                    <!--end::Symbol-->
+                                    <!--begin::Stats-->
+                                    <div class="m-0">
+                                        <a href={{route('maklum.balas.kepulihan')}}>
+                                            <span id="tidakMenjawabCount" class="text-white fw-bolder d-block fs-4x lh-1 ls-n1 mb-1">{{$tidak_menjawab}}</span>
+                                            <span class="text-white fw-bold fs-7">Klik untuk Lihat</span>
+                                        </a>
+                                    </div>
+                                    <!--end::Stats-->
+                                </div>
+                                <!--end::Items-->
+                            </div>
+                            <!--end::Col-->
+
+                            <!--begin::Col-->
+                            <div class="col-3">
+                                <!--begin::Items-->
+                                <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:crimson">
+                                    <!--begin::Symbol-->
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fas fa-file-lines text-light" style="font-size: 19px;">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">Tidak Pernah Menjawab</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -554,7 +580,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap4))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap4))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -581,7 +607,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap3))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap3))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -607,7 +633,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap2))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap2))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -634,7 +660,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap1))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap1))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->

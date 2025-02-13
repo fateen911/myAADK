@@ -82,6 +82,7 @@ class HomeController extends Controller
                                         });
                                     })->count();
 
+
                     session()->flash('message', 'Sila kemaskini kata laluan anda terlebih dahulu.');
                     return view('profile.update_password', compact('unreadCountPD','notifications'));
                 }
@@ -836,6 +837,8 @@ class HomeController extends Controller
                     $tahap2 = TahapKepulihan::where('id', 2)->value('tahap');
                     $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
                     $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
+
+                    // dd($unreadCountPD);
 
                     return view('dashboard.pegawai.dashboard_daerah', compact('telahKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
                                                                                                     'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
