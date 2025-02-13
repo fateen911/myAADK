@@ -663,19 +663,19 @@
                         <td>{{ number_format($modal->modal_fizikal, 2) }}</td>
                         <td>
                             @if($modal->modal_fizikal >= 1.0 && $modal->modal_fizikal <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_fizikal > 1.5 && $modal->modal_fizikal <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_fizikal > 2.5 && $modal->modal_fizikal <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: #ffc107; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_fizikal > 3.5 && $modal->modal_fizikal <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -686,19 +686,19 @@
                         <td>{{ number_format($modal->modal_psikologi, 2) }}</td>
                         <td>
                             @if($modal->modal_psikologi >= 1.0 && $modal->modal_psikologi <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_psikologi > 1.5 && $modal->modal_psikologi <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_psikologi > 2.5 && $modal->modal_psikologi <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: #ffc107; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>                            
                             @elseif($modal->modal_psikologi > 3.5 && $modal->modal_psikologi <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px; width:250px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -709,19 +709,19 @@
                         <td>{{ number_format($modal->modal_sosial, 2) }}</td>
                         <td>
                             @if($modal->modal_sosial >= 1.0 && $modal->modal_sosial <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_sosial > 1.5 && $modal->modal_sosial <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_sosial > 2.5 && $modal->modal_sosial <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_sosial > 3.5 && $modal->modal_sosial <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -732,19 +732,19 @@
                         <td>{{ number_format($modal->modal_persekitaran, 2) }}</td>
                         <td>
                             @if($modal->modal_persekitaran >= 1.0 && $modal->modal_persekitaran <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_persekitaran > 1.5 && $modal->modal_persekitaran <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_persekitaran > 2.5 && $modal->modal_persekitaran <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_persekitaran > 3.5 && $modal->modal_persekitaran <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -755,19 +755,19 @@
                         <td>{{ number_format($modal->modal_insaniah, 2) }}</td>
                         <td>
                             @if($modal->modal_insaniah >= 1.0 && $modal->modal_insaniah <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_insaniah > 1.5 && $modal->modal_insaniah <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_insaniah > 2.5 && $modal->modal_insaniah <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_insaniah > 3.5 && $modal->modal_insaniah <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -778,19 +778,19 @@
                         <td>{{ number_format($modal->modal_strategi_daya_tahan, 2) }}</td>
                         <td>
                             @if($modal->modal_strategi_daya_tahan >= 1.0 && $modal->modal_strategi_daya_tahan <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_strategi_daya_tahan > 1.5 && $modal->modal_strategi_daya_tahan <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_strategi_daya_tahan > 2.5 && $modal->modal_strategi_daya_tahan <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_strategi_daya_tahan > 3.5 && $modal->modal_strategi_daya_tahan <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -801,19 +801,19 @@
                         <td>{{ number_format($modal->modal_resiliensi, 2) }}</td>
                         <td>
                             @if($modal->modal_resiliensi >= 1.0 && $modal->modal_resiliensi <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_resiliensi > 1.5 && $modal->modal_resiliensi <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_resiliensi > 2.5 && $modal->modal_resiliensi <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_resiliensi > 3.5 && $modal->modal_resiliensi <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -824,19 +824,19 @@
                         <td>{{ number_format($modal->modal_spiritual, 2) }}</td>
                         <td>
                             @if($modal->modal_spiritual >= 1.0 && $modal->modal_spiritual <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_spiritual > 1.5 && $modal->modal_spiritual <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_spiritual > 2.5 && $modal->modal_spiritual <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_spiritual > 3.5 && $modal->modal_spiritual <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -847,19 +847,19 @@
                         <td>{{ number_format($modal->modal_rawatan, 2) }}</td>
                         <td>
                             @if($modal->modal_rawatan >= 1.0 && $modal->modal_rawatan <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_rawatan > 1.5 && $modal->modal_rawatan <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_rawatan > 2.5 && $modal->modal_rawatan <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_rawatan > 3.5 && $modal->modal_rawatan <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif
@@ -870,19 +870,19 @@
                         <td>{{ number_format($modal->modal_kesihatan, 2) }}</td>
                         <td>
                             @if($modal->modal_kesihatan >= 1.0 && $modal->modal_kesihatan <= 1.5)
-                                <badge class="badge badge-danger" style="background-color: red; padding:5px; margin:10px;">
+                                <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
                                     SANGAT TIDAK MEMUASKAN 
                                 </badge>
                             @elseif($modal->modal_kesihatan > 1.5 && $modal->modal_kesihatan <= 2.5)
-                                <badge class="badge" style="background-color: darkorange; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
                                     KURANG MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_kesihatan > 2.5 && $modal->modal_kesihatan <= 3.5)
-                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: #ffc107; color: black; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_kesihatan > 3.5 && $modal->modal_kesihatan <= 4.0)
-                                <badge class="badge" style="background-color: green; padding:5px; margin:10px;">
+                                <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
                                 </badge>
                             @endif

@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\BidangPekerjaan;
 use App\Models\PerekodanKehadiranProgram;
 use App\Models\Program;
-use App\Models\SkorModal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Dompdf\Dompdf;
-use App\Models\User;
 use App\Models\Daerah;
 use App\Models\KeluargaKlien;
 use App\Models\Negeri;
@@ -33,6 +30,7 @@ use App\Models\SejarahProfilKlien;
 use App\Models\WarisKlienUpdateRequest;
 use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\TidakKerja;
+use App\Models\SkorModal;
 
 class ProfilKlienController extends Controller
 {
@@ -448,6 +446,7 @@ class ProfilKlienController extends Controller
 
     //     return $pdf->stream($no_kp . '-profil-peribadi.pdf');
     // }
+
 
     public function muatTurunProfilKlien($id)
     {
