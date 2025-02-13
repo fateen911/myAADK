@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BidangPekerjaan;
 use App\Models\PerekodanKehadiranProgram;
 use App\Models\Program;
+use App\Models\SkorModal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -19,6 +20,7 @@ use App\Models\RawatanKlien;
 use App\Models\WarisKlien;
 use App\Models\KlienUpdateRequest;
 use App\Models\KeluargaKlienUpdateRequest;
+use App\Models\KeputusanKepulihan;
 use App\Models\NamaMajikan;
 use App\Models\NamaPekerjaan;
 use App\Models\Pegawai;
@@ -429,22 +431,50 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
     }
 
+    // public function muatTurunProfilKlien($id)
+    // {
+    //     $klien = Klien::where('id',$id)->first();
+    //     $pekerjaan = PekerjaanKlien::where('klien_id',$id)->first();
+    //     $waris = WarisKlien::where('klien_id',$id)->first();
+    //     $pasangan = KeluargaKlien::where('klien_id',$id)->first();
+    //     $rawatan = RawatanKlien::where('klien_id',$id)->first();
+
+    //     //aktiviti
+    //     $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('klien_id',$id)->get();
+
+    //     $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan','perekodan'));
+
+    //     $no_kp = $klien->no_kp;
+
+    //     return $pdf->stream($no_kp . '-profil-peribadi.pdf');
+    // }
+
     public function muatTurunProfilKlien($id)
     {
-        $klien = Klien::where('id',$id)->first();
-        $pekerjaan = PekerjaanKlien::where('klien_id',$id)->first();
-        $waris = WarisKlien::where('klien_id',$id)->first();
-        $pasangan = KeluargaKlien::where('klien_id',$id)->first();
-        $rawatan = RawatanKlien::where('klien_id',$id)->first();
-
-        //aktiviti
+        $klien = Klien::where('id', $id)->first();
+        $pekerjaan = PekerjaanKlien::where('klien_id', $id)->first();
+        $waris = WarisKlien::where('klien_id', $id)->first();
+        $pasangan = KeluargaKlien::where('klien_id', $id)->first();
+        $rawatan = RawatanKlien::where('klien_id', $id)->first();
         $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('klien_id',$id)->get();
 
-        $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan','perekodan'));
+        // Retrieve all records grouped by sesi
+        $keputusanKepulihan = KeputusanKepulihan::where('klien_id', $id)
+            ->orderBy('sesi')
+            ->get()
+            ->keyBy('sesi'); // Group by sesi for easy lookup
 
-        $no_kp = $klien->no_kp;
+        // dd($keputusanKepulihan);
 
-        return $pdf->stream($no_kp . '-profil-peribadi.pdf');
+        $modalKepulihan = SkorModal::where('klien_id', $id)
+            ->orderBy('sesi')
+            ->get()
+            ->groupBy('sesi'); // Group SkorModal by sesi
+
+        $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact(
+            'klien', 'pekerjaan', 'waris', 'pasangan', 'rawatan', 'keputusanKepulihan', 'modalKepulihan','perekodan'));
+
+        return $pdf->stream($klien->no_kp . '-profil-peribadi.pdf');
     }
 
     public function maklumatKlien($id)
