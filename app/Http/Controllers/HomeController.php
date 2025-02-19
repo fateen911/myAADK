@@ -202,24 +202,39 @@ class HomeController extends Controller
 
                     // Count the number of "Selesai" and "Tidak Selesai"
                     $selesai_menjawab = $responses->filter(function ($response) {
-                        return ($response->status == 'Selesai');
-                    })->count();
+                                            return ($response->status == 'Selesai');
+                                        })->count();
 
                     $belum_selesai_menjawab = $responses->filter(function ($response) {
-                        return ($response->status == 'Belum Selesai');;
-                    })->count();
+                                                return ($response->status == 'Belum Selesai');;
+                                            })->count();
 
-                    $tidak_menjawab = DB::table('klien as u')
-                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                                    ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                                        $join->on('u.id', '=', 'kk.klien_id')
-                                            ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
-                                    })
-                                    ->where(function ($query) {
-                                        $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
-                                              ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
-                                    })
-                                    ->count();
+                    $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                                    ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                                        $join->on('u.id', '=', 'kk.klien_id')
+                                                            ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                                                    })
+                                                    ->where('kk.updated_at', '<=', now()->subMonths(6)) // Latest record is more than 6 months old
+                                                    ->count();
+
+                    $tidak_pernah_menjawab = DB::table('klien as u')
+                                            ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                            ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
+                                            ->count();
+
+                    // $tidak_menjawab = DB::table('klien as u')
+                    //                 ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                    //                 ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
+                    //                     $join->on('u.id', '=', 'kk.klien_id')
+                    //                         ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                    //                 })
+                    //                 ->where(function ($query) {
+                    //                     $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
+                    //                           ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
+                    //                 })
+                    //                 ->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -246,7 +261,7 @@ class HomeController extends Controller
                     $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
 
                     return view('dashboard.pentadbir.dashboard', compact('permohonan_pendaftaran','pegawai','klien',
-                                                                        'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
+                                                                        'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab',
                                                                         'tidak_memuaskan','memuaskan','baik','cemerlang',
                                                                         'tahap1', 'tahap2', 'tahap3', 'tahap4',
                                                                         'belumKemaskini', 'telahKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai'));
@@ -413,17 +428,20 @@ class HomeController extends Controller
                         return ($response->status == 'Belum Selesai');;
                     })->count();
 
-                    $tidak_menjawab = DB::table('klien as u')
-                                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                                            $join->on('u.id', '=', 'kk.klien_id')
-                                                ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
-                                        })
-                                        ->where(function ($query) {
-                                            $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
-                                                ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
-                                        })
-                                        ->count();
+                    $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                                    ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                                        $join->on('u.id', '=', 'kk.klien_id')
+                                                            ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                                                    })
+                                                    ->where('kk.updated_at', '<=', now()->subMonths(6)) // Latest record is more than 6 months old
+                                                    ->count();
+
+                    $tidak_pernah_menjawab = DB::table('klien as u')
+                                            ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                            ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
+                                            ->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -450,7 +468,7 @@ class HomeController extends Controller
                     $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
 
                     return view('dashboard.pegawai.dashboard_brpp', compact('belumKemaskini', 'sedangKemaskini', 'jumlah1', 'jumlah2', 'belumSelesai', 'selesai',
-                                                                            'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab',
+                                                                            'belum_selesai_menjawab','selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab',
                                                                             'tidak_memuaskan','memuaskan','baik','cemerlang',
                                                                             'tahap1', 'tahap2', 'tahap3', 'tahap4'));
                 }
@@ -549,7 +567,7 @@ class HomeController extends Controller
                         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                         ->get();
 
-                    // Start building the query
+                    // Start building the query for status modal kepulihan
                     $query = DB::table('keputusan_kepulihan_klien as kk')
                             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
                             ->select(
@@ -572,8 +590,8 @@ class HomeController extends Controller
                             })
                             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status');
 
-                            // Filter by negeri_bertugas for tahap 4 (pegawai negeri)
-                            $query->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
+                    // Filter by negeri_bertugas for tahap 4 (pegawai negeri)
+                    $query->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
 
                     // Execute the query and get the results
                     $responses = $query->get();
@@ -588,21 +606,21 @@ class HomeController extends Controller
                     })->count();
 
                     // Count clients who didn't answer
-                    $tidak_menjawab = DB::table('klien as u')
-                                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                                            $join->on('u.id', '=', 'kk.klien_id')
-                                                ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
-                                        })
-                                        ->where(function ($query) use ($sixMonthsAgo) {
-                                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                                ->orWhere(function ($query) use ($sixMonthsAgo) {
-                                                    $query->whereNotNull('kk.klien_id')
-                                                        ->where('kk.updated_at', '<=', $sixMonthsAgo);
-                                                });
-                                        });
+                    $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                                    ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                                        $join->on('u.id', '=', 'kk.klien_id')
+                                                            ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+                                                    })
+                                                    ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months old
 
-                    $tidak_menjawab_negeri = $tidak_menjawab->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->count();
+                    $tidak_pernah_menjawab = DB::table('klien as u')
+                                            ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                            ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+                    $tidak_pernah_menjawab_negeri = $tidak_pernah_menjawab->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->count();
+                    $tidak_menjawab_lebih_6bulan_negeri = $tidak_menjawab_lebih_6bulan->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -630,10 +648,9 @@ class HomeController extends Controller
                     $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
                     $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
 
-                    return view('dashboard.pegawai.dashboard_negeri', compact('sedangKemaskiniNegeri','belumKemaskiniNegeri', 'jumlahKlienNegeri', 'jumlahPermohonanNegeri', 'selesaiNegeri', 'belumSelesaiNegeri',
-                                                                              'selesai_menjawab_negeri','belum_selesai_menjawab_negeri','tidak_menjawab_negeri',
-                                                                              'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan',
-                                                                            'tahap1', 'tahap2', 'tahap3', 'tahap4'));
+                    return view('dashboard.pegawai.dashboard_negeri',compact('sedangKemaskiniNegeri','belumKemaskiniNegeri', 'jumlahKlienNegeri', 'jumlahPermohonanNegeri', 'selesaiNegeri', 'belumSelesaiNegeri',
+                                                                                            'selesai_menjawab_negeri','belum_selesai_menjawab_negeri','tidak_menjawab_lebih_6bulan_negeri','tidak_pernah_menjawab_negeri',
+                                                                                            'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan', 'tahap1', 'tahap2', 'tahap3', 'tahap4'));
                 }
                 else if($tahap == 5)
                 {
@@ -769,21 +786,21 @@ class HomeController extends Controller
                                                     })->count();
 
                     // Count clients who didn't answer
-                    $tidak_menjawab = DB::table('klien as u')
-                                        ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                                        ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                                            $join->on('u.id', '=', 'kk.klien_id')
-                                                ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
-                                        })
-                                        ->where(function ($query) use ($sixMonthsAgo) {
-                                            $query->whereNull('kk.klien_id') // No record in keputusan_kepulihan_klien
-                                                ->orWhere(function ($query) use ($sixMonthsAgo) {
-                                                    $query->whereNotNull('kk.klien_id')
-                                                        ->where('kk.updated_at', '<=', $sixMonthsAgo); //Latest record in table keputusan_kepulihan_klien is more than 6 months
-                                                });
-                                        });
+                    $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                                    ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                                        $join->on('u.id', '=', 'kk.klien_id')
+                                                            ->on('kk.updated_at', '=', DB::raw('(SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)'));
+                                                    })
+                                                    ->where('kk.updated_at', '<=', $sixMonthsAgo); // Latest record is more than 6 months old
 
-                    $tidak_menjawab_daerah = $tidak_menjawab->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)->count();
+                    $tidak_pernah_menjawab = DB::table('klien as u')
+                                            ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                            ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+                    $tidak_pernah_menjawab_daerah = $tidak_pernah_menjawab->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)->count();
+                    $tidak_menjawab_lebih_6bulan_daerah = $tidak_menjawab_lebih_6bulan->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)->count();
 
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
@@ -838,10 +855,8 @@ class HomeController extends Controller
                     $tahap3 = TahapKepulihan::where('id', 3)->value('tahap');
                     $tahap4 = TahapKepulihan::where('id', 4)->value('tahap');
 
-                    // dd($unreadCountPD);
-
                     return view('dashboard.pegawai.dashboard_daerah', compact('telahKemaskiniDaerah','belumKemaskiniDaerah','jumlahKlienDaerah','belumSelesaiDaerah','selesaiDaerah','jumlahPermohonanDaerah',
-                                                                                                    'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_daerah',
+                                                                                                    'selesai_menjawab_daerah','belum_selesai_menjawab_daerah','tidak_menjawab_lebih_6bulan_daerah','tidak_pernah_menjawab_daerah',
                                                                                                     'cemerlang', 'baik', 'memuaskan', 'tidak_memuaskan', 'tahap1', 'tahap2', 'tahap3', 'tahap4',
                                                                                                     'notifications', 'unreadCountPD'));
                 }
