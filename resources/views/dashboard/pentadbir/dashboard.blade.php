@@ -514,7 +514,7 @@
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:#6f1d1b">
                                     <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
+                                    <div class="symbol symbol-30px me-0">
                                             <i class="fas fa-file-lines text-light" style="font-size: 18px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -655,8 +655,8 @@
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: red !important;">
                                     <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 19px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>

@@ -401,7 +401,7 @@
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color:#6f1d1b">
                                     <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0 mb-5">
+                                    <div class="symbol symbol-30px me-0">
                                             <i class="fas fa-file-lines text-light" style="font-size: 18px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
@@ -467,7 +467,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap4))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap4))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -494,7 +494,7 @@
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap3))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap3))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -520,7 +520,7 @@
                                             <i class="fas fa-file-lines text-light" style="font-size: 20px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap2))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap2))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
@@ -542,12 +542,12 @@
                                 <!--begin::Items-->
                                 <div class="px-6 pt-5 card-rounded h-150px w-100 card theme-dark-bg-body" style="background-color: red;">
                                     <!--begin::Symbol-->
-                                    <div class="symbol symbol-30px me-0">
-                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 20px;">
+                                    <div class="symbol symbol-30px me-0 mb-5">
+                                            <i class="fa-solid fa-file-lines text-light" style="font-size: 19px;">
                                                 <span class="path1"></span>
                                                 <span class="path2"></span>
                                                 <span class="path3"></span>
-                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucfirst(strtolower($tahap1))}}</span>
+                                                <span class="fw-semibold me-1 align-self-center" style="padding-bottom: 5px; padding-left:5px; font-family:sans-serif;">{{ucwords(strtolower($tahap1))}}</span>
                                             </i>
                                     </div>
                                     <!--end::Symbol-->
