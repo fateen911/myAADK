@@ -200,7 +200,6 @@ class HomeController extends Controller
                                     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                                     ->get();
 
-                    // Count the number of "Selesai" and "Tidak Selesai"
                     $selesai_menjawab = $responses->filter(function ($response) {
                                             return ($response->status == 'Selesai');
                                         })->count();
