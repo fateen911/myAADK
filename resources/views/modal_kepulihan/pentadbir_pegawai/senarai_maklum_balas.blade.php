@@ -231,12 +231,11 @@
                                 <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 22%;">Nama</th>
+                                            <th style="width: 27%;">Nama</th>
                                             <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 18%;">AADK Daerah</th>
-                                            <th style="text-align: center; width: 10%;">AADK Negeri</th>
-                                            <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 20%;">Tahap Kepulihan</th>  
+                                            <th style="text-align: center; width: 20%;">AADK Daerah</th>
+                                            <th style="text-align: center; width: 18%;">AADK Negeri</th>
+                                            <th style="text-align: center; width: 15%;">Tarikh Terakhir Menjawab</th> 
                                             <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
@@ -248,28 +247,15 @@
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response2->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
                                             <tr>
-                                                <td style="width: 22%;">
+                                                <td style="width: 27%;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
                                                         {{ $response2->nama }}
                                                     </a>
                                                 </td>
                                                 <td style="width: 12%; text-align: center;">{{ $response2->no_kp }}</td>
-                                                <td style="width: 18%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 20%; text-align: center;">   
-                                                    @if ($response2->tahap_kepulihan_id)
-                                                        @if ($response2->tahap_kepulihan_id == 1)
-                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response2->tahap_kepulihan_id == 2)
-                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response2->tahap_kepulihan_id == 3)
-                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
-                                                        @else
-                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @endif
-                                                    @endif
-                                                </td>
+                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
+                                                <td style="width: 18%; text-align: center;">{{ $negeri }}</td>
+                                                <td style="width: 15%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td style="width: 8%; text-align: center;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
                                                         <i class="fas fa-eye"></i>

@@ -419,6 +419,9 @@ class ModalKepulihanController extends Controller
                             ->select('u.id as klien_id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', DB::raw('ROUND(kk.skor, 3) as skor'), 'kk.tahap_kepulihan_id', 'kk.status', 'kk.updated_at')
                             ->where('kk.updated_at', '>=', $sixMonthsAgo)
                             ->where('kk.status', 'Selesai')
+                            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+                            })
                             ->orderBy('kk.updated_at', 'desc')
                             ->get();
 
@@ -536,6 +539,9 @@ class ModalKepulihanController extends Controller
                             ->select('u.id as klien_id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', DB::raw('ROUND(kk.skor, 3) as skor'), 'kk.tahap_kepulihan_id', 'kk.status', 'kk.updated_at')
                             ->where('kk.updated_at', '>=', $sixMonthsAgo)
                             ->where('kk.status', 'Selesai')
+                            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+                            })
                             ->orderBy('kk.updated_at', 'desc')
                             ->get();
 
@@ -602,6 +608,9 @@ class ModalKepulihanController extends Controller
                     ->groupBy('klien_id');
             })
             ->where('kk.status', 'Selesai')
+            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+            })
             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
             ->orderBy('kk.updated_at', 'desc')
@@ -707,6 +716,9 @@ class ModalKepulihanController extends Controller
                     ->groupBy('klien_id');
             })
             ->where('kk.status', 'Selesai')
+            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+            })
             ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
