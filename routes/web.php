@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 //SECOND DB
 Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
-Route::get('/klien-view', [KlienViewController::class, 'view_klien']);
+Route::get('/klien-view', [KlienViewController::class, 'viewKlien']);
 
 //ERROR
 Route::get('/404-not-found', function () {
