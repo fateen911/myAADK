@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\DatabaseTestController;
+use App\Http\Controllers\KlienViewController;
 use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
 use App\Http\Controllers\ModalKepulihanController;
@@ -24,6 +25,7 @@ Route::get('/', function () {
 
 //SECOND DB
 Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
+Route::get('/klien-view', [KlienViewController::class, 'view_klien']);
 
 //ERROR
 Route::get('/404-not-found', function () {
