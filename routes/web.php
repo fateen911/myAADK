@@ -4,6 +4,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
+use App\Http\Controllers\DatabaseTestController;
 use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
 use App\Http\Controllers\ModalKepulihanController;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing_page.version_3');
 });
+
+//SECOND DB
+Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
 
 //ERROR
 Route::get('/404-not-found', function () {
