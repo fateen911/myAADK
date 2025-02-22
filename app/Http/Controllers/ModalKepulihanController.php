@@ -14,6 +14,7 @@ use App\Models\SkorModal;
 use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\Pegawai;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ModalKepulihanController extends Controller
 {
@@ -823,7 +824,7 @@ class ModalKepulihanController extends Controller
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
     }
-    
+
     public function sejarahSoalSelidik($klien_id)
     {
         // Fetch the main history data
@@ -878,6 +879,53 @@ class ModalKepulihanController extends Controller
         }
 
         return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah', 'clientModals', 'notifications', 'unreadCountPD'));
+    }
+
+    public function exportPDFAnalisisMK()
+    {
+        // Fetch data based on 'selesai_menjawab' status
+        $sixMonthsAgo = now()->subMonths(6);
+        
+        // Define the modal kepulihan categories
+        $modalKepulihan = [
+            'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
+            'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
+        ];
+
+        // Get clients who completed the assessment
+        $data = DB::table('keputusan_kepulihan_klien as kk')
+            ->join('skor_modal as sm', function ($join) {
+                $join->on('kk.klien_id', '=', 'sm.klien_id')
+                    ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
+            })
+            ->select('kk.klien_id', 'kk.skor', 'sm.*')
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
+            ->where('kk.status', 'Selesai')
+            ->get();
+
+            // dd($data);
+
+        // Define categories
+        $categories = [
+            'Sangat Memuaskan' => [3.51, 4.0],
+            'Memuaskan' => [2.51, 3.5],
+            'Kurang Memuaskan' => [1.51, 2.5],
+            'Sangat Tidak Memuaskan' => [1.0, 1.5],
+        ];
+
+        // Count clients in each category for each modal kepulihan
+        $counts = [];
+        foreach ($categories as $category => [$min, $max]) {
+            foreach ($modalKepulihan as $modal) {
+                $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
+            }
+        }
+
+        $totalClients = $data->unique('klien_id')->count();
+
+        // Generate PDF
+        $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
+        return $pdf->stream('analisis_modal_kepulihan.pdf');
     }
 
 }

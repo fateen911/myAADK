@@ -149,11 +149,20 @@
                         {{-- SELESAI MENJAWAB --}}
                         <div class="tab-pane fade show active" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                             <!--begin::Card header-->
-                            <div class="header" style="padding-left: 10px;">
+                            {{-- <div class="header" style="padding-left: 10px;">
                                 <h2>Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
-                            </div>
+                            </div> --}}
+                            <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
+                                <h2>
+                                    Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
+                                    <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
+                                </h2>
+                                <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-primary">
+                                    <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
+                                </a>
+                            </div>                            
                             <!--end::Card header-->
 
                             <!--begin::Card body-->

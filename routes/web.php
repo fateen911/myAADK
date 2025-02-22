@@ -213,6 +213,7 @@ Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController:
 // PENTADBIR - MODUL KEPULIHAN
 Route::get('/pentadbir/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
 Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
+Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
 
 // PEGAWAI - MODUL KEPULIHAN
 Route::get('/pegawai-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanBrpp'])->middleware('auth')->name('maklum.balas.kepulihan.brpp');
