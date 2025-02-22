@@ -149,19 +149,24 @@
                         {{-- SELESAI MENJAWAB --}}
                         <div class="tab-pane fade show active" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                             <!--begin::Card header-->
-                            {{-- <div class="header" style="padding-left: 10px;">
-                                <h2>Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
-                                    <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
-                                </h2>
-                            </div> --}}
                             <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
                                 <h2>
                                     Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
-                                <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-primary">
-                                    <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
-                                </a>
+                                @if ((Auth::user()->tahap_pengguna == 1) || (Auth::user()->tahap_pengguna == 3))
+                                    <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-primary">
+                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
+                                    </a>
+                                @elseif (Auth::user()->tahap_pengguna == 4)
+                                    <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-primary">
+                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan N
+                                    </a>
+                                @elseif (Auth::user()->tahap_pengguna == 5)
+                                    <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-primary">
+                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan D
+                                    </a>
+                                @endif
                             </div>                            
                             <!--end::Card header-->
 

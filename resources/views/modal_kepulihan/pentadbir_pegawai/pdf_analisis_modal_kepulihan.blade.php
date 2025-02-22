@@ -87,8 +87,6 @@
             </tbody>
         </table>
 
-        <p class="highlight">
-            **Jumlah klien bagi setiap modal adalah {{ $totalClients }} orang
-        </p>
+        <p class="highlight">**Jumlah klien bagi setiap modal adalah {{ $totalClients }} orang</p>
     </body>
 </html>

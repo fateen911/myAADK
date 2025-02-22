@@ -903,8 +903,116 @@ class ModalKepulihanController extends Controller
             ->where('kk.status', 'Selesai')
             ->get();
 
-            // dd($data);
+        // Define categories
+        $categories = [
+            'Sangat Memuaskan' => [3.51, 4.0],
+            'Memuaskan' => [2.51, 3.5],
+            'Kurang Memuaskan' => [1.51, 2.5],
+            'Sangat Tidak Memuaskan' => [1.0, 1.5],
+        ];
 
+        // Count clients in each category for each modal kepulihan
+        $counts = [];
+        foreach ($categories as $category => [$min, $max]) {
+            foreach ($modalKepulihan as $modal) {
+                $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
+            }
+        }
+
+        $totalClients = $data->unique('klien_id')->count();
+
+        // Generate PDF
+        $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
+        return $pdf->stream('analisis_modal_kepulihan.pdf');
+    }
+
+    public function exportPDFAnalisisMKNegeri()
+    {
+        // Fetch data based on the latest six month
+        $pegawai = Auth::user();
+        $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $sixMonthsAgo = now()->subMonths(6);
+        
+        // Define the modal kepulihan categories
+        $modalKepulihan = [
+            'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
+            'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
+        ];
+
+        // Get clients who completed the assessment
+        $data = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('skor_modal as sm', function ($join) {
+                    $join->on('kk.klien_id', '=', 'sm.klien_id')
+                        ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
+                })
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat',
+                )
+                ->select('kk.klien_id', 'kk.skor', 'sm.*')
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->where('kk.status', 'Selesai')
+                ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                ->get();
+
+        // Define categories
+        $categories = [
+            'Sangat Memuaskan' => [3.51, 4.0],
+            'Memuaskan' => [2.51, 3.5],
+            'Kurang Memuaskan' => [1.51, 2.5],
+            'Sangat Tidak Memuaskan' => [1.0, 1.5],
+        ];
+
+        // Count clients in each category for each modal kepulihan
+        $counts = [];
+        foreach ($categories as $category => [$min, $max]) {
+            foreach ($modalKepulihan as $modal) {
+                $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
+            }
+        }
+
+        $totalClients = $data->unique('klien_id')->count();
+
+        // Generate PDF
+        $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
+        return $pdf->stream('analisis_modal_kepulihan.pdf');
+    }
+
+    public function exportPDFAnalisisMKDaerah()
+    {
+        // Fetch data based on 'selesai_menjawab' status
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $sixMonthsAgo = now()->subMonths(6);
+        
+        // Define the modal kepulihan categories
+        $modalKepulihan = [
+            'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
+            'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
+        ];
+
+        // Get clients who completed the assessment
+        $data = DB::table('keputusan_kepulihan_klien as kk')
+            ->join('skor_modal as sm', function ($join) {
+                $join->on('kk.klien_id', '=', 'sm.klien_id')
+                    ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
+            })
+            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+            ->select(
+                'u.id as klien_id',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
+            )
+            ->select('kk.klien_id', 'kk.skor', 'sm.*')
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
+            ->where('kk.status', 'Selesai')
+            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+            ->get();
+
+            // dd($data);
         // Define categories
         $categories = [
             'Sangat Memuaskan' => [3.51, 4.0],
