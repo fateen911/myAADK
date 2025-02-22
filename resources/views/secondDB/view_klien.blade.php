@@ -10,7 +10,7 @@
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
-                @foreach($data->first() ?? [] as $column => $value)
+                @foreach(array_keys($data[0] ?? []) as $column)
                     <th>{{ $column }}</th>
                 @endforeach
             </tr>
@@ -18,7 +18,7 @@
         <tbody>
             @foreach($data as $row)
                 <tr>
-                    @foreach($row->getAttributes() as $value)
+                    @foreach($row as $value)
                         <td>{{ $value }}</td>
                     @endforeach
                 </tr>
