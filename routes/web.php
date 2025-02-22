@@ -229,6 +229,8 @@ Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->nam
 Route::get('/pelaporan/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktivitiND.senarai_aktiviti');
 Route::post('/pelaporan/aktivitiND/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktiviti'])->name('pelaporan.aktivitiND.filter_senarai_aktiviti');
 Route::get('/pelaporan/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFIlterAktiviti'])->name('pelaporan.aktivitiND.json_fIlter_aktiviti');
+Route::get('/pelaporan/modal-kepulihan/pegawai-negeri', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
+Route::get('/pelaporan/modal-kepulihan/pegawai-daerah', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {

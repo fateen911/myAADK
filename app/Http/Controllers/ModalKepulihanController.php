@@ -823,7 +823,7 @@ class ModalKepulihanController extends Controller
 
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
     }
-
+    
     public function sejarahSoalSelidik($klien_id)
     {
         // Fetch the main history data
