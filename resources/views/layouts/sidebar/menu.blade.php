@@ -194,53 +194,6 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <!--begin:Menu link-->
-                        <span class="menu-link">
-                            <span class="menu-icon">
-                                <i class="ki-duotone ki-questionnaire-tablet fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i>
-                            </span>
-                            <span class="menu-title">Soal Selidik Kepulihan</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <!--end:Menu link-->
-
-                        <!--begin:Menu sub-->
-                        <div class="menu-sub menu-sub-accordion">
-                            <!--begin:Menu item-->
-                            <div class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <a class="menu-link" href={{route('maklum.balas.kepulihan')}}>
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Maklum Balas</span>
-                                </a>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-
-                            <!--begin:Menu item-->
-                            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('soalan-kepulihan') ? 'active' : '' }}">
-                                <!--begin:Menu link-->
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Senarai Soalan</span>
-                                </span>
-                                <!--end:Menu link-->
-                            </div>
-                            <!--end:Menu item-->
-                        </div>
-                        <!--end:Menu sub-->
-                    </div> --}}
-                    <!--end:Menu item-->
-
-                    <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}';">
@@ -321,7 +274,6 @@
 {{--                    </div>--}}
 {{--                    <!--end:Menu item-->--}}
 
-
                     <!--begin:Menu item PELAPORAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
@@ -329,6 +281,26 @@
                             <span class="menu-heading fw-bold text-uppercase fs-7">PELAPORAN</span>
                         </div>
                         <!--end:Menu content-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-graph-up fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Keseluruhan</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
 
@@ -664,6 +636,26 @@
                             <span class="menu-heading fw-bold text-uppercase fs-7">PELAPORAN</span>
                         </div>
                         <!--end:Menu content-->
+                    </div>
+                    <!--end:Menu item-->
+
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="click" class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan') }}';">
+                            <span class="menu-icon">
+                                <i class="ki-duotone ki-graph-up fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                </i>
+                            </span>
+                            <span class="menu-title">Keseluruhan</span>
+                        </a>
+                        <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
 
