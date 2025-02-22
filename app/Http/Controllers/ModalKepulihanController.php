@@ -1012,7 +1012,6 @@ class ModalKepulihanController extends Controller
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->get();
 
-            // dd($data);
         // Define categories
         $categories = [
             'Sangat Memuaskan' => [3.51, 4.0],

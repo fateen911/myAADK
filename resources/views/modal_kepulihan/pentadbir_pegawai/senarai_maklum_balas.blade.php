@@ -160,11 +160,11 @@
                                     </a>
                                 @elseif (Auth::user()->tahap_pengguna == 4)
                                     <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-primary">
-                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan N
+                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                     </a>
                                 @elseif (Auth::user()->tahap_pengguna == 5)
                                     <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-primary">
-                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan D
+                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                     </a>
                                 @endif
                             </div>                            
