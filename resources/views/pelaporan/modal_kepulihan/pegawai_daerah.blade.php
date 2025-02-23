@@ -194,10 +194,6 @@
                                                 class="btn btn-info">
                                                 <i class="fas fa-file-pdf"></i> Selesai Menjawab
                                             </a>
-
-                                            {{-- <a href="{{ route('selesai.pdf.daerah') }}" class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Selesai Menjawab
-                                            </a> --}}
                                         </div>
                                     </div>
                                 </form>
@@ -210,35 +206,27 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 22%;">Nama</th>
-                                            <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 18%;">AADK Daerah</th>
-                                            <th style="text-align: center; width: 10%;">AADK Negeri</th>
-                                            <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
+                                            <th style="width: 40%;">Nama</th>
+                                            <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 15%;">Tarikh Terakhir Menjawab</th> 
                                             <th style="text-align: center; width: 20%;">Tahap Kepulihan</th>  
-                                            <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
+                                            <th style="text-align: center; width: 10%;">Sejarah</th>
                                         </tr>
                                     </thead>
-                                    {{-- <tbody id="table-body">
-                                        @include('pelaporan.modal_kepulihan.pegawai_daerah', ['selesai_menjawab' => $selesai_menjawab])
-                                    </tbody> --}}
+                                    
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($selesai_menjawab as $response1)
                                             @php
                                                 $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response1->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response1->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response1->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
                                             <tr>
-                                                <td style="width: 22%;">
+                                                <td style="width: 40%;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
                                                         {{ $response1->nama }}
                                                     </a>
                                                 </td>
-                                                <td style="width: 12%; text-align: center;">{{ $response1->no_kp }}</td>
-                                                <td style="width: 18%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ isset($response1->updated_at) ? Carbon::parse($response1->updated_at)->format('d/m/Y') : 'N/A' }}</td>
+                                                <td style="width: 15%; text-align: center;">{{ $response1->no_kp }}</td>
+                                                <td style="width: 15%; text-align: center;">{{ isset($response1->updated_at) ? Carbon::parse($response1->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td style="width: 20%; text-align: center;">   
                                                     @if ($response1->tahap_kepulihan_id)
                                                         @if ($response1->tahap_kepulihan_id == 1)
@@ -252,7 +240,7 @@
                                                         @endif
                                                     @endif
                                                 </td>
-                                                <td style="width: 8%; text-align: center;">
+                                                <td style="width: 10%; text-align: center;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
@@ -282,32 +270,26 @@
                                 <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 27%;">Nama</th>
-                                            <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 20%;">AADK Daerah</th>
-                                            <th style="text-align: center; width: 18%;">AADK Negeri</th>
-                                            <th style="text-align: center; width: 15%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
+                                            <th style="width: 55%;">Nama</th>
+                                            <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 20%;">Tarikh Terakhir Menjawab</th> 
+                                            <th style="text-align: center; width: 10%;">Sejarah</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($belum_selesai_menjawab as $response2)
                                             @php
                                                 $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response2->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response2->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response2->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                             @endphp
                                             <tr>
-                                                <td style="width: 27%;">
+                                                <td style="width: 55%;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
                                                         {{ $response2->nama }}
                                                     </a>
                                                 </td>
-                                                <td style="width: 12%; text-align: center;">{{ $response2->no_kp }}</td>
-                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 18%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 15%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 8%; text-align: center;">
+                                                <td style="width: 15%; text-align: center;">{{ $response2->no_kp }}</td>
+                                                <td style="width: 20%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
+                                                <td style="width: 10%; text-align: center;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
@@ -338,25 +320,16 @@
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
-                                            <th class="min-w-30px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-50px" style="text-align: center;">AADK Daerah</th>
-                                            <th class="min-w-50px" style="text-align: center;">AADK Negeri</th>
-                                            <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
+                                            <th class="min-w-50px" style="text-align: center;">No. Kad Pengenalan</th>
+                                            <th class="min-w-50px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
                                             <th class="min-w-50px" style="text-align: center;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($tidak_menjawab_lebih_6bulan as $response3)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response3->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response3->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
                                             <tr>
                                                 <td>{{ $response3->nama }}</td>
                                                 <td style="text-align: center;">{{ $response3->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center">{{ isset($response3->updated_at) ? Carbon::parse($response3->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td style="text-align: center;">
                                                     @if ($response3->updated_at !== NULL)
@@ -390,24 +363,15 @@
                                 <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
-                                            <th class="min-w-150px">Nama</th>
+                                            <th class="min-w-250px">Nama</th>
                                             <th class="min-w-50px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">AADK Daerah</th>
-                                            <th class="min-w-100px" style="text-align: center;">AADK Negeri</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($tidak_pernah_menjawab as $response4)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response4->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response4->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
                                             <tr>
                                                 <td>{{ $response4->nama }}</td>
                                                 <td style="text-align: center;">{{ $response4->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
