@@ -159,18 +159,23 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label for="from_date">Tarikh Mula:</label>
-                                            <input type="date" id="from_date" name="from_date" class="form-control">
+                                            <input type="date" id="from_date" name="from_date" class="form-control" value="{{ request('from_date') }}">
+                                            {{-- <input type="date" id="from_date" name="from_date" class="form-control"> --}}
                                         </div>
                                         <div class="col-md-2">
                                             <label for="to_date">Tarikh Akhir:</label>
-                                            <input type="date" id="to_date" name="to_date" class="form-control">
+                                            <input type="date" id="to_date" name="to_date" class="form-control" value="{{ request('to_date') }}">
+                                            {{-- <input type="date" id="to_date" name="to_date" class="form-control"> --}}
                                         </div>
                                         <div class="col-md-3">
                                             <label for="tahap_kepulihan_id">Tahap Kepulihan:</label>
                                             <select id="tahap_kepulihan_id" name="tahap_kepulihan_id" class="form-control">
                                                 <option value="">Semua</option>
                                                 @foreach($tahap_kepulihan_list as $tk)
-                                                    <option value="{{ $tk->id }}">{{ $tk->tahap }}</option>
+                                                    <option value="{{ $tk->id }}" {{ request('tahap_kepulihan_id') == $tk->id ? 'selected' : '' }}>
+                                                        {{ $tk->tahap }}
+                                                    </option>
+                                                    {{-- <option value="{{ $tk->id }}">{{ $tk->tahap }}</option> --}}
                                                 @endforeach
                                             </select>
                                         </div>
@@ -180,11 +185,19 @@
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-4" style="padding-left: 220px;">
+                                        <div class="col-md-4" style="padding-left: 200px;">
                                             <br>
-                                            <a href="{{ route('selesai.pdf.daerah') }}" class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Senarai Klien
+                                            <a href="{{ route('selesai.pdf.daerah', [
+                                                'from_date' => request('from_date'), 
+                                                'to_date' => request('to_date'), 
+                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
+                                                class="btn btn-info">
+                                                <i class="fas fa-file-pdf"></i> Selesai Menjawab
                                             </a>
+
+                                            {{-- <a href="{{ route('selesai.pdf.daerah') }}" class="btn btn-info">
+                                                <i class="fas fa-file-pdf"></i> Selesai Menjawab
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </form>

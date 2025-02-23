@@ -56,31 +56,35 @@
 
     <div class="tittle">SENARAI KLIEN SELESAI MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
 
+    @php
+        $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $pegawaiDaerah->daerah_bertugas)->value('daerah');
+        $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $pegawaiDaerah->negeri_bertugas)->value('negeri');
+    @endphp
+
+    <br>
+    <div style="display: flex; justify-content: space-between;">
+        <span><strong>PEJABAT:</strong> {{ $negeri }}, {{ $daerah }}</span>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
-                <th>No.</th>
-                <th>Nama</th>
-                <th>No. Kad Pengenalan</th>
-                <th>AADK Daerah</th>
-                <th>AADK Negeri</th>
-                <th>Tarikh Terakhir Menjawab</th>
-                <th>Tahap Kepulihan</th>
+                <th style="width: 5%">NO.</th>
+                <th style="width: 40%">NAMA</th>
+                <th style="width: 10%">NO. KAD PENGENALAN</th>
+                <th style="width: 20%">TARIKH TERAKHIR MENJAWAB</th>
+                <th style="width: 25%">TAHAP KEPULIHAN</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($query as $klien)
+            @foreach($filteredData as $klien)
                 @php
                     $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $klien->tahap_kepulihan_id)->value('tahap');
-                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
-                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
                 @endphp
                 <tr>
-                    <td>{{ $loop->iteration }}.</td>  <!-- Automatically increments -->
+                    <td>{{ $loop->iteration }}.</td>
                     <td>{{ $klien->nama }}</td>
                     <td>{{ $klien->no_kp }}</td>
-                    <td>{{ $daerah }}</td>
-                    <td>{{ $negeri }}</td>
                     <td>{{ \Carbon\Carbon::parse($klien->updated_at)->format('d/m/Y') }}</td>
                     <td>{{ $tahap_kepulihan }}</td>
                 </tr>
