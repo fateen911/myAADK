@@ -244,6 +244,7 @@ Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::cl
 
 // PEGAWAI DAERAH - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-daerah/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
+Route::get('/pegawai-daerah/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabDaerah'])->name('selesai.pdf.daerah');
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {

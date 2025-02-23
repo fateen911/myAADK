@@ -8,9 +8,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\NotifikasiPegawaiDaerah;
+use App\Models\TahapKepulihan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PelaporanController extends Controller
 {
@@ -201,10 +203,12 @@ class PelaporanController extends Controller
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
-        $status = $request->input('status');
+
+        $tahap_kepulihan_list = TahapKepulihan::all();
+        $from_date = $request->input('from_date');
+        $to_date = $request->input('to_date');
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
 
-        // Clients who have responded within the last 6 months (Selesai Menjawab)
         $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
             ->select(
@@ -215,25 +219,54 @@ class PelaporanController extends Controller
                 'u.negeri_pejabat',
                 DB::raw('ROUND(kk.skor, 3) as skor'),
                 'kk.tahap_kepulihan_id',
-                'kk.status',
                 'kk.updated_at'
             )
             ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
             ->where('kk.status', 'Selesai')
+            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+            ->when($from_date, function ($query, $from_date) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date);
+            })
+            ->when($to_date, function ($query, $to_date) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date);
+            })
             ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
                 return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
             })
-            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
             ->orderBy('kk.updated_at', 'desc')
             ->get();
+
+        // Clients who have responded within the last 6 months (Selesai Menjawab)
+        // $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+        //     ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+        //     ->select(
+        //         'u.id as klien_id',
+        //         'u.nama',
+        //         'u.no_kp',
+        //         'u.daerah_pejabat',
+        //         'u.negeri_pejabat',
+        //         DB::raw('ROUND(kk.skor, 3) as skor'),
+        //         'kk.tahap_kepulihan_id',
+        //         'kk.status',
+        //         'kk.updated_at'
+        //     )
+        //     ->where('kk.updated_at', '>=', $sixMonthsAgo)
+        //     ->whereIn('kk.updated_at', function ($query) {
+        //         $query->select(DB::raw('MAX(updated_at)'))
+        //             ->from('keputusan_kepulihan_klien')
+        //             ->whereColumn('klien_id', 'kk.klien_id')
+        //             ->groupBy('klien_id');
+        //     })
+        //     ->where('kk.status', 'Selesai')
+        //     ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+        //         return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+        //     })
+        //     ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+        //     ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+        //     ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+        //     ->orderBy('kk.updated_at', 'desc')
+        //     ->get();
 
         // Clients who started but did not complete (Belum Selesai Menjawab)
         $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
@@ -331,8 +364,47 @@ class PelaporanController extends Controller
                             });
                         })->count();
 
-        return view('pelaporan.modal_kepulihan.pegawai_daerah', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
+        return view('pelaporan.modal_kepulihan.pegawai_daerah', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD','tahap_kepulihan_list'));
     }
+
+    public function PDFselesaiMenjawabDaerah(Request $request)
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $from_date = $request->input('from_date');
+        $to_date = $request->input('to_date');
+        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+            ->select(
+                'u.nama',
+                'u.no_kp',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
+                DB::raw('ROUND(kk.skor, 3) as skor'),
+                'kk.tahap_kepulihan_id',
+                'kk.updated_at'
+            )
+            ->where('kk.status', 'Selesai')
+            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+            ->when($from_date, function ($query, $from_date) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date);
+            })
+            ->when($to_date, function ($query, $to_date) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date);
+            })
+            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+            })
+            ->orderBy('kk.updated_at', 'desc')
+            ->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('query'));
+        return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
+    }
+
 
     public function senaraiAktiviti(){
         $user_id = Auth::id();

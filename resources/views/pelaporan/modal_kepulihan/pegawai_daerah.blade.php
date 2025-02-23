@@ -147,11 +147,49 @@
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
                                 
-                                <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-primary">
+                                <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-info">
                                     <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                 </a>
                             </div>
                             <!--end::Card header-->
+
+                            <!--begin::Filter Section-->
+                            <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
+                                <form id="filter-form">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="from_date">Tarikh Mula:</label>
+                                            <input type="date" id="from_date" name="from_date" class="form-control">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="to_date">Tarikh Akhir:</label>
+                                            <input type="date" id="to_date" name="to_date" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="tahap_kepulihan_id">Tahap Kepulihan:</label>
+                                            <select id="tahap_kepulihan_id" name="tahap_kepulihan_id" class="form-control">
+                                                <option value="">Semua</option>
+                                                @foreach($tahap_kepulihan_list as $tk)
+                                                    <option value="{{ $tk->id }}">{{ $tk->tahap }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary"> 
+                                                <i class="fas fa-filter"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4" style="padding-left: 220px;">
+                                            <br>
+                                            <a href="{{ route('selesai.pdf.daerah') }}" class="btn btn-info">
+                                                <i class="fas fa-file-pdf"></i> Senarai Klien
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end::Filter Section-->
 
                             <!--begin::Card body-->
                             <div class="body">
@@ -168,6 +206,9 @@
                                             <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
+                                    {{-- <tbody id="table-body">
+                                        @include('pelaporan.modal_kepulihan.pegawai_daerah', ['selesai_menjawab' => $selesai_menjawab])
+                                    </tbody> --}}
                                     <tbody class="fw-semibold text-gray-600">
                                         @foreach($selesai_menjawab as $response1)
                                             @php
@@ -411,4 +452,31 @@
                 }
         });
     </script>
+
+    <!-- JavaScript for AJAX Filtering -->
+    {{-- <script>
+        $(document).ready(function () {
+            $("#filter-form").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ route('modalKepulihanDaerah') }}",
+                    type: "GET",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $("#table-body").html(response);
+                    }
+                });
+            });
+
+            // Export PDF Button Click
+            $("#export-pdf").click(function (e) {
+                e.preventDefault();
+                let from_date = $("#from_date").val();
+                let to_date = $("#to_date").val();
+                let tahap_kepulihan_id = $("#tahap_kepulihan_id").val();
+                let url = "{{ route('exportAnalisisMKDaerah.pdf') }}?from_date=" + from_date + "&to_date=" + to_date + "&tahap_kepulihan_id=" + tahap_kepulihan_id;
+                window.location.href = url;
+            });
+        });
+    </script> --}}
 @endsection
