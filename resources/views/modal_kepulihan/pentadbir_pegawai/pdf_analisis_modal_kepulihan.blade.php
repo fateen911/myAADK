@@ -9,7 +9,7 @@
             .tittle { background-color: #666; color: white; padding: 10px; text-align: center; font-size: 18px; font-weight: bold; }
             .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
             .table th, .table td { border: 1px solid black; padding: 8px; text-align: center; }
-            .table th { background-color: #f2f2f2; }
+            .table th { background-color: lightgray !important; }
             .highlight { font-size: 14px; font-style: italic; color: red;}
 
             .header {
@@ -78,7 +78,7 @@
             <tbody>
                 @foreach ($counts as $category => $values)
                     <tr>
-                        <td>{{ $category }}</td>
+                        <td><strong>{{ $category }}</strong></td>
                         @foreach ($values as $count)
                             <td>{{ $count }}</td>
                         @endforeach

@@ -100,7 +100,7 @@
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Pengurusan</li>
+            <li class="breadcrumb-item text-muted">Pelaporan</li>
             <!--end::Item-->
             <!--begin::Item-->
             <li class="breadcrumb-item">
@@ -108,15 +108,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Maklum Balas</li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item">
-                <span class="bullet bg-gray-400 w-5px h-2px"></span>
-            </li>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Soal Selidik</li>
+            <li class="breadcrumb-item text-muted">Modal Kepulihan</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -149,10 +141,15 @@
                         {{-- SELESAI MENJAWAB --}}
                         <div class="tab-pane fade show active" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                             <!--begin::Card header-->
-                            <div class="header" style="padding-left: 10px;">
-                                <h2>Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
+                            <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
+                                <h2>
+                                    Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
+                                
+                                <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-primary">
+                                    <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
+                                </a>
                             </div>
                             <!--end::Card header-->
 

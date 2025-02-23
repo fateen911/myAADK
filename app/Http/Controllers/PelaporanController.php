@@ -331,7 +331,7 @@ class PelaporanController extends Controller
                             });
                         })->count();
 
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
+        return view('pelaporan.modal_kepulihan.pegawai_daerah', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
     }
 
     public function senaraiAktiviti(){
