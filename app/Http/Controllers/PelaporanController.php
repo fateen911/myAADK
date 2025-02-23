@@ -203,11 +203,17 @@ class PelaporanController extends Controller
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
-
         $tahap_kepulihan_list = TahapKepulihan::all();
-        $from_date = $request->input('from_date');
-        $to_date = $request->input('to_date');
+
+        $from_date_s = $request->input('from_date_s');
+        $to_date_s = $request->input('to_date_s');
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+
+        $from_date_bs = $request->input('from_date_bs');
+        $to_date_bs = $request->input('to_date_bs');
+
+        $from_date_tm6 = $request->input('from_date_tm6');
+        $to_date_tm6 = $request->input('to_date_tm6');
 
         $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
@@ -225,11 +231,11 @@ class PelaporanController extends Controller
             ->where('kk.status', 'Selesai')
             ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->when($from_date, function ($query, $from_date) {
-                return $query->whereDate('kk.updated_at', '>=', $from_date);
+            ->when($from_date_s, function ($query, $from_date_s) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_s);
             })
-            ->when($to_date, function ($query, $to_date) {
-                return $query->whereDate('kk.updated_at', '<=', $to_date);
+            ->when($to_date_s, function ($query, $to_date_s) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_s);
             })
             ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
                 return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
@@ -262,6 +268,12 @@ class PelaporanController extends Controller
             ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->when($from_date_bs, function ($query, $from_date_bs) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_bs);
+            })
+            ->when($to_date_bs, function ($query, $to_date_bs) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_bs);
+            })
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 
@@ -288,6 +300,12 @@ class PelaporanController extends Controller
             ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+            ->when($from_date_tm6, function ($query, $from_date_tm6) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_tm6);
+            })
+            ->when($to_date_tm6, function ($query, $to_date_tm6) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_tm6);
+            })
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 

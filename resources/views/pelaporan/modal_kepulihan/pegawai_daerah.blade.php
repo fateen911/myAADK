@@ -158,14 +158,12 @@
                                 <form id="filter-form">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <label for="from_date">Tarikh Mula:</label>
-                                            <input type="date" id="from_date" name="from_date" class="form-control" value="{{ request('from_date') }}">
-                                            {{-- <input type="date" id="from_date" name="from_date" class="form-control"> --}}
+                                            <label for="from_date_s">Tarikh Mula:</label>
+                                            <input type="date" id="from_date_s" name="from_date_s" class="form-control" value="{{ request('from_date_s') }}">
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="to_date">Tarikh Akhir:</label>
-                                            <input type="date" id="to_date" name="to_date" class="form-control" value="{{ request('to_date') }}">
-                                            {{-- <input type="date" id="to_date" name="to_date" class="form-control"> --}}
+                                            <label for="to_date_s">Tarikh Akhir:</label>
+                                            <input type="date" id="to_date_s" name="to_date_s" class="form-control" value="{{ request('to_date_s') }}">
                                         </div>
                                         <div class="col-md-3">
                                             <label for="tahap_kepulihan_id">Tahap Kepulihan:</label>
@@ -175,7 +173,6 @@
                                                     <option value="{{ $tk->id }}" {{ request('tahap_kepulihan_id') == $tk->id ? 'selected' : '' }}>
                                                         {{ $tk->tahap }}
                                                     </option>
-                                                    {{-- <option value="{{ $tk->id }}">{{ $tk->tahap }}</option> --}}
                                                 @endforeach
                                             </select>
                                         </div>
@@ -264,6 +261,39 @@
                             </div>
                             <!--end::Card header-->
 
+                            <!--begin::Filter Section-->
+                            <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
+                                <form id="filter-form">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="from_date_bs">Tarikh Mula:</label>
+                                            <input type="date" id="from_date_bs" name="from_date_bs" class="form-control" value="{{ request('from_date_bs') }}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="to_date_bs">Tarikh Akhir:</label>
+                                            <input type="date" id="to_date_bs" name="to_date_bs" class="form-control" value="{{ request('to_date_bs') }}">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary"> 
+                                                <i class="fas fa-filter"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-7" style="padding-left: 520px;">
+                                            <br>
+                                            <a href="{{ route('selesai.pdf.daerah', [
+                                                'from_date' => request('from_date'), 
+                                                'to_date' => request('to_date'), 
+                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
+                                                class="btn btn-info">
+                                                <i class="fas fa-file-pdf"></i> Senarai Klien
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end::Filter Section-->
+
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
@@ -313,6 +343,39 @@
                             </div>
                             <!--end::Card header-->
 
+                            <!--begin::Filter Section-->
+                            <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
+                                <form id="filter-form">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="from_date_tm6">Tarikh Mula:</label>
+                                            <input type="date" id="from_date_tm6" name="from_date_tm6" class="form-control" value="{{ request('from_date_tm6') }}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="to_date_tm6">Tarikh Akhir:</label>
+                                            <input type="date" id="to_date_tm6" name="to_date_tm6" class="form-control" value="{{ request('to_date_tm6') }}">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <button type="submit" class="btn btn-primary"> 
+                                                <i class="fas fa-filter"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-7" style="padding-left: 520px;">
+                                            <br>
+                                            <a href="{{ route('selesai.pdf.daerah', [
+                                                'from_date' => request('from_date'), 
+                                                'to_date' => request('to_date'), 
+                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
+                                                class="btn btn-info">
+                                                <i class="fas fa-file-pdf"></i> Senarai Klien
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--end::Filter Section-->
+
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
@@ -352,8 +415,12 @@
                         {{-- TIDAK PERNAH MENJAWAB --}}
                         <div class="tab-pane fade" id="tidakPernahMenjawab" role="tabpanel" aria-labelledby="tidakPernahMenjawab-tab">
                             <!--begin::Card header-->
-                            <div class="header" style="padding-left: 10px;">
-                                <h2>Senarai Klien Tidak Pernah Menjawab Soal Selidik Modal Kepulihan</h2>
+                            <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
+                                    <h2>Senarai Klien Tidak Pernah Menjawab Soal Selidik Modal Kepulihan</h2>
+                                
+                                <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-info">
+                                    <i class="fas fa-file-pdf"></i> Senarai Klien
+                                </a>
                             </div>
                             <!--end::Card header-->
 
