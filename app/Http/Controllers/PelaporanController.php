@@ -374,6 +374,7 @@ class PelaporanController extends Controller
         $from_date = $request->input('from_date');
         $to_date = $request->input('to_date');
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('keputusan_kepulihan_klien as kk')
             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
@@ -386,6 +387,7 @@ class PelaporanController extends Controller
                 'kk.tahap_kepulihan_id',
                 'kk.updated_at'
             )
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
             ->where('kk.status', 'Selesai')
             ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
@@ -401,7 +403,7 @@ class PelaporanController extends Controller
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('query'));
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('query'))->setPaper('a4', 'landscape');
         return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
     }
 
