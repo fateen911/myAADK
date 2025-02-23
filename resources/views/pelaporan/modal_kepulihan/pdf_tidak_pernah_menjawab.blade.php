@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Senarai Selesai Menjawab</title>
+    <title>Senarai Tidak Pernah Menjawab</title>
     <style>
         body { font-family: Arial, sans-serif; }
         .tittle { background-color: #666; color: white; padding: 10px; text-align: center; font-size: 18px; font-weight: bold; }
@@ -69,23 +69,16 @@
         <thead>
             <tr>
                 <th style="width: 5%">NO.</th>
-                <th style="width: 40%">NAMA</th>
-                <th style="width: 10%">NO. KAD PENGENALAN</th>
-                <th style="width: 20%">TARIKH TERAKHIR MENJAWAB</th>
-                <th style="width: 25%">TAHAP KEPULIHAN</th>
+                <th style="width: 70%">NAMA</th>
+                <th style="width: 25%">NO. KAD PENGENALAN</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($filteredData as $klien)
-                @php
-                    $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $klien->tahap_kepulihan_id)->value('tahap');
-                @endphp
+            @foreach($query as $klien)
                 <tr>
                     <td style="text-align: center;">{{ $loop->iteration }}.</td>
                     <td>{{ $klien->nama }}</td>
                     <td style="text-align: center;">{{ $klien->no_kp }}</td>
-                    <td style="text-align: center;">{{ \Carbon\Carbon::parse($klien->updated_at)->format('d/m/Y') }}</td>
-                    <td style="text-align: center;">{{ $tahap_kepulihan }}</td>
                 </tr>
             @endforeach
         </tbody>

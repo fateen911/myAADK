@@ -185,8 +185,8 @@
                                         <div class="col-md-4" style="padding-left: 200px;">
                                             <br>
                                             <a href="{{ route('selesai.pdf.daerah', [
-                                                'from_date' => request('from_date'), 
-                                                'to_date' => request('to_date'), 
+                                                'from_date_s' => request('from_date_s'), 
+                                                'to_date_s' => request('to_date_s'), 
                                                 'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
                                                 class="btn btn-info">
                                                 <i class="fas fa-file-pdf"></i> Selesai Menjawab
@@ -281,10 +281,9 @@
                                         </div>
                                         <div class="col-md-7" style="padding-left: 520px;">
                                             <br>
-                                            <a href="{{ route('selesai.pdf.daerah', [
-                                                'from_date' => request('from_date'), 
-                                                'to_date' => request('to_date'), 
-                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
+                                            <a href="{{ route('belum_selesai.pdf.daerah', [
+                                                'from_date_bs' => request('from_date_bs'), 
+                                                'to_date_bs' => request('to_date_bs')]) }}" 
                                                 class="btn btn-info">
                                                 <i class="fas fa-file-pdf"></i> Senarai Klien
                                             </a>
@@ -363,10 +362,9 @@
                                         </div>
                                         <div class="col-md-7" style="padding-left: 520px;">
                                             <br>
-                                            <a href="{{ route('selesai.pdf.daerah', [
-                                                'from_date' => request('from_date'), 
-                                                'to_date' => request('to_date'), 
-                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
+                                            <a href="{{ route('tidak_menjawab6.pdf.daerah', [
+                                                'from_date_tm6' => request('from_date_tm6'), 
+                                                'to_date_tm6' => request('to_date_tm6')]) }}" 
                                                 class="btn btn-info">
                                                 <i class="fas fa-file-pdf"></i> Senarai Klien
                                             </a>
@@ -418,7 +416,7 @@
                             <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
                                     <h2>Senarai Klien Tidak Pernah Menjawab Soal Selidik Modal Kepulihan</h2>
                                 
-                                <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-info">
+                                <a href="{{ route('tidak_pernah_menjawab.pdf.daerah') }}" class="btn btn-info">
                                     <i class="fas fa-file-pdf"></i> Senarai Klien
                                 </a>
                             </div>

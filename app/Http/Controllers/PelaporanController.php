@@ -358,9 +358,6 @@ class PelaporanController extends Controller
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-        $from_date = $request->input('from_date');
-        $to_date = $request->input('to_date');
-        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('keputusan_kepulihan_klien as kk')
@@ -380,12 +377,12 @@ class PelaporanController extends Controller
             ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
             ->orderBy('kk.updated_at', 'desc');
 
-        if ($request->filled('from_date')) {
-            $query->whereDate('kk.updated_at', '>=', $request->from_date);
+        if ($request->filled('from_date_s')) {
+            $query->whereDate('kk.updated_at', '>=', $request->from_date_s);
         }
     
-        if ($request->filled('to_date')) {
-            $query->whereDate('kk.updated_at', '<=', $request->to_date);
+        if ($request->filled('to_date_s')) {
+            $query->whereDate('kk.updated_at', '<=', $request->to_date_s);
         }
     
         if ($request->filled('tahap_kepulihan_id')) {
@@ -395,6 +392,125 @@ class PelaporanController extends Controller
         $filteredData = $query->get();
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
+        return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
+    }
+
+    public function PDFbelumSelesaiMenjawabDaerah(Request $request)
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.nama',
+                    'u.no_kp',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat',
+                    DB::raw('ROUND(kk.skor, 3) as skor'),
+                    'kk.tahap_kepulihan_id',
+                    'kk.status',
+                    'kk.updated_at'
+                )
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->whereIn('kk.updated_at', function ($query) {
+                    $query->select(DB::raw('MAX(updated_at)'))
+                        ->from('keputusan_kepulihan_klien')
+                        ->whereColumn('klien_id', 'kk.klien_id')
+                        ->groupBy('klien_id');
+                })
+                ->where('kk.status', '!=', 'Selesai') // Not completed responses
+                ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+                ->orderBy('kk.updated_at', 'desc');
+
+        if ($request->filled('from_date_bs')) {
+            $query->whereDate('kk.updated_at', '>=', $request->from_date_bs);
+        }
+    
+        if ($request->filled('to_date_bs')) {
+            $query->whereDate('kk.updated_at', '<=', $request->to_date_bs);
+        }
+    
+        $filteredData = $query->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_belum_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
+        return $pdf->stream('Senarai_Belum_Selesai_Menjawab.pdf');
+    }
+
+    public function PDFtidakMenjawabLebih6BulanDaerah(Request $request)
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.nama',
+                    'u.no_kp',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat',
+                    DB::raw('ROUND(kk.skor, 3) as skor'),
+                    'kk.tahap_kepulihan_id',
+                    'kk.updated_at'
+                )
+                ->where('kk.updated_at', '<=', $sixMonthsAgo)
+                ->whereIn('kk.updated_at', function ($query) {
+                    $query->select(DB::raw('MAX(updated_at)'))
+                        ->from('keputusan_kepulihan_klien')
+                        ->whereColumn('klien_id', 'kk.klien_id')
+                        ->groupBy('klien_id');
+                })
+                ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+                ->orderBy('kk.updated_at', 'desc');
+
+        if ($request->filled('from_date_tm6')) {
+            $query->whereDate('kk.updated_at', '>=', $request->from_date_tm6);
+        }
+    
+        if ($request->filled('to_date_tm6')) {
+            $query->whereDate('kk.updated_at', '<=', $request->to_date_tm6);
+        }
+    
+        if ($request->filled('tahap_kepulihan_id')) {
+            $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
+        }
+    
+        $filteredData = $query->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_menjawab_lebih_6bulan', compact('filteredData','pegawaiDaerah'));
+        return $pdf->stream('Senarai_Tidak_Menjawab_Lebih_6Bulan.pdf');
+    }
+
+    public function PDFtidakPernahMenjawabDaerah(Request $request)
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('klien as u')
+                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.nama',
+                    'u.no_kp',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat'
+                )
+                ->whereNull('kk.klien_id') // No response record found
+                ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
+                ->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('query','pegawaiDaerah'));
         return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
     }
 
