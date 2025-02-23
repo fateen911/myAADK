@@ -854,7 +854,7 @@
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.modal_kepulihan.negeri') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan/pegawai-negeri') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan/pegawai-negeri') }}';">
+                        <a class="menu-link" href="{{ url('/pegawai-negeri/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pegawai-negeri/pelaporan/modal-kepulihan') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -1076,7 +1076,7 @@
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.modal_kepulihan.daerah') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan/pegawai-daerah') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan/pegawai-daerah') }}';">
+                        <a class="menu-link" href="{{ url('/pegawai-daerah/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pegawai-daerah/pelaporan/modal-kepulihan') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>

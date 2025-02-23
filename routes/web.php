@@ -213,16 +213,16 @@ Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController:
 // MODAL KEPULIHAN
 Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
 
-// PENTADBIR & BRPP - MODUL KEPULIHAN
+// PENTADBIR & BRPP - MODAL KEPULIHAN
 Route::get('/pentadbir/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
 Route::get('/pegawai-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanBrpp'])->middleware('auth')->name('maklum.balas.kepulihan.brpp');
 Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
 
-// PEGAWAI NEGERI - MODUL KEPULIHAN
+// PEGAWAI NEGERI - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.negeri');
 Route::get('/pegawai-negeri/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKNegeri'])->name('exportAnalisisMKNegeri.pdf');
 
-// PEGAWAI DAERAH - MODUL KEPULIHAN
+// PEGAWAI DAERAH - MODAL KEPULIHAN
 Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanDaerah'])->middleware('auth')->name('maklum.balas.kepulihan.daerah');
 Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKDaerah'])->name('exportAnalisisMKDaerah.pdf');
 
@@ -230,14 +230,20 @@ Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepuliha
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
 Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
 
-// PELAPORAN
-Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihan'])->name('pelaporan.modal_kepulihan');
+// PELAPORAN - AKTIVITI
 Route::get('/pelaporan/aktiviti', [PelaporanController::class, 'aktiviti'])->name('pelaporan.aktiviti');
 Route::get('/pelaporan/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktivitiND.senarai_aktiviti');
 Route::post('/pelaporan/aktivitiND/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktiviti'])->name('pelaporan.aktivitiND.filter_senarai_aktiviti');
 Route::get('/pelaporan/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFIlterAktiviti'])->name('pelaporan.aktivitiND.json_fIlter_aktiviti');
-Route::get('/pelaporan/modal-kepulihan/pegawai-negeri', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
-Route::get('/pelaporan/modal-kepulihan/pegawai-daerah', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
+
+// PENTADBIR & BRPP - PELAPORAN - MODAL KEPULIHAN
+Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihan'])->name('pelaporan.modal_kepulihan');
+
+// PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
+Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
+
+// PEGAWAI DAERAH - PELAPORAN - MODAL KEPULIHAN
+Route::get('/pegawai-daerah/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
