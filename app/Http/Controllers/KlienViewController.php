@@ -19,9 +19,10 @@ class KlienViewController extends Controller
         if (!empty($data)) {
             // Insert data in chunks of 500 to avoid database limits
             collect($data)->chunk(500)->each(function ($chunk) {
-                DB::table('viewKlien')->insert($chunk->toArray());
+                DB::table('viewKlien')->insert($chunk->all());
             });
         }
+
 
 
         // Pass the data to the view
