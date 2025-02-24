@@ -31,8 +31,12 @@ class KlienViewController extends Controller
 
         // Insert data into 'viewKlien' table if data is not empty
         if (!empty($data)) {
-            DB::table('viewKlien')->insert($data);
+            // Insert data in chunks of 500 to avoid too many placeholders error
+            foreach (array_chunk($data, 500) as $chunk) {
+                DB::table('viewKlien')->insert($chunk);
+            }
         }
+        
 
         // Pass the data to the view
         return view('secondDB.view_klien', compact('data'));
