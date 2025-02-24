@@ -12,7 +12,7 @@ class KlienViewController extends Controller
     {
         $data = KlienView::where('id_fasiliti', '31')
             ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
-            ->limit(5000)
+            ->limit(10000)
             ->get()
             ->toArray();
 
