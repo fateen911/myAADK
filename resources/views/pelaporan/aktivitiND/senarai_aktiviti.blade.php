@@ -134,7 +134,9 @@
                                     </div>
 
                                     <div class="w-13 flex-center mt-5">
-                                        <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                        <a href="{{url('/pelaporan/aktiviti/excel/'.$user_id)}}">
+                                            <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

@@ -872,9 +872,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti') }}';">
+                        <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -1094,9 +1094,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti') }}';">
+                        <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>

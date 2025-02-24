@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PelaporanAktivitiExcel;
+use App\Exports\PerekodanKehadiranExcel;
 use App\Models\KategoriProgram;
+use App\Models\PerekodanKehadiranProgram;
 use App\Models\Program;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PelaporanController extends Controller
 {
@@ -335,7 +339,7 @@ class PelaporanController extends Controller
         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
                 ->select('id', 'message2', 'created_at', 'is_read2')
                 ->get();
-                
+
 
         // Combine and sort notifications by created_at descending
         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
@@ -380,15 +384,15 @@ class PelaporanController extends Controller
         if ($request->filled('from_date_s')) {
             $query->whereDate('kk.updated_at', '>=', $request->from_date_s);
         }
-    
+
         if ($request->filled('to_date_s')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_s);
         }
-    
+
         if ($request->filled('tahap_kepulihan_id')) {
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
-    
+
         $filteredData = $query->get();
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
@@ -430,11 +434,11 @@ class PelaporanController extends Controller
         if ($request->filled('from_date_bs')) {
             $query->whereDate('kk.updated_at', '>=', $request->from_date_bs);
         }
-    
+
         if ($request->filled('to_date_bs')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_bs);
         }
-    
+
         $filteredData = $query->get();
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_belum_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
@@ -474,15 +478,15 @@ class PelaporanController extends Controller
         if ($request->filled('from_date_tm6')) {
             $query->whereDate('kk.updated_at', '>=', $request->from_date_tm6);
         }
-    
+
         if ($request->filled('to_date_tm6')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_tm6);
         }
-    
+
         if ($request->filled('tahap_kepulihan_id')) {
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
-    
+
         $filteredData = $query->get();
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_menjawab_lebih_6bulan', compact('filteredData','pegawaiDaerah'));
@@ -624,7 +628,7 @@ class PelaporanController extends Controller
         if ($request->tahun) {
             $query->whereYear('tarikh_mula', $request->tahun);
         }
-        if ($request->tahun) {
+        if ($request->bulan) {
             $query->whereMonth('tarikh_mula', $request->bulan);
         }
         if ($request->kategori) {
@@ -653,6 +657,52 @@ class PelaporanController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->get();
                 return response()->json($program);
+            }
+        }
+        return redirect()->back()->with('error', 'User tidak dijumpai');
+    }
+
+    public function excelPelaporanAktiviti($id, Request $request)
+    {
+        $user = User::find($id);
+        $pegawai = Pegawai::where('users_id',$id)->first();
+        $query = Program::query();
+
+        // Apply filters
+        if ($request->tahun) {
+            $query->whereYear('tarikh_mula', $request->tahun);
+        }
+        if ($request->bulan) {
+            $query->whereMonth('tarikh_mula', $request->bulan);
+        }
+        if ($request->kategori) {
+            $query->where('kategori_id', $request->kategori);
+        }
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        $nama_excel = 'pelaporan_senarai_aktiviti.xlsx';
+
+        if($user){
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $program = $query->with('kategori')->orderBy('created_at', 'desc')->get();
+                return Excel::download(new PelaporanAktivitiExcel($program), $nama_excel);
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $program = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                return Excel::download(new PelaporanAktivitiExcel($program), $nama_excel);
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $program = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                return Excel::download(new PelaporanAktivitiExcel($program), $nama_excel);
             }
         }
         return redirect()->back()->with('error', 'User tidak dijumpai');
