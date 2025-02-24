@@ -561,7 +561,7 @@
                 <!--Aktiviti-->
                 <br>
                 <tr>
-                    <td class="header-part" colspan="3">F. REKOD KEHADIRAN AKTIVITI</td>
+                    <td class="header-part" colspan="3">E. REKOD KEHADIRAN AKTIVITI</td>
                 </tr>
                 <br>
                 <!--iteration in roman-->
@@ -641,7 +641,7 @@
                         @elseif ($kepulihan->tahap_kepulihan_id == 2)
                             <badge class="badge text-white" style="background-color: darkorange; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                         @elseif ($kepulihan->tahap_kepulihan_id == 3)
-                            <badge class="badge text-white bg-warning" style="padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge> 
+                            <badge class="badge text-white bg-warning" style="padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                         @else
                             <badge class="badge text-white" style="background-color: green; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                         @endif
@@ -687,7 +687,7 @@
                         <td>
                             @if($modal->modal_psikologi >= 1.0 && $modal->modal_psikologi <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_psikologi > 1.5 && $modal->modal_psikologi <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -696,7 +696,7 @@
                             @elseif($modal->modal_psikologi > 2.5 && $modal->modal_psikologi <= 3.5)
                                 <badge class="badge" style="background-color: #ffc107; padding:5px; width:250px; display: inline-block;">
                                     MEMUASKAN
-                                </badge>                            
+                                </badge>
                             @elseif($modal->modal_psikologi > 3.5 && $modal->modal_psikologi <= 4.0)
                                 <badge class="badge" style="background-color: green; padding:5px; width:250px; display: inline-block;">
                                     SANGAT MEMUASKAN
@@ -710,7 +710,7 @@
                         <td>
                             @if($modal->modal_sosial >= 1.0 && $modal->modal_sosial <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_sosial > 1.5 && $modal->modal_sosial <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -733,7 +733,7 @@
                         <td>
                             @if($modal->modal_persekitaran >= 1.0 && $modal->modal_persekitaran <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_persekitaran > 1.5 && $modal->modal_persekitaran <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -756,7 +756,7 @@
                         <td>
                             @if($modal->modal_insaniah >= 1.0 && $modal->modal_insaniah <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_insaniah > 1.5 && $modal->modal_insaniah <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -779,7 +779,7 @@
                         <td>
                             @if($modal->modal_strategi_daya_tahan >= 1.0 && $modal->modal_strategi_daya_tahan <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_strategi_daya_tahan > 1.5 && $modal->modal_strategi_daya_tahan <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -802,7 +802,7 @@
                         <td>
                             @if($modal->modal_resiliensi >= 1.0 && $modal->modal_resiliensi <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_resiliensi > 1.5 && $modal->modal_resiliensi <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -825,7 +825,7 @@
                         <td>
                             @if($modal->modal_spiritual >= 1.0 && $modal->modal_spiritual <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_spiritual > 1.5 && $modal->modal_spiritual <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -848,7 +848,7 @@
                         <td>
                             @if($modal->modal_rawatan >= 1.0 && $modal->modal_rawatan <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_rawatan > 1.5 && $modal->modal_rawatan <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
@@ -871,7 +871,7 @@
                         <td>
                             @if($modal->modal_kesihatan >= 1.0 && $modal->modal_kesihatan <= 1.5)
                                 <badge class="badge badge-danger" style="background-color: red; padding:5px; width:250px; display: inline-block;">
-                                    SANGAT TIDAK MEMUASKAN 
+                                    SANGAT TIDAK MEMUASKAN
                                 </badge>
                             @elseif($modal->modal_kesihatan > 1.5 && $modal->modal_kesihatan <= 2.5)
                                 <badge class="badge" style="background-color: darkorange; padding:5px; width:250px; display: inline-block;">
