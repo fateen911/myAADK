@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('klien', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_pk');
+            $table->integer('id_ki');
             $table->string('no_kp')->unique();
             $table->string('nama');
             $table->string('no_tel')->nullable();
