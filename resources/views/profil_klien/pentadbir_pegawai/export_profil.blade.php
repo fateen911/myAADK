@@ -10,6 +10,13 @@
             z-index: 1;
         }
 
+        .tittle 
+        {
+            background-color: lightgray;
+            font-weight: bold;
+            padding: 8px;
+        }
+
         .header {
             text-align: center;
             margin-bottom: 10px;
@@ -624,35 +631,32 @@
         @if ($kepulihan)
             <div style="page-break-before: always;"></div>
 
-            <table width="100%" border="1" cellspacing="0" cellpadding="5">
-                <tr>
-                    <th colspan="3" style="background-color: #ccc; text-align: center;">
-                        SEJARAH SOAL SELIDIK MODAL KEPULIHAN
-                    </th>
-                </tr>
+            <div class="tittle">F. SEJARAH SOAL SELIDIK MODAL KEPULIHAN</div>
+
+            <br>
+            <div class="mt-10">
                 @php
                     $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $kepulihan->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
                 @endphp
-                <tr>
-                    <td colspan="3" style="border: none;">
-                        <b>TAHAP KEPULIHAN:</b>
-                        @if ($kepulihan->tahap_kepulihan_id == 1)
-                            <badge class="badge text-white" style="background-color: red; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
-                        @elseif ($kepulihan->tahap_kepulihan_id == 2)
-                            <badge class="badge text-white" style="background-color: darkorange; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
-                        @elseif ($kepulihan->tahap_kepulihan_id == 3)
-                            <badge class="badge text-white bg-warning" style="padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
-                        @else
-                            <badge class="badge text-white" style="background-color: green; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="border: none;">
-                        <b>TARIKH MENJAWAB:</b> {{ date('d/m/Y', strtotime($kepulihan->updated_at)) }}
-                    </td>
-                </tr>
-                <tr>
+                <b>TAHAP KEPULIHAN:</b>
+                @if ($kepulihan->tahap_kepulihan_id == 1)
+                    <badge class="badge text-white" style="background-color: red; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
+                @elseif ($kepulihan->tahap_kepulihan_id == 2)
+                    <badge class="badge text-white" style="background-color: darkorange; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
+                @elseif ($kepulihan->tahap_kepulihan_id == 3)
+                    <badge class="badge text-white bg-warning" style="padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
+                @else
+                    <badge class="badge text-white" style="background-color: green; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
+                @endif
+            </div>
+            <br>
+            <div class="mt-10">
+                <b>TARIKH MENJAWAB:</b> {{ date('d/m/Y', strtotime($kepulihan->updated_at)) }}
+            </div>
+            <br>
+
+            <table width="100%" border="1" cellspacing="0" cellpadding="5">
+                <tr style="background-color: #CCC">
                     <th>Modal Kepulihan</th>
                     <th>Skor</th>
                     <th>Tahap Kepulihan</th>
