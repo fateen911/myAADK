@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarPenggunaController;
 use App\Http\Controllers\DatabaseTestController;
+use App\Http\Controllers\FamiliViewController;
+use App\Http\Controllers\KerjaViewController;
 use App\Http\Controllers\KlienViewController;
 use App\Http\Controllers\ProfilKlienController;
 use App\Http\Controllers\PengurusanProgController;
@@ -13,6 +15,7 @@ use App\Http\Controllers\TelegramBotController;
 use App\Http\Controllers\PejabatPengawasanController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PelaporanController;
+use App\Http\Controllers\WarisViewController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/dashboard', function () {
@@ -26,6 +29,9 @@ Route::get('/', function () {
 //SECOND DB
 Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
 Route::get('/klien-view', [KlienViewController::class, 'viewKlien']);
+Route::get('/kerja-view', [KerjaViewController::class, 'viewKerja']);
+Route::get('/famili-view', [FamiliViewController::class, 'viewFamili']);
+Route::get('/waris-view', [WarisViewController::class, 'viewWaris']);
 
 //ERROR
 Route::get('/404-not-found', function () {

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KlienView;
-use Illuminate\Support\Facades\DB;
+use App\Models\WarisView;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class KlienViewController extends Controller
+class WarisViewController extends Controller
 {
-    public function viewKlien()
+    public function viewWaris()
     {
-        $data = KlienView::where('id_fasiliti', '31')
+        $data = WarisView::where('id_fasiliti', '31')
             ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
             ->limit(10000)
             ->get()
@@ -26,8 +26,7 @@ class KlienViewController extends Controller
 
 
         // Pass the data to the view
-        return view('secondDB.view_klien', compact('data'));
+        return view('secondDB.view_waris', compact('data'));
 
     }
-
 }
