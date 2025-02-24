@@ -12,9 +12,18 @@ class KlienViewController extends Controller
     {
         // $data = KlienView::limit(20)->get()->toArray(); // Retrieve limited data for testing
         $data = KlienView::whereIn('id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
-                ->limit(1000)        
-                ->get()
-                ->toArray();
+            ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
+            ->whereIn('id_pk', function ($query) {
+                $query->select('id_pk')
+                    ->from('view_pccp_klien')
+                    ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
+                    ->whereIn('id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
+                    ->groupBy('id_pk')
+                    ->selectRaw('MAX(tkh_tamatPengawasan)');
+            })
+            ->get()
+            ->toArray();
+
 
         // Insert the retrieved data into the viewKlien table
         if (!empty($data)) {
