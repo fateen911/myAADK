@@ -396,7 +396,7 @@ class PelaporanController extends Controller
 
         $filteredData = $query->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
         return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
     }
 
@@ -442,7 +442,7 @@ class PelaporanController extends Controller
 
         $filteredData = $query->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_belum_selesai_menjawab', compact('filteredData','pegawaiDaerah'));
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_belum_selesai_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
         return $pdf->stream('Senarai_Belum_Selesai_Menjawab.pdf');
     }
 
@@ -490,7 +490,7 @@ class PelaporanController extends Controller
 
         $filteredData = $query->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_menjawab_lebih_6bulan', compact('filteredData','pegawaiDaerah'));
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_menjawab_lebih_6bulan', compact('filteredData'))->setPaper('a4', 'landscape');
         return $pdf->stream('Senarai_Tidak_Menjawab_Lebih_6Bulan.pdf');
     }
 
@@ -515,7 +515,7 @@ class PelaporanController extends Controller
                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
                 ->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('query','pegawaiDaerah'));
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('query'));
         return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
     }
 

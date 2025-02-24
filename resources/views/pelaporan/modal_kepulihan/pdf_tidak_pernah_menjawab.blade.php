@@ -55,30 +55,28 @@
 
     <div class="tittle">SENARAI KLIEN TIDAK PERNAH MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
 
-    @php
-        $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $pegawaiDaerah->daerah_bertugas)->value('daerah');
-        $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $pegawaiDaerah->negeri_bertugas)->value('negeri');
-    @endphp
-
-    <br>
-    <div style="display: flex; justify-content: space-between;">
-        <span><strong>PEJABAT:</strong> {{ $negeri }}, {{ $daerah }}</span>
-    </div>
-
     <table class="table">
         <thead>
             <tr>
                 <th style="width: 5%">NO.</th>
-                <th style="width: 70%">NAMA</th>
-                <th style="width: 25%">NO. KAD PENGENALAN</th>
+                <th style="width: 35%">NAMA</th>
+                <th style="width: 15%">NO. KAD PENGENALAN</th>
+                <th style="width: 20%;">AADK NEGERI</th>
+                <th style="width: 25%;">AADK DAERAH</th>
             </tr>
         </thead>
         <tbody>
             @foreach($query as $klien)
+                @php
+                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
+                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
+                @endphp
                 <tr>
                     <td style="text-align: center;">{{ $loop->iteration }}.</td>
                     <td>{{ $klien->nama }}</td>
                     <td style="text-align: center;">{{ $klien->no_kp }}</td>
+                    <td style="text-align: center;">{{ $negeri }}</td>
+                    <td style="text-align: center;">{{ $daerah }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -182,14 +182,14 @@
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-4" style="padding-left: 200px;">
+                                        <div class="col-md-4" style="padding-left: 220px;">
                                             <br>
                                             <a href="{{ route('selesai.pdf.daerah', [
                                                 'from_date_s' => request('from_date_s'), 
                                                 'to_date_s' => request('to_date_s'), 
                                                 'tahap_kepulihan_id' => request('tahap_kepulihan_id')]) }}" 
                                                 class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Selesai Menjawab
+                                                <i class="fas fa-file-pdf"></i> Senarai Klien
                                             </a>
                                         </div>
                                     </div>

@@ -49,35 +49,29 @@
 
 <body>
     <div class="header">
-        <img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 12%; height: 8%;">
+        <img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 10%; height: 12%;">
         <h3>AGENSI ANTIDADAH KEBANGSAAN (AADK)</h3>
     </div>
 
     <div class="tittle">SENARAI KLIEN SELESAI MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
 
-    @php
-        $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $pegawaiDaerah->daerah_bertugas)->value('daerah');
-        $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $pegawaiDaerah->negeri_bertugas)->value('negeri');
-    @endphp
-
-    <br>
-    <div style="display: flex; justify-content: space-between;">
-        <span><strong>PEJABAT:</strong> {{ $negeri }}, {{ $daerah }}</span>
-    </div>
-
     <table class="table">
         <thead>
             <tr>
-                <th style="width: 5%">NO.</th>
-                <th style="width: 40%">NAMA</th>
+                <th style="width: 3%">NO.</th>
+                <th style="width: 25%">NAMA</th>
                 <th style="width: 10%">NO. KAD PENGENALAN</th>
-                <th style="width: 20%">TARIKH TERAKHIR MENJAWAB</th>
-                <th style="width: 25%">TAHAP KEPULIHAN</th>
+                <th style="width: 12%">TARIKH TERAKHIR MENJAWAB</th>
+                <th style="width: 15%">TAHAP KEPULIHAN</th>
+                <th style="width: 15%;">AADK NEGERI</th>
+                <th style="width: 20%;">AADK DAERAH</th>
             </tr>
         </thead>
         <tbody>
             @foreach($filteredData as $klien)
                 @php
+                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
+                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
                     $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $klien->tahap_kepulihan_id)->value('tahap');
                 @endphp
                 <tr>
@@ -86,6 +80,8 @@
                     <td style="text-align: center;">{{ $klien->no_kp }}</td>
                     <td style="text-align: center;">{{ \Carbon\Carbon::parse($klien->updated_at)->format('d/m/Y') }}</td>
                     <td style="text-align: center;">{{ $tahap_kepulihan }}</td>
+                    <td style="text-align: center;">{{ $negeri }}</td>
+                    <td style="text-align: center;">{{ $daerah }}</td>
                 </tr>
             @endforeach
         </tbody>
