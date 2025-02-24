@@ -11,14 +11,18 @@ class KlienViewController extends Controller
     public function viewKlien()
     {
         $data = KlienView::whereIn('id_fasiliti', ['31'])
-                // ->limit(1000)        
-                ->get()
-                ->toArray();
+            ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
+            // ->limit(1000)        
+            ->get()
+            ->toArray();
+
         if (!empty($data)) {
             DB::table('viewKlien')->insert($data);
         }
+
         // Pass the data to the view
         return view('secondDB.view_klien', compact('data'));
+
     }
 
 }
