@@ -23,8 +23,9 @@ class KlienViewController extends Controller
                 $join->on('view_pccp_klien.id_pk', '=', 'latest.id_pk')
                     ->on('view_pccp_klien.tkh_tamatPengawasan', '=', 'latest.latest_tkh_tamatPengawasan');
             })
-            ->whereIn('view_pccp_klien.id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
-            ->limit(5000) // Limit to 1000 rows
+            // ->whereIn('view_pccp_klien.id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
+            ->whereIn('view_pccp_klien.id_fasiliti', ['31'])
+            // ->limit(5000) // Limit to 1000 rows
             ->get()
             ->toArray();
 
