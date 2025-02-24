@@ -6,7 +6,7 @@
     <title>Senarai Tidak Menjawab Lebih 6 Bulan</title>
     <style>
         body { font-family: Arial, sans-serif; }
-        .tittle { background-color: #666; color: white; padding: 10px; text-align: center; font-size: 18px; font-weight: bold; }
+        .tittle { background-color: #666; color: white; padding: 10px; text-align: center; font-size: 15px; font-weight: bold; }
         .table { 
             width: 100%; 
             margin-top: 10px; 
@@ -53,7 +53,7 @@
         <h3>AGENSI ANTIDADAH KEBANGSAAN (AADK)</h3>
     </div>
 
-    <div class="tittle">SENARAI KLIEN SELESAI MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
+    <div class="tittle">SENARAI KLIEN TIDAK MENJAWAB LEBIH 6 BULAN SOAL SELIDIK MODAL KEPULIHAN</div>
 
     @php
         $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $pegawaiDaerah->daerah_bertugas)->value('daerah');
