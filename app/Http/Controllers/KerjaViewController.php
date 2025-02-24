@@ -10,7 +10,7 @@ class KerjaViewController extends Controller
 {
     public function viewKerja()
     {
-        $data = KerjaView::join('view_pccp_klien as klien', 'kerja_view.id_pk', '=', 'klien.id_pk')
+        $data = KerjaView::join('view_pccp_klien as klien', 'view_pccp_kerja.id_pk', '=', 'klien.id_pk')
             ->where('klien.id_fasiliti', '31')
             ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
             ->limit(10000)
