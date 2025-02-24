@@ -10,10 +10,10 @@ class FamiliViewController extends Controller
 {
     public function viewFamili()
     {
-        $data = FamiliView::from('mysql_support.kerja_view as kerja')
-            ->join('mysql_support.view_pccp_klien as klien', 'kerja.id_klien', '=', 'klien.id')
+        $data = FamiliView::join('view_pccp_klien as klien', 'view_pccp_famili.id_pk', '=', 'klien.id_pk')
             ->where('klien.id_fasiliti', '31')
             ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
+            ->select('view_pccp_famili.*')
             ->limit(10000)
             ->get()
             ->toArray();
