@@ -10,8 +10,10 @@ class WarisViewController extends Controller
 {
     public function viewWaris()
     {
-        $data = WarisView::where('id_fasiliti', '31')
-            ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
+        $data = WarisView::from('mysql_support.kerja_view as kerja')
+            ->join('mysql_support.view_pccp_klien as klien', 'kerja.id_klien', '=', 'klien.id')
+            ->where('klien.id_fasiliti', '31')
+            ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
             ->limit(10000)
             ->get()
             ->toArray();
