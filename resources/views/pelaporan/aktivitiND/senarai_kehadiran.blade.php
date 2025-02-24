@@ -80,7 +80,7 @@
                         <div class="header p-0 m-0 w-100">
                             <h2>Senarai Kehadiran<br></h2><small>Berikut merupakan senarai kehadiran bagi aktiviti ini.</small>
                             <br>
-                            <div class="mt-8 d-flex w-100">
+                            <div class="mt-8 d-md-flex w-100">
                                 <div class="w-77 text-uppercase">
                                     Nama Aktiviti: {{strtoupper($program->nama)}} <br>
                                     Tarikh/Masa Mula: {{date('d/m/Y, h:iA', strtotime($program->tarikh_mula))}} <br>
@@ -93,8 +93,8 @@
                                     Sila Hubungi: {{$program->no_tel_dihubungi}} <br>
                                     <input type="hidden" id="programId" value="{{$program->id}}">
                                 </div>
-                                <div class="pt-20 ps-10">
-                                    <div class="d-flex gap-2 mt-7 mb-3 justify-content-end">
+                                <div class="pt-md-20 ps-md-10 pt-5">
+                                    <div class="d-flex gap-2 mt-md-7 mb-3 justify-content-md-end">
                                         <a href="{{url('/pengurusan-program/pdf-perekodan/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-color-danger">
                                             PDF &nbsp; <i class="bi bi-file-pdf"></i>
                                         </a>
