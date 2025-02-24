@@ -21,7 +21,7 @@ class WarisViewController extends Controller
         if (!empty($data)) {
             // Insert data in chunks of 500 to avoid database limits
             collect($data)->chunk(500)->each(function ($chunk) {
-                DB::table('viewklien')->insert($chunk->all());
+                DB::table('viewwaris')->insert($chunk->all());
             });
         }
 
