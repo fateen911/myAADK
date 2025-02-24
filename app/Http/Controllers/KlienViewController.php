@@ -12,6 +12,7 @@ class KlienViewController extends Controller
     {
         // $data = KlienView::limit(20)->get()->toArray(); // Retrieve limited data for testing
         $data = KlienView::whereIn('id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
+                ->limit(1000)        
                 ->get()
                 ->toArray();
 
