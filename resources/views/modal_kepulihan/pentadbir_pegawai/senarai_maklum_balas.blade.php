@@ -155,15 +155,15 @@
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
                                 @if ((Auth::user()->tahap_pengguna == 1) || (Auth::user()->tahap_pengguna == 3))
-                                    <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-primary">
+                                    <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-info">
                                         <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                     </a>
                                 @elseif (Auth::user()->tahap_pengguna == 4)
-                                    <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-primary">
+                                    <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-info">
                                         <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                     </a>
                                 @elseif (Auth::user()->tahap_pengguna == 5)
-                                    <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-primary">
+                                    <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-info">
                                         <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
                                     </a>
                                 @endif
