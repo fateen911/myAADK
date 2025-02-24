@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PelaporanAktivitiExcel;
 use App\Exports\PerekodanKehadiranExcel;
 use App\Models\KategoriProgram;
+use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
 use App\Models\Program;
 use App\Models\User;
@@ -707,5 +708,48 @@ class PelaporanController extends Controller
             }
         }
         return redirect()->back()->with('error', 'User tidak dijumpai');
+    }
+
+    public function pelaporanKehadiran($id)
+    {
+        $program = Program::with('kategori')->find($id);
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read1', false);
+                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read2', false);
+                });
+            })->count();
+        }
+
+        if ($program) {
+            return view('pelaporan.aktivitiND.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
+        } else {
+            return redirect()->back()->with('error', 'Program tidak dijumpai');
+        }
     }
 }
