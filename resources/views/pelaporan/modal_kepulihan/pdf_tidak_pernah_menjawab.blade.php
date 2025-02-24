@@ -66,7 +66,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($query as $klien)
+            @foreach($filteredData as $klien)
                 @php
                     $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
                     $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');

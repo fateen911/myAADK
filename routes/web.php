@@ -243,6 +243,10 @@ Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepu
 
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
+Route::get('/pegawai-negeri/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabNegeri'])->name('selesai.pdf.negeri');
+Route::get('/pegawai-negeri/pelaporan/modal-kepulihan/export-pdf/belum-selesai-menjawab', [PelaporanController::class, 'PDFbelumSelesaiMenjawabNegeri'])->name('belum_selesai.pdf.negeri');
+Route::get('/pegawai-negeri/pelaporan/modal-kepulihan/export-pdf/tidak-menjawab-lebih6', [PelaporanController::class, 'PDFtidakMenjawabLebih6BulanNegeri'])->name('tidak_menjawab6.pdf.negeri');
+Route::get('/pegawai-negeri/pelaporan/modal-kepulihan/export-pdf/tidak-pernah-menjawab', [PelaporanController::class, 'PDFtidakPernahMenjawabNegeri'])->name('tidak_pernah_menjawab.pdf.negeri');
 
 // PEGAWAI DAERAH - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-daerah/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
