@@ -10,6 +10,9 @@ class KlienViewController extends Controller
 {
     public function viewKlien()
     {
+        // Chunk size to manage large datasets safely
+        $chunkSize = 1000;
+
         // Subquery to get the latest 'tkh_tamatPengawasan' per 'id_pk'
         $subQuery = DB::connection('mysql_support')
             ->table('view_pccp_klien')
@@ -18,24 +21,21 @@ class KlienViewController extends Controller
             ->whereIn('id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
             ->groupBy('id_pk');
 
-        // Main query joining with the subquery
-        $data = KlienView::joinSub($subQuery, 'latest', function ($join) {
-                $join->on('view_pccp_klien.id_pk', '=', 'latest.id_pk')
-                    ->on('view_pccp_klien.tkh_tamatPengawasan', '=', 'latest.latest_tkh_tamatPengawasan');
+        // Fetch and insert data in chunks
+        DB::connection('mysql_support')
+            ->table('view_pccp_klien as v')
+            ->joinSub($subQuery, 'latest', function ($join) {
+                $join->on('v.id_pk', '=', 'latest.id_pk')
+                    ->on('v.tkh_tamatPengawasan', '=', 'latest.latest_tkh_tamatPengawasan');
             })
-            // ->whereIn('view_pccp_klien.id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
-            ->whereIn('view_pccp_klien.id_fasiliti', ['31'])
-            // ->limit(5000) // Limit to 1000 rows
-            ->get()
-            ->toArray();
+            ->whereIn('v.id_fasiliti', ['16', '31', '45', '57', '69', '80', '90', '99', '106'])
+            ->orderBy('v.id_pk') // Optional: ensures stable chunking
+            ->chunk($chunkSize, function ($records) {
+                if ($records->isNotEmpty()) {
+                    DB::table('viewKlien')->insert($records->toArray());
+                }
+            });
 
-        // Insert data into 'viewKlien' table if data is not empty
-        if (!empty($data)) {
-            // Insert data in chunks of 500 to avoid too many placeholders error
-            foreach (array_chunk($data, 500) as $chunk) {
-                DB::table('viewKlien')->insert($chunk);
-            }
-        }
         
 
         // Pass the data to the view
