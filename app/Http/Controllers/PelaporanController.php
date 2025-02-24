@@ -662,8 +662,9 @@ class PelaporanController extends Controller
         return redirect()->back()->with('error', 'User tidak dijumpai');
     }
 
-    public function excelPelaporanAktiviti($id, Request $request)
+    public function excelPelaporanAktiviti(Request $request)
     {
+        $id = Auth::id();
         $user = User::find($id);
         $pegawai = Pegawai::where('users_id',$id)->first();
         $query = Program::query();
