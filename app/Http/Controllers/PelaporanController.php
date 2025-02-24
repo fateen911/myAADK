@@ -99,9 +99,24 @@ class PelaporanController extends Controller
     {
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+        $aadk_daerah = DB::table('senarai_daerah_pejabat')->where('negeri_id', $pegawaiNegeri->negeri_bertugas)->get();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
-        $status = $request->input('status');
+        $tahap_kepulihan_list = TahapKepulihan::all();
+        
+        $from_date_s = $request->input('from_date_s');
+        $to_date_s = $request->input('to_date_s');
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+        $aadk_daerah_s = $request->input('aadk_daerah_s');
+
+        $from_date_bs = $request->input('from_date_bs');
+        $to_date_bs = $request->input('to_date_bs');
+        $aadk_daerah_bs = $request->input('aadk_daerah_bs');
+
+        $from_date_tm6 = $request->input('from_date_tm6');
+        $to_date_tm6 = $request->input('to_date_tm6');
+        $aadk_daerah_tm6 = $request->input('aadk_daerah_tm6');
+
+        $aadk_daerah_tpm = $request->input('aadk_daerah_tpm');
 
         // Clients who have responded within the last 6 months (Selesai Menjawab)
         $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
@@ -125,11 +140,20 @@ class PelaporanController extends Controller
                     ->groupBy('klien_id');
             })
             ->where('kk.status', 'Selesai')
+            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->when($from_date_s, function ($query, $from_date_s) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_s);
+            })
+            ->when($to_date_s, function ($query, $to_date_s) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_s);
+            })
             ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
                 return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
             })
-            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->when($aadk_daerah_s, function ($query, $aadk_daerah_s) {
+                return $query->where('u.daerah_pejabat', $aadk_daerah_s);
+            })
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 
@@ -157,6 +181,15 @@ class PelaporanController extends Controller
             ->where('kk.status', '!=', 'Selesai') // Not completed responses
             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+            ->when($from_date_bs, function ($query, $from_date_bs) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_bs);
+            })
+            ->when($to_date_bs, function ($query, $to_date_bs) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_bs);
+            })
+            ->when($aadk_daerah_bs, function ($query, $aadk_daerah_bs) {
+                return $query->where('u.daerah_pejabat', $aadk_daerah_bs);
+            })
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 
@@ -182,6 +215,15 @@ class PelaporanController extends Controller
             })
             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+            ->when($from_date_tm6, function ($query, $from_date_tm6) {
+                return $query->whereDate('kk.updated_at', '>=', $from_date_tm6);
+            })
+            ->when($to_date_tm6, function ($query, $to_date_tm6) {
+                return $query->whereDate('kk.updated_at', '<=', $to_date_tm6);
+            })
+            ->when($aadk_daerah_tm6, function ($query, $aadk_daerah_tm6) {
+                return $query->where('u.daerah_pejabat', $aadk_daerah_tm6);
+            })
             ->orderBy('kk.updated_at', 'desc')
             ->get();
 
@@ -198,9 +240,13 @@ class PelaporanController extends Controller
             ->whereNull('kk.klien_id') // No response record found
             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
             ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
+            ->when($aadk_daerah_tpm, function ($query, $aadk_daerah_tpm) {
+                return $query->where('u.daerah_pejabat', $aadk_daerah_tpm);
+            })
+            ->orderBy('u.nama', direction: 'asc')
             ->get();
 
-        return view('pelaporan.modal_kepulihan.pegawai_negeri', compact('selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
+        return view('pelaporan.modal_kepulihan.pegawai_negeri', compact('aadk_daerah','tahap_kepulihan_list','selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
     }
 
     public function modalKepulihanDaerah(Request $request)
