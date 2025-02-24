@@ -14,7 +14,9 @@ class KlienViewController extends Controller
                 // ->limit(1000)        
                 ->get()
                 ->toArray();
-
+        if (!empty($data)) {
+            DB::table('viewKlien')->insert($data);
+        }
         // Pass the data to the view
         return view('secondDB.view_klien', compact('data'));
     }
