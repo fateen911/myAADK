@@ -241,7 +241,7 @@ License: For each use you must have a valid license purchased only from above li
                             <p class="fs-5">
                                 Tel : 03 – 8911 2200 <br>
                                 Faks : 03 – 8926 2055 <br>
-                                Emel : webmaster[at]adk[dot]gov[dot]my <br>
+                                Emel : webmaster[at]aadk[dot]gov[dot]my <br>
                                 <br>
                                 Hotline AADK : 1-800-22-2235 / 019 – 626 2233
                             </p>
