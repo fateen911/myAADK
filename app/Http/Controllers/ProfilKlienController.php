@@ -230,20 +230,20 @@ class ProfilKlienController extends Controller
         // Fetch pegawai (user) info for the logged-in user
         $pegawaiNegeri = Pegawai::where('users_id', Auth::user()->id)->first();
 
-        $permohonanBelumSelesai = Klien::join('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                        ->join('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                        ->join('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                        ->join('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                        ->select('klien.*') // Fetch all columns from the klien table
-                                        ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-                                        ->where(function ($query) {
-                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
-                                        })
-                                        ->distinct()
-                                        ->get(); // Fetch the result as a collection
+        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->select('klien.*')
+                                ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', '=', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->get();
 
         // Find clients with status Kemaskini
         $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
@@ -429,24 +429,6 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
     }
 
-    // public function muatTurunProfilKlien($id)
-    // {
-    //     $klien = Klien::where('id',$id)->first();
-    //     $pekerjaan = PekerjaanKlien::where('klien_id',$id)->first();
-    //     $waris = WarisKlien::where('klien_id',$id)->first();
-    //     $pasangan = KeluargaKlien::where('klien_id',$id)->first();
-    //     $rawatan = RawatanKlien::where('klien_id',$id)->first();
-
-    //     //aktiviti
-    //     $perekodan = PerekodanKehadiranProgram::with('program','klien')->where('klien_id',$id)->get();
-
-    //     $pdf = PDF::loadView('profil_klien.pentadbir_pegawai.export_profil', compact('klien', 'pekerjaan','waris','pasangan','rawatan','perekodan'));
-
-    //     $no_kp = $klien->no_kp;
-
-    //     return $pdf->stream($no_kp . '-profil-peribadi.pdf');
-    // }
-
 
     public function muatTurunProfilKlien($id)
     {
@@ -462,8 +444,6 @@ class ProfilKlienController extends Controller
             ->orderBy('sesi')
             ->get()
             ->keyBy('sesi'); // Group by sesi for easy lookup
-
-        // dd($keputusanKepulihan);
 
         $modalKepulihan = SkorModal::where('klien_id', $id)
             ->orderBy('sesi')

@@ -495,10 +495,10 @@ class HomeController extends Controller
                     // Count the number of clients in "Belum Selesai"
                     // A client is "Belum Selesai" if at least one of the statuses in the 4 tables is "Kemaskini"
                     $belumSelesaiNegeri = DB::table('klien')
-                                            ->join('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                            ->join('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                            ->join('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                            ->join('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                            ->leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                            ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                            ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                            ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
                                             ->select('klien.id')
                                             ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                             ->where(function ($query) {
