@@ -29,6 +29,7 @@ Route::get('/', function () {
 //SECOND DB
 Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
 Route::get('/klien-view', [KlienViewController::class, 'viewKlien']);
+Route::get('/klien-view-update', [KlienViewController::class, 'viewKlienUpdate']);
 Route::get('/kerja-view', [KerjaViewController::class, 'viewKerja']);
 Route::get('/famili-view', [FamiliViewController::class, 'viewFamili']);
 Route::get('/waris-view', [WarisViewController::class, 'viewWaris']);
