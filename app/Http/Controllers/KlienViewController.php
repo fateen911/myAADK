@@ -32,33 +32,32 @@ class KlienViewController extends Controller
 
     public function viewKlienUpdate()
     {
-        // Select specific columns from KlienView
+        ini_set('max_execution_time', 0); // Prevent timeout
+
         $data = KlienView::select('id_pk', 'id_ki', 'alamat01', 'alamat02', 'alamat03', 'poskod', 'negeri')
             ->where('id_fasiliti', '31')
             ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
             ->get();
 
         if ($data->isNotEmpty()) {
-            // Process updates in chunks of 500 to avoid database limits
             $data->chunk(500)->each(function ($chunk) {
                 foreach ($chunk as $row) {
-                    DB::table('viewklien_new')
-                        ->where('id_pk', $row->id_pk)
-                        ->where('id_ki', $row->id_ki)
-                        ->update([
-                            'alamat01' => $row->alamat01,
-                            'alamat02' => $row->alamat02,
-                            'alamat03' => $row->alamat03,
-                            'poskod'   => $row->poskod,
-                            'negeri'   => $row->negeri,
-                        ]);
+                    DB::update("
+                        UPDATE viewklien 
+                        SET alamat01 = ?, alamat02 = ?, alamat03 = ?, poskod = ?, negeri = ?
+                        WHERE id_pk = ? AND id_ki = ?",
+                        [
+                            $row->alamat01, $row->alamat02, $row->alamat03,
+                            $row->poskod, $row->negeri, $row->id_pk, $row->id_ki
+                        ]
+                    );
                 }
             });
         }
 
-        // Pass the data to the view
         return view('secondDB.view_klien', compact('data'));
     }
+
 
 
 }
