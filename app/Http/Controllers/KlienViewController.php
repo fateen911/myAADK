@@ -43,7 +43,7 @@ class KlienViewController extends Controller
             $data->chunk(500)->each(function ($chunk) {
                 foreach ($chunk as $row) {
                     DB::update("
-                        UPDATE viewklien 
+                        UPDATE viewklien_new 
                         SET alamat01 = ?, alamat02 = ?, alamat03 = ?, poskod = ?, negeri = ?
                         WHERE id_pk = ? AND id_ki = ?",
                         [
