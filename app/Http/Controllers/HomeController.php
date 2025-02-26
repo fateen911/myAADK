@@ -209,7 +209,7 @@ class HomeController extends Controller
                                             })->count();
 
                     $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
-                                                    ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                                    // ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
                                                     ->join('keputusan_kepulihan_klien as kk', function($join) {
                                                         $join->on('u.id', '=', 'kk.klien_id')
                                                             ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
@@ -218,10 +218,12 @@ class HomeController extends Controller
                                                     ->count();
 
                     $tidak_pernah_menjawab = DB::table('klien as u')
-                                            ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
+                                            // ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
                                             ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
                                             ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
                                             ->count();
+
+                                            // dd($tidak_pernah_menjawab);
 
                     // $tidak_menjawab = DB::table('klien as u')
                     //                 ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
