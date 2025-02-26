@@ -9,10 +9,9 @@
 <head>
 	<!--begin::Vendor Stylesheets(used for this page only)-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
@@ -98,7 +97,7 @@
 			<!--begin::Content container-->
 			<div id="kt_app_content_container" class="app-container container-xxl">
 				{{-- Content Navigation Bar --}}
-				<div class="tab-content mt-0" id="myTabContent">
+				<div class="tab-content mt-0" id="klien" role="tabpanel" aria-labelledby="klien-tab">
 					{{-- KLIEN --}}
                     <!--begin::Card title-->
                     <div class="header ml-5">
@@ -107,6 +106,69 @@
 
                     <!--begin::Card body-->
                     <div class="body">
+                        <!--begin::Table-->
+                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                            <thead>
+                                <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+                                    <th class="min-w-250px">Nama</th>
+                                    <th class="min-w-50px">No. Kad Pengenalan</th>
+                                    <th class="min-w-50px">E-mel</th>
+                                    <th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
+                                    <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="fw-semibold text-gray-600">
+                                <!-- Data will be injected here by AJAX -->
+                            </tbody>
+                        </table>
+
+                        <!--begin::Modal - Kemaskini Klien-->
+                        <div class="modal fade" id="modal_kemaskini_klien" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!--begin::Modal title-->
+                                        <h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
+                                        <!--end::Modal title-->
+                                        <!--begin::Close-->
+                                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                            <i class="ki-solid ki-cross-circle fs-1"></i>
+                                        </div>
+                                        <!--end::Close-->
+                                    </div>
+
+                                    <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Modal - Kemaskini Klien-->
+
+                        <!--begin::Modal - Daftar Klien-->
+                        <div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!--begin::Modal title-->
+                                        <h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
+                                        <!--end::Modal title-->
+                                        <!--begin::Close-->
+                                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                            <i class="ki-solid ki-cross-circle fs-1"></i>
+                                        </div>
+                                        <!--end::Close-->
+                                    </div>
+
+                                    <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Modal - Daftar Klien-->
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Card body-->
+
+                    {{-- <div class="body">
                         <!--begin::Table-->
                         <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
                             <thead>
@@ -381,7 +443,7 @@
                             </tbody>
                         </table>
                         <!--end::Table-->
-                    </div>
+                    </div> --}}
                     <!--end::Card body-->
 				</div>
 			</div>
@@ -392,20 +454,12 @@
 </div>
 
     <!--begin::Javascript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--end::Javascript-->
-
-    <script>
-        $('#sortTable1').DataTable({
-			ordering: true,
-			order: [],
-			language: {
-				url: "/assets/lang/Malay.json"
-			}
-		});
-    </script>
 	
     <script>
         document.addEventListener('DOMContentLoaded', function () 
@@ -550,6 +604,113 @@
 
                 if (!valid) {
                     e.preventDefault();  // Prevent form submission if any validation fails
+                }
+            });
+        });
+    </script>
+
+    {{-- AJAX TABLE SENARAI KLIEN --}}
+	<script>
+		$(document).ready(function() {
+			// Load client data using AJAX
+			$.ajax({
+				url: "{{ route('pegawai-daerah-ajax-senarai-klien') }}", // Route for fetching data
+				method: 'GET',
+				dataType: 'json',
+				success: function(response) {
+					var klienList = response;
+					var rows = '';
+					var modalContainerKlien = ''; // To store modals
+					
+					// Clear the existing rows before appending new ones
+					$('#sortTable1 tbody').empty();
+
+					$.each(klienList, function(index, user1) {
+						var tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : ''; 
+
+						rows += '<tr>';
+						rows += '<td>' + (user1.nama ? user1.nama : '') + '</td>';
+						rows += '<td>' + (user1.no_kp ? user1.no_kp : '') + '</td>';
+						rows += '<td>' + (user1.emel ? user1.emel : '') + '</td>';
+						rows += '<td style="text-align: center;">' + tarikhDaftar + '</td>';
+						rows += `<td style="text-align: center;">
+									${user1.user_updated_at !== null ? 
+										`<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_kemaskini_klien">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>` 
+										: 
+										`<a id="daftarKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_daftar_klien">
+											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+												<i class="ki-duotone bi bi-pencil fs-3"></i>
+											</span>
+										</a>`
+									}
+								</td>`;
+						rows += '</tr>';
+					});
+
+					// Append the rows to the table body
+					$('#sortTable1 tbody').html(rows);
+
+					// Append the modals to a container
+                    $('#modalContainerKlien').html(modalContainerKlien);
+
+					// Reinitialize DataTable
+					if ($.fn.DataTable.isDataTable('#sortTable1')) {
+						$('#sortTable1').DataTable().destroy(); // Destroy existing instance
+					}
+
+					// Initialize DataTable with the new data
+					$('#sortTable1').DataTable({
+						ordering: true,
+						order: [],
+						language: {
+							url: "/assets/lang/Malay.json"
+						},
+						dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+							'<"row"<"col-sm-12 my-0"tr>>' +
+							'<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+						responsive: true
+					});
+				},
+				error: function(error) {
+					console.error("Ralat semasa mengambil data", error);
+				}
+			});
+		});
+	</script>
+
+	<!-- Modal Kemaskini Klien -->
+    <script>
+        $(document).on('click', '#kemaskiniKlienModal', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/modal/pegawai-daerah/kemaskini-klien/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyKemaskiniKlien').html(response);
+                },
+                error: function() {
+                    $('#modalBodyKemaskiniKlien').html('Ralat kandungan.'+id);
+                }
+            });
+        });
+    </script>
+
+	<!-- Modal Daftar Klien -->
+    <script>
+        $(document).on('click', '#daftarKlienModal', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/modal/pegawai-daerah/daftar-klien/'+ id, // Laravel route with dynamic ID
+                method: 'GET',
+                success: function(response) {
+                    $('#modalBodyDaftarKlien').html(response);
+                },
+                error: function() {
+                    $('#modalBodyDaftarKlien').html('Ralat kandungan.'+id);
                 }
             });
         });

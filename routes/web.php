@@ -151,7 +151,10 @@ Route::get('/modal/alasan-ditolak/pegawai/{id}', [DaftarPenggunaController::clas
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
 Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
+Route::get('/pegawai-daerah/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlienDaerah'])->name('pegawai-daerah-ajax-senarai-klien');
+Route::get('/modal/pegawai-daerah/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlienDaerah'])->name('modal-daerah-kemaskini-klien');
 Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class, 'pegawaiKemaskiniKlien'])->name('pegawai-kemaskini-klien');
+Route::get('/modal/pegawai-daerah/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlienDaerah'])->name('modal-daerah-daftar-klien');
 Route::post('/pegawai-daerah/daftar/klien', [DaftarPenggunaController::class, 'pegawaiDaftarKlien'])->name('pegawai-daftar-klien');
 
 // PENTADBIR - PENGURUSAN PROFIL KLIEN

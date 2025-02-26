@@ -22,6 +22,7 @@ use App\Models\JawatanAADK;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
 use App\Models\NotifikasiPegawaiDaerah;
+use Illuminate\Support\Facades\Log;
 
 class DaftarPenggunaController extends Controller
 {
@@ -35,45 +36,101 @@ class DaftarPenggunaController extends Controller
     }
 
     // PEGAWAI DAERAH
-    public function senaraiDaftarKlien()
+    public function senaraiDaftarKlien(Request $request)
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
 
-        if ($pegawaiDaerah) {
-            $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+        // Fetch notifications for daerah_aadk_lama
+        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message1', 'created_at', 'is_read1')
+            ->get();
+
+        // Fetch notifications for daerah_aadk_baru
+        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message2', 'created_at', 'is_read2')
+            ->get();
+
+        // Merge and sort notifications
+        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at')->values();
+
+        // Count unread notifications
+        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+            $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read1', false);
+            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read2', false);
+            });
+        })->count();
+
+        return view('pendaftaran.pegawai_daerah.daftar_klien', compact( 'notifications', 'unreadCountPD'));
+    }
+
+    public function getDataKlienDaerah()
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+        if (!$pegawaiDaerah) {
+            return response()->json(['error' => 'Pegawai not found'], 404);
+        }
+
+        $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
                         ->select('klien.*', 'users.updated_at as user_updated_at')
                         ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                         ->orderBy('user_updated_at', 'desc')
                         ->get();
-            
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
-            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-            ->select('id', 'message1', 'created_at', 'is_read1')
-            ->get();
 
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
-            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                        ->select('id', 'message2', 'created_at', 'is_read2')
-                        ->get();
+        return response()->json($klien);
+    }
+
+    // public function senaraiDaftarKlien()
+    // {
+    //     $pegawai = Auth::user();
+    //     $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+    //     if ($pegawaiDaerah) {
+    //         $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+    //                     ->select('klien.*', 'users.updated_at as user_updated_at')
+    //                     ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //                     ->orderBy('user_updated_at', 'desc')
+    //                     ->get();
+            
+    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+    //         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //         ->select('id', 'message1', 'created_at', 'is_read1')
+    //         ->get();
+
+    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+    //         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //                     ->select('id', 'message2', 'created_at', 'is_read2')
+    //                     ->get();
                         
 
-            // Combine and sort notifications by created_at descending
-            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+    //         // Combine and sort notifications by created_at descending
+    //         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-            // Correct unread count calculation for logged-in user's daerah_bertugas
-            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
-                                $query->where(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read1', false);
-                                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read2', false);
-                                });
-                            })->count();
+    //         // Correct unread count calculation for logged-in user's daerah_bertugas
+    //         $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+    //                             $query->where(function ($subQuery) use ($pegawaiDaerah) {
+    //                                 $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //                                     ->where('is_read1', false);
+    //                             })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+    //                                 $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //                                     ->where('is_read2', false);
+    //                             });
+    //                         })->count();
 
-            return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien', 'notifications', 'unreadCountPD'));
-        }
+    //         return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien', 'notifications', 'unreadCountPD'));
+    //     }
+    // }
+
+    public function modalKemaskiniKlienDaerah($id)
+    {
+        $klien = Klien::find($id);
+        return view('pendaftaran.pegawai_daerah.modal_kemaskini_klien', compact('klien'));
     }
 
     public function pegawaiKemaskiniKlien(Request $request)
@@ -121,6 +178,12 @@ class DaftarPenggunaController extends Controller
         } else {
             return redirect()->route('daftar-klien')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
+    }
+
+    public function modalDaftarKlienDaerah($id)
+    {
+        $klien = Klien::find($id);
+        return view('pendaftaran.pegawai_daerah.modal_daftar_klien', compact('klien'));
     }
 
     public function pegawaiDaftarKlien(Request $request)
