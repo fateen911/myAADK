@@ -91,7 +91,7 @@
                                 @csrf
                                 <div class="d-flex flex-column flex-row-fluid mb-5">
                                 <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
                                         <select id="tahun" class="form-select mt-5" name="tahun">
                                             <option value="">Sila Pilih Tahun</option>
                                             @foreach($years as $year)
@@ -100,7 +100,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
                                         <select id="bulan" class="form-select mt-5" name="bulan">
                                             <option value="">Sila Pilih Bulan</option>
                                             @for($i=1 ; $i<=12 ; $i++)
@@ -109,7 +109,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
                                         <select id="kategori" class="form-select mt-5" name="kategori">
                                             <option value="">Sila Pilih Kategori</option>
                                             @foreach($kategori as $k)
@@ -118,7 +118,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
                                         <select id="status" class="form-select mt-5" name="status">
                                             <option value="">Sila Pilih Status</option>
                                             <option class="text-uppercase" value="BELUM SELESAI">BELUM SELESAI</option>
@@ -129,11 +129,11 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center mt-5">
+                                    <div class="flex-center mt-5">
                                         <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
                                     </div>
 
-                                    <div class="w-13 flex-center mt-5">
+                                    <div class="flex-center mt-5">
                                         <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
                                             <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
                                         </a>
@@ -196,7 +196,7 @@
             fetchItems();
             function fetchItems() {
                 $.ajax({
-                    url: '/program/' + pegawaiId,
+                    url: '/pelaporan/program/' + pegawaiId,
                     method: 'GET',
                     success: function(response) {
                         $('#sortTable1').DataTable().destroy();
@@ -238,7 +238,7 @@
                             rows += '<tr>';
                             rows += '<td class="text-uppercase"><a href="{{url('pelaporan/aktiviti/senarai-kehadiran')}}/' + program.id + '">' + program.nama + '</a></td>';
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
-                            rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.kategori + '</td>';
                             rows += '<td class="text-uppercase">' + program.tempat + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '</tr>';

@@ -47,8 +47,8 @@ class PelaporanAktivitiExcel implements FromArray, WithHeadings, WithStyles, Wit
                 $item->custom_id,
                 strtoupper($item->kategori->nama),
                 strtoupper($item->tempat),
-                strtoupper($negeri) ? $negeri->negeri : 'TIADA',
-                strtoupper($daerah) ? $daerah->daerah : 'TIADA',
+                strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
                 $item->status,
             ];
             $count++;

@@ -1180,10 +1180,16 @@ class PengurusanProgController extends Controller
 
     public function filterHebahan(Request $request)
     {
-        $negeri_id = $request->input('negeri');
-        $daerah_id = $request->input('daerah');
+        $query = Klien::query();
+        // Apply filters
+        if ($request->input('negeri')) {
+            $query->where('negeri_pejabat',$request->input('negeri'));
+        }
+        if ($request->input('daerah')) {
+            $query->where('daerah_pejabat',$request->input('daerah'));
+        }
 
-        $filter = Klien::where('negeri_pejabat',$negeri_id)->where('daerah_pejabat',$daerah_id)->whereNotNull('emel')->get();
+        $filter =  $query->whereNotNull('emel')->get();
 
         if ($filter) {
             return response()->json($filter);

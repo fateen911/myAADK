@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exports\PelaporanAktivitiExcel;
 use App\Exports\PerekodanKehadiranExcel;
+use App\Models\Daerah;
+use App\Models\DaerahPejabat;
 use App\Models\KategoriProgram;
+use App\Models\Negeri;
+use App\Models\NegeriPejabat;
 use App\Models\PengesahanKehadiranProgram;
 use App\Models\PerekodanKehadiranProgram;
 use App\Models\Program;
@@ -56,43 +60,6 @@ class PelaporanController extends Controller
         }
 
         return view('pelaporan.modal_kepulihan', compact('notifications', 'unreadCountPD'));
-    }
-
-    public function analisis()
-    {
-        // Notifications and unread count for tahap_pengguna == 5
-        $notifications = null;
-        $unreadCountPD = 0;
-
-        if (Auth::user()->tahap_pengguna == 5) {
-            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
-
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
-            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                ->select('id', 'message1', 'created_at', 'is_read1')
-                ->get();
-
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
-            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                ->select('id', 'message2', 'created_at', 'is_read2')
-                ->get();
-
-            // Combine and sort notifications by created_at descending
-            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
-
-            // Correct unread count calculation for logged-in user's daerah_bertugas
-            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
-                                $query->where(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read1', false);
-                                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read2', false);
-                                });
-                            })->count();
-        }
-
-        return view('pelaporan.aktiviti.analisis', compact('notifications', 'unreadCountPD'));
     }
 
     public function modalKepulihanNegeri(Request $request)
@@ -735,6 +702,127 @@ class PelaporanController extends Controller
         return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
     }
 
+
+    //AKTIVITI
+    //ND - Pegawai Negeri & Daerah
+    //PB - Pentadbir & BRPP
+    public function pelaporanProgram($id)
+    {
+        $user = User::find($id);
+        $pegawai = Pegawai::where('users_id',$id)->first();
+        $program = [];
+
+        if($user){
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $prog = Program::with('kategori')->orderBy('created_at', 'desc')->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $prog = Program::with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $prog = Program::with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+                return response()->json($program);
+            }
+        }
+        return redirect()->back()->with('error', 'User tidak dijumpai');
+    }
+    public function analisis() //power bi
+    {
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read1', false);
+                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read2', false);
+                });
+            })->count();
+        }
+
+        return view('pelaporan.aktiviti.analisis', compact('notifications', 'unreadCountPD'));
+    }
+
     public function senaraiAktiviti(){
         $user_id = Auth::id();
 
@@ -779,6 +867,53 @@ class PelaporanController extends Controller
         $kategori = KategoriProgram::all();
 
         return view('pelaporan.aktiviti.aktivitiND.senarai_aktiviti',compact('user_id', 'notifications', 'unreadCountPD', 'years','kategori'));
+    }
+
+    public function senaraiAktivitiPB(){
+        $user_id = Auth::id();
+        $negeri = NegeriPejabat::all();
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read1', false);
+                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read2', false);
+                });
+            })->count();
+        }
+        //available years
+        // Get available years from the database
+        $years = Program::selectRaw('YEAR(tarikh_mula) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+        // Get all category
+        $kategori = KategoriProgram::all();
+
+        return view('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti',compact('user_id', 'notifications', 'unreadCountPD', 'years','kategori','negeri'));
     }
 
     public function filterSenaraiAktiviti(Request $request)
@@ -835,6 +970,63 @@ class PelaporanController extends Controller
         return view('pelaporan.aktiviti.aktivitiND.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori'));
     }
 
+    public function filterSenaraiAktivitiPB(Request $request)
+    {
+        $user_id = Auth::id();
+
+        // Notifications and unread count for tahap_pengguna == 5
+        $notifications = null;
+        $unreadCountPD = 0;
+
+        if (Auth::user()->tahap_pengguna == 5) {
+            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message1', 'created_at', 'is_read1')
+                ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                ->select('id', 'message2', 'created_at', 'is_read2')
+                ->get();
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read1', false);
+                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                        ->where('is_read2', false);
+                });
+            })->count();
+        }
+
+        // Get filters from the request
+        $tahun = $request->input('tahun', null);
+        $bulan = $request->input('bulan', null);
+        $pKategori = $request->input('kategori', null);
+        $pNegeri= $request->input('negeri', null);
+        $pDaerah = $request->input('daerah', null);
+        $status = $request->input('status', null);
+
+        //available years
+        // Get available years from the database
+        $years = Program::selectRaw('YEAR(tarikh_mula) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+        // Get all category
+        $kategori = KategoriProgram::all();
+        $negeri = Negeri::all();
+        $daerah = DaerahPejabat::where('kod',$pDaerah)->first();
+        return view('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori','negeri','pNegeri','daerah','pDaerah'));
+    }
+
     public function jsonFIlterAktiviti(Request $request,$id)
     {
         $user = User::find($id);
@@ -858,6 +1050,7 @@ class PelaporanController extends Controller
         if($user){
             if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
                 $program = $query->with('kategori')->orderBy('created_at', 'desc')->get();
+
                 return response()->json($program);
             }
             else if ($user->tahap_pengguna == '4') {//pegawai negeri
@@ -873,6 +1066,112 @@ class PelaporanController extends Controller
                     ->where('daerah_pejabat',$pegawai->daerah_bertugas)
                     ->orderBy('created_at', 'desc')
                     ->get();
+                return response()->json($program);
+            }
+        }
+        return redirect()->back()->with('error', 'User tidak dijumpai');
+    }
+
+    public function jsonFIlterAktivitiPB(Request $request,$id)
+    {
+        $user = User::find($id);
+        $pegawai = Pegawai::where('users_id',$id)->first();
+        $query = Program::query();
+
+        // Apply filters
+        if ($request->tahun) {
+            $query->whereYear('tarikh_mula', $request->tahun);
+        }
+        if ($request->bulan) {
+            $query->whereMonth('tarikh_mula', $request->bulan);
+        }
+        if ($request->kategori) {
+            $query->where('kategori_id', $request->kategori);
+        }
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+        if ($request->negeri) {
+            $query->where('negeri_pejabat', $request->negeri);
+        }
+        if ($request->daerah) {
+            $query->where('daerah_pejabat', $request->daerah);
+        }
+
+        $program = [];
+
+        if($user){
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $prog = $query->with('kategori')->orderBy('created_at', 'desc')->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $prog = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
+                return response()->json($program);
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $prog = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($prog as $item) {
+                    // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+
+                    $program[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
                 return response()->json($program);
             }
         }
@@ -898,6 +1197,12 @@ class PelaporanController extends Controller
         }
         if ($request->status) {
             $query->where('status', $request->status);
+        }
+        if ($request->negeri) {
+            $query->where('negeri_pejabat', $request->negeri);
+        }
+        if ($request->daerah) {
+            $query->where('daerah_pejabat', $request->daerah);
         }
 
         $nama_excel = 'pelaporan_senarai_aktiviti.xlsx';

@@ -243,6 +243,7 @@ Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanCont
 // PELAPORAN - AKTIVITI
 Route::get('/pelaporan/aktiviti/excel', [PelaporanController::class, 'excelPelaporanAktiviti'])->name('pelaporan.aktiviti.excel');
 Route::get('/pelaporan/aktiviti/senarai-kehadiran/{id}', [PelaporanController::class, 'pelaporanKehadiran'])->name('pelaporan.aktiviti.kehadiran');
+Route::get('/pelaporan/program/{id}', [PelaporanController::class, 'pelaporanProgram']);
 
 // PELAPORAN - AKTIVITI - PEGAWAI NEGERI & DAERAH
 Route::get('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.senarai_aktiviti');

@@ -87,11 +87,11 @@
                     <!--begin::Card body-->
                     <div class="body">
                         <div class="d-flex flex-row">
-                            <form method="post" action="{{url('/pelaporan/aktivitiND/filter-senarai-aktiviti')}}">
+                            <form method="post" action="{{url('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti')}}">
                                 @csrf
                                 <div class="d-flex flex-column flex-row-fluid mb-5">
                                 <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
-                                    <div class="w-13 flex-center">
+                                    <div class="w-10 flex-center">
                                         <select id="tahun" class="form-select mt-5" name="tahun">
                                             <option value="">Sila Pilih Tahun</option>
                                             @foreach($years as $year)
@@ -100,7 +100,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="w-10 flex-center">
                                         <select id="bulan" class="form-select mt-5" name="bulan">
                                             <option value="">Sila Pilih Bulan</option>
                                             @for($i=1 ; $i<=12 ; $i++)
@@ -109,7 +109,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
                                         <select id="kategori" class="form-select mt-5" name="kategori">
                                             <option value="">Sila Pilih Kategori</option>
                                             @foreach($kategori as $k)
@@ -117,8 +117,23 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="flex-center">
+                                        <select id="negeri" class="form-select mt-5" name="negeri">
+                                            <option value="">Sila Pilih Negeri</option>
+                                            @foreach($negeri as $item)
+                                                <option value="{{$item->id}}">{{$item->negeri}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                    <div class="w-13 flex-center">
+                                    <div class="flex-center">
+                                        <select id="daerah" class="form-select mt-5" name="daerah">
+                                            <option value="">Sila Pilih Daerah</option>
+                                            <!--AJAX-->
+                                        </select>
+                                    </div>
+
+                                    <div class="flex-center">
                                         <select id="status" class="form-select mt-5" name="status">
                                             <option value="">Sila Pilih Status</option>
                                             <option class="text-uppercase" value="BELUM SELESAI">BELUM SELESAI</option>
@@ -129,11 +144,11 @@
                                         </select>
                                     </div>
 
-                                    <div class="w-13 flex-center mt-5">
+                                    <div class="flex-center mt-5">
                                         <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
                                     </div>
 
-                                    <div class="w-13 flex-center mt-5">
+                                    <div class="flex-center mt-5">
                                         <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
                                             <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
                                         </a>
@@ -148,13 +163,17 @@
                             <tr class="text-center text-gray-400 fw-bold fs-7 gs-0 text-uppercase">
                                 <th class="min-w-175px">Nama Aktiviti</th>
                                 <th class="min-w-40px">ID</th>
-                                <th class="min-w-200px">Kategori</th>
+                                <th class="min-w-100px">Kategori</th>
                                 <th class="min-w-100px">Tempat</th>
+                                <th class="min-w-100px">Negeri Bertugas</th>
+                                <th class="min-w-100px">Daerah Bertugas</th>
                                 <th class="min-w-50px">Status</th>
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
                             <tr>
+                                <td>Tiada</td>
+                                <td>Tiada</td>
                                 <td>Tiada</td>
                                 <td>Tiada</td>
                                 <td>Tiada</td>
@@ -196,7 +215,7 @@
             fetchItems();
             function fetchItems() {
                 $.ajax({
-                    url: '/program/' + pegawaiId,
+                    url: '/pelaporan/program/' + pegawaiId,
                     method: 'GET',
                     success: function(response) {
                         $('#sortTable1').DataTable().destroy();
@@ -238,8 +257,10 @@
                             rows += '<tr>';
                             rows += '<td class="text-uppercase"><a href="{{url('pelaporan/aktiviti/senarai-kehadiran')}}/' + program.id + '">' + program.nama + '</a></td>';
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
-                            rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
+                            rows += '<td class="text-uppercase">' + program.kategori + '</td>';
                             rows += '<td class="text-uppercase">' + program.tempat + '</td>';
+                            rows += '<td class="text-uppercase">' + program.negeri + '</td>';
+                            rows += '<td class="text-uppercase">' + program.daerah + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '</tr>';
                         });
@@ -262,5 +283,29 @@
         });
     </script>
 
+    <!--filter negeri daerah-->
+    <script>
+        $(document).ready(function() {
+            $('#negeri').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#daerah').empty();
+                            $('#daerah').append('<option value="">Pilih Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                $('#daerah').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#daerah').empty();
+                    $('#daerah').append('<option value="">Pilih Daerah</option>');
+                }
+            });
+        });
+    </script>
 
 @endsection

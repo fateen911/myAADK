@@ -7920,6 +7920,12 @@ textarea.form-control-lg {
 .w-10 {
     width: 10% !important;
 }
+.w-12 {
+    width: 12% !important;
+}
+.w-15 {
+    width: 15% !important;
+}
 .w-20 {
     width: 20% !important;
 }

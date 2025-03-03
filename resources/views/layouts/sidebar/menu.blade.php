@@ -271,7 +271,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti.analisis', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
@@ -648,7 +648,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti.analisis', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
