@@ -39,6 +39,16 @@
             background-color: darkgrey;
         }
 
+        .menu-link.active {
+            background-color: darkgrey !important;
+            color: white !important;
+        }
+
+        .menu-sub .menu-link.submenu-active {
+            background-color: darkgrey !important;
+            color: white !important;
+        }
+
         .menu-icon {
             margin-right: 10px;
         }
@@ -212,68 +222,6 @@
                     </div>
                     <!--end:Menu item-->
 
-{{--                    <!--begin:Menu item-->--}}
-{{--                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">--}}
-{{--                        <!--begin:Menu link-->--}}
-{{--                        <span class="menu-link">--}}
-{{--                            <span class="menu-icon">--}}
-{{--                                <i class="ki-duotone ki-calendar-add fs-2">--}}
-{{--                                    <span class="path1"></span>--}}
-{{--                                    <span class="path2"></span>--}}
-{{--                                    <span class="path3"></span>--}}
-{{--                                    <span class="path4"></span>--}}
-{{--                                    <span class="path5"></span>--}}
-{{--                                    <span class="path6"></span>--}}
-{{--                                </i>--}}
-{{--                            </span>--}}
-{{--                            <span class="menu-title">Program</span>--}}
-{{--                            <span class="menu-arrow"></span>--}}
-{{--                        </span>--}}
-{{--                        <!--end:Menu link-->--}}
-
-{{--                        <!--begin:Menu sub-->--}}
-{{--                        <div class="menu-sub menu-sub-accordion">--}}
-{{--                            <!--begin:Menu item-->--}}
-{{--                            <div class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">--}}
-{{--                                <!--begin:Menu link-->--}}
-{{--                                <a class="menu-link" href={{url('/pengurusan-program/pentadbir-sistem/senarai-prog')}}>--}}
-{{--                                    <span class="menu-bullet">--}}
-{{--                                        <span class="bullet bullet-dot"></span>--}}
-{{--                                    </span>--}}
-{{--                                    <span class="menu-title">Pendaftaran</span>--}}
-{{--                                </a>--}}
-{{--                                <!--end:Menu link-->--}}
-{{--                            </div>--}}
-{{--                            <!--end:Menu item-->--}}
-{{--                            <!--begin:Menu item-->--}}
-{{--                            <div class="menu-item">--}}
-{{--                                <!--begin:Menu link-->--}}
-{{--                                <a class="menu-link" href="../../demo1/dist/apps/projects/list.html">--}}
-{{--                                    <span class="menu-bullet">--}}
-{{--                                        <span class="bullet bullet-dot"></span>--}}
-{{--                                    </span>--}}
-{{--                                    <span class="menu-title">Hebahan</span>--}}
-{{--                                </a>--}}
-{{--                                <!--end:Menu link-->--}}
-{{--                            </div>--}}
-{{--                            <!--end:Menu item-->--}}
-{{--                            <!--begin:Menu item-->--}}
-{{--                            <div class="menu-item">--}}
-{{--                                <!--begin:Menu link-->--}}
-{{--                                <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">--}}
-{{--                                    <span class="menu-bullet">--}}
-{{--                                        <span class="bullet bullet-dot"></span>--}}
-{{--                                    </span>--}}
-{{--                                    <span class="menu-title">Kehadiran</span>--}}
-{{--                                </a>--}}
-{{--                                <!--end:Menu link-->--}}
-{{--                            </div>--}}
-{{--                            <!--end:Menu item-->--}}
-{{--                        </div>--}}
-{{--                        <!--end:Menu sub-->--}}
-{{--                    </div>--}}
-{{--                    <!--end:Menu item-->--}}
-
                     <!--begin:Menu item PELAPORAN-->
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
@@ -325,9 +273,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktivitiND.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti') }}';">
+                        <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -339,8 +287,30 @@
                                 </i>
                             </span>
                             <span class="menu-title">Aktiviti</span>
+                            <span class="menu-arrow"></span>
                         </a>
                         <!--end:Menu link-->
+
+                        <!--begin:Submenu-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Analisis Data</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Rekod Aktiviti</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--end:Submenu-->
                     </div>
                     <!--end:Menu item-->
                 </div>
@@ -680,9 +650,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktivitiND.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti') }}';">
+                        <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-graph-up fs-2">
                                     <span class="path1"></span>
@@ -694,8 +664,30 @@
                                 </i>
                             </span>
                             <span class="menu-title">Aktiviti</span>
+                            <span class="menu-arrow"></span>
                         </a>
                         <!--end:Menu link-->
+
+                        <!--begin:Submenu-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Analisis Data</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Rekod Aktiviti</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--end:Submenu-->
                     </div>
                     <!--end:Menu item-->
                 </div>
