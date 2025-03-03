@@ -58,7 +58,7 @@ class PelaporanController extends Controller
         return view('pelaporan.modal_kepulihan', compact('notifications', 'unreadCountPD'));
     }
 
-    public function aktiviti()
+    public function analisis()
     {
         // Notifications and unread count for tahap_pengguna == 5
         $notifications = null;
@@ -92,7 +92,7 @@ class PelaporanController extends Controller
                             })->count();
         }
 
-        return view('pelaporan.aktiviti', compact('notifications', 'unreadCountPD'));
+        return view('pelaporan.aktiviti.analisis', compact('notifications', 'unreadCountPD'));
     }
 
     public function modalKepulihanNegeri(Request $request)
@@ -102,7 +102,7 @@ class PelaporanController extends Controller
         $aadk_daerah = DB::table('senarai_daerah_pejabat')->where('negeri_id', $pegawaiNegeri->negeri_bertugas)->get();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
         $tahap_kepulihan_list = TahapKepulihan::all();
-        
+
         $from_date_s = $request->input('from_date_s');
         $to_date_s = $request->input('to_date_s');
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
@@ -778,7 +778,7 @@ class PelaporanController extends Controller
         // Get all category
         $kategori = KategoriProgram::all();
 
-        return view('pelaporan.aktivitiND.senarai_aktiviti',compact('user_id', 'notifications', 'unreadCountPD', 'years','kategori'));
+        return view('pelaporan.aktiviti.aktivitiND.senarai_aktiviti',compact('user_id', 'notifications', 'unreadCountPD', 'years','kategori'));
     }
 
     public function filterSenaraiAktiviti(Request $request)
@@ -832,7 +832,7 @@ class PelaporanController extends Controller
         // Get all category
         $kategori = KategoriProgram::all();
 
-        return view('pelaporan.aktivitiND.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori'));
+        return view('pelaporan.aktiviti.aktivitiND.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori'));
     }
 
     public function jsonFIlterAktiviti(Request $request,$id)
@@ -963,7 +963,7 @@ class PelaporanController extends Controller
         }
 
         if ($program) {
-            return view('pelaporan.aktivitiND.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
+            return view('pelaporan.aktiviti.aktivitiND.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }

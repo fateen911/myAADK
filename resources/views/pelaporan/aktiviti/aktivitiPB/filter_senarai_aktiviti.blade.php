@@ -87,7 +87,7 @@
                     <!--begin::Card body-->
                     <div class="body">
                         <div class="d-flex flex-row">
-                            <form method="post" action="{{url('/pelaporan/aktivitiND/filter-senarai-aktiviti')}}">
+                            <form method="post" action="{{url('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti')}}">
                                 @csrf
                                 <div class="d-flex flex-column flex-row-fluid mb-5">
                                     <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
@@ -200,7 +200,7 @@
                 let kategori = $("#kategori").val();
                 let status = $("#status").val();
                 $.ajax({
-                    url: '/pelaporan/aktivitiND/json-filter-aktiviti/' + pegawaiId,
+                    url: '/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/' + pegawaiId,
                     method: 'GET',
                     data: {
                         tahun: tahun,

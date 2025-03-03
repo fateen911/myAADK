@@ -41,12 +41,10 @@
 
         .menu-link.active {
             background-color: darkgrey !important;
-            color: white !important;
         }
 
         .menu-sub .menu-link.submenu-active {
             background-color: darkgrey !important;
-            color: white !important;
         }
 
         .menu-icon {
@@ -273,7 +271,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktivitiND.senarai_aktiviti') ? 'show' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
@@ -294,7 +292,7 @@
                         <!--begin:Submenu-->
                         <div class="menu-sub menu-sub-accordion">
                             <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti') }}">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.analisis') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/analisis') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -302,7 +300,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -650,7 +648,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktivitiND.senarai_aktiviti') ? 'show' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.aktiviti', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
@@ -671,7 +669,7 @@
                         <!--begin:Submenu-->
                         <div class="menu-sub menu-sub-accordion">
                             <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti') }}">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.analisis') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/analisis') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -679,7 +677,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
@@ -864,9 +862,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
+                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
                                 <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
@@ -1086,9 +1084,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.aktiviti.aktivitiND.senarai_aktiviti') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
+                        <a class="menu-link" href="{{ url('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
                                 <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
