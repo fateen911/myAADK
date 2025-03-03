@@ -257,7 +257,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="ki-duotone ki-graph-up fs-3">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -277,7 +277,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -654,7 +654,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -868,7 +868,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -1090,7 +1090,7 @@
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/aktivitiND/senarai-aktiviti') }}';">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>

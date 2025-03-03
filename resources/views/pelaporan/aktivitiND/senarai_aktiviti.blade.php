@@ -35,13 +35,13 @@
     <!--begin::Page title-->
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5">
         <!--begin::Title-->
-        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengurusan</h1>
+        <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pelaporan</h1>
         <!--end::Title-->
         <!--begin::Breadcrumb-->
         <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
             <!--begin::Item-->
             <li class="breadcrumb-item text-muted">
-                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pengurusan</a>
+                <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Pelaporan</a>
             </li>
             <!--end::Item-->
             <!--begin::Item-->
@@ -60,7 +60,7 @@
             </li>
             <!--end::Item-->
             <!--begin::Item-->
-            <li class="breadcrumb-item text-muted">Senarai Aktiviti</li>
+            <li class="breadcrumb-item text-muted">Rekod Aktiviti</li>
             <!--end::Item-->
         </ul>
         <!--end::Breadcrumb-->
@@ -78,7 +78,7 @@
                     <div class="card-header border-0 pt-6">
                         <!--begin::Card title-->
                         <div class="header p-0 m-0">
-                            <h2>Senarai Aktiviti<br></h2><small>Sila klik pada nama aktiviti untuk melihat maklumat lanjut.</small>
+                            <h2>Rekod Aktiviti<br></h2><small>Sila klik pada nama aktiviti untuk melihat maklumat lanjut.</small>
                         </div>
                         <input type="hidden" name="pegawai_id" id="pegawaiId" value="{{$user_id}}">
                     </div>
