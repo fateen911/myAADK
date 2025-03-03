@@ -129,6 +129,9 @@
                                         <div class="flex-center">
                                             <select id="daerah" class="form-select mt-5" name="daerah">
                                                 <option value="">Sila Pilih Daerah</option>
+                                                @foreach($daerah as $item)
+                                                    <option value="{{$item->kod}}" {{ $pDaerah == $item->kod ? 'selected' : '' }}>{{$item->daerah}}</option>
+                                                @endforeach
                                                 <!--AJAX-->
                                             </select>
                                         </div>
@@ -136,11 +139,11 @@
                                         <div class="flex-center">
                                             <select id="status" class="form-select mt-5" name="status">
                                                 <option value="">Sila Pilih Status</option>
-                                                <option class="text-uppercase" value="BELUM SELESAI">BELUM SELESAI</option>
-                                                <option class="text-uppercase" value="PINDA">PINDA</option>
-                                                <option class="text-uppercase" value="SEDANG BERLANGSUNG">SEDANG BERLANGSUNG</option>
-                                                <option class="text-uppercase" value="SELESAI">SELESAI</option>
-                                                <option class="text-uppercase" value="BATAL">BATAL</option>
+                                                <option class="text-uppercase" value="BELUM SELESAI"{{ $status == 'BELUM SELESAI' ? 'selected' : '' }}>BELUM SELESAI</option>
+                                                <option class="text-uppercase" value="PINDA"{{ $status == 'PINDA' ? 'selected' : '' }}>PINDA</option>
+                                                <option class="text-uppercase" value="SEDANG BERLANGSUNG"{{ $status == 'SEDANG BERLANGSUNG' ? 'selected' : '' }}>SEDANG BERLANGSUNG</option>
+                                                <option class="text-uppercase" value="SELESAI"{{ $status == 'SELESAI' ? 'selected' : '' }}>SELESAI</option>
+                                                <option class="text-uppercase" value="BATAL"{{ $status == 'BATAL' ? 'selected' : '' }}>BATAL</option>
                                             </select>
                                         </div>
 
@@ -217,6 +220,8 @@
                 let tahun = $("#tahun").val();
                 let bulan = $("#bulan").val();
                 let kategori = $("#kategori").val();
+                let negeri = $("#negeri").val();
+                let daerah = $("#daerah").val();
                 let status = $("#status").val();
                 $.ajax({
                     url: '/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/' + pegawaiId,
@@ -225,6 +230,8 @@
                         tahun: tahun,
                         bulan: bulan,
                         kategori: kategori,
+                        negeri: negeri,
+                        daerah: daerah,
                         status: status
                     },
                     success: function(response) {

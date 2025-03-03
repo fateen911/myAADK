@@ -248,13 +248,13 @@ Route::get('/pelaporan/program/{id}', [PelaporanController::class, 'pelaporanPro
 // PELAPORAN - AKTIVITI - PEGAWAI NEGERI & DAERAH
 Route::get('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.senarai_aktiviti');
 Route::post('/pelaporan/aktiviti/aktivitiND/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.filter_senarai_aktiviti');
-Route::get('/pelaporan/aktiviti/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFIlterAktiviti'])->name('pelaporan.aktiviti.aktivitiND.json_fIlter_aktiviti');
+Route::get('/pelaporan/aktiviti/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktiviti'])->name('pelaporan.aktiviti.aktivitiND.json_fIlter_aktiviti');
 
 // PELAPORAN - AKTIVITI - PENTADBIR & BRPP
 Route::get('/pelaporan/aktiviti/analisis', [PelaporanController::class, 'analisis'])->name('pelaporan.aktiviti.analisis');
 Route::get('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti', [PelaporanController::class, 'senaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti');
 Route::post('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti');
-Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFIlterAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.json_fIlter_aktiviti');
+Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.json_fIlter_aktiviti');
 
 
 

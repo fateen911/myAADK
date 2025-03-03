@@ -1023,11 +1023,11 @@ class PelaporanController extends Controller
         // Get all category
         $kategori = KategoriProgram::all();
         $negeri = Negeri::all();
-        $daerah = DaerahPejabat::where('kod',$pDaerah)->first();
+        $daerah = DaerahPejabat::where('negeri_id',$pNegeri)->get();
         return view('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori','negeri','pNegeri','daerah','pDaerah'));
     }
 
-    public function jsonFIlterAktiviti(Request $request,$id)
+    public function jsonFilterAktiviti(Request $request,$id)
     {
         $user = User::find($id);
         $pegawai = Pegawai::where('users_id',$id)->first();
@@ -1072,7 +1072,7 @@ class PelaporanController extends Controller
         return redirect()->back()->with('error', 'User tidak dijumpai');
     }
 
-    public function jsonFIlterAktivitiPB(Request $request,$id)
+    public function jsonFilterAktivitiPB(Request $request,$id)
     {
         $user = User::find($id);
         $pegawai = Pegawai::where('users_id',$id)->first();
