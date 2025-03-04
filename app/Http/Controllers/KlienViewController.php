@@ -26,6 +26,7 @@ class KlienViewController extends Controller
 
         // Pass the data to the view
         // return view('secondDB.view_klien', compact('data'));
+        return redirect()->back();
 
     }
 
