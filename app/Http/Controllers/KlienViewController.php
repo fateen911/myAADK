@@ -22,11 +22,12 @@ class KlienViewController extends Controller
                 DB::table('viewklien')->insert($chunk->all());
             });
         }
+        alert('berjaya!');
 
 
 
         // Pass the data to the view
-        return view('secondDB.view_klien', compact('data'));
+        // return view('secondDB.view_klien', compact('data'));
 
     }
 
