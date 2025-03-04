@@ -10,9 +10,9 @@ class KlienViewController extends Controller
 {
     public function viewKlien()
     {
-        $data = KlienView::where('id_fasiliti', '16')
+        $data = KlienView::whereIn('id_fasiliti', ['45','57','69','80','90','99','106'])
             ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
-            ->limit(10000)
+            ->limit(20000)
             ->get()
             ->toArray();
 
