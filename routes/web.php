@@ -242,6 +242,7 @@ Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanCont
 
 // PELAPORAN - AKTIVITI
 Route::get('/pelaporan/aktiviti/excel', [PelaporanController::class, 'excelPelaporanAktiviti'])->name('pelaporan.aktiviti.excel');
+Route::get('/pelaporan/aktiviti/pdf', [PelaporanController::class, 'pdfPelaporanAktiviti'])->name('pelaporan.aktiviti.pdf');
 Route::get('/pelaporan/aktiviti/senarai-kehadiran/{id}', [PelaporanController::class, 'pelaporanKehadiran'])->name('pelaporan.aktiviti.kehadiran');
 Route::get('/pelaporan/program/{id}', [PelaporanController::class, 'pelaporanProgram']);
 
