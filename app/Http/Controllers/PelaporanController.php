@@ -1231,6 +1231,114 @@ class PelaporanController extends Controller
         return redirect()->back()->with('error', 'User tidak dijumpai');
     }
 
+    public function pdfPelaporanAktiviti(Request $request)
+    {
+        $id = Auth::id();
+        $user = User::find($id);
+        $pegawai = Pegawai::where('users_id',$id)->first();
+        $query = Program::query();
+
+        // Apply filters
+        if ($request->tahun) {
+            $query->whereYear('tarikh_mula', $request->tahun);
+        }
+        if ($request->bulan) {
+            $query->whereMonth('tarikh_mula', $request->bulan);
+        }
+        if ($request->kategori) {
+            $query->where('kategori_id', $request->kategori);
+        }
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+        if ($request->negeri) {
+            $query->where('negeri_pejabat', $request->negeri);
+        }
+        if ($request->daerah) {
+            $query->where('daerah_pejabat', $request->daerah);
+        }
+
+        $nama_pdf = 'rekod_aktiviti.pdf';
+        $data = [];
+
+        if($user){
+            if ($user->tahap_pengguna == '1' || $user->tahap_pengguna == '3') {//pentadbir or pegawai brpp
+                $program = $query->with('kategori')->orderBy('created_at', 'desc')->get();
+
+                foreach ($program as $item) {
+                    // Get the state and district names based on the negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $data[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
+                $pdf = PDF::loadView('pelaporan.aktiviti.pdf_rekod_aktiviti', ['data' => $data])->setPaper('a4','landscape');
+                return $pdf->download($nama_pdf);
+            }
+            else if ($user->tahap_pengguna == '4') {//pegawai negeri
+                $program = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($program as $item) {
+                    // Get the state and district names based on the negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $data[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
+                $pdf = PDF::loadView('pelaporan.aktiviti.pdf_rekod_aktiviti', ['data' => $data])->setPaper('a4','landscape');;
+                return $pdf->download($nama_pdf);
+            }
+            else if ($user->tahap_pengguna == '5') {//pegawai daerah
+                $program = $query->with('kategori')
+                    ->where('negeri_pejabat',$pegawai->negeri_bertugas)
+                    ->where('daerah_pejabat',$pegawai->daerah_bertugas)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                foreach ($program as $item) {
+                    // Get the state and district names based on the negeri_pejabat and daerah_pejabat
+                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $data[] = [
+                        'id'        =>  $item->id,
+                        'nama'      =>  strtoupper($item->nama),
+                        'custom_id' =>  $item->custom_id,
+                        'kategori'  =>  strtoupper($item->kategori->nama),
+                        'tempat'    =>  strtoupper($item->tempat),
+                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
+                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'status'    =>  $item->status,
+                    ];
+                }
+
+                $pdf = PDF::loadView('pelaporan.aktiviti.pdf_rekod_aktiviti', ['data' => $data])->setPaper('a4','landscape');;
+                return $pdf->download($nama_pdf);
+            }
+        }
+        return redirect()->back()->with('error', 'User tidak dijumpai');
+    }
+
     public function pelaporanKehadiran($id)
     {
         $program = Program::with('kategori')->find($id);

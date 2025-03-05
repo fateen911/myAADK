@@ -133,10 +133,18 @@
                                             <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
                                         </div>
 
-                                        <div class="w-13 flex-center mt-5">
-                                            <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
-                                                <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
-                                            </a>
+                                        <div class="flex-center mt-5 d-md-flex flex-row flex-column-fluid gap-2 ms-15">
+                                            <div>
+                                                <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
+                                                    <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                                </a>
+                                            </div>
+
+                                            <div>
+                                                <a href="{{route('pelaporan.aktiviti.pdf', request()->all())}}">
+                                                    <button class="btn btn-danger btn-icon" type="button" id="pdfBtn"><i class="bi bi-file-pdf fs-2"></i></button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

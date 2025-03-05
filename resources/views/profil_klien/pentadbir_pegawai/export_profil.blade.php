@@ -10,7 +10,7 @@
             z-index: 1;
         }
 
-        .tittle 
+        .tittle
         {
             background-color: lightgray;
             font-weight: bold;

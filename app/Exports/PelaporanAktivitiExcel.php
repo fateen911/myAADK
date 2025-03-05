@@ -38,7 +38,7 @@ class PelaporanAktivitiExcel implements FromArray, WithHeadings, WithStyles, Wit
 
         $count = 1;
         foreach ($this->program as $item) {
-            // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
+            // Get the state and district names based on the negeri_pejabat and daerah_pejabat
             $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
             $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
             $data[] = [

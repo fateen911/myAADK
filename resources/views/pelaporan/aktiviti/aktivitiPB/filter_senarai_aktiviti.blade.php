@@ -90,8 +90,8 @@
                             <form method="post" action="{{url('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti')}}">
                                 @csrf
                                 <div class="d-flex flex-column flex-row-fluid mb-5">
-                                    <div class="d-md-flex flex-row flex-column-fluid gap-5 mt-5">
-                                        <div class="w-10 flex-center">
+                                    <div class="d-md-flex flex-row flex-column-fluid gap-3 mt-5">
+                                        <div class="w-17 flex-center">
                                             <select id="tahun" class="form-select mt-5" name="tahun">
                                                 <option value="">Sila Pilih Tahun</option>
                                                 @foreach($years as $year)
@@ -100,7 +100,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="w-10 flex-center">
+                                        <div class="w-17 flex-center">
                                             <select id="bulan" class="form-select mt-5" name="bulan">
                                                 <option value="">Sila Pilih Bulan</option>
                                                 @for($i=1 ; $i<=12 ; $i++)
@@ -109,7 +109,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="flex-center">
+                                        <div class="w-18 flex-center">
                                             <select id="kategori" class="form-select mt-5" name="kategori">
                                                 <option value="">Sila Pilih Kategori</option>
                                                 @foreach($kategori as $k)
@@ -117,7 +117,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="flex-center">
+                                        <div class="w-17 flex-center">
                                             <select id="negeri" class="form-select mt-5" name="negeri">
                                                 <option value="">Sila Pilih Negeri</option>
                                                 @foreach($negeri as $item)
@@ -126,7 +126,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="flex-center">
+                                        <div class="w-17 flex-center">
                                             <select id="daerah" class="form-select mt-5" name="daerah">
                                                 <option value="">Sila Pilih Daerah</option>
                                                 @foreach($daerah as $item)
@@ -136,7 +136,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="flex-center">
+                                        <div class="w-17 flex-center">
                                             <select id="status" class="form-select mt-5" name="status">
                                                 <option value="">Sila Pilih Status</option>
                                                 <option class="text-uppercase" value="BELUM SELESAI"{{ $status == 'BELUM SELESAI' ? 'selected' : '' }}>BELUM SELESAI</option>
@@ -151,10 +151,18 @@
                                             <button class="btn btn-primary btn-icon" type="submit" id="filterBtn"><i class="bi bi-funnel-fill fs-2"></i></button>
                                         </div>
 
-                                        <div class="flex-center mt-5">
-                                            <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
-                                                <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
-                                            </a>
+                                        <div class="flex-center mt-5 d-md-flex flex-row flex-column-fluid gap-2 ms-10">
+                                            <div>
+                                                <a href="{{route('pelaporan.aktiviti.excel', request()->all())}}">
+                                                    <button class="btn btn-success btn-icon" type="button" id="excelBtn"><i class="bi bi-file-earmark-spreadsheet fs-2"></i></button>
+                                                </a>
+                                            </div>
+
+                                            <div>
+                                                <a href="{{route('pelaporan.aktiviti.pdf', request()->all())}}">
+                                                    <button class="btn btn-danger btn-icon" type="button" id="pdfBtn"><i class="bi bi-file-pdf fs-2"></i></button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -167,9 +175,9 @@
                                 <th class="min-w-175px">Nama Aktiviti</th>
                                 <th class="min-w-40px">ID</th>
                                 <th class="min-w-100px">Kategori</th>
-                                <th class="min-w-100px">Tempat</th>
-                                <th class="min-w-100px">Negeri Bertugas</th>
-                                <th class="min-w-100px">Daerah Bertugas</th>
+                                <th class="min-w-150px">Tempat</th>
+                                <th class="min-w-150px">Negeri Bertugas</th>
+                                <th class="min-w-150px">Daerah Bertugas</th>
                                 <th class="min-w-50px">Status</th>
                             </tr>
                             </thead>
