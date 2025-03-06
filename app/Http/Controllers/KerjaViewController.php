@@ -11,10 +11,10 @@ class KerjaViewController extends Controller
     public function viewKerja()
     {
         $data = KerjaView::join('view_pccp_klien as klien', 'view_pccp_kerja.id_pk', '=', 'klien.id_pk')
-            ->where('klien.id_fasiliti', '31')
+            // ->where('klien.id_fasiliti', '31')
             ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
             ->select('view_pccp_kerja.*')
-            ->limit(10000)
+            // ->limit(10000)
             ->get()
             ->toArray();
 
@@ -30,7 +30,8 @@ class KerjaViewController extends Controller
 
 
         // Pass the data to the view
-        return view('secondDB.view_kerja', compact('data'));
+        // return view('secondDB.view_kerja', compact('data'));
+        return redirect()->back();
 
     }
 }
