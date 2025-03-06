@@ -11,10 +11,10 @@ class FamiliViewController extends Controller
     public function viewFamili()
     {
         $data = FamiliView::join('view_pccp_klien as klien', 'view_pccp_famili.id_pk', '=', 'klien.id_pk')
-            ->where('klien.id_fasiliti', '31')
+            // ->where('klien.id_fasiliti', '31')
             ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
             ->select('view_pccp_famili.*')
-            ->limit(10000)
+            // ->limit(10000)
             ->get()
             ->toArray();
 
@@ -28,7 +28,8 @@ class FamiliViewController extends Controller
 
 
         // Pass the data to the view
-        return view('secondDB.view_famili', compact('data'));
+        // return view('secondDB.view_famili', compact('data'));
+        return redirect()->back();
 
     }
 }
