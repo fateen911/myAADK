@@ -15,6 +15,9 @@ use App\Mail\PegawaiRejected;
 use App\Mail\KemaskiniKataLaluan;
 use App\Models\User;
 use App\Models\Klien;
+use App\Models\WarisKlien;
+use App\Models\PekerjaanKlien;
+use App\Models\KeluargaKlien;
 use App\Models\Pegawai;
 use App\Models\NegeriPejabat;
 use App\Models\DaerahPejabat;
@@ -85,47 +88,6 @@ class DaftarPenggunaController extends Controller
 
         return response()->json($klien);
     }
-
-    // public function senaraiDaftarKlien()
-    // {
-    //     $pegawai = Auth::user();
-    //     $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
-
-    //     if ($pegawaiDaerah) {
-    //         $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
-    //                     ->select('klien.*', 'users.updated_at as user_updated_at')
-    //                     ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-    //                     ->orderBy('user_updated_at', 'desc')
-    //                     ->get();
-            
-    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
-    //         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-    //         ->select('id', 'message1', 'created_at', 'is_read1')
-    //         ->get();
-
-    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
-    //         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-    //                     ->select('id', 'message2', 'created_at', 'is_read2')
-    //                     ->get();
-                        
-
-    //         // Combine and sort notifications by created_at descending
-    //         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
-
-    //         // Correct unread count calculation for logged-in user's daerah_bertugas
-    //         $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
-    //                             $query->where(function ($subQuery) use ($pegawaiDaerah) {
-    //                                 $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-    //                                     ->where('is_read1', false);
-    //                             })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
-    //                                 $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-    //                                     ->where('is_read2', false);
-    //                             });
-    //                         })->count();
-
-    //         return view('pendaftaran.pegawai_daerah.daftar_klien', compact('klien', 'notifications', 'unreadCountPD'));
-    //     }
-    // }
 
     public function modalKemaskiniKlienDaerah($id)
     {
@@ -222,6 +184,11 @@ class DaftarPenggunaController extends Controller
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
             ]);
+
+            // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
+            WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+            KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+            PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
 
             if ($request->email)
             {
@@ -413,6 +380,11 @@ class DaftarPenggunaController extends Controller
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
             ]);
+
+            // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
+            WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+            KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+            PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
 
             if ($request->email){
                 Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
