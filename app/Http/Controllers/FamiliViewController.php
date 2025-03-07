@@ -20,9 +20,10 @@ class FamiliViewController extends Controller
                 $join->on('a.id_pk', '=', 'grouped.id_pk')
                     ->on('a.tkh_tamatPengawasan', '=', 'grouped.latest_tkh_tamatPengawasan');
             })
-            ->join(DB::connection('mysql_support')->table('view_pccp_famili as b'), 'a.id_pk', '=', 'b.id_pk')
+            ->join('mysql_support.view_pccp_famili as b', 'a.id_pk', '=', 'b.id_pk') 
             ->select('b.*', 'a.tkh_tamatPengawasan')
-            ->get();
+            ->get()
+            ->toArray(); 
 
 
         if (!empty($data)) {
