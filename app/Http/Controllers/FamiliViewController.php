@@ -11,10 +11,13 @@ class FamiliViewController extends Controller
     public function viewFamili()
     {
         $data = FamiliView::join('view_pccp_klien as klien', 'view_pccp_famili.id_pk', '=', 'klien.id_pk')
-            // ->where('klien.id_fasiliti', '31')
-            ->where('klien.tkh_tamatPengawasan', '<=', '2025-04-01')
+            ->where('klien.tkh_tamatPengawasan', function ($query) {
+                $query->selectRaw('MAX(tkh_tamatPengawasan)')
+                    ->from('view_pccp_klien')
+                    ->whereColumn('id_pk', 'klien.id_pk')
+                    ->where('tkh_tamatPengawasan', '<=', '2025-04-01');
+            })
             ->select('view_pccp_famili.*')
-            // ->limit(10000)
             ->get()
             ->toArray();
 
@@ -24,7 +27,6 @@ class FamiliViewController extends Controller
                 DB::table('viewfamili')->insert($chunk->all());
             });
         }
-
 
 
         // Pass the data to the view
