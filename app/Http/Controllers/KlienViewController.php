@@ -10,9 +10,9 @@ class KlienViewController extends Controller
 {
     public function viewKlien()
     {
-        $data = KlienView::where('AADK_Negeri', 'WP Kuala Lumpur')
-            ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
-            ->limit(50000)
+        $data = KlienView::where('tkh_tamatPengawasan', '<=', '2025-04-01')
+            // ->where('AADK_Negeri', 'WP Kuala Lumpur')
+            // ->limit(50000)
             ->get()
             ->toArray();
 
