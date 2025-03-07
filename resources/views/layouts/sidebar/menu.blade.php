@@ -251,7 +251,7 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.modal_kepulihan') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.modal_kepulihan', 'pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'show' : '' }}">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan') }}';">
                             <span class="menu-icon">
@@ -265,8 +265,30 @@
                                 </i>
                             </span>
                             <span class="menu-title">Modal Kepulihan</span>
+                            <span class="menu-arrow"></span>
                         </a>
                         <!--end:Menu link-->
+
+                        <!--begin:Submenu-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.analisis') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/analisis') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Analisis Data</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti') ? 'active' : '' }}" href="{{ url('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Rekod Aktiviti</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--end:Submenu-->
                     </div>
                     <!--end:Menu item-->
 

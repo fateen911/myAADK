@@ -25,43 +25,44 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PelaporanController extends Controller
 {
-    public function modalKepulihan()
-    {
-        // Notifications and unread count for tahap_pengguna == 5
-        $notifications = null;
-        $unreadCountPD = 0;
+    // public function modalKepulihan()
+    // {
+    //     // Notifications and unread count for tahap_pengguna == 5
+    //     $notifications = null;
+    //     $unreadCountPD = 0;
 
-        if (Auth::user()->tahap_pengguna == 5) {
-            $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+    //     if (Auth::user()->tahap_pengguna == 5) {
+    //         $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
 
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
-            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                ->select('id', 'message1', 'created_at', 'is_read1')
-                ->get();
+    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (message1)
+    //         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //             ->select('id', 'message1', 'created_at', 'is_read1')
+    //             ->get();
 
-            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
-            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                ->select('id', 'message2', 'created_at', 'is_read2')
-                ->get();
+    //         // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (message2)
+    //         $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //             ->select('id', 'message2', 'created_at', 'is_read2')
+    //             ->get();
 
-            // Combine and sort notifications by created_at descending
-            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+    //         // Combine and sort notifications by created_at descending
+    //         $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-            // Correct unread count calculation for logged-in user's daerah_bertugas
-            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
-                                $query->where(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read1', false);
-                                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
-                                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                        ->where('is_read2', false);
-                                });
-                            })->count();
-        }
+    //         // Correct unread count calculation for logged-in user's daerah_bertugas
+    //         $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+    //                             $query->where(function ($subQuery) use ($pegawaiDaerah) {
+    //                                 $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //                                     ->where('is_read1', false);
+    //                             })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+    //                                 $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //                                     ->where('is_read2', false);
+    //                             });
+    //                         })->count();
+    //     }
 
-        return view('pelaporan.modal_kepulihan', compact('notifications', 'unreadCountPD'));
-    }
+    //     return view('pelaporan.modal_kepulihan', compact('notifications', 'unreadCountPD'));
+    // }
 
+    // PEGAWAI NEGERI
     public function modalKepulihanNegeri(Request $request)
     {
         $pegawai = Auth::user();
@@ -213,7 +214,7 @@ class PelaporanController extends Controller
             ->orderBy('u.nama', direction: 'asc')
             ->get();
 
-        return view('pelaporan.modal_kepulihan.pegawai_negeri', compact('aadk_daerah','tahap_kepulihan_list','selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
+        return view('pelaporan.modal_kepulihan.pegawai_negeri_rekod', compact('aadk_daerah','tahap_kepulihan_list','selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
     }
 
     public function PDFselesaiMenjawabNegeri(Request $request)
@@ -385,6 +386,7 @@ class PelaporanController extends Controller
         return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
     }
 
+    // PEGAWAI DAERAH
     public function modalKepulihanDaerah(Request $request)
     {
         $pegawai = Auth::user();
@@ -538,7 +540,7 @@ class PelaporanController extends Controller
                             });
                         })->count();
 
-        return view('pelaporan.modal_kepulihan.pegawai_daerah', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD','tahap_kepulihan_list'));
+        return view('pelaporan.modal_kepulihan.pegawai_daerah_rekod', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD','tahap_kepulihan_list'));
     }
 
     public function PDFselesaiMenjawabDaerah(Request $request)
