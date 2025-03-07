@@ -10,19 +10,20 @@ class FamiliViewController extends Controller
 {
     public function viewFamili()
     {
-        $subquery = DB::table('view_pccp_klien')
+        $subquery = DB::connection('mysql_support')->table('view_pccp_klien')
             ->select('id_pk', DB::raw('MAX(tkh_tamatPengawasan) AS latest_tkh_tamatPengawasan'))
             ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
             ->groupBy('id_pk');
 
-        $data = DB::table('view_pccp_klien as a')
+        $data = DB::connection('mysql_support')->table('view_pccp_klien as a')
             ->joinSub($subquery, 'grouped', function ($join) {
                 $join->on('a.id_pk', '=', 'grouped.id_pk')
                     ->on('a.tkh_tamatPengawasan', '=', 'grouped.latest_tkh_tamatPengawasan');
             })
-            ->join('view_pccp_famili as b', 'a.id_pk', '=', 'b.id_pk')
+            ->join(DB::connection('mysql_support')->table('view_pccp_famili as b'), 'a.id_pk', '=', 'b.id_pk')
             ->select('b.*', 'a.tkh_tamatPengawasan')
             ->get();
+
 
         if (!empty($data)) {
             // Insert data in chunks of 500 to avoid database limits
