@@ -159,7 +159,7 @@
             // Function to validate 'Nama' field
             function validateNama(input) {
                 // Allow only alphabets, @, and ' characters
-                input.value = input.value.replace(/[^a-zA-Z@' ]/g, '');
+                input.value = input.value.replace(/[^a-zA-Z@'. ]/g, '');
             }
 
             // Function to validate 'No. Telefon' field

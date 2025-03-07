@@ -188,34 +188,13 @@
                 toggleFields();
                 filterDaerahOptions();
             });
-
-            // document.addEventListener('DOMContentLoaded', function() {
-            //     document.getElementById('pegawai_mohon_daftar_form').addEventListener('submit', function(event) {
-            //         const peranan = parseInt(perananField.value);
-
-            //         // Check if required fields are filled based on peranan
-            //         if (peranan === 4 && negeriSelect.value === '') { // Pegawai AADK Negeri
-            //             alert('Sila pilih Negeri Bertugas untuk Pegawai AADK Negeri.');
-            //             event.preventDefault();
-            //         } else if (peranan === 5 && (negeriSelect.value === '' || daerahSelect.value === '')) { // Pegawai AADK Daerah
-            //             alert('Sila pilih Negeri dan Daerah Bertugas untuk Pegawai AADK Daerah.');
-            //             event.preventDefault();
-            //         }
-
-            //         var emailInput = document.getElementById('emelPegawai').value;
-            //         if (emailInput.includes('@')) {
-            //             alert('Sila masukkan hanya nama e-mel pengguna tanpa domain.');
-            //             event.preventDefault();
-            //         }
-            //     });
-            // });
         </script>
 
         <script>
             // Prevent typing numeric characters
             document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('nama').addEventListener('input', function (e) {
-                    this.value = this.value.replace(/[^a-zA-Z\s'@]/g, '');
+                    this.value = this.value.replace(/[^a-zA-Z\s'@.]/g, '');
                 });
 
                 // Restrict input to digits by listening for input event
