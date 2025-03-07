@@ -10,20 +10,19 @@ class FamiliViewController extends Controller
 {
     public function viewFamili()
     {
-        $data = FamiliView::join('view_pccp_klien as klien', 'view_pccp_famili.id_pk', '=', 'klien.id_pk')
-            ->join(DB::raw("(  
-                SELECT id_pk, tkh_tamatPengawasan,
-                    ROW_NUMBER() OVER (PARTITION BY id_pk ORDER BY tkh_tamatPengawasan DESC) as row_num
-                FROM view_pccp_klien
-                WHERE tkh_tamatPengawasan <= '2025-04-01'
-            ) as latest_klien"), function ($join) {
-                $join->on('klien.id_pk', '=', 'latest_klien.id_pk')
-                    ->on('klien.tkh_tamatPengawasan', '=', 'latest_klien.tkh_tamatPengawasan');
+        $subquery = DB::table('view_pccp_klien')
+            ->select('id_pk', DB::raw('MAX(tkh_tamatPengawasan) AS latest_tkh_tamatPengawasan'))
+            ->where('tkh_tamatPengawasan', '<=', '2025-04-01')
+            ->groupBy('id_pk');
+
+        $data = DB::table('view_pccp_klien as a')
+            ->joinSub($subquery, 'grouped', function ($join) {
+                $join->on('a.id_pk', '=', 'grouped.id_pk')
+                    ->on('a.tkh_tamatPengawasan', '=', 'grouped.latest_tkh_tamatPengawasan');
             })
-            ->where('latest_klien.row_num', 1)  // Only keep the latest row per id_pk
-            ->select('view_pccp_famili.*')
-            ->get()
-            ->toArray();
+            ->join('view_pccp_famili as b', 'a.id_pk', '=', 'b.id_pk')
+            ->select('b.*', 'a.tkh_tamatPengawasan')
+            ->get();
 
         if (!empty($data)) {
             // Insert data in chunks of 500 to avoid database limits
