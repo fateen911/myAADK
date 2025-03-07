@@ -13,6 +13,8 @@ class RawatanKlien extends Model
 
     protected $fillable = [
         'klien_id',
+        'id_pk',
+        'id_ki',
         'tkh_perintah',
         'tkh_mula_pengawasan',
         'tkh_tamat_pengawasan',
