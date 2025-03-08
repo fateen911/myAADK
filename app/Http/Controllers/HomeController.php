@@ -221,8 +221,6 @@ class HomeController extends Controller
                                             ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
                                             ->count();
 
-                                            // dd($tidak_pernah_menjawab);
-
                     // $tidak_menjawab = DB::table('klien as u')
                     //                 ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
                     //                 ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {

@@ -257,10 +257,9 @@ Route::get('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti', [PelaporanControll
 Route::post('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti');
 Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.json_fIlter_aktiviti');
 
-
-
 // PENTADBIR & BRPP - PELAPORAN - MODAL KEPULIHAN
-Route::get('/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihan'])->name('pelaporan.modal_kepulihan');
+Route::get('/pelaporan/analisis/modal-kepulihan', [PelaporanController::class, 'analisisModalKepulihan'])->name('pelaporan.analisis.modal_kepulihan');
+Route::get('/pelaporan/rekod/modal-kepulihan', [PelaporanController::class, 'rekodModalKepulihan'])->name('pelaporan.rekod.modal_kepulihan');
 
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
