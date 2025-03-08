@@ -124,7 +124,7 @@
 				<div id="kt_app_content_container" class="app-container container-xxl">
                     <ul class="nav nav-tabs pt-5" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="selesai-tab" data-toggle="tab" data-target="#selesai" type="button" role="tab" aria-controls="selesai" aria-selected="true">Selesai</button>
+                            <button class="nav-link active" id="selesai-tab" data-toggle="tab" data-target="#selesai" type="button" role="tab" aria-controls="selesai" aria-selected="true">Selesai Menjawab</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="belumSelesai-tab" data-toggle="tab" data-target="#belumSelesai" type="button" role="tab" aria-controls="belumSelesai" aria-selected="true">Belum Selesai Menjawab</button>
@@ -146,29 +146,26 @@
                                     Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
-                                
-                                <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-info">
-                                    <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
-                                </a>
                             </div>
                             <!--end::Card header-->
 
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
                                 <form id="filter-form">
-                                    <div class="row">
+                                    <div class="row align-items-center">
+                                        <!-- Date Range -->
                                         <div class="col-md-2">
-                                            <label for="from_date_s">Tarikh Mula:</label>
                                             <input type="date" id="from_date_s" name="from_date_s" class="form-control" value="{{ request('from_date_s') }}">
                                         </div>
+                                        <span class="col-auto">-</span> <!-- Dash centered between inputs -->
                                         <div class="col-md-2">
-                                            <label for="to_date_s">Tarikh Akhir:</label>
                                             <input type="date" id="to_date_s" name="to_date_s" class="form-control" value="{{ request('to_date_s') }}">
                                         </div>
+                                
+                                        <!-- Tahap Kepulihan -->
                                         <div class="col-md-2">
-                                            <label for="tahap_kepulihan_id">Tahap Kepulihan:</label>
                                             <select id="tahap_kepulihan_id" name="tahap_kepulihan_id" class="form-control">
-                                                <option value="">Semua Tahap</option>
+                                                <option value="">Pilih Tahap Kepulihan</option>
                                                 @foreach($tahap_kepulihan_list as $tk)
                                                     <option value="{{ $tk->id }}" {{ request('tahap_kepulihan_id') == $tk->id ? 'selected' : '' }}>
                                                         {{ $tk->tahap }}
@@ -176,10 +173,21 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for="aadk_daerah_s">AADK Daerah:</label>
-                                            <select id="aadk_daerah_s" name="aadk_daerah_s" class="form-control">
-                                                <option value="">Semua Daerah</option>
+                                
+                                        <!-- AADK Negeri -->
+                                        <div class="col-md-2">
+                                            <select id="aadk_negeri_s" class="form-select" name="aadk_negeri_s">
+                                                <option value="">Pilih AADK Negeri</option>
+                                                @foreach($aadk_negeri as $item)
+                                                    <option value="{{$item->id}}" {{ request('aadk_negeri_s') == $item->id ? 'selected' : '' }}>{{$item->negeri}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                
+                                        <!-- AADK Daerah -->
+                                        <div class="col-md-2" style="width: 280px;">
+                                            <select id="aadk_daerah_s" class="form-select" name="aadk_daerah_s">
+                                                <option value="">Pilih AADK Daerah</option>
                                                 @foreach($aadk_daerah as $d1)
                                                     <option value="{{ $d1->kod }}" {{ request('aadk_daerah_s') == $d1->kod ? 'selected' : '' }}>
                                                         {{ $d1->daerah }}
@@ -187,22 +195,51 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                
+                                        <!-- Filter Button -->
                                         <div class="col-md-1">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary"> 
+                                            <button type="submit" class="btn btn-primary">
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-2">
-                                            <br>
-                                            <a href="{{ route('selesai.pdf.negeri', [
-                                                'from_date_s' => request('from_date_s'), 
-                                                'to_date_s' => request('to_date_s'), 
-                                                'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
-                                                'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
-                                                class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Senarai Klien
-                                            </a>
+
+                                        {{-- Export PDF & EXCEL --}}
+                                        <div class="col-md-3 mt-5">
+                                            <h5>
+                                                Senarai Rekod Klien:
+                                                <a href="{{ route('selesai.pdf.negeri', [
+                                                    'from_date_s' => request('from_date_s'), 
+                                                    'to_date_s' => request('to_date_s'), 
+                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
+                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
+                                                    class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                <a href="{{ route('export.selesai-menjawab.excel')}}" id="export-excel" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-4 mt-5">
+                                            <h5>
+                                                Analisis Modal Kepulihan:
+                                                <a href="{{ route('exportAnalisisMKNegeri.pdf', [
+                                                    'from_date_s' => request('from_date_s'), 
+                                                    'to_date_s' => request('to_date_s'), 
+                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
+                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
+                                                    class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                <a href="{{ route('selesai.pdf.negeri', [
+                                                    'from_date_s' => request('from_date_s'), 
+                                                    'to_date_s' => request('to_date_s'), 
+                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
+                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
+                                                    class="btn btn-sm btn-success">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </a>
+                                            </h5>
                                         </div>
                                     </div>
                                 </form>
@@ -215,16 +252,19 @@
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
-                                            <th style="width: 20%;">Nama</th>
-                                            <th style="text-align: center; width: 12%;">No. Kad Pengenalan</th>
-                                            <th style="text-align: center; width: 14%;">AADK Negeri</th>
-                                            <th style="text-align: center; width: 16%;">AADK Daerah</th>
+                                            <th style="width: 25%;">Nama</th>
+                                            <th style="text-align: center; width: 10%;">No. Kad Pengenalan</th>
+                                            <th style="text-align: center; width: 15%;">AADK Negeri</th>
+                                            <th style="text-align: center; width: 20%;">AADK Daerah</th>
                                             <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
                                             <th style="text-align: center; width: 20%;">Tahap Kepulihan</th>  
-                                            <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
+                                            {{-- <th style="text-align: center; width: 8%;">Sejarah Menjawab</th> --}}
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
+                                    <tbody id="table-body">
+                                        <!-- Data will be inserted here dynamically -->
+                                    </tbody>                                    
+                                    {{-- <tbody class="fw-semibold text-gray-600">
                                         @foreach($selesai_menjawab as $response1)
                                             @php
                                                 $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response1->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
@@ -232,14 +272,14 @@
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response1->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
                                             @endphp
                                             <tr>
-                                                <td style="width: 20%;">
+                                                <td style="width: 25%;">
                                                     <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
                                                         {{ $response1->nama }}
                                                     </a>
                                                 </td>
-                                                <td style="width: 12%; text-align: center;">{{ $response1->no_kp }}</td>
-                                                <td style="width: 14%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 16%; text-align: center;">{{ $daerah }}</td>
+                                                <td style="width: 10%; text-align: center;">{{ $response1->no_kp }}</td>
+                                                <td style="width: 15%; text-align: center;">{{ $negeri }}</td>
+                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
                                                 <td style="width: 10%; text-align: center;">{{ isset($response1->updated_at) ? Carbon::parse($response1->updated_at)->format('d/m/Y') : 'N/A' }}</td>
                                                 <td style="width: 20%; text-align: center;">   
                                                     @if ($response1->tahap_kepulihan_id)
@@ -254,14 +294,9 @@
                                                         @endif
                                                     @endif
                                                 </td>
-                                                <td style="width: 8%; text-align: center;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </td>
                                             </tr>
                                         @endforeach
-                                    </tbody>
+                                    </tbody> --}}
                                 </table>                                
                                 <!--end::Table-->
                             </div>                    
@@ -588,5 +623,119 @@
                     url: "/assets/lang/Malay.json"
                 }
         });
+    </script>
+
+    <!--filter negeri daerah-->
+    <script>
+        $(document).ready(function() {
+            $('#aadk_negeri_s').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#aadk_daerah_s').empty();
+                            $('#aadk_daerah_s').append('<option value="">Pilih AADK Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                $('#aadk_daerah_s').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#aadk_daerah_s').empty();
+                    $('#aadk_daerah_s').append('<option value="">Pilih AADK Daerah</option>');
+                }
+            });
+        });
+    </script>
+
+    {{-- AJAX SELESAI MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                let formData = $('#filter-form').serialize(); // Serialize form data
+
+                $.ajax({
+                    url: "{{ route('ajax-senarai-selesai-menjawab') }}",
+                    method: "GET",
+                    data: formData,
+                    success: function (response) {
+                        let tableBody = $("#table-body");
+                        tableBody.empty(); // Clear existing data
+
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+
+                            // Determine tahap kepulihan badge color
+                            let badgeColor;
+                            switch (row.tahap) {
+                                case 'SANGAT TIDAK MEMUASKAN':
+                                    badgeColor = 'background-color: red;';
+                                    break;
+                                case 'KURANG MEMUASKAN':
+                                    badgeColor = 'background-color: darkorange;';
+                                    break;
+                                case 'MEMUASKAN':
+                                    badgeColor = 'background-color: #ffc107;';
+                                    break;
+                                default:
+                                    badgeColor = 'background-color: green;';
+                            }
+                            
+                            let newRow = `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                    <td style="text-align: center;">
+                                        <span class="badge text-white" style="padding:10px; width:200px; display: inline-block; text-align: center; ${badgeColor}">
+                                            ${row.tahap ? row.tahap : 'N/A'}
+                                        </span>
+                                    </td>
+                                </tr>
+                            `;
+                            tableBody.append(newRow);
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+
+            // Fetch data on page load
+            fetchData();
+
+            // Fetch data when filter form is submitted
+            $("#filter-form").submit(function (e) {
+                e.preventDefault();
+                fetchData();
+            });
+        });
+
+        // $(document).ready(function () {
+        //     $("#export-excel").click(function (e) {
+        //         e.preventDefault();
+
+        //         var fromDate = $("#from_date_s").val();
+        //         var toDate = $("#to_date_s").val();
+        //         var tahap = $("#tahap_kepulihan_id").val();
+        //         var negeri = $("#aadk_negeri_s").val();
+        //         var daerah = $("#aadk_daerah_s").val();
+
+        //         var query = $.param({
+        //             from_date_s: fromDate,
+        //             to_date_s: toDate,
+        //             tahap_kepulihan_id: tahap,
+        //             aadk_negeri_s: negeri,
+        //             aadk_daerah_s: daerah
+        //         });
+
+        //         window.location.href = "/excel/selesai-menjawab" + query;
+        //     });
+        // });
     </script>
 @endsection

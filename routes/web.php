@@ -260,6 +260,8 @@ Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [Pelapora
 // PENTADBIR & BRPP - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pelaporan/analisis/modal-kepulihan', [PelaporanController::class, 'analisisModalKepulihan'])->name('pelaporan.analisis.modal_kepulihan');
 Route::get('/pelaporan/rekod/modal-kepulihan', [PelaporanController::class, 'rekodModalKepulihan'])->name('pelaporan.rekod.modal_kepulihan');
+Route::get('/senarai-klien/selesai-menjawab', [PelaporanController::class, 'jsonSelesaiMenjawabPB'])->name('ajax-senarai-selesai-menjawab');
+Route::get('/excel/selesai-menjawab', [PelaporanController::class, 'MKselesaiMenjawabExcelPB'])->name('export.selesai-menjawab.excel');
 
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
