@@ -219,18 +219,20 @@
                                         <div class="col-md-4 mt-5">
                                             <h5>
                                                 Analisis Modal Kepulihan:
-                                                <a href="{{ route('exportAnalisisMKNegeri.pdf', [
+                                                <a href="{{ route('pelaporan.analisisMK.pdf', [
                                                     'from_date_s' => request('from_date_s'), 
                                                     'to_date_s' => request('to_date_s'), 
                                                     'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
+                                                    'aadk_negeri_s' => request('aadk_negeri_s'),
                                                     'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
                                                     class="btn btn-sm btn-danger">
                                                     <i class="fas fa-file-pdf"></i>
                                                 </a>
-                                                <a href="{{ route('selesai.pdf.negeri', [
+                                                <a href="{{ route('pelaporan.analisisMK.excel', [
                                                     'from_date_s' => request('from_date_s'), 
                                                     'to_date_s' => request('to_date_s'), 
                                                     'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
+                                                    'aadk_negeri_s' => request('aadk_negeri_s'),
                                                     'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
                                                     class="btn btn-sm btn-success">
                                                     <i class="fas fa-file-excel"></i>
@@ -254,12 +256,19 @@
                                             <th style="text-align: center; width: 20%;">AADK Daerah</th>
                                             <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
                                             <th style="text-align: center; width: 20%;">Tahap Kepulihan</th>  
-                                            {{-- <th style="text-align: center; width: 8%;">Sejarah Menjawab</th> --}}
                                         </tr>
                                     </thead>
+
                                     <tbody id="table-body">
-                                        <!-- Data will be inserted here dynamically -->
-                                    </tbody>                                    
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
+                                    </tbody>
                                     {{-- <tbody class="fw-semibold text-gray-600">
                                         @foreach($selesai_menjawab as $response1)
                                             @php
@@ -730,13 +739,13 @@
                     aadk_daerah_s: daerah
                 });
 
-                window.location.href = "/excel/selesai-menjawab?" + query; // Added '?' before query
+                window.location.href = "/pelaporan/excel/selesai-menjawab?" + query; // Added '?' before query
             });
 
             $('#export-pdf1').on('click', function (e) {
                 e.preventDefault();
                 let filterData = $('#filter-form').serialize(); // Get filtered values
-                window.open("{{ route('selesai.pdf') }}?" + filterData, '_blank');
+                window.open("{{ route('pelaporan.selesai-menjawab.pdf') }}?" + filterData, '_blank');
             });
         });
     </script>

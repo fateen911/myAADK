@@ -261,8 +261,10 @@ Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [Pelapora
 Route::get('/pelaporan/analisis/modal-kepulihan', [PelaporanController::class, 'analisisModalKepulihan'])->name('pelaporan.analisis.modal_kepulihan');
 Route::get('/pelaporan/rekod/modal-kepulihan', [PelaporanController::class, 'rekodModalKepulihan'])->name('pelaporan.rekod.modal_kepulihan');
 Route::get('/senarai-klien/selesai-menjawab', [PelaporanController::class, 'jsonSelesaiMenjawabPB'])->name('ajax-senarai-selesai-menjawab');
-Route::get('/excel/selesai-menjawab', [PelaporanController::class, 'MKselesaiMenjawabExcelPB'])->name('export.selesai-menjawab.excel');
-Route::get('/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabPB'])->name('selesai.pdf');
+Route::get('/pelaporan/excel/selesai-menjawab', [PelaporanController::class, 'MKselesaiMenjawabExcelPB'])->name('pelaporan.export.selesai-menjawab.excel');
+Route::get('/pelaporan/pdf/modal-kepulihan/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabPB'])->name('pelaporan.selesai-menjawab.pdf');
+Route::get('/pelaporan/pdf/analisis/modal-kepulihan/selesai-menjawab', [PelaporanController::class, 'PDFAnalisisMK'])->name('pelaporan.analisisMK.pdf');
+Route::get('/export-analisis-mk', [PelaporanController::class, 'excelAnalisisMK'])->name('pelaporan.analisisMK.excel');
 
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');

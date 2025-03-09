@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnalisisMKExcel;
 use App\Exports\MKSelesaiMenjawabExcel;
 use App\Exports\PelaporanAktivitiExcel;
 use App\Exports\PerekodanKehadiranExcel;
@@ -265,6 +266,70 @@ class PelaporanController extends Controller
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
         return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
+    }
+
+    public function PDFAnalisisMK()
+    {
+        // Fetch data based on the latest six month
+        $sixMonthsAgo = now()->subMonths(6);
+        
+        // Define the modal kepulihan categories
+        $modalKepulihan = [
+            'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
+            'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
+        ];
+
+        // Get clients who completed the assessment
+        $data = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('skor_modal as sm', function ($join) {
+                    $join->on('kk.klien_id', '=', 'sm.klien_id')
+                        ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
+                })
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat',
+                )
+                ->select('kk.klien_id', 'kk.skor', 'sm.*')
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->where('kk.status', 'Selesai')
+                ->get();
+
+        // Define categories
+        $categories = [
+            'Sangat Memuaskan' => [3.51, 4.0],
+            'Memuaskan' => [2.51, 3.5],
+            'Kurang Memuaskan' => [1.51, 2.5],
+            'Sangat Tidak Memuaskan' => [1.0, 1.5],
+        ];
+
+        // Count clients in each category for each modal kepulihan
+        $counts = [];
+        foreach ($categories as $category => [$min, $max]) {
+            foreach ($modalKepulihan as $modal) {
+                $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
+            }
+        }
+
+        $totalClients = $data->unique('klien_id')->count();
+
+        // Generate PDF
+        $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
+        return $pdf->stream('analisis_modal_kepulihan.pdf');
+    }
+
+    public function excelAnalisisMK(Request $request)
+    {
+        $filters = [
+            'from_date_s' => $request->from_date_s,
+            'to_date_s' => $request->to_date_s,
+            'tahap_kepulihan_id' => $request->tahap_kepulihan_id,
+            'aadk_negeri_s' => $request->aadk_negeri_s,
+            'aadk_daerah_s' => $request->aadk_daerah_s,
+        ];
+    
+        return Excel::download(new AnalisisMKExcel($filters), 'Analisis_Modal_Kepulihan.xlsx');
     }
 
     // PEGAWAI NEGERI
