@@ -6,12 +6,18 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class MKSelesaiMenjawabExcel implements FromCollection
+class MKSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, WithEvents,  WithColumnWidths
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     protected $filters;
 
     public function __construct($filters)
@@ -35,7 +41,6 @@ class MKSelesaiMenjawabExcel implements FromCollection
                 't.tahap'
             );
 
-        // Apply Filters
         if (!empty($this->filters['from_date_s']) && !empty($this->filters['to_date_s'])) {
             $query->whereBetween('kk.updated_at', [$this->filters['from_date_s'], $this->filters['to_date_s']]);
         }
@@ -54,18 +59,107 @@ class MKSelesaiMenjawabExcel implements FromCollection
 
     public function headings(): array
     {
-        return ['Nama', 'No. Kad Pengenalan', 'AADK Negeri', 'AADK Daerah', 'Tarikh Terakhir Menjawab', 'Tahap Kepulihan'];
+        return [
+            ['PELAPORAN: MODAL KEPULIHAN - SENARAI KLIEN SELESAI MENJAWAB'], 
+            [''],
+            [
+                'BIL.',
+                'NAMA',
+                'NO. KAD PENGENALAN',
+                'AADK NEGERI',
+                'AADK DAERAH',                
+                'TARIKH TERAKHIR MENJAWAB',
+                'TAHAP KEPULIHAN',
+            ],
+        ];
     }
 
     public function map($row): array
     {
+        // Increment the counter for "BIL" column
+        static $counter = 0;
+        $counter++;
+
         return [
+            "\u{200B}" . $counter . ".", // Adds a zero-width space before the number
             $row->nama,
-            $row->no_kp,
-            optional($row->negeriPejabat)->negeri,
-            optional($row->daerahPejabat)->daerah,
+            strval($row->no_kp), // Converts to string without adding apostrophe
+            $row->negeri,
+            $row->daerah,
             $row->updated_at ? \Carbon\Carbon::parse($row->updated_at)->format('d/m/Y') : 'N/A',
-            optional($row->tahapKepulihan)->tahap,
+            $row->tahap,
+        ];
+    }
+
+    public function columnWidths(): array
+    {
+        return [
+            'A' => 5,
+            'B' => 35,           
+            'C' => 25,
+            'D' => 25,
+            'E' => 40,
+            'F' => 30,
+            'G' => 30,
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'A' => '@', // Forces column C (NO KP) to be treated as text
+            'C' => NumberFormat::FORMAT_NUMBER,
+            'F' => NumberFormat::FORMAT_DATE_DDMMYYYY, // Format Date
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                
+                // Merge title row
+                $sheet->mergeCells('A1:G1');
+                $sheet->mergeCells('A2:G2');
+
+                // Title Styling (Row 1)
+                $sheet->getStyle('A1')->applyFromArray([
+                    'font' => ['bold' => true, 'size' => 16],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+                ]);
+
+                // Find the last row with data
+                $lastRow = $event->sheet->getHighestRow();
+
+                // Apply header styling (Row 3)
+                $sheet->getStyle('A3:G3')->applyFromArray([
+                    'font' => [
+                        'bold' => true, 
+                        'size' => 12, 
+                        'color' => ['rgb' => '000000'], // Change font color to Black
+                    ],
+                    'fill' => [
+                        'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'D3D3D3'], // Gray background
+                    ],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+                ]);
+
+                // Apply borders to all data rows (A1:G$lastRow)
+                $sheet->getStyle('A1:G' . $lastRow)->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'], // Black border color
+                        ],
+                    ],
+                ]);
+
+                // Center align all data except for column B (Nama)
+                $sheet->getStyle('A4:A' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle('C4:G' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            },
         ];
     }
 }
