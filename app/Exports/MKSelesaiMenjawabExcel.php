@@ -15,6 +15,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Carbon\Carbon;
 
 class MKSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, WithEvents,  WithColumnWidths
 {
@@ -27,6 +28,8 @@ class MKSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMappin
 
     public function collection()
     {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
         $query = DB::table('keputusan_kepulihan_klien as kk')
             ->join('klien as k', 'kk.klien_id', '=', 'k.id')
             ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
@@ -39,7 +42,10 @@ class MKSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMappin
                 'd.daerah',
                 'kk.updated_at',
                 't.tahap'
-            );
+            )
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
+            ->where('kk.status', 'Selesai')
+            ->orderBy('kk.updated_at', 'desc');
 
         if (!empty($this->filters['from_date_s']) && !empty($this->filters['to_date_s'])) {
             $query->whereBetween('kk.updated_at', [$this->filters['from_date_s'], $this->filters['to_date_s']]);

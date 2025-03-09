@@ -172,6 +172,8 @@ class PelaporanController extends Controller
 
     public function jsonSelesaiMenjawabPB(Request $request)
     {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
         $query = DB::table('keputusan_kepulihan_klien as kk')
             ->join('klien as k', 'kk.klien_id', '=', 'k.id')
             ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
@@ -185,7 +187,10 @@ class PelaporanController extends Controller
                 'd.daerah', 
                 'kk.updated_at', 
                 't.tahap'
-            );
+            )
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
+            ->where('kk.status', 'Selesai')
+            ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
         if ($request->from_date_s && $request->to_date_s) {
@@ -217,6 +222,50 @@ class PelaporanController extends Controller
         return Excel::download(new MKSelesaiMenjawabExcel($filters), 'senarai_klien_selesai_menjawab.xlsx');
     }
 
+    public function PDFselesaiMenjawabPB(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+            ->select(
+                'u.nama',
+                'u.no_kp',
+                'u.daerah_pejabat',
+                'u.negeri_pejabat',
+                DB::raw('ROUND(kk.skor, 3) as skor'),
+                'kk.tahap_kepulihan_id',
+                'kk.updated_at'
+            )
+            ->where('kk.updated_at', '>=', $sixMonthsAgo)
+            ->where('kk.status', 'Selesai')
+            ->orderBy('kk.updated_at', 'desc');
+
+        if ($request->filled('from_date_s')) {
+            $query->whereDate('kk.updated_at', '>=', $request->from_date_s);
+        }
+
+        if ($request->filled('to_date_s')) {
+            $query->whereDate('kk.updated_at', '<=', $request->to_date_s);
+        }
+
+        if ($request->filled('tahap_kepulihan_id')) {
+            $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
+        }
+
+        if ($request->filled('aadk_negeri_s')) {
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_s);
+        }
+
+        if ($request->filled('aadk_daerah_s')) {
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_s);
+        }
+
+        $filteredData = $query->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_selesai_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
+        return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
+    }
 
     // PEGAWAI NEGERI
     public function modalKepulihanNegeri(Request $request)

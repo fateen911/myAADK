@@ -207,15 +207,11 @@
                                         <div class="col-md-3 mt-5">
                                             <h5>
                                                 Senarai Rekod Klien:
-                                                <a href="{{ route('selesai.pdf.negeri', [
-                                                    'from_date_s' => request('from_date_s'), 
-                                                    'to_date_s' => request('to_date_s'), 
-                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
-                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
-                                                    class="btn btn-sm btn-danger">
+                                                <a href="#" id="export-pdf1" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-file-pdf"></i>
                                                 </a>
-                                                <a href="{{ route('export.selesai-menjawab.excel')}}" id="export-excel" class="btn btn-sm btn-success">
+                                                
+                                                <a href="#" id="export-excel1" class="btn btn-sm btn-success">
                                                     <i class="fas fa-file-excel"></i>
                                                 </a>
                                             </h5>
@@ -716,26 +712,32 @@
             });
         });
 
-        // $(document).ready(function () {
-        //     $("#export-excel").click(function (e) {
-        //         e.preventDefault();
+        $(document).ready(function () {
+            $("#export-excel1").click(function (e) {
+                e.preventDefault();
 
-        //         var fromDate = $("#from_date_s").val();
-        //         var toDate = $("#to_date_s").val();
-        //         var tahap = $("#tahap_kepulihan_id").val();
-        //         var negeri = $("#aadk_negeri_s").val();
-        //         var daerah = $("#aadk_daerah_s").val();
+                var fromDate = $("#from_date_s").val();
+                var toDate = $("#to_date_s").val();
+                var tahap = $("#tahap_kepulihan_id").val();
+                var negeri = $("#aadk_negeri_s").val();
+                var daerah = $("#aadk_daerah_s").val();
 
-        //         var query = $.param({
-        //             from_date_s: fromDate,
-        //             to_date_s: toDate,
-        //             tahap_kepulihan_id: tahap,
-        //             aadk_negeri_s: negeri,
-        //             aadk_daerah_s: daerah
-        //         });
+                var query = $.param({
+                    from_date_s: fromDate,
+                    to_date_s: toDate,
+                    tahap_kepulihan_id: tahap,
+                    aadk_negeri_s: negeri,
+                    aadk_daerah_s: daerah
+                });
 
-        //         window.location.href = "/excel/selesai-menjawab" + query;
-        //     });
-        // });
+                window.location.href = "/excel/selesai-menjawab?" + query; // Added '?' before query
+            });
+
+            $('#export-pdf1').on('click', function (e) {
+                e.preventDefault();
+                let filterData = $('#filter-form').serialize(); // Get filtered values
+                window.open("{{ route('selesai.pdf') }}?" + filterData, '_blank');
+            });
+        });
     </script>
 @endsection

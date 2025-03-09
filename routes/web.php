@@ -262,6 +262,7 @@ Route::get('/pelaporan/analisis/modal-kepulihan', [PelaporanController::class, '
 Route::get('/pelaporan/rekod/modal-kepulihan', [PelaporanController::class, 'rekodModalKepulihan'])->name('pelaporan.rekod.modal_kepulihan');
 Route::get('/senarai-klien/selesai-menjawab', [PelaporanController::class, 'jsonSelesaiMenjawabPB'])->name('ajax-senarai-selesai-menjawab');
 Route::get('/excel/selesai-menjawab', [PelaporanController::class, 'MKselesaiMenjawabExcelPB'])->name('export.selesai-menjawab.excel');
+Route::get('/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabPB'])->name('selesai.pdf');
 
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
