@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\AnalisisMKExcel;
 use App\Exports\MKSelesaiMenjawabExcel;
+use App\Exports\MKBelumSelesaiMenjawabExcel;
 use App\Exports\PelaporanAktivitiExcel;
 use App\Exports\PerekodanKehadiranExcel;
 use App\Models\Daerah;
@@ -78,10 +79,10 @@ class PelaporanController extends Controller
         // $aadk_negeri_s = $request->input('aadk_negeri_s');
         // $aadk_daerah_s = $request->input('aadk_daerah_s');
 
-        $from_date_bs = $request->input('from_date_bs');
-        $to_date_bs = $request->input('to_date_bs');
-        $aadk_negeri_bs = $request->input('aadk_negeri_bs');
-        $aadk_daerah_bs = $request->input('aadk_daerah_bs');
+        // $from_date_bs = $request->input('from_date_bs');
+        // $to_date_bs = $request->input('to_date_bs');
+        // $aadk_negeri_bs = $request->input('aadk_negeri_bs');
+        // $aadk_daerah_bs = $request->input('aadk_daerah_bs');
 
         $from_date_tm6 = $request->input('from_date_tm6');
         $to_date_tm6 = $request->input('to_date_tm6');
@@ -171,6 +172,7 @@ class PelaporanController extends Controller
         return view('pelaporan.modal_kepulihan.pentadbir_brpp_rekod', compact('aadk_negeri','aadk_daerah','tahap_kepulihan_list','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
     }
 
+    // PENTADBIR & BRPP - MODAL KEPULIHAN - SELESAI MENJAWAB
     public function jsonSelesaiMenjawabPB(Request $request)
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -356,6 +358,111 @@ class PelaporanController extends Controller
         ];
     
         return Excel::download(new AnalisisMKExcel($filters), 'Analisis_Modal_Kepulihan.xlsx');
+    }
+
+    // PENTADBIR & BRPP - MODAL KEPULIHAN - BELUM SELESAI MENJAWAB
+    public function jsonBelumSelesaiMenjawabPB(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                ->select(
+                    'u.id as klien_id',
+                    'u.nama',
+                    'u.no_kp',
+                    'd.daerah as nama_daerah',  // Get the actual daerah name
+                    'n.negeri as nama_negeri',  // Get the actual negeri name
+                    'kk.updated_at',
+                    'kk.status' // Assuming there is a status column
+                )
+                ->where('kk.status', '!=', 'Selesai') // Not completed responses
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->whereIn('kk.updated_at', function ($query) {
+                    $query->select(DB::raw('MAX(updated_at)'))
+                        ->from('keputusan_kepulihan_klien')
+                        ->whereColumn('klien_id', 'kk.klien_id')
+                        ->groupBy('klien_id');
+                })
+                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'd.daerah', 'n.negeri','kk.updated_at', 'kk.status')
+                ->orderBy('kk.updated_at', 'desc');
+
+        // Apply Filters
+        if ($request->from_date_bs && $request->to_date_bs) {
+            $query->whereBetween('kk.updated_at', [$request->from_date_bs, $request->to_date_bs]);
+        }
+        if ($request->aadk_negeri_bs) {
+            $query->where('k.negeri_pejabat', $request->aadk_negeri_bs);
+        }
+        if ($request->aadk_daerah_bs) {
+            $query->where('k.daerah_pejabat', $request->aadk_daerah_bs);
+        }
+
+        return response()->json(['data' => $query->get()]);
+    }
+
+    public function MKBelumSelesaiMenjawabExcelPB(Request $request)
+    {
+        $filters = [
+            'from_date_bs' => $request->input('from_date_bs'),
+            'to_date_bs' => $request->input('to_date_bs'),
+            'aadk_negeri_bs' => $request->input('aadk_negeri_bs'),
+            'aadk_daerah_bs' => $request->input('aadk_daerah_bs'),
+        ];
+
+        return Excel::download(new MKBelumSelesaiMenjawabExcel($filters), 'senarai_klien_belum_selesai_menjawab.xlsx');
+    }
+
+    public function PDFBelumSelesaiMenjawabPB(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('keputusan_kepulihan_klien as kk')
+                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                ->select(
+                    'u.id as klien_id',
+                    'u.nama',
+                    'u.no_kp',
+                    'u.daerah_pejabat',
+                    'u.negeri_pejabat',
+                    DB::raw('ROUND(kk.skor, 3) as skor'), // Format skor to 3 decimal places
+                    'kk.tahap_kepulihan_id',
+                    'kk.updated_at',
+                    'kk.status' // Assuming there is a status column
+                )
+                ->where('kk.status', '!=', 'Selesai') // Not completed responses
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->whereIn('kk.updated_at', function ($query) {
+                    $query->select(DB::raw('MAX(updated_at)'))
+                        ->from('keputusan_kepulihan_klien')
+                        ->whereColumn('klien_id', 'kk.klien_id')
+                        ->groupBy('klien_id');
+                })
+                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+                ->orderBy('kk.updated_at', 'desc');
+
+        if ($request->filled('from_date_bs')) {
+            $query->whereDate('kk.updated_at', '>=', $request->from_date_bs);
+        }
+
+        if ($request->filled('to_date_bs')) {
+            $query->whereDate('kk.updated_at', '<=', $request->to_date_bs);
+        }
+
+        if ($request->filled('aadk_negeri_bs')) {
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_bs);
+        }
+
+        if ($request->filled('aadk_daerah_bs')) {
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_bs);
+        }
+
+        $filteredData = $query->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_belum_selesai_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
+        return $pdf->stream('Senarai_Klien_Belum_Selesai_Menjawab.pdf');
     }
 
     // PEGAWAI NEGERI

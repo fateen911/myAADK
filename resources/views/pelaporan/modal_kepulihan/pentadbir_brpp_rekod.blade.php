@@ -144,14 +144,14 @@
                             <div class="header d-flex justify-content-between align-items-center" style="padding-left: 10px;">
                                 <h2>
                                     Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
-                                    <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
+                                    <br><small>Sila klik pada nama klien untuk lihat butirannya.</small>
                                 </h2>
                             </div>
                             <!--end::Card header-->
 
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
-                                <form id="filter-form">
+                                <form id="filter-form1">
                                     <div class="row align-items-center">
                                         <!-- Date Range -->
                                         <div class="col-md-2">
@@ -248,7 +248,7 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody id="table-body">
+                                    <tbody id="table-body1">
                                         <tr>
                                             <td>Tiada</td>
                                             <td>Tiada</td>
@@ -258,39 +258,6 @@
                                             <td>Tiada</td>
                                         </tr>
                                     </tbody>
-                                    {{-- <tbody class="fw-semibold text-gray-600">
-                                        @foreach($selesai_menjawab as $response1)
-                                            @php
-                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response1->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response1->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response1->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                            @endphp
-                                            <tr>
-                                                <td style="width: 25%;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
-                                                        {{ $response1->nama }}
-                                                    </a>
-                                                </td>
-                                                <td style="width: 10%; text-align: center;">{{ $response1->no_kp }}</td>
-                                                <td style="width: 15%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ isset($response1->updated_at) ? Carbon::parse($response1->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 20%; text-align: center;">   
-                                                    @if ($response1->tahap_kepulihan_id)
-                                                        @if ($response1->tahap_kepulihan_id == 1)
-                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response1->tahap_kepulihan_id == 2)
-                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response1->tahap_kepulihan_id == 3)
-                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
-                                                        @else
-                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody> --}}
                                 </table>                                
                                 <!--end::Table-->
                             </div>                    
@@ -302,49 +269,65 @@
                             <!--begin::Card header-->
                             <div class="header" style="padding-left: 10px;">
                                 <h2>Senarai Klien Belum Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
-                                    <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
+                                    <br><small>Sila klik pada nama klien untuk lihat butirannya.</small>
                                 </h2>
                             </div>
                             <!--end::Card header-->
 
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
-                                <form id="filter-form">
-                                    <div class="row">
+                                <form id="filter-form2">
+                                    <div class="row align-items-center">
+                                        <!-- Date Range -->
                                         <div class="col-md-2">
-                                            <label for="from_date_bs">Tarikh Mula:</label>
                                             <input type="date" id="from_date_bs" name="from_date_bs" class="form-control" value="{{ request('from_date_bs') }}">
                                         </div>
+                                        <span class="col-auto">-</span> <!-- Dash centered between inputs -->
                                         <div class="col-md-2">
-                                            <label for="to_date_bs">Tarikh Akhir:</label>
                                             <input type="date" id="to_date_bs" name="to_date_bs" class="form-control" value="{{ request('to_date_bs') }}">
                                         </div>
+                                
+                                        <!-- AADK Negeri -->
                                         <div class="col-md-3">
-                                            <label for="aadk_daerah_bs">AADK Daerah:</label>
-                                            <select id="aadk_daerah_bs" name="aadk_daerah_bs" class="form-control">
-                                                <option value="">Semua</option>
-                                                @foreach($aadk_daerah as $d2)
-                                                    <option value="{{ $d2->kod }}" {{ request('aadk_daerah_bs') == $d2->kod ? 'selected' : '' }}>
-                                                        {{ $d2->daerah }}
+                                            <select id="aadk_negeri_bs" class="form-select" name="aadk_negeri_bs">
+                                                <option value="">Pilih AADK Negeri</option>
+                                                @foreach($aadk_negeri as $item)
+                                                    <option value="{{$item->id}}" {{ request('aadk_negeri_bs') == $item->id ? 'selected' : '' }}>{{$item->negeri}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                
+                                        <!-- AADK Daerah -->
+                                        <div class="col-md-3">
+                                            <select id="aadk_daerah_bs" class="form-select" name="aadk_daerah_bs">
+                                                <option value="">Pilih AADK Daerah</option>
+                                                @foreach($aadk_daerah as $d1)
+                                                    <option value="{{ $d1->kod }}" {{ request('aadk_daerah_bs') == $d1->kod ? 'selected' : '' }}>
+                                                        {{ $d1->daerah }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                
+                                        <!-- Filter Button -->
                                         <div class="col-md-1">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary"> 
+                                            <button type="submit" class="btn btn-primary">
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-4">
-                                            <br>
-                                            <a href="{{ route('belum_selesai.pdf.negeri', [
-                                                'from_date_bs' => request('from_date_bs'), 
-                                                'to_date_bs' => request('to_date_bs'),
-                                                'aadk_daerah_bs' => request('aadk_daerah_bs')]) }}" 
-                                                class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Senarai Klien
-                                            </a>
+
+                                        {{-- Export PDF & EXCEL --}}
+                                        <div class="col-md-3 mt-5">
+                                            <h5>
+                                                Senarai Rekod Klien:
+                                                <a href="#" id="export-pdf3" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                
+                                                <a href="#" id="export-excel3" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </a>
+                                            </h5>
                                         </div>
                                     </div>
                                 </form>
@@ -361,34 +344,16 @@
                                             <th style="text-align: center; width: 15%;">No. Kad Pengenalan</th>
                                             <th style="text-align: center; width: 15%;">AADK Negeri</th>
                                             <th style="text-align: center; width: 20%;">AADK Daerah</th>
-                                            <th style="text-align: center; width: 10%;">Tarikh Terakhir Menjawab</th> 
-                                            <th style="text-align: center; width: 10%;">Sejarah Menjawab</th>
+                                            <th style="text-align: center; width: 20%;">Tarikh Terakhir Menjawab</th> 
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($belum_selesai_menjawab as $response2)
-                                            @php
-                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response2->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response2->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response2->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                            @endphp
-                                            <tr>
-                                                <td style="width: 30%;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
-                                                        {{ $response2->nama }}
-                                                    </a>
-                                                </td>
-                                                <td style="width: 15%; text-align: center;">{{ $response2->no_kp }}</td>
-                                                <td style="width: 15%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 10%; text-align: center;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+
+                                    <tbody id="table-body2">
+                                        <td>Tiada</td>
+                                        <td>Tiada</td>
+                                        <td>Tiada</td>
+                                        <td>Tiada</td>
+                                        <td>Tiada</td>
                                     </tbody>
                                 </table>                                
                                 <!--end::Table-->
@@ -585,6 +550,7 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
     
+    {{-- Sorting table --}}
     <script>
         $('#sortTable1').DataTable({
                 ordering: true, 
@@ -644,18 +610,42 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#aadk_negeri_bs').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#aadk_daerah_bs').empty();
+                            $('#aadk_daerah_bs').append('<option value="">Pilih AADK Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                $('#aadk_daerah_bs').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#aadk_daerah_bs').empty();
+                    $('#aadk_daerah_bs').append('<option value="">Pilih AADK Daerah</option>');
+                }
+            });
+        });
+    </script>
+
     {{-- AJAX SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
             function fetchData() {
-                let formData = $('#filter-form').serialize(); // Serialize form data
+                let formData = $('#filter-form1').serialize(); // Serialize form data
 
                 $.ajax({
                     url: "{{ route('ajax-senarai-selesai-menjawab') }}",
                     method: "GET",
                     data: formData,
                     success: function (response) {
-                        let tableBody = $("#table-body");
+                        let tableBody = $("#table-body1");
                         tableBody.empty(); // Clear existing data
 
                         $.each(response.data, function (index, row) {
@@ -704,7 +694,7 @@
             fetchData();
 
             // Fetch data when filter form is submitted
-            $("#filter-form").submit(function (e) {
+            $("#filter-form1").submit(function (e) {
                 e.preventDefault();
                 fetchData();
             });
@@ -734,7 +724,7 @@
 
             $('#export-pdf1').on('click', function (e) {
                 e.preventDefault();
-                let filterData = $('#filter-form').serialize(); // Get filtered values
+                let filterData = $('#filter-form1').serialize(); // Get filtered values
                 window.open("{{ route('pelaporan.selesai-menjawab.pdf') }}?" + filterData, '_blank');
             });
         });
@@ -762,8 +752,81 @@
 
             $('#export-pdf2').on('click', function (e) {
                 e.preventDefault();
-                let filterData = $('#filter-form').serialize(); // Get filtered values
+                let filterData = $('#filter-form1').serialize(); // Get filtered values
                 window.open("{{ route('pelaporan.analisisMK.pdf') }}?" + filterData, '_blank');
+            });
+        });
+    </script>
+
+    {{-- AJAX BELUM SELESAI MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                let formData = $('#filter-form2').serialize(); // Serialize form data
+
+                $.ajax({
+                    url: "{{ route('ajax-senarai-belum-selesai-menjawab') }}",
+                    method: "GET",
+                    data: formData,
+                    success: function (response) {
+                        let tableBody = $("#table-body2");
+                        tableBody.empty(); // Clear existing data
+
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+
+                            let newRow = `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.nama_negeri}</td>
+                                    <td style="text-align: center;">${row.nama_daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                </tr>
+                            `;
+                            tableBody.append(newRow);
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+
+            // Fetch data on page load
+            fetchData();
+
+            // Fetch data when filter form is submitted
+            $("#filter-form2").submit(function (e) {
+                e.preventDefault();
+                fetchData();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#export-excel3").click(function (e) {
+                e.preventDefault();
+
+                var fromDate = $("#from_date_bs").val();
+                var toDate = $("#to_date_bs").val();
+                var negeri = $("#aadk_negeri_bs").val();
+                var daerah = $("#aadk_daerah_bs").val();
+
+                var query = $.param({
+                    from_date_bs: fromDate,
+                    to_date_bs: toDate,
+                    aadk_negeri_bs: negeri,
+                    aadk_daerah_bs: daerah
+                });
+
+                window.location.href = "/pelaporan/excel/belum-selesai-menjawab?" + query; // Added '?' before query
+            });
+
+
+            $('#export-pdf3').on('click', function (e) {
+                e.preventDefault();
+                let filterData = $('#filter-form2').serialize(); // Get filtered values
+                window.open("{{ route('pelaporan.belum-selesai-menjawab.pdf') }}?" + filterData, '_blank');
             });
         });
     </script>
