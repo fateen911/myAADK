@@ -29,24 +29,30 @@ class AnalisisMKExcel implements FromView, WithEvents
 
         // Fetch data with filters
         $query = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('skor_modal as sm', function ($join) {
-                $join->on('kk.klien_id', '=', 'sm.klien_id')
-                    ->on('kk.sesi', '=', 'sm.sesi');
-            })
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select('kk.klien_id', 'kk.skor', 'sm.*')
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->where('kk.status', 'Selesai');
+        ->join('skor_modal as sm', function ($join) {
+            $join->on('kk.klien_id', '=', 'sm.klien_id')
+                ->on('kk.sesi', '=', 'sm.sesi');
+        })
+        ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+        ->select('kk.klien_id', 'kk.skor', 'sm.*')
+        ->where('kk.updated_at', '>=', $sixMonthsAgo)
+        ->where('kk.status', 'Selesai');
 
         // Apply filters if set
+        if (!empty($this->filters['from_date_s'])) {
+            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_s']);
+        }
+        if (!empty($this->filters['to_date_s'])) {
+            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_s']);
+        }
         if (!empty($this->filters['tahap_kepulihan_id'])) {
             $query->where('kk.tahap_kepulihan_id', $this->filters['tahap_kepulihan_id']);
         }
         if (!empty($this->filters['aadk_negeri_s'])) {
-            $query->where('u.negeri', $this->filters['aadk_negeri_s']);
+            $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_s']);
         }
         if (!empty($this->filters['aadk_daerah_s'])) {
-            $query->where('u.daerah', $this->filters['aadk_daerah_s']);
+            $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_s']);
         }
 
         $data = collect($query->get());

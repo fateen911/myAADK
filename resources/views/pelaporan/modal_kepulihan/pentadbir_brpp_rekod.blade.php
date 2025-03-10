@@ -219,22 +219,11 @@
                                         <div class="col-md-4 mt-5">
                                             <h5>
                                                 Analisis Modal Kepulihan:
-                                                <a href="{{ route('pelaporan.analisisMK.pdf', [
-                                                    'from_date_s' => request('from_date_s'), 
-                                                    'to_date_s' => request('to_date_s'), 
-                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
-                                                    'aadk_negeri_s' => request('aadk_negeri_s'),
-                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
-                                                    class="btn btn-sm btn-danger">
+                                                <a href="#" id="export-pdf2" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-file-pdf"></i>
                                                 </a>
-                                                <a href="{{ route('pelaporan.analisisMK.excel', [
-                                                    'from_date_s' => request('from_date_s'), 
-                                                    'to_date_s' => request('to_date_s'), 
-                                                    'tahap_kepulihan_id' => request('tahap_kepulihan_id'),
-                                                    'aadk_negeri_s' => request('aadk_negeri_s'),
-                                                    'aadk_daerah_s' => request('aadk_daerah_s')]) }}" 
-                                                    class="btn btn-sm btn-success">
+
+                                                <a href="#" id="export-excel2" class="btn btn-sm btn-success">
                                                     <i class="fas fa-file-excel"></i>
                                                 </a>
                                             </h5>
@@ -742,10 +731,39 @@
                 window.location.href = "/pelaporan/excel/selesai-menjawab?" + query; // Added '?' before query
             });
 
+
             $('#export-pdf1').on('click', function (e) {
                 e.preventDefault();
                 let filterData = $('#filter-form').serialize(); // Get filtered values
                 window.open("{{ route('pelaporan.selesai-menjawab.pdf') }}?" + filterData, '_blank');
+            });
+        });
+
+        $(document).ready(function () {
+            $("#export-excel2").click(function (e) {
+                e.preventDefault();
+
+                var fromDate = $("#from_date_s").val();
+                var toDate = $("#to_date_s").val();
+                var tahap = $("#tahap_kepulihan_id").val();
+                var negeri = $("#aadk_negeri_s").val();
+                var daerah = $("#aadk_daerah_s").val();
+
+                var query = $.param({
+                    from_date_s: fromDate,
+                    to_date_s: toDate,
+                    tahap_kepulihan_id: tahap,
+                    aadk_negeri_s: negeri,
+                    aadk_daerah_s: daerah
+                });
+
+                window.location.href = "/pelaporan/excel/analisis-mk?" + query; // Added '?' before query
+            });
+
+            $('#export-pdf2').on('click', function (e) {
+                e.preventDefault();
+                let filterData = $('#filter-form').serialize(); // Get filtered values
+                window.open("{{ route('pelaporan.analisisMK.pdf') }}?" + filterData, '_blank');
             });
         });
     </script>
