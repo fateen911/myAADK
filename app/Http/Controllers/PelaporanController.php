@@ -394,10 +394,10 @@ class PelaporanController extends Controller
             $query->whereBetween('kk.updated_at', [$request->from_date_bs, $request->to_date_bs]);
         }
         if ($request->aadk_negeri_bs) {
-            $query->where('k.negeri_pejabat', $request->aadk_negeri_bs);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_bs);
         }
         if ($request->aadk_daerah_bs) {
-            $query->where('k.daerah_pejabat', $request->aadk_daerah_bs);
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_bs);
         }
 
         return response()->json(['data' => $query->get()]);

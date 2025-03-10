@@ -62,10 +62,10 @@ class MKBelumSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithM
             $query->whereBetween('kk.updated_at', [$this->filters['from_date_bs'], $this->filters['to_date_bs']]);
         }
         if (!empty($this->filters['aadk_negeri_bs'])) {
-            $query->where('k.negeri_pejabat', $this->filters['aadk_negeri_bs']);
+            $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_bs']);
         }
         if (!empty($this->filters['aadk_daerah_bs'])) {
-            $query->where('k.daerah_pejabat', $this->filters['aadk_daerah_bs']);
+            $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_bs']);
         }
 
         return collect($query->get());
