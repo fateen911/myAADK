@@ -58,7 +58,7 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
     public function headings(): array
     {
         return [
-            ['PELAPORAN: MODAL KEPULIHAN - SENARAI KLIEN BELUM SELESAI MENJAWAB'], 
+            ['PELAPORAN: MODAL KEPULIHAN - SENARAI KLIEN TIDAK PERNAH MENJAWAB'], 
             [''],
             [
                 'BIL.',
@@ -89,9 +89,9 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
     {
         return [
             'A' => 5,
-            'B' => 35,           
+            'B' => 45,           
             'C' => 25,
-            'D' => 25,
+            'D' => 30,
             'E' => 40,
         ];
     }

@@ -69,7 +69,7 @@ class MKTidakMenjawabLebih6BulanExcel implements FromCollection, WithHeadings, W
     public function headings(): array
     {
         return [
-            ['PELAPORAN: MODAL KEPULIHAN - SENARAI KLIEN BELUM SELESAI MENJAWAB'], 
+            ['PELAPORAN: MODAL KEPULIHAN - SENARAI KLIEN TIDAK MENJAWAB MELEBIHI 6 BULAN'], 
             [''],
             [
                 'BIL.',

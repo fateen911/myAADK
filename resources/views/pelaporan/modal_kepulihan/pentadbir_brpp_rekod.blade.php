@@ -1031,7 +1031,7 @@
                 let filterData = $('#filter-form4').serialize(); // Get filtered values
 
                 $.ajax({
-                    url: "{{ route('pelaporan.tidak-pernah-menjawab.json') }}", // Route to fetch JSON data
+                    url: "{{ route('pelaporan.tidak-pernah-menjawab.json') }}",
                     type: "GET",
                     data: filterData,
                     dataType: "json",
@@ -1040,30 +1040,30 @@
                     },
                     success: function (response) {
                         if (response.success) {
-                            // Pass JSON data to another request for PDF generation
                             generatePDF(response.data);
                         } else {
-                            alert("No data found to export.");
+                            alert(response.message); // Show message from Laravel
                         }
+                    },
+                    error: function (xhr) {
+                        console.log("AJAX Error:", xhr.responseText);
+                        alert("Error fetching data. Check console for details.");
                     },
                     complete: function () {
                         $('#export-pdf5').prop('disabled', false).text('Export PDF');
-                    },
-                    error: function () {
-                        alert("Error fetching data. Please try again.");
                     }
                 });
             });
 
-            // Function to generate PDF using JSON data
+
             function generatePDF(data) {
                 $.ajax({
-                    url: "{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}", // Route to generate PDF
+                    url: "{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}",
                     type: "POST",
-                    data: { data: data, _token: "{{ csrf_token() }}" },
-                    xhrFields: {
-                        responseType: 'blob' // Handle binary data
-                    },
+                    data: JSON.stringify({ data: data }), // Ensure it's valid JSON
+                    contentType: "application/json", // Correct header
+                    headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }, // Proper CSRF token
+                    xhrFields: { responseType: 'blob' },
                     success: function (response) {
                         let blob = new Blob([response], { type: "application/pdf" });
                         let link = document.createElement('a');
@@ -1073,9 +1073,9 @@
                         link.click();
                         document.body.removeChild(link);
                     },
-                    error: function () {
-                        console.log(xhr.responseText); // Log server error
-                        alert("Error generating PDF.");
+                    error: function (xhr) {
+                        console.log("PDF Generation Error:", xhr.responseText);
+                        alert("Error generating PDF. Check console for details.");
                     }
                 });
             }
