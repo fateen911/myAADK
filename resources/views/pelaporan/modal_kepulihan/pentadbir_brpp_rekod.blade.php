@@ -560,41 +560,6 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
-    
-    {{-- Sorting table --}}
-    <script>
-        $('#sortTable1').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable2').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable3').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable4').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-    </script>
 
     <!--filter negeri daerah-->
     <script>
@@ -707,6 +672,8 @@
                         let tableBody = $("#table-body1");
                         tableBody.empty(); // Clear existing data
 
+                        let rows = ""; // Define rows variable to store all table rows
+
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
 
@@ -725,8 +692,8 @@
                                 default:
                                     badgeColor = 'background-color: green;';
                             }
-                            
-                            let newRow = `
+
+                            rows += `
                                 <tr>
                                     <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
@@ -740,7 +707,26 @@
                                     </td>
                                 </tr>
                             `;
-                            tableBody.append(newRow);
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable1")) {
+                            $('#sortTable1').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable1').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
                         });
                     },
                     error: function () {
@@ -831,10 +817,12 @@
                         let tableBody = $("#table-body2");
                         tableBody.empty(); // Clear existing data
 
+                        let rows = ""; // Define rows variable to store all table rows
+
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
 
-                            let newRow = `
+                            rows += `
                                 <tr>
                                     <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
@@ -843,7 +831,26 @@
                                     <td style="text-align: center;">${formattedDate}</td>
                                 </tr>
                             `;
-                            tableBody.append(newRow);
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable2")) {
+                            $('#sortTable2').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable2').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
                         });
                     },
                     error: function () {
@@ -904,10 +911,12 @@
                         let tableBody = $("#table-body3");
                         tableBody.empty(); // Clear existing data
 
+                        let rows = ""; // Define rows variable to store all table rows
+
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
 
-                            let newRow = `
+                            rows += `
                                 <tr>
                                     <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
@@ -916,7 +925,26 @@
                                     <td style="text-align: center;">${formattedDate}</td>
                                 </tr>
                             `;
-                            tableBody.append(newRow);
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable3")) {
+                            $('#sortTable3').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable3').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
                         });
                     },
                     error: function () {
@@ -977,8 +1005,10 @@
                         let tableBody = $("#table-body4");
                         tableBody.empty(); // Clear existing data
 
+                        let rows = ""; // Define rows variable to store all table rows
+
                         $.each(response.data, function (index, row) {
-                            let newRow = `
+                            rows += `
                                 <tr>
                                     <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
@@ -986,7 +1016,26 @@
                                     <td style="text-align: center;">${row.daerah}</td>
                                 </tr>
                             `;
-                            tableBody.append(newRow);
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable4")) {
+                            $('#sortTable4').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable4').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
                         });
                     },
                     error: function () {
