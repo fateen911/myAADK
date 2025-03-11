@@ -373,42 +373,58 @@
 
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
-                                <form id="filter-form">
-                                    <div class="row">
+                                <form id="filter-form3">
+                                    <div class="row align-items-center">
+                                        <!-- Date Range -->
                                         <div class="col-md-2">
-                                            <label for="from_date_tm6">Tarikh Mula:</label>
                                             <input type="date" id="from_date_tm6" name="from_date_tm6" class="form-control" value="{{ request('from_date_tm6') }}">
                                         </div>
+                                        <span class="col-auto">-</span> <!-- Dash centered between inputs -->
                                         <div class="col-md-2">
-                                            <label for="to_date_tm6">Tarikh Akhir:</label>
                                             <input type="date" id="to_date_tm6" name="to_date_tm6" class="form-control" value="{{ request('to_date_tm6') }}">
                                         </div>
+                                
+                                        <!-- AADK Negeri -->
                                         <div class="col-md-3">
-                                            <label for="aadk_daerah_tm6">AADK Daerah:</label>
-                                            <select id="aadk_daerah_tm6" name="aadk_daerah_tm6" class="form-control">
-                                                <option value="">Semua Daerah</option>
-                                                @foreach($aadk_daerah as $d3)
-                                                    <option value="{{ $d3->kod }}" {{ request('aadk_daerah_tm6') == $d3->kod ? 'selected' : '' }}>
-                                                        {{ $d3->daerah }}
+                                            <select id="aadk_negeri_tm6" class="form-select" name="aadk_negeri_tm6">
+                                                <option value="">Pilih AADK Negeri</option>
+                                                @foreach($aadk_negeri as $item)
+                                                    <option value="{{$item->id}}" {{ request('aadk_negeri_tm6') == $item->id ? 'selected' : '' }}>{{$item->negeri}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                
+                                        <!-- AADK Daerah -->
+                                        <div class="col-md-3">
+                                            <select id="aadk_daerah_tm6" class="form-select" name="aadk_daerah_tm6">
+                                                <option value="">Pilih AADK Daerah</option>
+                                                @foreach($aadk_daerah as $d1)
+                                                    <option value="{{ $d1->kod }}" {{ request('aadk_daerah_tm6') == $d1->kod ? 'selected' : '' }}>
+                                                        {{ $d1->daerah }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                
+                                        <!-- Filter Button -->
                                         <div class="col-md-1">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary"> 
+                                            <button type="submit" class="btn btn-primary">
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-4">
-                                            <br>
-                                            <a href="{{ route('tidak_menjawab6.pdf.negeri', [
-                                                'from_date_tm6' => request('from_date_tm6'), 
-                                                'to_date_tm6' => request('to_date_tm6'),
-                                                'aadk_daerah_tm6' => request('aadk_daerah_tm6')]) }}" 
-                                                class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Senarai Klien
-                                            </a>
+
+                                        {{-- Export PDF & EXCEL --}}
+                                        <div class="col-md-3 mt-5">
+                                            <h5>
+                                                Senarai Rekod Klien:
+                                                <a href="#" id="export-pdf4" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                
+                                                <a href="#" id="export-excel4" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </a>
+                                            </h5>
                                         </div>
                                     </div>
                                 </form>
@@ -426,11 +442,10 @@
                                             <th class="min-w-50px" style="text-align: center;">AADK Negeri</th>
                                             <th class="min-w-100px" style="text-align: center;">AADK Daerah</th>
                                             <th class="min-w-70px" style="text-align: center;">Tarikh Terakhir Menjawab</th> 
-                                            <th class="min-w-30px" style="text-align: center;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($tidak_menjawab_lebih_6bulan as $response3)
+                                    <tbody id="table-body3">
+                                        {{-- @foreach($tidak_menjawab_lebih_6bulan as $response3)
                                             @php
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response3->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response3->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
@@ -452,7 +467,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>                               
                                 <!--end::Table-->
@@ -470,7 +485,7 @@
 
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
-                                <form id="filter-form">
+                                <form id="filter-form4">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="aadk_daerah_tpm">AADK Daerah:</label>
@@ -514,8 +529,8 @@
                                             <th class="min-w-150px" style="text-align: center;">AADK Daerah</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($tidak_pernah_menjawab as $response4)
+                                    <tbody id="table-body4">
+                                        {{-- @foreach($tidak_pernah_menjawab as $response4)
                                             @php
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response4->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response4->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
@@ -527,7 +542,7 @@
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -629,6 +644,54 @@
                 } else {
                     $('#aadk_daerah_bs').empty();
                     $('#aadk_daerah_bs').append('<option value="">Pilih AADK Daerah</option>');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#aadk_negeri_tm6').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#aadk_daerah_tm6').empty();
+                            $('#aadk_daerah_tm6').append('<option value="">Pilih AADK Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                $('#aadk_daerah_tm6').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#aadk_daerah_tm6').empty();
+                    $('#aadk_daerah_tm6').append('<option value="">Pilih AADK Daerah</option>');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#aadk_negeri_tpm').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#aadk_daerah_tpm').empty();
+                            $('#aadk_daerah_tpm').append('<option value="">Pilih AADK Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                $('#aadk_daerah_tpm').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#aadk_daerah_tpm').empty();
+                    $('#aadk_daerah_tpm').append('<option value="">Pilih AADK Daerah</option>');
                 }
             });
         });
@@ -827,6 +890,79 @@
                 e.preventDefault();
                 let filterData = $('#filter-form2').serialize(); // Get filtered values
                 window.open("{{ route('pelaporan.belum-selesai-menjawab.pdf') }}?" + filterData, '_blank');
+            });
+        });
+    </script>
+
+    {{-- AJAX TIDAK MENJAWAB LEBIH 6 BULAN --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                let formData = $('#filter-form3').serialize(); // Serialize form data
+
+                $.ajax({
+                    url: "{{ route('ajax-senarai-tidak-menjawab-lebih-6Bulan') }}",
+                    method: "GET",
+                    data: formData,
+                    success: function (response) {
+                        let tableBody = $("#table-body3");
+                        tableBody.empty(); // Clear existing data
+
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+
+                            let newRow = `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                </tr>
+                            `;
+                            tableBody.append(newRow);
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+
+            // Fetch data on page load
+            fetchData();
+
+            // Fetch data when filter form is submitted
+            $("#filter-form3").submit(function (e) {
+                e.preventDefault();
+                fetchData();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#export-excel4").click(function (e) {
+                e.preventDefault();
+
+                var fromDate = $("#from_date_tm6").val();
+                var toDate = $("#to_date_tm6").val();
+                var negeri = $("#aadk_negeri_tm6").val();
+                var daerah = $("#aadk_daerah_tm6").val();
+
+                var query = $.param({
+                    from_date_tm6: fromDate,
+                    to_date_tm6: toDate,
+                    aadk_negeri_tm6: negeri,
+                    aadk_daerah_tm6: daerah
+                });
+
+                window.location.href = "/pelaporan/excel/tidak-menjawab-lebih-6Bulan?" + query; // Added '?' before query
+            });
+
+
+            $('#export-pdf4').on('click', function (e) {
+                e.preventDefault();
+                let filterData = $('#filter-form2').serialize(); // Get filtered values
+                window.open("{{ route('pelaporan.tidak-menjawab-lebih-6Bulan.pdf') }}?" + filterData, '_blank');
             });
         });
     </script>

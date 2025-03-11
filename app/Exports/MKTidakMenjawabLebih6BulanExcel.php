@@ -18,7 +18,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class MKBelumSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, WithEvents,  WithColumnWidths
+class MKTidakMenjawabLebih6BulanExcel implements FromCollection, WithHeadings, WithMapping, WithColumnFormatting, WithEvents,  WithColumnWidths
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -34,41 +34,35 @@ class MKBelumSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithM
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
-        $query = DB::table('keputusan_kepulihan_klien as kk')
-                ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+        $query = DB::table('klien as u')
+                ->join('keputusan_kepulihan_klien as kk', function($join) {
+                    $join->on('u.id', '=', 'kk.klien_id')
+                        ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                })
                 ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
                 ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
                 ->select(
                     'u.id as klien_id',
                     'u.nama',
                     'u.no_kp',
-                    'd.daerah as nama_daerah',  // Get the actual daerah name
-                    'n.negeri as nama_negeri',  // Get the actual negeri name
+                    'd.daerah',  // Get the actual daerah name
+                    'n.negeri',  // Get the actual negeri name
                     'kk.updated_at',
-                    'kk.status' // Assuming there is a status column
                 )
-                ->where('kk.status', '!=', 'Selesai') // Not completed responses
-                ->where('kk.updated_at', '>=', $sixMonthsAgo)
-                ->whereIn('kk.updated_at', function ($query) {
-                    $query->select(DB::raw('MAX(updated_at)'))
-                        ->from('keputusan_kepulihan_klien')
-                        ->whereColumn('klien_id', 'kk.klien_id')
-                        ->groupBy('klien_id');
-                })
-                ->groupBy('u.id', 'u.nama', 'u.no_kp', 'd.daerah', 'n.negeri','kk.updated_at', 'kk.status')
+                ->where('kk.updated_at', '<=', now()->subMonths(6)) // Latest record is more than 6 months old
                 ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_bs'])) {
-            $query->whereDate('kk.updated_at', $this->filters['from_date_bs']);
+        if (!empty($this->filters['from_date_tm6'])) {
+            $query->whereDate('kk.updated_at', $this->filters['from_date_tm6']);
         }
-        if (!empty($this->filters['to_date_bs'])) {
-            $query->whereDate('kk.updated_at', $this->filters['to_date_bs']);
+        if (!empty($this->filters['to_date_tm6'])) {
+            $query->whereDate('kk.updated_at', $this->filters['to_date_tm6']);
         }
-        if (!empty($this->filters['aadk_negeri_bs'])) {
-            $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_bs']);
+        if (!empty($this->filters['aadk_negeri_tm6'])) {
+            $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_tm6']);
         }
-        if (!empty($this->filters['aadk_daerah_bs'])) {
-            $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_bs']);
+        if (!empty($this->filters['aadk_daerah_tm6'])) {
+            $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_tm6']);
         }
 
         return collect($query->get());
@@ -100,8 +94,8 @@ class MKBelumSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithM
             "\u{200B}" . $counter . ".", // Adds a zero-width space before the number
             $row->nama,
             strval($row->no_kp), // Converts to string without adding apostrophe
-            $row->nama_negeri,
-            $row->nama_daerah,
+            $row->negeri,
+            $row->daerah,
             $row->updated_at ? \Carbon\Carbon::parse($row->updated_at)->format('d/m/Y') : 'N/A',
         ];
     }

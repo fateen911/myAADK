@@ -47,8 +47,11 @@ class MKSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithMappin
             ->where('kk.status', 'Selesai')
             ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_s']) && !empty($this->filters['to_date_s'])) {
-            $query->whereBetween('kk.updated_at', [$this->filters['from_date_s'], $this->filters['to_date_s']]);
+        if (!empty($this->filters['from_date_s'])) {
+            $query->whereDate('kk.updated_at', $this->filters['from_date_s']);
+        }
+        if (!empty($this->filters['to_date_s'])) {
+            $query->whereDate('kk.updated_at', $this->filters['to_date_s']);
         }
         if (!empty($this->filters['tahap_kepulihan_id'])) {
             $query->where('kk.tahap_kepulihan_id', $this->filters['tahap_kepulihan_id']);
