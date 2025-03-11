@@ -612,27 +612,82 @@ class PelaporanController extends Controller
         return Excel::download(new MKTidakPernahMenjawabExcel($filters), 'senarai_klien_tidak_pernah_menjawab.xlsx');
     }
 
-    public function PDFtidakPernahMenjawabPB(Request $request)
+    // public function PDFtidakPernahMenjawabPB(Request $request)
+    // {
+    //     $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+    //     $query = DB::table('klien as u')
+    //             ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+    //             ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+    //     if ($request->filled('aadk_negeri_tpm')) {
+    //         $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+    //     }
+        
+    //     if ($request->filled('aadk_daerah_tpm')) {
+    //         $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
+    //     }
+
+    //     $filteredData = $query->get();
+
+    //     $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
+    //     return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+    // }
+
+    public function jsonPDFtidakPernahMenjawabPB(Request $request) 
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('klien as u')
-                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
-                ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+                ->whereNull('kk.klien_id');
 
         if ($request->filled('aadk_negeri_tpm')) {
-            $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
         }
-        
+
         if ($request->filled('aadk_daerah_tpm')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
         }
 
-        $filteredData = $query->get();
+        $filteredData = $query->limit(5000)->get(); // Limit records to prevent overload
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
-        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+        return response()->json([
+            'success' => count($filteredData) > 0,
+            'data' => $filteredData
+        ]);
     }
+
+    public function PDFtidakPernahMenjawabPB(Request $request)
+    {
+        // dd($request->all());
+
+        // Decode JSON if necessary
+        $filteredData = collect(json_decode($request->data, true));
+
+        if ($filteredData->isEmpty()) {
+            return response()->json(['error' => 'No data received'], 400);
+        }
+
+        // Fetch negeri and daerah in bulk
+        $daerahList = DB::table('senarai_daerah_pejabat')->pluck('daerah', 'kod');
+        $negeriList = DB::table('senarai_negeri_pejabat')->pluck('negeri', 'negeri_id');
+
+        // Map daerah and negeri
+        $filteredData = $filteredData->map(function ($klien) use ($daerahList, $negeriList) {
+            $klien['negeri'] = $negeriList[$klien['negeri_pejabat']] ?? 'Tidak Diketahui';
+            $klien['daerah'] = $daerahList[$klien['daerah_pejabat']] ?? 'Tidak Diketahui';
+            return $klien;
+        });
+
+        // Generate PDF
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
+                ->setPaper('a4', 'landscape');
+
+        return response($pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf'), 200)
+            ->header('Content-Type', 'application/pdf');
+    }
+
 
     // PEGAWAI NEGERI
     public function modalKepulihanNegeri(Request $request)

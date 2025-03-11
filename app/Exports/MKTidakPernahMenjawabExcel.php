@@ -66,7 +66,6 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
                 'NO. KAD PENGENALAN',
                 'AADK NEGERI',
                 'AADK DAERAH',                
-                'TARIKH TERAKHIR MENJAWAB',
             ],
         ];
     }
@@ -81,9 +80,8 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
             "\u{200B}" . $counter . ".", // Adds a zero-width space before the number
             $row->nama,
             strval($row->no_kp), // Converts to string without adding apostrophe
-            $row->nama_negeri,
-            $row->nama_daerah,
-            $row->updated_at ? \Carbon\Carbon::parse($row->updated_at)->format('d/m/Y') : 'N/A',
+            $row->negeri,
+            $row->daerah,
         ];
     }
 
@@ -95,7 +93,6 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
             'C' => 25,
             'D' => 25,
             'E' => 40,
-            'F' => 30,
         ];
     }
 
@@ -104,7 +101,6 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
         return [
             'A' => '@', // Forces column C (NO KP) to be treated as text
             'C' => NumberFormat::FORMAT_NUMBER,
-            'F' => NumberFormat::FORMAT_DATE_DDMMYYYY, // Format Date
         ];
     }
 
@@ -115,8 +111,8 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
                 $sheet = $event->sheet->getDelegate();
                 
                 // Merge title row
-                $sheet->mergeCells('A1:F1');
-                $sheet->mergeCells('A2:F2');
+                $sheet->mergeCells('A1:E1');
+                $sheet->mergeCells('A2:E2');
 
                 // Title Styling (Row 1)
                 $sheet->getStyle('A1')->applyFromArray([
@@ -128,7 +124,7 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
                 $lastRow = $event->sheet->getHighestRow();
 
                 // Apply header styling (Row 3)
-                $sheet->getStyle('A3:F3')->applyFromArray([
+                $sheet->getStyle('A3:E3')->applyFromArray([
                     'font' => [
                         'bold' => true, 
                         'size' => 12, 
@@ -142,7 +138,7 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
                 ]);
 
                 // Apply borders to all data rows (A1:G$lastRow)
-                $sheet->getStyle('A1:F' . $lastRow)->applyFromArray([
+                $sheet->getStyle('A1:E' . $lastRow)->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
@@ -153,7 +149,7 @@ class MKTidakPernahMenjawabExcel implements FromCollection, WithHeadings, WithMa
 
                 // Center align all data except for column B (Nama)
                 $sheet->getStyle('A4:A' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle('C4:F' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle('C4:E' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             },
         ];
     }

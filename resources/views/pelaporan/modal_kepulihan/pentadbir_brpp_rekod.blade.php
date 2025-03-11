@@ -1013,8 +1013,6 @@
                 var daerah = $("#aadk_daerah_tpm").val();
 
                 var query = $.param({
-                    from_date_tpm: fromDate,
-                    to_date_tpm: toDate,
                     aadk_negeri_tpm: negeri,
                     aadk_daerah_tpm: daerah
                 });
@@ -1023,11 +1021,64 @@
             });
 
 
+            // $('#export-pdf5').on('click', function (e) {
+            //     e.preventDefault();
+            //     let filterData = $('#filter-form4').serialize(); // Get filtered values
+            //     window.open("{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}?" + filterData, '_blank');
+            // });
             $('#export-pdf5').on('click', function (e) {
                 e.preventDefault();
                 let filterData = $('#filter-form4').serialize(); // Get filtered values
-                window.open("{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}?" + filterData, '_blank');
+
+                $.ajax({
+                    url: "{{ route('pelaporan.tidak-pernah-menjawab.json') }}", // Route to fetch JSON data
+                    type: "GET",
+                    data: filterData,
+                    dataType: "json",
+                    beforeSend: function () {
+                        $('#export-pdf5').prop('disabled', true).text('Generating PDF...');
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            // Pass JSON data to another request for PDF generation
+                            generatePDF(response.data);
+                        } else {
+                            alert("No data found to export.");
+                        }
+                    },
+                    complete: function () {
+                        $('#export-pdf5').prop('disabled', false).text('Export PDF');
+                    },
+                    error: function () {
+                        alert("Error fetching data. Please try again.");
+                    }
+                });
             });
+
+            // Function to generate PDF using JSON data
+            function generatePDF(data) {
+                $.ajax({
+                    url: "{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}", // Route to generate PDF
+                    type: "POST",
+                    data: { data: data, _token: "{{ csrf_token() }}" },
+                    xhrFields: {
+                        responseType: 'blob' // Handle binary data
+                    },
+                    success: function (response) {
+                        let blob = new Blob([response], { type: "application/pdf" });
+                        let link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = "Senarai_Tidak_Pernah_Menjawab.pdf";
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    },
+                    error: function () {
+                        console.log(xhr.responseText); // Log server error
+                        alert("Error generating PDF.");
+                    }
+                });
+            }
         });
     </script>
 @endsection

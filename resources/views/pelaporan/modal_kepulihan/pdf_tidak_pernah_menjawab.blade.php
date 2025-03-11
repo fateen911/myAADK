@@ -67,16 +67,12 @@
         </thead>
         <tbody>
             @foreach($filteredData as $klien)
-                @php
-                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
-                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
-                @endphp
                 <tr>
                     <td style="text-align: center;">{{ $loop->iteration }}.</td>
-                    <td>{{ $klien->nama }}</td>
-                    <td style="text-align: center;">{{ $klien->no_kp }}</td>
-                    <td style="text-align: center;">{{ $negeri }}</td>
-                    <td style="text-align: center;">{{ $daerah }}</td>
+                    <td>{{ $klien['nama'] }}</td>
+                    <td style="text-align: center;">{{ $klien['no_kp'] }}</td>
+                    <td style="text-align: center;">{{ $klien['negeri'] }}</td>
+                    <td style="text-align: center;">{{ $klien['daerah'] }}</td>
                 </tr>
             @endforeach
         </tbody>
