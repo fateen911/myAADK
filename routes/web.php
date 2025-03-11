@@ -278,6 +278,11 @@ Route::get('/senarai-klien/tidak-menjawab-lebih-6Bulan', [PelaporanController::c
 Route::get('/pelaporan/excel/tidak-menjawab-lebih-6Bulan', [PelaporanController::class, 'ExcelTidakMenjawabLebih6BulanPB'])->name('pelaporan.tidak-menjawab-lebih-6Bulan.excel');
 Route::get('/pelaporan/pdf/modal-kepulihan/tidak-menjawab-lebih-6Bulan', [PelaporanController::class, 'PDFtidakMenjawabLebih6BulanPB'])->name('pelaporan.tidak-menjawab-lebih-6Bulan.pdf');
 
+// PENTADBIR & BRPP - PELAPORAN - MODAL KEPULIHAN - AJAX TIDAK PERNAH MENJAWAB
+Route::get('/senarai-klien/tidak-pernah-menjawab', [PelaporanController::class, 'jsonTidakPernahMenjawabPB'])->name('ajax-senarai-tidak-pernah-menjawab');
+Route::get('/pelaporan/excel/tidak-pernah-menjawab', [PelaporanController::class, 'ExcelTidakPernahMenjawabPB'])->name('pelaporan.tidak-pernah-menjawab.excel');
+Route::get('/pelaporan/pdf/modal-kepulihan/tidak-pernah-menjawab', [PelaporanController::class, 'PDFtidakPernahMenjawabPB'])->name('pelaporan.tidak-pernah-menjawab.pdf');
+
 // PEGAWAI NEGERI - PELAPORAN - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanNegeri'])->middleware('auth')->name('pelaporan.modal_kepulihan.negeri');
 Route::get('/pegawai-negeri/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabNegeri'])->name('selesai.pdf.negeri');

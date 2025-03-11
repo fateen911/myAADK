@@ -32,8 +32,6 @@ class MKTidakMenjawabLebih6BulanExcel implements FromCollection, WithHeadings, W
 
     public function collection()
     {
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
-
         $query = DB::table('klien as u')
                 ->join('keputusan_kepulihan_klien as kk', function($join) {
                     $join->on('u.id', '=', 'kk.klien_id')

@@ -349,11 +349,13 @@
                                     </thead>
 
                                     <tbody id="table-body2">
-                                        <td>Tiada</td>
-                                        <td>Tiada</td>
-                                        <td>Tiada</td>
-                                        <td>Tiada</td>
-                                        <td>Tiada</td>
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>                                
                                 <!--end::Table-->
@@ -445,29 +447,13 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body3">
-                                        {{-- @foreach($tidak_menjawab_lebih_6bulan as $response3)
-                                            @php
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response3->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response3->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $response3->nama }}</td>
-                                                <td style="text-align: center;">{{ $response3->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center">{{ isset($response3->updated_at) ? Carbon::parse($response3->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="text-align: center;">
-                                                    @if ($response3->updated_at !== NULL)
-                                                        <a href="{{ route('sejarah.soal.selidik.klien', $response3->klien_id) }}">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    @else
-                                                        N/A
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>                               
                                 <!--end::Table-->
@@ -486,31 +472,48 @@
                             <!--begin::Filter Section-->
                             <div class="filter-section" style="padding-left: 30px; padding-bottom: 20px;">
                                 <form id="filter-form4">
-                                    <div class="row">
+                                    <div class="row align-items-center">
+                                        <!-- AADK Negeri -->
                                         <div class="col-md-3">
-                                            <label for="aadk_daerah_tpm">AADK Daerah:</label>
-                                            <select id="aadk_daerah_tpm" name="aadk_daerah_tpm" class="form-control">
-                                                <option value="">Semua Daerah</option>
-                                                @foreach($aadk_daerah as $d4)
-                                                    <option value="{{ $d4->kod }}" {{ request('aadk_daerah_tpm') == $d4->kod ? 'selected' : '' }}>
-                                                        {{ $d4->daerah }}
+                                            <select id="aadk_negeri_tpm" class="form-select" name="aadk_negeri_tpm">
+                                                <option value="">Pilih AADK Negeri</option>
+                                                @foreach($aadk_negeri as $item)
+                                                    <option value="{{$item->id}}" {{ request('aadk_negeri_tpm') == $item->id ? 'selected' : '' }}>{{$item->negeri}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                
+                                        <!-- AADK Daerah -->
+                                        <div class="col-md-4">
+                                            <select id="aadk_daerah_tpm" class="form-select" name="aadk_daerah_tpm">
+                                                <option value="">Pilih AADK Daerah</option>
+                                                @foreach($aadk_daerah as $d1)
+                                                    <option value="{{ $d1->kod }}" {{ request('aadk_daerah_tpm') == $d1->kod ? 'selected' : '' }}>
+                                                        {{ $d1->daerah }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                
+                                        <!-- Filter Button -->
                                         <div class="col-md-1">
-                                            <br>
-                                            <button type="submit" class="btn btn-primary"> 
+                                            <button type="submit" class="btn btn-primary">
                                                 <i class="fas fa-filter"></i>
                                             </button>
                                         </div>
-                                        <div class="col-md-8">
-                                            <br>
-                                            <a href="{{ route('tidak_pernah_menjawab.pdf.negeri', [
-                                                'aadk_daerah_tpm' => request('aadk_daerah_tpm')]) }}" 
-                                                class="btn btn-info">
-                                                <i class="fas fa-file-pdf"></i> Senarai Klien
-                                            </a>
+
+                                        {{-- Export PDF & EXCEL --}}
+                                        <div class="col-md-4">
+                                            <h5>
+                                                Senarai Rekod Klien:
+                                                <a href="#" id="export-pdf5" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                
+                                                <a href="#" id="export-excel5" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-file-excel"></i>
+                                                </a>
+                                            </h5>
                                         </div>
                                     </div>
                                 </form>
@@ -530,19 +533,12 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body4">
-                                        {{-- @foreach($tidak_pernah_menjawab as $response4)
-                                            @php
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response4->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response4->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $response4->nama }}</td>
-                                                <td style="text-align: center;">{{ $response4->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                            </tr>
-                                        @endforeach --}}
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -963,6 +959,74 @@
                 e.preventDefault();
                 let filterData = $('#filter-form2').serialize(); // Get filtered values
                 window.open("{{ route('pelaporan.tidak-menjawab-lebih-6Bulan.pdf') }}?" + filterData, '_blank');
+            });
+        });
+    </script>
+
+    {{-- AJAX TIDAK PERNAH MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                let formData = $('#filter-form4').serialize(); // Serialize form data
+
+                $.ajax({
+                    url: "{{ route('ajax-senarai-tidak-pernah-menjawab') }}",
+                    method: "GET",
+                    data: formData,
+                    success: function (response) {
+                        let tableBody = $("#table-body4");
+                        tableBody.empty(); // Clear existing data
+
+                        $.each(response.data, function (index, row) {
+                            let newRow = `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                </tr>
+                            `;
+                            tableBody.append(newRow);
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+
+            // Fetch data on page load
+            fetchData();
+
+            // Fetch data when filter form is submitted
+            $("#filter-form4").submit(function (e) {
+                e.preventDefault();
+                fetchData();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#export-excel5").click(function (e) {
+                e.preventDefault();
+
+                var negeri = $("#aadk_negeri_tpm").val();
+                var daerah = $("#aadk_daerah_tpm").val();
+
+                var query = $.param({
+                    from_date_tpm: fromDate,
+                    to_date_tpm: toDate,
+                    aadk_negeri_tpm: negeri,
+                    aadk_daerah_tpm: daerah
+                });
+
+                window.location.href = "/pelaporan/excel/tidak-pernah-menjawab?" + query; // Added '?' before query
+            });
+
+
+            $('#export-pdf5').on('click', function (e) {
+                e.preventDefault();
+                let filterData = $('#filter-form4').serialize(); // Get filtered values
+                window.open("{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}?" + filterData, '_blank');
             });
         });
     </script>

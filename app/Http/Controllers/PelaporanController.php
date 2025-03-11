@@ -523,7 +523,7 @@ class PelaporanController extends Controller
             'aadk_daerah_tm6' => $request->input('aadk_daerah_tm6'),
         ];
 
-        return Excel::download(new MKTidakMenjawabLebih6BulanExcel($filters), 'senarai_klien_belum_selesai_menjawab.xlsx');
+        return Excel::download(new MKTidakMenjawabLebih6BulanExcel($filters), 'senarai_klien_tidak_menjawab_lebih_6bulan.xlsx');
     }
 
     public function PDFtidakMenjawabLebih6BulanPB(Request $request)
@@ -572,6 +572,66 @@ class PelaporanController extends Controller
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_menjawab_lebih_6bulan', compact('filteredData'))->setPaper('a4', 'landscape');
         return $pdf->stream('Senarai_Tidak_Menjawab_Lebih_6Bulan.pdf');
+    }
+
+    // PENTADBIR & BRPP - MODAL KEPULIHAN - TIDAK MENJAWAB LEBIH 6 BULAN
+    public function jsonTidakPernahMenjawabPB(Request $request)
+    {
+        $query = DB::table('klien as u')
+                    ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                    ->select(
+                        'u.id as klien_id',
+                        'u.nama',
+                        'u.no_kp',
+                        'd.daerah',  // Get the actual daerah name
+                        'n.negeri',  // Get the actual negeri name
+                    )
+                    ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+        // Apply Filters
+        if ($request->filled('aadk_negeri_tpm')) {
+            $query->where('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+        }
+        
+        if ($request->filled('aadk_daerah_tpm')) {
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
+        }
+
+        return response()->json(['data' => $query->get()]);
+    }
+
+    public function ExcelTidakPernahMenjawabPB(Request $request)
+    {
+        $filters = [
+            'aadk_negeri_tpm' => $request->input('aadk_negeri_tpm'),
+            'aadk_daerah_tpm' => $request->input('aadk_daerah_tpm'),
+        ];
+
+        return Excel::download(new MKTidakPernahMenjawabExcel($filters), 'senarai_klien_tidak_pernah_menjawab.xlsx');
+    }
+
+    public function PDFtidakPernahMenjawabPB(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('klien as u')
+                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+        if ($request->filled('aadk_negeri_tpm')) {
+            $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+        }
+        
+        if ($request->filled('aadk_daerah_tpm')) {
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
+        }
+
+        $filteredData = $query->get();
+
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
+        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
     // PEGAWAI NEGERI
@@ -895,7 +955,7 @@ class PelaporanController extends Controller
         $filteredData = $query->get();
 
         $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'));
-        return $pdf->stream('Selesai_Menjawab_Modal_Kepulihan.pdf');
+        return $pdf->stream('Selesai_Tidak_Pernah_Menjawab_Modal_Kepulihan.pdf');
     }
 
     // PEGAWAI DAERAH
