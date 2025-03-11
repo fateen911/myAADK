@@ -1069,65 +1069,11 @@
                 window.location.href = "/pelaporan/excel/tidak-pernah-menjawab?" + query; // Added '?' before query
             });
 
-
-            // $('#export-pdf5').on('click', function (e) {
-            //     e.preventDefault();
-            //     let filterData = $('#filter-form4').serialize(); // Get filtered values
-            //     window.open("{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}?" + filterData, '_blank');
-            // });
             $('#export-pdf5').on('click', function (e) {
                 e.preventDefault();
                 let filterData = $('#filter-form4').serialize(); // Get filtered values
-
-                $.ajax({
-                    url: "{{ route('pelaporan.tidak-pernah-menjawab.json') }}",
-                    type: "GET",
-                    data: filterData,
-                    dataType: "json",
-                    beforeSend: function () {
-                        $('#export-pdf5').prop('disabled', true).text('Generating PDF...');
-                    },
-                    success: function (response) {
-                        if (response.success) {
-                            generatePDF(response.data);
-                        } else {
-                            alert(response.message); // Show message from Laravel
-                        }
-                    },
-                    error: function (xhr) {
-                        console.log("AJAX Error:", xhr.responseText);
-                        alert("Error fetching data. Check console for details.");
-                    },
-                    complete: function () {
-                        $('#export-pdf5').prop('disabled', false).text('Export PDF');
-                    }
-                });
+                window.open("{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}?" + filterData, '_blank');
             });
-
-
-            function generatePDF(data) {
-                $.ajax({
-                    url: "{{ route('pelaporan.tidak-pernah-menjawab.pdf') }}",
-                    type: "POST",
-                    data: JSON.stringify({ data: data }), // Ensure it's valid JSON
-                    contentType: "application/json", // Correct header
-                    headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}" }, // Proper CSRF token
-                    xhrFields: { responseType: 'blob' },
-                    success: function (response) {
-                        let blob = new Blob([response], { type: "application/pdf" });
-                        let link = document.createElement('a');
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = "Senarai_Tidak_Pernah_Menjawab.pdf";
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    },
-                    error: function (xhr) {
-                        console.log("PDF Generation Error:", xhr.responseText);
-                        alert("Error generating PDF. Check console for details.");
-                    }
-                });
-            }
         });
     </script>
 @endsection
