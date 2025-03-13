@@ -407,7 +407,7 @@ class ModalKepulihanController extends Controller
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
 
-    // PENTADBIR ATAU PEGAWAI
+    // PENTADBIR ATAU BRPP
     public function maklumBalasKepulihan(Request $request)
     {
         return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
@@ -530,6 +530,7 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $tidak_pernah_menjawab]);
     }
 
+    // PEGAWAI NEGERI
     public function maklumBalasKepulihanNegeri(Request $request)
     {
         $pegawai = Auth::user();

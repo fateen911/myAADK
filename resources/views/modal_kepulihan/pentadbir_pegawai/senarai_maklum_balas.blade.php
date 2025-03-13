@@ -355,40 +355,6 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
-    
-    {{-- <script>
-        $('#sortTable1').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable2').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable3').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-
-        $('#sortTable4').DataTable({
-                ordering: true, 
-                order: [], 
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
-        });
-    </script> --}}
 
     {{-- AJAX SELESAI MENJAWAB --}}
     <script>
@@ -411,7 +377,7 @@
 
                             rows += `
                                 <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
                                     <td style="text-align: center;">${row.negeri}</td>
                                     <td style="text-align: center;">${row.daerah}</td>
@@ -422,7 +388,7 @@
                                         </span>
                                     </td>
                                     <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
@@ -478,13 +444,13 @@
 
                             rows += `
                                 <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
                                     <td style="text-align: center;">${row.nama_negeri}</td>
                                     <td style="text-align: center;">${row.nama_daerah}</td>
                                     <td style="text-align: center;">${formattedDate}</td>
                                     <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
@@ -541,13 +507,13 @@
 
                             rows += `
                                 <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
                                     <td style="text-align: center;">${row.negeri}</td>
                                     <td style="text-align: center;">${row.daerah}</td>
                                     <td style="text-align: center;">${formattedDate}</td>
                                     <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
@@ -601,7 +567,7 @@
                         $.each(response.data, function (index, row) {
                             rows += `
                                 <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
                                     <td style="text-align: center;">${row.no_kp}</td>
                                     <td style="text-align: center;">${row.negeri}</td>
                                     <td style="text-align: center;">${row.daerah}</td>
