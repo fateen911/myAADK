@@ -32,7 +32,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PelaporanController extends Controller
 {
-    // PENTADBIR & BRPP
+    // PENTADBIR & BRPP - ANALISIS MODAL KEPULIHAN
     public function analisisModalKepulihan()
     {
         // Notifications and unread count for tahap_pengguna == 5
@@ -67,7 +67,7 @@ class PelaporanController extends Controller
                             })->count();
         }
 
-        return view('pelaporan.modal_kepulihan', compact('notifications', 'unreadCountPD'));
+        return view('pelaporan.modal_kepulihan.pentadbir_brpp_analisis', compact('notifications', 'unreadCountPD'));
     }
 
     public function rekodModalKepulihan(Request $request)
