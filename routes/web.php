@@ -223,8 +223,6 @@ Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController:
 // PENTADBIR & PEGAWAI - MODAL KEPULIHAN
 Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
 Route::get('/pentadbir-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
-Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.pegawai-negeri');
-Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanDaerah'])->middleware('auth')->name('maklum.balas.kepulihan.pegawai-daerah');
 // Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
 // Route::get('/pegawai-negeri/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKNegeri'])->name('exportAnalisisMKNegeri.pdf');
 // Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKDaerah'])->name('exportAnalisisMKDaerah.pdf');

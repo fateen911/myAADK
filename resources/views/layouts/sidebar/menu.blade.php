@@ -815,9 +815,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.negeri') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan.negeri') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.negeri') }}';">
+                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
@@ -1037,9 +1037,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan.daerah') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('maklum.balas.kepulihan') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan.daerah') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan.daerah') }}';">
+                        <a class="menu-link" href="{{ route('maklum.balas.kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ route('maklum.balas.kepulihan') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-questionnaire-tablet fs-2">
                                     <span class="path1"></span>
