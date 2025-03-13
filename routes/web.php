@@ -223,10 +223,13 @@ Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController:
 // MODAL KEPULIHAN
 Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
 
-// PENTADBIR & BRPP - MODAL KEPULIHAN
-Route::get('/pentadbir/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
-Route::get('/pegawai-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanBrpp'])->middleware('auth')->name('maklum.balas.kepulihan.brpp');
-Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
+// PENTADBIR & BRPP - JSON MODAL KEPULIHAN
+Route::get('/pentadbir-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
+Route::get('/pentadbir-brpp/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPB'])->middleware('auth')->name('selesai-menjawab.pentadbir-brpp');
+Route::get('/pentadbir-brpp/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPB'])->middleware('auth')->name('belum-selesai-menjawab.pentadbir-brpp');
+Route::get('/pentadbir-brpp/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPB'])->middleware('auth')->name('tidak-menjawab-lebih-6Bulan.pentadbir-brpp');
+Route::get('/pentadbir-brpp/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPB'])->middleware('auth')->name('tidak-pernah-menjawab.pentadbir-brpp');
+// Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
 
 // PEGAWAI NEGERI - MODAL KEPULIHAN
 Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.negeri');

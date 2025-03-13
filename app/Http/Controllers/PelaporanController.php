@@ -182,22 +182,22 @@ class PelaporanController extends Controller
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as k', 'kk.klien_id', '=', 'k.id')
-            ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
-            ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
-            ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
-            ->select(
-                'k.id as klien_id', 
-                'k.nama', 
-                'k.no_kp', 
-                'n.negeri', 
-                'd.daerah', 
-                'kk.updated_at', 
-                't.tahap'
-            )
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->where('kk.status', 'Selesai')
-            ->orderBy('kk.updated_at', 'desc');
+                ->join('klien as k', 'kk.klien_id', '=', 'k.id')
+                ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
+                ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
+                ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
+                ->select(
+                    'k.id as klien_id', 
+                    'k.nama', 
+                    'k.no_kp', 
+                    'n.negeri', 
+                    'd.daerah', 
+                    'kk.updated_at', 
+                    't.tahap'
+                )
+                ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                ->where('kk.status', 'Selesai')
+                ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
         if ($request->filled('from_date_s')) {

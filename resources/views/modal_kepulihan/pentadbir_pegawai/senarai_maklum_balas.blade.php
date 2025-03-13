@@ -154,19 +154,6 @@
                                     Senarai Klien Selesai Menjawab Soal Selidik Modal Kepulihan Dalam Tempoh Enam (6) Bulan Terkini
                                     <br><small>Sila klik pada nama klien atau ikon mata pada kolum 'Sejarah Menjawab' untuk lihat butirannya.</small>
                                 </h2>
-                                @if ((Auth::user()->tahap_pengguna == 1) || (Auth::user()->tahap_pengguna == 3))
-                                    <a href="{{ route('exportAnalisisMK.pdf') }}" class="btn btn-info">
-                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
-                                    </a>
-                                @elseif (Auth::user()->tahap_pengguna == 4)
-                                    <a href="{{ route('exportAnalisisMKNegeri.pdf') }}" class="btn btn-info">
-                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
-                                    </a>
-                                @elseif (Auth::user()->tahap_pengguna == 5)
-                                    <a href="{{ route('exportAnalisisMKDaerah.pdf') }}" class="btn btn-info">
-                                        <i class="fas fa-file-pdf"></i> Analisis Modal Kepulihan
-                                    </a>
-                                @endif
                             </div>                            
                             <!--end::Card header-->
 
@@ -185,43 +172,17 @@
                                             <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($selesai_menjawab as $response1)
-                                            @php
-                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response1->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response1->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response1->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-                                            <tr>
-                                                <td style="width: 22%;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
-                                                        {{ $response1->nama }}
-                                                    </a>
-                                                </td>
-                                                <td style="width: 12%; text-align: center;">{{ $response1->no_kp }}</td>
-                                                <td style="width: 18%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 10%; text-align: center;">{{ isset($response1->updated_at) ? Carbon::parse($response1->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 20%; text-align: center;">   
-                                                    @if ($response1->tahap_kepulihan_id)
-                                                        @if ($response1->tahap_kepulihan_id == 1)
-                                                            <badge class="badge text-white" style="background-color: red; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response1->tahap_kepulihan_id == 2)
-                                                            <badge class="badge text-white" style="background-color: darkorange; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @elseif ($response1->tahap_kepulihan_id == 3)
-                                                            <badge class="badge text-white bg-warning" style="padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>   
-                                                        @else
-                                                            <badge class="badge text-white" style="background-color: green; padding:10px; width:200px; display: inline-block; text-align: center;">{{ $tahap_kepulihan }}</badge>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                                <td style="width: 8%; text-align: center;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response1->klien_id) }}">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+
+                                    <tbody id="table-body1">
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>                                
                                 <!--end::Table-->
@@ -253,30 +214,16 @@
                                             <th style="text-align: center; width: 8%;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($belum_selesai_menjawab as $response2)
-                                            @php
-                                                $tahap_kepulihan = DB::table('tahap_kepulihan')->where('id', $response2->tahap_kepulihan_id)->value('tahap_kepulihan.tahap');
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response2->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response2->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-                                            <tr>
-                                                <td style="width: 27%;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
-                                                        {{ $response2->nama }}
-                                                    </a>
-                                                </td>
-                                                <td style="width: 12%; text-align: center;">{{ $response2->no_kp }}</td>
-                                                <td style="width: 20%; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width: 18%; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width: 15%; text-align: center;">{{ isset($response2->updated_at) ? Carbon::parse($response2->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="width: 8%; text-align: center;">
-                                                    <a href="{{ route('sejarah.soal.selidik.klien', $response2->klien_id) }}">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+
+                                    <tbody id="table-body2">
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>                                
                                 <!--end::Table-->
@@ -308,8 +255,16 @@
                                             <th class="min-w-50px" style="text-align: center;">Sejarah Menjawab</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($tidak_menjawab_lebih_6bulan as $response3)
+                                    <tbody id="table-body3">
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
+                                        {{-- @foreach($tidak_menjawab_lebih_6bulan as $response3)
                                             @php
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response3->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response3->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
@@ -331,7 +286,7 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>                               
                                 <!--end::Table-->
@@ -359,8 +314,14 @@
                                             <th class="min-w-100px" style="text-align: center;">AADK Negeri</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
-                                        @foreach($tidak_pernah_menjawab as $response4)
+                                    <tbody id="table-body4">
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
+                                        {{-- @foreach($tidak_pernah_menjawab as $response4)
                                             @php
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response4->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response4->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
@@ -372,7 +333,7 @@
                                                 <td style="text-align: center;">{{ $daerah }}</td>
                                                 <td style="text-align: center;">{{ $negeri }}</td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -395,7 +356,7 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
     
-    <script>
+    {{-- <script>
         $('#sortTable1').DataTable({
                 ordering: true, 
                 order: [], 
@@ -426,6 +387,256 @@
                 language: {
                     url: "/assets/lang/Malay.json"
                 }
+        });
+    </script> --}}
+
+    {{-- AJAX SELESAI MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                $.ajax({
+                    url: "{{ route('selesai-menjawab.pentadbir-brpp') }}",
+                    method: "GET",
+                    success: function (response) {
+                        console.log(response); // Check if data is being retrieved in the browser console
+                        let tableBody = $("#table-body1");
+                        tableBody.empty();
+
+                        let rows = "";
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+                            let badgeColor = row.tahap === 'SANGAT TIDAK MEMUASKAN' ? 'red' :
+                                            row.tahap === 'KURANG MEMUASKAN' ? 'darkorange' :
+                                            row.tahap === 'MEMUASKAN' ? '#ffc107' : 'green';
+
+                            rows += `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                    <td style="text-align: center;">
+                                        <span class="badge text-white" style="padding:10px; width:200px; display: inline-block; text-align: center; background-color: ${badgeColor};">
+                                            ${row.tahap ? row.tahap : 'N/A'}
+                                        </span>
+                                    </td>
+                                    <td style="width: 8%; text-align: center;">
+                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable1")) {
+                            $('#sortTable1').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable1').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+            // Fetch data on page load
+            fetchData();
+        });
+    </script>
+
+    {{-- AJAX BELUM SELESAI MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                $.ajax({
+                    url: "{{ route('belum-selesai-menjawab.pentadbir-brpp') }}",
+                    method: "GET",
+                    success: function (response) {
+                        let tableBody = $("#table-body2");
+                        tableBody.empty(); // Clear existing data
+
+                        let rows = ""; // Define rows variable to store all table rows
+
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+
+                            rows += `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.nama_negeri}</td>
+                                    <td style="text-align: center;">${row.nama_daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                    <td style="width: 8%; text-align: center;">
+                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable2")) {
+                            $('#sortTable2').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable2').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+            // Fetch data on page load
+            fetchData();
+        });
+    </script>
+
+    {{-- AJAX TIDAK MENJAWAB LEBIH 6 BULAN --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                $.ajax({
+                    url: "{{ route('tidak-menjawab-lebih-6Bulan.pentadbir-brpp') }}",
+                    method: "GET",
+                    success: function (response) {
+                        let tableBody = $("#table-body3");
+                        tableBody.empty(); // Clear existing data
+
+                        let rows = ""; // Define rows variable to store all table rows
+
+                        $.each(response.data, function (index, row) {
+                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
+
+                            rows += `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">${formattedDate}</td>
+                                    <td style="width: 8%; text-align: center;">
+                                        <a href="/sejarah-soal-selidik-klien/${row.klien_id}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable3")) {
+                            $('#sortTable3').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable3').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+            // Fetch data on page load
+            fetchData();
+        });
+    </script>
+
+    {{-- AJAX TIDAK PERNAH MENJAWAB --}}
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                $.ajax({
+                    url: "{{ route('tidak-pernah-menjawab.pentadbir-brpp') }}",
+                    method: "GET",
+                    success: function (response) {
+                        let tableBody = $("#table-body4");
+                        tableBody.empty(); // Clear existing data
+
+                        let rows = ""; // Define rows variable to store all table rows
+
+                        $.each(response.data, function (index, row) {
+                            rows += `
+                                <tr>
+                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable4")) {
+                            $('#sortTable4').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable4').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+
+            // Fetch data on page load
+            fetchData();
         });
     </script>
 @endsection
