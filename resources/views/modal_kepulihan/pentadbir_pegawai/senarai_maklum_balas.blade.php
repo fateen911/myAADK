@@ -160,7 +160,9 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
+                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" 
+                                data-url="{{ route('selesai-menjawab.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
+                                {{-- <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 22%;">Nama</th>
@@ -203,7 +205,8 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;">
+                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable" 
+                                data-url="{{ route('belum-selesai-menjawab.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 27%;">Nama</th>
@@ -244,7 +247,9 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable" 
+                                data-url="{{ route('tidak-menjawab-lebih-6Bulan.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
+                                {{-- <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
@@ -264,29 +269,6 @@
                                             <td>Tiada</td>
                                             <td>Tiada</td>
                                         </tr>
-                                        {{-- @foreach($tidak_menjawab_lebih_6bulan as $response3)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response3->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response3->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $response3->nama }}</td>
-                                                <td style="text-align: center;">{{ $response3->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center">{{ isset($response3->updated_at) ? Carbon::parse($response3->updated_at)->format('d/m/Y') : 'N/A' }}</td>
-                                                <td style="text-align: center;">
-                                                    @if ($response3->updated_at !== NULL)
-                                                        <a href="{{ route('sejarah.soal.selidik.klien', $response3->klien_id) }}">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    @else
-                                                        N/A
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>                               
                                 <!--end::Table-->
@@ -305,7 +287,9 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable" 
+                                data-url="{{ route('tidak-pernah-menjawab.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
+                                {{-- <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
@@ -321,19 +305,6 @@
                                             <td>Tiada</td>
                                             <td>Tiada</td>
                                         </tr>
-                                        {{-- @foreach($tidak_pernah_menjawab as $response4)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $response4->daerah_pejabat)->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $response4->negeri_pejabat)->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
-                                            <tr>
-                                                <td>{{ $response4->nama }}</td>
-                                                <td style="text-align: center;">{{ $response4->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                            </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -360,8 +331,10 @@
     <script>
         $(document).ready(function () {
             function fetchData() {
+                let routeUrl = $("#sortTable1").data("url"); // Get route from table data attribute
+
                 $.ajax({
-                    url: "{{ route('selesai-menjawab.pentadbir-brpp') }}",
+                    url: routeUrl, // Use dynamic route
                     method: "GET",
                     success: function (response) {
                         console.log(response); // Check if data is being retrieved in the browser console
@@ -430,8 +403,10 @@
     <script>
         $(document).ready(function () {
             function fetchData() {
+                let routeUrl = $("#sortTable2").data("url"); // Get route from table data attribute
+
                 $.ajax({
-                    url: "{{ route('belum-selesai-menjawab.pentadbir-brpp') }}",
+                    url: routeUrl, // Use dynamic route
                     method: "GET",
                     success: function (response) {
                         let tableBody = $("#table-body2");
@@ -493,8 +468,10 @@
     <script>
         $(document).ready(function () {
             function fetchData() {
+                let routeUrl = $("#sortTable3").data("url"); // Get route from table data attribute
+
                 $.ajax({
-                    url: "{{ route('tidak-menjawab-lebih-6Bulan.pentadbir-brpp') }}",
+                    url: routeUrl, // Use dynamic route
                     method: "GET",
                     success: function (response) {
                         let tableBody = $("#table-body3");
@@ -555,8 +532,10 @@
     <script>
         $(document).ready(function () {
             function fetchData() {
+                let routeUrl = $("#sortTable4").data("url"); // Get route from table data attribute
+
                 $.ajax({
-                    url: "{{ route('tidak-pernah-menjawab.pentadbir-brpp') }}",
+                    url: routeUrl, // Use dynamic route
                     method: "GET",
                     success: function (response) {
                         let tableBody = $("#table-body4");

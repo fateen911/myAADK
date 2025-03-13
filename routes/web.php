@@ -230,13 +230,13 @@ Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanContro
 // Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKDaerah'])->name('exportAnalisisMKDaerah.pdf');
 
 // PENTADBIR & BRPP - AJAX SELESAI MENJAWAB
-Route::get('/pentadbir/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPentadbir'])->middleware('auth')->name('selesai-menjawab.1');
+Route::get('/pentadbir/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPB'])->middleware('auth')->name('selesai-menjawab.1');
 Route::get('/pegawai-brpp/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPB'])->name('selesai-menjawab.3');
 Route::get('/pegawai-negeri/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPN'])->name('selesai-menjawab.4');
 Route::get('/pegawai-daerah/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPD'])->name('selesai-menjawab.5');
 
 // PENTADBIR & BRPP - AJAX BELUM SELESAI MENJAWAB
-Route::get('/pentadbir/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPentadbir'])->middleware('auth')->name('belum-selesai-menjawab.1');
+Route::get('/pentadbir/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPB'])->middleware('auth')->name('belum-selesai-menjawab.1');
 Route::get('/pegawai-brpp/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPB'])->name('belum-selesai-menjawab.3');
 Route::get('/pegawai-negeri/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPN'])->name('belum-selesai-menjawab.4');
 Route::get('/pegawai-daerah/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPD'])->name('belum-selesai-menjawab.5');
