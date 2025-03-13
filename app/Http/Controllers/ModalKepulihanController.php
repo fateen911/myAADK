@@ -411,6 +411,7 @@ class ModalKepulihanController extends Controller
     public function maklumBalasKepulihan(Request $request)
     {
         $pegawai = Auth::user();
+        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id'); // Get the filter parameter
 
         if($pegawai->tahap_pengguna == 5)
         {
@@ -440,11 +441,11 @@ class ModalKepulihanController extends Controller
                                 });
                             })->count();
 
-            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('notifications', 'unreadCountPD'));
+            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('notifications', 'unreadCountPD','tahap_kepulihan_id'));
         }
         else
         {
-            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
+            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas',compact('tahap_kepulihan_id'));
         }
     }
 
@@ -578,7 +579,7 @@ class ModalKepulihanController extends Controller
     }
 
     // AJAX BELUM SELESAI MENJAWAB
-    public function belumSelesaiMenjawabPB(Request $request)
+    public function belumSelesaiMenjawabPB()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
@@ -613,7 +614,7 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $belum_selesai_menjawab]);
     }
 
-    public function belumSelesaiMenjawabPN(Request $request)
+    public function belumSelesaiMenjawabPN()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
         $pegawai = Auth::user();
@@ -651,7 +652,7 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $belum_selesai_menjawab]);
     }
 
-    public function belumSelesaiMenjawabPD(Request $request)
+    public function belumSelesaiMenjawabPD()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
         $pegawai = Auth::user();

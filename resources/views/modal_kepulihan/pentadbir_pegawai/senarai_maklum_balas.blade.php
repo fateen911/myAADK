@@ -329,10 +329,13 @@
         $(document).ready(function () {
             function fetchData() {
                 let routeUrl = $("#sortTable1").data("url"); // Get route from table data attribute
+                let tahapKepulihanId = "{{ request('tahap_kepulihan_id') }}"; 
 
                 $.ajax({
                     url: routeUrl, // Use dynamic route
                     method: "GET",
+                    data: { tahap_kepulihan_id: tahapKepulihanId },
+                    
                     success: function (response) {
                         console.log(response); // Check if data is being retrieved in the browser console
                         let tableBody = $("#table-body1");
