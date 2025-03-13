@@ -162,7 +162,6 @@
                                 <!--begin::Table-->
                                 <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" 
                                 data-url="{{ route('selesai-menjawab.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
-                                {{-- <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable" style="width: 100%; table-layout: auto;"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7">
                                             <th style="width: 22%;">Nama</th>
@@ -249,7 +248,6 @@
                                 <!--begin::Table-->
                                 <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable" 
                                 data-url="{{ route('tidak-menjawab-lebih-6Bulan.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
-                                {{-- <table id="sortTable3" class="table table-striped table-hover dataTable js-exportable"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
@@ -289,7 +287,6 @@
                                 <!--begin::Table-->
                                 <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable" 
                                 data-url="{{ route('tidak-pernah-menjawab.' . auth()->user()->tahap_pengguna) }}" style="width: 100%; table-layout: auto;">
-                                {{-- <table id="sortTable4" class="table table-striped table-hover dataTable js-exportable"> --}}
                                     <thead>
                                         <tr class="text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
