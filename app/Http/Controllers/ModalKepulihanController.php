@@ -407,10 +407,45 @@ class ModalKepulihanController extends Controller
         return redirect()->route('klien.soalSelidik')->with('success', 'Respon soal selidik kepulihan telah berjaya dihantar.');
     }
 
-    // PENTADBIR ATAU BRPP
+    // PENTADBIR ATAU PEGAWAI
     public function maklumBalasKepulihan(Request $request)
     {
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
+        $pegawai = Auth::user();
+
+        if($pegawai->tahap_pengguna == 5)
+        {
+            $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+            $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+            ->select('id', 'message1', 'created_at', 'is_read1')
+            ->get();
+
+            // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+            $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                    ->select('id', 'message2', 'created_at', 'is_read2')
+                    ->get();
+                    
+
+            // Combine and sort notifications by created_at descending
+            $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+
+            // Correct unread count calculation for logged-in user's daerah_bertugas
+            $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+                                $query->where(function ($subQuery) use ($pegawaiDaerah) {
+                                    $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+                                        ->where('is_read1', false);
+                                })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+                                    $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+                                        ->where('is_read2', false);
+                                });
+                            })->count();
+
+            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('notifications', 'unreadCountPD'));
+        }
+        else
+        {
+            return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas');
+        }
     }
 
     public function selesaiMenjawabPB(Request $request)
@@ -419,26 +454,33 @@ class ModalKepulihanController extends Controller
         $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
 
         $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
-                                ->join('klien as k', 'kk.klien_id', '=', 'k.id')
-                                ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
-                                ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
-                                ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
-                                ->select(
-                                    'k.id as klien_id', 
-                                    'k.nama', 
-                                    'k.no_kp', 
-                                    'n.negeri', 
-                                    'd.daerah', 
-                                    'kk.updated_at', 
-                                    't.tahap'
-                                )
-                                ->where('kk.updated_at', '>=', $sixMonthsAgo)
-                                ->where('kk.status', 'Selesai')
-                                ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
-                                    return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
-                                })
-                                ->orderBy('kk.updated_at', 'desc')
-                                ->get();
+                            ->join('klien as k', 'kk.klien_id', '=', 'k.id')
+                            ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
+                            ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
+                            ->select(
+                                'k.id as klien_id',
+                                'k.nama',
+                                'k.no_kp',
+                                'n.negeri',
+                                'd.daerah',
+                                DB::raw('ROUND(kk.skor, 3) as skor'),
+                                't.tahap',
+                                'kk.updated_at'
+                            )
+                            ->where('kk.updated_at', '>=', $sixMonthsAgo) // Only records from the last 6 months
+                            ->whereIn('kk.updated_at', function ($query) {
+                                $query->select(DB::raw('MAX(updated_at)'))
+                                    ->from('keputusan_kepulihan_klien')
+                                    ->whereColumn('klien_id', 'kk.klien_id') // Get the latest updated record for each client
+                                    ->groupBy('klien_id');
+                            })
+                            ->where('kk.status', 'Selesai') // Filter for completed status
+                            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id); // Filter by tahap_kepulihan if provided
+                            })
+                            ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
+                            ->get();
 
         if ($selesai_menjawab->isEmpty()) {
             return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
@@ -447,6 +489,95 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $selesai_menjawab]);
     }
 
+    public function selesaiMenjawabPN(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+        $pegawai = Auth::user();
+        $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+                            ->join('klien as k', 'kk.klien_id', '=', 'k.id')
+                            ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
+                            ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
+                            ->select(
+                                'k.id as klien_id',
+                                'k.nama',
+                                'k.no_kp',
+                                'n.negeri',
+                                'd.daerah',
+                                't.tahap',
+                                'kk.updated_at'
+                            )
+                            ->where('kk.updated_at', '>=', $sixMonthsAgo) // Only records from the last 6 months
+                            ->whereIn('kk.updated_at', function ($query) {
+                                $query->select(DB::raw('MAX(updated_at)'))
+                                    ->from('keputusan_kepulihan_klien')
+                                    ->whereColumn('klien_id', 'kk.klien_id') // Get the latest updated record for each client
+                                    ->groupBy('klien_id');
+                            })
+                            ->where('kk.status', 'Selesai') // Filter for completed status
+                            ->where('k.negeri_pejabat', $pegawaiNegeri->negeri_bertugas) // Filter by the logged-in officer's state
+                            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id); // Filter by tahap_kepulihan if provided
+                            })
+                            ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
+                            ->get();
+
+        if ($selesai_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $selesai_menjawab]);
+    }
+
+    public function selesaiMenjawabPD(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+                            ->join('klien as k', 'kk.klien_id', '=', 'k.id')
+                            ->join('senarai_negeri_pejabat as n', 'k.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
+                            ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
+                            ->select(
+                                'k.id as klien_id',
+                                'k.nama',
+                                'k.no_kp',
+                                'n.negeri',
+                                'd.daerah',
+                                DB::raw('ROUND(kk.skor, 3) as skor'),
+                                't.tahap',
+                                'kk.updated_at'
+                            )
+                            ->where('kk.updated_at', '>=', $sixMonthsAgo) // Only records from the last 6 months
+                            ->whereIn('kk.updated_at', function ($query) {
+                                $query->select(DB::raw('MAX(updated_at)'))
+                                    ->from('keputusan_kepulihan_klien')
+                                    ->whereColumn('klien_id', 'kk.klien_id') // Get the latest updated record for each client
+                                    ->groupBy('klien_id');
+                            })
+                            ->where('kk.status', 'Selesai') // Filter for completed status
+                            ->where('k.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                            ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+                                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id); // Filter by tahap_kepulihan if provided
+                            })
+                            ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
+                            ->get();
+
+        if ($selesai_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $selesai_menjawab]);
+    }
+
+    // AJAX BELUM SELESAI MENJAWAB
     public function belumSelesaiMenjawabPB(Request $request)
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -465,6 +596,12 @@ class ModalKepulihanController extends Controller
                                         'kk.status' // Assuming there is a status column
                                     )
                                     ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                                    ->whereIn('kk.updated_at', function ($query) {
+                                        $query->select(DB::raw('MAX(updated_at)'))
+                                            ->from('keputusan_kepulihan_klien')
+                                            ->whereColumn('klien_id', 'kk.klien_id')
+                                            ->groupBy('klien_id');
+                                    })
                                     ->where('kk.status', 'Belum Selesai')
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
@@ -476,6 +613,84 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $belum_selesai_menjawab]);
     }
 
+    public function belumSelesaiMenjawabPN(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $pegawai = Auth::user();
+        $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+                                    ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                    ->select(
+                                        'u.id as klien_id',
+                                        'u.nama',
+                                        'u.no_kp',
+                                        'd.daerah as nama_daerah',  // Get the actual daerah name
+                                        'n.negeri as nama_negeri',  // Get the actual negeri name
+                                        'kk.updated_at',
+                                        'kk.status' // Assuming there is a status column
+                                    )
+                                    ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                                    ->whereIn('kk.updated_at', function ($query) {
+                                        $query->select(DB::raw('MAX(updated_at)'))
+                                            ->from('keputusan_kepulihan_klien')
+                                            ->whereColumn('klien_id', 'kk.klien_id')
+                                            ->groupBy('klien_id');
+                                    })
+                                    ->where('kk.status', 'Belum Selesai')
+                                    ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                    ->orderBy('kk.updated_at', 'desc')
+                                    ->get();
+
+        if ($belum_selesai_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $belum_selesai_menjawab]);
+    }
+
+    public function belumSelesaiMenjawabPD(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+                                    ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+                                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                    ->select(
+                                        'u.id as klien_id',
+                                        'u.nama',
+                                        'u.no_kp',
+                                        'd.daerah as nama_daerah',  // Get the actual daerah name
+                                        'n.negeri as nama_negeri',  // Get the actual negeri name
+                                        'kk.updated_at',
+                                        'kk.status' // Assuming there is a status column
+                                    )
+                                    ->where('kk.updated_at', '>=', $sixMonthsAgo)
+                                    ->whereIn('kk.updated_at', function ($query) {
+                                        $query->select(DB::raw('MAX(updated_at)'))
+                                            ->from('keputusan_kepulihan_klien')
+                                            ->whereColumn('klien_id', 'kk.klien_id')
+                                            ->groupBy('klien_id');
+                                    })
+                                    ->where('kk.status', 'Belum Selesai')
+                                    ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                    ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                    ->orderBy('kk.updated_at', 'desc')
+                                    ->get();
+
+        if ($belum_selesai_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $belum_selesai_menjawab]);
+    }
+
+    // AJAX TIDAK MENJAWAB LEBIH 6 BULAN
     public function tidakMenjawabLebih6BulanPB()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -506,6 +721,74 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
     }
 
+    public function tidakMenjawabLebih6BulanPN()
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $pegawai = Auth::user();
+        $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                        ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                            $join->on('u.id', '=', 'kk.klien_id')
+                                                ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                                        })
+                                        ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                        ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                        ->select(
+                                            'u.id as klien_id',
+                                            'u.nama',
+                                            'u.no_kp',
+                                            'd.daerah',  // Get the actual daerah name
+                                            'n.negeri',  // Get the actual negeri name
+                                            'kk.updated_at',
+                                        )
+                                        ->where('kk.updated_at', '<=', $sixMonthsAgo)
+                                        ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                        ->orderBy('kk.updated_at', 'desc')
+                                        ->get();
+
+        if ($tidak_menjawab_lebih_6bulan->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
+    }
+
+    public function tidakMenjawabLebih6BulanPD()
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        $pegawai = Auth::user();
+        $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+
+        $tidak_menjawab_lebih_6bulan = DB::table('klien as u')
+                                        ->join('keputusan_kepulihan_klien as kk', function($join) {
+                                            $join->on('u.id', '=', 'kk.klien_id')
+                                                ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
+                                        })
+                                        ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                        ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                        ->select(
+                                            'u.id as klien_id',
+                                            'u.nama',
+                                            'u.no_kp',
+                                            'd.daerah',  // Get the actual daerah name
+                                            'n.negeri',  // Get the actual negeri name
+                                            'kk.updated_at',
+                                        )
+                                        ->where('kk.updated_at', '<=', $sixMonthsAgo)
+                                        ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                        ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                        ->orderBy('kk.updated_at', 'desc')
+                                        ->get();
+
+        if ($tidak_menjawab_lebih_6bulan->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
+    }
+
+    // AJAX TIDAK PERNAH MENJAWAB
     public function tidakPernahMenjawabPB()
     {
         $tidak_pernah_menjawab = DB::table('klien as u')
@@ -530,252 +813,309 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $tidak_pernah_menjawab]);
     }
 
-    // PEGAWAI NEGERI
-    public function maklumBalasKepulihanNegeri(Request $request)
+    public function tidakPernahMenjawabPN()
     {
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
-        $status = $request->input('status');
-        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
 
-        // Clients who have responded within the last 6 months (Selesai Menjawab)
-        $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.status',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('kk.status', 'Selesai')
-            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
-                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
-            })
-            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who started but did not complete (Belum Selesai Menjawab)
-        $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.status',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('kk.status', '!=', 'Selesai') // Not completed responses
-            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who last responded more than 6 months ago (Tidak Menjawab Lebih 6 Bulan)
-        $tidak_menjawab_lebih_6bulan = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '<=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who have never responded (Tidak Pernah Menjawab)
         $tidak_pernah_menjawab = DB::table('klien as u')
-            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat'
-            )
-            ->whereNull('kk.klien_id') // No response record found
-            ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
-            ->get();
+                                    ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                    ->select(
+                                        'u.id as klien_id',
+                                        'u.nama',
+                                        'u.no_kp',
+                                        'd.daerah',  // Get the actual daerah name
+                                        'n.negeri',  // Get the actual negeri name
+                                    )
+                                    ->whereNull('kk.klien_id')
+                                    ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                                    ->orderBy('u.nama', 'asc')
+                                    ->get();
 
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
+        if ($tidak_pernah_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $tidak_pernah_menjawab]);
     }
 
-    public function maklumBalasKepulihanDaerah(Request $request)
+    public function tidakPernahMenjawabPD()
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
-        $status = $request->input('status');
-        $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
 
-        // Clients who have responded within the last 6 months (Selesai Menjawab)
-        $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.status',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('kk.status', 'Selesai')
-            ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
-                return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
-            })
-            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who started but did not complete (Belum Selesai Menjawab)
-        $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.status',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '>=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('kk.status', '!=', 'Selesai') // Not completed responses
-            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who last responded more than 6 months ago (Tidak Menjawab Lebih 6 Bulan)
-        $tidak_menjawab_lebih_6bulan = DB::table('keputusan_kepulihan_klien as kk')
-            ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat',
-                DB::raw('ROUND(kk.skor, 3) as skor'),
-                'kk.tahap_kepulihan_id',
-                'kk.updated_at'
-            )
-            ->where('kk.updated_at', '<=', $sixMonthsAgo)
-            ->whereIn('kk.updated_at', function ($query) {
-                $query->select(DB::raw('MAX(updated_at)'))
-                    ->from('keputusan_kepulihan_klien')
-                    ->whereColumn('klien_id', 'kk.klien_id')
-                    ->groupBy('klien_id');
-            })
-            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
-            ->orderBy('kk.updated_at', 'desc')
-            ->get();
-
-        // Clients who have never responded (Tidak Pernah Menjawab)
         $tidak_pernah_menjawab = DB::table('klien as u')
-            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
-            ->select(
-                'u.id as klien_id',
-                'u.nama',
-                'u.no_kp',
-                'u.daerah_pejabat',
-                'u.negeri_pejabat'
-            )
-            ->whereNull('kk.klien_id') // No response record found
-            ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-            ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-            ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
-            ->get();
+                                    ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+                                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+                                    ->select(
+                                        'u.id as klien_id',
+                                        'u.nama',
+                                        'u.no_kp',
+                                        'd.daerah',  // Get the actual daerah name
+                                        'n.negeri',  // Get the actual negeri name
+                                    )
+                                    ->whereNull('kk.klien_id')
+                                    ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                    ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                    ->orderBy('u.nama', 'asc')
+                                    ->get();
+
+        if ($tidak_pernah_menjawab->isEmpty()) {
+            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
+        }
+        
+        return response()->json(['data' => $tidak_pernah_menjawab]);
+    }
+
+    // PEGAWAI NEGERI
+    // public function maklumBalasKepulihanNegeri(Request $request)
+    // {
+    //     $pegawai = Auth::user();
+    //     $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+    //     $sixMonthsAgo = Carbon::now()->subMonths(6);
+    //     $status = $request->input('status');
+    //     $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+
+    //     // Clients who have responded within the last 6 months (Selesai Menjawab)
+    //     $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.status',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('kk.status', 'Selesai')
+    //         ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+    //             return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+    //         })
+    //         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who started but did not complete (Belum Selesai Menjawab)
+    //     $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.status',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('kk.status', '!=', 'Selesai') // Not completed responses
+    //         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who last responded more than 6 months ago (Tidak Menjawab Lebih 6 Bulan)
+    //     $tidak_menjawab_lebih_6bulan = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '<=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who have never responded (Tidak Pernah Menjawab)
+    //     $tidak_pernah_menjawab = DB::table('klien as u')
+    //         ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat'
+    //         )
+    //         ->whereNull('kk.klien_id') // No response record found
+    //         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
+    //         ->get();
+
+    //     return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact('selesai_menjawab','belum_selesai_menjawab','tidak_menjawab_lebih_6bulan','tidak_pernah_menjawab'));
+    // }
+
+    // public function maklumBalasKepulihanDaerah(Request $request)
+    // {
+    //     $pegawai = Auth::user();
+    //     $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+    //     $sixMonthsAgo = Carbon::now()->subMonths(6);
+    //     $status = $request->input('status');
+    //     $tahap_kepulihan_id = $request->input('tahap_kepulihan_id');
+
+    //     // Clients who have responded within the last 6 months (Selesai Menjawab)
+    //     $selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.status',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('kk.status', 'Selesai')
+    //         ->when($tahap_kepulihan_id, function ($query, $tahap_kepulihan_id) {
+    //             return $query->where('kk.tahap_kepulihan_id', $tahap_kepulihan_id);
+    //         })
+    //         ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+    //         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who started but did not complete (Belum Selesai Menjawab)
+    //     $belum_selesai_menjawab = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.status',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('kk.status', '!=', 'Selesai') // Not completed responses
+    //         ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+    //         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who last responded more than 6 months ago (Tidak Menjawab Lebih 6 Bulan)
+    //     $tidak_menjawab_lebih_6bulan = DB::table('keputusan_kepulihan_klien as kk')
+    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat',
+    //             DB::raw('ROUND(kk.skor, 3) as skor'),
+    //             'kk.tahap_kepulihan_id',
+    //             'kk.updated_at'
+    //         )
+    //         ->where('kk.updated_at', '<=', $sixMonthsAgo)
+    //         ->whereIn('kk.updated_at', function ($query) {
+    //             $query->select(DB::raw('MAX(updated_at)'))
+    //                 ->from('keputusan_kepulihan_klien')
+    //                 ->whereColumn('klien_id', 'kk.klien_id')
+    //                 ->groupBy('klien_id');
+    //         })
+    //         ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+    //         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
+    //         ->orderBy('kk.updated_at', 'desc')
+    //         ->get();
+
+    //     // Clients who have never responded (Tidak Pernah Menjawab)
+    //     $tidak_pernah_menjawab = DB::table('klien as u')
+    //         ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+    //         ->select(
+    //             'u.id as klien_id',
+    //             'u.nama',
+    //             'u.no_kp',
+    //             'u.daerah_pejabat',
+    //             'u.negeri_pejabat'
+    //         )
+    //         ->whereNull('kk.klien_id') // No response record found
+    //         ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+    //         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //         ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat')
+    //         ->get();
 
 
-        // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
-        $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-        ->select('id', 'message1', 'created_at', 'is_read1')
-        ->get();
+    //     // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
+    //     $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //     ->select('id', 'message1', 'created_at', 'is_read1')
+    //     ->get();
 
-        // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
-        $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                ->select('id', 'message2', 'created_at', 'is_read2')
-                ->get();
+    //     // Fetch notifications where daerah_bertugas matches daerah_aadk_baru (for message2)
+    //     $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //             ->select('id', 'message2', 'created_at', 'is_read2')
+    //             ->get();
                 
 
-        // Combine and sort notifications by created_at descending
-        $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
+    //     // Combine and sort notifications by created_at descending
+    //     $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
 
-        // Correct unread count calculation for logged-in user's daerah_bertugas
-        $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
-                            $query->where(function ($subQuery) use ($pegawaiDaerah) {
-                                $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
-                                    ->where('is_read1', false);
-                            })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
-                                $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
-                                    ->where('is_read2', false);
-                            });
-                        })->count();
+    //     // Correct unread count calculation for logged-in user's daerah_bertugas
+    //     $unreadCountPD = NotifikasiPegawaiDaerah::where(function ($query) use ($pegawaiDaerah) {
+    //                         $query->where(function ($subQuery) use ($pegawaiDaerah) {
+    //                             $subQuery->where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
+    //                                 ->where('is_read1', false);
+    //                         })->orWhere(function ($subQuery) use ($pegawaiDaerah) {
+    //                             $subQuery->where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
+    //                                 ->where('is_read2', false);
+    //                         });
+    //                     })->count();
 
-        return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
-    }
+    //     return view('modal_kepulihan.pentadbir_pegawai.senarai_maklum_balas', compact( 'selesai_menjawab','belum_selesai_menjawab', 'tidak_menjawab_lebih_6bulan', 'tidak_pernah_menjawab', 'notifications', 'unreadCountPD'));
+    // }
 
     public function sejarahSoalSelidik($klien_id)
     {
