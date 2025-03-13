@@ -220,24 +220,39 @@ Route::get('/klien/modul-kepulihan/soalan-kepulihan', [ModalKepulihanController:
 Route::post('/klien/autosave/kepulihan',  [ModalKepulihanController::class, 'autosaveResponSoalanKepulihan'])->name('klien.autosave.kepulihan');
 Route::post('/klien/hantar/jawapan/soalan-kepulihan', [ModalKepulihanController::class, 'storeResponSoalanKepulihan'])->name('klien.submit.kepulihan');
 
-// MODAL KEPULIHAN
+// PENTADBIR & PEGAWAI - MODAL KEPULIHAN
 Route::get('/sejarah/modul-kepulihan/klien/{klien_id}', [ModalKepulihanController::class, 'sejarahSoalSelidik'])->name('sejarah.soal.selidik.klien');
-
-// PENTADBIR & BRPP - JSON MODAL KEPULIHAN
 Route::get('/pentadbir-brpp/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihan'])->middleware('auth')->name('maklum.balas.kepulihan');
-Route::get('/pentadbir-brpp/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPB'])->middleware('auth')->name('selesai-menjawab.pentadbir-brpp');
-Route::get('/pentadbir-brpp/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPB'])->middleware('auth')->name('belum-selesai-menjawab.pentadbir-brpp');
-Route::get('/pentadbir-brpp/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPB'])->middleware('auth')->name('tidak-menjawab-lebih-6Bulan.pentadbir-brpp');
-Route::get('/pentadbir-brpp/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPB'])->middleware('auth')->name('tidak-pernah-menjawab.pentadbir-brpp');
+Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.pegawai-negeri');
+Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanDaerah'])->middleware('auth')->name('maklum.balas.kepulihan.pegawai-daerah');
 // Route::get('/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMK'])->name('exportAnalisisMK.pdf');
+// Route::get('/pegawai-negeri/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKNegeri'])->name('exportAnalisisMKNegeri.pdf');
+// Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKDaerah'])->name('exportAnalisisMKDaerah.pdf');
 
-// PEGAWAI NEGERI - MODAL KEPULIHAN
-Route::get('/pegawai-negeri/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanNegeri'])->middleware('auth')->name('maklum.balas.kepulihan.negeri');
-Route::get('/pegawai-negeri/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKNegeri'])->name('exportAnalisisMKNegeri.pdf');
+// PENTADBIR & BRPP - AJAX SELESAI MENJAWAB
+Route::get('/pentadbir/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPentadbir'])->middleware('auth')->name('selesai-menjawab.1');
+Route::get('/pegawai-brpp/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPB'])->name('selesai-menjawab.3');
+Route::get('/pegawai-negeri/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPN'])->name('selesai-menjawab.4');
+Route::get('/pegawai-daerah/modul-kepulihan/selesai-menjawab', [ModalKepulihanController::class, 'selesaiMenjawabPD'])->name('selesai-menjawab.5');
 
-// PEGAWAI DAERAH - MODAL KEPULIHAN
-Route::get('/pegawai-daerah/modul-kepulihan/maklum-balas', [ModalKepulihanController::class, 'maklumBalasKepulihanDaerah'])->middleware('auth')->name('maklum.balas.kepulihan.daerah');
-Route::get('/pegawai-daerah/export-pdf/analisis/modal-kepulihan', [ModalKepulihanController::class, 'exportPDFAnalisisMKDaerah'])->name('exportAnalisisMKDaerah.pdf');
+// PENTADBIR & BRPP - AJAX BELUM SELESAI MENJAWAB
+Route::get('/pentadbir/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPentadbir'])->middleware('auth')->name('belum-selesai-menjawab.1');
+Route::get('/pegawai-brpp/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPB'])->name('belum-selesai-menjawab.3');
+Route::get('/pegawai-negeri/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPN'])->name('belum-selesai-menjawab.4');
+Route::get('/pegawai-daerah/modul-kepulihan/belum-selesai-menjawab', [ModalKepulihanController::class, 'belumSelesaiMenjawabPD'])->name('belum-selesai-menjawab.5');
+
+// PENTADBIR & BRPP - AJAX TIDAK MENJAWAB LEBIH 6 BULAN
+Route::get('/pentadbir-brpp/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPB'])->middleware('auth')->name('tidak-menjawab-lebih-6Bulan.1');
+Route::get('/pegawai-brpp/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPB'])->name('tidak-menjawab-lebih-6Bulan.3');
+Route::get('/pegawai-negeri/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPN'])->name('tidak-menjawab-lebih-6Bulan.4');
+Route::get('/pegawai-daerah/modul-kepulihan/tidak-menjawab-lebih-6Bulan', [ModalKepulihanController::class, 'tidakMenjawabLebih6BulanPD'])->name('tidak-menjawab-lebih-6Bulan.5');
+
+// PENTADBIR & BRPP - AJAX TIDAK PERNAH MENJAWAB
+Route::get('/pentadbir-brpp/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPB'])->middleware('auth')->name('tidak-pernah-menjawab.1');
+Route::get('/pegawai-brpp/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPB'])->name('tidak-pernah-menjawab.3');
+Route::get('/pegawai-negeri/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPN'])->name('tidak-pernah-menjawab.4');
+Route::get('/pegawai-daerah/modul-kepulihan/tidak-pernah-menjawab', [ModalKepulihanController::class, 'tidakPernahMenjawabPD'])->name('tidak-pernah-menjawab.5');
+
 
 // KLIEN - PERTUKARAN PEJABAT
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
