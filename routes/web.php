@@ -321,12 +321,32 @@ Route::get('/pegawai-negeri/senarai-klien/tidak-pernah-menjawab', [PelaporanCont
 Route::get('/pegawai-negeri/pelaporan/excel/tidak-pernah-menjawab', [PelaporanController::class, 'ExcelTidakPernahMenjawabPN'])->name('pelaporan.tidak-pernah-menjawab.excel.negeri');
 Route::get('/pegawai-negeri/pelaporan/pdf/modal-kepulihan/tidak-pernah-menjawab', [PelaporanController::class, 'PDFtidakPernahMenjawabPN'])->name('pelaporan.tidak-pernah-menjawab.pdf.negeri');
 
-// PEGAWAI DAERAH - PELAPORAN - MODAL KEPULIHAN
+
+// PELAPORAN - PEGAWAI DAERAH - MODAL KEPULIHAN
 Route::get('/pegawai-daerah/pelaporan/modal-kepulihan', [PelaporanController::class, 'modalKepulihanDaerah'])->middleware('auth')->name('pelaporan.modal_kepulihan.daerah');
-Route::get('/pegawai-daerah/pelaporan/modal-kepulihan/export-pdf/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabDaerah'])->name('selesai.pdf.daerah');
-Route::get('/pegawai-daerah/pelaporan/modal-kepulihan/export-pdf/belum-selesai-menjawab', [PelaporanController::class, 'PDFbelumSelesaiMenjawabDaerah'])->name('belum_selesai.pdf.daerah');
-Route::get('/pegawai-daerah/pelaporan/modal-kepulihan/export-pdf/tidak-menjawab-lebih6', [PelaporanController::class, 'PDFtidakMenjawabLebih6BulanDaerah'])->name('tidak_menjawab6.pdf.daerah');
-Route::get('/pegawai-daerah/pelaporan/modal-kepulihan/export-pdf/tidak-pernah-menjawab', [PelaporanController::class, 'PDFtidakPernahMenjawabDaerah'])->name('tidak_pernah_menjawab.pdf.daerah');
+
+// PELAPORAN - PEGAWAI DAERAH - MODAL KEPULIHAN - AJAX SELESAI MENJAWAB
+Route::get('/pegawai-daerah/senarai-klien/selesai-menjawab', [PelaporanController::class, 'jsonSelesaiMenjawabPD'])->name('ajax-senarai-selesai-menjawab.daerah');
+Route::get('/pegawai-daerah/pelaporan/excel/selesai-menjawab', [PelaporanController::class, 'MKselesaiMenjawabExcelPD'])->name('pelaporan.selesai-menjawab.excel.daerah');
+Route::get('/pegawai-daerah/pelaporan/pdf/modal-kepulihan/selesai-menjawab', [PelaporanController::class, 'PDFselesaiMenjawabPD'])->name('pelaporan.selesai-menjawab.pdf.daerah');
+Route::get('/pegawai-daerah/pelaporan/pdf/analisis/modal-kepulihan', [PelaporanController::class, 'PDFAnalisisModalKepulihanPD'])->name('pelaporan.analisisMK.pdf.daerah');
+Route::get('/pegawai-daerah/pelaporan/excel/analisis/modal-kepulihan', [PelaporanController::class, 'excelAnalisisModalKepulihanPD'])->name('pelaporan.analisisMK.excel.daerah');
+
+// PELAPORAN - PEGAWAI DAERAH - MODAL KEPULIHAN - AJAX BELUM SELESAI MENJAWAB
+Route::get('/pegawai-daerah/senarai-klien/belum-selesai-menjawab', [PelaporanController::class, 'jsonBelumSelesaiMenjawabPD'])->name('ajax-senarai-belum-selesai-menjawab.daerah');
+Route::get('/pegawai-daerah/pelaporan/excel/belum-selesai-menjawab', [PelaporanController::class, 'MKBelumSelesaiMenjawabExcelPD'])->name('pelaporan.belum-selesai-menjawab.excel.daerah');
+Route::get('/pegawai-daerah/pelaporan/pdf/modal-kepulihan/belum-selesai-menjawab', [PelaporanController::class, 'PDFBelumSelesaiMenjawabPD'])->name('pelaporan.belum-selesai-menjawab.pdf.daerah');
+
+// PELAPORAN - PEGAWAI DAERAH - MODAL KEPULIHAN - AJAX TIDAK MENJAWAB LEBIH 6 BULAN
+Route::get('/pegawai-daerah/senarai-klien/tidak-menjawab-lebih-6Bulan', [PelaporanController::class, 'jsonTidakMenjawabLebih6BulanPD'])->name('ajax-senarai-tidak-menjawab-lebih-6Bulan.daerah');
+Route::get('/pegawai-daerah/pelaporan/excel/tidak-menjawab-lebih-6Bulan', [PelaporanController::class, 'ExcelTidakMenjawabLebih6BulanPD'])->name('pelaporan.tidak-menjawab-lebih-6Bulan.excel.daerah');
+Route::get('/pegawai-daerah/pelaporan/pdf/modal-kepulihan/tidak-menjawab-lebih-6Bulan', [PelaporanController::class, 'PDFtidakMenjawabLebih6BulanPD'])->name('pelaporan.tidak-menjawab-lebih-6Bulan.pdf.daerah');
+
+// PELAPORAN - PEGAWAI DAERAH - MODAL KEPULIHAN - AJAX TIDAK PERNAH MENJAWAB
+Route::get('/pegawai-daerah/senarai-klien/tidak-pernah-menjawab', [PelaporanController::class, 'jsonTidakPernahMenjawabPD'])->name('ajax-senarai-tidak-pernah-menjawab.daerah');
+Route::get('/pegawai-daerah/pelaporan/excel/tidak-pernah-menjawab', [PelaporanController::class, 'ExcelTidakPernahMenjawabPD'])->name('pelaporan.tidak-pernah-menjawab.excel.daerah');
+Route::get('/pegawai-daerah/pelaporan/pdf/modal-kepulihan/tidak-pernah-menjawab', [PelaporanController::class, 'PDFtidakPernahMenjawabPD'])->name('pelaporan.tidak-pernah-menjawab.pdf.daerah');
+
 
 // KLIEN - NOTIFIKASI
 Route::middleware(['auth'])->group(function () {
@@ -334,7 +354,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'markAsReadKlien'])->name('notifications.markRead');
     Route::get('/pegawai-daerah/notifikasi', [NotifikasiController::class, 'fetchNotificationsPD'])->name('notifications.fetchNotificationsPD');
     Route::get('/pegawai-daerah/notifikasi/{id}/{message}', [NotifikasiController::class, 'markAsReadPD'])->name('notifications.markReadPD');
-    // Route::get('/pegawai-daerah/notifikasi/{id}', [NotifikasiController::class, 'markAsReadPD'])->name('notifications.markReadPD');
     Route::get('/pegawai-daerah/senarai-pertukaran-pejabat', [NotifikasiController::class, 'senaraiTukarAADKDaerahPD'])->name('notifications.senaraiTukarDaerahPD');
 });
 
