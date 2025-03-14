@@ -60,11 +60,11 @@ class MKBelumSelesaiMenjawabExcelPN implements FromCollection, WithHeadings, Wit
                 ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_s'])) {
-            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_s']);
+        if (!empty($this->filters['from_date_bs'])) {
+            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_bs']);
         } 
-        if (!empty($this->filters['to_date_s'])) {
-            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_s']);
+        if (!empty($this->filters['to_date_bs'])) {
+            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_bs']);
         }
         if (!empty($this->filters['aadk_daerah_bs'])) {
             $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_bs']);
