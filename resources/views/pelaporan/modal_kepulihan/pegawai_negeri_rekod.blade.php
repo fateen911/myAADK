@@ -525,22 +525,28 @@
     <script>
         $(document).ready(function () {
             function fetchData() {
-                let formData = $('#filter-form1').serialize(); // Serialize form data
+                let formData = $('#filter-form1').serialize();
+                console.log("Sending request with:", formData); // Debugging log
 
                 $.ajax({
                     url: "{{ route('ajax-senarai-selesai-menjawab.negeri') }}",
                     method: "GET",
                     data: formData,
                     success: function (response) {
+                        let table = $('#sortTable1');
                         let tableBody = $("#table-body1");
-                        tableBody.empty(); // Clear existing data
 
-                        let rows = ""; // Define rows variable to store all table rows
+                        // Destroy existing DataTable instance if it exists
+                        if ($.fn.DataTable.isDataTable(table)) {
+                            table.DataTable().clear().destroy();
+                        }
+
+                        tableBody.empty(); // Clear existing table data
+                        let rows = "";
 
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
 
-                            // Determine tahap kepulihan badge color
                             let badgeColor;
                             switch (row.tahap) {
                                 case 'SANGAT TIDAK MEMUASKAN':
@@ -574,13 +580,8 @@
 
                         tableBody.html(rows);
 
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable1")) {
-                            $('#sortTable1').DataTable().destroy();
-                        }
-
                         // Reinitialize DataTable
-                        $('#sortTable1').DataTable({
+                        table.DataTable({
                             ordering: true,
                             order: [],
                             language: {
@@ -615,14 +616,12 @@
                 var fromDate = $("#from_date_s").val();
                 var toDate = $("#to_date_s").val();
                 var tahap = $("#tahap_kepulihan_id").val();
-                var negeri = $("#aadk_negeri_s").val();
                 var daerah = $("#aadk_daerah_s").val();
 
                 var query = $.param({
                     from_date_s: fromDate,
                     to_date_s: toDate,
                     tahap_kepulihan_id: tahap,
-                    aadk_negeri_s: negeri,
                     aadk_daerah_s: daerah
                 });
 
@@ -644,14 +643,12 @@
                 var fromDate = $("#from_date_s").val();
                 var toDate = $("#to_date_s").val();
                 var tahap = $("#tahap_kepulihan_id").val();
-                var negeri = $("#aadk_negeri_s").val();
                 var daerah = $("#aadk_daerah_s").val();
 
                 var query = $.param({
                     from_date_s: fromDate,
                     to_date_s: toDate,
                     tahap_kepulihan_id: tahap,
-                    aadk_negeri_s: negeri,
                     aadk_daerah_s: daerah
                 });
 

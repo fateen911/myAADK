@@ -551,7 +551,6 @@ class PelaporanController extends Controller
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $aadk_daerah = DB::table('senarai_daerah_pejabat')->where('negeri_id', $pegawaiNegeri->negeri_bertugas)->get();
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
         $tahap_kepulihan_list = TahapKepulihan::all();
 
         return view('pelaporan.modal_kepulihan.pegawai_negeri_rekod', compact('aadk_daerah','tahap_kepulihan_list'));
@@ -559,7 +558,7 @@ class PelaporanController extends Controller
 
     // PEGAWAI NEGERI - MODAL KEPULIHAN - SELESAI MENJAWAB
     public function jsonSelesaiMenjawabPN(Request $request)
-    {
+    {        
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -584,16 +583,19 @@ class PelaporanController extends Controller
                 ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
-        if ($request->filled('from_date_s')) {
+        if ($request->has('from_date_s') && $request->from_date_s != '') {
             $query->whereDate('kk.updated_at', '>=', $request->from_date_s);
         }
-        if ($request->filled('to_date_s')) {
+
+        if ($request->has('to_date_s') && $request->to_date_s != '') {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_s);
         }
-        if ($request->tahap_kepulihan_id) {
+
+        if ($request->has('tahap_kepulihan_id') && $request->tahap_kepulihan_id != '') {
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
-        if ($request->aadk_daerah_s) {
+        
+        if ($request->has('aadk_daerah_s') && $request->aadk_daerah_s != '') {
             $query->where('k.daerah_pejabat', $request->aadk_daerah_s);
         }
 
