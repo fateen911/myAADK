@@ -87,10 +87,10 @@ class MKTidakPernahMenjawabExcelPN implements FromCollection, WithHeadings, With
     {
         return [
             'A' => 5,
-            'B' => 45,           
-            'C' => 25,
-            'D' => 30,
-            'E' => 40,
+            'B' => 36,           
+            'C' => 24,
+            'D' => 20,
+            'E' => 30,
         ];
     }
 
