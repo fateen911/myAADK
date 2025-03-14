@@ -58,11 +58,11 @@ class MKBelumSelesaiMenjawabExcel implements FromCollection, WithHeadings, WithM
                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'd.daerah', 'n.negeri','kk.updated_at', 'kk.status')
                 ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_bs'])) {
-            $query->whereDate('kk.updated_at', $this->filters['from_date_bs']);
-        }
-        if (!empty($this->filters['to_date_bs'])) {
-            $query->whereDate('kk.updated_at', $this->filters['to_date_bs']);
+        if (!empty($this->filters['from_date_s'])) {
+            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_s']);
+        } 
+        if (!empty($this->filters['to_date_s'])) {
+            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_s']);
         }
         if (!empty($this->filters['aadk_negeri_bs'])) {
             $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_bs']);

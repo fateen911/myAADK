@@ -50,11 +50,11 @@ class MKTidakMenjawabLebih6BulanExcel implements FromCollection, WithHeadings, W
                 ->where('kk.updated_at', '<=', now()->subMonths(6)) // Latest record is more than 6 months old
                 ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_tm6'])) {
-            $query->whereDate('kk.updated_at', $this->filters['from_date_tm6']);
-        }
-        if (!empty($this->filters['to_date_tm6'])) {
-            $query->whereDate('kk.updated_at', $this->filters['to_date_tm6']);
+        if (!empty($this->filters['from_date_s'])) {
+            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_s']);
+        } 
+        if (!empty($this->filters['to_date_s'])) {
+            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_s']);
         }
         if (!empty($this->filters['aadk_negeri_tm6'])) {
             $query->where('u.negeri_pejabat', $this->filters['aadk_negeri_tm6']);

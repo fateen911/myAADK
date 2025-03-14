@@ -368,10 +368,10 @@
                                 
                                         <!-- AADK Daerah -->
                                         <div class="col-md-3">
-                                            <select id="aadk_daerah_bs" class="form-select" name="aadk_daerah_bs">
+                                            <select id="aadk_daerah_tm6" class="form-select" name="aadk_daerah_tm6">
                                                 <option value="">Pilih AADK Daerah</option>
                                                 @foreach($aadk_daerah as $d1)
-                                                    <option value="{{ $d1->kod }}" {{ request('aadk_daerah_bs') == $d1->kod ? 'selected' : '' }}>
+                                                    <option value="{{ $d1->kod }}" {{ request('aadk_daerah_tm6') == $d1->kod ? 'selected' : '' }}>
                                                         {{ $d1->daerah }}
                                                     </option>
                                                 @endforeach
@@ -674,10 +674,16 @@
                     method: "GET",
                     data: formData,
                     success: function (response) {
+                        let table = $('#sortTable2');
                         let tableBody = $("#table-body2");
-                        tableBody.empty(); // Clear existing data
+                       
+                        // Destroy existing DataTable instance if it exists
+                        if ($.fn.DataTable.isDataTable(table)) {
+                            table.DataTable().clear().destroy();
+                        }
 
-                        let rows = ""; // Define rows variable to store all table rows
+                        tableBody.empty(); // Clear existing table data
+                        let rows = "";
 
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
@@ -695,13 +701,8 @@
 
                         tableBody.html(rows);
 
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable2")) {
-                            $('#sortTable2').DataTable().destroy();
-                        }
-
                         // Reinitialize DataTable
-                        $('#sortTable2').DataTable({
+                        table.DataTable({
                             ordering: true,
                             order: [],
                             language: {
@@ -735,13 +736,11 @@
 
                 var fromDate = $("#from_date_bs").val();
                 var toDate = $("#to_date_bs").val();
-                var negeri = $("#aadk_negeri_bs").val();
                 var daerah = $("#aadk_daerah_bs").val();
 
                 var query = $.param({
                     from_date_bs: fromDate,
                     to_date_bs: toDate,
-                    aadk_negeri_bs: negeri,
                     aadk_daerah_bs: daerah
                 });
 
@@ -768,10 +767,16 @@
                     method: "GET",
                     data: formData,
                     success: function (response) {
+                        let table = $('#sortTable3');
                         let tableBody = $("#table-body3");
-                        tableBody.empty(); // Clear existing data
+                       
+                        // Destroy existing DataTable instance if it exists
+                        if ($.fn.DataTable.isDataTable(table)) {
+                            table.DataTable().clear().destroy();
+                        }
 
-                        let rows = ""; // Define rows variable to store all table rows
+                        tableBody.empty(); // Clear existing table data
+                        let rows = "";
 
                         $.each(response.data, function (index, row) {
                             let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
@@ -789,13 +794,8 @@
 
                         tableBody.html(rows);
 
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable3")) {
-                            $('#sortTable3').DataTable().destroy();
-                        }
-
                         // Reinitialize DataTable
-                        $('#sortTable3').DataTable({
+                        table.DataTable({
                             ordering: true,
                             order: [],
                             language: {
@@ -829,13 +829,11 @@
 
                 var fromDate = $("#from_date_tm6").val();
                 var toDate = $("#to_date_tm6").val();
-                var negeri = $("#aadk_negeri_tm6").val();
                 var daerah = $("#aadk_daerah_tm6").val();
 
                 var query = $.param({
                     from_date_tm6: fromDate,
                     to_date_tm6: toDate,
-                    aadk_negeri_tm6: negeri,
                     aadk_daerah_tm6: daerah
                 });
 
@@ -862,10 +860,16 @@
                     method: "GET",
                     data: formData,
                     success: function (response) {
+                        let table = $('#sortTable4');
                         let tableBody = $("#table-body4");
-                        tableBody.empty(); // Clear existing data
+                       
+                        // Destroy existing DataTable instance if it exists
+                        if ($.fn.DataTable.isDataTable(table)) {
+                            table.DataTable().clear().destroy();
+                        }
 
-                        let rows = ""; // Define rows variable to store all table rows
+                        tableBody.empty(); // Clear existing table data
+                        let rows = "";
 
                         $.each(response.data, function (index, row) {
                             rows += `
@@ -880,13 +884,8 @@
 
                         tableBody.html(rows);
 
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable4")) {
-                            $('#sortTable4').DataTable().destroy();
-                        }
-
                         // Reinitialize DataTable
-                        $('#sortTable4').DataTable({
+                        table.DataTable({
                             ordering: true,
                             order: [],
                             language: {
@@ -918,11 +917,8 @@
             $("#export-excel5").click(function (e) {
                 e.preventDefault();
 
-                var negeri = $("#aadk_negeri_tpm").val();
                 var daerah = $("#aadk_daerah_tpm").val();
-
                 var query = $.param({
-                    aadk_negeri_tpm: negeri,
                     aadk_daerah_tpm: daerah
                 });
 

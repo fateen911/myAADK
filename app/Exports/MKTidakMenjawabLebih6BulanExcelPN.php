@@ -52,11 +52,11 @@ class MKTidakMenjawabLebih6BulanExcelPN implements FromCollection, WithHeadings,
                 ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
-        if (!empty($this->filters['from_date_tm6'])) {
-            $query->whereDate('kk.updated_at', $this->filters['from_date_tm6']);
-        }
-        if (!empty($this->filters['to_date_tm6'])) {
-            $query->whereDate('kk.updated_at', $this->filters['to_date_tm6']);
+        if (!empty($this->filters['from_date_s'])) {
+            $query->whereDate('kk.updated_at', '>=', $this->filters['from_date_s']);
+        } 
+        if (!empty($this->filters['to_date_s'])) {
+            $query->whereDate('kk.updated_at', '<=', $this->filters['to_date_s']);
         }
         if (!empty($this->filters['aadk_daerah_tm6'])) {
             $query->where('u.daerah_pejabat', $this->filters['aadk_daerah_tm6']);
