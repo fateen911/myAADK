@@ -19,8 +19,13 @@
         "maatwebsite/excel": "^3.1",
         "setasign/fpdi": "^2.6",
         "simplesoftwareio/simple-qrcode": "^4.2",
+<<<<<<< Updated upstream
         "tecnickcom/tcpdf": "^6.8",
         "twilio/sdk": "^8.2"
+=======
+        "twilio/sdk": "^8.2",
+        "yajra/laravel-datatables-oracle": "^11.1"
+>>>>>>> Stashed changes
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.0",

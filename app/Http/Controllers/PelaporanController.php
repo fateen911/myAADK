@@ -40,6 +40,7 @@ use Carbon\Carbon;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class PelaporanController extends Controller
 {
@@ -495,28 +496,29 @@ class PelaporanController extends Controller
     public function jsonTidakPernahMenjawabPB(Request $request)
     {
         $query = DB::table('klien as u')
-                    ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
-                    ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
-                    ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
-                    ->select(
-                        'u.id as klien_id',
-                        'u.nama',
-                        'u.no_kp',
-                        'd.daerah',  // Get the actual daerah name
-                        'n.negeri',  // Get the actual negeri name
-                    )
-                    ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+            ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
+            ->leftJoin('senarai_daerah_pejabat as d', 'u.daerah_pejabat', '=', 'd.kod')
+            ->select(
+                'u.id as klien_id',
+                'u.nama',
+                'u.no_kp',
+                'd.daerah',
+                'n.negeri'
+            )
+            ->whereNull('kk.klien_id');
 
         // Apply Filters
         if ($request->filled('aadk_negeri_tpm')) {
-            $query->where('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
         }
-        
+
         if ($request->filled('aadk_daerah_tpm')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakPernahMenjawabPB(Request $request)
