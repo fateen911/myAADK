@@ -334,8 +334,6 @@
             let table = $("#sortTable1").DataTable({
                 processing: true,
                 serverSide: true,  // Enable server-side processing for large datasets
-                responsive: true,
-                ordering: true,
                 order: [], // Default order
                 ajax: {
                     url: routeUrl,
@@ -388,80 +386,7 @@
             }
         });
     </script>    
-    {{-- <script>
-        $(document).ready(function () {
-            function fetchData() {
-                let routeUrl = $("#sortTable1").data("url"); // Get route from table data attribute
-                let tahapKepulihanId = "{{ request('tahap_kepulihan_id') }}"; 
-
-                $.ajax({
-                    url: routeUrl, // Use dynamic route
-                    method: "GET",
-                    data: { tahap_kepulihan_id: tahapKepulihanId },
-                    
-                    success: function (response) {
-                        console.log(response); // Check if data is being retrieved in the browser console
-                        let tableBody = $("#table-body1");
-                        tableBody.empty();
-
-                        let rows = "";
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-                            let badgeColor = row.tahap === 'SANGAT TIDAK MEMUASKAN' ? 'red' :
-                                            row.tahap === 'KURANG MEMUASKAN' ? 'darkorange' :
-                                            row.tahap === 'MEMUASKAN' ? '#ffc107' : 'green';
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                    <td style="text-align: center;">
-                                        <span class="badge text-white" style="padding:10px; width:200px; display: inline-block; text-align: center; background-color: ${badgeColor};">
-                                            ${row.tahap ? row.tahap : 'N/A'}
-                                        </span>
-                                    </td>
-                                    <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable1")) {
-                            $('#sortTable1').DataTable().destroy();
-                        }
-
-                        // Reinitialize DataTable
-                        $('#sortTable1').DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
-                    }
-                });
-            }
-            // Fetch data on page load
-            fetchData();
-        });
-    </script> --}}
-
+    
     {{-- AJAX BELUM SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
