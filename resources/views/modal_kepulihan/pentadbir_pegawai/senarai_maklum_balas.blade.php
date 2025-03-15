@@ -327,6 +327,69 @@
     {{-- AJAX SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
+            let routeUrl = $("#sortTable1").data("url"); // Get route from data attribute
+            let tahapKepulihanId = "{{ request('tahap_kepulihan_id') }}"; 
+    
+            // Initialize DataTable
+            let table = $("#sortTable1").DataTable({
+                processing: true,
+                serverSide: true,  // Enable server-side processing for large datasets
+                responsive: true,
+                ordering: true,
+                order: [], // Default order
+                ajax: {
+                    url: routeUrl,
+                    type: "GET",
+                    data: function (d) {
+                        d.tahap_kepulihan_id = tahapKepulihanId; // Pass parameter to controller
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                },
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                     '<"row"<"col-sm-12 my-0"tr>>' +
+                     '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                columns: [
+                    { data: "nama", render: function (data, type, row) {
+                            return `<a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${data}</a>`;
+                        }
+                    },
+                    { data: "no_kp", className: "text-center" },
+                    { data: "negeri", className: "text-center" },
+                    { data: "daerah", className: "text-center" },
+                    { data: "updated_at", className: "text-center", render: function (data) {
+                            return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                        }
+                    },
+                    { data: "tahap", className: "text-center align-middle", render: function (data) {
+                            let badgeColor = data === 'SANGAT TIDAK MEMUASKAN' ? 'red' :
+                                             data === 'KURANG MEMUASKAN' ? 'darkorange' :
+                                             data === 'MEMUASKAN' ? '#ffc107' : 'green';
+                            return `<span class="badge text-white p-3 w-100" 
+                                        style="background-color:${badgeColor}; display: inline-block;">
+                                        ${data ? data : 'N/A'}
+                                    </span>`;
+                        }
+                    },
+                    { data: "klien_id", className: "text-center", orderable: false, render: function (data) {
+                            return `<a href="/sejarah/modul-kepulihan/klien/${data}"><i class="fas fa-eye"></i></a>`;
+                        }
+                    }
+                ]
+            });
+    
+            // Function to reload DataTable when filters change (if needed)
+            function reloadTable() {
+                table.ajax.reload();
+            }
+        });
+    </script>    
+    {{-- <script>
+        $(document).ready(function () {
             function fetchData() {
                 let routeUrl = $("#sortTable1").data("url"); // Get route from table data attribute
                 let tahapKepulihanId = "{{ request('tahap_kepulihan_id') }}"; 
@@ -397,7 +460,7 @@
             // Fetch data on page load
             fetchData();
         });
-    </script>
+    </script> --}}
 
     {{-- AJAX BELUM SELESAI MENJAWAB --}}
     <script>
@@ -531,57 +594,26 @@
     {{-- AJAX TIDAK PERNAH MENJAWAB --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let routeUrl = $("#sortTable4").data("url"); // Get route from table data attribute
-
-                $.ajax({
-                    url: routeUrl, // Use dynamic route
-                    method: "GET",
-                    success: function (response) {
-                        let tableBody = $("#table-body4");
-                        tableBody.empty(); // Clear existing data
-
-                        let rows = ""; // Define rows variable to store all table rows
-
-                        $.each(response.data, function (index, row) {
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable4")) {
-                            $('#sortTable4').DataTable().destroy();
-                        }
-
-                        // Reinitialize DataTable
-                        $('#sortTable4').DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
-                    }
-                });
-            }
-
-            // Fetch data on page load
-            fetchData();
+            let table = $('#sortTable4').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: $("#sortTable4").data("url"), // Get route from table data attribute
+                columns: [
+                    { data: 'nama', name: 'nama' },
+                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
+                    { data: 'negeri', name: 'negeri', className: 'text-center' },
+                    { data: 'daerah', name: 'daerah', className: 'text-center' }
+                ],
+                ordering: true,
+                order: [],
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                responsive: true
+            });
         });
     </script>
 @endsection

@@ -14,7 +14,7 @@ use App\Models\SkorModal;
 use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\Pegawai;
 use Carbon\Carbon;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Yajra\DataTables\Facades\DataTables;
 
 class ModalKepulihanController extends Controller
 {
@@ -449,6 +449,7 @@ class ModalKepulihanController extends Controller
         }
     }
 
+    // PENTADBIR ATAU PEGAWAI - AJAX SELESAI MENJAWAB
     public function selesaiMenjawabPB(Request $request)
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -483,11 +484,12 @@ class ModalKepulihanController extends Controller
                             ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
                             ->get();
 
-        if ($selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $selesai_menjawab]);
+        return DataTables::of($selesai_menjawab)
+                ->addColumn('nama', function ($row) {
+                    return '<a href="/sejarah/modul-kepulihan/klien/' . $row->klien_id . '">' . $row->nama . '</a>';
+                })
+                ->rawColumns(['nama']) // Allow HTML in DataTable
+                ->make(true);
     }
 
     public function selesaiMenjawabPN(Request $request)
@@ -526,11 +528,12 @@ class ModalKepulihanController extends Controller
                             ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
                             ->get();
 
-        if ($selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $selesai_menjawab]);
+        return DataTables::of($selesai_menjawab)
+                ->addColumn('nama', function ($row) {
+                    return '<a href="/sejarah/modul-kepulihan/klien/' . $row->klien_id . '">' . $row->nama . '</a>';
+                })
+                ->rawColumns(['nama']) // Allow HTML in DataTable
+                ->make(true);
     }
 
     public function selesaiMenjawabPD(Request $request)
@@ -571,14 +574,15 @@ class ModalKepulihanController extends Controller
                             ->orderBy('kk.updated_at', 'desc') // Sort by latest update first
                             ->get();
 
-        if ($selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $selesai_menjawab]);
+        return DataTables::of($selesai_menjawab)
+                ->addColumn('nama', function ($row) {
+                    return '<a href="/sejarah/modul-kepulihan/klien/' . $row->klien_id . '">' . $row->nama . '</a>';
+                })
+                ->rawColumns(['nama']) // Allow HTML in DataTable
+                ->make(true);
     }
 
-    // AJAX BELUM SELESAI MENJAWAB
+    // PENTADBIR ATAU PEGAWAI - AJAX BELUM SELESAI MENJAWAB
     public function belumSelesaiMenjawabPB()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -691,7 +695,7 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $belum_selesai_menjawab]);
     }
 
-    // AJAX TIDAK MENJAWAB LEBIH 6 BULAN
+    // PENTADBIR ATAU PEGAWAI - AJAX TIDAK MENJAWAB LEBIH 6 BULAN
     public function tidakMenjawabLebih6BulanPB()
     {
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -789,7 +793,7 @@ class ModalKepulihanController extends Controller
         return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
     }
 
-    // AJAX TIDAK PERNAH MENJAWAB
+    // PENTADBIR ATAU PEGAWAI - AJAX TIDAK PERNAH MENJAWAB
     public function tidakPernahMenjawabPB()
     {
         $tidak_pernah_menjawab = DB::table('klien as u')
@@ -807,11 +811,8 @@ class ModalKepulihanController extends Controller
                                     ->orderBy('u.nama', 'asc')
                                     ->get();
 
-        if ($tidak_pernah_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $tidak_pernah_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_pernah_menjawab)->make(true);
     }
 
     public function tidakPernahMenjawabPN()
@@ -835,11 +836,8 @@ class ModalKepulihanController extends Controller
                                     ->orderBy('u.nama', 'asc')
                                     ->get();
 
-        if ($tidak_pernah_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $tidak_pernah_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_pernah_menjawab)->make(true);
     }
 
     public function tidakPernahMenjawabPD()
@@ -864,14 +862,11 @@ class ModalKepulihanController extends Controller
                                     ->orderBy('u.nama', 'asc')
                                     ->get();
 
-        if ($tidak_pernah_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
-        
-        return response()->json(['data' => $tidak_pernah_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_pernah_menjawab)->make(true);
     }
 
-    // SEJARAH SOAL SELIDIK KLIEN
+    // PENTADBIR ATAU PEGAWAI - SEJARAH SOAL SELIDIK KLIEN
     public function sejarahSoalSelidik($klien_id)
     {
         // Fetch the main history data
@@ -927,159 +922,4 @@ class ModalKepulihanController extends Controller
 
         return view('modal_kepulihan.pentadbir_pegawai.sejarah_soal_selidik', compact('sejarah', 'clientModals', 'notifications', 'unreadCountPD'));
     }
-
-    // public function exportPDFAnalisisMK()
-    // {
-    //     // Fetch data based on 'selesai_menjawab' status
-    //     $sixMonthsAgo = now()->subMonths(6);
-        
-    //     // Define the modal kepulihan categories
-    //     $modalKepulihan = [
-    //         'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
-    //         'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
-    //     ];
-
-    //     // Get clients who completed the assessment
-    //     $data = DB::table('keputusan_kepulihan_klien as kk')
-    //         ->join('skor_modal as sm', function ($join) {
-    //             $join->on('kk.klien_id', '=', 'sm.klien_id')
-    //                 ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
-    //         })
-    //         ->select('kk.klien_id', 'kk.skor', 'sm.*')
-    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
-    //         ->where('kk.status', 'Selesai')
-    //         ->get();
-
-    //     // Define categories
-    //     $categories = [
-    //         'Sangat Memuaskan' => [3.51, 4.0],
-    //         'Memuaskan' => [2.51, 3.5],
-    //         'Kurang Memuaskan' => [1.51, 2.5],
-    //         'Sangat Tidak Memuaskan' => [1.0, 1.5],
-    //     ];
-
-    //     // Count clients in each category for each modal kepulihan
-    //     $counts = [];
-    //     foreach ($categories as $category => [$min, $max]) {
-    //         foreach ($modalKepulihan as $modal) {
-    //             $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
-    //         }
-    //     }
-
-    //     $totalClients = $data->unique('klien_id')->count();
-
-    //     // Generate PDF
-    //     $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
-    //     return $pdf->stream('analisis_modal_kepulihan.pdf');
-    // }
-
-    // public function exportPDFAnalisisMKNegeri()
-    // {
-    //     // Fetch data based on the latest six month
-    //     $pegawai = Auth::user();
-    //     $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-    //     $sixMonthsAgo = now()->subMonths(6);
-        
-    //     // Define the modal kepulihan categories
-    //     $modalKepulihan = [
-    //         'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
-    //         'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
-    //     ];
-
-    //     // Get clients who completed the assessment
-    //     $data = DB::table('keputusan_kepulihan_klien as kk')
-    //             ->join('skor_modal as sm', function ($join) {
-    //                 $join->on('kk.klien_id', '=', 'sm.klien_id')
-    //                     ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
-    //             })
-    //             ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-    //             ->select(
-    //                 'u.id as klien_id',
-    //                 'u.daerah_pejabat',
-    //                 'u.negeri_pejabat',
-    //             )
-    //             ->select('kk.klien_id', 'kk.skor', 'sm.*')
-    //             ->where('kk.updated_at', '>=', $sixMonthsAgo)
-    //             ->where('kk.status', 'Selesai')
-    //             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-    //             ->get();
-
-    //     // Define categories
-    //     $categories = [
-    //         'Sangat Memuaskan' => [3.51, 4.0],
-    //         'Memuaskan' => [2.51, 3.5],
-    //         'Kurang Memuaskan' => [1.51, 2.5],
-    //         'Sangat Tidak Memuaskan' => [1.0, 1.5],
-    //     ];
-
-    //     // Count clients in each category for each modal kepulihan
-    //     $counts = [];
-    //     foreach ($categories as $category => [$min, $max]) {
-    //         foreach ($modalKepulihan as $modal) {
-    //             $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
-    //         }
-    //     }
-
-    //     $totalClients = $data->unique('klien_id')->count();
-
-    //     // Generate PDF
-    //     $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
-    //     return $pdf->stream('analisis_modal_kepulihan.pdf');
-    // }
-
-    // public function exportPDFAnalisisMKDaerah()
-    // {
-    //     // Fetch data based on 'selesai_menjawab' status
-    //     $pegawai = Auth::user();
-    //     $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-    //     $sixMonthsAgo = now()->subMonths(6);
-        
-    //     // Define the modal kepulihan categories
-    //     $modalKepulihan = [
-    //         'modal_fizikal', 'modal_psikologi', 'modal_sosial', 'modal_persekitaran', 'modal_insaniah',
-    //         'modal_spiritual', 'modal_rawatan', 'modal_kesihatan', 'modal_strategi_daya_tahan', 'modal_resiliensi'
-    //     ];
-
-    //     // Get clients who completed the assessment
-    //     $data = DB::table('keputusan_kepulihan_klien as kk')
-    //         ->join('skor_modal as sm', function ($join) {
-    //             $join->on('kk.klien_id', '=', 'sm.klien_id')
-    //                 ->on('kk.sesi', '=', 'sm.sesi'); // Ensure same session
-    //         })
-    //         ->join('klien as u', 'kk.klien_id', '=', 'u.id')
-    //         ->select(
-    //             'u.id as klien_id',
-    //             'u.daerah_pejabat',
-    //             'u.negeri_pejabat',
-    //         )
-    //         ->select('kk.klien_id', 'kk.skor', 'sm.*')
-    //         ->where('kk.updated_at', '>=', $sixMonthsAgo)
-    //         ->where('kk.status', 'Selesai')
-    //         ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-    //         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-    //         ->get();
-
-    //     // Define categories
-    //     $categories = [
-    //         'Sangat Memuaskan' => [3.51, 4.0],
-    //         'Memuaskan' => [2.51, 3.5],
-    //         'Kurang Memuaskan' => [1.51, 2.5],
-    //         'Sangat Tidak Memuaskan' => [1.0, 1.5],
-    //     ];
-
-    //     // Count clients in each category for each modal kepulihan
-    //     $counts = [];
-    //     foreach ($categories as $category => [$min, $max]) {
-    //         foreach ($modalKepulihan as $modal) {
-    //             $counts[$category][$modal] = $data->whereBetween($modal, [$min, $max])->count();
-    //         }
-    //     }
-
-    //     $totalClients = $data->unique('klien_id')->count();
-
-    //     // Generate PDF
-    //     $pdf = PDF::loadView('modal_kepulihan.pentadbir_pegawai.pdf_analisis_modal_kepulihan', compact('counts', 'modalKepulihan', 'totalClients'))->setPaper('a4', 'landscape');
-    //     return $pdf->stream('analisis_modal_kepulihan.pdf');
-    // }
-
 }
