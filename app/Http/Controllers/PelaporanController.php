@@ -242,7 +242,7 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_s);
         }
 
-        $data = collect($query->get());
+        // $data = collect($query->get());
 
         // Define categories
         $categories = collect([
@@ -252,11 +252,13 @@ class PelaporanController extends Controller
             'Sangat Tidak Memuaskan' => [1.0, 1.5],
         ]);
 
+        $data = collect($query->get())->map(fn($item) => (array) $item);
+
         // Count clients per category & modal
         $counts = $categories->mapWithKeys(function ($range, $category) use ($data, $modalKepulihan) {
             return [
                 $category => collect($modalKepulihan)->mapWithKeys(function ($modal) use ($data, $range) {
-                    return [$modal => $data->filter(fn($item) => $item->$modal >= $range[0] && $item->$modal <= $range[1])->count()];
+                    return [$modal => $data->filter(fn($item) => isset($item[$modal]) && $item[$modal] >= $range[0] && $item[$modal] <= $range[1])->count()];
                 })
             ];
         });
@@ -771,8 +773,6 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_s);
         }
 
-        $data = collect($query->get());
-
         // Define categories
         $categories = collect([
             'Sangat Memuaskan' => [3.51, 4.0],
@@ -781,11 +781,13 @@ class PelaporanController extends Controller
             'Sangat Tidak Memuaskan' => [1.0, 1.5],
         ]);
 
+        $data = collect($query->get())->map(fn($item) => (array) $item);
+
         // Count clients per category & modal
         $counts = $categories->mapWithKeys(function ($range, $category) use ($data, $modalKepulihan) {
             return [
                 $category => collect($modalKepulihan)->mapWithKeys(function ($modal) use ($data, $range) {
-                    return [$modal => $data->filter(fn($item) => $item->$modal >= $range[0] && $item->$modal <= $range[1])->count()];
+                    return [$modal => $data->filter(fn($item) => isset($item[$modal]) && $item[$modal] >= $range[0] && $item[$modal] <= $range[1])->count()];
                 })
             ];
         });
@@ -1372,8 +1374,6 @@ class PelaporanController extends Controller
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
 
-        $data = collect($query->get());
-
         // Define categories
         $categories = collect([
             'Sangat Memuaskan' => [3.51, 4.0],
@@ -1382,15 +1382,17 @@ class PelaporanController extends Controller
             'Sangat Tidak Memuaskan' => [1.0, 1.5],
         ]);
 
+        $data = collect($query->get())->map(fn($item) => (array) $item);
+
         // Count clients per category & modal
         $counts = $categories->mapWithKeys(function ($range, $category) use ($data, $modalKepulihan) {
             return [
                 $category => collect($modalKepulihan)->mapWithKeys(function ($modal) use ($data, $range) {
-                    return [$modal => $data->filter(fn($item) => $item->$modal >= $range[0] && $item->$modal <= $range[1])->count()];
+                    return [$modal => $data->filter(fn($item) => isset($item[$modal]) && $item[$modal] >= $range[0] && $item[$modal] <= $range[1])->count()];
                 })
             ];
         });
-
+        
         $totalClients = $data->unique('klien_id')->count();
 
         // Generate PDF

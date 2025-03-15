@@ -20,12 +20,6 @@ class MKTidakPernahMenjawabExcelPD implements FromCollection, WithHeadings, With
     /**
     * @return \Illuminate\Support\Collection
     */
-    protected $filters;
-
-    public function __construct($filters)
-    {
-        $this->filters = $filters;
-    }
 
     public function collection()
     {
