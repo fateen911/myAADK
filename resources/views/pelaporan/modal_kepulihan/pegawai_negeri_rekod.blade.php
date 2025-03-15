@@ -524,88 +524,51 @@
     {{-- AJAX SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let formData = $('#filter-form1').serialize();
-                console.log("Sending request with:", formData); // Debugging log
-
-                $.ajax({
+            let table1 = $('#sortTable1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
                     url: "{{ route('ajax-senarai-selesai-menjawab.negeri') }}",
-                    method: "GET",
-                    data: formData,
-                    success: function (response) {
-                        let table = $('#sortTable1');
-                        let tableBody = $("#table-body1");
-
-                        // Destroy existing DataTable instance if it exists
-                        if ($.fn.DataTable.isDataTable(table)) {
-                            table.DataTable().clear().destroy();
-                        }
-
-                        tableBody.empty(); // Clear existing table data
-                        let rows = "";
-
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-
-                            let badgeColor;
-                            switch (row.tahap) {
-                                case 'SANGAT TIDAK MEMUASKAN':
-                                    badgeColor = 'background-color: red;';
-                                    break;
-                                case 'KURANG MEMUASKAN':
-                                    badgeColor = 'background-color: darkorange;';
-                                    break;
-                                case 'MEMUASKAN':
-                                    badgeColor = 'background-color: #ffc107;';
-                                    break;
-                                default:
-                                    badgeColor = 'background-color: green;';
-                            }
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                    <td style="text-align: center;">
-                                        <span class="badge text-white" style="padding:10px; width:200px; display: inline-block; text-align: center; ${badgeColor}">
-                                            ${row.tahap ? row.tahap : 'N/A'}
-                                        </span>
-                                    </td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Reinitialize DataTable
-                        table.DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
+                    data: function (d) {
+                        d.from_date_s = $('#from_date_s').val();
+                        d.to_date_s = $('#to_date_s').val();
+                        d.tahap_kepulihan_id = $('#tahap_kepulihan_id').val();
+                        d.aadk_daerah_s = $('#aadk_daerah_s').val();
                     }
-                });
-            }
-
-            // Fetch data on page load
-            fetchData();
+                },
+                columns: [
+                    { data: "nama", render: function(data, type, row) {
+                        return `<a href="/sejarah-soal-selidik-klien/${row.klien_id}">${data}</a>`;
+                    }},
+                    { data: "no_kp", className: "text-center" },
+                    { data: "negeri", className: "text-center" },
+                    { data: "daerah", className: "text-center" },
+                    { data: "updated_at", className: "text-center", render: function (data) {
+                        return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                    }},
+                    { data: "tahap", className: "text-center", render: function (data) {
+                        let badgeColor;
+                        switch (data) {
+                            case 'SANGAT TIDAK MEMUASKAN': badgeColor = 'red'; break;
+                            case 'KURANG MEMUASKAN': badgeColor = 'darkorange'; break;
+                            case 'MEMUASKAN': badgeColor = '#ffc107'; break;
+                            default: badgeColor = 'green';
+                        }
+                        return `<span class="badge text-white" style="padding:10px; width:100%; display:inline-block; background-color:${badgeColor}">${data ? data : 'N/A'}</span>`;
+                    }}
+                ],
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            });
 
             // Fetch data when filter form is submitted
             $("#filter-form1").submit(function (e) {
                 e.preventDefault();
-                fetchData();
+                table1.ajax.reload(); // Reload DataTables with new filter data
             });
         });
 

@@ -132,7 +132,8 @@ class PelaporanController extends Controller
             $query->where('k.daerah_pejabat', $request->aadk_daerah_s);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKselesaiMenjawabExcelPB(Request $request)
@@ -666,7 +667,8 @@ class PelaporanController extends Controller
             $query->where('k.daerah_pejabat', $request->aadk_daerah_s);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKselesaiMenjawabExcelPN(Request $request)
@@ -1155,7 +1157,8 @@ class PelaporanController extends Controller
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKselesaiMenjawabExcelPD(Request $request)
