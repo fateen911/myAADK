@@ -1044,7 +1044,8 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakPernahMenjawabPN(Request $request)
@@ -1392,7 +1393,7 @@ class PelaporanController extends Controller
                 })
             ];
         });
-        
+
         $totalClients = $data->unique('klien_id')->count();
 
         // Generate PDF
@@ -1625,7 +1626,8 @@ class PelaporanController extends Controller
                     ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
                     ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas);
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakPernahMenjawabPD(Request $request)

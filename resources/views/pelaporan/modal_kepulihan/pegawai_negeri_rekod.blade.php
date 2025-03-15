@@ -852,64 +852,34 @@
     {{-- AJAX TIDAK PERNAH MENJAWAB --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let formData = $('#filter-form4').serialize(); // Serialize form data
-
-                $.ajax({
+            let table4 = $('#sortTable4').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
                     url: "{{ route('ajax-senarai-tidak-pernah-menjawab.negeri') }}",
-                    method: "GET",
-                    data: formData,
-                    success: function (response) {
-                        let table = $('#sortTable4');
-                        let tableBody = $("#table-body4");
-                       
-                        // Destroy existing DataTable instance if it exists
-                        if ($.fn.DataTable.isDataTable(table)) {
-                            table.DataTable().clear().destroy();
-                        }
-
-                        tableBody.empty(); // Clear existing table data
-                        let rows = "";
-
-                        $.each(response.data, function (index, row) {
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Reinitialize DataTable
-                        table.DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
+                    type: "GET",
+                    data: function (d) {
+                        d.aadk_daerah_tpm = $('#aadk_daerah_tpm').val();
                     }
-                });
-            }
+                },
+                columns: [
+                    { data: "nama", name: "nama" },
+                    { data: "no_kp", name: "no_kp", className: "text-center" },
+                    { data: "negeri", name: "negeri", className: "text-center" },
+                    { data: "daerah", name: "daerah", className: "text-center" }
+                ],
+                dom:'<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' + // Move "Papar rekod" and "Carian" to the top
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>', // Keep pagination and info below
+                language: {
+                    url: "/assets/lang/Malay.json"
+                }
+            });
 
-            // Fetch data on page load
-            fetchData();
-
-            // Fetch data when filter form is submitted
-            $("#filter-form4").submit(function (e) {
+            // Apply filter on button click
+            $('#filter-form4').submit(function (e) {
                 e.preventDefault();
-                fetchData();
+                table4.ajax.reload();
             });
         });
 
