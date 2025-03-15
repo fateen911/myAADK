@@ -222,217 +222,6 @@
                                         <td class="min-w-50px">Tiada</td>
                                     </tr>
 								</tbody>
-
-								{{-- <tbody class="fw-semibold text-gray-600">
-									@foreach ($permohonan_pegawai as $user3)
-										@php
-											$peranan = DB::table('tahap_pengguna')->where('id', $user3['peranan'])->value('peranan');
-											$negeriB = $user3['negeri_bertugas'] ? DB::table('senarai_negeri_pejabat')->where('negeri_id', $user3['negeri_bertugas'])->value('negeri') : null;
-											$daerahB = $user3['daerah_bertugas'] ? DB::table('senarai_daerah_pejabat')->where('kod', $user3['daerah_bertugas'])->value('daerah') : null;
-										@endphp
-
-										<tr>
-											<td>{{ $user3->nama }}</td>
-											<td>{{ $user3->no_kp }}</td>
-											<td>{{ $user3->emel }}</td>
-											<td>{{ $peranan }}</td>
-											<td>
-												@if ($negeriB !== null)
-        											{{ $negeriB }}
-													@if ($daerahB !== null)
-														({{ $daerahB }})
-													@endif
-												@else
-											</td>
-											@endif
-											<td>
-												<div class="d-flex justify-content-center align-items-center">
-													<a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_permohonan_pegawai{{$user3->id}}">
-														<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Permohonan">
-															<i class="ki-duotone bi bi-pencil fs-3"></i>
-														</span>
-													</a>
-												</div>
-											</td>
-
-											<!--begin::Modal - Permohonan Pegawai-->
-											<div class="modal fade" id="modal_permohonan_pegawai{{$user3->id}}" tabindex="-1" aria-hidden="true">
-												<!--begin::Modal dialog-->
-												<div class="modal-dialog modal-dialog-centered mw-650px">
-													<!--begin::Modal content-->
-													<div class="modal-content">
-														<!--begin::Modal header-->
-														<div class="modal-header">
-															<!--begin::Modal title-->
-															<h2>Luluskan Permohonan Pendaftaran Pegawai</h2>
-															<!--end::Modal title-->
-
-															<!--begin::Close-->
-															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-																<i class="ki-solid ki-cross-circle fs-1"></i>
-															</div>
-															<!--end::Close-->
-														</div>
-														<!--end::Modal header-->
-
-														<!--begin::Modal body-->
-														<div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-															<!--begin::Form-->
-															<form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $user3->id]) }}" method="post">
-																@csrf
-
-																<input type="hidden" name="id" value="{{ $user3->id }}">
-																<div class="scroll-y me-n7 pe-7" id="modal_permohonan_pegawai_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_permohonan_pegawai_header" data-kt-scroll-wrappers="#modal_permohonan_pegawai_scroll" data-kt-scroll-offset="300px">
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-																		<input type="text" class="form-control form-control-solid custom-form" name="nama" id="nama" value="{{$user3->nama}}" style="text-transform: uppercase;" required/>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan
-																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan no kad pengenalan tanpa '-'.">
-																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																					<span class="path3"></span>
-																				</i>
-																			</span>
-																		</label>
-																		<input type="text" class="form-control form-control-solid custom-form" id="no_kp_pegawai_mohon" name="no_kp" value="{{$user3->no_kp}}" inputmode="numeric" maxlength="12" required/>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<label class="fs-6 fw-semibold mb-2 required">E-mel</label>
-																		<div class="input-group">
-																			<input type="text" class="form-control form-control-solid custom-form" id="emelPegawai" name="emelPegawai" value="{{ explode('@', $user3->emel)[0] }}" required/>
-																			<span class="input-group-text">@adk.gov.my</span>
-																		</div>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2 required">No. Telefon
-																			<span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-																				<i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-																					<span class="path1"></span>
-																					<span class="path2"></span>
-																					<span class="path3"></span>
-																				</i>
-																			</span>
-																		</label>
-																		<input type="text" class="form-control form-control-solid custom-form" id="no_tel_pegawai_mohon" name="no_tel" value="{{$user3->no_tel}}" inputmode="numeric" maxlength="11" required/>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-5">
-																		<label class="fs-6 fw-semibold mb-2 required">Jawatan & Gred</label>
-																		<select name="jawatan" id="jawatan" class="form-select form-select-solid custom-select">
-																			<option value="">Pilih</option>
-																			@foreach ($jawatan as $j)
-																				<option value="{{ $j->id }}" {{$user3->jawatan == $j->id  ? 'selected' : ''}}>{{ $j->jawatan_gred }}</option>
-																			@endforeach
-																		</select>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	<div class="fv-row mb-7">
-																		<label class="fs-6 fw-semibold mb-2 required">Peranan</label>
-																		<select name="peranan_pengguna" id="peranan_pengguna" class="form-select form-select-solid custom-select" data-placeholder="Pilih">
-																			@foreach ($tahap as $tahap1)
-																				<option value="{{$tahap1->id}}" {{$user3->peranan == $tahap1->id  ? 'selected' : ''}}>{{$tahap1->peranan}}</option>
-																			@endforeach
-																		</select>
-																	</div>
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	@if ($user3->negeri_bertugas != null)
-																		<div class="fv-row mb-5">
-																			<label class="fs-6 fw-semibold mb-2 required">Negeri Bertugas</label>
-																			<select name="negeri_bertugas" id="negeri_bertugas" class="form-select form-select-solid custom-select">
-																				<option value="">Pilih Negeri Bertugas</option>
-																				@foreach ($negeri as $item1)
-																					<option value="{{ $item1->negeri_id}}" {{$user3->negeri_bertugas == $item1->negeri_id  ? 'selected' : ''}}>{{$item1->negeri}}</option>
-																				@endforeach
-																			</select>
-																		</div>
-																	@endif
-																	<!--end::Input group-->
-																	<!--begin::Input group-->
-																	@if ($user3->daerah_bertugas != null)
-																		<div class="fv-row mb-5">
-																			<label class="fs-6 fw-semibold mb-2 required">Daerah Bertugas</label>
-																			<select name="daerah_bertugas" id="daerah_bertugas" class="form-select form-select-solid custom-select">
-																				<option value="">Pilih Daerah Bertugas</option>
-																				@foreach ($daerah as $item2)
-																					<option value="{{ $item2->kod }}" {{$user3->daerah_bertugas == $item2->kod  ? 'selected' : ''}}>{{ $item2->daerah }}</option>
-																				@endforeach
-																			</select>
-																		</div>
-																	@endif
-																	<!--end::Input group-->
-																</div>
-																<!--end::Scroll-->
-
-																<!--begin::Actions-->
-																<div class="text-center pt-15">
-																	<button type="submit" name="status" value="Lulus" class="btn btn-success me-3">Diluluskan</button>
-																	<!-- Close the first modal before opening the second one -->
-																	<button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_permohonan_ditolak{{$user3->id}}">Ditolak</button>
-																</div>
-																<!--end::Actions-->
-															</form>
-															<!--end::Form-->
-														</div>
-														<!--end::Modal body-->
-													</div>
-													<!--end::Modal content-->
-												</div>
-												<!--end::Modal dialog-->
-											</div>
-											<!--end::Modal -  Kemaskini Pegawai-->
-										</tr>
-
-										<!--begin::Modal Ditolak-->
-										<div class="modal fade" id="modal_permohonan_ditolak{{$user3->id}}" tabindex="-1" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered mw-650px">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h2 style="text-align: center !important;">Permohonan Pendaftaran Pegawai Ditolak</h2>
-														<div id="kt_modal_add_customer_close" data-bs-dismiss="modal">
-															<i class="ki-solid ki-cross-circle fs-1"></i>
-														</div>
-													</div>
-
-													<div class="modal-body">
-														<form id="rejection_form_{{$user3->id}}" action="{{ route('permohonan-pegawai-ditolak', ['id' => $user3->id]) }}" method="POST">
-															@csrf
-															<input type="hidden" name="status" value="Ditolak">
-															<input type="hidden" name="id" value="{{ $user3->id }}">
-
-															<!-- Begin Rejection Reasons Input -->
-															<div id="dynamicFields">
-																<label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak :</label>
-																<div class="input-group mb-2 catatan-row">
-																	<textarea class="form-control form-control-solid custom-form" name="alasan_ditolak" placeholder="Contoh: Sila isi nama seperti kad pengenalan, Peranan tidak benar"></textarea>
-																</div>
-															</div>
-															<!-- End Rejection Reasons Input -->
-
-															<!-- Form actions -->
-															<div class="text-center pt-3">
-																<button type="submit" class="btn btn-primary">Hantar</button>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!--end::Modal Ditolak-->
-									@endforeach
-								</tbody> --}}
 							</table>
 							<!--end::Table-->
 
@@ -1193,76 +982,72 @@
 	</script>
 
 	{{-- AJAX TABLE SENARAI PERMOHONAN PEGAWAI --}}
-    <script>
-        $(document).ready(function() {
-            // Fetch Pegawai data via AJAX
-            $.ajax({
-                url: "{{ route('ajax-senarai-permohonan-pegawai') }}",
-                method: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    var permohonanPegawaiList = response.permohonan_pegawai;
-                    var rows = '';
-                    var modalContainer = ''; // To store modals
-                    // Clear the existing rows before appending new ones
-                    $('#sortTable3 tbody').empty();
-
-                    $.each(permohonanPegawaiList, function(index, user3) {
-                        var peranan = user3.tahap_pengguna;
-                        var tarikhDaftar = new Date(user3.created_at).toLocaleDateString('en-GB');
-                        var negeriB = user3.negeri_bertugas ? user3.negeri_bertugas : '';
-                        var daerahB = user3.daerah_bertugas ? user3.daerah_bertugas : '';
-						var permohonanPegawaiId = user3.id; 
-
-                        // Populate table rows
-                        rows += '<tr>';
-                        rows +=	'<td>' + user3.nama + '</td>';
-                        rows +=	'<td>' + user3.no_kp + '</td>';
-                        rows +=	'<td>' + user3.emel + '</td>';
-                        rows +=	'<td>' + user3.peranan; + '</td>';
-						rows += '<td>' + negeriB + (daerahB ? ' (' + daerahB + ')' : '') + '</td>'; // Display Negeri and Daerah
-                        rows +=	`<td>
-									<div class="d-flex justify-content-center align-items-center">
-										<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + permohonanPegawaiId + `" data-bs-target="#modal_permohonan_pegawai">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>
-									</div>
-								</td>`;
-                        rows +=	'</tr>';
-                    });
-
-                    // Append the rows to the table body
-                    $('#sortTable3 tbody').html(rows);
-
-                    // Append the modals to a container
-                    $('#modalContainer').html(modalContainer);
-
-                    // Check if DataTable is already initialized before destroying it
-                    if ($.fn.DataTable.isDataTable('#sortTable3')) {
-                        $('#sortTable3').DataTable().destroy(); // Destroy the existing DataTable instance
-                    }
-
-                    // Initialize DataTable with the new data
-                    $('#sortTable3').DataTable({
-                        ordering: true,
-                        order: [], // Default order (no sorting initially)
-                        language: {
-                            url: "/assets/lang/Malay.json" // Path to the language file
-                        },
-                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                            '<"row"<"col-sm-12 my-0"tr>>' +
-                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                        responsive: true
-                    });
+	<script>
+		$(document).ready(function() {
+			$('#sortTable3').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: {
+					url: "{{ route('ajax-senarai-permohonan-pegawai') }}",
+					dataSrc: function(json) {
+						return json.data; // No custom message, just return the data
+					}
+				},
+				columns: [
+					{ data: 'nama', name: 'pegawai_mohon_daftar.nama' },
+					{ data: 'no_kp', name: 'pegawai_mohon_daftar.no_kp' },
+					{ data: 'emel', name: 'pegawai_mohon_daftar.emel' },
+					{ data: 'peranan', name: 'tahap_pengguna.peranan' },
+					{ 
+						data: null, 
+						name: 'negeri_bertugas', 
+						render: function(data, type, row) {
+							// If both are null, return an empty string
+							if (!row.negeri_bertugas && !row.daerah_bertugas) {
+								return "";
+							}
+							// Otherwise, display the state and (district) if available
+							return row.negeri_bertugas + (row.daerah_bertugas ? ' (' + row.daerah_bertugas + ')' : '');
+						}
+					},
+					{ 
+						data: 'created_at', 
+						name: 'users.created_at',
+						render: function(data, type, row) {
+							return new Date(data).toLocaleDateString('en-GB');
+						}
+					},
+					{
+						data: 'id',
+						name: 'pegawai_mohon_daftar.id',
+						orderable: false,
+						searchable: false,
+						render: function(data, type, row) {
+							return `
+								<div class="d-flex justify-content-center align-items-center">
+									<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+										data-bs-toggle="modal" 
+										data-id="${pegawai_mohon_daftar.id}" 
+										data-bs-target="#modal_kemaskini_pegawai">
+										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+											<i class="ki-duotone bi bi-pencil fs-3"></i>
+										</span>
+									</a>
+								</div>`;
+						}
+					}
+				],
+				order: [[5, 'desc']], // Order by created_at
+				dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                language: {
+                    url: "/assets/lang/Malay.json",
+					emptyTable: "", // Custom message
                 },
-                error: function(error) {
-                    console.error("Ralat semasa mengambil data", error);
-                }
-            });
-        });
-    </script>
+			});
+		});
+	</script>
 
     <!-- Modal Luluskan Permohonan Pegawai -->
     <script>
@@ -1300,77 +1085,67 @@
 	</script>
 
     {{-- AJAX TABLE SENARAI PEGAWAI --}}
-    <script>
-        $(document).ready(function() {
-            // Fetch Pegawai data via AJAX
-            $.ajax({
-                url: "{{ route('ajax-senarai-pegawai') }}",
-                method: 'GET',
-                dataType: 'json',
-                success: function(response) {
-                    var pegawaiList = response.pegawai;
-                    var rows = '';
-                    var modalContainer = ''; // To store modals
-                    // Clear the existing rows before appending new ones
-                    $('#sortTable2 tbody').empty();
-
-                    $.each(pegawaiList, function(index, user2) {
-                        var peranan = user2.tahap_pengguna;
-                        var tarikhDaftar = new Date(user2.created_at).toLocaleDateString('en-GB');
-                        var negeriB = user2.negeri_bertugas ? user2.negeri_bertugas : '';
-                        var daerahB = user2.daerah_bertugas ? user2.daerah_bertugas : '';
-						var pegawaiId = user2.pegawai_id; 
-
-                        // Populate table rows
-                        rows += '<tr>';
-                        rows +=	'<td>' + user2.name + '</td>';
-                        rows +=	'<td>' + user2.no_kp + '</td>';
-                        rows +=	'<td>' + user2.email + '</td>';
-                        rows +=	'<td>' + user2.peranan; + '</td>';
-						rows += '<td>' + negeriB + (daerahB ? ' (' + daerahB + ')' : '') + '</td>'; // Display Negeri and Daerah
-                        rows +=	'<td style="text-align: center;">' + tarikhDaftar + '</td>'
-                        rows +=	`<td>
-									<div class="d-flex justify-content-center align-items-center">
-										<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + pegawaiId + `" data-bs-target="#modal_kemaskini_pegawai">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>
-									</div>
-								</td>`;
-                        rows +=	'</tr>';
-                    });
-
-                    // Append the rows to the table body
-                    $('#sortTable2 tbody').html(rows);
-
-                    // Append the modals to a container
-                    $('#modalContainer').html(modalContainer);
-
-                    // Check if DataTable is already initialized before destroying it
-                    if ($.fn.DataTable.isDataTable('#sortTable2')) {
-                        $('#sortTable2').DataTable().destroy(); // Destroy the existing DataTable instance
-                    }
-
-                    // Initialize DataTable with the new data
-                    $('#sortTable2').DataTable({
-                        ordering: true,
-                        order: [], // Default order (no sorting initially)
-                        language: {
-                            url: "/assets/lang/Malay.json" // Path to the language file
-                        },
-                        dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                            '<"row"<"col-sm-12 my-0"tr>>' +
-                            '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                        responsive: true
-                    });
+	<script>
+		$(document).ready(function() {
+			$('#sortTable2').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('ajax-senarai-pegawai') }}",
+				columns: [
+					{ data: 'name', name: 'users.name' },
+					{ data: 'no_kp', name: 'users.no_kp' },
+					{ data: 'email', name: 'users.email' },
+					{ data: 'peranan', name: 'tahap_pengguna.peranan' },
+					{ 
+						data: null, 
+						name: 'negeri_bertugas', 
+						render: function(data, type, row) {
+							// If both are null, return an empty string
+							if (!row.negeri_bertugas && !row.daerah_bertugas) {
+								return "";
+							}
+							// Otherwise, display the state and (district) if available
+							return row.negeri_bertugas + (row.daerah_bertugas ? ' (' + row.daerah_bertugas + ')' : '');
+						}
+					},
+					{ 
+						data: 'created_at', 
+						name: 'users.created_at',
+						render: function(data, type, row) {
+							return new Date(data).toLocaleDateString('en-GB');
+						}
+					},
+					{
+						data: 'pegawai_id',
+						name: 'pegawai.id',
+						orderable: false,
+						searchable: false,
+						render: function(data, type, row) {
+							return `
+								<div class="d-flex justify-content-center align-items-center">
+									<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
+										data-bs-toggle="modal" 
+										data-id="${row.pegawai_id}" 
+										data-bs-target="#modal_kemaskini_pegawai">
+										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+											<i class="ki-duotone bi bi-pencil fs-3"></i>
+										</span>
+									</a>
+								</div>`;
+						}
+					}
+				],
+				order: [[5, 'desc']], // Order by created_at
+				dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                language: {
+                    url: "/assets/lang/Malay.json"
                 },
-                error: function(error) {
-                    console.error("Ralat semasa mengambil data", error);
-                }
-            });
-        });
-    </script>
+                responsive: true
+			});
+		});
+	</script>
 
     <!-- Modal Kemaskini Pegawai -->
     <script>
@@ -1391,75 +1166,30 @@
 
 	{{-- AJAX TABLE SENARAI KLIEN --}}
 	<script>
-		$(document).ready(function() {
-			// Load client data using AJAX
-			$.ajax({
-				url: "{{ route('ajax-senarai-klien') }}", // Route for fetching data
-				method: 'GET',
-				dataType: 'json',
-				success: function(response) {
-					var klienList = response;
-					var rows = '';
-					var modalContainerKlien = ''; // To store modals
-					
-					// Clear the existing rows before appending new ones
-					$('#sortTable1 tbody').empty();
-
-					$.each(klienList, function(index, user1) {
-						var tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : ''; 
-
-						rows += '<tr>';
-						rows += '<td>' + (user1.nama ? user1.nama : '') + '</td>';
-						rows += '<td>' + (user1.no_kp ? user1.no_kp : '') + '</td>';
-						rows += '<td>' + (user1.emel ? user1.emel : '') + '</td>';
-						rows += '<td style="text-align: center;">' + tarikhDaftar + '</td>';
-						rows += `<td style="text-align: center;">
-									${user1.user_updated_at !== null ? 
-										`<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_kemaskini_klien">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>` 
-										: 
-										`<a id="daftarKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_daftar_klien">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>`
-									}
-								</td>`;
-						rows += '</tr>';
-					});
-
-					// Append the rows to the table body
-					$('#sortTable1 tbody').html(rows);
-
-					// Append the modals to a container
-                    $('#modalContainerKlien').html(modalContainerKlien);
-
-					// Reinitialize DataTable
-					if ($.fn.DataTable.isDataTable('#sortTable1')) {
-						$('#sortTable1').DataTable().destroy(); // Destroy existing instance
-					}
-
-					// Initialize DataTable with the new data
-					$('#sortTable1').DataTable({
-						ordering: true,
-						order: [],
-						language: {
-							url: "/assets/lang/Malay.json"
-						},
-						dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-							'<"row"<"col-sm-12 my-0"tr>>' +
-							'<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-						responsive: true
-					});
-				},
-				error: function(error) {
-					console.error("Ralat semasa mengambil data", error);
-				}
-			});
-		});
+        $(document).ready(function() {
+            let table1 = $('#sortTable1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('ajax-senarai-klien') }}", // Ensure this route is correct
+                    type: "GET",
+                },
+                columns: [
+                    { data: "nama", name: "nama" },
+                    { data: "no_kp", name: "no_kp", className: "text-center" },
+                    { data: "emel", name: "emel", className: "text-center" },
+                    { data: "tarikhDaftar", name: "tarikhDaftar", className: "text-center" },
+                    { data: "tindakan", name: "tindakan", className: "text-center", orderable: false, searchable: false }
+                ],
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                responsive: true
+            });
+        });
 	</script>
 
 	<!-- Modal Kemaskini Klien -->

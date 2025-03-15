@@ -106,24 +106,6 @@ class DaftarPenggunaController extends Controller
             ->make(true);
     }
 
-    // public function getDataKlienDaerah()
-    // {
-    //     $pegawai = Auth::user();
-    //     $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
-
-    //     if (!$pegawaiDaerah) {
-    //         return response()->json(['error' => 'Pegawai not found'], 404);
-    //     }
-
-    //     $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
-    //                     ->select('klien.*', 'users.updated_at as user_updated_at')
-    //                     ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-    //                     ->orderBy('user_updated_at', 'desc')
-    //                     ->get();
-
-    //     return response()->json($klien);
-    // }
-
     public function modalKemaskiniKlienDaerah($id)
     {
         $klien = Klien::find($id);
@@ -248,73 +230,101 @@ class DaftarPenggunaController extends Controller
         return view ('pendaftaran.pentadbir.daftar_pengguna', compact('tahap', 'daerah', 'negeri','jawatan'));
     }
 
-    public function getDataKlien()
+    public function getDataKlien(Request $request)
     {
-        $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+        $query = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
                         ->select('klien.*', 'users.updated_at as user_updated_at')
-                        ->orderBy('user_updated_at', 'desc')
-                        ->get();
+                        ->orderBy('user_updated_at', 'desc');
 
-        return response()->json($klien); // Return the data as JSON
+        return DataTables::of($query)
+            ->addColumn('tarikhDaftar', function ($klien) {
+                return $klien->user_updated_at ? \Carbon\Carbon::parse($klien->user_updated_at)->format('d/m/Y') : '';
+            })
+            ->addColumn('tindakan', function ($klien) {
+                return $klien->user_updated_at !== null
+                    ? '<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="' . $klien->id . '" data-bs-target="#modal_kemaskini_klien">
+                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+                                <i class="ki-duotone bi bi-pencil fs-3"></i>
+                            </span>
+                        </a>'
+                    : '<a id="daftarKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="' . $klien->id . '" data-bs-target="#modal_daftar_klien">
+                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+                                <i class="ki-duotone bi bi-pencil fs-3"></i>
+                            </span>
+                        </a>';
+            })
+            ->rawColumns(['tindakan']) // Allow HTML rendering in the 'tindakan' column
+            ->make(true);
     }
 
     public function getDataPegawai()
     {
-        $pegawai = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
-                        ->leftJoin('tahap_pengguna', 'users.tahap_pengguna', '=', 'tahap_pengguna.id') // Join for Peranan
-                        ->leftJoin('senarai_negeri_pejabat', 'pegawai.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
-                        ->leftJoin('senarai_daerah_pejabat', 'pegawai.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
-                        ->select('users.*', 'pegawai.id as pegawai_id', 'tahap_pengguna.peranan', 'senarai_negeri_pejabat.negeri as negeri_bertugas', 'senarai_daerah_pejabat.daerah as daerah_bertugas') // Include pegawai.id
-                        ->whereIn('tahap_pengguna', [3, 4, 5])
-                        ->orderBy('users.updated_at', 'desc')
-                        ->get();
+        $query = User::leftJoin('pegawai', 'users.no_kp', '=', 'pegawai.no_kp')
+                    ->leftJoin('tahap_pengguna', 'users.tahap_pengguna', '=', 'tahap_pengguna.id') // Join for Peranan
+                    ->leftJoin('senarai_negeri_pejabat', 'pegawai.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
+                    ->leftJoin('senarai_daerah_pejabat', 'pegawai.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
+                    ->select([
+                        'users.*',
+                        'pegawai.id as pegawai_id',
+                        'tahap_pengguna.peranan',
+                        'senarai_negeri_pejabat.negeri as negeri_bertugas',
+                        'senarai_daerah_pejabat.daerah as daerah_bertugas'
+                    ])
+                    ->whereIn('tahap_pengguna.id', [3, 4, 5])
+                    ->orderBy('users.updated_at', 'desc');
 
-        // Convert the necessary related data to JSON as well
-        $negeri = NegeriPejabat::all()->sortBy('negeri');
-        $daerah = DaerahPejabat::all()->sortBy('daerah');
-        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
-        $jawatan = JawatanAADK::all();
-
-        // Return all necessary data as JSON
-        return response()->json([
-            'pegawai' => $pegawai,
-            'negeri' => $negeri,
-            'daerah' => $daerah,
-            'tahap' => $tahap,
-            'jawatan' => $jawatan
-        ]);
+        return DataTables::of($query)->make(true);
     }
 
     public function getDataPermohonanPegawai()
     {
-        $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
-                                                ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
-                                                ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
-                                                ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
-                                                ->select(
-                                                    'pegawai_mohon_daftar.*', 
-                                                    'tahap_pengguna.peranan', 
-                                                    'senarai_negeri_pejabat.negeri as negeri_bertugas', 
-                                                    'senarai_daerah_pejabat.daerah as daerah_bertugas'
-                                                )
-                                                ->orderBy('pegawai_mohon_daftar.updated_at', 'desc') // Order by updated_at
-                                                ->get();
+        $query = PegawaiMohonDaftar::where('status', 'Baharu')
+                    ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
+                    ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
+                    ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
+                    ->select([
+                        'pegawai_mohon_daftar.*',
+                        'tahap_pengguna.peranan',
+                        'senarai_negeri_pejabat.negeri as negeri_bertugas',
+                        'senarai_daerah_pejabat.daerah as daerah_bertugas'
+                    ])
+                    ->orderBy('pegawai_mohon_daftar.updated_at', 'desc');
 
-        $negeri = NegeriPejabat::all()->sortBy('negeri');
-        $daerah = DaerahPejabat::all()->sortBy('daerah');
-
-        $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
-        $jawatan = JawatanAADK::all();
-
-        // Return all necessary data as JSON
-        return response()->json([
-            'permohonan_pegawai' => $permohonan_pegawai,
-            'negeri' => $negeri,
-            'daerah' => $daerah,
-            'tahap' => $tahap,
-            'jawatan' => $jawatan
-        ]);
+        return DataTables::of($query)->make(true);
     }
+
+   
+
+    // public function getDataPermohonanPegawai()
+    // {
+    //     $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
+    //                                             ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
+    //                                             ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
+    //                                             ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
+    //                                             ->select(
+    //                                                 'pegawai_mohon_daftar.*', 
+    //                                                 'tahap_pengguna.peranan', 
+    //                                                 'senarai_negeri_pejabat.negeri as negeri_bertugas', 
+    //                                                 'senarai_daerah_pejabat.daerah as daerah_bertugas'
+    //                                             )
+    //                                             ->orderBy('pegawai_mohon_daftar.updated_at', 'desc') // Order by updated_at
+    //                                             ->get();
+
+    //     $negeri = NegeriPejabat::all()->sortBy('negeri');
+    //     $daerah = DaerahPejabat::all()->sortBy('daerah');
+
+    //     $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
+    //     $jawatan = JawatanAADK::all();
+
+    //     // Return all necessary data as JSON
+    //     return response()->json([
+    //         'permohonan_pegawai' => $permohonan_pegawai,
+    //         'negeri' => $negeri,
+    //         'daerah' => $daerah,
+    //         'tahap' => $tahap,
+    //         'jawatan' => $jawatan
+    //     ]);
+    // }
 
     // PENTADBIR : DAFTAR / KEMASKINI PEGAWAI & KLIEN
     public function modalKemaskiniKlien($id)
