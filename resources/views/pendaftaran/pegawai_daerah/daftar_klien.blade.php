@@ -611,75 +611,30 @@
 
     {{-- AJAX TABLE SENARAI KLIEN --}}
 	<script>
-		$(document).ready(function() {
-			// Load client data using AJAX
-			$.ajax({
-				url: "{{ route('pegawai-daerah-ajax-senarai-klien') }}", // Route for fetching data
-				method: 'GET',
-				dataType: 'json',
-				success: function(response) {
-					var klienList = response;
-					var rows = '';
-					var modalContainerKlien = ''; // To store modals
-					
-					// Clear the existing rows before appending new ones
-					$('#sortTable1 tbody').empty();
-
-					$.each(klienList, function(index, user1) {
-						var tarikhDaftar = user1.user_updated_at ? new Date(user1.user_updated_at).toLocaleDateString('en-GB') : ''; 
-
-						rows += '<tr>';
-						rows += '<td>' + (user1.nama ? user1.nama : '') + '</td>';
-						rows += '<td>' + (user1.no_kp ? user1.no_kp : '') + '</td>';
-						rows += '<td>' + (user1.emel ? user1.emel : '') + '</td>';
-						rows += '<td style="text-align: center;">' + tarikhDaftar + '</td>';
-						rows += `<td style="text-align: center;">
-									${user1.user_updated_at !== null ? 
-										`<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_kemaskini_klien">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>` 
-										: 
-										`<a id="daftarKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="` + user1.id + `" data-bs-target="#modal_daftar_klien">
-											<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
-												<i class="ki-duotone bi bi-pencil fs-3"></i>
-											</span>
-										</a>`
-									}
-								</td>`;
-						rows += '</tr>';
-					});
-
-					// Append the rows to the table body
-					$('#sortTable1 tbody').html(rows);
-
-					// Append the modals to a container
-                    $('#modalContainerKlien').html(modalContainerKlien);
-
-					// Reinitialize DataTable
-					if ($.fn.DataTable.isDataTable('#sortTable1')) {
-						$('#sortTable1').DataTable().destroy(); // Destroy existing instance
-					}
-
-					// Initialize DataTable with the new data
-					$('#sortTable1').DataTable({
-						ordering: true,
-						order: [],
-						language: {
-							url: "/assets/lang/Malay.json"
-						},
-						dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-							'<"row"<"col-sm-12 my-0"tr>>' +
-							'<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-						responsive: true
-					});
-				},
-				error: function(error) {
-					console.error("Ralat semasa mengambil data", error);
-				}
-			});
-		});
+        $(document).ready(function() {
+            let table1 = $('#sortTable1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('pegawai-daerah-ajax-senarai-klien') }}", // Ensure this route is correct
+                    type: "GET",
+                },
+                columns: [
+                    { data: "nama", name: "nama" },
+                    { data: "no_kp", name: "no_kp", className: "text-center" },
+                    { data: "emel", name: "emel", className: "text-center" },
+                    { data: "tarikhDaftar", name: "tarikhDaftar", className: "text-center" },
+                    { data: "tindakan", name: "tindakan", className: "text-center", orderable: false, searchable: false }
+                ],
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                responsive: true
+            });
+        });
 	</script>
 
 	<!-- Modal Kemaskini Klien -->

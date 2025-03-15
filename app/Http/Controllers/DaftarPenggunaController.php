@@ -25,7 +25,7 @@ use App\Models\JawatanAADK;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
 use App\Models\NotifikasiPegawaiDaerah;
-use Illuminate\Support\Facades\Log;
+use Yajra\DataTables\Facades\DataTables;
 
 class DaftarPenggunaController extends Controller
 {
@@ -71,7 +71,7 @@ class DaftarPenggunaController extends Controller
         return view('pendaftaran.pegawai_daerah.daftar_klien', compact( 'notifications', 'unreadCountPD'));
     }
 
-    public function getDataKlienDaerah()
+    public function getDataKlienDaerah(Request $request)
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
@@ -80,14 +80,49 @@ class DaftarPenggunaController extends Controller
             return response()->json(['error' => 'Pegawai not found'], 404);
         }
 
-        $klien =Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+        $query = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
                         ->select('klien.*', 'users.updated_at as user_updated_at')
                         ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                        ->orderBy('user_updated_at', 'desc')
-                        ->get();
+                        ->orderBy('user_updated_at', 'desc');
 
-        return response()->json($klien);
+        return DataTables::of($query)
+            ->addColumn('tarikhDaftar', function ($klien) {
+                return $klien->user_updated_at ? \Carbon\Carbon::parse($klien->user_updated_at)->format('d/m/Y') : '';
+            })
+            ->addColumn('tindakan', function ($klien) {
+                return $klien->user_updated_at !== null
+                    ? '<a id="kemaskiniKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="' . $klien->id . '" data-bs-target="#modal_kemaskini_klien">
+                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
+                                <i class="ki-duotone bi bi-pencil fs-3"></i>
+                            </span>
+                        </a>'
+                    : '<a id="daftarKlienModal" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-id="' . $klien->id . '" data-bs-target="#modal_daftar_klien">
+                            <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
+                                <i class="ki-duotone bi bi-pencil fs-3"></i>
+                            </span>
+                        </a>';
+            })
+            ->rawColumns(['tindakan']) // Allow HTML rendering in the 'tindakan' column
+            ->make(true);
     }
+
+    // public function getDataKlienDaerah()
+    // {
+    //     $pegawai = Auth::user();
+    //     $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+    //     if (!$pegawaiDaerah) {
+    //         return response()->json(['error' => 'Pegawai not found'], 404);
+    //     }
+
+    //     $klien = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
+    //                     ->select('klien.*', 'users.updated_at as user_updated_at')
+    //                     ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+    //                     ->orderBy('user_updated_at', 'desc')
+    //                     ->get();
+
+    //     return response()->json($klien);
+    // }
 
     public function modalKemaskiniKlienDaerah($id)
     {
