@@ -596,6 +596,9 @@ class PelaporanController extends Controller
 
     public function PDFtidakPernahMenjawabPB(Request $request)
     {
+        ini_set('memory_limit', '512M');
+        ini_set('max_execution_time', 300);
+    
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('klien as u')
@@ -615,10 +618,10 @@ class PelaporanController extends Controller
         // Generate PDF using Snappy
         $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
             ->setPaper('a4', 'landscape')
-            ->setOption('disable-smart-shrinking', true) // Prevents blurriness
-            ->setOption('dpi', 300) // Increases resolution
-            ->setOption('enable-local-file-access', true); // Add this line
-
+            ->setOption('disable-smart-shrinking', true)
+            ->setOption('lowquality', true) // Speeds up processing
+            ->setOption('enable-local-file-access', true);
+        
         return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 

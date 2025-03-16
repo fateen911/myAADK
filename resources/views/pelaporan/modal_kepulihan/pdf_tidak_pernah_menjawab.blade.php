@@ -51,15 +51,6 @@
             width: 100px;
             height: auto;
         }
-        /* Fix PDF Background Image */
-        .watermark {
-            position: fixed;
-            top: 30%;
-            left: 10%;
-            width: 80%;
-            opacity: 0.2;
-            z-index: -1;
-        }
     </style>
 </head>
 
@@ -99,9 +90,5 @@
             @endforeach
         </tbody>
     </table>
-
-    <!-- Background Image Watermark -->
-    <img src="{{ public_path('logo/mySupport-bw.png') }}" class="watermark">
-
 </body>
 </html>
