@@ -187,9 +187,20 @@ Route::get('/pentadbir/senarai-permohonan-klien',[ProfilKlienController::class, 
 Route::get('/pentadbir/permohonan/belum-selesai',[ProfilKlienController::class, 'permohonanKlienBelumSelesai'])->middleware('auth')->name('permohonan-belum-selesai.1');
 Route::get('/pentadbir/permohonan/selesai',[ProfilKlienController::class, 'permohonanKlienSelesai'])->middleware('auth')->name('permohonan-selesai.1');
 
+// PEGAWAI BRPP - PENGURUSAN PERMOHONAN KEMASKINI PROFIL KLIEN
 Route::get('/pegawai-brpp/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienBrpp'])->middleware('auth')->name('senarai-permohonan-klien-brpp');
+Route::get('/pegawai-brpp/permohonan/belum-selesai',[ProfilKlienController::class, 'permohonanKlienBelumSelesaiPB'])->middleware('auth')->name('permohonan-belum-selesai.3');
+Route::get('/pegawai-brpp/permohonan/selesai',[ProfilKlienController::class, 'permohonanKlienSelesaiPB'])->middleware('auth')->name('permohonan-selesai.3');
+
+// PEGAWAI NEGERI - PENGURUSAN PERMOHONAN KEMASKINI PROFIL KLIEN
 Route::get('/pegawai-negeri/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienNegeri'])->middleware('auth')->name('senarai-permohonan-klien-negeri');
+Route::get('/pegawai-negeri/permohonan/belum-selesai',[ProfilKlienController::class, 'permohonanKlienBelumSelesaiPN'])->middleware('auth')->name('permohonan-belum-selesai.4');
+Route::get('/pegawai-negeri/permohonan/selesai',[ProfilKlienController::class, 'permohonanKlienSelesaiPN'])->middleware('auth')->name('permohonan-selesai.4');
+
+// PEGAWAI DAERAH - PENGURUSAN PERMOHONAN KEMASKINI PROFIL KLIEN
 Route::get('/pegawai-daerah/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienDaerah'])->middleware('auth')->name('senarai-permohonan-klien-daerah');
+Route::get('/pegawai-daerah/permohonan/belum-selesai',[ProfilKlienController::class, 'permohonanKlienBelumSelesaiPD'])->middleware('auth')->name('permohonan-belum-selesai.5');
+Route::get('/pegawai-daerah/permohonan/selesai',[ProfilKlienController::class, 'permohonanKlienSelesaiPD'])->middleware('auth')->name('permohonan-selesai.5');
 
 // PENTADBIR UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST
 Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');

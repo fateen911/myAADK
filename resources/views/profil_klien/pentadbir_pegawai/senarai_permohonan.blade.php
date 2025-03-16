@@ -125,7 +125,7 @@
                                             <th style="width:10% !important; text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
+                                    <tbody id="table-body1">
                                         <tr>
                                             <td>Tiada</td>
                                             <td>Tiada</td>
@@ -134,30 +134,6 @@
                                             <td>Tiada</td>
                                             <td>Tiada</td>
                                         </tr>
-                                        {{-- @foreach ($permohonanSelesai as $user1)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user1['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user1['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
-                                                $nama_pengemaskini = DB::table('pegawai')->where('users_id', $user1['pengemaskini'])->value('pegawai.nama');
-                                            @endphp
-
-                                            <tr>
-                                                <td style="width:25% !important;"><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['klien_id']) }}" target="_blank">{{$user1->nama}}</a></td>
-                                                <td style="width:15% !important; text-align: center;">{{ $user1->no_kp }}</td>
-                                                <td style="width:20% !important; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width:15% !important; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width:15% !important; text-align: center;">{{ $nama_pengemaskini ?? 'N/A' }}</td>
-                                                <td style="width:10% !important; text-align: center;">
-                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['klien_id']) }}">
-                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
-                                                    </a>
-                                
-                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user1['klien_id']) }}">
-                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -185,7 +161,7 @@
                                             <th class="min-w-30px" style="text-align: center;">Tindakan</th></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-semibold text-gray-600">
+                                    <tbody id="table-body2">
                                         <tr>
                                             <td>Tiada</td>
                                             <td>Tiada</td>
@@ -193,28 +169,6 @@
                                             <td>Tiada</td>
                                             <td>Tiada</td>
                                         </tr>
-                                        {{-- @foreach ($permohonanBelumSelesai as $user2)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user2['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user2['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
-                                            <tr>
-                                                <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}" target="_blank">{{$user2->nama}}</a></td>
-                                                <td style="text-align: center;">{{ $user2->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">
-                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}">
-                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
-                                                    </a>
-                                
-                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user2['id']) }}">
-                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -239,42 +193,134 @@
     
     <script>
         $(document).ready(function () {
-            // Load DataTable for Selesai
-            $('#sortTable1').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: $('#sortTable1').data('url'), // Get route URL from the table's data attribute
-                columns: [
-                    { data: 'nama', name: 'nama' },
-                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
-                    { data: 'daerah_pejabat', name: 'daerah_pejabat', className: 'text-center' },
-                    { data: 'negeri_pejabat', name: 'negeri_pejabat', className: 'text-center' },
-                    { data: 'pengemaskini', name: 'pengemaskini', className: 'text-center' },
-                    { data: 'tindakan', name: 'tindakan', orderable: false, searchable: false, className: 'text-center' }
-                ],
-                language: { url: "/assets/lang/Malay.json" },
-                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                    '<"row"<"col-sm-12 my-0"tr>>' +
-                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-            });
+            function fetchData() {
+                let routeUrl = $("#sortTable2").data("url"); // Get route from table data attribute
 
-            // Load DataTable for Belum Selesai
-            $('#sortTable2').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: $('#sortTable2').data('url'), // Get route URL from the table's data attribute
-                columns: [
-                    { data: 'nama', name: 'nama' },
-                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
-                    { data: 'daerah_pejabat', name: 'daerah_pejabat', className: 'text-center' },
-                    { data: 'negeri_pejabat', name: 'negeri_pejabat', className: 'text-center' },
-                    { data: 'tindakan', name: 'tindakan', orderable: false, searchable: false, className: 'text-center' }
-                ],
-                language: { url: "/assets/lang/Malay.json" },
-                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                    '<"row"<"col-sm-12 my-0"tr>>' +
-                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-            });
+                $.ajax({
+                    url: routeUrl, // Use dynamic route
+                    method: "GET",
+                    dataType: 'json',
+                    
+                    success: function (response) {
+                        console.log(response); // Check if data is being retrieved in the browser console
+                        let tableBody = $("#table-body2");
+                        tableBody.empty();
+
+                        let rows = "";
+                        $.each(response.data, function (index, row) {
+                            rows += `
+                                <tr>
+                                    <td><a href="/pentadbir-pegawai/maklumat-klien/${row.id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">
+                                        <a href="/pentadbir-pegawai/maklumat-klien/${row.id}">
+                                            <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
+                                        </a>
+
+                                        <a href="/muat-turun/PDF/profil-klien/${row.id}">
+                                            <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable2")) {
+                            $('#sortTable2').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable2').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+            // Fetch data on page load
+            fetchData();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function fetchData() {
+                let routeUrl = $("#sortTable1").data("url"); // Get route from table data attribute
+
+                $.ajax({
+                    url: routeUrl, // Use dynamic route
+                    method: "GET",
+                    dataType: 'json',
+                    
+                    success: function (response) {
+                        console.log(response); // Check if data is being retrieved in the browser console
+                        let tableBody = $("#table-body1");
+                        tableBody.empty();
+
+                        let rows = "";
+                        $.each(response.data, function (index, row) {
+                            rows += `
+                                <tr>
+                                    <td><a href="/pentadbir-pegawai/maklumat-klien/${row.id}">${row.nama}</a></td>
+                                    <td style="text-align: center;">${row.no_kp}</td>
+                                    <td style="text-align: center;">${row.negeri}</td>
+                                    <td style="text-align: center;">${row.daerah}</td>
+                                    <td style="text-align: center;">${row.nama_pengemaskini}</td>
+                                    <td style="text-align: center;">
+                                        <a href="/pentadbir-pegawai/maklumat-klien/${row.id}">
+                                            <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
+                                        </a>
+
+                                        <a href="/muat-turun/PDF/profil-klien/${row.id}">
+                                            <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        tableBody.html(rows);
+
+                        // Destroy existing DataTable before reinitializing
+                        if ($.fn.DataTable.isDataTable("#sortTable1")) {
+                            $('#sortTable1').DataTable().destroy();
+                        }
+
+                        // Reinitialize DataTable
+                        $('#sortTable1').DataTable({
+                            ordering: true,
+                            order: [],
+                            language: {
+                                url: "/assets/lang/Malay.json"
+                            },
+                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                                '<"row"<"col-sm-12 my-0"tr>>' +
+                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                            responsive: true
+                        });
+                    },
+                    error: function () {
+                        alert("Error retrieving data.");
+                    }
+                });
+            }
+            // Fetch data on page load
+            fetchData();
         });
     </script>
 @endsection

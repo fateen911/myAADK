@@ -110,15 +110,15 @@ class ProfilKlienController extends Controller
                                         ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
                                 })
                                 ->distinct()
-                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'klien.daerah_pejabat', 'klien.negeri_pejabat')
+                                ->join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah')
                                 ->get();
 
-        return DataTables::of($permohonanBelumSelesai)
-            ->addColumn('tindakan', function ($row) {
-                return '<a href="' . url('pentadbir-pegawai/maklumat-klien/' . $row->id) . '" class="btn btn-sm btn-primary">Lihat</a>';
-            })
-            ->rawColumns(['tindakan'])
-            ->make(true);
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanBelumSelesai
+        ]);
     }
 
     public function permohonanKlienSelesai(Request $request)
@@ -138,7 +138,9 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
+        $permohonanSelesai = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                            ->join('sejarah_profil_klien as spk', 'klien.id', '=', 'spk.klien_id') // Join the 'sejarah_profil_klien' table
                             ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
                             ->where(function ($query) {
                                 $query->whereIn('klien.id', function ($subQuery) {
@@ -157,16 +159,15 @@ class ProfilKlienController extends Controller
                                 });
                             })
                             ->distinct()
+                            ->leftJoin('users', 'spk.pengemaskini', '=', 'users.id')
+                            ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah','users.name as nama_pengemaskini')
                             ->get();
 
-        return DataTables::of($permohonanSelesai)
-            ->addColumn('tindakan', function ($row) {
-                return '<a href="' . url('pentadbir-pegawai/maklumat-klien/' . $row->id) . '" class="btn btn-sm btn-primary">Lihat</a>';
-            })
-            ->rawColumns(['tindakan'])
-            ->make(true);
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanSelesai
+        ]);
     }
-
 
     // PEGAWAI BRPP
     public function senaraiKlienBrpp()
@@ -217,20 +218,35 @@ class ProfilKlienController extends Controller
 
     public function senaraiPermohonanKlienBrpp()
     {
-        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                        ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                        ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                        ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                        ->select('klien.*') // Fetch all columns of the klien table
-                                        ->where(function ($query) {
-                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
-                                        })
-                                        ->distinct()
-                                        ->get(); // Fetch the result as a collection
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan');
+    }
 
+    public function permohonanKlienBelumSelesaiPB(Request $request)
+    {
+        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah')
+                                ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanBelumSelesai
+        ]);
+    }
+
+    public function permohonanKlienSelesaiPB(Request $request)
+    {
         // Find clients with status Kemaskini
         $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
                                 ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
@@ -246,28 +262,35 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
-                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
-                                    ->where(function ($query) {
-                                        $query->whereIn('klien.id', function ($subQuery) {
-                                            $subQuery->select('klien_id')
-                                            ->from('klien_update_requests')
-                                            ->whereIn('status', ['Lulus', 'Ditolak'])
-                                            ->unionAll(
-                                                PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            );
-                                        });
-                                    })
-                                    ->distinct()
-                                    ->get();
+        $permohonanSelesai = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                            ->join('sejarah_profil_klien as spk', 'klien.id', '=', 'spk.klien_id') // Join the 'sejarah_profil_klien' table
+                            ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+                            ->where(function ($query) {
+                                $query->whereIn('klien.id', function ($subQuery) {
+                                    $subQuery->select('klien_id')
+                                    ->from('klien_update_requests')
+                                    ->whereIn('status', ['Lulus', 'Ditolak'])
+                                    ->unionAll(
+                                        PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    );
+                                });
+                            })
+                            ->distinct()
+                            ->leftJoin('users', 'spk.pengemaskini', '=', 'users.id')
+                            ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah','users.name as nama_pengemaskini')
+                            ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai'));
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanSelesai
+        ]);
     }
 
     // PEGAWAI NEGERI
@@ -327,23 +350,39 @@ class ProfilKlienController extends Controller
 
     public function senaraiPermohonanKlienNegeri()
     {
-        // Fetch pegawai (user) info for the logged-in user
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan');
+    }
+
+    public function permohonanKlienBelumSelesaiPN(Request $request)
+    {
         $pegawaiNegeri = Pegawai::where('users_id', Auth::user()->id)->first();
 
         $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
                                 ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
                                 ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
                                 ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                ->select('klien.*')
                                 ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                 ->where(function ($query) {
-                                    $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                                        ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                                        ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                                        ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
+                                    $query->where('klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
                                 })
                                 ->distinct()
+                                ->join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah')
                                 ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanBelumSelesai
+        ]);
+    }
+
+    public function permohonanKlienSelesaiPN(Request $request)
+    {
+        $pegawaiNegeri = Pegawai::where('users_id', Auth::user()->id)->first();
 
         // Find clients with status Kemaskini
         $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
@@ -361,29 +400,36 @@ class ProfilKlienController extends Controller
                                 ->pluck('klien.id');
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
-                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
-                                    ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
-                                    ->where(function ($query) {
-                                        $query->whereIn('klien.id', function ($subQuery) {
-                                            $subQuery->select('klien_id')
-                                            ->from('klien_update_requests')
-                                            ->whereIn('status', ['Lulus', 'Ditolak'])
-                                            ->unionAll(
-                                                PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            );
-                                        });
-                                    })
-                                    ->distinct()
-                                    ->get();
+        $permohonanSelesai = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                            ->join('sejarah_profil_klien as spk', 'klien.id', '=', 'spk.klien_id') // Join the 'sejarah_profil_klien' table
+                            ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+                            ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
+                            ->where(function ($query) {
+                                $query->whereIn('klien.id', function ($subQuery) {
+                                    $subQuery->select('klien_id')
+                                    ->from('klien_update_requests')
+                                    ->whereIn('status', ['Lulus', 'Ditolak'])
+                                    ->unionAll(
+                                        PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    );
+                                });
+                            })
+                            ->distinct()
+                            ->leftJoin('users', 'spk.pengemaskini', '=', 'users.id')
+                            ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah','users.name as nama_pengemaskini')
+                            ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai'));
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanSelesai
+        ]);
     }
 
     // PEGAWAI DAERAH
@@ -473,65 +519,6 @@ class ProfilKlienController extends Controller
 
     public function senaraiPermohonanKlienDaerah()
     {
-        // Fetch pegawai (user) info for the logged-in user
-        $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
-
-        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                        ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                        ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                        ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                        ->select('klien.*') // Fetch all columns from the klien table
-                                        ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                        ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                        ->where(function ($query) {
-                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
-                                        })
-                                        ->distinct()
-                                        ->get(); // Fetch the result as a collection
-
-        // Find clients with status Kemaskini
-        $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                ->where(function ($query) {
-                                    $query->where('klien_update_requests.status', 'Kemaskini')
-                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
-                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
-                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
-                                })
-                                ->distinct()
-                                ->pluck('klien.id');
-
-        // Count clients who are not in the above list and meet the criteria for being 'selesai'
-        $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
-                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
-                                    ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                    ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                    ->where(function ($query) {
-                                        $query->whereIn('klien.id', function ($subQuery) {
-                                            $subQuery->select('klien_id')
-                                            ->from('klien_update_requests')
-                                            ->whereIn('status', ['Lulus', 'Ditolak'])
-                                            ->unionAll(
-                                                PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            );
-                                        });
-                                    })
-                                    ->distinct()
-                                    ->get();
-
         // Fetch Notifications for Pegawai Daerah (tahap_pengguna == 5)
         $pegawai = Auth::user();
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
@@ -557,7 +544,89 @@ class ProfilKlienController extends Controller
                             });
                         })->count();
 
-        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact( 'notifications', 'unreadCountPD'));
+    }
+
+    public function permohonanKlienBelumSelesaiPD(Request $request)
+    {
+        $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah')
+                                ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanBelumSelesai
+        ]);
+    }
+
+    public function permohonanKlienSelesaiPD(Request $request)
+    {
+        $pegawaiDaerah = Pegawai::where('users_id', Auth::user()->id)->first();
+
+        // Find clients with status Kemaskini
+        $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->pluck('klien.id');
+
+        // Count clients who are not in the above list and meet the criteria for being 'selesai'
+        $permohonanSelesai = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                            ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                            ->join('sejarah_profil_klien as spk', 'klien.id', '=', 'spk.klien_id') // Join the 'sejarah_profil_klien' table
+                            ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+                            ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                            ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                            ->where(function ($query) {
+                                $query->whereIn('klien.id', function ($subQuery) {
+                                    $subQuery->select('klien_id')
+                                    ->from('klien_update_requests')
+                                    ->whereIn('status', ['Lulus', 'Ditolak'])
+                                    ->unionAll(
+                                        PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    );
+                                });
+                            })
+                            ->distinct()
+                            ->leftJoin('users', 'spk.pengemaskini', '=', 'users.id')
+                            ->select('klien.id', 'klien.nama', 'klien.no_kp', 'n.negeri','d.daerah','users.name as nama_pengemaskini')
+                            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $permohonanSelesai
+        ]);
     }
 
     // PEGAWAI/PENTADBIR - DOWNLOAD PROFIL KLIEN
