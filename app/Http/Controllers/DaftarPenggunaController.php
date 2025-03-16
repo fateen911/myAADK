@@ -273,6 +273,10 @@ class DaftarPenggunaController extends Controller
                     ->whereIn('tahap_pengguna.id', [3, 4, 5])
                     ->orderBy('users.updated_at', 'desc');
 
+        if ($query->count() == 0) {
+            return response()->json(['data' => []]); // Ensure empty response when no records exist
+        }
+    
         return DataTables::of($query)->make(true);
     }
 
@@ -290,41 +294,12 @@ class DaftarPenggunaController extends Controller
                     ])
                     ->orderBy('pegawai_mohon_daftar.updated_at', 'desc');
 
+        if ($query->count() == 0) {
+            return response()->json(['data' => []]); // Ensure empty response when no records exist
+        }
+    
         return DataTables::of($query)->make(true);
     }
-
-   
-
-    // public function getDataPermohonanPegawai()
-    // {
-    //     $permohonan_pegawai = PegawaiMohonDaftar::where('status', 'Baharu')
-    //                                             ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
-    //                                             ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
-    //                                             ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
-    //                                             ->select(
-    //                                                 'pegawai_mohon_daftar.*', 
-    //                                                 'tahap_pengguna.peranan', 
-    //                                                 'senarai_negeri_pejabat.negeri as negeri_bertugas', 
-    //                                                 'senarai_daerah_pejabat.daerah as daerah_bertugas'
-    //                                             )
-    //                                             ->orderBy('pegawai_mohon_daftar.updated_at', 'desc') // Order by updated_at
-    //                                             ->get();
-
-    //     $negeri = NegeriPejabat::all()->sortBy('negeri');
-    //     $daerah = DaerahPejabat::all()->sortBy('daerah');
-
-    //     $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
-    //     $jawatan = JawatanAADK::all();
-
-    //     // Return all necessary data as JSON
-    //     return response()->json([
-    //         'permohonan_pegawai' => $permohonan_pegawai,
-    //         'negeri' => $negeri,
-    //         'daerah' => $daerah,
-    //         'tahap' => $tahap,
-    //         'jawatan' => $jawatan
-    //     ]);
-    // }
 
     // PENTADBIR : DAFTAR / KEMASKINI PEGAWAI & KLIEN
     public function modalKemaskiniKlien($id)

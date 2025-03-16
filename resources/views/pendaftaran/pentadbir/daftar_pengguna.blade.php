@@ -985,7 +985,6 @@
 	<script>
 		$(document).ready(function() {
 			$('#sortTable3').DataTable({
-				processing: true,
 				serverSide: true,
 				ajax: {
 					url: "{{ route('ajax-senarai-permohonan-pegawai') }}",
@@ -1088,7 +1087,6 @@
 	<script>
 		$(document).ready(function() {
 			$('#sortTable2').DataTable({
-				processing: true,
 				serverSide: true,
 				ajax: "{{ route('ajax-senarai-pegawai') }}",
 				columns: [
