@@ -21,23 +21,36 @@
             margin-top: 10px; 
             border-collapse: collapse; /* Ensures single-line borders */
             font-size: 11px;
+            page-break-inside: auto; /* Ensure the table does not break */
         }
         .table th, .table td { 
             border: 1px solid black; 
             padding: 8px; 
         }
-        .table th { background-color: #2d2d5d !important; color: white; }
-
+        .table th { 
+            background-color: #2d2d5d !important; 
+            color: white; 
+        }
+        /* Prevent row break */
+        tr { 
+            page-break-inside: avoid; 
+            page-break-after: auto; 
+        }
+        /* Ensure headers repeat on each page */
+        thead { 
+            display: table-header-group; 
+        }
+        tfoot { 
+            display: table-row-group; 
+        }
         .header {
             text-align: center;
             margin-bottom: 10px;
         }
-
         .header img {
             width: 100px;
             height: auto;
         }
-
         /* Fix PDF Background Image */
         .watermark {
             position: fixed;
