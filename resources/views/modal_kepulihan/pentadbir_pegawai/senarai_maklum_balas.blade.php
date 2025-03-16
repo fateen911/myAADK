@@ -332,7 +332,6 @@
     
             // Initialize DataTable
             let table = $("#sortTable1").DataTable({
-                processing: true,
                 serverSide: true,  // Enable server-side processing for large datasets
                 order: [], // Default order
                 ajax: {
@@ -390,129 +389,66 @@
     {{-- AJAX BELUM SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let routeUrl = $("#sortTable2").data("url"); // Get route from table data attribute
-
-                $.ajax({
-                    url: routeUrl, // Use dynamic route
-                    method: "GET",
-                    success: function (response) {
-                        let tableBody = $("#table-body2");
-                        tableBody.empty(); // Clear existing data
-
-                        let rows = ""; // Define rows variable to store all table rows
-
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.nama_negeri}</td>
-                                    <td style="text-align: center;">${row.nama_daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                    <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable2")) {
-                            $('#sortTable2').DataTable().destroy();
+            // Initialize DataTable for 'Belum Selesai Menjawab'
+            $('#sortTable2').DataTable({
+                serverSide: true,
+                ajax: $('#sortTable2').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', render: function (data, type, row) {
+                        return `<a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${data}</a>`;
+                    }},
+                    { data: 'no_kp', className: "text-center" },
+                    { data: 'nama_negeri', className: "text-center" },
+                    { data: 'nama_daerah', className: "text-center" },
+                    { data: 'updated_at', className: "text-center", render: function (data) {
+                        return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                    }},
+                    { data: 'klien_id', orderable: false, searchable: false, className: "text-center",
+                        render: function (data) {
+                            return `<a href="/sejarah/modul-kepulihan/klien/${data}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>`;
                         }
-
-                        // Reinitialize DataTable
-                        $('#sortTable2').DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
                     }
-                });
-            }
-            // Fetch data on page load
-            fetchData();
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            });
         });
     </script>
 
     {{-- AJAX TIDAK MENJAWAB LEBIH 6 BULAN --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let routeUrl = $("#sortTable3").data("url"); // Get route from table data attribute
-
-                $.ajax({
-                    url: routeUrl, // Use dynamic route
-                    method: "GET",
-                    success: function (response) {
-                        let tableBody = $("#table-body3");
-                        tableBody.empty(); // Clear existing data
-
-                        let rows = ""; // Define rows variable to store all table rows
-
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                    <td style="width: 8%; text-align: center;">
-                                        <a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Destroy existing DataTable before reinitializing
-                        if ($.fn.DataTable.isDataTable("#sortTable3")) {
-                            $('#sortTable3').DataTable().destroy();
+            // Initialize DataTable for 'Tidak Menjawab Lebih 6 Bulan'
+            $('#sortTable3').DataTable({
+                serverSide: true,
+                ajax: $('#sortTable3').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', render: function (data, type, row) {
+                        return `<a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${data}</a>`;
+                    }},
+                    { data: 'no_kp', className: "text-center" },
+                    { data: 'negeri', className: "text-center" },
+                    { data: 'daerah', className: "text-center" },
+                    { data: 'updated_at', className: "text-center", render: function (data) {
+                        return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                    }},
+                    { data: 'klien_id', orderable: false, searchable: false, className: "text-center",
+                        render: function (data) {
+                            return `<a href="/sejarah/modul-kepulihan/klien/${data}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>`;
                         }
-
-                        // Reinitialize DataTable
-                        $('#sortTable3').DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
                     }
-                });
-            }
-            // Fetch data on page load
-            fetchData();
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            });
         });
     </script>
 

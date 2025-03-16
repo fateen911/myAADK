@@ -610,12 +610,9 @@ class ModalKepulihanController extends Controller
                                     ->where('kk.status', 'Belum Selesai')
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-
-        if ($belum_selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $belum_selesai_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($belum_selesai_menjawab)->make(true);
     }
 
     public function belumSelesaiMenjawabPN()
@@ -648,12 +645,9 @@ class ModalKepulihanController extends Controller
                                     ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-
-        if ($belum_selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $belum_selesai_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($belum_selesai_menjawab)->make(true);
     }
 
     public function belumSelesaiMenjawabPD()
@@ -687,12 +681,9 @@ class ModalKepulihanController extends Controller
                                     ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-
-        if ($belum_selesai_menjawab->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $belum_selesai_menjawab]);
+        // Use DataTables for proper pagination
+        return DataTables::of($belum_selesai_menjawab)->make(true);
     }
 
     // PENTADBIR ATAU PEGAWAI - AJAX TIDAK MENJAWAB LEBIH 6 BULAN
@@ -718,12 +709,9 @@ class ModalKepulihanController extends Controller
                                         ->where('kk.updated_at', '<=', $sixMonthsAgo)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-
-        if ($tidak_menjawab_lebih_6bulan->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }
 
     public function tidakMenjawabLebih6BulanPN()
@@ -751,12 +739,9 @@ class ModalKepulihanController extends Controller
                                         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-
-        if ($tidak_menjawab_lebih_6bulan->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }
 
     public function tidakMenjawabLebih6BulanPD()
@@ -785,12 +770,9 @@ class ModalKepulihanController extends Controller
                                         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-
-        if ($tidak_menjawab_lebih_6bulan->isEmpty()) {
-            return response()->json(['data' => [], 'message' => 'Tiada data dijumpai']);
-        }
         
-        return response()->json(['data' => $tidak_menjawab_lebih_6bulan]);
+        // Use DataTables for proper pagination
+        return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }
 
     // PENTADBIR ATAU PEGAWAI - AJAX TIDAK PERNAH MENJAWAB
