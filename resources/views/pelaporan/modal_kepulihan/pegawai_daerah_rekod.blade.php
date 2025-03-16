@@ -468,7 +468,6 @@
     <script>
         $(document).ready(function () {
             let table1 = $('#sortTable1').DataTable({
-                processing: true,
                 serverSide: true,
                 ajax: {
                     url: "{{ route('ajax-senarai-selesai-menjawab.daerah') }}",
@@ -567,89 +566,57 @@
     {{-- AJAX BELUM SELESAI MENJAWAB --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let formData = $('#filter-form2').serialize(); // Serialize form data
-
-                $.ajax({
+            let table = $('#sortTable2').DataTable({
+                serverSide: true,
+                ajax: {
                     url: "{{ route('ajax-senarai-belum-selesai-menjawab.daerah') }}",
-                    method: "GET",
-                    data: formData,
-                    success: function (response) {
-                        let table = $('#sortTable2');
-                        let tableBody = $("#table-body2");
-                       
-                        // Destroy existing DataTable instance if it exists
-                        if ($.fn.DataTable.isDataTable(table)) {
-                            table.DataTable().clear().destroy();
-                        }
-
-                        tableBody.empty(); // Clear existing table data
-                        let rows = "";
-
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.nama_negeri}</td>
-                                    <td style="text-align: center;">${row.nama_daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Reinitialize DataTable
-                        table.DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
+                    type: "GET",
+                    data: function (d) {
+                        d.from_date_bs = $("#from_date_bs").val();
+                        d.to_date_bs = $("#to_date_bs").val();
                     }
-                });
-            }
+                },
+                columns: [
+                    { data: "nama", render: function (data, type, row) {
+                        return `<a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${data}</a>`;
+                    }},
+                    { data: "no_kp", className: "text-center" },
+                    { data: "nama_negeri", className: "text-center" },
+                    { data: "nama_daerah", className: "text-center" },
+                    { data: "updated_at", className: "text-center", render: function (data) {
+                        return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                    }}
+                ],
+                order: [],
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                responsive: true
+            });
 
-            // Fetch data on page load
-            fetchData();
-
-            // Fetch data when filter form is submitted
+            // Fetch data on form submission (reloading DataTable with new filters)
             $("#filter-form2").submit(function (e) {
                 e.preventDefault();
-                fetchData();
+                table.ajax.reload();
             });
-        });
 
-        $(document).ready(function () {
+            // Export Excel
             $("#export-excel3").click(function (e) {
                 e.preventDefault();
-
-                var fromDate = $("#from_date_bs").val();
-                var toDate = $("#to_date_bs").val();
-
-                var query = $.param({
-                    from_date_bs: fromDate,
-                    to_date_bs: toDate,
+                let query = $.param({
+                    from_date_bs: $("#from_date_bs").val(),
+                    to_date_bs: $("#to_date_bs").val(),
                 });
-
-                window.location.href = "/pegawai-daerah/pelaporan/excel/belum-selesai-menjawab?" + query; // Added '?' before query
+                window.location.href = "/pegawai-daerah/pelaporan/excel/belum-selesai-menjawab?" + query;
             });
 
-
-            $('#export-pdf3').on('click', function (e) {
+            // Export PDF
+            $("#export-pdf3").click(function (e) {
                 e.preventDefault();
-                let filterData = $('#filter-form2').serialize(); // Get filtered values
+                let filterData = $("#filter-form2").serialize();
                 window.open("{{ route('pelaporan.belum-selesai-menjawab.pdf.daerah') }}?" + filterData, '_blank');
             });
         });
@@ -658,89 +625,57 @@
     {{-- AJAX TIDAK MENJAWAB LEBIH 6 BULAN --}}
     <script>
         $(document).ready(function () {
-            function fetchData() {
-                let formData = $('#filter-form3').serialize(); // Serialize form data
-
-                $.ajax({
+            let table = $('#sortTable3').DataTable({
+                serverSide: true,
+                ajax: {
                     url: "{{ route('ajax-senarai-tidak-menjawab-lebih-6Bulan.daerah') }}",
-                    method: "GET",
-                    data: formData,
-                    success: function (response) {
-                        let table = $('#sortTable3');
-                        let tableBody = $("#table-body3");
-                       
-                        // Destroy existing DataTable instance if it exists
-                        if ($.fn.DataTable.isDataTable(table)) {
-                            table.DataTable().clear().destroy();
-                        }
-
-                        tableBody.empty(); // Clear existing table data
-                        let rows = "";
-
-                        $.each(response.data, function (index, row) {
-                            let formattedDate = row.updated_at ? new Date(row.updated_at).toLocaleDateString('en-GB') : 'N/A';
-
-                            rows += `
-                                <tr>
-                                    <td><a href="/sejarah-soal-selidik-klien/${row.klien_id}">${row.nama}</a></td>
-                                    <td style="text-align: center;">${row.no_kp}</td>
-                                    <td style="text-align: center;">${row.negeri}</td>
-                                    <td style="text-align: center;">${row.daerah}</td>
-                                    <td style="text-align: center;">${formattedDate}</td>
-                                </tr>
-                            `;
-                        });
-
-                        tableBody.html(rows);
-
-                        // Reinitialize DataTable
-                        table.DataTable({
-                            ordering: true,
-                            order: [],
-                            language: {
-                                url: "/assets/lang/Malay.json"
-                            },
-                            dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
-                                '<"row"<"col-sm-12 my-0"tr>>' +
-                                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                            responsive: true
-                        });
-                    },
-                    error: function () {
-                        alert("Error retrieving data.");
+                    type: "GET",
+                    data: function (d) {
+                        d.from_date_tm6 = $("#from_date_tm6").val();
+                        d.to_date_tm6 = $("#to_date_tm6").val();
                     }
-                });
-            }
+                },
+                columns: [
+                    { data: "nama", render: function (data, type, row) {
+                        return `<a href="/sejarah/modul-kepulihan/klien/${row.klien_id}">${data}</a>`;
+                    }},
+                    { data: "no_kp", className: "text-center" },
+                    { data: "negeri", className: "text-center" },
+                    { data: "daerah", className: "text-center" },
+                    { data: "updated_at", className: "text-center", render: function (data) {
+                        return data ? new Date(data).toLocaleDateString('en-GB') : 'N/A';
+                    }}
+                ],
+                order: [],
+                language: {
+                    url: "/assets/lang/Malay.json"
+                },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                responsive: true
+            });
 
-            // Fetch data on page load
-            fetchData();
-
-            // Fetch data when filter form is submitted
+            // Fetch data on form submission (reloading DataTable with new filters)
             $("#filter-form3").submit(function (e) {
                 e.preventDefault();
-                fetchData();
+                table.ajax.reload();
             });
-        });
 
-        $(document).ready(function () {
+            // Export Excel
             $("#export-excel4").click(function (e) {
                 e.preventDefault();
-
-                var fromDate = $("#from_date_tm6").val();
-                var toDate = $("#to_date_tm6").val();
-
-                var query = $.param({
-                    from_date_tm6: fromDate,
-                    to_date_tm6: toDate,
+                let query = $.param({
+                    from_date_tm6: $("#from_date_tm6").val(),
+                    to_date_tm6: $("#to_date_tm6").val(),
                 });
-
-                window.location.href = "/pegawai-daerah/pelaporan/excel/tidak-menjawab-lebih-6Bulan?" + query; // Added '?' before query
+                window.location.href = "/pegawai-daerah/pelaporan/excel/tidak-menjawab-lebih-6Bulan?" + query;
             });
 
-
-            $('#export-pdf4').on('click', function (e) {
+            // Export PDF
+            $("#export-pdf4").click(function (e) {
                 e.preventDefault();
-                let filterData = $('#filter-form2').serialize(); // Get filtered values
+                let filterData = $("#filter-form3").serialize();
                 window.open("{{ route('pelaporan.tidak-menjawab-lebih-6Bulan.pdf.daerah') }}?" + filterData, '_blank');
             });
         });

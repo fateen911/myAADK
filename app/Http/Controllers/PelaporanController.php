@@ -329,7 +329,8 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_bs);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKBelumSelesaiMenjawabExcelPB(Request $request)
@@ -425,14 +426,15 @@ class PelaporanController extends Controller
         }
 
         if ($request->filled('aadk_negeri_tm6')) {
-            $query->where('u.negeri_pejabat', '<=', $request->aadk_negeri_tm6);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_tm6);
         }
         
         if ($request->filled('aadk_daerah_tm6')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakMenjawabLebih6BulanPB(Request $request)
@@ -482,7 +484,7 @@ class PelaporanController extends Controller
         }
 
         if ($request->filled('aadk_negeri_tm6')) {
-            $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tm6);
+            $query->whereDate('u.negeri_pejabat', $request->aadk_negeri_tm6);
         }
         
         if ($request->filled('aadk_daerah_tm6')) {
@@ -860,7 +862,8 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_bs);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKBelumSelesaiMenjawabExcelPN(Request $request)
@@ -961,7 +964,8 @@ class PelaporanController extends Controller
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakMenjawabLebih6BulanPN(Request $request)
@@ -1338,7 +1342,8 @@ class PelaporanController extends Controller
             $query->whereDate('kk.updated_at', '<=', $request->to_date_bs);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function MKBelumSelesaiMenjawabExcelPD(Request $request)
@@ -1431,7 +1436,8 @@ class PelaporanController extends Controller
             $query->whereDate('kk.updated_at', '<=', $request->to_date_tm6);
         }
 
-        return response()->json(['data' => $query->get()]);
+        // Use DataTables for proper pagination
+        return DataTables::of($query)->make(true);
     }
 
     public function ExcelTidakMenjawabLebih6BulanPD(Request $request)
