@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senarai Tidak Pernah Menjawab</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .tittle { background-color: #666; color: white; padding: 10px; text-align: center; font-size: 16px; font-weight: bold; }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .title { 
+            background-color: #666; 
+            color: white; 
+            padding: 10px; 
+            text-align: center; 
+            font-size: 16px; 
+            font-weight: bold; 
+        }
         .table { 
             width: 100%; 
             margin-top: 10px; 
@@ -29,18 +38,12 @@
             height: auto;
         }
 
-        body::before {
-            content: "";
-            display: block;
+        /* Fix PDF Background Image */
+        .watermark {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('logo/mySupport-bw.png');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            top: 30%;
+            left: 10%;
+            width: 80%;
             opacity: 0.2;
             z-index: -1;
         }
@@ -48,12 +51,18 @@
 </head>
 
 <body>
+    <!-- Fix Logo Not Appearing -->
     <div class="header">
-        <img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 12%; height: 8%;">
+        <img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 12%; height: auto;">
         <h3>AGENSI ANTIDADAH KEBANGSAAN (AADK)</h3>
     </div>
 
-    <div class="tittle">SENARAI KLIEN TIDAK PERNAH MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
+    <div class="title">SENARAI KLIEN TIDAK PERNAH MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
+
+    @php
+        $daerahList = DB::table('senarai_daerah_pejabat')->pluck('daerah', 'kod');
+        $negeriList = DB::table('senarai_negeri_pejabat')->pluck('negeri', 'negeri_id');
+    @endphp
 
     <table class="table">
         <thead>
@@ -66,20 +75,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($filteredData as $klien)
-                @php
-                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
-                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
-                @endphp
+            @foreach($filteredData as $index => $klien)
                 <tr>
-                    <td style="text-align: center;">{{ $loop->iteration }}.</td>
+                    <td style="text-align: center;">{{ $index + 1 }}.</td>
                     <td>{{ $klien->nama }}</td>
                     <td style="text-align: center;">{{ $klien->no_kp }}</td>
-                    <td style="text-align: center;">{{ $negeri }}</td>
-                    <td style="text-align: center;">{{ $daerah }}</td>
+                    <td style="text-align: center;">{{ $negeriList[$klien->negeri_pejabat] ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $daerahList[$klien->daerah_pejabat] ?? '-' }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <!-- Background Image Watermark -->
+    <img src="{{ public_path('logo/mySupport-bw.png') }}" class="watermark">
+
 </body>
 </html>

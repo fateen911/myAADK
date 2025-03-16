@@ -39,6 +39,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -536,84 +537,90 @@ class PelaporanController extends Controller
         return Excel::download(new MKTidakPernahMenjawabExcel($filters), 'senarai_klien_tidak_pernah_menjawab.xlsx');
     }
 
-    public function PDFtidakPernahMenjawabPB(Request $request)
-    {
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
-
-        // Query to fetch data
-        $query = DB::table('klien as u')
-            ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
-            ->whereNull('kk.klien_id');
-
-        if ($request->filled('aadk_negeri_tpm')) {
-            $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
-        }
-        
-        if ($request->filled('aadk_daerah_tpm')) {
-            $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
-        }
-
-        $allData = $query->get();
-
-        // Process data in chunks (e.g., 2000 records per chunk)
-        $chunks = $allData->chunk(2000);
-        $chunkIndex = 1;
-        $pdfPaths = [];
-
-        foreach ($chunks as $filteredData) {
-            $pdf = Pdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'));
-            $filePath = storage_path("app/public/reports/pdf_part_{$chunkIndex}.pdf");
-            $pdf->save($filePath);
-            $pdfPaths[] = $filePath;
-            $chunkIndex++;
-        }
-
-        // Merge PDFs into one file
-        $finalPDFPath = storage_path("app/public/reports/final_report.pdf");
-        $this->mergePDFs($pdfPaths, $finalPDFPath);
-
-        return response()->json([
-            'message' => 'PDF generation completed.',
-            'download_link' => Storage::url('public/reports/final_report.pdf')
-        ]);
-    }
-
-    // Function to merge PDFs
-    public function mergePDFs($filePaths, $outputPath)
-    {
-        $pdf = new Fpdi();
-        foreach ($filePaths as $file) {
-            $pageCount = $pdf->setSourceFile($file);
-            for ($i = 1; $i <= $pageCount; $i++) {
-                $pdf->AddPage();
-                $tplIdx = $pdf->importPage($i);
-                $pdf->useTemplate($tplIdx);
-            }
-        }
-        $pdf->Output($outputPath, 'F');
-    }
-
     // public function PDFtidakPernahMenjawabPB(Request $request)
     // {
     //     $sixMonthsAgo = Carbon::now()->subMonths(6);
 
+    //     // Query to fetch data
     //     $query = DB::table('klien as u')
-    //             ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
-    //             ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+    //         ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
+    //         ->whereNull('kk.klien_id');
 
     //     if ($request->filled('aadk_negeri_tpm')) {
-    //         $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+    //         $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
     //     }
         
     //     if ($request->filled('aadk_daerah_tpm')) {
     //         $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
     //     }
 
-    //     $filteredData = $query->get();
+    //     $allData = $query->get();
 
-    //     $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
-    //     return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+    //     // Process data in chunks (e.g., 2000 records per chunk)
+    //     $chunks = $allData->chunk(2000);
+    //     $chunkIndex = 1;
+    //     $pdfPaths = [];
+
+    //     foreach ($chunks as $filteredData) {
+    //         $pdf = Pdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'));
+    //         $filePath = storage_path("app/public/reports/pdf_part_{$chunkIndex}.pdf");
+    //         $pdf->save($filePath);
+    //         $pdfPaths[] = $filePath;
+    //         $chunkIndex++;
+    //     }
+
+    //     // Merge PDFs into one file
+    //     $finalPDFPath = storage_path("app/public/reports/final_report.pdf");
+    //     $this->mergePDFs($pdfPaths, $finalPDFPath);
+
+    //     return response()->json([
+    //         'message' => 'PDF generation completed.',
+    //         'download_link' => Storage::url('public/reports/final_report.pdf')
+    //     ]);
     // }
+
+    // // Function to merge PDFs
+    // public function mergePDFs($filePaths, $outputPath)
+    // {
+    //     $pdf = new Fpdi();
+    //     foreach ($filePaths as $file) {
+    //         $pageCount = $pdf->setSourceFile($file);
+    //         for ($i = 1; $i <= $pageCount; $i++) {
+    //             $pdf->AddPage();
+    //             $tplIdx = $pdf->importPage($i);
+    //             $pdf->useTemplate($tplIdx);
+    //         }
+    //     }
+    //     $pdf->Output($outputPath, 'F');
+    // }
+
+    public function PDFtidakPernahMenjawabPB(Request $request)
+    {
+        $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+        $query = DB::table('klien as u')
+                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
+
+        if ($request->filled('aadk_negeri_tpm')) {
+            $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+        }
+        
+        if ($request->filled('aadk_daerah_tpm')) {
+            $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
+        }
+
+        $filteredData = $query->get();
+
+        // Generate PDF using Snappy
+        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
+            ->setPaper('a4', 'landscape')
+            ->setOption('disable-smart-shrinking', true) // Prevents blurriness
+            ->setOption('dpi', 300) // Increases resolution
+            ->setOption('enable-local-file-access', true); // Add this line
+
+        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
+    }
 
     // PEGAWAI NEGERI
     public function modalKepulihanNegeri(Request $request)
@@ -1069,8 +1076,9 @@ class PelaporanController extends Controller
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
+        // Fetch clients who never answered the survey
         $query = DB::table('klien as u')
-                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+                ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
                 ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
                 ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
         
@@ -1080,9 +1088,34 @@ class PelaporanController extends Controller
 
         $filteredData = $query->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
-        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+        // Generate PDF using Snappy
+        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
+            ->setPaper('a4', 'landscape')
+            ->setOption('enable-local-file-access', true); // Add this line
+
+        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
+
+    // public function PDFtidakPernahMenjawabPN(Request $request)
+    // {
+    //     $pegawai = Auth::user();
+    //     $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
+    //     $sixMonthsAgo = Carbon::now()->subMonths(6);
+
+    //     $query = DB::table('klien as u')
+    //             ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
+    //             ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
+    //             ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
+        
+    //     if ($request->filled('aadk_daerah_tpm')) {
+    //         $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
+    //     }
+
+    //     $filteredData = $query->get();
+
+    //     $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
+    //     return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+    // }
 
     
     // PEGAWAI DAERAH
@@ -1537,8 +1570,12 @@ class PelaporanController extends Controller
 
         $filteredData = $query->get();
 
-        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
-        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
+        // Generate PDF using Snappy
+        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
+            ->setPaper('a4', 'landscape')
+            ->setOption('enable-local-file-access', true); // Add this line
+
+        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
 
