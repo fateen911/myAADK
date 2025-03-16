@@ -63,11 +63,6 @@
 
     <div class="title">SENARAI KLIEN TIDAK PERNAH MENJAWAB SOAL SELIDIK MODAL KEPULIHAN</div>
 
-    @php
-        $daerahList = DB::table('senarai_daerah_pejabat')->pluck('daerah', 'kod');
-        $negeriList = DB::table('senarai_negeri_pejabat')->pluck('negeri', 'negeri_id');
-    @endphp
-
     <table class="table">
         <thead>
             <tr>
@@ -80,12 +75,16 @@
         </thead>
         <tbody>
             @foreach($filteredData as $index => $klien)
+                @php
+                    $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $klien->daerah_pejabat)->value('daerah');
+                    $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $klien->negeri_pejabat)->value('negeri');
+                @endphp
                 <tr>
                     <td style="text-align: center;">{{ $index + 1 }}.</td>
                     <td>{{ $klien->nama }}</td>
                     <td style="text-align: center;">{{ $klien->no_kp }}</td>
-                    <td style="text-align: center;">{{ $negeriList[$klien->negeri_pejabat] ?? '-' }}</td>
-                    <td style="text-align: center;">{{ $daerahList[$klien->daerah_pejabat] ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $daerah ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $negeri ?? '-' }}</td>
                 </tr>
             @endforeach
         </tbody>

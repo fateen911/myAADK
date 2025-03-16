@@ -485,7 +485,7 @@ class PelaporanController extends Controller
         }
 
         if ($request->filled('aadk_negeri_tm6')) {
-            $query->whereDate('u.negeri_pejabat', $request->aadk_negeri_tm6);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_tm6);
         }
         
         if ($request->filled('aadk_daerah_tm6')) {
@@ -596,8 +596,8 @@ class PelaporanController extends Controller
 
     public function PDFtidakPernahMenjawabPB(Request $request)
     {
-        ini_set('memory_limit', '512M');
-        ini_set('max_execution_time', 300);
+        ini_set('memory_limit', '1024M'); // Increase to 1GB
+        ini_set('max_execution_time', 600); // Increase execution time to 10 minutes
     
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
@@ -606,7 +606,7 @@ class PelaporanController extends Controller
                 ->whereNull('kk.klien_id'); // No records in keputusan_kepulihan_klien
 
         if ($request->filled('aadk_negeri_tpm')) {
-            $query->whereDate('u.negeri_pejabat', '<=', $request->aadk_negeri_tpm);
+            $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
         }
         
         if ($request->filled('aadk_daerah_tpm')) {
