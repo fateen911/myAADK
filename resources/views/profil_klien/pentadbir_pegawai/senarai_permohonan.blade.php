@@ -114,7 +114,7 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable"  data-url="{{ route('permohonan-selesai.' . auth()->user()->tahap_pengguna) }}">
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th style="width:25% !important;">Nama</th>
@@ -126,7 +126,15 @@
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($permohonanSelesai as $user1)
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
+                                        {{-- @foreach ($permohonanSelesai as $user1)
                                             @php
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user1['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user1['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
@@ -149,7 +157,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -167,7 +175,7 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable"  data-url="{{ route('permohonan-belum-selesai.' . auth()->user()->tahap_pengguna) }}">
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
@@ -178,7 +186,14 @@
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($permohonanBelumSelesai as $user2)
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
+                                        {{-- @foreach ($permohonanBelumSelesai as $user2)
                                             @php
                                                 $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user2['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
                                                 $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user2['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
@@ -199,7 +214,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -223,20 +238,43 @@
 	<!--end::Javascript-->
     
     <script>
-        $('#sortTable1').DataTable({
-                ordering: true,
-                order: [],
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
+        $(document).ready(function () {
+            // Load DataTable for Selesai
+            $('#sortTable1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: $('#sortTable1').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', name: 'nama' },
+                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
+                    { data: 'daerah_pejabat', name: 'daerah_pejabat', className: 'text-center' },
+                    { data: 'negeri_pejabat', name: 'negeri_pejabat', className: 'text-center' },
+                    { data: 'pengemaskini', name: 'pengemaskini', className: 'text-center' },
+                    { data: 'tindakan', name: 'tindakan', orderable: false, searchable: false, className: 'text-center' }
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             });
-        
-        $('#sortTable2').DataTable({
-            ordering: true,
-            order: [],
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
+
+            // Load DataTable for Belum Selesai
+            $('#sortTable2').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: $('#sortTable2').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', name: 'nama' },
+                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
+                    { data: 'daerah_pejabat', name: 'daerah_pejabat', className: 'text-center' },
+                    { data: 'negeri_pejabat', name: 'negeri_pejabat', className: 'text-center' },
+                    { data: 'tindakan', name: 'tindakan', orderable: false, searchable: false, className: 'text-center' }
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            });
         });
     </script>
 @endsection

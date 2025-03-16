@@ -31,6 +31,7 @@ use App\Models\WarisKlienUpdateRequest;
 use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\TidakKerja;
 use App\Models\SkorModal;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProfilKlienController extends Controller
 {
@@ -47,41 +48,81 @@ class ProfilKlienController extends Controller
     // PENTADBIR
     public function senaraiKlien()
     {
+        return view('profil_klien.pentadbir_pegawai.senarai');
+    }
+
+    public function klienTelahKemaskiniProfil()
+    {
         // Clients who have updated their profile either by client or pegawai
-        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
+        $telahKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', function($join) {
                                     $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
                                         ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
                                 })
                                 ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
                                 ->whereNotNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                    'users.name as pengemaskini_name',
+                                )
                                 ->get();
 
+        // Use DataTables for proper pagination
+        return DataTables::of($telahKemaskini)->make(true);
+    }
+
+    public function klienBelumKemaskiniProfil()
+    {
         // Clients who have never updated their profile
-        $belumKemaskini = Klien::select('klien.*')
+        $belumKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
                                 ->whereNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                )
                                 ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
+        // Use DataTables for proper pagination
+        return DataTables::of($belumKemaskini)->make(true);
     }
 
     public function senaraiPermohonanKlien()
     {
-        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
-                                        ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
-                                        ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
-                                        ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
-                                        ->select('klien.*') // Fetch all columns of the klien table
-                                        ->where(function ($query) {
-                                            $query->where('klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('pekerjaan_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('keluarga_klien_update_requests.status', '=', 'Kemaskini')
-                                                ->orWhere('waris_klien_update_requests.status', '=', 'Kemaskini');
-                                        })
-                                        ->distinct()
-                                        ->get(); // Fetch the result as a collection
+        return view('profil_klien.pentadbir_pegawai.senarai_permohonan');
+    }
 
+    public function permohonanKlienBelumSelesai(Request $request)
+    {
+        $permohonanBelumSelesai = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
+                                ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
+                                ->leftJoin('keluarga_klien_update_requests', 'klien.id', '=', 'keluarga_klien_update_requests.klien_id')
+                                ->leftJoin('waris_klien_update_requests', 'klien.id', '=', 'waris_klien_update_requests.klien_id')
+                                ->where(function ($query) {
+                                    $query->where('klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('pekerjaan_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('keluarga_klien_update_requests.status', 'Kemaskini')
+                                        ->orWhere('waris_klien_update_requests.status', 'Kemaskini');
+                                })
+                                ->distinct()
+                                ->select('klien.id', 'klien.nama', 'klien.no_kp', 'klien.daerah_pejabat', 'klien.negeri_pejabat')
+                                ->get();
+
+        return DataTables::of($permohonanBelumSelesai)
+            ->addColumn('tindakan', function ($row) {
+                return '<a href="' . url('pentadbir-pegawai/maklumat-klien/' . $row->id) . '" class="btn btn-sm btn-primary">Lihat</a>';
+            })
+            ->rawColumns(['tindakan'])
+            ->make(true);
+    }
+
+    public function permohonanKlienSelesai(Request $request)
+    {
         // Find clients with status Kemaskini
         $clientsWithKemaskini = Klien::leftJoin('klien_update_requests', 'klien.id', '=', 'klien_update_requests.klien_id')
                                 ->leftJoin('pekerjaan_klien_update_requests', 'klien.id', '=', 'pekerjaan_klien_update_requests.klien_id')
@@ -98,49 +139,80 @@ class ProfilKlienController extends Controller
 
         // Count clients who are not in the above list and meet the criteria for being 'selesai'
         $permohonanSelesai = Klien::join('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id') // Join the 'sejarah_profil_klien' table
-                                    ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
-                                    ->where(function ($query) {
-                                        $query->whereIn('klien.id', function ($subQuery) {
-                                            $subQuery->select('klien_id')
-                                            ->from('klien_update_requests')
-                                            ->whereIn('status', ['Lulus', 'Ditolak'])
-                                            ->unionAll(
-                                                PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            )
-                                            ->unionAll(
-                                                WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
-                                            );
-                                        });
-                                    })
-                                    ->distinct()
-                                    ->get();
+                            ->whereNotIn('klien.id', $clientsWithKemaskini) // Exclude clients with 'Kemaskini'
+                            ->where(function ($query) {
+                                $query->whereIn('klien.id', function ($subQuery) {
+                                    $subQuery->select('klien_id')
+                                    ->from('klien_update_requests')
+                                    ->whereIn('status', ['Lulus', 'Ditolak'])
+                                    ->unionAll(
+                                        PekerjaanKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        KeluargaKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    )
+                                    ->unionAll(
+                                        WarisKlienUpdateRequest::select('klien_id')->whereIn('status', ['Lulus', 'Ditolak'])
+                                    );
+                                });
+                            })
+                            ->distinct()
+                            ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai'));
+        return DataTables::of($permohonanSelesai)
+            ->addColumn('tindakan', function ($row) {
+                return '<a href="' . url('pentadbir-pegawai/maklumat-klien/' . $row->id) . '" class="btn btn-sm btn-primary">Lihat</a>';
+            })
+            ->rawColumns(['tindakan'])
+            ->make(true);
     }
+
 
     // PEGAWAI BRPP
     public function senaraiKlienBrpp()
     {
-        // Clients who have updated their profile (sedangKemaskini)
-        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
+        return view('profil_klien.pentadbir_pegawai.senarai');
+    }
+
+    public function klienTelahKemaskiniProfilPB()
+    {
+        // Clients who have updated their profile either by client or pegawai
+        $telahKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', function($join) {
                                     $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
                                         ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
                                 })
                                 ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
                                 ->whereNotNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                    'users.name as pengemaskini_name',
+                                )
                                 ->get();
 
-        // Clients who have never updated their profile (belumKemaskini)
-        $belumKemaskini = Klien::select('klien.*')
+        // Use DataTables for proper pagination
+        return DataTables::of($telahKemaskini)->make(true);
+    }
+
+    public function klienBelumKemaskiniPB()
+    {
+        // Clients who have never updated their profile
+        $belumKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
                                 ->whereNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                )
                                 ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
+        // Use DataTables for proper pagination
+        return DataTables::of($belumKemaskini)->make(true);
     }
 
     public function senaraiPermohonanKlienBrpp()
@@ -201,28 +273,56 @@ class ProfilKlienController extends Controller
     // PEGAWAI NEGERI
     public function senaraiKlienNegeri()
     {
+        return view('profil_klien.pentadbir_pegawai.senarai');
+    }
+
+    public function klienTelahKemaskiniProfilPN()
+    {
         $pegawai = Auth::user();
         $pegawaiNegeri = Pegawai::where('users_id', $pegawai->id)->first();
 
-        // Clients who have updated their profile (sedangKemaskini)
-        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
+        // Clients who have updated their profile either by client or pegawai
+        $telahKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', function($join) {
                                     $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
                                         ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
                                 })
                                 ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
                                 ->whereNotNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                    'users.name as pengemaskini_name',
+                                )
                                 ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                 ->get();
 
-        // Clients who have never updated their profile (belumKemaskini)
-        $belumKemaskini = Klien::select('klien.*')
+        // Use DataTables for proper pagination
+        return DataTables::of($telahKemaskini)->make(true);
+    }
+
+    public function klienBelumKemaskiniProfilPN()
+    {
+        $pegawai = Auth::user();
+        $pegawaiNegeri = Pegawai::where('users_id', $pegawai->id)->first();
+
+        // Clients who have never updated their profile
+        $belumKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
                                 ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
                                 ->whereNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                )
                                 ->where('klien.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                 ->get();
 
-        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini'));
+        // Use DataTables for proper pagination
+        return DataTables::of($belumKemaskini)->make(true);
     }
 
     public function senaraiPermohonanKlienNegeri()
@@ -292,26 +392,6 @@ class ProfilKlienController extends Controller
         $pegawai = Auth::user();
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
 
-        // Clients who have updated their profile (sedangKemaskini)
-        $sedangKemaskini = Klien::select('klien.*', 'users.name as pengemaskini_name')
-                                ->leftJoin('sejarah_profil_klien', function($join) {
-                                    $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
-                                        ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
-                                })
-                                ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
-                                ->whereNotNull('sejarah_profil_klien.klien_id')
-                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                ->get();
-
-        // Clients who have never updated their profile (belumKemaskini)
-        $belumKemaskini = Klien::select('klien.*')
-                                ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
-                                ->whereNull('sejarah_profil_klien.klien_id')
-                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
-                                ->get();
-
         // Fetch notifications where daerah_bertugas matches daerah_aadk_lama (for message1)
         $notificationsLama = NotifikasiPegawaiDaerah::where('daerah_aadk_lama', $pegawaiDaerah->daerah_bertugas)
         ->select('id', 'message1', 'created_at', 'is_read1')
@@ -337,7 +417,58 @@ class ProfilKlienController extends Controller
                             });
                         })->count();
 
-        return view('profil_klien.pentadbir_pegawai.senarai', compact('sedangKemaskini', 'belumKemaskini', 'notifications', 'unreadCountPD'));
+        return view('profil_klien.pentadbir_pegawai.senarai', compact('notifications', 'unreadCountPD'));
+    }
+
+    public function klienTelahKemaskiniProfilPD()
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+        // Clients who have updated their profile either by client or pegawai
+        $telahKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->leftJoin('sejarah_profil_klien', function($join) {
+                                    $join->on('klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                        ->whereRaw('sejarah_profil_klien.id = (SELECT MAX(id) FROM sejarah_profil_klien WHERE klien_id = klien.id)');
+                                })
+                                ->leftJoin('users', 'sejarah_profil_klien.pengemaskini', '=', 'users.id')
+                                ->whereNotNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                    'users.name as pengemaskini_name',
+                                )
+                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                ->get();
+
+        // Use DataTables for proper pagination
+        return DataTables::of($telahKemaskini)->make(true);
+    }
+
+    public function klienBelumKemaskiniProfilPD()
+    {
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
+
+        // Clients who have never updated their profile
+        $belumKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
+                                ->join('senarai_daerah_pejabat as d', 'klien.daerah_pejabat', '=', 'd.kod')
+                                ->leftJoin('sejarah_profil_klien', 'klien.id', '=', 'sejarah_profil_klien.klien_id')
+                                ->whereNull('sejarah_profil_klien.klien_id')
+                                ->select(
+                                    'klien.*',
+                                    'n.negeri',
+                                    'd.daerah',
+                                )
+                                ->where('klien.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
+                                ->where('klien.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
+                                ->get();
+
+        // Use DataTables for proper pagination
+        return DataTables::of($belumKemaskini)->make(true);
     }
 
     public function senaraiPermohonanKlienDaerah()
@@ -429,7 +560,7 @@ class ProfilKlienController extends Controller
         return view('profil_klien.pentadbir_pegawai.senarai_permohonan', compact('permohonanBelumSelesai', 'permohonanSelesai', 'notifications', 'unreadCountPD'));
     }
 
-
+    // PEGAWAI/PENTADBIR - DOWNLOAD PROFIL KLIEN
     public function muatTurunProfilKlien($id)
     {
         $klien = Klien::where('id', $id)->first();
@@ -456,6 +587,7 @@ class ProfilKlienController extends Controller
         return $pdf->stream($klien->no_kp . '-profil-peribadi.pdf');
     }
 
+    // PEGAWAI/PENTADBIR - VIEW PROFIL KLIEN
     public function maklumatKlien($id)
     {
         $negeri = Negeri::all()->sortBy('negeri');

@@ -157,15 +157,36 @@ Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class,
 Route::get('/modal/pegawai-daerah/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlienDaerah'])->name('modal-daerah-daftar-klien');
 Route::post('/pegawai-daerah/daftar/klien', [DaftarPenggunaController::class, 'pegawaiDaftarKlien'])->name('pegawai-daftar-klien');
 
+
+// PENTADBIR & PEGAWAI - PENGURUSAN PROFIL KLIEN
+Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+
 // PENTADBIR - PENGURUSAN PROFIL KLIEN
 Route::get('/pentadbir/senarai-klien',[ProfilKlienController::class, 'senaraiKlien'])->middleware('auth')->name('senarai-klien');
+Route::get('/pentadbir/senarai-klien/telah-kemaskini/profil',[ProfilKlienController::class, 'klienTelahKemaskiniProfil'])->middleware('auth')->name('telah-kemaskini-profil.1');
+Route::get('/pentadbir/senarai-klien/belum-kemaskini/profil',[ProfilKlienController::class, 'klienBelumKemaskiniProfil'])->middleware('auth')->name('belum-kemaskini-profil.1');
+
+// PEGAWAI BRPP - PENGURUSAN PROFIL KLIEN
 Route::get('/pegawai-brpp/senarai-klien',[ProfilKlienController::class, 'senaraiKlienBrpp'])->middleware('auth')->name('senarai-klien-brpp');
+Route::get('/pegawai-brpp/senarai-klien/telah-kemaskini/profil',[ProfilKlienController::class, 'klienTelahKemaskiniProfilPB'])->middleware('auth')->name('telah-kemaskini-profil.3');
+Route::get('/pegawai-brpp/senarai-klien/belum-kemaskini/profil',[ProfilKlienController::class, 'klienBelumKemaskiniProfilPB'])->middleware('auth')->name('belum-kemaskini-profil.3');
+
+// PEGAWAI NEGERI - PENGURUSAN PROFIL KLIEN
 Route::get('/pegawai-negeri/senarai-klien',[ProfilKlienController::class, 'senaraiKlienNegeri'])->middleware('auth')->name('senarai-klien-negeri');
+Route::get('/pegawai-negeri/senarai-klien/telah-kemaskini/profil',[ProfilKlienController::class, 'klienTelahKemaskiniProfilPN'])->middleware('auth')->name('telah-kemaskini-profil.4');
+Route::get('/pegawai-negeri/senarai-klien/belum-kemaskini/profil',[ProfilKlienController::class, 'klienBelumKemaskiniProfilPN'])->middleware('auth')->name('belum-kemaskini-profil.4');
+
+// PEGAWAI DAERAH - PENGURUSAN PROFIL KLIEN
 Route::get('/pegawai-daerah/senarai-klien',[ProfilKlienController::class, 'senaraiKlienDaerah'])->middleware('auth')->name('senarai-klien-daerah');
-Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+Route::get('/pegawai-daerah/senarai-klien/telah-kemaskini/profil',[ProfilKlienController::class, 'klienTelahKemaskiniProfilPD'])->middleware('auth')->name('telah-kemaskini-profil.5');
+Route::get('/pegawai-daerah/senarai-klien/belum-kemaskini/profil',[ProfilKlienController::class, 'klienBelumKemaskiniProfilPD'])->middleware('auth')->name('belum-kemaskini-profil.5');
+
 
 // PENTADBIR - PENGURUSAN PERMOHONAN KEMASKINI PROFIL KLIEN
 Route::get('/pentadbir/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlien'])->middleware('auth')->name('senarai-permohonan-klien');
+Route::get('/pentadbir/permohonan/belum-selesai',[ProfilKlienController::class, 'permohonanKlienBelumSelesai'])->middleware('auth')->name('permohonan-belum-selesai.1');
+Route::get('/pentadbir/permohonan/selesai',[ProfilKlienController::class, 'permohonanKlienSelesai'])->middleware('auth')->name('permohonan-selesai.1');
+
 Route::get('/pegawai-brpp/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienBrpp'])->middleware('auth')->name('senarai-permohonan-klien-brpp');
 Route::get('/pegawai-negeri/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienNegeri'])->middleware('auth')->name('senarai-permohonan-klien-negeri');
 Route::get('/pegawai-daerah/senarai-permohonan-klien',[ProfilKlienController::class, 'senaraiPermohonanKlienDaerah'])->middleware('auth')->name('senarai-permohonan-klien-daerah');

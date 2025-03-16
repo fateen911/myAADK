@@ -139,43 +139,26 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable"  data-url="{{ route('telah-kemaskini-profil.' . auth()->user()->tahap_pengguna) }}">
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th style="width:25% !important;">Nama</th>
                                             <th style="width:15% !important; text-align: center;">No. Kad Pengenalan</th>
-                                            <th style="width:15% !important; text-align: center;">Pejabat AADK Daerah</th>
                                             <th style="width:15% !important; text-align: center;">AADK Negeri</th>
+                                            <th style="width:15% !important; text-align: center;">AADK Daerah</th>
                                             <th style="width:15% !important; text-align: center;">Pengemaskini</th> 
                                             <th style="width:15% !important; text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($sedangKemaskini as $user1)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user1['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user1['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
-                                            <tr>
-                                                <td style="width:25% !important;"><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">{{$user1->nama}}</a></td>
-                                                <td style="width:15% !important; text-align: center;">{{ $user1->no_kp }}</td>
-                                                <td style="width:15% !important; text-align: center;">{{ $daerah }}</td>
-                                                <td style="width:15% !important; text-align: center;">{{ $negeri }}</td>
-                                                <td style="width:15% !important; text-align: center;">{{ $user1->pengemaskini_name ?? 'N/A' }}</td>
-                                                <td style="width:15% !important; text-align: center;">
-                                                    <!-- Pencil icon for kemaskini -->
-                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user1['id']) }}">
-                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
-                                                    </a>
-                                
-                                                    <!-- PDF icon for muat turun -->
-                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user1['id']) }}">
-                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -193,39 +176,24 @@
                             <!--begin::Card body-->
                             <div class="body">
                                 <!--begin::Table-->
-                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable">
+                                <table id="sortTable2" class="table table-striped table-hover dataTable js-exportable" data-url="{{ route('belum-kemaskini-profil.' . auth()->user()->tahap_pengguna)}}" >
                                     <thead>
                                         <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
                                             <th class="min-w-150px">Nama</th>
                                             <th class="min-w-70px" style="text-align: center;">No. Kad Pengenalan</th>
-                                            <th class="min-w-100px" style="text-align: center;">Pejabat AADK Daerah</th>
                                             <th class="min-w-100px" style="text-align: center;">AADK Negeri</th>
+                                            <th class="min-w-100px" style="text-align: center;">AADK Daerah</th>
                                             <th class="min-w-30px" style="text-align: center;">Tindakan</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
-                                        @foreach ($belumKemaskini as $user2)
-                                            @php
-                                                $daerah = DB::table('senarai_daerah_pejabat')->where('kod', $user2['daerah_pejabat'])->value('senarai_daerah_pejabat.daerah');
-                                                $negeri = DB::table('senarai_negeri_pejabat')->where('negeri_id', $user2['negeri_pejabat'])->value('senarai_negeri_pejabat.negeri');
-                                            @endphp
-
-                                            <tr>
-                                                <td><a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}" target="_blank">{{$user2->nama}}</a></td>
-                                                <td style="text-align: center;">{{ $user2->no_kp }}</td>
-                                                <td style="text-align: center;">{{ $daerah }}</td>
-                                                <td style="text-align: center;">{{ $negeri }}</td>
-                                                <td style="text-align: center;">
-                                                    <a href="{{ url('pentadbir-pegawai/maklumat-klien/'. $user2['id']) }}">
-                                                        <i class="fas fa-pencil" style="color:blueviolet; padding-right:28px; font-size:18px;"></i>
-                                                    </a>
-                                
-                                                    <a href="{{ url('muat-turun/PDF/profil-klien/'. $user2['id']) }}">
-                                                        <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                        <tr>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                            <td>Tiada</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!--end::Table-->
@@ -247,22 +215,68 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<!--end::Javascript-->
-    
+   
+
     <script>
-        $('#sortTable1').DataTable({
-                ordering: true,
-                order: [],
-                language: {
-                    url: "/assets/lang/Malay.json"
-                }
+        $(document).ready(function() {
+            // Initialize DataTable for "Telah Dikemaskini" clients
+            $('#sortTable1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: $('#sortTable1').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', name: 'nama', render: function(data, type, row) {
+                        return `<a href="/pentadbir-pegawai/maklumat-klien/${row.id}">${data}</a>`;
+                    }},
+                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
+                    { data: 'negeri', name: 'negeri_pejabat', className: 'text-center' },
+                    { data: 'daerah', name: 'daerah_pejabat', className: 'text-center' },
+                    { data: 'pengemaskini_name', name: 'pengemaskini_name', className: 'text-center', defaultContent: 'N/A' },
+                    { data: 'id', name: 'id', className: 'text-center', orderable: false, searchable: false, render: function(data, type, row) {
+                        return `
+                            <a href="/pentadbir-pegawai/maklumat-klien/${data}">
+                                <i class="fas fa-pencil" style="color:blueviolet; padding-right:18px; font-size:18px;"></i>
+                            </a>
+                            <a href="/muat-turun/PDF/profil-klien/${data}">
+                                <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
+                            </a>
+                        `;
+                    }}
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             });
-        
-        $('#sortTable2').DataTable({
-            ordering: true,
-            order: [],
-            language: {
-                url: "/assets/lang/Malay.json"
-            }
+
+            // Initialize DataTable for "Belum Dikemaskini" clients
+            $('#sortTable2').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: $('#sortTable2').data('url'), // Get route URL from the table's data attribute
+                columns: [
+                    { data: 'nama', name: 'nama', render: function(data, type, row) {
+                        return `<a href="/pentadbir-pegawai/maklumat-klien/${row.id}" target="_blank">${data}</a>`;
+                    }},
+                    { data: 'no_kp', name: 'no_kp', className: 'text-center' },
+                    { data: 'negeri', name: 'negeri_pejabat', className: 'text-center' },
+                    { data: 'daerah', name: 'daerah_pejabat', className: 'text-center' },
+                    { data: 'id', name: 'id', className: 'text-center', orderable: false, searchable: false, render: function(data, type, row) {
+                        return `
+                            <a href="/pentadbir-pegawai/maklumat-klien/${data}">
+                                <i class="fas fa-pencil" style="color:blueviolet; padding-right:28px; font-size:18px;"></i>
+                            </a>
+                            <a href="/muat-turun/PDF/profil-klien/${data}">
+                                <i class="fas fa-file-pdf" style="color:blueviolet; font-size:18px;"></i>
+                            </a>
+                        `;
+                    }}
+                ],
+                language: { url: "/assets/lang/Malay.json" },
+                dom: '<"row"<"col-sm-12 col-md-6 mt-2 page"l><"col-sm-12 col-md-6 mt-2"f>>' +
+                    '<"row"<"col-sm-12 my-0"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            });
         });
     </script>
 @endsection
