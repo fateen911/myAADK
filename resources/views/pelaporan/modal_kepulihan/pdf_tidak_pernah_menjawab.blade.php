@@ -31,17 +31,12 @@
             background-color: #2d2d5d !important; 
             color: white; 
         }
-        /* Prevent row break */
-        tr { 
-            page-break-inside: avoid; 
-            page-break-after: auto; 
+        .table tr {
+            page-break-inside: avoid !important; /* Prevent breaking rows */
         }
-        /* Ensure headers repeat on each page */
-        thead { 
-            display: table-header-group; 
-        }
-        tfoot { 
-            display: table-row-group; 
+        .table td, .table th {
+            page-break-inside: avoid !important;
+            page-break-before: auto;
         }
         .header {
             text-align: center;
@@ -50,6 +45,9 @@
         .header img {
             width: 100px;
             height: auto;
+        }
+        .page-break {
+            page-break-before: always;
         }
     </style>
 </head>
@@ -86,6 +84,10 @@
                     <td style="text-align: center;">{{ $daerah ?? '-' }}</td>
                     <td style="text-align: center;">{{ $negeri ?? '-' }}</td>
                 </tr>
+
+                @if(($index + 1) % 30 == 0)  <!-- Insert a page break every 30 rows -->
+                    <tr class="page-break"></tr>
+                @endif
             @endforeach
         </tbody>
     </table>
