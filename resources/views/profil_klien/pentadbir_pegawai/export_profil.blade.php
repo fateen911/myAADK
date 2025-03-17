@@ -644,7 +644,7 @@
                 @elseif ($kepulihan->tahap_kepulihan_id == 2)
                     <badge class="badge text-white" style="background-color: darkorange; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                 @elseif ($kepulihan->tahap_kepulihan_id == 3)
-                    <badge class="badge text-white bg-warning" style="padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
+                    <badge class="badge text-white" style="background-color: #ffc107; padding: 5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                 @else
                     <badge class="badge text-white" style="background-color: green; padding:5px;">{{ $tahap_kepulihan }} (SKOR: {{ number_format($kepulihan->skor, 2) }})</badge>
                 @endif
