@@ -1863,7 +1863,6 @@ class ProfilKlienController extends Controller
         $butiranKlien = Klien::leftJoin('pekerjaan_klien', 'klien.id', '=', 'pekerjaan_klien.klien_id')
                             ->leftJoin('waris_klien', 'klien.id', '=', 'waris_klien.klien_id')
                             ->leftJoin('keluarga_klien', 'klien.id', '=', 'keluarga_klien.klien_id')
-                            ->leftJoin('rawatan_klien', 'klien.id', '=', 'rawatan_klien.klien_id')
                             ->where('klien.id', $clientId)
                             ->first();
 
@@ -1908,6 +1907,7 @@ class ProfilKlienController extends Controller
 
     public function KlienRequestUpdate(Request $request)
     {
+        // dd($request->all());
         try {
             // Validation rules for fields that users can update
             $validatedData = $request->validate([
@@ -1918,6 +1918,7 @@ class ProfilKlienController extends Controller
                 'negeri'           => 'required|string|max:255',
                 'poskod'           => 'required|string|max:5',
                 'tahap_pendidikan' => 'required|string|max:255',
+                'penyakit'         => 'required|string|max:255',
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
@@ -1933,7 +1934,6 @@ class ProfilKlienController extends Controller
             'jantina',
             'agama',
             'bangsa',
-            'penyakit',
             'status_oku',
             'skor_ccri'
         ])->toArray();

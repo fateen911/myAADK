@@ -260,15 +260,18 @@
                                     <div class="col-md-7">
                                         <!--begin::Input-->
                                         <span class="fs-6 form-control-plaintext">
-                                            {{$butiranKlien->skor_ccri}}
-                                            @if($butiranKlien->skor_ccri < 40)
-                                                (TIDAK MEMUASKAN)
-                                            @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
-                                                (MEMUASKAN)
-                                            @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
-                                                (BAIK)
-                                            @elseif($butiranKlien->skor_ccri >= 80)
-                                                (CEMERLANG)
+                                            @if($butiranKlien->skor_ccri != NULL)
+                                                {{$butiranKlien->skor_ccri}}
+
+                                                @if($butiranKlien->skor_ccri > 0 && $butiranKlien->skor_ccri < 40)
+                                                    (TIDAK MEMUASKAN)
+                                                @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
+                                                    (MEMUASKAN)
+                                                @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
+                                                    (BAIK)
+                                                @elseif($butiranKlien->skor_ccri >= 80)
+                                                    (CEMERLANG)
+                                                @endif
                                             @endif
                                         </span>
                                         <!--end::Input-->
@@ -483,17 +486,6 @@
                                                 </div>
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
-                                                        <label class="fs-6 fw-semibold form-label mt-3">Penyakit</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        @php
-                                                            $penyakitKlien = DB::table('senarai_penyakit')->where('id', $butiranKlien->penyakit)->value('senarai_penyakit.penyakit');
-                                                        @endphp
-                                                        <span id="penyakit" class="fs-6 form-control-plaintext">{{$penyakitKlien}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row fv-row">
-                                                    <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">Status Orang Kurang Upaya (OKU)</label>
                                                     </div>
                                                     <div class="col-md-6">
@@ -506,15 +498,18 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <span id="skor_ccri" class="fs-6 form-control-plaintext">
-                                                            {{$butiranKlien->skor_ccri}}
-                                                            @if($butiranKlien->skor_ccri < 40)
-                                                                (TIDAK MEMUASKAN)
-                                                            @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
-                                                                (MEMUASKAN)
-                                                            @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
-                                                                (BAIK)
-                                                            @elseif($butiranKlien->skor_ccri >= 80)
-                                                                (CEMERLANG)
+                                                            @if($butiranKlien->skor_ccri != NULL)
+                                                                {{$butiranKlien->skor_ccri}}
+
+                                                                @if($butiranKlien->skor_ccri > 0 && $butiranKlien->skor_ccri < 40)
+                                                                    (TIDAK MEMUASKAN)
+                                                                @elseif($butiranKlien->skor_ccri >= 40 && $butiranKlien->skor_ccri <= 60)
+                                                                    (MEMUASKAN)
+                                                                @elseif($butiranKlien->skor_ccri >= 61 && $butiranKlien->skor_ccri <= 79)
+                                                                    (BAIK)
+                                                                @elseif($butiranKlien->skor_ccri >= 80)
+                                                                    (CEMERLANG)
+                                                                @endif
                                                             @endif
                                                         </span>
                                                     </div>
@@ -570,17 +565,12 @@
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Negeri</label>
                                                     </div>
                                                     <div class="col-md-8">
-                                                        {{-- <select name="tahap" id="pilihtahap" aria-label="Pilih" data-control="select2" data-placeholder="Pilih" data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold"> --}}
                                                         <select class="form-select form-select-solid custom-select" id="negeri" name="negeri" data-control="select2">
+                                                            <option>Pilih Negeri</option>
                                                             @foreach ($negeri as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                                             @endforeach
                                                         </select>
-                                                        {{-- <select class="form-select form-select-solid custom-select" id="negeri" name="negeri" data-control="select2" data-dropdown-parent="#requestPeribadiKlien" aria-label="Pilih">
-                                                            @foreach ($negeri as $item)
-                                                                <option value="{{ $item->id }}" {{ $butiranKlien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
-                                                            @endforeach
-                                                        </select> --}}
                                                     </div>
                                                 </div>
                                                 <div class="row fv-row mb-7">
@@ -589,6 +579,7 @@
                                                     </div>
                                                     <div class="col-md-8">
                                                         <select class="form-select form-select-solid custom-select" id="daerah" name="daerah" data-control="select2">
+                                                            <option>Pilih Daerah</option>
                                                             @foreach ($daerah as $item)
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->daerah == $item->id ? 'selected' : '' }} data-negeri-id="{{ $item->negeri_id }}">{{ $item->daerah }}</option>
                                                             @endforeach
@@ -605,6 +596,14 @@
                                                                 <option value="{{ $item->id }}" {{ $butiranKlien->tahap_pendidikan == $item->id ? 'selected' : '' }}>{{ $item->pendidikan }}</option>
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row fv-row mb-7">
+                                                    <div class="col-md-4 text-md-start">
+                                                        <label class="fs-6 fw-semibold form-label mt-3 required">Penyakit</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" id="penyakit" name="penyakit" value="{{ $butiranKlien->penyakit }}" />
                                                     </div>
                                                 </div>
 
@@ -3119,7 +3118,18 @@
                 negeri: "{{ $butiranKlien->negeri }}",
                 daerah: "{{ $butiranKlien->daerah }}",
                 tahap_pendidikan: "{{ $butiranKlien->tahap_pendidikan }}",
+                penyakit: "{{ $butiranKlien->penyakit }}",
             };
+
+            let negeri = document.getElementById('negeri') ? document.getElementById('negeri').value : '';
+            if (negeri === 'Pilih Negeri') {
+                negeri = null;  // Treat "Pilih Alasan" as null
+            }
+
+            let daerah = document.getElementById('daerah') ? document.getElementById('daerah').value : '';
+            if (daerah === 'Pilih Daerah') {
+                daerah = null;  // Treat "Pilih Alasan" as null
+            }
     
             // Get current data (input values from form)
             const currentDataKlien = {
@@ -3127,9 +3137,10 @@
                 emel: document.getElementById('emel').value,
                 alamat_rumah: document.getElementById('alamat_rumah').value,
                 poskod: document.getElementById('poskod').value,
-                negeri: document.getElementById('negeri').value,
-                daerah: document.getElementById('daerah').value,
+                negeri: negeri,
+                daerah: daerah,
                 tahap_pendidikan: document.getElementById('tahap_pendidikan').value,
+                penyakit: document.getElementById('penyakit').value,
             };
     
             // Handle poskod as a string for comparison, but check if the field is defined
@@ -3139,6 +3150,12 @@
             if (currentDataKlien.poskod !== null && currentDataKlien.poskod !== undefined) {
                 currentDataKlien.poskod = currentDataKlien.poskod.toString();
             }
+
+            Object.keys(currentDataKlien).forEach(key => {
+                if (currentDataKlien[key] && typeof currentDataKlien[key] === "string" && currentDataKlien[key].startsWith("Pilih")) {
+                    currentDataKlien[key] = null;
+                }
+            });
     
             let isChanged = false;
     
