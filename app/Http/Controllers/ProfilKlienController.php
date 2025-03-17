@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Daerah;
+use App\Models\KategoriOku;
 use App\Models\KeluargaKlien;
 use App\Models\Negeri;
 use App\Models\Klien;
@@ -671,7 +672,7 @@ class ProfilKlienController extends Controller
         $daerahKerjaPasangan = Daerah::all()->sortBy('daerah');
         $tahapPendidikan = Pendidikan::all();
         $pendapatan = Pendapatan::all();
-        $penyakit = Penyakit::all();
+        $oku = KategoriOku::all();
         $bidangKerja = BidangPekerjaan::all();
         $namaKerja = NamaPekerjaan::all();
         $majikan = NamaMajikan::all();
@@ -751,7 +752,7 @@ class ProfilKlienController extends Controller
                                                                         'pekerjaan','requestPekerjaan', 'updateRequestPekerjaan','requestedDataPekerjaan',
                                                                         'waris', 'requestWaris', 'updateRequestBapa','requestedDataBapa','statusBapa','updateRequestIbu','requestedDataIbu','statusIbu','updateRequestPenjaga','requestedDataPenjaga','statusPenjaga',
                                                                         'pasangan', 'requestPasangan', 'updateRequestPasangan','requestedDataPasangan',
-                                                                        'rawatan','pendapatan','tahapPendidikan','penyakit','bidangKerja','namaKerja','majikan','alasanTidakKerja',
+                                                                        'rawatan','pendapatan','tahapPendidikan','oku','bidangKerja','namaKerja','majikan','alasanTidakKerja',
                                                                         'notifications', 'unreadCountPD'));
     }
 
@@ -1429,7 +1430,7 @@ class ProfilKlienController extends Controller
                 'daerah_klien'              => 'required|string|max:255',
                 'negeri_klien'              => 'required|string|max:255',
                 'tahap_pendidikan'          => 'required|string|max:255',
-                'penyakit'   => 'required|string|max:255',
+                'penyakit'                  => 'required|string|max:255',
                 'status_oku'                => 'required|string|max:255',
             ]);
         }
@@ -1442,12 +1443,12 @@ class ProfilKlienController extends Controller
         $updateData = [
             'no_tel'            => $validatedData['no_tel'],
             'emel'              => $validatedData['emel'],
-            'alamat_rumah'      => $validatedData['alamat_rumah_klien'],
+            'alamat_rumah'      => strtoupper($validatedData['alamat_rumah_klien']),
             'poskod'            => $validatedData['poskod_klien'],
             'daerah'            => $validatedData['daerah_klien'],
             'negeri'            => $validatedData['negeri_klien'],
             'tahap_pendidikan'  => $validatedData['tahap_pendidikan'],
-            'penyakit'          => $validatedData['penyakit'],
+            'penyakit'          => strtoupper($validatedData['penyakit']),
             'status_oku'        => $validatedData['status_oku'],
         ];
 
@@ -1638,6 +1639,7 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatBapaKlien(Request $request, $id)
     {
+        // dd($request->all());
         try {
             $validatedData = $request->validate([
                 'nama_bapa' => 'nullable|string|max:255',
@@ -1700,6 +1702,7 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatIbuKlien(Request $request, $id)
     {
+        // dd($request->all());
         try {
             $validatedData = $request->validate([
                 'nama_ibu'  => 'nullable|string|max:255',
@@ -1762,6 +1765,7 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatPenjagaKlien(Request $request, $id)
     {
+        // dd($request->all());
         try {
             $validatedData = $request->validate([
                 'hubungan_penjaga' => 'nullable|string|max:255',

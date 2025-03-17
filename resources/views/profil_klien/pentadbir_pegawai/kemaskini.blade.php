@@ -229,15 +229,18 @@
                                 </div>
                                 <div class="col-md-8">
                                     <span id="skor_ccri" class="fs-6 form-control-plaintext">
-                                        {{$klien->skor_ccri}}
-                                        @if($klien->skor_ccri < 40)
-                                            (TIDAK MEMUASKAN)
-                                        @elseif($klien->skor_ccri >= 40 && $klien->skor_ccri <= 60)
-                                            (MEMUASKAN)
-                                        @elseif($klien->skor_ccri >= 61 && $klien->skor_ccri <= 79)
-                                            (BAIK)
-                                        @elseif($klien->skor_ccri >= 80)
-                                            (CEMERLANG)
+                                        @if(!is_null($klien->skor_ccri))
+                                            {{$klien->skor_ccri}}
+
+                                            @if($klien->skor_ccri > 0 && $klien->skor_ccri < 40)
+                                                (TIDAK MEMUASKAN)
+                                            @elseif($klien->skor_ccri >= 40 && $klien->skor_ccri <= 60)
+                                                (MEMUASKAN)
+                                            @elseif($klien->skor_ccri >= 61 && $klien->skor_ccri <= 79)
+                                                (BAIK)
+                                            @elseif($klien->skor_ccri >= 80)
+                                                (CEMERLANG)
+                                            @endif
                                         @endif
                                     </span>
                                 </div>
@@ -354,6 +357,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <select class="form-select form-select-solid custom-select" id="negeri_klien" name="negeri_klien"  data-control="select2" data-hide-search="false">
+                                            <option>Pilih Negeri</option>
                                             @foreach ($negeri as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->negeri == $item->id ? 'selected' : '' }}>{{ $item->negeri }}</option>
                                             @endforeach
@@ -372,6 +376,7 @@
                                 <div class="col-md-8">
                                     <div class="w-100">
                                         <select class="form-select form-select-solid custom-select" id="daerah_klien" name="daerah_klien"  data-control="select2" data-hide-search="false">
+                                            <option>Pilih Daerah</option>
                                             @foreach ($daerah as $item)
                                                 <option value="{{ $item->id }}" {{ $klien->daerah == $item->id ? 'selected' : '' }}>{{ $item->daerah }}</option>
                                             @endforeach
@@ -406,11 +411,7 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-select form-select-solid custom-select" id="penyakit" name="penyakit"  data-control="select2" data-hide-search="false" >
-                                        @foreach ($penyakit as $item)
-                                            <option value="{{ $item->id }}" {{ $klien->penyakit == $item->id ? 'selected' : '' }}>{{ $item->penyakit }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control form-control-solid" style="text-transform: uppercase;" id="penyakit" name="penyakit" value="{{$klien->penyakit}}"/>
                                 </div>
                             </div>
                             <!--end::Input group-->
@@ -422,7 +423,11 @@
                                     </label>
                                 </div>
                                 <div class="col-md-8 position-relative">
-                                    <input type="text" class="form-control form-control-solid" id="status_oku" name="status_oku" value="{{$klien->status_oku}}"/>
+                                    <select class="form-select form-select-solid custom-select" id="status_oku" name="status_oku"  data-control="select2" data-hide-search="false" >
+                                        @foreach ($oku as $item)
+                                            <option value="{{ $item->kategori }}" {{ $klien->status_oku == $item->kategori ? 'selected' : '' }}>{{ $item->kategori }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="position-absolute top-10 end-0 mt-3 me-2">
                                         <label class="form-label fs-6 mb-0 fst-italic">** Klik <a href="https://oku.jkm.gov.my/semakan_oku" class="text-primary">di sini</a> untuk semakan OKU</label>
                                     </div>
@@ -1392,7 +1397,7 @@
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid custom-select" id="negeri_b" name="negeri_bapa" data-control="select2" data-hide-search="false">
-                                                                <option>Pilih negeri</option>
+                                                                <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_bapa == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
                                                                 @endforeach
@@ -1415,7 +1420,7 @@
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid custom-select" id="daerah_b" name="daerah_bapa" data-control="select2" data-hide-search="false">
-                                                                <option>Pilih daerah</option>
+                                                                <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_bapa == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
                                                                 @endforeach
@@ -1593,7 +1598,7 @@
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid custom-select" id="negeri_i" name="negeri_ibu" data-control="select2" data-hide-search="false">
-                                                                <option>Pilih negeri</option>
+                                                                <option>Pilih Negeri</option>
                                                                 @foreach ($negeriWaris as $negeriW)
                                                                     <option value="{{ $negeriW->id }}" {{ $waris->negeri_ibu == $negeriW->id ? 'selected' : '' }}>{{ $negeriW->negeri }}</option>
                                                                 @endforeach
@@ -1616,7 +1621,7 @@
                                                         <div class="w-100">
                                                             <!--begin::Select2-->
                                                             <select class="form-select form-select-solid custom-select" id="daerah_i" name="daerah_ibu" data-control="select2" data-hide-search="false">
-                                                                <option>Pilih daerah</option>
+                                                                <option>Pilih Daerah</option>
                                                                 @foreach ($daerahWaris as $daerahW)
                                                                     <option value="{{ $daerahW->id }}" {{ $waris->daerah_ibu == $daerahW->id ? 'selected' : '' }}>{{ $daerahW->daerah }}</option>
                                                                 @endforeach
@@ -2906,7 +2911,6 @@
     </div>
     <!--end::Content-->
 
-    {{-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
