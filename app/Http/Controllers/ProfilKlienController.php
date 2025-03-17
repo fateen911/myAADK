@@ -1488,6 +1488,7 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatPekerjaanKlien(Request $request, $id)
     {
+        // dd($request->all());
         try {
             // Validate the input with conditional rules based on status_kerja
             $validatedData = $request->validate([
@@ -1534,6 +1535,11 @@ class ProfilKlienController extends Controller
             $validatedData['alasan_tidak_kerja'] = null;
         }
 
+        // Convert alamat_kerja to uppercase if it exists
+        if (!empty($validatedData['alamat_kerja'])) {
+            $validatedData['alamat_kerja'] = strtoupper($validatedData['alamat_kerja']);
+        }
+
         // Find PekerjaanKlien record
         $pekerjaanKlien = PekerjaanKlien::where('klien_id', $id)->first();
         $sejarahProfil = SejarahProfilKlien::where('klien_id', $pekerjaanKlien->klien_id)->first();
@@ -1570,6 +1576,7 @@ class ProfilKlienController extends Controller
 
     public function kemaskiniMaklumatKeluargaKlien(Request $request, $id)
     {
+        // dd($request->all());
         try {
             $validatedData = $request->validate([
                 'status_perkahwinan'    => 'required|string|max:255',

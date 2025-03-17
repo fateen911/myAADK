@@ -3029,7 +3029,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_klien').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_k').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3078,7 +3077,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_kerja').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_kerja').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3127,7 +3125,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_b').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_b').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3176,7 +3173,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_i').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_i').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3225,7 +3221,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_p').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_p').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3274,7 +3269,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_partner').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_partner').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3323,7 +3317,6 @@
 
                 // Clear daerah options and poskod
                 $('#daerah_kerja_pasangan').empty().append('<option value="">Pilih Daerah</option>');
-                $('#poskod_kerja_pasangan').val('');
 
                 // Update daerah dropdown
                 updateDaerahDropdown(selectedNegeri);
@@ -3760,15 +3753,15 @@
                 poskod_kerja: "{{ $pekerjaan->poskod_kerja }}",
                 negeri_kerja: "{{ $pekerjaan->negeri_kerja }}",
                 daerah_kerja: "{{ $pekerjaan->daerah_kerja }}",
-                alasan_tidak_kerja: "{{ $pekerjaan->alasan_tidak_kerja }}"  // This could be null
+                alasan_tidak_kerja: "{{ $pekerjaan->alasan_tidak_kerja }}"
             };
 
             console.log(originalData);
 
             // Get current form data
             let alasan_tidak_kerja = document.getElementById('alasan_tidak_kerja') ? document.getElementById('alasan_tidak_kerja').value : '';
-            if (alasan_tidak_kerja === 'Pilih Alasan Tidak Bekerja') {
-                alasan_tidak_kerja = null;  // Treat as null
+            if (alasan_tidak_kerja === 'Pilih Alasan Tidak Bekerja' || alasan_tidak_kerja.trim() === '') {
+                alasan_tidak_kerja = null;
             }
 
             let negeri_kerja = document.getElementById('negeri_kerja') ? document.getElementById('negeri_kerja').value : '';
@@ -3802,8 +3795,8 @@
             }
 
             let nama_majikan = document.getElementById('nama_majikan') ? document.getElementById('nama_majikan').value : '';
-            if (nama_majikan === 'Pilih Nama Majikan') {
-                nama_majikan = null;  // Treat as null
+            if (nama_majikan === 'Pilih Nama Majikan' || nama_majikan.trim() === '') {
+                nama_majikan = null;
             }
 
             const currentData = {
@@ -3821,6 +3814,12 @@
                 daerah_kerja: daerah_kerja,
                 alasan_tidak_kerja: alasan_tidak_kerja 
             };
+
+            Object.keys(currentData).forEach(key => {
+                if (currentData[key] && typeof currentData[key] === "string" && currentData[key].startsWith("Pilih")) {
+                    currentData[key] = null;
+                }
+            });
 
             // Handle poskod_kerja as a string for comparison
             if (originalData.poskod_kerja !== null) {
@@ -3842,7 +3841,7 @@
                 }
             });
 
-            if (!isChanged) {
+            if (isChanged == false) {
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
@@ -3910,6 +3909,12 @@
                 negeri_kerja_pasangan: daerah_kerja_pasangan,
                 daerah_kerja_pasangan: daerah_kerja_pasangan,
             };
+
+            Object.keys(currentData).forEach(key => {
+                if (currentData[key] && typeof currentData[key] === "string" && currentData[key].startsWith("Pilih")) {
+                    currentData[key] = null;
+                }
+            });
 
             // Handle poskod_partner as a string for comparison
             if (originalData.poskod_partner !== null) {
