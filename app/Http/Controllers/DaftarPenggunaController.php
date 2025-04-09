@@ -286,14 +286,17 @@ class DaftarPenggunaController extends Controller
                     ->leftJoin('tahap_pengguna', 'pegawai_mohon_daftar.peranan', '=', 'tahap_pengguna.id') // Join for Peranan
                     ->leftJoin('senarai_negeri_pejabat', 'pegawai_mohon_daftar.negeri_bertugas', '=', 'senarai_negeri_pejabat.negeri_id') // Join for Negeri
                     ->leftJoin('senarai_daerah_pejabat', 'pegawai_mohon_daftar.daerah_bertugas', '=', 'senarai_daerah_pejabat.kod') // Join for Daerah
-                    ->select([
-                        'pegawai_mohon_daftar.*',
-                        'tahap_pengguna.peranan',
+                    ->select(
+                        'pegawai_mohon_daftar.id',
+                        'pegawai_mohon_daftar.nama',
+                        'pegawai_mohon_daftar.no_kp',
+                        'pegawai_mohon_daftar.emel',
                         'senarai_negeri_pejabat.negeri as negeri_bertugas',
-                        'senarai_daerah_pejabat.daerah as daerah_bertugas'
-                    ])
+                        'senarai_daerah_pejabat.daerah as daerah_bertugas',
+                        'tahap_pengguna.peranan as peranan'
+                    )
                     ->orderBy('pegawai_mohon_daftar.updated_at', 'desc');
-
+        
         if ($query->count() == 0) {
             return response()->json(['data' => []]); // Ensure empty response when no records exist
         }

@@ -994,12 +994,13 @@
 				},
 				columns: [
 					{ data: 'nama', name: 'pegawai_mohon_daftar.nama' },
-					{ data: 'no_kp', name: 'pegawai_mohon_daftar.no_kp' },
-					{ data: 'emel', name: 'pegawai_mohon_daftar.emel' },
-					{ data: 'peranan', name: 'tahap_pengguna.peranan' },
+					{ data: 'no_kp', name: 'pegawai_mohon_daftar.no_kp', className: "text-center" },
+					{ data: 'emel', name: 'pegawai_mohon_daftar.emel', className: "text-center" },
+					{ data: 'peranan', name: 'tahap_pengguna.peranan', className: "text-center" },
 					{ 
 						data: null, 
-						name: 'negeri_bertugas', 
+						name: 'negeri_bertugas',
+						className: "text-center", 
 						render: function(data, type, row) {
 							// If both are null, return an empty string
 							if (!row.negeri_bertugas && !row.daerah_bertugas) {
@@ -1009,16 +1010,10 @@
 							return row.negeri_bertugas + (row.daerah_bertugas ? ' (' + row.daerah_bertugas + ')' : '');
 						}
 					},
-					{ 
-						data: 'created_at', 
-						name: 'users.created_at',
-						render: function(data, type, row) {
-							return new Date(data).toLocaleDateString('en-GB');
-						}
-					},
 					{
 						data: 'id',
 						name: 'pegawai_mohon_daftar.id',
+						className: "text-center",
 						orderable: false,
 						searchable: false,
 						render: function(data, type, row) {
@@ -1026,8 +1021,8 @@
 								<div class="d-flex justify-content-center align-items-center">
 									<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
 										data-bs-toggle="modal" 
-										data-id="${pegawai_mohon_daftar.id}" 
-										data-bs-target="#modal_kemaskini_pegawai">
+										data-id="${row.id}" 
+										data-bs-target="#modal_permohonan_pegawai">
 										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 											<i class="ki-duotone bi bi-pencil fs-3"></i>
 										</span>
@@ -1091,12 +1086,13 @@
 				ajax: "{{ route('ajax-senarai-pegawai') }}",
 				columns: [
 					{ data: 'name', name: 'users.name' },
-					{ data: 'no_kp', name: 'users.no_kp' },
-					{ data: 'email', name: 'users.email' },
-					{ data: 'peranan', name: 'tahap_pengguna.peranan' },
+					{ data: 'no_kp', name: 'users.no_kp', className: "text-center" },
+					{ data: 'email', name: 'users.email', className: "text-center" },
+					{ data: 'peranan', name: 'tahap_pengguna.peranan', className: "text-center" },
 					{ 
 						data: null, 
 						name: 'negeri_bertugas', 
+						className: "text-center",
 						render: function(data, type, row) {
 							// If both are null, return an empty string
 							if (!row.negeri_bertugas && !row.daerah_bertugas) {
@@ -1109,6 +1105,7 @@
 					{ 
 						data: 'created_at', 
 						name: 'users.created_at',
+						className: "text-center",
 						render: function(data, type, row) {
 							return new Date(data).toLocaleDateString('en-GB');
 						}
@@ -1116,6 +1113,7 @@
 					{
 						data: 'pegawai_id',
 						name: 'pegawai.id',
+						className: "text-center",
 						orderable: false,
 						searchable: false,
 						render: function(data, type, row) {
