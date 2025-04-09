@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"',
+        'binary'  => env('WKHTMLTOPDF_BINARY', '/usr/bin/wkhtmltopdf'),
         'timeout' => false,
         'options' => [],
         'env'     => [],
