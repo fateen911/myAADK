@@ -560,10 +560,9 @@ class PelaporanController extends Controller
 
         // Generate PDF using Snappy
         $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
-            ->setPaper('a4', 'landscape')
-            ->setOption('disable-smart-shrinking', true)
-            ->setOption('lowquality', true) // Speeds up processing
-            ->setOption('enable-local-file-access', true);
+                ->setOption('disable-smart-shrinking', true)
+                ->setOption('lowquality', true) // Speeds up processing
+                ->setOption('enable-local-file-access', true);
         
         return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
