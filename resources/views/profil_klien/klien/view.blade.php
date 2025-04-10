@@ -2354,8 +2354,6 @@
 
                 // Clear existing options
                 $("#daerah").empty();
-                $('#poskod').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);
@@ -2413,9 +2411,7 @@
 
                 // Clear existing options
                 $("#daerah_kerja").empty();
-                $('#poskod_kerja').val('');
-
-
+                
                 // Trigger AJAX request
                 getBandarData(idnegeri);
             });
@@ -2469,8 +2465,6 @@
 
                 // Clear existing options
                 $("#daerah_b").empty();
-                $('#poskod_b').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);
@@ -2528,8 +2522,6 @@
 
                 // Clear existing options
                 $("#daerah_i").empty();
-                $('#poskod_i').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);
@@ -2587,8 +2579,6 @@
 
                 // Clear existing options
                 $("#daerah_p").empty();
-                $('#poskod_p').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);
@@ -2646,8 +2636,6 @@
 
                 // Clear existing options
                 $("#daerah_partner").empty();
-                $('#poskod_partner').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);
@@ -2705,8 +2693,6 @@
 
                 // Clear existing options
                 $("#daerah_kerja_pasangan").empty();
-                $('#poskod_kerja_pasangan').val('');
-
 
                 // Trigger AJAX request
                 getBandarData(idnegeri);

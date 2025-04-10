@@ -3027,7 +3027,7 @@
             $('#negeri_klien').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_klien').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3075,7 +3075,7 @@
             $('#negeri_kerja').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_kerja').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3123,7 +3123,7 @@
             $('#negeri_b').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_b').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3171,7 +3171,7 @@
             $('#negeri_i').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_i').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3219,7 +3219,7 @@
             $('#negeri_p').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_p').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3267,7 +3267,7 @@
             $('#negeri_partner').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_partner').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
@@ -3315,7 +3315,7 @@
             $('#negeri_kerja_pasangan').on('change', function () {
                 var selectedNegeri = $(this).val();
 
-                // Clear daerah options and poskod
+                // Clear daerah options
                 $('#daerah_kerja_pasangan').empty().append('<option value="">Pilih Daerah</option>');
 
                 // Update daerah dropdown
