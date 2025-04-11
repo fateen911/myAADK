@@ -34,6 +34,8 @@ Route::get('/kerja-view', [KerjaViewController::class, 'viewKerja']);
 Route::get('/famili-view', [FamiliViewController::class, 'viewFamili']);
 Route::get('/waris-view', [WarisViewController::class, 'viewWaris']);
 
+Route::get('/klien-view-add', [KlienViewController::class, 'addKlien']);
+
 //ERROR
 Route::get('/404-not-found', function () {
     return view('error.404_not_found');
