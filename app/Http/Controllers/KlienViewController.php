@@ -80,7 +80,7 @@ class KlienViewController extends Controller
     public function addKlien()
     {
         DB::statement("
-            INSERT INTO klien (
+            INSERT INTO klien_view (
                 id_pk, id_ki, no_kp, nama, no_tel, emel, alamat_rumah, poskod, daerah, negeri, 
                 jantina, agama, bangsa, tahap_pendidikan, penyakit, status_oku, 
                 skor_ccri, daerah_pejabat, negeri_pejabat, status_kemaskini, 
