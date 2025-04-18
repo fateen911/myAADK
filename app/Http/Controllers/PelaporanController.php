@@ -2182,7 +2182,7 @@ class PelaporanController extends Controller
         }
 
         if ($program) {
-            return view('pelaporan.aktiviti.aktivitiND.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
+            return view('pelaporan.aktiviti.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
