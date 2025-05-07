@@ -542,81 +542,137 @@
 
 					{{-- KLIEN --}}
 					<div class="tab-pane fade" id="klien" role="tabpanel" aria-labelledby="klien-tab">
-						<div class="header row align-items-center">
-							<!--begin::Card title-->
-							<div class="col">
-								<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk daftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
-							</div>
-						</div>
+						<div class="row m-5">
+							<!--begin::Col-->
+							<div class="col-xl-3">
+								<!--begin::Engage widget 9-->
+								<div class="card h-lg-100" style="background:  #ffffff )">
+									<!--begin::Body-->
+									<div class="card-body">
+										<!--begin::Row-->
+										<div class="row align-items-center">
+											<!--begin::form-->
+											<form class="form w-100" action="" method="post"> 
+											@csrf 
+												<!--begin::Heading-->
+												<div class="text-center mb-11">
+													<br>
+													<h2 class="text-dark fw-bolder mb-3">
+														Sistem MyAADK
+													</h2>
+												</div>
+												<!--end::Heading-->
 
-						<!--begin::Card body-->
-						<div class="body">
-							<!--begin::Table-->
-							<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
-								<thead>
-									<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-										<th class="min-w-250px">Nama</th>
-										<th class="min-w-50px">No. Kad Pengenalan</th>
-										<th class="min-w-50px">E-mel</th>
-										<th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
-										<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
-									</tr>
-								</thead>
+												<!--begin::logo-->
+												<div class="text-center mb-11">
+													<img src="{{ asset('logo/aadk.png') }}" alt="Logo" style="height: 120px; width: auto;">
+												</div>
+												<!--end::logo-->
 
-								<tbody class="fw-semibold text-gray-600">
-									<!-- Data will be injected here by AJAX -->
-									<td class="min-w-250px">Tiada</td>
-                                    <td class="min-w-50px">Tiada</td>
-                                    <td class="min-w-50px">Tiada</td>
-                                    <td class="min-w-60px">Tiada</td>
-                                    <td class="min-w-40px">Tiada</td>
-								</tbody>
-							</table>
+												<!--begin::Input group-->
+												<div class="col-xs-3">
+													<input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
+												</div>
+												<!--end::Input group-->
 
-							<!--begin::Modal - Kemaskini Klien-->
-							<div class="modal fade" id="modal_kemaskini_klien" tabindex="-1" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered mw-650px">
-									<div class="modal-content">
-										<div class="modal-header">
-											<!--begin::Modal title-->
-											<h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
-											<!--end::Modal title-->
-											<!--begin::Close-->
-											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-												<i class="ki-solid ki-cross-circle fs-1"></i>
-											</div>
-											<!--end::Close-->
+												<!--begin::Submit button-->
+												<div class="d-flex flex-center mt-5">
+													<button type="submit" class="btn btn-primary">Semak</button>
+												</div>
+												<!--end::Submit button-->
+											</form>
 										</div>
-
-										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
 									</div>
+									<!--end::Body-->
 								</div>
 							</div>
-							<!--end::Modal - Kemaskini Klien-->
-
-							<!--begin::Modal - Daftar Klien-->
-							<div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered mw-650px">
-									<div class="modal-content">
-										<div class="modal-header">
-											<!--begin::Modal title-->
-											<h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
-											<!--end::Modal title-->
-											<!--begin::Close-->
-											<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-												<i class="ki-solid ki-cross-circle fs-1"></i>
-											</div>
-											<!--end::Close-->
-										</div>
-
-										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
+							<!--end::Col-->
+							
+							<!--begin::Col-->
+							<div class="col-xl-9">
+								<div class="card card-flush h-xl-100">
+									<!--begin::Header-->
+									<div class="card-header pt-5">
+										<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk mendaftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
 									</div>
+									<!--end::Header-->
+
+									<!--begin::Body-->
+									<div class="body">
+										<!--begin::Table container-->
+										<div class="table-responsive">
+											<!--begin::Table-->
+											<table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+												<thead>
+													<tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+														<th class="min-w-250px">Nama</th>
+														<th class="min-w-50px">No. Kad Pengenalan</th>
+														<th class="min-w-50px">E-mel</th>
+														<th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
+														<th class="min-w-40px" style="text-align: center;">Kemaskini</th>
+													</tr>
+												</thead>
+
+												<tbody class="fw-semibold text-gray-600">
+													<!-- Data will be injected here by AJAX -->
+													<td class="min-w-250px">Tiada</td>
+													<td class="min-w-50px">Tiada</td>
+													<td class="min-w-50px">Tiada</td>
+													<td class="min-w-60px">Tiada</td>
+													<td class="min-w-40px">Tiada</td>
+												</tbody>
+											</table>
+											<!--end::Table-->
+
+											<!--begin::Modal - Kemaskini Klien-->
+											<div class="modal fade" id="modal_kemaskini_klien" tabindex="-1" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered mw-650px">
+													<div class="modal-content">
+														<div class="modal-header">
+															<!--begin::Modal title-->
+															<h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
+															<!--end::Modal title-->
+															<!--begin::Close-->
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
+															</div>
+															<!--end::Close-->
+														</div>
+
+														<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
+													</div>
+												</div>
+											</div>
+											<!--end::Modal - Kemaskini Klien-->
+
+											<!--begin::Modal - Daftar Klien-->
+											<div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered mw-650px">
+													<div class="modal-content">
+														<div class="modal-header">
+															<!--begin::Modal title-->
+															<h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
+															<!--end::Modal title-->
+															<!--begin::Close-->
+															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+																<i class="ki-solid ki-cross-circle fs-1"></i>
+															</div>
+															<!--end::Close-->
+														</div>
+
+														<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
+													</div>
+												</div>
+											</div>
+											<!--end::Modal - Daftar Klien-->
+										</div>
+										<!--end::Table container-->
+									</div>
+									<!--end::Body-->
 								</div>
+								<!--end::Table Widget 9-->
 							</div>
-							<!--end::Modal - Daftar Klien-->
-							<!--end::Table-->
 						</div>
-						<!--end::Card body-->
 					</div>
 				</div>
 
