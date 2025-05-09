@@ -407,7 +407,6 @@ class DaftarPenggunaController extends Controller
             'poskod' => $klienData->poskod,
             'daerah' => $klienData->daerah,
             'negeri' => $klienData->negeri,
-            // Add all necessary fields
             'status_kemaskini' => 'Baharu'
         ]);
 
@@ -481,13 +480,11 @@ class DaftarPenggunaController extends Controller
             // Create the new user
             $user = User::create($createData);
 
-            // Disable timestamps temporarily
-            $klien->timestamps = false;
-
             // Update in table klien
             $klien->update([
                 'no_tel' => $request->no_tel,
                 'emel' => $request->email,
+                'created_at' => now(),
             ]);
 
             // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
