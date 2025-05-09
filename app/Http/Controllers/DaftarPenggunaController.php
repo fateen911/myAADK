@@ -25,6 +25,10 @@ use App\Models\JawatanAADK;
 use App\Models\PegawaiMohonDaftar;
 use App\Models\TahapPengguna;
 use App\Models\NotifikasiPegawaiDaerah;
+use App\Models\KlienView;
+use App\Models\KerjaView;
+use App\Models\WarisView;
+use App\Models\FamiliView;
 use Yajra\DataTables\Facades\DataTables;
 
 class DaftarPenggunaController extends Controller
@@ -359,6 +363,88 @@ class DaftarPenggunaController extends Controller
         else {
             return redirect()->route('senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
+    }
+
+    // TEST SEMAK IC
+    public function semakKp(Request $request)
+    {
+        $no_kp = $request->input('no_kp');
+        $klienView = KlienView::where('no_kp', $no_kp)->first();
+
+        if (!$klienView) {
+            return redirect()->back()->with('error', 'No Kad Pengenalan tersebut tidak dibenarkan untuk proses pendaftaran dalam sistem ini');
+        }
+
+        // Store IC and data in session
+        session([
+            'no_kp' => $no_kp,
+            'klien_view' => $klienView,
+            'waris_view' => WarisView::where('no_kp', $no_kp)->first(),
+            'famili_view' => FamiliView::where('no_kp', $no_kp)->first(),
+            'kerja_view' => KerjaView::where('no_kp', $no_kp)->first()
+        ]);
+
+        return redirect()->back()->with('exists', 'Data berjaya dijumpai. Sila klik "Daftar" untuk mendaftar klien ini.');
+    }
+
+    public function registerKlien(Request $request)
+    {
+        $no_kp = session('no_kp');
+        $klienData = session('klien_view');
+        $warisData = session('waris_view');
+        $keluargaData = session('famili_view');
+        $pekerjaanData = session('kerja_view');
+
+        if (!$klienData) {
+            return redirect()->back()->with('error', 'Data klien tidak tersedia dalam sesi. Sila semak semula No KP.');
+        }
+
+        $klien = Klien::create([
+            'no_kp' => $klienData->no_kp,
+            'nama' => $klienData->nama,
+            'jantina' => $klienData->jantina,
+            'alamat_rumah' => $klienData->alamat_rumah,
+            'poskod' => $klienData->poskod,
+            'daerah' => $klienData->daerah,
+            'negeri' => $klienData->negeri,
+            // Add all necessary fields
+            'status_kemaskini' => 'Baharu'
+        ]);
+
+        if ($keluargaData) {
+            KeluargaKlien::create([
+                'klien_id' => $klien->id,
+                'status_perkahwinan' => $keluargaData->status_perkahwinan,
+                'nama_pasangan' => $keluargaData->nama_pasangan,
+                // add others
+                'status_kemaskini' => 'Baharu'
+            ]);
+        }
+
+        if ($pekerjaanData) {
+            PekerjaanKlien::create([
+                'klien_id' => $klien->id,
+                'status_kerja' => $pekerjaanData->status_kerja,
+                'nama_kerja' => $pekerjaanData->nama_kerja,
+                // add others
+                'status_kemaskini' => 'Baharu'
+            ]);
+        }
+
+        if ($warisData) {
+            WarisKlien::create([
+                'klien_id' => $klien->id,
+                'nama_bapa' => $warisData->nama_bapa,
+                'nama_ibu' => $warisData->nama_ibu,
+                // add others
+                'status_kemaskini' => 'Baharu'
+            ]);
+        }
+
+        // Clear session data
+        session()->forget(['klien_view', 'waris_view', 'famili_view', 'kerja_view', 'no_kp']);
+
+        return redirect()->route('senarai-pengguna')->with('success', 'Pendaftaran berjaya!');
     }
 
     public function modalDaftarKlien($id)

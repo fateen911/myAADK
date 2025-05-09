@@ -140,11 +140,15 @@ Route::post('pentadbir/daftar/pegawai', [DaftarPenggunaController::class, 'dafta
 Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiLulus'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
+Route::post('/semak-kp', [DaftarPenggunaController::class, 'semakKp'])->name('semak.kp');
+Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
+Route::post('/register-klien', [DaftarPenggunaController::class, 'registerKlien'])->name('register.klien');
+
 // AJAX PENDAFTARAN
 Route::get('/get-daerah-bertugas/{negeri_id}', [DaftarPenggunaController::class, 'getDaerahBertugas'])->name('get-daerah-bertugas');
 Route::get('/pentadbir/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlien'])->name('ajax-senarai-klien');
 Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlien'])->name('modal-kemaskini-klien');
-Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
+// Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
 Route::get('/pentadbir/ajax/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('ajax-senarai-pegawai');
 Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
 Route::get('/pentadbir/ajax/senarai-permohonan-pegawai', [DaftarPenggunaController::class, 'getDataPermohonanPegawai'])->name('ajax-senarai-permohonan-pegawai');

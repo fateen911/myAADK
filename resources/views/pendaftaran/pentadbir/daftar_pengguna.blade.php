@@ -339,7 +339,7 @@
 										<!--begin::Row-->
 										<div class="row align-items-center">
 											<!--begin::form-->
-											<form class="form w-100" action="" method="post"> 
+											<form class="form w-100" action="{{ route('semak.kp') }}" method="post">
 											@csrf 
 												<!--begin::Heading-->
 												<div class="text-center mb-11">
@@ -652,6 +652,27 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+
+			@if(session('exists'))
+				Swal.fire({
+					icon: 'success',
+					title: 'No Kad Pengenalan Klien Wujud!',
+					text: {!! json_encode(session('message')) !!},
+					confirmButtonText: 'Daftar'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$('#modal_daftar_klien').modal('show');
+					}
+				});
+			@endif
+
+			@if(session('not-exists'))
+				Swal.fire({
+					icon: 'error',
+					title: 'Ralat',
+					text: {!! json_encode(session('error')) !!},
+				});
+			@endif
         });
     </script>
 
