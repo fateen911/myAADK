@@ -231,7 +231,7 @@ class DaftarPenggunaController extends Controller
         $tahap = TahapPengguna::whereIn('id', [3, 4, 5])->get()->sortBy('id');
         $jawatan = JawatanAADK::all();
 
-        return view ('pendaftaran.pentadbir.daftar_pengguna', compact('tahap', 'daerah', 'negeri','jawatan'));
+        return view('pendaftaran.pentadbir.daftar_pengguna', compact('tahap', 'daerah', 'negeri','jawatan'));
     }
 
     public function getDataKlien(Request $request)
@@ -369,20 +369,20 @@ class DaftarPenggunaController extends Controller
     public function semakKp(Request $request)
     {
         $no_kp = $request->input('no_kp');
-        $klienView = KlienView::where('no_kp', $no_kp)->first();
+        $klienView = KlienView::where('mykad', $no_kp)->first();
 
         if (!$klienView) {
             return redirect()->back()->with('error', 'No Kad Pengenalan tersebut tidak dibenarkan untuk proses pendaftaran dalam sistem ini');
         }
 
         // Store IC and data in session
-        session([
-            'no_kp' => $no_kp,
-            'klien_view' => $klienView,
-            'waris_view' => WarisView::where('no_kp', $no_kp)->first(),
-            'famili_view' => FamiliView::where('no_kp', $no_kp)->first(),
-            'kerja_view' => KerjaView::where('no_kp', $no_kp)->first()
-        ]);
+        // session([
+        //     'no_kp' => $no_kp,
+        //     'klien_view' => $klienView,
+        //     'waris_view' => WarisView::where('no_kp', $no_kp)->first(),
+        //     'famili_view' => FamiliView::where('no_kp', $no_kp)->first(),
+        //     'kerja_view' => KerjaView::where('no_kp', $no_kp)->first()
+        // ]);
 
         return redirect()->back()->with('exists', 'Data berjaya dijumpai. Sila klik "Daftar" untuk mendaftar klien ini.');
     }
