@@ -399,6 +399,12 @@ class DaftarPenggunaController extends Controller
             return redirect()->back()->with('error', 'Data klien tidak tersedia dalam sesi. Sila semak semula No KP.');
         }
 
+        // Check if password is provided
+        if (!$request->filled('passwordDaftar')) {
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+        }
+
+        // Create Klien
         $klien = Klien::create([
             'no_kp' => $klienData->no_kp,
             'nama' => $klienData->nama,
@@ -407,16 +413,20 @@ class DaftarPenggunaController extends Controller
             'poskod' => $klienData->poskod,
             'daerah' => $klienData->daerah,
             'negeri' => $klienData->negeri,
-            'status_kemaskini' => 'Baharu'
+            'status_kemaskini' => 'Baharu',
+            'no_tel' => $request->no_tel,
+            'emel' => $request->email,
+            'created_at' => now(),
         ]);
 
+        // Related models
         if ($keluargaData) {
             KeluargaKlien::create([
                 'klien_id' => $klien->id,
                 'status_perkahwinan' => $keluargaData->status_perkahwinan,
                 'nama_pasangan' => $keluargaData->nama_pasangan,
-                // add others
-                'status_kemaskini' => 'Baharu'
+                'status_kemaskini' => 'Baharu',
+                'created_at' => now(),
             ]);
         }
 
@@ -425,8 +435,8 @@ class DaftarPenggunaController extends Controller
                 'klien_id' => $klien->id,
                 'status_kerja' => $pekerjaanData->status_kerja,
                 'nama_kerja' => $pekerjaanData->nama_kerja,
-                // add others
-                'status_kemaskini' => 'Baharu'
+                'status_kemaskini' => 'Baharu',
+                'created_at' => now(),
             ]);
         }
 
@@ -435,15 +445,35 @@ class DaftarPenggunaController extends Controller
                 'klien_id' => $klien->id,
                 'nama_bapa' => $warisData->nama_bapa,
                 'nama_ibu' => $warisData->nama_ibu,
-                // add others
-                'status_kemaskini' => 'Baharu'
+                'status_kemaskini' => 'Baharu',
+                'created_at' => now(),
             ]);
+        }
+
+        // Create User
+        $user = User::create([
+            'name' => strtoupper($request->name),
+            'no_kp' => $request->no_kp,
+            'email' => $request->email,
+            'tahap_pengguna' => 2, // Klien
+            'status' => 0,
+            'password' => Hash::make($request->passwordDaftar),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Send Email if email exists
+        if ($request->email) {
+            Mail::to($user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
+            $message = 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.';
+        } else {
+            $message = 'Klien telah berjaya didaftarkan sebagai pengguna sistem.';
         }
 
         // Clear session data
         session()->forget(['klien_view', 'waris_view', 'famili_view', 'kerja_view', 'no_kp']);
 
-        return redirect()->route('senarai-pengguna')->with('success', 'Pendaftaran berjaya!');
+        return redirect()->route('senarai-pengguna')->with('success', $message);
     }
 
     public function modalDaftarKlien($id)
