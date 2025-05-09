@@ -358,7 +358,7 @@
 
 												<!--begin::Input group-->
 												<div class="col-xs-3">
-													<input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;"/>
+													<input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
 												</div>
 												<!--end::Input group-->
 
