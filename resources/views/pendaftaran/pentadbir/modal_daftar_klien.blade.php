@@ -5,7 +5,7 @@
         <form class="form" id="modal_daftar_klien_form" action="{{ route('register.klien') }}" method="post">
             @csrf
 
-            <input type="hidden" name="id" value="{{ $klien->id }}">
+            <input type="hidden" name="id" value="{{ $klien->mykad }}">
             <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
@@ -23,7 +23,7 @@
                     <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$klien->no_kp}}" readonly/>
+                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$klien->mykad}}" readonly/>
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -41,7 +41,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$klien->no_tel}}" oninput="validateNoTel(this)" inputmode="numeric"/>
+                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$klien->telefon}}" oninput="validateNoTel(this)" inputmode="numeric"/>
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -62,8 +62,8 @@
                     <!--end::Label-->
                     <!--begin::Input-->
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-solid custom-form" id="passwordDaftarKlien{{$klien->id}}" name="passwordDaftar" />
-                        <button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien{{$klien->id}}')">Jana Kata Laluan</button>
+                        <input type="text" class="form-control form-control-solid custom-form" id="passwordDaftarKlien{{$klien->mykad}}" name="passwordDaftar" />
+                        <button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien{{$klien->mykad}}')">Jana Kata Laluan</button>
                     </div>
                     <!--end::Input-->
                 </div>

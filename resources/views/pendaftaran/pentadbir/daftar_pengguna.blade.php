@@ -11,8 +11,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -432,26 +432,7 @@
 											</div>
 											<!--end::Modal - Kemaskini Klien-->
 
-											<!--begin::Modal - Daftar Klien-->
-											<div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
-												<div class="modal-dialog modal-dialog-centered mw-650px">
-													<div class="modal-content">
-														<div class="modal-header">
-															<!--begin::Modal title-->
-															<h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
-															<!--end::Modal title-->
-															<!--begin::Close-->
-															<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-																<i class="ki-solid ki-cross-circle fs-1"></i>
-															</div>
-															<!--end::Close-->
-														</div>
-
-														<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
-													</div>
-												</div>
-											</div>
-											<!--end::Modal - Daftar Klien-->
+											
 										</div>
 										<!--end::Table container-->
 									</div>
@@ -598,6 +579,28 @@
 					</div>
 				</div>
 				<!--end::Modal - Daftar Pegawai-->
+
+				<!--begin::Modal - Daftar Klien-->
+				<div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered mw-650px">
+						<div class="modal-content">
+							<div class="modal-header">
+								<!--begin::Modal title-->
+								<h2 style="padding-left: 50px !important;">Pendaftaran Akaun Klien</h2>
+								<!--end::Modal title-->
+								<!--begin::Close-->
+								<div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+									<i class="ki-solid ki-cross-circle fs-1"></i>
+								</div>
+								<!--end::Close-->
+							</div>
+
+							<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyDaftarKlien"></div>
+						</div>
+					</div>
+				</div>
+				<!--end::Modal - Daftar Klien-->
+
 			</div>
 			<!--end::Content container-->
 		</div>
@@ -654,14 +657,16 @@
             @endif
 
 			@if(session('exists'))
+				let noKp = @json(session('no_kp'));
+
 				Swal.fire({
 					icon: 'success',
 					title: 'No Kad Pengenalan Klien Wujud!',
-					text: {!! json_encode(session('message')) !!},
+					text: {!! json_encode(session('exists')) !!},
 					confirmButtonText: 'Daftar'
 				}).then((result) => {
 					if (result.isConfirmed) {
-						$('#modal_daftar_klien').modal('show');
+						loadDaftarKlienModal(noKp);
 					}
 				});
 			@endif
@@ -1071,20 +1076,23 @@
 
 	<!-- Modal Daftar Klien -->
     <script>
-        $(document).on('click', '#daftarKlienModal', function() {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/modal/daftar-klien/'+ id, // Laravel route with dynamic ID
-                method: 'GET',
-                success: function(response) {
-                    $('#modalBodyDaftarKlien').html(response);
-                },
-                error: function() {
-                    $('#modalBodyDaftarKlien').html('Ralat kandungan.'+id);
-                }
-            });
-        });
-    </script>
+		function loadDaftarKlienModal(noKp) {
+			$.ajax({
+				url: '/modal/daftar-klien/' + noKp,
+				method: 'GET',
+				success: function(response) {
+					$('#modalBodyDaftarKlien').html(response);
+					$('#modal_daftar_klien').modal('show');
+				},
+				error: function() {
+					$('#modalBodyDaftarKlien').html('Ralat kandungan. ID tidak dijumpai: ' + noKp);
+					$('#modal_daftar_klien').modal('show');
+				}
+			});
+		}
+	</script>
+	
+	
 
 	{{-- Form validation for Daftar Pegawai --}}
 	<script>
