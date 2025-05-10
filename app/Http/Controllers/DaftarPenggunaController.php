@@ -405,10 +405,10 @@ class DaftarPenggunaController extends Controller
         $no_kp = $request->input('no_kp');
         
         //second db
-        // $klienData = KlienView::where('mykad', $no_kp)->first();
+        $klienData = KlienView::where('mykad', $no_kp)->first();
 
         //test local
-        $klienData = viewklienlocal::where('mykad', $no_kp)->first();
+        // $klienData = viewklienlocal::where('mykad', $no_kp)->first();
 
         if (!$klienData) {
             return redirect()->back()->with('error', 'Data klien tidak tersedia dalam sesi. Sila semak semula No KP.');
@@ -481,10 +481,10 @@ class DaftarPenggunaController extends Controller
         $klien_id = Klien::where('no_kp', $no_kp)->value('id');
 
         //second db
-        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
+        $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
 
         //test local
-        $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
+        // $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
 
         if ($keluargaData) {
             KeluargaKlien::create([
@@ -498,10 +498,10 @@ class DaftarPenggunaController extends Controller
         }
 
         //second db
-        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
+        $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
 
         //test local
-        $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
+        // $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
 
         // daerah: from senarai_daerah where daerah == $warisData->alamat3
         $daerah_penjaga = Daerah::where('daerah', $warisData->alamat3)
@@ -537,10 +537,10 @@ class DaftarPenggunaController extends Controller
         }
 
         //second db
-        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+        $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         //test local
-        $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+        // $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         // daerah: from senarai_daerah where daerah == $warisData->tk_majikan_alamat3
         $daerah_majikan = Daerah::where('daerah', $pekerjaanData->tk_majikan_alamat3)
@@ -614,10 +614,10 @@ class DaftarPenggunaController extends Controller
     public function modalDaftarKlien($id)
     {
         //second db
-        // $klien = KlienView::where('mykad', $id)->first();
+        $klien = KlienView::where('mykad', $id)->first();
 
         //test local
-        $klien = viewklienlocal::where('mykad', $id)->first();
+        // $klien = viewklienlocal::where('mykad', $id)->first();
 
         return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
     }
