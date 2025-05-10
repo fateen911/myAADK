@@ -378,10 +378,10 @@ class DaftarPenggunaController extends Controller
         $no_kp = $request->input('no_kp');
 
         //second db
-        // $klienView = KlienView::where('mykad', $no_kp)->first();
+        $klienView = KlienView::where('mykad', $no_kp)->first();
 
         //test local
-        $klienView = viewklienlocal::where('mykad', $no_kp)->first();
+        // $klienView = viewklienlocal::where('mykad', $no_kp)->first();
 
         if (!$klienView) {
             return redirect()->back()->with('error', 'No Kad Pengenalan tersebut tidak dibenarkan untuk proses pendaftaran dalam sistem ini');
