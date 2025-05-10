@@ -399,7 +399,7 @@ class DaftarPenggunaController extends Controller
     public function registerKlien(Request $request)
     {
         $no_kp = $request->input('no_kp');
-
+        
         //second db
         $klienData = KlienView::where('mykad', $no_kp)->first();
 
@@ -442,14 +442,16 @@ class DaftarPenggunaController extends Controller
         $daerah = Daerah::where('daerah', $klienData->alamat03)
         ->value('id');
 
+        $no_tel = $request->input('no_tel') ?: $klienData->telefon;
+        $email = $request->input('email') ?: $klienData->emel;
 
         $klien = Klien::create([
             'id_pk' => $klienData->id_pk,
             'id_ki' => $klienData->id_ki,
             'no_kp' => $klienData->mykad,
             'nama' => strtoupper($klienData->nama),
-            'no_tel' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($klienData->telefon))),
-            'emel' => $klienData->emel,
+            'no_tel' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($no_tel))),
+            'emel' => $email,
             'alamat_rumah' => strtoupper(implode(' ', array_filter([
                 $klienData->alamat01,
                 $klienData->alamat02,
