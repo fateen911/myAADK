@@ -385,7 +385,7 @@ class DaftarPenggunaController extends Controller
 
         // Check if client exists or not in view MyAADK
         if (!$klienView) {
-            return redirect()->back()->with('not-exists', 'No Kad Pengenalan tersebut tidak dibenarkan untuk mendaftar sebagai pengguna sistem ini');
+            return redirect()->back()->with('not-exists', 'No kad pengenalan tersebut tidak dibenarkan untuk mendaftar sebagai pengguna sistem ini');
         }
 
         // Check if client already exists as a user
@@ -578,7 +578,7 @@ class DaftarPenggunaController extends Controller
         // 6) Create users
         // Check if password is provided
         if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu.');
         }
 
         $user = User::create([
