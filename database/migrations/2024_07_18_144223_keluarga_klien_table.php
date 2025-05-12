@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('keluarga_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('status_perkahwinan');
+            $table->string('status_perkahwinan')->nullable();
             $table->string('nama_pasangan')->nullable();
             $table->string('no_tel_pasangan')->nullable();
             $table->string('bilangan_anak')->nullable();

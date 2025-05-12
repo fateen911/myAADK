@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pekerjaan_klien', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('klien_id');
-            $table->string('status_kerja');
+            $table->string('status_kerja')->nullable();
             $table->string('alasan_tidak_kerja')->nullable();
             $table->string('bidang_kerja')->nullable();
             $table->string('nama_kerja')->nullable();

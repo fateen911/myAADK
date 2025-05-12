@@ -377,10 +377,10 @@ class DaftarPenggunaController extends Controller
     {
         $no_kp = $request->input('no_kp');
 
-        //second db
+        // SERVER
         // $klienView = KlienView::where('mykad', $no_kp)->first();
 
-        //test local
+        // DB LOCAL
         $klienView = viewklienlocal::where('mykad', $no_kp)->first();
 
         if (!$klienView) {
@@ -389,8 +389,8 @@ class DaftarPenggunaController extends Controller
 
         // Store IC and data in session
         session([
-            'no_kp' => $no_kp,
-            'klien_view' => [
+                'no_kp' => $no_kp,
+                'klien_view' => [
                 'nama' => $klienView->nama,
                 'no_tel' => $klienView->telefon,
                 'email' => $klienView->emel,
@@ -403,23 +403,23 @@ class DaftarPenggunaController extends Controller
     public function registerKlien(Request $request)
     {
         $no_kp = $request->input('no_kp');
-        
-        //second db
+
+        // SERVER
         // $klienData = KlienView::where('mykad', $no_kp)->first();
+        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
+        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
+        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
-        //test local
+        // DB LOCAL
         $klienData = viewklienlocal::where('mykad', $no_kp)->first();
+        $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
+        $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
+        $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
-        if (!$klienData) {
-            return redirect()->back()->with('error', 'Data klien tidak tersedia dalam sesi. Sila semak semula No KP.');
-        }
+        // 1) Create klien
+        $no_tel = $request->input('no_tel') ?: $klienData->telefon;
+        $email = $request->input('email') ?: $klienData->emel;
 
-        // Check if password is provided
-        if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
-        }
-
-        // Create Klien
         $penyakit = 'TIADA';
         if (!empty($klienData->penyakit)) {
             $parsed = @unserialize($klienData->penyakit);
@@ -428,22 +428,15 @@ class DaftarPenggunaController extends Controller
             }
         }
 
-        // negeri_pejabat: from senarai_negeri where negeri == $klienData->negeri
-        $negeri_pejabat_id = DaerahPejabat::where('kod', $klienData->id_fasiliti)
-        ->value('negeri_id');
-        $negeriPejabat = NegeriPejabat::where('negeri_id', $negeri_pejabat_id)
-        ->value('id');
+        // negeri_pejabat: from senarai_negeri_pejabat where negeri == $klienData->negeri
+        $negeri_pejabat_id = DaerahPejabat::where('kod', $klienData->id_fasiliti)->value('negeri_id');
+        $negeriPejabat = NegeriPejabat::where('negeri_id', $negeri_pejabat_id)->value('id');
 
         // negeri: from senarai_negeri where negeri == $klienData->negeri_alamat
-        $negeri = Negeri::where('negeri', $klienData->negeri)
-        ->value('id');
+        $negeri = Negeri::where('negeri', $klienData->negeri)->value('id');
 
         // daerah: from senarai_daerah where daerah == $klienData->alamat03
-        $daerah = Daerah::where('daerah', $klienData->alamat03)
-        ->value('id');
-
-        $no_tel = $request->input('no_tel') ?: $klienData->telefon;
-        $email = $request->input('email') ?: $klienData->emel;
+        $daerah = Daerah::where('daerah', $klienData->alamat03)->value('id');
 
         $klien = Klien::create([
             'id_pk' => $klienData->id_pk,
@@ -477,102 +470,87 @@ class DaftarPenggunaController extends Controller
             'created_at' => now(),
         ]);
 
-        // Related models
+        // get klien_id
         $klien_id = Klien::where('no_kp', $no_kp)->value('id');
 
-        //second db
-        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
 
-        //test local
-        $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
+        // 2) Create keluarga_klien
+        KeluargaKlien::create([
+            'klien_id' => $klien_id,
+            'status_perkahwinan' => $keluargaData ? strtoupper($klienData->st_kahwin) : null,
+            'nama_pasangan' => $keluargaData ? strtoupper($keluargaData->lk_nama_psgn) : null,
+            'no_tel_pasangan' => $keluargaData ? preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_psgn))) : null,
+            'status_kemaskini' => 'Baharu',
+            'created_at' => now(),
+        ]);
 
-        if ($keluargaData) {
-            KeluargaKlien::create([
-                'klien_id' => $klien_id,
-                'status_perkahwinan' => strtoupper($klienData->st_kahwin),
-                'nama_pasangan' => strtoupper($keluargaData->lk_nama_psgn),
-                'no_tel_pasangan' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_psgn))),
-                'status_kemaskini' => 'Baharu',
-                'created_at' => now(),
-            ]);
-        }
-
-        //second db
-        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
-
-        //test local
-        $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
-
+        
+        // 3) Create waris_klien
         // daerah: from senarai_daerah where daerah == $warisData->alamat3
-        $daerah_penjaga = Daerah::where('daerah', $warisData->wr_alamat3)->value('id');
+        $daerah_penjaga = $warisData ? Daerah::where('daerah', $warisData->wr_alamat3)->value('id') : null;
 
-        //kalau data waris takde dalam view. kena masukkan klien_id jgk ke dalam table waris?
-        if ($warisData) {
-            WarisKlien::create([
-                'klien_id' => $klien_id,
-                'nama_bapa' => strtoupper($keluargaData->lk_nama_bapa),
-                'no_tel_bapa' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_bapa))),
-                'status_bapa' => strtoupper($keluargaData->status_bapa),
-                'nama_ibu' => strtoupper($keluargaData->lk_nama_ibu),
-                'no_tel_ibu' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_ibu))),
-                'status_ibu' => strtoupper($keluargaData->status_ibu),
-                'hubungan_penjaga' => strtoupper($warisData->wr_hubungan),
-                'nama_penjaga' => strtoupper($warisData->wr_nama),
-                'no_tel_penjaga' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($warisData->wr_notel))),
-                'alamat_penjaga' => strtoupper(implode(' ', array_filter([
-                    $warisData->wr_alamat1,
-                    $warisData->wr_alamat2,
-                ]))),
-                'poskod_penjaga' => (empty($warisData->wr_poskod)) 
+        WarisKlien::create([
+            'klien_id' => $klien_id,
+            'nama_bapa' => $keluargaData ? strtoupper($keluargaData->lk_nama_bapa) : null,
+            'no_tel_bapa' => $keluargaData ? preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_bapa))) : null,
+            'status_bapa' => $keluargaData ? strtoupper($keluargaData->status_bapa) : null,
+            'nama_ibu' => $keluargaData ? strtoupper($keluargaData->lk_nama_ibu) : null,
+            'no_tel_ibu' => $keluargaData ? preg_replace('/[^0-9]/', '', str_replace('-', '', trim($keluargaData->lk_notel_ibu))) : null,
+            'status_ibu' => $keluargaData ? strtoupper($keluargaData->status_ibu) : null,
+            'hubungan_penjaga' => $warisData ? strtoupper($warisData->wr_hubungan) : null,
+            'nama_penjaga' => $warisData ? strtoupper($warisData->wr_nama) : null,
+            'no_tel_penjaga' => $warisData ? preg_replace('/[^0-9]/', '', str_replace('-', '', trim($warisData->wr_notel))) : null,
+            'alamat_penjaga' => $warisData ? strtoupper(implode(' ', array_filter([
+                $warisData->wr_alamat1,
+                $warisData->wr_alamat2,
+            ]))) : null,
+            'poskod_penjaga' => $warisData
+                ? (empty($warisData->wr_poskod) 
                     ? '00000' 
                     : (strlen($warisData->wr_poskod) == 5 
                         ? $warisData->wr_poskod 
-                        : substr('00000' . $warisData->wr_poskod, -5)),
-                'daerah_penjaga' => $daerah_penjaga,
-                'negeri_penjaga' => $warisData->wr_negeri,
-                'status_kemaskini' => 'Baharu',
-                'created_at' => now(),
-            ]);
-        }
+                        : substr('00000' . $warisData->wr_poskod, -5)))
+                : null,
+            'daerah_penjaga' => $daerah_penjaga,
+            'negeri_penjaga' => $warisData ? $warisData->wr_negeri : null,
+            'status_kemaskini' => 'Baharu',
+            'created_at' => now(),
+        ]);
 
-        //second db
-        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
-        //test local
-        $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
-
+        // 4) Create pekerjaan_klien
         // daerah: from senarai_daerah where daerah == $warisData->tk_majikan_alamat3
-        $daerah_majikan = Daerah::where('daerah', $pekerjaanData->tk_majikan_alamat3)
-        ->value('id');
+        $daerah_majikan = $pekerjaanData ? Daerah::where('daerah', $pekerjaanData->tk_majikan_alamat3)->value('id') : null;
 
-        if ($pekerjaanData) {
-            PekerjaanKlien::create([
-                'klien_id' => $klien_id,
-                'status_kerja' => strtoupper($pekerjaanData->tk_status),
-                'alasan_tidak_kerja' => strtoupper($pekerjaanData->tk_status_xbekerja),
-                'bidang_kerja' => $pekerjaanData->tk_bidang,
-                'nama_kerja' => $pekerjaanData->tk_pekerjaan,
-                'pendapatan' => $pekerjaanData->tk_gaji,
-                'kategori_majikan' => strtoupper($pekerjaanData->tk_kategori_majikan),
-                'nama_majikan' => $pekerjaanData->tk_nama_majikan,
-                'no_tel_majikan' => preg_replace('/[^0-9]/', '', str_replace('-', '', trim($pekerjaanData->tk_majikan_notel))),
-                'alamat_kerja' => strtoupper(implode(' ', array_filter([
-                    $pekerjaanData->tk_majikan_alamat1,
-                    $pekerjaanData->tk_majikan_alamat2,
-                ]))),
-                'poskod_kerja' => (empty($pekerjaanData->tk_majikan_poskod)) 
+        PekerjaanKlien::create([
+            'klien_id' => $klien_id,
+            'status_kerja' => $pekerjaanData ? strtoupper($pekerjaanData->tk_status) : null,
+            'alasan_tidak_kerja' => $pekerjaanData ? strtoupper($pekerjaanData->tk_status_xbekerja) : null,
+            'bidang_kerja' => $pekerjaanData ? $pekerjaanData->tk_bidang : null,
+            'nama_kerja' => $pekerjaanData ? $pekerjaanData->tk_pekerjaan : null,
+            'pendapatan' => $pekerjaanData ? $pekerjaanData->tk_gaji : null,
+            'kategori_majikan' => $pekerjaanData ? strtoupper($pekerjaanData->tk_kategori_majikan) : null,
+            'nama_majikan' => $pekerjaanData ? $pekerjaanData->tk_nama_majikan : null,
+            'no_tel_majikan' => $pekerjaanData ? preg_replace('/[^0-9]/', '', str_replace('-', '', trim($pekerjaanData->tk_majikan_notel))) : null,
+            'alamat_kerja' => $pekerjaanData ? strtoupper(implode(' ', array_filter([
+                $pekerjaanData->tk_majikan_alamat1,
+                $pekerjaanData->tk_majikan_alamat2,
+            ]))) : null,
+            'poskod_kerja' => $pekerjaanData
+                ? (empty($pekerjaanData->tk_majikan_poskod) 
                     ? '00000' 
                     : (strlen($pekerjaanData->tk_majikan_poskod) == 5 
                         ? $pekerjaanData->tk_majikan_poskod 
-                        : substr('00000' . $pekerjaanData->tk_majikan_poskod, -5)),
-                'daerah_kerja' => $daerah_majikan,
-                'negeri_kerja' => $pekerjaanData->tk_majikan_negeri,
-                'status_kemaskini' => 'Baharu',
-                'created_at' => now(),
-            ]);
-        }
+                        : substr('00000' . $pekerjaanData->tk_majikan_poskod, -5)))
+                : null,
+            'daerah_kerja' => $daerah_majikan,
+            'negeri_kerja' => $pekerjaanData ? $pekerjaanData->tk_majikan_negeri : null,
+            'status_kemaskini' => 'Baharu',
+            'created_at' => now(),
+        ]);
 
-        // Create Rawatan
+
+        // 5) Create rawatan_klien
         $rawatan = RawatanKlien::create([
             'klien_id' => $klien_id,
             'id_pk' => $klienData->id_pk,
@@ -587,7 +565,13 @@ class DaftarPenggunaController extends Controller
             'updated_at' => now(),
         ]);
 
-        // Create User
+
+        // 6) Create users
+        // Check if password is provided
+        if (!$request->filled('passwordDaftar')) {
+            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+        }
+
         $user = User::create([
             'name' => strtoupper($request->name),
             'no_kp' => $request->no_kp,
@@ -612,64 +596,64 @@ class DaftarPenggunaController extends Controller
 
     public function modalDaftarKlien($id)
     {
-        //second db
+        // SERVER
         // $klien = KlienView::where('mykad', $id)->first();
 
-        //test local
+        // DB LOCAL
         $klien = viewklienlocal::where('mykad', $id)->first();
 
         return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
     }
 
-    public function pentadbirDaftarKlien(Request $request)
-    {
-        // Retrieve the user by their ID
-        $user = User::where('no_kp', $request->no_kp)->first();
+    // public function pentadbirDaftarKlien(Request $request)
+    // {
+    //     // Retrieve the user by their ID
+    //     $user = User::where('no_kp', $request->no_kp)->first();
 
-        // Retrieve the corresponding Klien record by no_kp
-        $klien = Klien::where('no_kp', $request->no_kp)->first();
+    //     // Retrieve the corresponding Klien record by no_kp
+    //     $klien = Klien::where('no_kp', $request->no_kp)->first();
 
-        // Check if a password has been provided
-        if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
-        }
-        else
-        {
-            $createData = [
-                'name' => strtoupper($request->name),
-                'no_kp' => $request->no_kp,
-                'email' => $request->email,
-                'tahap_pengguna' => 2,   // Set default user level
-                'status' => 0,           // Set default status
-                'password' => Hash::make($request->passwordDaftar),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+    //     // Check if a password has been provided
+    //     if (!$request->filled('passwordDaftar')) {
+    //         return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
+    //     }
+    //     else
+    //     {
+    //         $createData = [
+    //             'name' => strtoupper($request->name),
+    //             'no_kp' => $request->no_kp,
+    //             'email' => $request->email,
+    //             'tahap_pengguna' => 2,   // Set default user level
+    //             'status' => 0,           // Set default status
+    //             'password' => Hash::make($request->passwordDaftar),
+    //             'created_at' => now(),
+    //             'updated_at' => now(),
+    //         ];
 
-            // Create the new user
-            $user = User::create($createData);
+    //         // Create the new user
+    //         $user = User::create($createData);
 
-            // Update in table klien
-            $klien->update([
-                'no_tel' => $request->no_tel,
-                'emel' => $request->email,
-                'created_at' => now(),
-            ]);
+    //         // Update in table klien
+    //         $klien->update([
+    //             'no_tel' => $request->no_tel,
+    //             'emel' => $request->email,
+    //             'created_at' => now(),
+    //         ]);
 
-            // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
-            WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-            KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-            PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+    //         // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
+    //         WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+    //         KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
+    //         PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
 
-            if ($request->email){
-                Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
-                return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
-            }
-            else{
-                return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
-            }
-        }
-    }
+    //         if ($request->email){
+    //             Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
+    //             return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
+    //         }
+    //         else{
+    //             return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
+    //         }
+    //     }
+    // }
 
     public function modalKemaskiniPegawai($id)
     {
