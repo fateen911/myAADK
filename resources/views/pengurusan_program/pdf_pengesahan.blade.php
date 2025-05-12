@@ -31,7 +31,7 @@
         <div class="my-3 text-center">
             <table class="mx-auto">
                 <tr>
-                    <td class="text-center border-transparent"><img src="{{ public_path('logo/mySupport.png') }}" alt="Logo AADK" style="width: 100px; height: auto;"></td>
+                    <td class="text-center border-transparent"><img src="{{ public_path('logo/aadk.png') }}" alt="Logo AADK" style="width: 80px; height: auto;"></td>
                 </tr>
                 <tr>
                     <td class="text-center border-transparent p-0"><p class="mt-5 fs-30"><b>AGENSI ANTIDADAH KEBANGSAAN (AADK)</b></p></td>
