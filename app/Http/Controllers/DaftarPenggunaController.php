@@ -383,14 +383,22 @@ class DaftarPenggunaController extends Controller
         // DB LOCAL
         $klienView = viewklienlocal::where('mykad', $no_kp)->first();
 
+        // Check if client exists or not in view MyAADK
         if (!$klienView) {
-            return redirect()->back()->with('error', 'No Kad Pengenalan tersebut tidak dibenarkan untuk proses pendaftaran dalam sistem ini');
+            return redirect()->back()->with('not-exists', 'No Kad Pengenalan tersebut tidak dibenarkan untuk mendaftar sebagai pengguna sistem ini');
         }
 
-        // Store IC and data in session
+        // Check if client already exists as a user
+        $user = User::where('no_kp', $no_kp)->first();
+
+        if ($user) {
+            return redirect()->back()->with('registered', 'Klien sudah mendaftar sebagai pengguna sistem ini.');
+        }
+
+        // Store IC and client data in session if not yet registered
         session([
-                'no_kp' => $no_kp,
-                'klien_view' => [
+            'no_kp' => $no_kp,
+            'klien_view' => [
                 'nama' => $klienView->nama,
                 'no_tel' => $klienView->telefon,
                 'email' => $klienView->emel,
@@ -399,6 +407,7 @@ class DaftarPenggunaController extends Controller
 
         return redirect()->back()->with('exists', 'Data berjaya dijumpai. Sila klik "Daftar" untuk mendaftar klien ini.');
     }
+
 
     public function registerKlien(Request $request)
     {

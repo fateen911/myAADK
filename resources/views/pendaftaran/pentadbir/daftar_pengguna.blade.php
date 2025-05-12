@@ -677,10 +677,20 @@
 			@if(session('not-exists'))
 				Swal.fire({
 					icon: 'error',
-					title: 'Ralat',
-					text: {!! json_encode(session('error')) !!},
+					title: 'No Kad Pengenalan Tidak Wujud!',
+					text: '{!! session('not-exists') !!}',
+					confirmButtonText: 'OK'
 				});
 			@endif
+
+			@if(session('registered'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Telah Mendaftar!',
+                    text: '{!! session('registered') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 
