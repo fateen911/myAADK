@@ -108,9 +108,6 @@
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label">Nama Aktiviti</label>
                                         <input type="text" name="nama" class="form-control mb-2" value="" required/>
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
                                     </div>
                                     <!--end::Input group-->
 
@@ -155,40 +152,54 @@
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                        <label class="required form-label">Tempat Aktiviti</label>
+                                        <input type="text" name="tempat" class="form-control mb-2" value="" required/>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <div class="form d-flex flex-column flex-lg-row mb-6">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                                <label class="required form-label">Tempat Aktiviti</label>
-                                                <input type="text" name="tempat" class="form-control mb-2" value="" required/>
+                                                <label class="form-label">Negeri</label>
+                                                <select id="negeri" class="form-select" name="negeri"  required>
+                                                    <option value="">Sila Pilih Negeri</option>
+                                                    @foreach($negeri as $item)
+                                                        <option value="{{$item->id}}">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->negeri) }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" value=""/>
+                                                <label class="form-label">Daerah</label>
+                                                <select id="daerah" class="form-select" name="daerah"  required>
+                                                    <option value="">Sila Pilih Daerah</option>
+                                                    <!--AJAX-->
+                                                </select>
                                             </div>
                                         </div>
-
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
                                     </div>
                                     <!--end::Input group-->
 
                                     <!--end::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                        <div class="form d-flex flex-column flex-lg-row">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                                <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" value=""/>
+                                            </div>
+                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                                 <label class="required form-label">Nama Pegawai</label>
                                                 <input type="text" name="nama_pegawai" class="form-control mb-2" value="" required/>
                                             </div>
-                                            <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
-                                                <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="text" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 01765899334" value="" maxlength="11" onkeypress="return isNumberKey(event)" required/>
-                                            </div>
                                         </div>
-
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
                                     </div>
+
+                                    <!--begin::Input group-->
+                                    <div class="mb-5 fv-row">
+                                        <label class="required form-label">No. Telefon Untuk Dihubungi</label>
+                                        <input type="text" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 01765899334" value="" maxlength="11" onkeypress="return isNumberKey(event)" required/>
+                                    </div>
+                                    <!--end::Input group-->
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
@@ -252,6 +263,32 @@
     <!-- Editor -->
     <script src="assets/js/custom/apps/ecommerce/catalog/save-product.js"></script>
     <!--end::Javascript-->
+
+    <!--filter-->
+    <script>
+        $(document).ready(function() {
+            $('#negeri').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#daerah').empty();
+                            $('#daerah').append('<option value="">Pilih Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                var nameWithoutPrefix = daerah.daerah.replace(/^AADK\s*/, '');
+                                $('#daerah').append('<option value="' + daerah.kod + '">' + nameWithoutPrefix + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#daerah').empty();
+                    $('#daerah').append('<option value="">Pilih Daerah</option>');
+                }
+            });
+        });
+    </script>
 
     <script>
         document.getElementById('program_form').addEventListener('submit', function(event) {

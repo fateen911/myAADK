@@ -248,6 +248,26 @@
                             <!--end::Input group-->
 
                             <!--begin::Input group-->
+                            <div class="form d-flex flex-column flex-lg-row">
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px me-lg-10">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">Negeri:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $negeri->negeri) }}</p>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
+                                    <!--begin::Input group-->
+                                    <div class="mb-2 fv-row">
+                                        <label class="form-label">Daerah:</label>
+                                        <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $daerah->daerah) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
                             <div class="mb-6 fv-row">
                                 <label class="form-label">Penganjur Aktiviti:</label>
                                 <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">

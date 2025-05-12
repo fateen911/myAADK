@@ -157,22 +157,31 @@
                                     </div>
                                     <!--end::Input group-->
 
+                                    <div class="mb-5 fv-row">
+                                        <label class="required form-label">Tempat Aktiviti</label>
+                                        <input type="text" name="tempat" id="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
+                                    </div>
+
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <div class="form d-flex flex-column flex-lg-row mb-5">
+                                        <div class="form d-flex flex-column flex-lg-row mb-6">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                                <label class="required form-label">Tempat Aktiviti</label>
-                                                <input type="text" name="tempat"  id="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
+                                                <label class="form-label">Negeri</label>
+                                                <select id="negeri" class="form-select" name="negeri"  required>
+                                                    <option value="{{$program->negeri}}">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $negeriP->negeri) }}</option>
+                                                    @foreach($negeri as $item)
+                                                        <option value="{{$item->id}}">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->negeri) }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
-                                                <input type="text" name="penganjur" class="form-control mb-2" value="{{$program->penganjur}}"/>
+                                                <label class="form-label">Daerah</label>
+                                                <select id="daerah" class="form-select" name="daerah"  required>
+                                                    <option value="{{$program->daerah}}">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $daerahP->daerah) }}</option>
+                                                    <!--AJAX-->
+                                                </select>
                                             </div>
                                         </div>
-
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
                                     </div>
                                     <!--end::Input group-->
 
@@ -184,15 +193,17 @@
                                                 <input type="text" name="nama_pegawai" class="form-control mb-2" value="{{$program->nama_pegawai}}" required/>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
-                                                <label class="required form-label">No. Telefon Untuk Dihubungi</label>
-                                                <input type="text" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 60145672838" value="{{$program->no_tel_dihubungi}}" maxlength="11" onkeypress="return isNumberKey(event)" required/>
+                                                <label class="form-label">Penganjur Aktiviti (Jika Ada)</label>
+                                                <input type="text" name="penganjur" class="form-control mb-2" value="{{$program->penganjur}}"/>
                                             </div>
                                         </div>
-
-                                        {{--                                                            <!--begin::Description-->--}}
-                                        {{--                                                            <div class="text-muted fs-7">A product name is required and recommended to be unique.</div>--}}
-                                        {{--                                                            <!--end::Description-->--}}
                                     </div>
+
+                                    <div class="mb-5 fv-row">
+                                        <label class="required form-label">No. Telefon Untuk Dihubungi</label>
+                                        <input type="text" name="no_tel_dihubungi" class="form-control mb-2" placeholder="Contoh: 601134789594" value="{{$program->no_tel_dihubungi}}" maxlength="11" onkeypress="return isNumberKey(event)" required/>
+                                    </div>
+
                                     <!-- Input bagi hebahan pindaan program -->
                                     <input type="checkbox" id="hebah_pindaan" name="hebah_pindaan" style="display: none;">
                                     <!--begin::Input group-->
@@ -257,6 +268,32 @@
     <!-- Editor -->
     <script src="assets/js/custom/apps/ecommerce/catalog/save-product.js"></script>
     <!--end::Javascript-->
+
+    <!--filter-->
+    <script>
+        $(document).ready(function() {
+            $('#negeri').change(function() {
+                var negeriId = $(this).val();
+                if (negeriId) {
+                    $.ajax({
+                        url: '/daerah/' + negeriId,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#daerah').empty();
+                            $('#daerah').append('<option value="">Pilih Daerah</option>');
+                            $.each(response, function(key, daerah) {
+                                var nameWithoutPrefix = daerah.daerah.replace(/^AADK\s*/, '');
+                                $('#daerah').append('<option value="' + daerah.kod + '">' + nameWithoutPrefix + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#daerah').empty();
+                    $('#daerah').append('<option value="">Pilih Daerah</option>');
+                }
+            });
+        });
+    </script>
 
     <script>
         // Store initial values for comparison

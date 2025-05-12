@@ -22,6 +22,8 @@ class Program extends Model
         'tarikh_mula',
         'tarikh_tamat',
         'tempat',
+        'negeri',
+        'daerah',
         'penganjur',
         'nama_pegawai',
         'no_tel_dihubungi',

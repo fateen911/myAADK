@@ -178,6 +178,19 @@ class PengurusanProgController extends Controller
     public function daftarProgPA()
     {
         $kategori = KategoriProgram::all();
+        //get tahap
+        $pegawai = Pegawai::where('users_id', Auth::id())->first();
+        $user = User::find(Auth::id());
+        $tahap = $user->tahap_pengguna;
+
+        if ($user->tahap_pengguna == "4") {//pegawai negeri
+            $negeri = NegeriPejabat::where('id', $pegawai->negeri_bertugas)->first();
+            $daerah = "";
+        }
+        else if ($user->tahap_pengguna == "5") {//pegawai daerah
+            $negeri = NegeriPejabat::where('id', $pegawai->negeri_bertugas)->first();
+            $daerah = DaerahPejabat::where('negeri_id', $pegawai->negeri_bertugas)->where('kod', $pegawai->daerah_bertugas)->first();
+        }
 
         if ($kategori) {
             // Notifications and unread count for tahap_pengguna == 5
@@ -212,7 +225,7 @@ class PengurusanProgController extends Controller
                                 })->count();
             }
 
-            return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori', 'notifications', 'unreadCountPD'));
+            return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori', 'negeri', 'daerah','tahap','notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -276,6 +289,8 @@ class PengurusanProgController extends Controller
         $program->tarikh_mula          =   $tarikh_mula;
         $program->tarikh_tamat         =   $tarikh_tamat;
         $program->tempat               =   $request->tempat;
+        $program->negeri               =   $request->negeri;
+        $program->daerah               =   $request->daerah;
         $program->penganjur            =   $request->penganjur;
         $program->nama_pegawai         =   $request->nama_pegawai;
         $program->no_tel_dihubungi     =   $request->no_tel_dihubungi;
@@ -287,7 +302,6 @@ class PengurusanProgController extends Controller
         $program->status               =   "BELUM SELESAI";
         $program->version              =    1;
         $program->save();
-
 
         //PENGESAHAN
         // Generate the unique link with event ID
@@ -332,6 +346,22 @@ class PengurusanProgController extends Controller
         $kategori = KategoriProgram::all();
         $program = Program::with('kategori')->find($id);
 
+        $pegawai = Pegawai::where('users_id', Auth::id())->first();
+        $user = User::find(Auth::id());
+        $tahap = $user->tahap_pengguna;
+
+        if ($user->tahap_pengguna == "4") {//pegawai negeri
+            $negeri = NegeriPejabat::where('id', $pegawai->negeri_bertugas)->first();
+            $daerah = "";
+        }
+        else if ($user->tahap_pengguna == "5") {//pegawai daerah
+            $negeri = NegeriPejabat::where('id', $pegawai->negeri_bertugas)->first();
+            $daerah = DaerahPejabat::where('negeri_id', $pegawai->negeri_bertugas)->where('kod', $pegawai->daerah_bertugas)->first();
+        }
+
+        $negeriP = NegeriPejabat::where('id', $program->negeri)->first();
+        $daerahP = DaerahPejabat::where('kod', $program->daerah)->first();
+
         // Notifications and unread count for tahap_pengguna == 5
         $notifications = null;
         $unreadCountPD = 0;
@@ -365,7 +395,7 @@ class PengurusanProgController extends Controller
         }
 
         if ($kategori || $program) {
-            return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program', 'notifications', 'unreadCountPD'));
+            return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program', 'notifications', 'unreadCountPD','negeri','daerah','tahap','negeriP','daerahP'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -388,6 +418,8 @@ class PengurusanProgController extends Controller
             'tarikh_mula'          =>   $tarikh_mula,
             'tarikh_tamat'         =>   $tarikh_tamat,
             'tempat'               =>   $request->tempat,
+            'negeri'               =>   $request->negeri,
+            'daerah'              =>   $request->daerah,
             'penganjur'            =>   $request->penganjur,
             'nama_pegawai'         =>   $request->nama_pegawai,
             'no_tel_dihubungi'     =>   $request->no_tel_dihubungi,
@@ -503,6 +535,8 @@ class PengurusanProgController extends Controller
         $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
         $tdk_hadir = $pengesahan->where('program_id',$id)->where('keputusan','TIDAK HADIR')->count();
         $keseluruhan = $hadir + $tdk_hadir;
+        $negeri = NegeriPejabat::where('id', $program->negeri)->first();
+        $daerah = DaerahPejabat::where('kod', $program->daerah)->first();
 
         // Notifications and unread count for tahap_pengguna == 5
         $notifications = null;
@@ -537,7 +571,7 @@ class PengurusanProgController extends Controller
         }
 
         if ($program) {
-            return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan', 'notifications', 'unreadCountPD'));
+            return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','negeri','daerah','hadir', 'tdk_hadir', 'keseluruhan', 'notifications', 'unreadCountPD'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -618,8 +652,9 @@ class PengurusanProgController extends Controller
     public function daftarProgPS()
     {
         $kategori = KategoriProgram::all();
+        $negeri = NegeriPejabat::all();
         if ($kategori) {
-            return view('pengurusan_program.pentadbir_sistem.daftar_prog', compact('kategori'));
+            return view('pengurusan_program.pentadbir_sistem.daftar_prog', compact('kategori','negeri'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -685,6 +720,8 @@ class PengurusanProgController extends Controller
         $program->tarikh_mula          =   $tarikh_mula;
         $program->tarikh_tamat         =   $tarikh_tamat;
         $program->tempat               =   $request->tempat;
+        $program->negeri               =   $request->negeri;
+        $program->daerah               =   $request->daerah;
         $program->penganjur            =   $request->penganjur;
         $program->nama_pegawai         =   $request->nama_pegawai;
         $program->no_tel_dihubungi     =   $request->no_tel_dihubungi;
@@ -740,8 +777,13 @@ class PengurusanProgController extends Controller
     {
         $kategori = KategoriProgram::all();
         $program = Program::with('kategori')->find($id);
+
+        $negeri = NegeriPejabat::all();
+
+        $negeriP = NegeriPejabat::where('id', $program->negeri)->first();
+        $daerahP = DaerahPejabat::where('kod', $program->daerah)->first();
         if ($kategori || $program) {
-            return view('pengurusan_program.pentadbir_sistem.kemaskini_prog', compact('kategori','program'));
+            return view('pengurusan_program.pentadbir_sistem.kemaskini_prog', compact('kategori','program','negeri','negeriP','daerahP'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
@@ -764,6 +806,8 @@ class PengurusanProgController extends Controller
         'tarikh_mula'          =>   $tarikh_mula,
         'tarikh_tamat'         =>   $tarikh_tamat,
         'tempat'               =>   $request->tempat,
+        'negeri'               =>   $request->negeri,
+        'daerah'              =>   $request->daerah,
         'penganjur'            =>   $request->penganjur,
         'nama_pegawai'         =>   $request->nama_pegawai,
         'no_tel_dihubungi'     =>   $request->no_tel_dihubungi,
@@ -880,8 +924,10 @@ class PengurusanProgController extends Controller
         $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
         $tdk_hadir = $pengesahan->where('program_id',$id)->where('keputusan','TIDAK HADIR')->count();
         $keseluruhan = $hadir + $tdk_hadir;
+        $negeri = NegeriPejabat::where('id', $program->negeri)->first();
+        $daerah = DaerahPejabat::where('kod', $program->daerah)->first();
         if ($program) {
-            return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan'));
+            return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan','daerah','negeri'));
         } else {
             return redirect()->back()->with('error', 'Program tidak dijumpai');
         }
