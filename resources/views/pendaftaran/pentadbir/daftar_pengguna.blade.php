@@ -686,7 +686,7 @@
 			@if(session('registered'))
                 Swal.fire({
                     icon: 'error',
-                    title: 'Telah Mendaftar!',
+                    title: 'Klien Telah Mendaftar!',
                     text: '{!! session('registered') !!}',
                     confirmButtonText: 'OK'
                 });
