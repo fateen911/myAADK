@@ -379,8 +379,9 @@
 							<div class="col-xl-9">
 								<div class="card card-flush h-xl-100">
 									<!--begin::Header-->
-									<div class="card-header pt-5">
-										<h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk mendaftar klien sebagai pengguna sistem atau mengemaskini maklumat akaun klien.</small></h2>
+									<div class="col p-5">
+										<h2>Senarai Keseluruhan Klien</h2>
+										<small>Sila klik pada ikon pensil untuk mengemaskini maklumat akaun klien.</small>
 									</div>
 									<!--end::Header-->
 

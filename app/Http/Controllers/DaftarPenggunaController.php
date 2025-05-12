@@ -504,8 +504,7 @@ class DaftarPenggunaController extends Controller
         $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
 
         // daerah: from senarai_daerah where daerah == $warisData->alamat3
-        $daerah_penjaga = Daerah::where('daerah', $warisData->alamat3)
-        ->value('id');
+        $daerah_penjaga = Daerah::where('daerah', $warisData->wr_alamat3)->value('id');
 
         //kalau data waris takde dalam view. kena masukkan klien_id jgk ke dalam table waris?
         if ($warisData) {
