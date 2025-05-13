@@ -121,7 +121,7 @@
                                             <select id="negeri" class="form-select mt-5" name="negeri">
                                                 <option value="">Sila Pilih Negeri</option>
                                                 @foreach($negeri as $item)
-                                                    <option value="{{$item->id}}" {{ $pNegeri == $item->id ? 'selected' : '' }}>{{$item->negeri}}</option>
+                                                    <option value="{{$item->id}}" {{ $pNegeri == $item->id ? 'selected' : '' }}>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->negeri) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -130,7 +130,7 @@
                                             <select id="daerah" class="form-select mt-5" name="daerah">
                                                 <option value="">Sila Pilih Daerah</option>
                                                 @foreach($daerah as $item)
-                                                    <option value="{{$item->kod}}" {{ $pDaerah == $item->kod ? 'selected' : '' }}>{{$item->daerah}}</option>
+                                                    <option value="{{$item->kod}}" {{ $pDaerah == $item->kod ? 'selected' : '' }}>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->daerah) }}</option>
                                                 @endforeach
                                                 <!--AJAX-->
                                             </select>
@@ -176,8 +176,8 @@
                                 <th class="min-w-40px">ID</th>
                                 <th class="min-w-100px">Kategori</th>
                                 <th class="min-w-150px">Tempat</th>
-                                <th class="min-w-150px">Negeri Bertugas</th>
-                                <th class="min-w-150px">Daerah Bertugas</th>
+                                <th class="min-w-150px">Negeri</th>
+                                <th class="min-w-150px">Daerah</th>
                                 <th class="min-w-50px">Status</th>
                             </tr>
                             </thead>
@@ -249,6 +249,9 @@
                         let btn = '';
                         let btn2 = '';
                         $.each(response, function(index, program) {
+                            var dNegeri = program.negeri.replace(/^AADK\s*/, '');
+                            var dDaerah = program.daerah.replace(/^AADK\s*/, '');
+
                             if(program.status=='SELESAI'){
                                 color = "badge-light-success text-seagreen";
                                 btn   = " ";
@@ -284,8 +287,8 @@
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori + '</td>';
                             rows += '<td class="text-uppercase">' + program.tempat + '</td>';
-                            rows += '<td class="text-uppercase">' + program.negeri + '</td>';
-                            rows += '<td class="text-uppercase">' + program.daerah + '</td>';
+                            rows += '<td class="text-uppercase">' + dNegeri + '</td>';
+                            rows += '<td class="text-uppercase">' + dDaerah + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '</tr>';
                         });
@@ -321,7 +324,8 @@
                             $('#daerah').empty();
                             $('#daerah').append('<option value="">Pilih Daerah</option>');
                             $.each(response, function(key, daerah) {
-                                $('#daerah').append('<option value="' + daerah.kod + '">' + daerah.daerah + '</option>');
+                                var dDaerah = daerah.daerah.replace(/^AADK\s*/, '');
+                                $('#daerah').append('<option value="' + daerah.kod + '">' + dDaerah + '</option>');
                             });
                         }
                     });

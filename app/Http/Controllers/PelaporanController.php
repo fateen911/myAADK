@@ -104,12 +104,12 @@ class PelaporanController extends Controller
                 ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
                 ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
                 ->select(
-                    'k.id as klien_id', 
-                    'k.nama', 
-                    'k.no_kp', 
-                    'n.negeri', 
-                    'd.daerah', 
-                    'kk.updated_at', 
+                    'k.id as klien_id',
+                    'k.nama',
+                    'k.no_kp',
+                    'n.negeri',
+                    'd.daerah',
+                    'kk.updated_at',
                     't.tahap'
                 )
                 ->where('kk.updated_at', '>=', $sixMonthsAgo)
@@ -195,7 +195,7 @@ class PelaporanController extends Controller
         return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
     }
 
-    public function PDFAnalisisMK(Request $request) 
+    public function PDFAnalisisMK(Request $request)
     {
         // Fetch filters from request
         $filters = [
@@ -283,7 +283,7 @@ class PelaporanController extends Controller
             'aadk_negeri_s' => $request->aadk_negeri_s,
             'aadk_daerah_s' => $request->aadk_daerah_s,
         ];
-    
+
         return Excel::download(new AnalisisMKExcel($filters), 'Analisis_Modal_Kepulihan.xlsx');
     }
 
@@ -429,7 +429,7 @@ class PelaporanController extends Controller
         if ($request->filled('aadk_negeri_tm6')) {
             $query->where('u.negeri_pejabat', $request->aadk_negeri_tm6);
         }
-        
+
         if ($request->filled('aadk_daerah_tm6')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
@@ -487,7 +487,7 @@ class PelaporanController extends Controller
         if ($request->filled('aadk_negeri_tm6')) {
             $query->where('u.negeri_pejabat', $request->aadk_negeri_tm6);
         }
-        
+
         if ($request->filled('aadk_daerah_tm6')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
@@ -541,7 +541,7 @@ class PelaporanController extends Controller
     {
         ini_set('memory_limit', '1024M'); // Increase to 1GB
         ini_set('max_execution_time', 600); // Increase execution time to 10 minutes
-    
+
         $sixMonthsAgo = Carbon::now()->subMonths(6);
 
         $query = DB::table('klien as u')
@@ -551,7 +551,7 @@ class PelaporanController extends Controller
         if ($request->filled('aadk_negeri_tpm')) {
             $query->where('u.negeri_pejabat', $request->aadk_negeri_tpm);
         }
-        
+
         if ($request->filled('aadk_daerah_tpm')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
         }
@@ -563,7 +563,7 @@ class PelaporanController extends Controller
                 ->setOption('disable-smart-shrinking', true)
                 ->setOption('lowquality', true) // Speeds up processing
                 ->setOption('enable-local-file-access', true);
-        
+
         return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
@@ -580,7 +580,7 @@ class PelaporanController extends Controller
 
     // PEGAWAI NEGERI - MODAL KEPULIHAN - SELESAI MENJAWAB
     public function jsonSelesaiMenjawabPN(Request $request)
-    {        
+    {
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -591,12 +591,12 @@ class PelaporanController extends Controller
                 ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
                 ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
                 ->select(
-                    'k.id as klien_id', 
-                    'k.nama', 
-                    'k.no_kp', 
-                    'n.negeri', 
-                    'd.daerah', 
-                    'kk.updated_at', 
+                    'k.id as klien_id',
+                    'k.nama',
+                    'k.no_kp',
+                    'n.negeri',
+                    'd.daerah',
+                    'kk.updated_at',
                     't.tahap'
                 )
                 ->where('kk.updated_at', '>=', $sixMonthsAgo)
@@ -616,7 +616,7 @@ class PelaporanController extends Controller
         if ($request->has('tahap_kepulihan_id') && $request->tahap_kepulihan_id != '') {
             $query->where('kk.tahap_kepulihan_id', $request->tahap_kepulihan_id);
         }
-        
+
         if ($request->has('aadk_daerah_s') && $request->aadk_daerah_s != '') {
             $query->where('k.daerah_pejabat', $request->aadk_daerah_s);
         }
@@ -681,7 +681,7 @@ class PelaporanController extends Controller
         return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
     }
 
-    public function PDFAnalisisModalKepulihanPN(Request $request) 
+    public function PDFAnalisisModalKepulihanPN(Request $request)
     {
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
@@ -765,7 +765,7 @@ class PelaporanController extends Controller
             'tahap_kepulihan_id' => $request->tahap_kepulihan_id,
             'aadk_daerah_s' => $request->aadk_daerah_s,
         ];
-    
+
         return Excel::download(new AnalisisMKExcelPN($filters), 'Analisis_Modal_Kepulihan.xlsx');
     }
 
@@ -809,7 +809,7 @@ class PelaporanController extends Controller
         if ($request->filled('to_date_bs')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_bs);
         }
-       
+
         if ($request->aadk_daerah_bs) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_bs);
         }
@@ -911,7 +911,7 @@ class PelaporanController extends Controller
         if ($request->filled('to_date_tm6')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_tm6);
         }
-        
+
         if ($request->filled('aadk_daerah_tm6')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
@@ -967,7 +967,7 @@ class PelaporanController extends Controller
         if ($request->filled('to_date_tm6')) {
             $query->whereDate('kk.updated_at', '<=', $request->to_date_tm6);
         }
-        
+
         if ($request->filled('aadk_daerah_tm6')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tm6);
         }
@@ -983,7 +983,7 @@ class PelaporanController extends Controller
     {
         $pegawai = Auth::user();
         $pegawaiNegeri = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-        
+
         $query = DB::table('klien as u')
                     ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
                     ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
@@ -1029,7 +1029,7 @@ class PelaporanController extends Controller
                 ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id')
                 ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
                 ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas);
-        
+
         if ($request->filled('aadk_daerah_tpm')) {
             $query->where('u.daerah_pejabat', $request->aadk_daerah_tpm);
         }
@@ -1044,7 +1044,7 @@ class PelaporanController extends Controller
         return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
-    
+
     // PEGAWAI DAERAH
     public function modalKepulihanDaerah(Request $request)
     {
@@ -1083,7 +1083,7 @@ class PelaporanController extends Controller
 
     // PEGAWAI DAERAH - MODAL KEPULIHAN - SELESAI MENJAWAB
     public function jsonSelesaiMenjawabPD(Request $request)
-    {        
+    {
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -1094,18 +1094,18 @@ class PelaporanController extends Controller
                 ->join('senarai_daerah_pejabat as d', 'k.daerah_pejabat', '=', 'd.kod')
                 ->join('tahap_kepulihan as t', 'kk.tahap_kepulihan_id', '=', 't.id')
                 ->select(
-                    'k.id as klien_id', 
-                    'k.nama', 
-                    'k.no_kp', 
-                    'n.negeri', 
-                    'd.daerah', 
-                    'kk.updated_at', 
+                    'k.id as klien_id',
+                    'k.nama',
+                    'k.no_kp',
+                    'n.negeri',
+                    'd.daerah',
+                    'kk.updated_at',
                     't.tahap'
                 )
                 ->where('kk.updated_at', '>=', $sixMonthsAgo)
                 ->where('kk.status', 'Selesai')
                 ->where('k.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)             
+                ->where('k.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
@@ -1177,7 +1177,7 @@ class PelaporanController extends Controller
         return $pdf->stream('Senarai_Selesai_Menjawab.pdf');
     }
 
-    public function PDFAnalisisModalKepulihanPD(Request $request) 
+    public function PDFAnalisisModalKepulihanPD(Request $request)
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
@@ -1256,7 +1256,7 @@ class PelaporanController extends Controller
             'to_date_s' => $request->to_date_s,
             'tahap_kepulihan_id' => $request->tahap_kepulihan_id,
         ];
-    
+
         return Excel::download(new AnalisisMKExcelPD($filters), 'Analisis_Modal_Kepulihan.xlsx');
     }
 
@@ -1290,7 +1290,7 @@ class PelaporanController extends Controller
                 })
                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'd.daerah', 'n.negeri','kk.updated_at', 'kk.status')
                 ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)                
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
@@ -1344,7 +1344,7 @@ class PelaporanController extends Controller
                 })
                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah', 'u.negeri', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at', 'kk.status')
                 ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)                
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
         if ($request->filled('from_date_bs')) {
@@ -1384,7 +1384,7 @@ class PelaporanController extends Controller
                 )
                 ->where('kk.updated_at', '<=', now()->subMonths(6)) // Latest record is more than 6 months old
                 ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)                
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
         // Apply Filters
@@ -1436,7 +1436,7 @@ class PelaporanController extends Controller
                 })
                 ->groupBy('u.id', 'u.nama', 'u.no_kp', 'u.daerah_pejabat', 'u.negeri_pejabat', 'kk.skor', 'kk.tahap_kepulihan_id', 'kk.updated_at')
                 ->where('u.negeri_pejabat', $pegawaiDaerah->negeri_bertugas)
-                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)                
+                ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                 ->orderBy('kk.updated_at', 'desc');
 
         if ($request->filled('from_date_tm6')) {
@@ -1458,7 +1458,7 @@ class PelaporanController extends Controller
     {
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
-        
+
         $query = DB::table('klien as u')
                     ->leftJoin('keputusan_kepulihan_klien as kk', 'u.id', '=', 'kk.klien_id') // Just a simple left join
                     ->leftJoin('senarai_negeri_pejabat as n', 'u.negeri_pejabat', '=', 'n.negeri_id')
@@ -1487,7 +1487,7 @@ class PelaporanController extends Controller
     {
         ini_set('memory_limit', '1024M'); // Increase to 1GB
         ini_set('max_execution_time', 600); // Increase execution time to 10 minutes
-        
+
         $pegawai = Auth::user();
         $pegawaiDaerah = DB::table('pegawai')->where('users_id', $pegawai->id)->first();
         $sixMonthsAgo = Carbon::now()->subMonths(6);
@@ -1524,8 +1524,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1533,8 +1533,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1548,8 +1548,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1557,8 +1557,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1573,8 +1573,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1582,8 +1582,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1912,8 +1912,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1921,8 +1921,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1937,8 +1937,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1946,8 +1946,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1963,8 +1963,8 @@ class PelaporanController extends Controller
 
                 foreach ($prog as $item) {
                     // Get the state and district names based on the klien's negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
                         'id'        =>  $item->id,
@@ -1972,8 +1972,8 @@ class PelaporanController extends Controller
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2005,10 +2005,10 @@ class PelaporanController extends Controller
             $query->where('status', $request->status);
         }
         if ($request->negeri) {
-            $query->where('negeri_pejabat', $request->negeri);
+            $query->where('negeri', $request->negeri);
         }
         if ($request->daerah) {
-            $query->where('daerah_pejabat', $request->daerah);
+            $query->where('daerah', $request->daerah);
         }
 
         $nama_excel = 'pelaporan_senarai_aktiviti.xlsx';
@@ -2058,10 +2058,10 @@ class PelaporanController extends Controller
             $query->where('status', $request->status);
         }
         if ($request->negeri) {
-            $query->where('negeri_pejabat', $request->negeri);
+            $query->where('negeri', $request->negeri);
         }
         if ($request->daerah) {
-            $query->where('daerah_pejabat', $request->daerah);
+            $query->where('daerah', $request->daerah);
         }
 
         $nama_pdf = 'rekod_aktiviti.pdf';
@@ -2073,16 +2073,16 @@ class PelaporanController extends Controller
 
                 foreach ($program as $item) {
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2098,16 +2098,16 @@ class PelaporanController extends Controller
 
                 foreach ($program as $item) {
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2124,16 +2124,16 @@ class PelaporanController extends Controller
 
                 foreach ($program as $item) {
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
-                    $negeri = Negeri::where('id', $item->negeri_pejabat)->first();
-                    $daerah = DaerahPejabat::where('kod', $item->daerah_pejabat)->first();
+                    $negeri = NegeriPejabat::where('id', $item->negeri)->first();
+                    $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper($negeri) ? $negeri->negeri : 'SEMUA',
-                        'daerah'    =>  strtoupper($daerah) ? $daerah->daerah : 'SEMUA',
+                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
+                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
