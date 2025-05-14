@@ -6,9 +6,9 @@ use App\Mail\DaftarKlien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use App\Mail\DaftarPegawai;
 use App\Mail\PegawaiApproved;
 use App\Mail\PegawaiRejected;
@@ -172,7 +172,9 @@ class DaftarPenggunaController extends Controller
         // $klienView = KlienView::where('mykad', $no_kp)->first();
 
         // LOCAL
-        $klienView = viewklienlocal::where('mykad', $no_kp)->first();
+        // $klienView = viewklienlocal::where('mykad', $no_kp)->first();
+
+        $klienView = app()->environment('local')? viewklienlocal::where('mykad', $no_kp)->first(): KlienView::where('mykad', $no_kp)->first();
 
         // Step 1: Check if client exists in view
         if (!$klienView) {
@@ -210,7 +212,9 @@ class DaftarPenggunaController extends Controller
         // $klien = KlienView::where('mykad', $id)->first();
 
         // DB LOCAL
-        $klien = viewklienlocal::where('mykad', $id)->first();
+        // $klien = viewklienlocal::where('mykad', $id)->first();
+
+        $klien = app()->environment('local')? viewklienlocal::where('mykad', $id)->first(): KlienView::where('mykad', $id)->first();
 
         return view('pendaftaran.pegawai_daerah.modal_daftar_klien', compact('klien'));
     }
@@ -226,10 +230,24 @@ class DaftarPenggunaController extends Controller
         // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         // DB LOCAL
-        $klienData = viewklienlocal::where('mykad', $no_kp)->first();
-        $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
-        $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
-        $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+        // $klienData = viewklienlocal::where('mykad', $no_kp)->first();
+        // $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
+        // $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
+        // $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+
+        if (App::environment('local')) {
+            // DB LOCAL
+            $klienData = viewklienlocal::where('mykad', $no_kp)->first();
+            $keluargaData = viewfamililocal::where('id_pk', $klienData?->id_pk)->first();
+            $warisData = viewwarislocal::where('id_pk', $klienData?->id_pk)->first();
+            $pekerjaanData = viewkerjalocal::where('id_pk', $klienData?->id_pk)->where('id_kes', $klienData?->id_ki)->first();
+        } else {
+            // SERVER
+            $klienData = KlienView::where('mykad', $no_kp)->first();
+            $keluargaData = FamiliView::where('id_pk', $klienData?->id_pk)->first();
+            $warisData = WarisView::where('id_pk', $klienData?->id_pk)->first();
+            $pekerjaanData = KerjaView::where('id_pk', $klienData?->id_pk)->where('id_kes', $klienData?->id_ki)->first();
+        }
 
         // 1) Create klien
         $no_tel = $request->input('no_tel') ?: $klienData->telefon;
@@ -839,10 +857,12 @@ class DaftarPenggunaController extends Controller
         $no_kp = $request->input('no_kp');
 
         // SERVER
-        $klienView = KlienView::where('mykad', $no_kp)->first();
+        // $klienView = KlienView::where('mykad', $no_kp)->first();
 
         // DB LOCAL
         // $klienView = viewklienlocal::where('mykad', $no_kp)->first();
+
+        $klienView = app()->environment('local')? viewklienlocal::where('mykad', $no_kp)->first(): KlienView::where('mykad', $no_kp)->first();
 
         // Check if client exists or not in view MyAADK
         if (!$klienView) {
@@ -872,10 +892,12 @@ class DaftarPenggunaController extends Controller
     public function modalDaftarKlien($id)
     {
         // SERVER
-        $klien = KlienView::where('mykad', $id)->first();
+        // $klien = KlienView::where('mykad', $id)->first();
 
         // DB LOCAL
         // $klien = viewklienlocal::where('mykad', $id)->first();
+
+        $klien = app()->environment('local')? viewklienlocal::where('mykad', $id)->first(): KlienView::where('mykad', $id)->first();
 
         return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
     }
@@ -885,16 +907,30 @@ class DaftarPenggunaController extends Controller
         $no_kp = $request->input('no_kp');
 
         // SERVER
-        $klienData = KlienView::where('mykad', $no_kp)->first();
-        $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
-        $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
-        $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+        // $klienData = KlienView::where('mykad', $no_kp)->first();
+        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
+        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
+        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         // DB LOCAL
         // $klienData = viewklienlocal::where('mykad', $no_kp)->first();
         // $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
         // $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
         // $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
+
+        if (App::environment('local')) {
+            // DB LOCAL
+            $klienData = viewklienlocal::where('mykad', $no_kp)->first();
+            $keluargaData = viewfamililocal::where('id_pk', $klienData?->id_pk)->first();
+            $warisData = viewwarislocal::where('id_pk', $klienData?->id_pk)->first();
+            $pekerjaanData = viewkerjalocal::where('id_pk', $klienData?->id_pk)->where('id_kes', $klienData?->id_ki)->first();
+        } else {
+            // SERVER
+            $klienData = KlienView::where('mykad', $no_kp)->first();
+            $keluargaData = FamiliView::where('id_pk', $klienData?->id_pk)->first();
+            $warisData = WarisView::where('id_pk', $klienData?->id_pk)->first();
+            $pekerjaanData = KerjaView::where('id_pk', $klienData?->id_pk)->where('id_kes', $klienData?->id_ki)->first();
+        }
 
         // 1) Create klien
         $no_tel = $request->input('no_tel') ?: $klienData->telefon;
