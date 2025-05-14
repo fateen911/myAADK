@@ -11,8 +11,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
 	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -465,18 +467,19 @@
 
 	<!-- Modal Daftar Klien -->
     <script>
-        $(document).on('click', '#daftarKlienModal', function() {
-            var id = $(this).data('id');
-            $.ajax({
-                url: '/modal/pegawai-daerah/daftar-klien/'+ id, // Laravel route with dynamic ID
-                method: 'GET',
-                success: function(response) {
-                    $('#modalBodyDaftarKlien').html(response);
-                },
-                error: function() {
-                    $('#modalBodyDaftarKlien').html('Ralat kandungan.'+id);
-                }
-            });
-        });
-    </script>
+		function loadDaftarKlienModal(noKp) {
+			$.ajax({
+				url: '/modal/pegawai-daerah/daftar-klien/' + noKp,
+				method: 'GET',
+				success: function(response) {
+					$('#modalBodyDaftarKlien').html(response);
+					$('#modal_daftar_klien').modal('show');
+				},
+				error: function() {
+					$('#modalBodyDaftarKlien').html('Ralat kandungan. ID tidak dijumpai: ' + noKp);
+					$('#modal_daftar_klien').modal('show');
+				}
+			});
+		}
+	</script>
 @endsection
