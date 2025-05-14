@@ -265,6 +265,47 @@
                     confirmButtonText: 'OK'
                 });
             @endif
+
+            @if(session('exists'))
+				let noKp = @json(session('no_kp'));
+				Swal.fire({
+					icon: 'success',
+					title: 'No Kad Pengenalan Klien Wujud!',
+					text: {!! json_encode(session('exists')) !!},
+					confirmButtonText: 'Daftar'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						loadDaftarKlienModal(noKp);
+					}
+				});
+			@endif
+
+			@if(session('not-exists'))
+				Swal.fire({
+					icon: 'error',
+					title: 'No Kad Pengenalan Tidak Wujud!',
+					text: '{!! session('not-exists') !!}',
+					confirmButtonText: 'OK'
+				});
+			@endif
+
+            @if(session('unauthorized'))
+				Swal.fire({
+					icon: 'error',
+					title: 'No Kad Pengenalan Tidak Wujud!',
+					text: '{!! session('unauthorized') !!}',
+					confirmButtonText: 'OK'
+				});
+			@endif
+
+			@if(session('registered'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Klien Telah Mendaftar!',
+                    text: '{!! session('registered') !!}',
+                    confirmButtonText: 'OK'
+                });
+            @endif
         });
     </script>
 

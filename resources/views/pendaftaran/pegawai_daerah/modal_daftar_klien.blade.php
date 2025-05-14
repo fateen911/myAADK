@@ -5,7 +5,7 @@
         <form class="form" id="modal_daftar_klien_form" action="{{ route('pegawai-daerah.daftar.klien') }}" method="post">
             @csrf
 
-            <input type="hidden" name="id" value="{{ $klien->id }}">
+            <input type="hidden" name="id" value="{{ $klien->mykad }}">
             <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
                 <!--begin::Input group-->
                 <div class="fv-row mb-5">
@@ -23,7 +23,7 @@
                     <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$klien->no_kp}}" readonly/>
+                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{ $klien->mykad }}" readonly/>
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
