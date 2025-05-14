@@ -152,7 +152,7 @@ class DaftarPenggunaController extends Controller
             // Send email notification if the user has an email and a new password was set
             if ($user->email && $request->filled('passwordKemaskini')) {
                 Mail::to($user->email)->send(new KemaskiniKataLaluan($user->email, $request->passwordKemaskini, $user->no_kp));
-                return redirect()->route('daftar-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
+                return redirect()->route('pegawai-daerah.senarai-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini. Notifikasi e-mel telah dihantar kepada klien.');
             }
 
             return redirect()->route('pegawai-daerah.senarai-klien')->with('message', 'Maklumat akaun klien ' . $request->name . ' telah berjaya dikemaskini.');
@@ -409,59 +409,7 @@ class DaftarPenggunaController extends Controller
         return redirect()->route('pegawai-daerah.senarai-klien')->with('success', $message);
     }
 
-    // public function pegawaiDaftarKlien(Request $request)
-    // {
-    //     // Retrieve the user by their ID
-    //     $user = User::where('no_kp', $request->no_kp)->first();
-
-    //     // Retrieve the corresponding Klien record by no_kp
-    //     $klien = Klien::where('no_kp', $request->no_kp)->first();
-
-    //     // Check if a password has been provided
-    //     if (!$request->filled('passwordDaftar')) {
-    //         return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu untuk mendaftarkan klien.');
-    //     }
-    //     else
-    //     {
-    //         $createData = [
-    //             'name' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $request->email,
-    //             'tahap_pengguna' => 2,
-    //             'status' => 0,
-    //             'password' => Hash::make($request->passwordDaftar),
-    //             'created_at' => now(),
-    //             'updated_at' => now(),
-    //         ];
-
-    //         // Create the new user
-    //         $user = User::create($createData);
-
-    //         // Disable timestamps temporarily
-    //         $klien->timestamps = false;
-
-    //         // Update in table klien
-    //         $klien->update([
-    //             'no_tel' => $request->no_tel,
-    //             'emel' => $request->email,
-    //         ]);
-
-    //         // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
-    //         WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-    //         KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-    //         PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-
-    //         if ($request->email)
-    //         {
-    //             Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
-    //             return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
-    //         }
-    //         else{
-    //             return redirect()->route('daftar-klien')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
-    //         }
-    //     }
-    // }
-
+   
     // 2) PENTADBIR
     public function senaraiPengguna()
     {

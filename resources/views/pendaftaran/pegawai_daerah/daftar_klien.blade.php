@@ -272,7 +272,7 @@
 				let noKp = @json(session('no_kp'));
 				Swal.fire({
 					icon: 'success',
-					title: 'No Kad Pengenalan Klien Wujud!',
+					title: 'Klien Wujud!',
 					text: {!! json_encode(session('exists')) !!},
 					confirmButtonText: 'Daftar'
 				}).then((result) => {
