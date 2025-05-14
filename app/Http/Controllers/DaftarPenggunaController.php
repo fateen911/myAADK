@@ -168,12 +168,6 @@ class DaftarPenggunaController extends Controller
         $pegawai = Auth::user(); 
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first(); 
 
-        // SERVER
-        // $klienView = KlienView::where('mykad', $no_kp)->first();
-
-        // LOCAL
-        // $klienView = viewklienlocal::where('mykad', $no_kp)->first();
-
         $klienView = app()->environment('local')? viewklienlocal::where('mykad', $no_kp)->first(): KlienView::where('mykad', $no_kp)->first();
 
         // Step 1: Check if client exists in view
@@ -208,12 +202,6 @@ class DaftarPenggunaController extends Controller
 
     public function modalDaftarKlienDaerah($id)
     {
-        // SERVER
-        // $klien = KlienView::where('mykad', $id)->first();
-
-        // DB LOCAL
-        // $klien = viewklienlocal::where('mykad', $id)->first();
-
         $klien = app()->environment('local')? viewklienlocal::where('mykad', $id)->first(): KlienView::where('mykad', $id)->first();
 
         return view('pendaftaran.pegawai_daerah.modal_daftar_klien', compact('klien'));
@@ -222,18 +210,6 @@ class DaftarPenggunaController extends Controller
     public function pegawaiDaftarKlien(Request $request)
     {
         $no_kp = $request->input('no_kp');
-
-        // SERVER
-        // $klienData = KlienView::where('mykad', $no_kp)->first();
-        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
-        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
-        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
-
-        // DB LOCAL
-        // $klienData = viewklienlocal::where('mykad', $no_kp)->first();
-        // $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
-        // $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
-        // $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         if (App::environment('local')) {
             // DB LOCAL
@@ -856,12 +832,6 @@ class DaftarPenggunaController extends Controller
     {
         $no_kp = $request->input('no_kp');
 
-        // SERVER
-        // $klienView = KlienView::where('mykad', $no_kp)->first();
-
-        // DB LOCAL
-        // $klienView = viewklienlocal::where('mykad', $no_kp)->first();
-
         $klienView = app()->environment('local')? viewklienlocal::where('mykad', $no_kp)->first(): KlienView::where('mykad', $no_kp)->first();
 
         // Check if client exists or not in view MyAADK
@@ -891,12 +861,6 @@ class DaftarPenggunaController extends Controller
 
     public function modalDaftarKlien($id)
     {
-        // SERVER
-        // $klien = KlienView::where('mykad', $id)->first();
-
-        // DB LOCAL
-        // $klien = viewklienlocal::where('mykad', $id)->first();
-
         $klien = app()->environment('local')? viewklienlocal::where('mykad', $id)->first(): KlienView::where('mykad', $id)->first();
 
         return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
@@ -905,18 +869,6 @@ class DaftarPenggunaController extends Controller
     public function pentadbirDaftarKlien(Request $request)
     {
         $no_kp = $request->input('no_kp');
-
-        // SERVER
-        // $klienData = KlienView::where('mykad', $no_kp)->first();
-        // $keluargaData = FamiliView::where('id_pk', $klienData->id_pk)->first();
-        // $warisData = WarisView::where('id_pk', $klienData->id_pk)->first();
-        // $pekerjaanData = KerjaView::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
-
-        // DB LOCAL
-        // $klienData = viewklienlocal::where('mykad', $no_kp)->first();
-        // $keluargaData = viewfamililocal::where('id_pk', $klienData->id_pk)->first();
-        // $warisData = viewwarislocal::where('id_pk', $klienData->id_pk)->first();
-        // $pekerjaanData = viewkerjalocal::where('id_pk', $klienData->id_pk)->where('id_kes', $klienData->id_ki)->first();
 
         if (App::environment('local')) {
             // DB LOCAL
