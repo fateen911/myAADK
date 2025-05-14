@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Str; @endphp
 @extends('layouts._default')
 
 @section('content')
@@ -170,7 +171,17 @@
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
                                                 <label class="form-label">Negeri</label>
                                                 <select id="negeri" class="form-select" name="negeri" required>
-                                                    <option value="{{$negeri->id}}" selected>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $negeri->negeri) }}</option>
+                                                    @php
+                                                        $displayName = $negeri->negeri;
+                                                        if (Str::contains($displayName, 'NEGERI SEMBILAN') || Str::contains($displayName, 'WILAYAH PERSEKUTUAN')) {
+                                                            // For Negeri Sembilan, remove only 'AADK '
+                                                            $displayName = Str::replaceFirst('AADK', '', $negeri->negeri);
+                                                        } else {
+                                                            // For others, remove 'AADK NEGERI '
+                                                            $displayName = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                                                        }
+                                                    @endphp
+                                                    <option value="{{$negeri->id}}" selected>{{ $displayName }}</option>
                                                 </select>
                                             </div>
 
@@ -183,7 +194,7 @@
                                                     </select>
                                                 @elseif($tahap == '5')
                                                     <select class="form-select" name="daerah" required>
-                                                        <option value="{{$daerah->kod}}" selected>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $daerah->daerah) }}</option>
+                                                        <option value="{{$daerah->kod}}" selected>{{ \Illuminate\Support\Str::replaceFirst('AADK DAERAH', '', $daerah->daerah) }}</option>
                                                     </select>
                                                 @endif
                                             </div>
@@ -288,7 +299,7 @@
                         $('#daerah').empty();
                         $('#daerah').append('<option value="">Pilih Daerah</option>');
                         $.each(response, function(key, daerah) {
-                            var nameWithoutPrefix = daerah.daerah.replace(/^AADK\s*/, '');
+                            var nameWithoutPrefix = daerah.daerah.replace(/^AADK DAERAH\s*/, '');
                             $('#daerah').append('<option value="' + daerah.kod + '">' + nameWithoutPrefix + '</option>');
                         });
                     }

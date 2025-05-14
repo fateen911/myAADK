@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Str; @endphp
 @extends('layouts._default')
 
 @section('content')
@@ -121,7 +122,18 @@
                                             <select id="negeri" class="form-select mt-5" name="negeri">
                                                 <option value="">Sila Pilih Negeri</option>
                                                 @foreach($negeri as $item)
-                                                    <option value="{{$item->id}}" {{ $pNegeri == $item->id ? 'selected' : '' }}>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->negeri) }}</option>
+                                                    @php
+                                                        $displayName = $item->negeri;
+
+                                                        if (Str::contains($item->negeri, 'NEGERI SEMBILAN') || Str::contains($displayName, 'WILAYAH PERSEKUTUAN')) {
+                                                            // Only remove "AADK "
+                                                            $displayName = Str::replaceFirst('AADK', '', $item->negeri);
+                                                        } else {
+                                                            // Remove "AADK NEGERI "
+                                                            $displayName = Str::replaceFirst('AADK NEGERI', '', $item->negeri);
+                                                        }
+                                                    @endphp
+                                                    <option value="{{$item->id}}" {{ $pNegeri == $item->id ? 'selected' : '' }}>{{ $displayName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -130,7 +142,7 @@
                                             <select id="daerah" class="form-select mt-5" name="daerah">
                                                 <option value="">Sila Pilih Daerah</option>
                                                 @foreach($daerah as $item)
-                                                    <option value="{{$item->kod}}" {{ $pDaerah == $item->kod ? 'selected' : '' }}>{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->daerah) }}</option>
+                                                    <option value="{{$item->kod}}" {{ $pDaerah == $item->kod ? 'selected' : '' }}>{{ \Illuminate\Support\Str::replaceFirst('AADK DAERAH', '', $item->daerah) }}</option>
                                                 @endforeach
                                                 <!--AJAX-->
                                             </select>
@@ -249,8 +261,6 @@
                         let btn = '';
                         let btn2 = '';
                         $.each(response, function(index, program) {
-                            var dNegeri = program.negeri.replace(/^AADK\s*/, '');
-                            var dDaerah = program.daerah.replace(/^AADK\s*/, '');
 
                             if(program.status=='SELESAI'){
                                 color = "badge-light-success text-seagreen";
@@ -287,8 +297,8 @@
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori + '</td>';
                             rows += '<td class="text-uppercase">' + program.tempat + '</td>';
-                            rows += '<td class="text-uppercase">' + dNegeri + '</td>';
-                            rows += '<td class="text-uppercase">' + dDaerah + '</td>';
+                            rows += '<td class="text-uppercase">' + program.negeri + '</td>';
+                            rows += '<td class="text-uppercase">' + program.daerah + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
                             rows += '</tr>';
                         });
@@ -324,7 +334,7 @@
                             $('#daerah').empty();
                             $('#daerah').append('<option value="">Pilih Daerah</option>');
                             $.each(response, function(key, daerah) {
-                                var dDaerah = daerah.daerah.replace(/^AADK\s*/, '');
+                                var dDaerah = daerah.daerah.replace(/^AADK DAERAH\s*/, '');
                                 $('#daerah').append('<option value="' + daerah.kod + '">' + dDaerah + '</option>');
                             });
                         }

@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Str; @endphp
 @extends('layouts._default')
 
 @section('content')
@@ -165,7 +166,17 @@
                                                 <select id="negeri" class="form-select" name="negeri"  required>
                                                     <option value="">Sila Pilih Negeri</option>
                                                     @foreach($negeri as $item)
-                                                        <option value="{{$item->id}}">{{ \Illuminate\Support\Str::replaceFirst('AADK ', '', $item->negeri) }}</option>
+                                                        @php
+                                                            $displayName = $item->negeri;
+                                                            if (Str::contains($displayName, 'NEGERI SEMBILAN') || Str::contains($displayName, 'WILAYAH PERSEKUTUAN')) {
+                                                                // For Negeri Sembilan, remove only 'AADK '
+                                                                $displayName = Str::replaceFirst('AADK', '', $item->negeri);
+                                                            } else {
+                                                                // For others, remove 'AADK NEGERI '
+                                                                $displayName = Str::replaceFirst('AADK NEGERI', '', $item->negeri);
+                                                            }
+                                                        @endphp
+                                                        <option value="{{$item->id}}">{{ $displayName }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -277,7 +288,7 @@
                             $('#daerah').empty();
                             $('#daerah').append('<option value="">Pilih Daerah</option>');
                             $.each(response, function(key, daerah) {
-                                var nameWithoutPrefix = daerah.daerah.replace(/^AADK\s*/, '');
+                                var nameWithoutPrefix = daerah.daerah.replace(/^AADK DAERAH\s*/, '');
                                 $('#daerah').append('<option value="' + daerah.kod + '">' + nameWithoutPrefix + '</option>');
                             });
                         }

@@ -6,6 +6,7 @@ use App\Models\DaerahPejabat;
 use App\Models\Negeri;
 use App\Models\NegeriPejabat;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -33,7 +34,7 @@ class PelaporanAktivitiExcel implements FromArray, WithHeadings, WithStyles, Wit
         $data = [
             [''], // Empty row for spacing
             [''], // Empty row for spacing
-            ['BIL.','NAMA', 'ID', 'KATEGORI', 'TEMPAT', 'NEGERI BERTUGAS', 'DAERAH BERTUGAS', 'STATUS']
+            ['BIL.','NAMA', 'ID', 'KATEGORI', 'TEMPAT', 'NEGERI', 'DAERAH', 'STATUS']
         ];
 
         $count = 1;
@@ -41,14 +42,24 @@ class PelaporanAktivitiExcel implements FromArray, WithHeadings, WithStyles, Wit
             // Get the state and district names based on the negeri_pejabat and daerah_pejabat
             $negeri = NegeriPejabat::where('id', $item->negeri)->first();
             $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
+
+            $displayNegeri = $negeri->negeri;
+            if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                // For Negeri Sembilan, remove only 'AADK '
+                $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+            } else {
+                // For others, remove 'AADK NEGERI '
+                $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+            }
+
             $data[] = [
                 $count,
                 strtoupper($item->nama),
                 $item->custom_id,
                 strtoupper($item->kategori->nama),
                 strtoupper($item->tempat),
-                strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                strtoupper($displayNegeri),
+                strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                 $item->status,
             ];
             $count++;

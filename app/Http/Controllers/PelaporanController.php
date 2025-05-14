@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use setasign\Fpdi\Tcpdf\Fpdi;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Barryvdh\Snappy\Facades\SnappyPdf;
@@ -1527,14 +1528,23 @@ class PelaporanController extends Controller
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $program[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1828,7 +1838,7 @@ class PelaporanController extends Controller
             ->pluck('year');
         // Get all category
         $kategori = KategoriProgram::all();
-        $negeri = Negeri::all();
+        $negeri = NegeriPejabat::all();
         $daerah = DaerahPejabat::where('negeri_id',$pNegeri)->get();
         return view('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti', compact('user_id', 'notifications', 'unreadCountPD','tahun','bulan','pKategori','status','years','kategori','negeri','pNegeri','daerah','pDaerah'));
     }
@@ -1915,14 +1925,23 @@ class PelaporanController extends Controller
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK ', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $program[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1940,14 +1959,23 @@ class PelaporanController extends Controller
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $program[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -1966,14 +1994,23 @@ class PelaporanController extends Controller
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $program[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2075,14 +2112,24 @@ class PelaporanController extends Controller
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
+
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2100,14 +2147,24 @@ class PelaporanController extends Controller
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
+
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
@@ -2126,14 +2183,24 @@ class PelaporanController extends Controller
                     // Get the state and district names based on the negeri_pejabat and daerah_pejabat
                     $negeri = NegeriPejabat::where('id', $item->negeri)->first();
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
+
+                    $displayNegeri = $negeri->negeri;
+                    if (Str::contains($displayNegeri, 'NEGERI SEMBILAN')|| Str::contains($displayNegeri, 'WILAYAH PERSEKUTUAN')) {
+                        // For Negeri Sembilan, remove only 'AADK '
+                        $displayNegeri = Str::replaceFirst('AADK', '', $negeri->negeri);
+                    } else {
+                        // For others, remove 'AADK NEGERI '
+                        $displayNegeri = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
+                    }
+
                     $data[] = [
                         'id'        =>  $item->id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
                         'tempat'    =>  strtoupper($item->tempat),
-                        'negeri'    =>  strtoupper(str_replace('AADK ', '', $negeri->negeri)),
-                        'daerah'    =>  strtoupper(str_replace('AADK ', '', $daerah->daerah)),
+                        'negeri'    =>  strtoupper($displayNegeri),
+                        'daerah'    =>  strtoupper(str_replace('AADK DAERAH', '', $daerah->daerah)),
                         'status'    =>  $item->status,
                     ];
                 }
