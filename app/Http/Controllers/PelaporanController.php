@@ -1908,10 +1908,10 @@ class PelaporanController extends Controller
             $query->where('status', $request->status);
         }
         if ($request->negeri) {
-            $query->where('negeri_pejabat', $request->negeri);
+            $query->where('negeri', $request->negeri);
         }
         if ($request->daerah) {
-            $query->where('daerah_pejabat', $request->daerah);
+            $query->where('daerah', $request->daerah);
         }
 
         $program = [];
