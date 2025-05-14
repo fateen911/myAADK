@@ -434,8 +434,6 @@
 												</div>
 											</div>
 											<!--end::Modal - Kemaskini Klien-->
-
-											
 										</div>
 										<!--end::Table container-->
 									</div>
@@ -603,7 +601,6 @@
 					</div>
 				</div>
 				<!--end::Modal - Daftar Klien-->
-
 			</div>
 			<!--end::Content container-->
 		</div>

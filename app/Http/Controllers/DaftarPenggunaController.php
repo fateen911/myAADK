@@ -408,8 +408,18 @@ class DaftarPenggunaController extends Controller
         return redirect()->back()->with('exists', 'Data berjaya dijumpai. Sila klik "Daftar" untuk mendaftar klien ini.');
     }
 
+    public function modalDaftarKlien($id)
+    {
+        // SERVER
+        // $klien = KlienView::where('mykad', $id)->first();
 
-    public function registerKlien(Request $request)
+        // DB LOCAL
+        $klien = viewklienlocal::where('mykad', $id)->first();
+
+        return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
+    }
+
+    public function pentadbirDaftarKlien(Request $request)
     {
         $no_kp = $request->input('no_kp');
 
@@ -602,68 +612,7 @@ class DaftarPenggunaController extends Controller
 
         return redirect()->route('senarai-pengguna')->with('success', $message);
     }
-
-    public function modalDaftarKlien($id)
-    {
-        // SERVER
-        // $klien = KlienView::where('mykad', $id)->first();
-
-        // DB LOCAL
-        $klien = viewklienlocal::where('mykad', $id)->first();
-
-        return view('pendaftaran.pentadbir.modal_daftar_klien', compact('klien'));
-    }
-
-    // public function pentadbirDaftarKlien(Request $request)
-    // {
-    //     // Retrieve the user by their ID
-    //     $user = User::where('no_kp', $request->no_kp)->first();
-
-    //     // Retrieve the corresponding Klien record by no_kp
-    //     $klien = Klien::where('no_kp', $request->no_kp)->first();
-
-    //     // Check if a password has been provided
-    //     if (!$request->filled('passwordDaftar')) {
-    //         return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan untuk mendaftarkan klien terlebih dahulu.');
-    //     }
-    //     else
-    //     {
-    //         $createData = [
-    //             'name' => strtoupper($request->name),
-    //             'no_kp' => $request->no_kp,
-    //             'email' => $request->email,
-    //             'tahap_pengguna' => 2,   // Set default user level
-    //             'status' => 0,           // Set default status
-    //             'password' => Hash::make($request->passwordDaftar),
-    //             'created_at' => now(),
-    //             'updated_at' => now(),
-    //         ];
-
-    //         // Create the new user
-    //         $user = User::create($createData);
-
-    //         // Update in table klien
-    //         $klien->update([
-    //             'no_tel' => $request->no_tel,
-    //             'emel' => $request->email,
-    //             'created_at' => now(),
-    //         ]);
-
-    //         // Update created_at for WarisKlien, KeluargaKlien, and PekerjaanKlien where klien_id matches
-    //         WarisKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-    //         KeluargaKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-    //         PekerjaanKlien::where('klien_id', $klien->id)->update(['created_at' => now()]);
-
-    //         if ($request->email){
-    //             Mail::to(users: $user->email)->send(new DaftarKlien($user, $request->passwordDaftar));
-    //             return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem. Notifikasi e-mel telah dihantar kepada klien.');
-    //         }
-    //         else{
-    //             return redirect()->route('senarai-pengguna')->with('success', 'Klien telah berjaya didaftarkan sebagai pengguna sistem.');
-    //         }
-    //     }
-    // }
-
+    
     public function modalKemaskiniPegawai($id)
     {
         $pegawai = Pegawai::find($id);

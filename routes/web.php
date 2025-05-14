@@ -134,21 +134,20 @@ Route::middleware('auth')->group(function () {
 // PENTADBIR - DAFTAR PENGGUNA
 Route::get('/pentadbir/senarai-pengguna',[DaftarPenggunaController::class, 'senaraiPengguna'])->middleware('auth')->name('senarai-pengguna');
 Route::post('pentadbir/kemaskini/klien', [DaftarPenggunaController::class, 'pentadbirKemaskiniKlien'])->name('pentadbir-kemaskini-klien');
-Route::post('pentadbir/daftar/klien', [DaftarPenggunaController::class, 'pentadbirDaftarKlien'])->name('pentadbir-daftar-klien');
+// Route::post('pentadbir/daftar/klien', [DaftarPenggunaController::class, 'pentadbirDaftarKlien'])->name('pentadbir-daftar-klien');
 Route::post('pentadbir/kemaskini/pegawai', [DaftarPenggunaController::class, 'kemaskiniPegawai'])->name('kemaskini-pegawai');
 Route::post('pentadbir/daftar/pegawai', [DaftarPenggunaController::class, 'daftarPegawai'])->name('daftar-pegawai');
 Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiLulus'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
 Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
-Route::post('/semak-kp', [DaftarPenggunaController::class, 'semakKp'])->name('semak.kp');
+Route::post('pentadbir/semak-kp', [DaftarPenggunaController::class, 'semakKp'])->name('semak.kp');
 Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
-Route::post('/register-klien', [DaftarPenggunaController::class, 'registerKlien'])->name('register.klien');
+Route::post('pentadbir/daftar/klien', [DaftarPenggunaController::class, 'pentadbirDaftarKlien'])->name('pentadbir-daftar-klien');
 
-// AJAX PENDAFTARAN
+// PENTADBIR - AJAX PENDAFTARAN
 Route::get('/get-daerah-bertugas/{negeri_id}', [DaftarPenggunaController::class, 'getDaerahBertugas'])->name('get-daerah-bertugas');
 Route::get('/pentadbir/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlien'])->name('ajax-senarai-klien');
 Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlien'])->name('modal-kemaskini-klien');
-// Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
 Route::get('/pentadbir/ajax/senarai-pegawai', [DaftarPenggunaController::class, 'getDataPegawai'])->name('ajax-senarai-pegawai');
 Route::get('/modal/kemaskini-pegawai/{id}', [DaftarPenggunaController::class, 'modalKemaskiniPegawai'])->name('modal-kemaskini-pegawai');
 Route::get('/pentadbir/ajax/senarai-permohonan-pegawai', [DaftarPenggunaController::class, 'getDataPermohonanPegawai'])->name('ajax-senarai-permohonan-pegawai');
@@ -156,13 +155,14 @@ Route::get('/modal/luluskan-pegawai/{id}', [DaftarPenggunaController::class, 'mo
 Route::get('/modal/alasan-ditolak/pegawai/{id}', [DaftarPenggunaController::class, 'modalPermohonanPegawaiDitolak'])->name('modal-permohonan-pegawai-ditolak');
 
 // PEGAWAI DAERAH - DAFTAR or KEMASKINI KLIEN
-Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('daftar-klien');
+Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('pegawai-daerah.senarai-klien');
 Route::get('/pegawai-daerah/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlienDaerah'])->name('pegawai-daerah-ajax-senarai-klien');
 Route::get('/modal/pegawai-daerah/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlienDaerah'])->name('modal-daerah-kemaskini-klien');
 Route::post('/pegawai-daerah/kemaskini/klien', [DaftarPenggunaController::class, 'pegawaiKemaskiniKlien'])->name('pegawai-kemaskini-klien');
-Route::get('/modal/pegawai-daerah/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlienDaerah'])->name('modal-daerah-daftar-klien');
-Route::post('/pegawai-daerah/daftar/klien', [DaftarPenggunaController::class, 'pegawaiDaftarKlien'])->name('pegawai-daftar-klien');
 
+Route::post('/pegawai-daerah/semak-kp', [DaftarPenggunaController::class, 'semakKpDaerah'])->name('pegawai-daerah.semak.kp');
+Route::get('/modal/pegawai-daerah/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlienDaerah'])->name('modal.pegawai-daerah.daftar-klien');
+Route::post('/pegawai-daerah/daftar/klien', [DaftarPenggunaController::class, 'pegawaiDaftarKlien'])->name('pegawai-daerah.daftar.klien');
 
 // PENTADBIR & PEGAWAI - PENGURUSAN PROFIL KLIEN
 Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');

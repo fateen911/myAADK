@@ -969,10 +969,10 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('daftar-klien') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pegawai-daerah.senarai-klien') ? 'active' : '' }}">
                         <!--begin:Menu link-->
                         <span>
-                            <a class="menu-link" href="{{ route('daftar-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('daftar-klien') }}';">
+                            <a class="menu-link" href="{{ route('pegawai-daerah.senarai-klien') }}" onclick="event.preventDefault(); window.location.href='{{ route('pegawai-daerah.senarai-klien') }}';">
                                 <span class="menu-icon">
                                     <i class="ki-duotone ki-user-edit fs-2">
                                         <span class="path1"></span>

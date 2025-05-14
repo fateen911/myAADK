@@ -92,57 +92,104 @@
 <!--begin::Body-->
 <div class="card shadow-sm mx-w-300 mx-w-450 mw-r-700">
 	<div class="table-responsive">
-		<!--begin::Content-->
 		<div id="kt_app_content" class="app-content flex-column-fluid">
-			<!--begin::Content container-->
-			<div id="kt_app_content_container" class="app-container container-xxl">
-				{{-- Content Navigation Bar --}}
-				<div class="tab-content mt-0" id="klien" role="tabpanel" aria-labelledby="klien-tab">
-					{{-- KLIEN --}}
-                    <!--begin::Card title-->
-                    <div class="header ml-5">
-                        <h2>Senarai Keseluruhan Klien<br><small>Sila klik pada ikon pensil untuk kemaskini maklumat akaun klien.</small></h2>	
-                    </div>
-
-                    <!--begin::Card body-->
-                    <div class="body">
-                        <!--begin::Table-->
-                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
-                            <thead>
-                                <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-                                    <th class="min-w-250px">Nama</th>
-                                    <th class="min-w-50px">No. Kad Pengenalan</th>
-                                    <th class="min-w-50px">E-mel</th>
-                                    <th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
-                                    <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
-                                </tr>
-                            </thead>
-
-                            <tbody class="fw-semibold text-gray-600">
-                                <!-- Data will be injected here by AJAX -->
-                            </tbody>
-                        </table>
-
-                        <!--begin::Modal - Kemaskini Klien-->
-                        <div class="modal fade" id="modal_kemaskini_klien" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered mw-650px">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <!--begin::Modal title-->
-                                        <h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
-                                        <!--end::Modal title-->
-                                        <!--begin::Close-->
-                                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                                            <i class="ki-solid ki-cross-circle fs-1"></i>
-                                        </div>
-                                        <!--end::Close-->
+            <div class="row m-5">
+                <!--begin::Col-->
+                <div class="col-xl-3">
+                    <!--begin::Engage widget 9-->
+                    <div class="card h-lg-100" style="background:  #ffffff )">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Row-->
+                            <div class="row align-items-center">
+                                <!--begin::form-->
+                                <form class="form w-100" action="{{ route('pegawai-daerah.semak.kp') }}" method="post">
+                                @csrf 
+                                    <!--begin::Heading-->
+                                    <div class="text-center mb-11">
+                                        <br>
+                                        <h2 class="text-dark fw-bolder mb-3">
+                                            Sistem MyAADK
+                                        </h2>
                                     </div>
+                                    <!--end::Heading-->
 
-                                    <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
-                                </div>
+                                    <!--begin::logo-->
+                                    <div class="text-center mb-11">
+                                        <img src="{{ asset('logo/aadk.png') }}" alt="Logo" style="height: 120px; width: auto;">
+                                    </div>
+                                    <!--end::logo-->
+
+                                    <!--begin::Input group-->
+                                    <div class="col-xs-3">
+                                        <input type="text" placeholder="No Kad Pengenalan" name="no_kp" maxlength="12" autocomplete="off" class="form-control bg-transparent" style="text-align:center; display: block;margin-left: auto; margin-right: auto;" required oninvalid="this.setCustomValidity('Sila isi.')" oninput="setCustomValidity('')"/>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Submit button-->
+                                    <div class="d-flex flex-center mt-5">
+                                        <button type="submit" class="btn btn-primary">Semak</button>
+                                    </div>
+                                    <!--end::Submit button-->
+                                </form>
                             </div>
                         </div>
-                        <!--end::Modal - Kemaskini Klien-->
+                        <!--end::Body-->
+                    </div>
+                </div>
+                <!--end::Col-->
+
+				<!--begin::Col-->
+                <div class="col-xl-9">
+                    <div class="card card-flush h-xl-100">
+                        <!--begin::Header-->
+                        <div style="padding-top: 15px; padding-left: 30px;">
+                            <h2>Senarai Keseluruhan Klien</h2>
+                            <small>Sila klik pada ikon pensil untuk mengemaskini maklumat akaun klien.</small>
+                        </div>
+                        <!--end::Header-->
+
+                        <!--begin::Card body-->
+                        <div class="body">
+                            <!--begin::Table-->
+                            <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
+                                        <th class="min-w-250px">Nama</th>
+                                        <th class="min-w-50px">No. Kad Pengenalan</th>
+                                        <th class="min-w-50px">E-mel</th>
+                                        <th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
+                                        <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="fw-semibold text-gray-600">
+                                    <!-- Data will be injected here by AJAX -->
+                                </tbody>
+                            </table>
+
+                            <!--begin::Modal - Kemaskini Klien-->
+                            <div class="modal fade" id="modal_kemaskini_klien" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered mw-650px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <!--begin::Modal title-->
+                                            <h2 style="padding-left: 50px !important;">Kemaskini Maklumat Akaun Klien</h2>
+                                            <!--end::Modal title-->
+                                            <!--begin::Close-->
+                                            <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
+                                                <i class="ki-solid ki-cross-circle fs-1"></i>
+                                            </div>
+                                            <!--end::Close-->
+                                        </div>
+
+                                        <div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyKemaskiniKlien"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Modal - Kemaskini Klien-->
+                        </div>
+                        <!--end::Card body-->
 
                         <!--begin::Modal - Daftar Klien-->
                         <div class="modal fade" id="modal_daftar_klien" tabindex="-1" aria-hidden="true">
@@ -164,292 +211,10 @@
                             </div>
                         </div>
                         <!--end::Modal - Daftar Klien-->
-                        <!--end::Table-->
                     </div>
-                    <!--end::Card body-->
-
-                    {{-- <div class="body">
-                        <!--begin::Table-->
-                        <table id="sortTable1" class="table table-striped table-hover dataTable js-exportable">
-                            <thead>
-                                <tr class="text-center text-gray-400 fw-bold fs-7 gs-0">
-                                    <th class="min-w-250px">Nama</th>
-                                    <th class="min-w-50px">No. Kad Pengenalan</th>
-                                    <th class="min-w-50px">E-mel</th>
-                                    <th class="min-w-60px" style="text-align: center;">Tarikh Daftar</th>
-                                    <th class="min-w-40px" style="text-align: center;">Kemaskini</th>
-                                </tr>
-                            </thead>
-                            <tbody class="fw-semibold text-gray-600">
-                                @foreach ($klien as $user1)
-                                    @php
-                                        $peranan = DB::table('tahap_pengguna')->where('id', $user1['tahap_pengguna'])->value('peranan');
-                                        // $tarikh_daftar1 = Carbon::parse($user1->updated_at)->format('d-m-Y');
-                                        $tarikh_daftar1 = $user1->user_updated_at ? Carbon::parse($user1->user_updated_at)->format('d-m-Y') : 'N/A';
-                                    @endphp
-
-                                    <tr>
-                                        <td>{{ $user1->nama }}</td>
-                                        <td>{{ $user1->no_kp }}</td>
-                                        <td>{{ $user1->emel }}</td>
-                                        @if ( $user1->user_updated_at !== null)
-                                            <td style="text-align: center;">{{ $tarikh_daftar1}}</td>
-                                        @else
-                                            <td style="text-align: center;">N/A</td>
-                                        @endif
-                                        <td style="text-align: center;">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                @if ( $user1->user_updated_at !== null)
-                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_kemaskini_klien{{$user1->id}}">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
-                                                            <i class="ki-duotone bi bi-pencil fs-3"></i>
-                                                        </span>
-                                                    </a>
-                                                @else
-                                                    <a href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#modal_daftar_klien{{$user1->id}}">
-                                                        <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Daftar">
-                                                            <i class="ki-duotone bi bi-pencil fs-3"></i>
-                                                        </span>
-                                                    </a>
-                                                @endif
-                                            </div>                                                
-                                        </td>
-
-                                        <!--begin::Modal - Kemaskini Klien-->
-                                        <div class="modal fade" id="modal_kemaskini_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
-                                            <!--begin::Modal dialog-->
-                                            <div class="modal-dialog modal-dialog-centered mw-650px">
-                                                <!--begin::Modal content-->
-                                                <div class="modal-content">
-                                                    <!--begin::Modal header-->
-                                                    <div class="modal-header">
-                                                        <!--begin::Modal title-->
-                                                        <h2>Kemaskini Maklumat Akaun Klien</h2>
-                                                        <!--end::Modal title-->
-                                                        <!--begin::Close-->
-                                                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                                                            <i class="ki-solid ki-cross-circle fs-1"></i>
-                                                        </div>
-                                                        <!--end::Close-->
-                                                    </div>
-                                                    <!--end::Modal header-->
-
-                                                    <!--begin::Modal body-->
-                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                                        <!--begin::Form-->
-                                                        <form class="form" id="modal_kemaskini_klien_form" action="{{ route('pegawai-kemaskini-klien') }}" method="post">
-                                                            @csrf
-
-                                                            <input type="hidden" name="id" value="{{ $user1->id }}">
-                                                            <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" name="name" value="{{$user1->nama}}" readonly/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">No. Telefon
-                                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                                                <span class="path1"></span>
-                                                                                <span class="path2"></span>
-                                                                                <span class="path3"></span>
-                                                                            </i>
-                                                                        </span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric"/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">E-mel</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="{{$user1->emel}}" />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control form-control-solid custom-form" id="passwordKlien{{$user1->id}}" name="passwordKemaskini" />
-                                                                        <button type="button" class="btn btn-secondary" onclick="generatePasswordKlien('passwordKlien{{$user1->id}}')">Jana Kata Laluan</button>
-                                                                    </div>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-
-                                                            <!--begin::Actions-->
-                                                            <div class="text-center pt-15">
-                                                                <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-
-                                                                <button type="submit" id="kt_modal_new_card_submit" class="btn btn-primary">
-                                                                    <span class="indicator-label">Simpan</span>
-                                                                    <span class="indicator-progress">Sila tunggu...
-                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                                </button>
-                                                            </div>
-                                                            <!--end::Actions-->
-                                                        </form>
-                                                        <!--end::Form-->
-                                                    </div>
-                                                    <!--end::Modal body-->
-                                                </div>
-                                                <!--end::Modal content-->
-                                            </div>
-                                            <!--end::Modal dialog-->
-                                        </div>
-                                        <!--end::Modal - Kemaskini Klien-->
-
-                                        <!--begin::Modal - Daftar Klien-->
-                                        <div class="modal fade" id="modal_daftar_klien{{$user1->id}}" tabindex="-1" aria-hidden="true">
-                                            <!--begin::Modal dialog-->
-                                            <div class="modal-dialog modal-dialog-centered mw-650px">
-                                                <!--begin::Modal content-->
-                                                <div class="modal-content">
-                                                    <!--begin::Modal header-->
-                                                    <div class="modal-header">
-                                                        <!--begin::Modal title-->
-                                                        <h2>Pendaftaran Akaun Klien</h2>
-                                                        <!--end::Modal title-->
-                                                        <!--begin::Close-->
-                                                        <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
-                                                            <i class="ki-solid ki-cross-circle fs-1"></i>
-                                                        </div>
-                                                        <!--end::Close-->
-                                                    </div>
-                                                    <!--end::Modal header-->
-
-                                                    <!--begin::Modal body-->
-                                                    <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                                                        <!--begin::Form-->
-                                                        <form class="form" id="modal_daftar_klien_form" action="{{ route('pegawai-daftar-klien') }}" method="post">
-                                                            @csrf
-
-                                                            <input type="hidden" name="id" value="{{ $user1->id }}">
-                                                            <div class="scroll-y me-n7 pe-7" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-offset="300px">
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2 required">Nama Penuh</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" name="name" value="{{$user1->nama}}" readonly/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2 required">No. Kad Pengenalan</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid" name="no_kp" value="{{$user1->no_kp}}" readonly/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">No. Telefon
-                                                                        <span class="ms-1" data-bs-toggle="tooltip" title="Masukkan nombor telefon tidak termasuk simbol '-' dan tidak melebihi 11 aksara.">
-                                                                            <i class="ki-duotone ki-information-2 text-gray-500 fs-6">
-                                                                                <span class="path1"></span>
-                                                                                <span class="path2"></span>
-                                                                                <span class="path3"></span>
-                                                                            </i>
-                                                                        </span>
-                                                                    </label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="text" class="form-control form-control-solid custom-form" name="no_tel" placeholder="Contoh: 0109000000" value="{{$user1->no_tel}}" inputmode="numeric"/>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2">E-mel</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <input type="email" class="form-control form-control-solid custom-form" name="email" placeholder="Contoh: contoh1@gmail.com" value="{{$user1->emel}}" />
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                                <!--begin::Input group-->
-                                                                <div class="fv-row mb-5">
-                                                                    <!--begin::Label-->
-                                                                    <label class="fs-6 fw-semibold mb-2 required">Kata Laluan Baharu</label>
-                                                                    <!--end::Label-->
-                                                                    <!--begin::Input-->
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control form-control-solid custom-form" placeholder="" id="passwordDaftarKlien{{$user1->id}}" name="passwordDaftar" />
-                                                                        <button type="button" class="btn btn-secondary" onclick="generatePasswordDaftarKlien('passwordDaftarKlien{{$user1->id}}')">Jana Kata Laluan</button>
-                                                                    </div>
-                                                                    <!--end::Input-->
-                                                                </div>
-                                                                <!--end::Input group-->
-                                                            </div>
-
-                                                            <!--begin::Actions-->
-                                                            <div class="text-center pt-15">
-                                                                <button type="reset" data-bs-dismiss="modal" class="btn btn-light me-3">Batal</button>
-
-                                                                <button type="submit" id="daftarBtn" class="btn btn-primary">
-                                                                    <span class="indicator-label">Daftar</span>
-                                                                    <span class="indicator-progress">Sila tunggu...
-                                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                                </button>
-                                                            </div>
-                                                            <!--end::Actions-->
-                                                        </form>
-                                                        <!--end::Form-->
-                                                    </div>
-                                                    <!--end::Modal body-->
-                                                </div>
-                                                <!--end::Modal content-->
-                                            </div>
-                                            <!--end::Modal dialog-->
-                                        </div>
-                                        <!--end::Modal - Daftar Klien-->
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <!--end::Table-->
-                    </div> --}}
-                    <!--end::Card body-->
 				</div>
 			</div>
-			<!--end::Content container-->
 		</div>
-		<!--end::Content-->
 	</div>
 </div>
 
@@ -461,6 +226,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--end::Javascript-->
 	
+    {{-- POP-UP / ALERT MESSAGE --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () 
         {
@@ -502,6 +268,7 @@
         });
     </script>
 
+    {{-- GENERATE PASSWORD --}}
     <script>
         function generatePasswordKlien(inputId) {
             const length = 6;
@@ -552,6 +319,7 @@
         }
     </script>
 
+    {{-- INPUT CONTROL --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Select all elements with name 'no_tel'

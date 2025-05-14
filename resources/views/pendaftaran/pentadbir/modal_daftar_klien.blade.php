@@ -2,7 +2,7 @@
 <html>
     <body>
         <!--begin::Modal - Daftar Klien -->
-        <form class="form" id="modal_daftar_klien_form" action="{{ route('register.klien') }}" method="post">
+        <form class="form" id="modal_daftar_klien_form" action="{{ route('pentadbir-daftar-klien') }}" method="post">
             @csrf
 
             <input type="hidden" name="id" value="{{ $klien->mykad }}">
