@@ -62,7 +62,7 @@
         <!--end::Breadcrumb-->
     </div>
     <!--end::Page title-->
-    
+
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid pt-5">
         <!--begin::Content container-->
@@ -284,7 +284,7 @@
                 </div>
                 <!--end::Content-->
             </div>
-            <!--end::Basic info-->  
+            <!--end::Basic info-->
 
             <!--begin::Sign-in Method-->
             <div class="card mb-xl-10">
@@ -363,7 +363,7 @@
                                             <i class="fa fa-eye-slash eye-icon"></i>
                                         </span>
                                     </div>
-                                    
+
                                     <!-- Confirm Password Match Requirement -->
                                     <ul id="confirm-password-requirements" class="mt-2 list-unstyled">
                                         <li id="match-requirement" class="text-muted">
@@ -405,12 +405,12 @@
                 });
             @endif
 
-            // Check if there is a flash error message
-            @if(session('error'))
+            // Check if there is a flash errors message
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -423,7 +423,7 @@
                     confirmButtonText: 'OK'
                 });
             @endif
-        
+
             @if(session('passwordError'))
                 Swal.fire({
                     icon: 'error',
@@ -439,7 +439,7 @@
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const icon = input.parentElement.querySelector('.toggle-password i');
-            
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye-slash');
@@ -483,7 +483,7 @@
                 if (confirmPassword !== "") {
                     var passwordsMatch = password === confirmPassword;
                     updateCriteria('match-requirement', passwordsMatch);
-                } 
+                }
                 else {
                     resetCriteria('match-requirement');  // Reset the match requirement if confirmPassword is empty
                 }

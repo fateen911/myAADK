@@ -45,7 +45,7 @@ class PasswordResetChallengeFormController extends Controller
                 // Store the no_kad_pengenalan in the session
                 session(['no_kp' => $klien->no_kp]);
                 return redirect()->route('reset.password.challenge');
-            } 
+            }
             else {
                 return back()->withErrors([
                     'negeri_lahir' => 'Jawapan tidak sepadan dengan data kami.',
@@ -71,7 +71,7 @@ class PasswordResetChallengeFormController extends Controller
         $no_kad_pengenalan = session('no_kad_pengenalan');
 
         if (!$no_kad_pengenalan) {
-            return redirect()->route('password.challenge')->withErrors(['error' => 'Sesi telah tamat tempoh. Sila cuba sekali lagi.']);
+            return redirect()->route('password.challenge')->withErrors(['errors' => 'Sesi telah tamat tempoh. Sila cuba sekali lagi.']);
         }
 
         $user = User::where('no_kp', $no_kad_pengenalan)->first();
@@ -84,7 +84,7 @@ class PasswordResetChallengeFormController extends Controller
 
             return redirect()->route('login')->with('success', 'Set semula kata laluan berjaya. Anda kini boleh log masuk dengan kata laluan baru anda.');
         } else {
-            return back()->withErrors(['error' => 'User not found.']);
+            return back()->withErrors(['errors' => 'User not found.']);
         }
     }
 }

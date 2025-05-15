@@ -22,25 +22,25 @@ class NewPasswordController extends Controller
     {
         // Step 1: Retrieve the token from the URL query parameters
         $token = $token;
-        
+
         // Step 2: Query the password_resets table to find the token
         $reset = DB::table('password_resets')
             ->where('token', $token)
             ->first();
         $email = $reset ->email;
-        //dd($email);    
+        //dd($email);
 
         // Step 3: Check if a matching record was found and validate the token
         if (!$reset || empty($reset->email)) {
-            // Handle invalid token or token not found (display an error message)
-            return redirect()->route('password.reset')->with('error', 'Token tidak sah atau token tidak ditemui.');
+            // Handle invalid token or token not found (display an errors message)
+            return redirect()->route('password.reset')->with('errors', 'Token tidak sah atau token tidak ditemui.');
         }
 
         // Check if the token has expired (e.g., within a certain time limit)
         $expirationTime = config('auth.passwords.users.expire');
         if (now()->subMinutes($expirationTime) > $reset->created_at) {
-            // Handle token expiration (display an error message)
-            return redirect()->route('password.reset')->with('error', 'Token telah tamat tempoh. Sila minta pautan baharu.');
+            // Handle token expiration (display an errors message)
+            return redirect()->route('password.reset')->with('errors', 'Token telah tamat tempoh. Sila minta pautan baharu.');
         }
 
         // Step 4: Token is valid, show the password reset form
@@ -67,18 +67,18 @@ class NewPasswordController extends Controller
             ->where('token', $request->input('token'))
             ->where('email', $request->input('email'))
             ->first();
-        $user = User::where('email', '=', $request->input('email'))->first();    
+        $user = User::where('email', '=', $request->input('email'))->first();
 
         if (!$reset || empty($reset->email)) {
-            // Handle invalid token or token not found (display an error message)
-            return redirect()->route('password.reset')->with('error', 'Token tidak sah atau token tidak dijumpai.');
+            // Handle invalid token or token not found (display an errors message)
+            return redirect()->route('password.reset')->with('errors', 'Token tidak sah atau token tidak dijumpai.');
         }
 
         // Check if the token has expired (e.g., within a certain time limit)
         $expirationTime = config('auth.passwords.users.expire');
         if (now()->subMinutes($expirationTime) > $reset->created_at) {
-            // Handle token expiration (display an error message)
-            return redirect()->route('password.reset')->with('error', 'Token telah tamat tempoh. Sila minta yang baru.');
+            // Handle token expiration (display an errors message)
+            return redirect()->route('password.reset')->with('errors', 'Token telah tamat tempoh. Sila minta yang baru.');
         }
 
         // Token is valid; update the user's password and delete the token

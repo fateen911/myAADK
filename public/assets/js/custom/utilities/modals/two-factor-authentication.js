@@ -82,8 +82,8 @@ var KTModalTwoFactorAuthentication = function () {
 						// Show loading indication
 						smsSubmitButton.setAttribute('data-kt-indicator', 'on');
 
-						// Disable button to avoid multiple click 
-						smsSubmitButton.disabled = true;						
+						// Disable button to avoid multiple click
+						smsSubmitButton.disabled = true;
 
 						// Simulate ajax process
 						setTimeout(function() {
@@ -92,7 +92,7 @@ var KTModalTwoFactorAuthentication = function () {
 
 							// Enable button
 							smsSubmitButton.disabled = false;
-							
+
 							// Show success message. For more info check the plugin's official documentation: https://sweetalert2.github.io/
 							Swal.fire({
 								text: "Mobile number has been successfully submitted!",
@@ -110,9 +110,9 @@ var KTModalTwoFactorAuthentication = function () {
 							});
 
 							//smsForm.submit(); // Submit form
-						}, 2000);   						
+						}, 2000);
 					} else {
-						// Show error message.
+						// Show errors message.
 						Swal.fire({
 							text: "Sorry, looks like there are some errors detected, please try again.",
 							icon: "error",
@@ -174,7 +174,7 @@ var KTModalTwoFactorAuthentication = function () {
 					if (status == 'Valid') {
 						appsSubmitButton.setAttribute('data-kt-indicator', 'on');
 
-						// Disable button to avoid multiple click 
+						// Disable button to avoid multiple click
 						appsSubmitButton.disabled = true;
 
 						setTimeout(function() {
@@ -182,7 +182,7 @@ var KTModalTwoFactorAuthentication = function () {
 
 							// Enable button
 							appsSubmitButton.disabled = false;
-							
+
 							// Show success message.
 							Swal.fire({
 								text: "Code has been successfully submitted!",
@@ -200,9 +200,9 @@ var KTModalTwoFactorAuthentication = function () {
 							});
 
 							//appsForm.submit(); // Submit form
-						}, 2000);   						
+						}, 2000);
 					} else {
-						// Show error message.
+						// Show errors message.
 						Swal.fire({
 							text: "Sorry, looks like there are some errors detected, please try again.",
 							icon: "error",

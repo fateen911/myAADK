@@ -52,7 +52,7 @@ var KTModalTopUpWallet = function () {
 
 						//KTUtil.scrollTop();
 					} else {
-						// Show error message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+						// Show errors message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
 						Swal.fire({
 							text: "Sorry, looks like there are some errors detected, please try again.",
 							icon: "error",
@@ -85,7 +85,7 @@ var KTModalTopUpWallet = function () {
 			// Prevent default button action
 			e.preventDefault();
 
-			// Disable button to avoid multiple click 
+			// Disable button to avoid multiple click
 			formSubmitButton.disabled = true;
 
 			// Show loading indication
@@ -106,7 +106,7 @@ var KTModalTopUpWallet = function () {
 	}
 
 	// Init form inputs
-	var initForm = function () {	
+	var initForm = function () {
         // Handle currency swap logic
         const currencyTypes = form.querySelectorAll('[name="currency_type"]');
         const targets = form.querySelectorAll('[data-kt-modal-top-up-wallet-option]');
@@ -232,8 +232,8 @@ var KTModalTopUpWallet = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",

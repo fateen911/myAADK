@@ -2364,7 +2364,7 @@ span.flatpickr-weekday {
 .fv-plugins-foundation .fv-row__error label,
 .fv-plugins-foundation .fv-row__error fieldset legend,
 .fv-plugins-foundation .fv-row__error .fv-plugins-icon {
-  color: #cc4b37; /* Same as .is-invalid-label and .form-error */
+  color: #cc4b37; /* Same as .is-invalid-label and .form-errors */
 }
 
 .fv-plugins-materialize .fv-plugins-icon {
@@ -2501,7 +2501,7 @@ span.flatpickr-weekday {
 .fv-plugins-pure .fv-has-error label,
 .fv-plugins-pure .fv-has-error .fv-help-block,
 .fv-plugins-pure .fv-has-error .fv-plugins-icon {
-  color: #ca3c3c; /* Same as .button-error */
+  color: #ca3c3c; /* Same as .button-errors */
 }
 
 .fv-plugins-pure .fv-has-success label,
@@ -2537,7 +2537,7 @@ span.flatpickr-weekday {
 
 .fv-plugins-semantic.ui.form .fields.error label,
 .fv-plugins-semantic .error .fv-plugins-icon {
-  color: #9f3a38; /* Same as .ui.form .field.error .input */
+  color: #9f3a38; /* Same as .ui.form .field.errors .input */
 }
 
 .fv-plugins-semantic .fv-plugins-icon-check {
@@ -2627,7 +2627,7 @@ span.flatpickr-weekday {
 
 .fv-plugins-turret .fv-invalid-row .form-message,
 .fv-plugins-turret .fv-invalid-row .fv-plugins-icon {
-  color: #c00; /* Same as .form-message.error */
+  color: #c00; /* Same as .form-message.errors */
 }
 
 .fv-plugins-turret .fv-valid-row .form-message,

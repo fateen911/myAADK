@@ -5,7 +5,7 @@ var KTSignupComingSoon = function() {
     // Elements
     var form;
     var submitButton;
-	var validator; 
+	var validator;
 
     var counterDays;
     var counterHours;
@@ -13,17 +13,17 @@ var KTSignupComingSoon = function() {
     var counterSeconds;
 
     var handleForm = function(e) {
-        var validation;		 
+        var validation;
 
         if( !form ) {
             return;
-        }        
+        }
 
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(
 			form,
 			{
-				fields: {					
+				fields: {
 					'email': {
                         validators: {
                             regexp: {
@@ -34,7 +34,7 @@ var KTSignupComingSoon = function() {
 								message: 'Email address is required'
 							}
 						}
-					} 
+					}
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -45,7 +45,7 @@ var KTSignupComingSoon = function() {
                     })
 				}
 			}
-		);		
+		);
 
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
@@ -56,7 +56,7 @@ var KTSignupComingSoon = function() {
                     // Show loading indication
                     submitButton.setAttribute('data-kt-indicator', 'on');
 
-                    // Disable button to avoid multiple click 
+                    // Disable button to avoid multiple click
                     submitButton.disabled = true;
 
                     // Simulate ajax request
@@ -77,8 +77,8 @@ var KTSignupComingSoon = function() {
                                 confirmButton: "btn btn-primary"
                             }
                         }).then(function (result) {
-                            if (result.isConfirmed) { 
-                                form.querySelector('[name="email"]').value= "";                            
+                            if (result.isConfirmed) {
+                                form.querySelector('[name="email"]').value= "";
                                 //form.submit();
 
                                 //form.submit(); // submit form
@@ -88,9 +88,9 @@ var KTSignupComingSoon = function() {
                                 }
                             }
                         });
-                    }, 2000);   						
+                    }, 2000);
                 } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    // Show errors popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
@@ -107,7 +107,7 @@ var KTSignupComingSoon = function() {
 
     var initCounter = function() {
         // Set the date we're counting down to
-        var currentTime = new Date(); 
+        var currentTime = new Date();
         var countDownDate = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24 * 15 + 1000 * 60 * 60 * 10 + 1000 * 60 * 15).getTime();
 
         var count = function() {
@@ -124,7 +124,7 @@ var KTSignupComingSoon = function() {
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Display the result
-            if(counterDays) counterDays.innerHTML = days; 
+            if(counterDays) counterDays.innerHTML = days;
             if(counterHours) counterHours.innerHTML = hours;
             if(counterMinutes) counterMinutes.innerHTML = minutes;
             if(counterSeconds) counterSeconds.innerHTML = seconds;
@@ -143,15 +143,15 @@ var KTSignupComingSoon = function() {
         init: function() {
             form = document.querySelector('#kt_coming_soon_form');
             submitButton = document.querySelector('#kt_coming_soon_submit');
-           
+
             handleForm();
 
             counterDays = document.querySelector('#kt_coming_soon_counter_days');
-            if (counterDays) {                
+            if (counterDays) {
                 counterHours = document.querySelector('#kt_coming_soon_counter_hours');
                 counterMinutes = document.querySelector('#kt_coming_soon_counter_minutes');
                 counterSeconds = document.querySelector('#kt_coming_soon_counter_seconds');
-                
+
                 initCounter();
             }
         }

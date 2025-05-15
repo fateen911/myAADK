@@ -79,7 +79,7 @@ class DaftarPenggunaController extends Controller
         $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
 
         if (!$pegawaiDaerah) {
-            return response()->json(['error' => 'Pegawai not found'], 404);
+            return response()->json(['errors' => 'Pegawai not found'], 404);
         }
 
         $query = Klien::leftJoin('users', 'klien.no_kp', '=', 'users.no_kp')
@@ -165,8 +165,8 @@ class DaftarPenggunaController extends Controller
     public function semakKpDaerah(Request $request)
     {
         $no_kp = $request->input('no_kp');
-        $pegawai = Auth::user(); 
-        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first(); 
+        $pegawai = Auth::user();
+        $pegawaiDaerah = Pegawai::where('users_id', $pegawai->id)->first();
 
         $klienView = app()->environment('local')? viewklienlocal::where('mykad', $no_kp)->first(): KlienView::where('mykad', $no_kp)->first();
 
@@ -259,10 +259,10 @@ class DaftarPenggunaController extends Controller
                 $klienData->alamat02,
                 $klienData->alamat03
             ]))),
-            'poskod' => (empty($klienData->poskod)) 
-                ? '00000' 
-                : (strlen($klienData->poskod) == 5 
-                    ? $klienData->poskod 
+            'poskod' => (empty($klienData->poskod))
+                ? '00000'
+                : (strlen($klienData->poskod) == 5
+                    ? $klienData->poskod
                     : substr('00000' . $klienData->poskod, -5)),
             'daerah' => $daerah ?? '',
             'negeri' => $negeri ?? '',
@@ -293,7 +293,7 @@ class DaftarPenggunaController extends Controller
             'created_at' => now(),
         ]);
 
-        
+
         // 3) Create waris_klien
         // daerah: from senarai_daerah where daerah == $warisData->alamat3
         $daerah_penjaga = $warisData ? Daerah::where('daerah', $warisData->wr_alamat3)->value('id') : null;
@@ -314,10 +314,10 @@ class DaftarPenggunaController extends Controller
                 $warisData->wr_alamat2,
             ]))) : null,
             'poskod_penjaga' => $warisData
-                ? (empty($warisData->wr_poskod) 
-                    ? '00000' 
-                    : (strlen($warisData->wr_poskod) == 5 
-                        ? $warisData->wr_poskod 
+                ? (empty($warisData->wr_poskod)
+                    ? '00000'
+                    : (strlen($warisData->wr_poskod) == 5
+                        ? $warisData->wr_poskod
                         : substr('00000' . $warisData->wr_poskod, -5)))
                 : null,
             'daerah_penjaga' => $daerah_penjaga,
@@ -346,10 +346,10 @@ class DaftarPenggunaController extends Controller
                 $pekerjaanData->tk_majikan_alamat2,
             ]))) : null,
             'poskod_kerja' => $pekerjaanData
-                ? (empty($pekerjaanData->tk_majikan_poskod) 
-                    ? '00000' 
-                    : (strlen($pekerjaanData->tk_majikan_poskod) == 5 
-                        ? $pekerjaanData->tk_majikan_poskod 
+                ? (empty($pekerjaanData->tk_majikan_poskod)
+                    ? '00000'
+                    : (strlen($pekerjaanData->tk_majikan_poskod) == 5
+                        ? $pekerjaanData->tk_majikan_poskod
                         : substr('00000' . $pekerjaanData->tk_majikan_poskod, -5)))
                 : null,
             'daerah_kerja' => $daerah_majikan,
@@ -378,7 +378,7 @@ class DaftarPenggunaController extends Controller
         // 6) Create users
         // Check if password is provided
         if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu.');
+            return redirect()->back()->with('errors', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu.');
         }
 
         $user = User::create([
@@ -403,7 +403,7 @@ class DaftarPenggunaController extends Controller
         return redirect()->route('pegawai-daerah.senarai-klien')->with('success', $message);
     }
 
-   
+
     // 2) PENTADBIR
     public function senaraiPengguna()
     {
@@ -463,7 +463,7 @@ class DaftarPenggunaController extends Controller
         if ($query->count() == 0) {
             return response()->json(['data' => []]); // Ensure empty response when no records exist
         }
-    
+
         return DataTables::of($query)->make(true);
     }
 
@@ -483,11 +483,11 @@ class DaftarPenggunaController extends Controller
                         'tahap_pengguna.peranan as peranan'
                     )
                     ->orderBy('pegawai_mohon_daftar.updated_at', 'desc');
-        
+
         if ($query->count() == 0) {
             return response()->json(['data' => []]); // Ensure empty response when no records exist
         }
-    
+
         return DataTables::of($query)->make(true);
     }
 
@@ -547,7 +547,7 @@ class DaftarPenggunaController extends Controller
             return redirect()->route('senarai-pengguna')->with('warning', 'Maklumat akaun klien belum didaftarkan ke dalam sistem.');
         }
     }
-    
+
     public function modalKemaskiniPegawai($id)
     {
         $pegawai = Pegawai::find($id);
@@ -624,7 +624,7 @@ class DaftarPenggunaController extends Controller
             return redirect()->route('senarai-pengguna')->with('message', 'Akaun pegawai ' . $request->nama . ' telah berjaya dikemaskini.');
         }
 
-        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna tidak wujud.');
+        return redirect()->route('senarai-pengguna')->with('errors', 'Pengguna tidak wujud.');
     }
 
     public function modalPermohonanPegawai($id)
@@ -753,7 +753,7 @@ class DaftarPenggunaController extends Controller
         // Mail::to($defaultEmail)->send(new PegawaiRejected($pegawaiDitolak));
         Mail::to($pegawaiDitolak->emel)->send(new PegawaiRejected($pegawaiDitolak));
 
-        return redirect()->route('senarai-pengguna')->with('error', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
+        return redirect()->route('senarai-pengguna')->with('errors', 'Pengguna ' . $pegawaiDitolak->nama . ' tidak didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pemohon.');
     }
 
     public function daftarPegawai(Request $request)
@@ -823,7 +823,7 @@ class DaftarPenggunaController extends Controller
             return redirect()->route('senarai-pengguna')->with('success', 'Pegawai telah berjaya didaftarkan sebagai pengguna sistem ini. Notifikasi e-mel telah dihantar kepada pegawai.');
         }
         else {
-            return redirect()->route('senarai-pengguna')->with('error', 'No kad pengenalan ' . $request->no_kp . ' telah didaftarkan dalam sistem ini.');
+            return redirect()->route('senarai-pengguna')->with('errors', 'No kad pengenalan ' . $request->no_kp . ' telah didaftarkan dalam sistem ini.');
         }
     }
 
@@ -918,10 +918,10 @@ class DaftarPenggunaController extends Controller
                 $klienData->alamat02,
                 $klienData->alamat03
             ]))),
-            'poskod' => (empty($klienData->poskod)) 
-                ? '00000' 
-                : (strlen($klienData->poskod) == 5 
-                    ? $klienData->poskod 
+            'poskod' => (empty($klienData->poskod))
+                ? '00000'
+                : (strlen($klienData->poskod) == 5
+                    ? $klienData->poskod
                     : substr('00000' . $klienData->poskod, -5)),
             'daerah' => $daerah ?? '',
             'negeri' => $negeri ?? '',
@@ -952,7 +952,7 @@ class DaftarPenggunaController extends Controller
             'created_at' => now(),
         ]);
 
-        
+
         // 3) Create waris_klien
         // daerah: from senarai_daerah where daerah == $warisData->alamat3
         $daerah_penjaga = $warisData ? Daerah::where('daerah', $warisData->wr_alamat3)->value('id') : null;
@@ -973,10 +973,10 @@ class DaftarPenggunaController extends Controller
                 $warisData->wr_alamat2,
             ]))) : null,
             'poskod_penjaga' => $warisData
-                ? (empty($warisData->wr_poskod) 
-                    ? '00000' 
-                    : (strlen($warisData->wr_poskod) == 5 
-                        ? $warisData->wr_poskod 
+                ? (empty($warisData->wr_poskod)
+                    ? '00000'
+                    : (strlen($warisData->wr_poskod) == 5
+                        ? $warisData->wr_poskod
                         : substr('00000' . $warisData->wr_poskod, -5)))
                 : null,
             'daerah_penjaga' => $daerah_penjaga,
@@ -1005,10 +1005,10 @@ class DaftarPenggunaController extends Controller
                 $pekerjaanData->tk_majikan_alamat2,
             ]))) : null,
             'poskod_kerja' => $pekerjaanData
-                ? (empty($pekerjaanData->tk_majikan_poskod) 
-                    ? '00000' 
-                    : (strlen($pekerjaanData->tk_majikan_poskod) == 5 
-                        ? $pekerjaanData->tk_majikan_poskod 
+                ? (empty($pekerjaanData->tk_majikan_poskod)
+                    ? '00000'
+                    : (strlen($pekerjaanData->tk_majikan_poskod) == 5
+                        ? $pekerjaanData->tk_majikan_poskod
                         : substr('00000' . $pekerjaanData->tk_majikan_poskod, -5)))
                 : null,
             'daerah_kerja' => $daerah_majikan,
@@ -1037,7 +1037,7 @@ class DaftarPenggunaController extends Controller
         // 6) Create users
         // Check if password is provided
         if (!$request->filled('passwordDaftar')) {
-            return redirect()->back()->with('error', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu.');
+            return redirect()->back()->with('errors', 'Klien belum didaftarkan sebagai pengguna sistem. Sila jana kata laluan terlebih dahulu.');
         }
 
         $user = User::create([

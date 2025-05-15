@@ -95,9 +95,9 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-                        @if (session('error'))
+                        @if (session('errors'))
                             <div class="alert alert-danger p-2" role="alert">
-                                {{ session('error') }}
+                                {{ session('errors') }}
                             </div>
                         @endif
                         <div class="fw-semibold fs-6 mb-7">

@@ -26,7 +26,7 @@
         </ul>
     </div>
 </div>
-    
+
 <body>
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid mt-5">
@@ -119,7 +119,7 @@
                     <!--end:::Tab item-->
                 </ul>
                 <!--end:::Tabs-->
-                
+
                 <!--begin:::Tab content-->
                 <div class="tab-content" id="myTabContent">
                     <!--begin:::Tab pane Klien-->
@@ -135,7 +135,7 @@
                                 </div>
                             </div>
                             <!--end::Heading-->
-                            
+
                             <!--begin::Input group-->
                             <div class="row fv-row mb-2">
                                 <div class="col-md-4 text-md-start">
@@ -434,7 +434,7 @@
                                 </div>
                             </div>
                             <!--end::Input group-->
-                            
+
                             <!--begin::Action buttons-->
                             <div class="row py-5">
                                 <div class="col-md-8 offset-md-4">
@@ -479,7 +479,7 @@
                                                     $daerah_asal = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->value('pejabat_pengawasan_klien.daerah_aadk_asal');
                                                     $tamatRPDK = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_asal)->value('senarai_daerah_pejabat.daerah');
                                                 @endphp
-                                        
+
                                                 <div class="row fv-row">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
@@ -651,7 +651,7 @@
                                                         <input type="text" class="form-control form-control-solid {{ $requestedPendidikan != $pendidikanKlien ? 'border-danger' : '' }}" name="tahap_pendidikan" value="{{ $requestedPendidikan }}" readonly />
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
@@ -673,7 +673,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                                
+                        </div>
                         <!--end::Modal-->
 
                         @if ($updateRequestKlien)
@@ -693,7 +693,7 @@
                                                 @csrf
                                                 <input type="hidden" name="status" value="Ditolak">
                                                 <input type="hidden" name="id" value="{{ $updateRequestKlien->klien_id }}">
-                            
+
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
                                                     <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -702,7 +702,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- End Rejection Reasons Input -->
-                            
+
                                                 <!-- Form actions -->
                                                 <div class="text-center pt-3">
                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -730,7 +730,7 @@
                                 </div>
                             </div>
                             <!--end::Heading-->
-                    
+
                             <!--begin::Input group-->
                             <div class="row fv-row mb-7">
                                 <div class="col-md-3 text-md-start">
@@ -865,7 +865,7 @@
                                         <div class="col-md-9">
                                             <input type="text" class="form-control form-control-solid" id="lain_lain_majikan" name="lain_lain_majikan" placeholder="Sila Nyatakan (Lain-Lain)" value="{{$pekerjaan->lain_lain_majikan}}" style="text-transform: uppercase;"/>
                                         </div>
-                                    </div>   
+                                    </div>
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
@@ -1028,7 +1028,7 @@
                                                     $namaKerja = DB::table('senarai_pekerjaan')->where('id', $pekerjaan->nama_kerja)->value('senarai_pekerjaan.pekerjaan');
                                                     $requestedAlasanTK = DB::table('senarai_tidak_kerja')->where('id', $requestedDataPekerjaan['alasan_tidak_kerja'])->value('senarai_tidak_kerja.alasan');
                                                 @endphp
-                                        
+
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
@@ -1077,11 +1077,11 @@
                                                             <label class="fs-6 fw-semibold form-label mt-3">Nama Majikan</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" 
-                                                                   class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}" 
-                                                                   name="nama_majikan" 
-                                                                   id="nama_majikan_modal"  
-                                                                   value="{{ $requestedNamaMajikan == 'LAIN-LAIN' ? $requestedNamaMajikan . ' (' . ($requestedDataPekerjaan['lain_lain_nama_majikan'] ?? '') . ')' : $requestedNamaMajikan }}" 
+                                                            <input type="text"
+                                                                   class="form-control form-control-solid {{ $requestedNamaMajikan != $namaMajikan ? 'border-danger' : '' }}"
+                                                                   name="nama_majikan"
+                                                                   id="nama_majikan_modal"
+                                                                   value="{{ $requestedNamaMajikan == 'LAIN-LAIN' ? $requestedNamaMajikan . ' (' . ($requestedDataPekerjaan['lain_lain_nama_majikan'] ?? '') . ')' : $requestedNamaMajikan }}"
                                                                    readonly />
                                                         </div>
                                                     </div>
@@ -1160,7 +1160,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                                
+                        </div>
                         <!--end::Modal-->
 
                         @if ($updateRequestPekerjaan)
@@ -1180,7 +1180,7 @@
                                                 @csrf
                                                 <input type="hidden" name="status" value="Ditolak">
                                                 <input type="hidden" name="id" value="{{ $updateRequestPekerjaan->klien_id }}">
-                            
+
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
                                                     <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -1189,7 +1189,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- End Rejection Reasons Input -->
-                            
+
                                                 <!-- Form actions -->
                                                 <div class="text-center pt-3">
                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -1245,7 +1245,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </nav>                                
+                                </nav>
                                 {{-- end::Sidebar --}}
 
                                 <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
@@ -1261,7 +1261,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Heading-->
-                                                
+
                                                 <!--begin::Input group-->
                                                 <div class="row fv-row mb-5">
                                                     <div class="col-md-4 text-md-start">
@@ -1430,7 +1430,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
-                                                
+
                                                 <!-- begin::Action buttons -->
                                                 <div class="row py-5">
                                                     <div class="col-md-8 offset-md-4">
@@ -1450,7 +1450,7 @@
                                                 <!-- end::Action buttons -->
                                             </form>
                                         </div>
-                    
+
                                         <!-- Maklumat Ibu -->
                                         <div class="tab-pane" id="maklumatIbu">
                                             <form id="ibuKlienForm" method="post" style="padding-left: 50px;" action="{{ route('kemaskini.ibu.klien', ['id' => $klien->id]) }}">
@@ -1462,7 +1462,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Heading-->
-                                                
+
                                                 <!--begin::Input group-->
                                                 <div class="row fv-row mb-5">
                                                     <div class="col-md-4 text-md-start">
@@ -1631,7 +1631,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
-                                                
+
                                                 <!--begin::Action buttons-->
                                                 <div class="row py-5">
                                                     <div class="col-md-8 offset-md-4">
@@ -1650,7 +1650,7 @@
                                                 <!--end::Action buttons-->
                                             </form>
                                         </div>
-                    
+
                                         <!-- Maklumat Penjaga -->
                                         <div class="tab-pane" id="maklumatPenjaga">
                                             <form id="penjagaKlienForm" method="post" style="padding-left: 50px;" action="{{ route('kemaskini.penjaga.klien', ['id' => $klien->id]) }}">
@@ -1662,7 +1662,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Heading-->
-                                                
+
                                                 <!--begin::Input group-->
                                                 <div class="row fv-row mb-5">
                                                     <div class="col-md-4 text-md-start">
@@ -1847,7 +1847,7 @@
                                                     </div>
                                                 </div>
                                                 <!--end::Input group-->
-                                                
+
                                                 <!--begin::Action buttons-->
                                                 <div class="row py-5">
                                                     <div class="col-md-8 offset-md-4">
@@ -1868,7 +1868,7 @@
                                         </div>
                                     </div>
                                 </main>
-                    
+
                                 <!--begin::Modal BapaKlien-->
                                 <div class="modal fade" id="approvalBapa" tabindex="-1" aria-labelledby="luluskanPermohonanBapaLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -1882,14 +1882,14 @@
                                                     <form method="post" action="{{ route('approve.update.bapa', ['id' => $updateRequestBapa->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
-    
+
                                                         @php
                                                             $requestedDaerahBapa = DB::table('senarai_daerah')->where('id', $requestedDataBapa['daerah_bapa'])->value('senarai_daerah.daerah');
                                                             $requestedNegeriBapa = DB::table('senarai_negeri')->where('id', $requestedDataBapa['negeri_bapa'])->value('senarai_negeri.negeri');
                                                             $daerahBapa = DB::table('senarai_daerah')->where('id', $waris->daerah_bapa)->value('senarai_daerah.daerah');
                                                             $negeriBapa = DB::table('senarai_negeri')->where('id', $waris->negeri_bapa)->value('senarai_negeri.negeri');
                                                         @endphp
-                                                
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
@@ -1954,7 +1954,7 @@
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDaerahBapa != $daerahBapa ? 'border-danger' : '' }}" name="daerah_bapa" value="{{ $requestedDaerahBapa }}" readonly />
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
@@ -1970,13 +1970,13 @@
                                                     </form>
                                                 @endif
                                             </div>
-    
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>                                                  
+                                </div>
                                 <!--end::Modal BapaKlien-->
 
                                 @if($updateRequestBapa)
@@ -1996,7 +1996,7 @@
                                                         @csrf
                                                         <input type="hidden" name="status" value="Ditolak">
                                                         <input type="hidden" name="id" value="{{ $updateRequestBapa->klien_id }}">
-                                    
+
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
                                                             <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -2005,7 +2005,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- End Rejection Reasons Input -->
-                                    
+
                                                         <!-- Form actions -->
                                                         <div class="text-center pt-3">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -2031,14 +2031,14 @@
                                                     <form method="post" action="{{ route('approve.update.ibu', ['id' => $updateRequestIbu->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
-    
+
                                                         @php
                                                             $requestedDaerahIbu = DB::table('senarai_daerah')->where('id', $requestedDataIbu['daerah_ibu'])->value('senarai_daerah.daerah');
                                                             $requestedNegeriIbu = DB::table('senarai_negeri')->where('id', $requestedDataIbu['negeri_ibu'])->value('senarai_negeri.negeri');
                                                             $daerahIbu = DB::table('senarai_daerah')->where('id', $waris->daerah_ibu)->value('senarai_daerah.daerah');
                                                             $negeriIbu = DB::table('senarai_negeri')->where('id', $waris->negeri_ibu)->value('senarai_negeri.negeri');
                                                         @endphp
-                                                
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Nama</label>
@@ -2103,7 +2103,7 @@
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDaerahIbu != $daerahIbu ? 'border-danger' : '' }}" name="daerah_ibu" value="{{ $requestedDaerahIbu }}" readonly />
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
@@ -2119,13 +2119,13 @@
                                                     </form>
                                                 @endif
                                             </div>
-    
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <!--end::Modal IbuKlien-->
 
                                 @if($updateRequestIbu)
@@ -2145,7 +2145,7 @@
                                                         @csrf
                                                         <input type="hidden" name="status" value="Ditolak">
                                                         <input type="hidden" name="id" value="{{ $updateRequestIbu->klien_id }}">
-                                    
+
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
                                                             <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -2154,7 +2154,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- End Rejection Reasons Input -->
-                                    
+
                                                         <!-- Form actions -->
                                                         <div class="text-center pt-3">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -2180,14 +2180,14 @@
                                                     <form method="post" action="{{ route('approve.update.penjaga', ['id' => $updateRequestPenjaga->klien_id]) }}">
                                                         @csrf
                                                         @method('PATCH')
-    
+
                                                         @php
                                                             $requestedDaerahPenjaga = DB::table('senarai_daerah')->where('id', $requestedDataPenjaga['daerah_penjaga'])->value('senarai_daerah.daerah');
                                                             $requestedNegeriPenjaga = DB::table('senarai_negeri')->where('id', $requestedDataPenjaga['negeri_penjaga'])->value('senarai_negeri.negeri');
                                                             $daerahPenjaga = DB::table('senarai_daerah')->where('id', $waris->daerah_penjaga)->value('senarai_daerah.daerah');
                                                             $negeriPenjaga = DB::table('senarai_negeri')->where('id', $waris->negeri_penjaga)->value('senarai_negeri.negeri');
                                                         @endphp
-                                                
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Hubungan</label>
@@ -2260,7 +2260,7 @@
                                                                 <input type="text" class="form-control form-control-solid {{ $requestedDaerahPenjaga != $daerahPenjaga ? 'border-danger' : '' }}" name="daerah_penjaga" value="{{ $requestedDaerahPenjaga }}" readonly />
                                                             </div>
                                                         </div>
-    
+
                                                         <div class="row fv-row mb-7">
                                                             <div class="col-md-4 text-md-start">
                                                                 <label class="fs-6 fw-semibold form-label mt-3">Keputusan</label>
@@ -2276,13 +2276,13 @@
                                                     </form>
                                                 @endif
                                             </div>
-    
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <!--end::Modal PenjagaKlien-->
 
                                 @if($updateRequestPenjaga)
@@ -2302,7 +2302,7 @@
                                                         @csrf
                                                         <input type="hidden" name="status" value="Ditolak">
                                                         <input type="hidden" name="id" value="{{ $updateRequestPenjaga->klien_id }}">
-                                    
+
                                                         <!-- Begin Rejection Reasons Input -->
                                                         <div id="dynamicFields">
                                                             <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -2311,7 +2311,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- End Rejection Reasons Input -->
-                                    
+
                                                         <!-- Form actions -->
                                                         <div class="text-center pt-3">
                                                             <button type="submit" class="btn btn-primary">Hantar</button>
@@ -2506,7 +2506,7 @@
                                     </div>
                                 </div>
                                 <!--end::Input group-->
-                                
+
                                 <!--begin::Input group-->
                                 <div class="row fv-row mb-7">
                                     <div class="col-md-4 text-md-start">
@@ -2578,7 +2578,7 @@
                                             <!--begin::Select2-->
                                             <select class="form-select form-select-solid custom-select" id="daerah_kerja_pasangan" name="daerah_kerja_pasangan" data-control="select2" data-hide-search="false">
                                                 <option>Pilih Daerah</option>
-                                                @foreach ($daerahKerjaPasangan as $daerahKP)    
+                                                @foreach ($daerahKerjaPasangan as $daerahKP)
                                                     <option value="{{ $daerahKP->id }}" {{ $pasangan->daerah_kerja_pasangan == $daerahKP->id ? 'selected' : '' }}>{{ $daerahKP->daerah }}</option>
                                                 @endforeach
                                             </select>
@@ -2588,7 +2588,7 @@
                                 </div>
                                 <!--end::Input group-->
                             </div>
-                            
+
                             <!--begin::Action buttons-->
                             <div class="row py-5">
                                 <div class="col-md-8 offset-md-4">
@@ -2625,13 +2625,13 @@
                                                     $requestedNegeriPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_pasangan'])->value('senarai_negeri.negeri');
                                                     $requestedDaerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $requestedDataPasangan['daerah_kerja_pasangan'])->value('senarai_daerah.daerah');
                                                     $requestedNegeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $requestedDataPasangan['negeri_kerja_pasangan'])->value('senarai_negeri.negeri');
-                                                    
+
                                                     $daerahPasangan = DB::table('senarai_daerah')->where('id', $pasangan->daerah_pasangan)->value('senarai_daerah.daerah');
                                                     $negeriPasangan = DB::table('senarai_negeri')->where('id', $pasangan->negeri_pasangan)->value('senarai_negeri.negeri');
                                                     $daerahKerjaPasangan = DB::table('senarai_daerah')->where('id', $pasangan->daerah_kerja_pasangan)->value('senarai_daerah.daerah');
                                                     $negeriKerjaPasangan = DB::table('senarai_negeri')->where('id', $pasangan->negeri_kerja_pasangan)->value('senarai_negeri.negeri');
                                                 @endphp
-                                        
+
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Perkahwinan</label>
@@ -2753,7 +2753,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                                                
+                        </div>
                         <!--end::Modal-->
 
                         @if($updateRequestPasangan)
@@ -2773,7 +2773,7 @@
                                                 @csrf
                                                 <input type="hidden" name="status" value="Ditolak">
                                                 <input type="hidden" name="id" value="{{ $updateRequestPasangan->klien_id }}">
-                            
+
                                                 <!-- Begin Rejection Reasons Input -->
                                                 <div id="dynamicFields">
                                                     <label class="fs-6 fw-semibold mb-2">Nyatakan alasan permohonan ditolak:</label>
@@ -2782,7 +2782,7 @@
                                                     </div>
                                                 </div>
                                                 <!-- End Rejection Reasons Input -->
-                            
+
                                                 <!-- Form actions -->
                                                 <div class="text-center pt-3">
                                                     <button type="submit" class="btn btn-primary">Hantar</button>
@@ -2809,7 +2809,7 @@
                                 </div>
                             </div>
                             <!--end::Heading-->
-                        
+
                             <!--begin::Input group-->
                             <div class="row fv-row mb-4">
                                 <div class="col-md-4 text-md-start">
@@ -2929,7 +2929,7 @@
         function calculateAgeFromIC() {
             let icNumber = document.getElementById('no_kp').textContent.trim();
             icNumber = icNumber.replace(':', '').trim();  // Remove colon and trim whitespace
-            
+
             const year = parseInt(icNumber.substring(0, 2), 10);
             const month = parseInt(icNumber.substring(2, 4), 10);
             const day = parseInt(icNumber.substring(4, 6), 10);
@@ -2946,7 +2946,7 @@
             }
 
             document.getElementById('umur').textContent = `${age}`; // Update the text content of the span
-            document.getElementById('modal_umur').textContent = `${age}`; 
+            document.getElementById('modal_umur').textContent = `${age}`;
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -2971,17 +2971,17 @@
                 });
             @endif
 
-            // Check if there is a flash error message
-            @if(session('error'))
+            // Check if there is a flash errors message
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya Dikemaskini!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
 
-            // Check if there is a flash error message
+            // Check if there is a flash errors message
             @if(session('errorProfil'))
                 Swal.fire({
                     icon: 'error',
@@ -2991,7 +2991,7 @@
                 });
             @endif
 
-            // Check if there is a flash error message
+            // Check if there is a flash errors message
             @if(session('errorPermohonan'))
                 Swal.fire({
                     icon: 'error',
@@ -3014,11 +3014,11 @@
         });
 
         $(document).ready(function(){
-            $('[data-bs-toggle="tooltip"]').tooltip(); 
+            $('[data-bs-toggle="tooltip"]').tooltip();
         });
     </script>
 
-    {{-- Display daerah based on negeri klien --}}     
+    {{-- Display daerah based on negeri klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3112,9 +3112,9 @@
                 }
             }
         });
-    </script>     
+    </script>
 
-    {{-- Display daerah based on negeri bapa klien --}} 
+    {{-- Display daerah based on negeri bapa klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3160,9 +3160,9 @@
                 }
             }
         });
-    </script>    
+    </script>
 
-    {{-- Display daerah based on negeri ibu klien --}}  
+    {{-- Display daerah based on negeri ibu klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3208,9 +3208,9 @@
                 }
             }
         });
-    </script>   
+    </script>
 
-    {{-- Display daerah based on negeri penjaga klien --}} 
+    {{-- Display daerah based on negeri penjaga klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3256,9 +3256,9 @@
                 }
             }
         });
-    </script>    
+    </script>
 
-    {{-- Display daerah based on negeri pasangan klien --}}  
+    {{-- Display daerah based on negeri pasangan klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3304,9 +3304,9 @@
                 }
             }
         });
-    </script>   
+    </script>
 
-    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}  
+    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}
     <script>
         $(document).ready(function () {
             // Trigger initial population
@@ -3352,7 +3352,7 @@
                 }
             }
         });
-    </script>   
+    </script>
 
     {{-- Checkbox alamat --}}
     <script>
@@ -3363,7 +3363,7 @@
         var initialPoskodBapa = document.getElementById("poskod_b").value;
 
         function alamatBapa() {
-            
+
             var checkBox = document.getElementById("alamat_bapa_sama");
             var alamat_klien = document.getElementById("alamat_rumah_klien");
             var klien_negeri = document.getElementById("negeri_klien");
@@ -3416,7 +3416,7 @@
         var initialPoskodIbu = document.getElementById("poskod_i").value;
 
         function alamatIbu() {
-            
+
             var checkBox = document.getElementById("alamat_ibu_sama");
             var alamat_klien = document.getElementById("alamat_rumah_klien");
             var klien_negeri = document.getElementById("negeri_klien");
@@ -3469,7 +3469,7 @@
         var initialPoskodPenjaga = document.getElementById("poskod_p").value;
 
         function alamatPenjaga() {
-            
+
             var checkBox = document.getElementById("alamat_penjaga_sama");
             var alamat_klien = document.getElementById("alamat_rumah_klien");
             var klien_negeri = document.getElementById("negeri_klien");
@@ -3522,7 +3522,7 @@
         var initialPoskodPasangan = document.getElementById("poskod_partner").value;
 
         function alamatPasangan() {
-            
+
             var checkBox = document.getElementById("alamat_pasangan_sama");
             var alamat_klien = document.getElementById("alamat_rumah_klien");
             var klien_negeri = document.getElementById("negeri_klien");
@@ -3578,7 +3578,7 @@
                     }
                 });
             }
-        
+
             // Restrict input to digits for all specified fields
             const maxLengthSettings = {
                 'no_tel': 11,
@@ -3598,7 +3598,7 @@
                 'poskod_pasangan': 5,
                 'poskod_kerja_pasangan': 5
             };
-        
+
             // Loop through each setting and apply the restriction
             Object.keys(maxLengthSettings).forEach(function(name) {
                 document.querySelectorAll('[name="' + name + '"]').forEach(function(element) {
@@ -3606,9 +3606,9 @@
                 });
             });
         });
-    </script> 
+    </script>
 
-    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}  
+    {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusKerja = $('#status_kerja');
@@ -3640,8 +3640,8 @@
             const statusKerjaModal = document.getElementById('status_kerja_modal');
             const bekerjaFields = document.getElementById('bekerjaFieldsModal');
             const tidakBekerjaFields = document.getElementById('tidakBekerjaFieldsModal');
-    
-            function toggleFields() 
+
+            function toggleFields()
             {
                 console.log('Status Kerja Modal:', statusKerjaModal.value); // Debugging
 
@@ -3656,12 +3656,12 @@
                     tidakBekerjaFields.style.display = 'none';
                 }
             }
-    
+
             // Initial check
             toggleFields();
         });
     </script>
-    
+
     {{-- Compare original data with updated data --}}
     <script>
         document.getElementById('submitBtnKlien').addEventListener('click', function (e) {
@@ -3677,7 +3677,7 @@
                 penyakit: "{{ $klien->penyakit }}",
                 status_oku: "{{ $klien->status_oku }}",
             };
-    
+
             // Get current data (input values from form)
             const currentDataKlien = {
                 no_tel: document.getElementById('no_tel').value,
@@ -3690,7 +3690,7 @@
                 penyakit: document.getElementById('penyakit').value,
                 status_oku: document.getElementById('status_oku').value,
             };
-    
+
             // Handle poskod_k as a string for comparison, but check if the field is defined
             if (originalDataKlien.poskod_k !== null && originalDataKlien.poskod_k !== undefined) {
                 originalDataKlien.poskod_k = originalDataKlien.poskod_k.toString();
@@ -3698,36 +3698,36 @@
             if (currentDataKlien.poskod_k !== null && currentDataKlien.poskod_k !== undefined) {
                 currentDataKlien.poskod_k = currentDataKlien.poskod_k.toString();
             }
-    
+
             let isChanged = false;
-        
+
             // Compare all fields except emel (case-insensitive comparison)
             Object.keys(originalDataKlien).forEach(key => {
                 if (key !== 'emel') {
-                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';  
-                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';   
-    
+                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';
+                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';
+
                     console.log(`Comparing ${key}: Original Value: ${originalValue} | Current Value: ${currentValue}`);
-    
+
                     if (originalValue !== currentValue) {
                         isChanged = true;  // Mark as changed
                         console.log(`${key} has changed.`);
                     }
                 }
             });
-    
+
             // Compare email case-sensitively
             console.log(`Comparing emel: Original Value: ${originalDataKlien.emel} | Current Value: ${currentDataKlien.emel}`);
             if (originalDataKlien.emel !== currentDataKlien.emel) {
                 isChanged = true;  // Mark as changed if email differs (case-sensitive)
                 console.log("Email has changed.");
             }
-    
+
             if (!isChanged) {
                 // Display alert if no changes are detected
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
             } else {
                 // Allow form submission if changes are detected
@@ -3812,7 +3812,7 @@
                 poskod_kerja: document.getElementById('poskod_kerja').value,
                 negeri_kerja: negeri_kerja,
                 daerah_kerja: daerah_kerja,
-                alasan_tidak_kerja: alasan_tidak_kerja 
+                alasan_tidak_kerja: alasan_tidak_kerja
             };
 
             Object.keys(currentData).forEach(key => {
@@ -3833,8 +3833,8 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
-                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';
 
                 if (originalValue !== currentValue) {
                     isChanged = true;  // Mark as changed
@@ -3845,10 +3845,10 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
-            else { 
+            }
+            else {
                 console.log('Form data is being submitted with the following values:', currentData);
 
                 // Allow form submission
@@ -3944,8 +3944,8 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
-                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';
 
                 if (originalValue !== currentValue) {
                     isChanged = true;  // Mark as changed
@@ -3956,9 +3956,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('keluargaKlienForm').submit();
@@ -4023,7 +4023,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -4037,9 +4037,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('bapaKlienForm').submit();
@@ -4104,7 +4104,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -4118,9 +4118,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('ibuKlienForm').submit();
@@ -4187,7 +4187,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -4202,9 +4202,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('penjagaKlienForm').submit();
@@ -4214,7 +4214,7 @@
 
     {{-- Lain-lain majikan Non Modal --}}
     <script>
-        function LainMajikanNonModal() 
+        function LainMajikanNonModal()
         {
             const namaMajikanDropdown = document.getElementById('nama_majikan');
             const lainLainNamaMajikanNonModal = document.getElementById('lainLainMajikanNonModal');
@@ -4222,7 +4222,7 @@
 
             if (namaMajikanDropdown.value === '829') { // Check if value matches ID 829 (LAIN-LAIN)
                 lainLainNamaMajikanNonModal.style.display = 'block';
-            } 
+            }
             else {
                 lainLainNamaMajikanNonModal.style.display = 'none';
             }
@@ -4260,7 +4260,7 @@
             });
         });
     </script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Get the element references
@@ -4279,5 +4279,5 @@
             pasanganFields();
         });
     </script>
-</body>     
+</body>
 @endsection

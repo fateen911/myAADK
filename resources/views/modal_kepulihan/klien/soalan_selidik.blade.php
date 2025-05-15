@@ -67,8 +67,8 @@
             padding: 5px 10px;
             border-radius: 15px;
             text-align: center;
-            text-decoration: none; 
-            display: inline-block; 
+            text-decoration: none;
+            display: inline-block;
             width: 80%;
         }
 
@@ -186,7 +186,7 @@
     <!--end::Breadcrumb-->
 </div>
 <!--end::Page title-->
-    
+
 <!--begin::Content-->
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <!--begin::Content container-->
@@ -199,7 +199,7 @@
                 <div class="profile-name">
                     <h2>{{$klien->nama}}</h2>
                 </div>
-            </div>            
+            </div>
             <!--end::Card header-->
 
             <!--begin::Card body-->
@@ -228,7 +228,7 @@
                 @endif
 
                 <br>
-                
+
                 @if ($butangMula)
                     <a href="{{ route('klien.soalanDemografi') }}" class="status text-black fs-4 fw-bold">KLIK UNTUK MENJAWAB -></a>
                 @else
@@ -238,7 +238,7 @@
                 @endif
             </div>
             <!--end::Card body-->
-        </div>        
+        </div>
         <!--end::Card flush-->
     </div>
     <!--end::Content container-->
@@ -260,12 +260,12 @@
             });
         @endif
 
-        // Check if there is a flash error message
-        @if(session('error'))
+        // Check if there is a flash errors message
+        @if(session('errors'))
             Swal.fire({
                 icon: 'error',
                 title: 'Tidak Berjaya!',
-                text: '{!! session('error') !!}',
+                text: '{!! session('errors') !!}',
                 confirmButtonText: 'OK'
             });
         @endif

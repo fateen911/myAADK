@@ -85,9 +85,9 @@
 
 		.nav-link {
 			font-size: 14px;
-			color: #6c757d; 
+			color: #6c757d;
 			background-color: none;
-			border: 1px solid transparent; 
+			border: 1px solid transparent;
 			padding: 10px 15px;
 			font-family: 'Poppins', sans-serif;
 		}
@@ -103,7 +103,7 @@
 		/* Active tab with color and shadow */
 		.nav-link.active {
 			color: darkslateblue !important;
-    		box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2); 
+    		box-shadow: 0 -4px 12px rgba(0, 123, 255, 0.2);
 			background-color: whitesmoke !important; /* Light blue background for active tab */
 			color: #8800ff; /* Bold blue font for active tab */
 			border-bottom: 2px solid darkslateblue !important; /* Blue underline for active tab */
@@ -253,7 +253,7 @@
 												<i class="ki-solid ki-cross-circle fs-1"></i>
 											</div>
 										</div>
-							
+
 										<div class="modal-body scroll-y mx-5 mx-xl-15" id="modalBodyPermohonanPegawaiDitolak"></div>
 									</div>
 								</div>
@@ -342,7 +342,7 @@
 										<div class="row align-items-center">
 											<!--begin::form-->
 											<form class="form w-100" action="{{ route('semak.kp') }}" method="post">
-											@csrf 
+											@csrf
 												<!--begin::Heading-->
 												<div class="text-center mb-11">
 													<br>
@@ -376,7 +376,7 @@
 								</div>
 							</div>
 							<!--end::Col-->
-							
+
 							<!--begin::Col-->
 							<div class="col-xl-9">
 								<div class="card card-flush h-xl-100">
@@ -616,7 +616,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--end::Javascript-->
 
-	{{-- Popup alert success/error message --}}
+	{{-- Popup alert success/errors message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function ()
         {
@@ -629,11 +629,11 @@
                 });
             @endif
 
-            @if(session('error'))
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Didaftarkan!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -876,10 +876,10 @@
 					{ data: 'no_kp', name: 'pegawai_mohon_daftar.no_kp', className: "text-center" },
 					{ data: 'emel', name: 'pegawai_mohon_daftar.emel', className: "text-center" },
 					{ data: 'peranan', name: 'tahap_pengguna.peranan', className: "text-center" },
-					{ 
-						data: null, 
+					{
+						data: null,
 						name: 'negeri_bertugas',
-						className: "text-center", 
+						className: "text-center",
 						render: function(data, type, row) {
 							// If both are null, return an empty string
 							if (!row.negeri_bertugas && !row.daerah_bertugas) {
@@ -898,9 +898,9 @@
 						render: function(data, type, row) {
 							return `
 								<div class="d-flex justify-content-center align-items-center">
-									<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
-										data-bs-toggle="modal" 
-										data-id="${row.id}" 
+									<a id="permohonanPegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
+										data-bs-toggle="modal"
+										data-id="${row.id}"
 										data-bs-target="#modal_permohonan_pegawai">
 										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 											<i class="ki-duotone bi bi-pencil fs-3"></i>
@@ -968,9 +968,9 @@
 					{ data: 'no_kp', name: 'users.no_kp', className: "text-center" },
 					{ data: 'email', name: 'users.email', className: "text-center" },
 					{ data: 'peranan', name: 'tahap_pengguna.peranan', className: "text-center" },
-					{ 
-						data: null, 
-						name: 'negeri_bertugas', 
+					{
+						data: null,
+						name: 'negeri_bertugas',
 						className: "text-center",
 						render: function(data, type, row) {
 							// If both are null, return an empty string
@@ -981,8 +981,8 @@
 							return row.negeri_bertugas + (row.daerah_bertugas ? ' (' + row.daerah_bertugas + ')' : '');
 						}
 					},
-					{ 
-						data: 'created_at', 
+					{
+						data: 'created_at',
 						name: 'users.created_at',
 						className: "text-center",
 						render: function(data, type, row) {
@@ -998,9 +998,9 @@
 						render: function(data, type, row) {
 							return `
 								<div class="d-flex justify-content-center align-items-center">
-									<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" 
-										data-bs-toggle="modal" 
-										data-id="${row.pegawai_id}" 
+									<a id="pegawaiModal" href="#" class="btn btn-icon btn-active-light-primary w-30px h-30px me-3"
+										data-bs-toggle="modal"
+										data-id="${row.pegawai_id}"
 										data-bs-target="#modal_kemaskini_pegawai">
 										<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Kemaskini">
 											<i class="ki-duotone bi bi-pencil fs-3"></i>
@@ -1101,8 +1101,8 @@
 			});
 		}
 	</script>
-	
-	
+
+
 
 	{{-- Form validation for Daftar Pegawai --}}
 	<script>

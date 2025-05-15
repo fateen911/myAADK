@@ -232,7 +232,7 @@ var Prism = (function (_self) {
 				}
 
 				// IE11 workaround
-				// we'll get the src of the current script by parsing IE11's error stack trace
+				// we'll get the src of the current script by parsing IE11's errors stack trace
 				// this will not work for inline scripts
 
 				try {
@@ -3474,7 +3474,7 @@ Prism.languages.insertBefore('aspnet', Prism.languages.javascript ? 'script' : '
 							env.settings[key] = value;
 						}
 					} catch (_error) {
-						// ignore error
+						// ignore errors
 					}
 				}
 			}

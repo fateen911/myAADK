@@ -26,15 +26,15 @@
         @csrf
 
         <div>
-            <x-text-input 
-                id="no_kp" 
-                class="block w-full pr-10" 
-                type="text" 
-                name="no_kp" 
-                :value="old('no_kp')" 
-                required 
-                autofocus 
-                autocomplete="no_kp" 
+            <x-text-input
+                id="no_kp"
+                class="block w-full pr-10"
+                type="text"
+                name="no_kp"
+                :value="old('no_kp')"
+                required
+                autofocus
+                autocomplete="no_kp"
                 placeholder="{{ __('No. Kad Pengenalan') }}"
                 oninput="validateInput(this)"
             />
@@ -78,12 +78,12 @@
                 input.value = input.value.slice(0, 12);
             }
 
-            // Optional: Update the error message dynamically
+            // Optional: Update the errors message dynamically
             const errorElement = document.getElementById('no_kp_error');
             if (input.value.length < 12) {
                 errorElement.textContent = 'No Kad Pengenalan mesti mempunyai 12 digit.';
             } else {
-                errorElement.textContent = ''; // Clear the error message when valid
+                errorElement.textContent = ''; // Clear the errors message when valid
             }
         }
     </script>

@@ -9,7 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/css/profilKlien_klien_view.css" rel="stylesheet">
-   
+
     <!-- Select2 CSS & JS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
@@ -35,7 +35,7 @@
             </a>
         </div>
     </div>
-    
+
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid d-flex justify-content-center align-items-center">
         <!--begin::Content container-->
@@ -97,7 +97,7 @@
                         <!--end:::Tab item-->
                     </ul>
                     <!--end:::Tabs-->
-                    
+
                     <!--begin:::Tab content-->
                     <div class="tab-content" id="myTabContent">
                         <!--begin:::Tab pane Peribadi-->
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <!--end::Heading-->
-                                
+
                                 <!--begin::Input group-->
                                 <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
@@ -126,7 +126,7 @@
                                         <!--end::Text-->
                                     </div>
                                 </div>
-                                <!--end::Input group--> 
+                                <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="row fv-row">
                                     <div class="col-md-5 text-md-start">
@@ -392,7 +392,7 @@
                                     </div>
                                 </div>
                                 <!--end::Input group-->
-                                
+
                                 <!--begin::Action buttons-->
                                 <div class="row py-5">
                                     <div class="col-md-7 offset-md-5">
@@ -401,14 +401,14 @@
                                                 @if ($resultRequestKlien->status != "Kemaskini")
                                                     <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
                                                         Mohon Kemaskini
-                                                    </button>                                            
+                                                    </button>
                                                 @else
                                                     <div class="btn-light-warning">Permohonan Kemaskini Telah Dihantar</div>
                                                 @endif
                                             @else
                                                 <button type="button" class="btn btn-primary modal-trigger" id="requestModalPeribadiKlien" data-target="#requestPeribadiKlien">
                                                     Mohon Kemaskini
-                                                </button> 
+                                                </button>
                                             @endif
                                         </div>
                                     </div>
@@ -613,17 +613,17 @@
                                                             <button type="submit" id="submitBtnKlien" class="btn btn-primary">Hantar</button>
                                                         </div>
                                                     </div>
-                                                </div>   
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                                                
+                            </div>
                             <!--end::Modal-->
                         </div>
                         <!--end:::Tab pane-->
 
-                        
+
                         <!--begin:::Tab pane Pekerjaan-->
                         <div class="tab-pane fade" id="kt_ecommerce_settings_customers" role="tabpanel">
                             <!--begin::Form-->
@@ -636,7 +636,7 @@
                                     </div>
                                 </div>
                                 <!--end::Heading-->
-                        
+
                                 <!--begin::Input group-->
                                 <div class="row fv-row">
                                     <div class="col-md-4 text-md-start">
@@ -788,7 +788,7 @@
                                                 <span>Daerah</span>
                                             </label>
                                         </div>
-                                    
+
                                         <div class="col-md-8">
                                             <div class="w-100">
                                                 @php
@@ -845,11 +845,11 @@
                                             <h3 class="modal-title" id="permohonanPekerjaanKlienLabel">Mohon Kemaskini Maklumat Pekerjaan Klien</h3>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                            
+
                                         <div class="modal-body">
                                             <form id="pekerjaanKlienForm" method="POST" action="{{ route('pekerjaanKlien.requestUpdate') }}">
                                                 @csrf
-                            
+
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-4 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Kerja</label>
@@ -861,7 +861,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                            
+
                                                 <!-- Fields to display when status is BEKERJA -->
                                                 <div id="bekerjaFieldsModal">
                                                     <div class="row fv-row mb-7">
@@ -1003,7 +1003,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                            
+
                                                 <!-- New field for "Status Tidak Bekerja" -->
                                                 <div id="tidakBekerjaFieldsModal" style="display:none;">
                                                     <div class="row fv-row mb-7">
@@ -1020,14 +1020,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                            
+
                                                 <div class="row fv-row mt-4 mb-2">
                                                     <div class="col-md-12">
                                                         <div class="d-flex justify-content-center align-items-center">
                                                             <button type="submit" id="submitBtnPekerjaan" class="btn btn-primary">Hantar</button>
                                                         </div>
                                                     </div>
-                                                </div>   
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -1192,7 +1192,7 @@
                                                     <!--end::Action buttons-->
                                                 </form>
                                             </div>
-                        
+
                                             <!-- Maklumat Ibu -->
                                             <div class="tab-pane" id="maklumatIbu">
                                                 <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form">
@@ -1318,7 +1318,7 @@
                                                     <!--end::Action buttons-->
                                                 </form>
                                             </div>
-                        
+
                                             <!-- Maklumat Penjaga -->
                                             <div class="tab-pane" id="maklumatPenjaga">
                                                 <form method="GET" id="kt_ecommerce_settings_general_form" class="form centered-form" action="">
@@ -1456,7 +1456,7 @@
                                             </div>
                                         </div>
                                     </main>
-                        
+
                                     <!--begin::Modal BapaKlien-->
                                     <div class="modal fade" id="requestBapaKlien" tabindex="-1" aria-labelledby="permohonanBapaKlienLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
@@ -1576,12 +1576,12 @@
                                                                     <button type="submit" id="submitBtnBapa" class="btn btn-primary">Hantar</button>
                                                                 </div>
                                                             </div>
-                                                        </div>                                            
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                
+                                    </div>
                                     <!--end::Modal BapaKlien-->
 
                                     <!--begin::Modal IbuKlien-->
@@ -1703,12 +1703,12 @@
                                                                     <button type="submit" id="submitBtnIbu" class="btn btn-primary">Hantar</button>
                                                                 </div>
                                                             </div>
-                                                        </div>                                            
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                
+                                    </div>
                                     <!--end::Modal IbuKlien-->
 
                                     <!--begin::Modal PenjagaKlien-->
@@ -1838,12 +1838,12 @@
                                                                     <button type="submit" id="submitBtnPenjaga" class="btn btn-primary">Hantar</button>
                                                                 </div>
                                                             </div>
-                                                        </div>                                            
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                                
+                                    </div>
                                     <!--end::Modal PenjagaKlien-->
                                 </div>
                             </div>
@@ -2000,7 +2000,7 @@
                                         </div>
                                     </div>
                                     <!--end::Input group-->
-                                    
+
                                     <!--begin::Input group-->
                                     <div class="row fv-row">
                                         <div class="col-md-4 text-md-start">
@@ -2114,7 +2114,7 @@
                                                 <div class="row fv-row mb-7">
                                                     <div class="col-md-5 text-md-start">
                                                         <label class="fs-6 fw-semibold form-label mt-3 required">Status Perkahwinan</label>
-                                                    </div> 
+                                                    </div>
                                                     <div class="col-md-7">
                                                         <!--begin::Select2-->
                                                         <select class="form-select form-select-solid custom-select" id="status_perkahwinan" name="status_perkahwinan" data-control="select2" data-hide-search="true">
@@ -2259,12 +2259,12 @@
                                                             <button type="submit" id="submitBtnKeluarga" class="btn btn-primary">Hantar</button>
                                                         </div>
                                                     </div>
-                                                </div>                                             
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                                                
+                            </div>
                             <!--end::Modal-->
                         </div>
                         <!--end:::Tab pane-->
@@ -2302,7 +2302,7 @@
             });
         });
     </script> --}}
-    
+
     {{-- Success / Error Message --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -2316,17 +2316,17 @@
                 });
             @endif
 
-            // Check if there is a flash error message
-            @if(session('error'))
+            // Check if there is a flash errors message
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
 
-            // Check if there is a flash error message
+            // Check if there is a flash errors message
             @if(session('errorProfil'))
                 Swal.fire({
                     icon: 'error',
@@ -2338,7 +2338,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri klien --}}     
+    {{-- Display daerah based on negeri klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri').val();
@@ -2360,7 +2360,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2395,7 +2395,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri pekerjaan klien --}}     
+    {{-- Display daerah based on negeri pekerjaan klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_kerja').val();
@@ -2411,13 +2411,13 @@
 
                 // Clear existing options
                 $("#daerah_kerja").empty();
-                
+
                 // Trigger AJAX request
                 getBandarData(idnegeri);
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2449,7 +2449,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri bapa klien --}}     
+    {{-- Display daerah based on negeri bapa klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_b').val();
@@ -2471,7 +2471,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2506,7 +2506,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri ibu klien --}}     
+    {{-- Display daerah based on negeri ibu klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_i').val();
@@ -2528,7 +2528,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2563,7 +2563,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri penjaga klien --}}     
+    {{-- Display daerah based on negeri penjaga klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_p').val();
@@ -2585,7 +2585,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2620,7 +2620,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri pasangan klien --}}     
+    {{-- Display daerah based on negeri pasangan klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_partner').val();
@@ -2642,7 +2642,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2677,7 +2677,7 @@
         });
     </script>
 
-    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}     
+    {{-- Display daerah based on negeri tempat kerja pasangan klien --}}
     <script>
         $(document).ready(function () {
             var previousIdNegeri = $('#negeri_kerja_pasangan').val();
@@ -2699,7 +2699,7 @@
             });
 
             function getBandarData(idnegeri) {
-                // AJAX request 
+                // AJAX request
                 $.ajax({
                     url: '/get-daerah/' + idnegeri,
                     type: 'get',
@@ -2757,7 +2757,7 @@
             }
 
             document.getElementById('umur').textContent = `${age}`; // Update the text content of the span
-            document.getElementById('modal_umur').textContent = `${age}`; 
+            document.getElementById('modal_umur').textContent = `${age}`;
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -2789,7 +2789,7 @@
         var initialPoskodBapa = document.getElementById("poskod_b").value;
 
         function alamatBapa() {
-            
+
             var checkBox = document.getElementById("alamat_bapa_sama");
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
@@ -2843,7 +2843,7 @@
         var initialPoskodIbu = document.getElementById("poskod_i").value;
 
         function alamatIbu() {
-            
+
             var checkBox = document.getElementById("alamat_ibu_sama");
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
@@ -2897,7 +2897,7 @@
         var initialPoskodPenjaga = document.getElementById("poskod_p").value;
 
         function alamatPenjaga() {
-            
+
             var checkBox = document.getElementById("alamat_penjaga_sama");
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
@@ -2951,7 +2951,7 @@
         var initialPoskodPasangan = document.getElementById("poskod_partner").value;
 
         function alamatPasangan() {
-            
+
             var checkBox = document.getElementById("alamat_pasangan_sama");
             var alamat_klien = document.getElementById("alamat_rumah");
             var klien_negeri = document.getElementById("negeri");
@@ -3007,7 +3007,7 @@
                     }
                 });
             }
-        
+
             // Restrict input to digits for all specified fields
             const maxLengthSettings = {
                 'no_tel': 11,
@@ -3027,7 +3027,7 @@
                 'poskod_pasangan': 5,
                 'poskod_kerja_pasangan': 5
             };
-        
+
             // Loop through each setting and apply the restriction
             Object.keys(maxLengthSettings).forEach(function(name) {
                 document.querySelectorAll('[name="' + name + '"]').forEach(function(element) {
@@ -3035,16 +3035,16 @@
                 });
             });
         });
-    </script>   
-    
+    </script>
+
     {{-- Display field bekerja atau tidakBekerja based on statusKerja --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const statusKerja = document.getElementById('status_kerja');
             const bekerjaFields = document.getElementById('bekerjaFields');
             const tidakBekerjaFields = document.getElementById('tidakBekerjaFields');
-    
-            function toggleFieldsNonModal() 
+
+            function toggleFieldsNonModal()
             {
                 const statusKerjaValue = statusKerja.textContent.trim(); // Get the text inside the span
                 console.log('Status Kerja (Non-Modal):', statusKerjaValue); // Debugging
@@ -3081,10 +3081,10 @@
                     tidakBekerjaFields.style.display = 'block';
                 }
             }
-    
+
             // Initial check
             toggleFields();
-    
+
             // Add event listener for Select2 change event
             statusKerja.on('change.select2', function() {
                 toggleFields();
@@ -3116,7 +3116,7 @@
             if (daerah === 'Pilih Daerah') {
                 daerah = null;  // Treat "Pilih Alasan" as null
             }
-    
+
             // Get current data (input values from form)
             const currentDataKlien = {
                 no_tel: document.getElementById('no_tel').value,
@@ -3128,7 +3128,7 @@
                 tahap_pendidikan: document.getElementById('tahap_pendidikan').value,
                 penyakit: document.getElementById('penyakit').value,
             };
-    
+
             // Handle poskod as a string for comparison, but check if the field is defined
             if (originalDataKlien.poskod !== null && originalDataKlien.poskod !== undefined) {
                 originalDataKlien.poskod = originalDataKlien.poskod.toString();
@@ -3142,38 +3142,38 @@
                     currentDataKlien[key] = null;
                 }
             });
-    
+
             let isChanged = false;
-    
+
             console.log("Checking field comparisons...");
-    
+
             // Compare all fields except emel (case-insensitive comparison)
             Object.keys(originalDataKlien).forEach(key => {
                 if (key !== 'emel') {
-                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';  
-                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';   
-    
+                    let originalValue = originalDataKlien[key] ? originalDataKlien[key].toUpperCase() : '';
+                    let currentValue = currentDataKlien[key] ? currentDataKlien[key].toUpperCase() : '';
+
                     console.log(`Comparing ${key}: Original Value: ${originalValue} | Current Value: ${currentValue}`);
-    
+
                     if (originalValue !== currentValue) {
                         isChanged = true;  // Mark as changed
                         console.log(`${key} has changed.`);
                     }
                 }
             });
-    
+
             // Compare email case-sensitively
             console.log(`Comparing emel: Original Value: ${originalDataKlien.emel} | Current Value: ${currentDataKlien.emel}`);
             if (originalDataKlien.emel !== currentDataKlien.emel) {
                 isChanged = true;  // Mark as changed if email differs (case-sensitive)
                 console.log("Email has changed.");
             }
-    
+
             if (!isChanged) {
                 // Display alert if no changes are detected
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
             } else {
                 // Allow form submission if changes are detected
@@ -3182,7 +3182,7 @@
             }
         });
     </script>
-    
+
     <script>
         document.getElementById('submitBtnPekerjaan').addEventListener('click', function (e) {
             // Get original data (fetched from server/database)
@@ -3201,13 +3201,13 @@
                 daerah_kerja: "{{ $butiranKlien->daerah_kerja }}",
                 alasan_tidak_kerja: "{{ $butiranKlien->alasan_tidak_kerja }}"  // This could be null
             };
-    
+
             // Get current form data
             let alasan_tidak_kerja = document.getElementById('alasan_tidak_kerja') ? document.getElementById('alasan_tidak_kerja').value : '';
             if (alasan_tidak_kerja === 'Pilih Alasan') {
                 alasan_tidak_kerja = null;  // Treat "Pilih Alasan" as null
             }
-    
+
             const currentData = {
                 status_kerja: document.getElementById('status_kerja_modal').value,
                 bidang_kerja: document.getElementById('bidang_kerja').value,
@@ -3223,7 +3223,7 @@
                 daerah_kerja: document.getElementById('daerah_kerja').value,
                 alasan_tidak_kerja: alasan_tidak_kerja  // Use the updated value
             };
-    
+
             // Handle poskod_kerja as a string for comparison
             if (originalData.poskod_kerja !== null) {
                 originalData.poskod_kerja = originalData.poskod_kerja.toString();
@@ -3233,24 +3233,24 @@
             }
 
             let isChanged = false;
-    
+
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
-                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
-    
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';
+
                 if (originalValue !== currentValue) {
                     isChanged = true;  // Mark as changed
                 }
             });
-    
+
             if (!isChanged) {
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('pekerjaanKlienForm').submit();
@@ -3339,8 +3339,8 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';  
-                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';   
+                let originalValue = originalData[key] ? originalData[key].toUpperCase() : '';
+                let currentValue = currentData[key] ? currentData[key].toUpperCase() : '';
 
                 if (originalValue !== currentValue) {
                     isChanged = true;  // Mark as changed
@@ -3351,9 +3351,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('keluargaKlienForm').submit();
@@ -3418,7 +3418,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -3432,16 +3432,16 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('bapaKlienForm').submit();
             }
         });
     </script>
-    
+
     <script>
         document.getElementById('submitBtnIbu').addEventListener('click', function (e) {
             // Get original data (fetched from server/database)
@@ -3499,7 +3499,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -3513,9 +3513,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('ibuKlienForm').submit();
@@ -3582,7 +3582,7 @@
 
             // Compare all fields
             Object.keys(originalData).forEach(key => {
-                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';  
+                let originalValue = originalData[key] ? originalData[key].trim().toUpperCase() : '';
                 let currentValue = currentData[key] ? currentData[key].trim().toUpperCase() : '';
 
                 console.log(`Comparing ${key}: originalValue = '${originalValue}', currentValue = '${currentValue}'`);
@@ -3597,9 +3597,9 @@
                 // Display alert
                 alert("Data yang dikemaskini adalah sama dengan data asal");
                 // Stop form submission if no changes are detected
-                e.preventDefault(); 
+                e.preventDefault();
                 return;
-            } 
+            }
             else {
                 // Allow form submission
                 document.getElementById('penjagaKlienForm').submit();
@@ -3609,7 +3609,7 @@
 
     {{-- Lain-lain majikan Modal --}}
     <script>
-        function LainMajikanModal() 
+        function LainMajikanModal()
         {
             const namaMajikanDropdown = document.getElementById('nama_majikan');
             const lainLainNamaMajikanModal = document.getElementById('lainLainMajikanModal');
@@ -3618,7 +3618,7 @@
             if (namaMajikanDropdown.value === '829') { // Check if value matches ID 829 (LAIN-LAIN)
                 lainLainNamaMajikanModal.style.display = 'block';
                 // lainLainNamaMajikanInput.setAttribute('required', 'required');
-            } 
+            }
             else {
                 lainLainNamaMajikanModal.style.display = 'none';
                 // lainLainNamaMajikanInput.removeAttribute('required');
@@ -3639,7 +3639,7 @@
             const lainLainNamaMajikanNonModal = document.getElementById('lainLainMajikanNonModal');
 
             // Use innerText or textContent to get the displayed value
-            if (namaMajikanNonModal.innerText === 'LAIN-LAIN' || namaMajikanNonModal.textContent === 'LAIN-LAIN') { 
+            if (namaMajikanNonModal.innerText === 'LAIN-LAIN' || namaMajikanNonModal.textContent === 'LAIN-LAIN') {
                 lainLainNamaMajikanNonModal.style.display = 'block';
             } else {
                 lainLainNamaMajikanNonModal.style.display = 'none';
@@ -3656,22 +3656,22 @@
     <script>
         function pasanganModal() {
             const statusPerkahwinanModal = $('#status_perkahwinan').val();
-            
+
             if (statusPerkahwinanModal === 'BERKAHWIN') {
                 $('#pasanganFieldsModal').show();
             } else {
                 $('#pasanganFieldsModal').hide();
             }
         }
-    
+
         $(document).ready(function() {
             // Call pasanganModal on page load
             pasanganModal();
-    
+
             // Add event listener for changes
             $('#status_perkahwinan').on('change', pasanganModal);
         });
-    </script>  
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

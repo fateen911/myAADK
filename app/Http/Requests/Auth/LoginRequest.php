@@ -66,7 +66,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // If 'no_kp' is correct, but the password is wrong, show error only for password
+        // If 'no_kp' is correct, but the password is wrong, show errors only for password
         if (!Auth::attempt($this->only('no_kp', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 

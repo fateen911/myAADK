@@ -41,17 +41,6 @@ use Telegram\Bot\Objects\Update;
 
 class PengurusanProgController extends Controller
 {
-    //TRY
-    public function tryQR()
-    {
-        return view('pengurusan_program.tryQR');
-    }
-
-    public function try()
-    {
-        return view('pengurusan_program.try');
-    }
-
     //JSON
     public function klienSemua()//semua
     {
@@ -118,7 +107,7 @@ class PengurusanProgController extends Controller
                 return response()->json($program);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
     public function pengesahan($id)
@@ -227,7 +216,7 @@ class PengurusanProgController extends Controller
 
             return view('pengurusan_program.pegawai_aadk.daftar_prog', compact('kategori', 'negeri', 'daerah','tahap','notifications', 'unreadCountPD'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -397,7 +386,7 @@ class PengurusanProgController extends Controller
         if ($kategori || $program) {
             return view('pengurusan_program.pegawai_aadk.kemaskini_prog', compact('kategori','program', 'notifications', 'unreadCountPD','negeri','daerah','tahap','negeriP','daerahP'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -573,7 +562,7 @@ class PengurusanProgController extends Controller
         if ($program) {
             return view('pengurusan_program.pegawai_aadk.maklumat_prog', compact('program','negeri','daerah','hadir', 'tdk_hadir', 'keseluruhan', 'notifications', 'unreadCountPD'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -657,7 +646,7 @@ class PengurusanProgController extends Controller
         if ($kategori) {
             return view('pengurusan_program.pentadbir_sistem.daftar_prog', compact('kategori','negeri'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -786,7 +775,7 @@ class PengurusanProgController extends Controller
         if ($kategori || $program) {
             return view('pengurusan_program.pentadbir_sistem.kemaskini_prog', compact('kategori','program','negeri','negeriP','daerahP'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -930,7 +919,7 @@ class PengurusanProgController extends Controller
         if ($program) {
             return view('pengurusan_program.pentadbir_sistem.maklumat_prog', compact('program','hadir', 'tdk_hadir', 'keseluruhan','daerah','negeri'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -1012,7 +1001,7 @@ class PengurusanProgController extends Controller
                 return view('pengurusan_program.klien.perekodan_tutup', compact('program'));
             }
         } else {
-            return redirect()->back()->with('error', 'Program tidak wujud.');
+            return redirect()->back()->with('errors', 'Program tidak wujud.');
         }
     }
 
@@ -1025,11 +1014,11 @@ class PengurusanProgController extends Controller
         $klien = Klien::where('no_kp', $request->no_kp)->first();
         $program = Program::where('id', $id)->first();
         if (is_null($klien)){
-            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+            return redirect()->back()->with('errors', 'No Kad Pengenalan tidak sah.');
         }
 
         if (is_null($program)){
-            return redirect()->back()->with('error', 'Program tidak wujud.');
+            return redirect()->back()->with('errors', 'Program tidak wujud.');
         }
 
         $klien_id = $klien->id;
@@ -1040,7 +1029,7 @@ class PengurusanProgController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'Kehadiran telah direkodkan sebelum ini.');
+            return redirect()->back()->with('errors', 'Kehadiran telah direkodkan sebelum ini.');
         }
 
         $tarikh_perekodan = Carbon::now();
@@ -1114,7 +1103,7 @@ class PengurusanProgController extends Controller
                 return view('pengurusan_program.klien.pengesahan_tutup', compact('program'));
             }
         } else {
-            return redirect()->back()->with('error', 'Program tidak wujud.');
+            return redirect()->back()->with('errors', 'Program tidak wujud.');
         }
     }
 
@@ -1127,11 +1116,11 @@ class PengurusanProgController extends Controller
         $klien = Klien::where('no_kp', $request->no_kp)->first();
         $program = Program::where('id', $id)->first();
         if (is_null($klien)){
-            return redirect()->back()->with('error', 'No Kad Pengenalan tidak sah.');
+            return redirect()->back()->with('errors', 'No Kad Pengenalan tidak sah.');
         }
 
         if (is_null($program)){
-            return redirect()->back()->with('error', 'Program tidak wujud.');
+            return redirect()->back()->with('errors', 'Program tidak wujud.');
         }
 
         $klien_id = $klien->id;
@@ -1142,7 +1131,7 @@ class PengurusanProgController extends Controller
             ->exists();
 
         if ($exists) {
-            return redirect()->back()->with('error', 'Pengesahan telah dibuat sebelum ini.');
+            return redirect()->back()->with('errors', 'Pengesahan telah dibuat sebelum ini.');
         }
 
         $tarikh_pengesahan = Carbon::now();
@@ -1180,7 +1169,7 @@ class PengurusanProgController extends Controller
                 return view('pengurusan_program.hebahan.papar_hebahan_daerah', compact('program','daerah'));
             }
         }
-        return redirect()->back()->with('error');
+        return redirect()->back()->with('errors');
     }
 
     public function paparSms($id)
@@ -1190,7 +1179,7 @@ class PengurusanProgController extends Controller
         if ($program) {
             return view('pengurusan_program.hebahan.papar_sms', compact('program','negeri'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -1213,7 +1202,7 @@ class PengurusanProgController extends Controller
                 return view('pengurusan_program.hebahan.papar_emel_daerah', compact('program','daerah'));
             }
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -1224,7 +1213,7 @@ class PengurusanProgController extends Controller
         if ($program) {
             return view('pengurusan_program.hebahan.papar_telegram', compact('program','negeri'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 
@@ -1244,7 +1233,7 @@ class PengurusanProgController extends Controller
         if ($filter) {
             return response()->json($filter);
         } else {
-            return redirect()->back()->with('error', 'Negeri/daerah tidak dijumpai');
+            return redirect()->back()->with('errors', 'Negeri/daerah tidak dijumpai');
         }
     }
     public function jenisHebahan(Request $request, $id)

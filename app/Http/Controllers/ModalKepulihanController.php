@@ -79,7 +79,7 @@ class ModalKepulihanController extends Controller
             ->orderBy('updated_at', 'desc')
             ->first();
 
-        
+
         // Fetch notifications for the client
         $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
@@ -237,7 +237,7 @@ class ModalKepulihanController extends Controller
                                 ->where('klien_id', $clientId)
                                 ->pluck('skala_id', 'soalan_id')
                                 ->toArray();
-        
+
         // Fetch notifications for the client
         $notifications = NotifikasiKlien::where('klien_id', $clientId)
             ->orderBy('created_at', 'desc')
@@ -248,7 +248,7 @@ class ModalKepulihanController extends Controller
             ->where('is_read', false)
             ->count();
 
-            
+
         return view('modal_kepulihan.klien.soalan_kepulihan3', compact('notifications', 'unreadCount'), [
             'questions' => $questions,
             'autosavedAnswers' => $autosavedAnswers,
@@ -300,7 +300,7 @@ class ModalKepulihanController extends Controller
                                 ->toArray();
 
         if (count($autosavedAnswers) == 0) {
-            return redirect()->back()->with('error', 'Tiada jawapan yang diterima.');
+            return redirect()->back()->with('errors', 'Tiada jawapan yang diterima.');
         }
 
         // Process the autosaved answers
@@ -369,7 +369,7 @@ class ModalKepulihanController extends Controller
                         ->whereIn('soalan_id', $soalanIds)
                         ->where('klien_id', $clientId)
                         ->sum('skala_id');
-            
+
             // Calculate the average (sum / count of soalan_ids)
             $average = $sumSkala / count($soalanIds);
             $modalAverages[$modal] = round($average, 2);
@@ -425,7 +425,7 @@ class ModalKepulihanController extends Controller
             $notificationsBaru = NotifikasiPegawaiDaerah::where('daerah_aadk_baru', $pegawaiDaerah->daerah_bertugas)
                     ->select('id', 'message2', 'created_at', 'is_read2')
                     ->get();
-                    
+
 
             // Combine and sort notifications by created_at descending
             $notifications = $notificationsLama->merge($notificationsBaru)->sortByDesc('created_at');
@@ -610,7 +610,7 @@ class ModalKepulihanController extends Controller
                                     ->where('kk.status', 'Belum Selesai')
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($belum_selesai_menjawab)->make(true);
     }
@@ -645,7 +645,7 @@ class ModalKepulihanController extends Controller
                                     ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($belum_selesai_menjawab)->make(true);
     }
@@ -681,7 +681,7 @@ class ModalKepulihanController extends Controller
                                     ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                     ->orderBy('kk.updated_at', 'desc')
                                     ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($belum_selesai_menjawab)->make(true);
     }
@@ -709,7 +709,7 @@ class ModalKepulihanController extends Controller
                                         ->where('kk.updated_at', '<=', $sixMonthsAgo)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }
@@ -739,7 +739,7 @@ class ModalKepulihanController extends Controller
                                         ->where('u.negeri_pejabat', $pegawaiNegeri->negeri_bertugas)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }
@@ -770,7 +770,7 @@ class ModalKepulihanController extends Controller
                                         ->where('u.daerah_pejabat', $pegawaiDaerah->daerah_bertugas)
                                         ->orderBy('kk.updated_at', 'desc')
                                         ->get();
-        
+
         // Use DataTables for proper pagination
         return DataTables::of($tidak_menjawab_lebih_6bulan)->make(true);
     }

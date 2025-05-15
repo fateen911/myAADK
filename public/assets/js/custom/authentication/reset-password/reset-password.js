@@ -81,7 +81,7 @@ var KTAuthResetPassword = function () {
                         });
                     }, 1500);
                 } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    // Show errors popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
@@ -133,7 +133,7 @@ var KTAuthResetPassword = function () {
                                 location.href = redirectUrl;
                             }
                         } else {
-                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                            // Show errors popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
                                 text: "Sorry, the email is incorrect, please try again.",
                                 icon: "error",
@@ -162,7 +162,7 @@ var KTAuthResetPassword = function () {
                         submitButton.disabled = false;
                     });
                 } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    // Show errors popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",

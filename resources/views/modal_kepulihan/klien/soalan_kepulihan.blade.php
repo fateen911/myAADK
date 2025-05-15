@@ -95,7 +95,7 @@
         </div>
         <!--end::Page title-->
     </div>
-        
+
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-xxl">
@@ -110,7 +110,7 @@
                     <form id="paginationForm" action="{{ route('klien.soalanKepulihan') }}" method="GET">
                         @csrf
                         <input type="hidden" name="currentPage" id="currentPage" value="{{ $currentPage }}">
-                
+
                         @foreach($questions[$currentPage - 1] as $question)
                             <div class="question" style="font-size: 12pt;">
                                 <p><b>{{ ($currentPage - 1) * 10 + $loop->iteration }}. {{ $question->soalan }}</b></p>
@@ -144,7 +144,7 @@
                             @endif
                         </div>
                     </form>
-                
+
                     <!-- Separate form for submission, only visible on the last page -->
                     @if ($currentPage == 3)
                         <form action="{{ route('klien.submit.kepulihan') }}" method="POST">
@@ -177,12 +177,12 @@
                 });
             @endif
 
-            // Check if there is a flash error message
-            @if(session('error'))
+            // Check if there is a flash errors message
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif

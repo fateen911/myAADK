@@ -3,7 +3,7 @@
     <head>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-    
+
     <body>
         <form class="form" id="modal_permohonan_pegawai_form" action="{{ route('kelulusan-permohonan-pegawai', ['id' => $permohonan_pegawai->id]) }}" method="post">
             @csrf
@@ -123,10 +123,10 @@
                 const peranan_pegawai = document.getElementById('peranan_pengguna').value;
                 const negeri_bertugas = document.getElementById('negeri_bertugas').value;
                 const daerah_bertugas = document.getElementById('daerah_bertugas').value;
-            
-                // Initialize error message
+
+                // Initialize errors message
                 let errorMessage = '';
-            
+
                 // Common required field check
                 if (!name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
                     errorMessage = 'Sila isi semua medan yang bertanda *.';
@@ -145,14 +145,14 @@
                         }
                     }
                 }
-            
-                // If there is an error message, prevent form submission and display the message
+
+                // If there is an errors message, prevent form submission and display the message
                 if (errorMessage) {
                     event.preventDefault();  // Prevent form submission
-                    alert(errorMessage);     // Display the error message to the user (or use another method to show it on the form)
+                    alert(errorMessage);     // Display the errors message to the user (or use another method to show it on the form)
                 }
             });
-        </script>            
+        </script>
 
         {{-- Control input nama, no_tel, no_kp --}}
         <script>
@@ -189,19 +189,19 @@
         <script>
             function validateEmailDomain() {
                 const emailInput = document.getElementById('emelPegawai').value;
-                
+
                 // Check if email is empty
                 if (emailInput.trim() === '') {
                     alert('Sila masukkan emel.');
                     return false; // Prevent form submission
                 }
-            
+
                 // Check if email contains '@'
                 if (emailInput.includes('@')) {
                     alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
                     return false; // Prevent form submission
                 }
-            
+
                 return true; // Allow form submission if email is valid
             }
 
@@ -233,7 +233,7 @@
                 const tahapPengguna = document.getElementById('peranan_pengguna').value;
                 const negeriField = document.getElementById('permohonan_pegawai_negeri_field');
                 const daerahField = document.getElementById('permohonan_pegawai_daerah_field');
-                
+
                 if (negeriField && daerahField) {
                     if (tahapPengguna === "3") {
                         negeriField.style.display = 'none';
@@ -247,12 +247,12 @@
                     }
                 }
             }
-        
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Call toggleFields on page load to set initial state
                 toggleFields();
             });
-        </script> 
+        </script>
 
         {{-- Filter daerah based on negeri --}}
         <script>
@@ -261,7 +261,7 @@
                 const negeriSelect = document.getElementById('negeri_bertugas');
                 const daerahSelect = document.getElementById('daerah_bertugas');
                 const selectedNegeriId = negeriSelect.value;
-                
+
                 console.log("Selected Negeri ID:", selectedNegeriId);
 
                 Array.from(daerahSelect.options).forEach(option => {

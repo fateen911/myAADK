@@ -1435,7 +1435,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1482,7 +1482,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat profil klien telah berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1507,7 +1507,7 @@ class ProfilKlienController extends Controller
                 'negeri_kerja'      => 'nullable|string|max:255',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1570,7 +1570,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat pekerjaan klien berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1594,7 +1594,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1640,7 +1640,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat keluarga klien berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1660,7 +1660,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1703,7 +1703,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat bapa klien berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1723,7 +1723,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1766,7 +1766,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat ibu klien berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1787,7 +1787,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -1830,7 +1830,7 @@ class ProfilKlienController extends Controller
             return redirect()->back()->with('success', 'Maklumat penjaga klien berjaya dikemaskini.');
         }
         else {
-            return redirect()->back()->with('error', 'Klien tidak dijumpai.');
+            return redirect()->back()->with('errors', 'Klien tidak dijumpai.');
         }
     }
 
@@ -1922,7 +1922,7 @@ class ProfilKlienController extends Controller
             ]);
         }
         catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 
@@ -2120,7 +2120,7 @@ class ProfilKlienController extends Controller
                 'negeri_kerja_pasangan' => 'nullable|string|max:255',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Redirect back with custom error message when validation fails
+            // Redirect back with custom errors message when validation fails
             return redirect()->back()->with('errorProfil', 'Sila pastikan semua medan bertanda * telah diisi dan format data adalah betul');
         }
 

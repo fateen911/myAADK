@@ -427,12 +427,12 @@
             });
             @endif
 
-            // Check if there is a flash error message
-            @if(session('error'))
+            // Check if there is a flash errors message
+            @if(session('errors'))
             Swal.fire({
                 icon: 'error',
                 title: 'Tidak Berjaya!',
-                text: '{!! session('error') !!}',
+                text: '{!! session('errors') !!}',
                 confirmButtonText: 'OK'
             });
             @endif

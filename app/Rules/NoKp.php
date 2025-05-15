@@ -32,7 +32,7 @@ class NoKp implements ValidationRule
     }
 
     /**
-     * Get the validation error message.
+     * Get the validation errors message.
      *
      * @return string
      */

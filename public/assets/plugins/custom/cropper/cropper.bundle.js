@@ -997,7 +997,7 @@
     var chunkSize = 8192;
     var uint8 = new Uint8Array(arrayBuffer);
     while (uint8.length > 0) {
-      // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
+      // XXX: Babel's `toConsumableArray` helper will throw errors in IE or Safari 9
       // eslint-disable-next-line prefer-spread
       chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
       uint8 = uint8.subarray(chunkSize);
@@ -1014,7 +1014,7 @@
     var dataView = new DataView(arrayBuffer);
     var orientation;
 
-    // Ignores range error when the image does not have correct Exif information
+    // Ignores range errors when the image does not have correct Exif information
     try {
       var littleEndian;
       var app1Start;
@@ -2994,7 +2994,7 @@
           _this.xhr = null;
         };
 
-        // Bust cache when there is a "crossOrigin" property to avoid browser cache error
+        // Bust cache when there is a "crossOrigin" property to avoid browser cache errors
         if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
           url = addTimestamp(url);
         }

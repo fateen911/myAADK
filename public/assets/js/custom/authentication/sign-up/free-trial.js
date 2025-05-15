@@ -14,7 +14,7 @@ var KTSignupFreeTrial = function() {
         validator = FormValidation.formValidation(
 			form,
 			{
-				fields: {					 
+				fields: {
 					'email': {
                         validators: {
                             regexp: {
@@ -66,14 +66,14 @@ var KTSignupFreeTrial = function() {
 					trigger: new FormValidation.plugins.Trigger({
                         event: {
                             password: false
-                        }  
+                        }
                     }),
 					bootstrap: new FormValidation.plugins.Bootstrap5({
                         rowSelector: '.fv-row',
                         eleInvalidClass: '',
                         eleValidClass: ''
                     })
-                }			 
+                }
 			}
 		);
 
@@ -87,7 +87,7 @@ var KTSignupFreeTrial = function() {
                     // Show loading indication
                     submitButton.setAttribute('data-kt-indicator', 'on');
 
-                    // Disable button to avoid multiple click 
+                    // Disable button to avoid multiple click
                     submitButton.disabled = true;
 
                     // Simulate ajax request
@@ -108,8 +108,8 @@ var KTSignupFreeTrial = function() {
                                 confirmButton: "btn btn-primary"
                             }
                         }).then(function (result) {
-                            if (result.isConfirmed) { 
-                                form.reset();  // reset form                    
+                            if (result.isConfirmed) {
+                                form.reset();  // reset form
                                 passwordMeter.reset();  // reset password meter
 
                                 //form.submit(); // submit form
@@ -119,9 +119,9 @@ var KTSignupFreeTrial = function() {
                                 }
                             }
                         });
-                    }, 1500);   						
+                    }, 1500);
                 } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    // Show errors popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
@@ -166,4 +166,3 @@ KTUtil.onDOMContentLoaded(function() {
 });
 
 
- 

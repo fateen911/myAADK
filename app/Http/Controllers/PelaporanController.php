@@ -1600,7 +1600,7 @@ class PelaporanController extends Controller
                 return response()->json($program);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
     public function analisis() //power bi
     {
@@ -1885,7 +1885,7 @@ class PelaporanController extends Controller
                 return response()->json($program);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
     public function jsonFilterAktivitiPB(Request $request,$id)
@@ -2018,7 +2018,7 @@ class PelaporanController extends Controller
                 return response()->json($program);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
     public function excelPelaporanAktiviti(Request $request)
@@ -2071,7 +2071,7 @@ class PelaporanController extends Controller
                 return Excel::download(new PelaporanAktivitiExcel($program), $nama_excel);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
     public function pdfPelaporanAktiviti(Request $request)
@@ -2209,7 +2209,7 @@ class PelaporanController extends Controller
                 return $pdf->download($nama_pdf);
             }
         }
-        return redirect()->back()->with('error', 'User tidak dijumpai');
+        return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
     public function pelaporanKehadiran($id)
@@ -2251,7 +2251,7 @@ class PelaporanController extends Controller
         if ($program) {
             return view('pelaporan.aktiviti.senarai_kehadiran', compact('program','notifications', 'unreadCountPD'));
         } else {
-            return redirect()->back()->with('error', 'Program tidak dijumpai');
+            return redirect()->back()->with('errors', 'Program tidak dijumpai');
         }
     }
 }

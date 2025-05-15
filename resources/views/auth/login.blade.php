@@ -7,18 +7,18 @@
             .relative {
                 position: relative;
             }
-    
+
             .absolute {
                 position: absolute;
                 top: 50%;
                 right: 10px; /* Adjust this value if necessary */
                 transform: translateY(-50%);
             }
-    
+
             .cursor-pointer {
                 cursor: pointer;
             }
-    
+
             .pr-10 {
                 padding-right: 2.5rem; /* Ensure there is enough space for the icon */
             }
@@ -28,7 +28,7 @@
             }
         </style>
     </head>
-    
+
 
     <div class="text-center">
         <a href="/">
@@ -60,7 +60,7 @@
                 </span>
             </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />        
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-2">
@@ -97,12 +97,12 @@
                     confirmButtonText: 'OK'
                 });
             @endif
-        
-            @if(session('error'))
+
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Berjaya!',
-                    text: '{{ session('error') }}',
+                    text: '{{ session('errors') }}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -113,10 +113,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             const togglePassword = document.querySelector('#togglePassword');
             const password = document.querySelector('#password');
-        
+
             const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
             const passwordConfirmation = document.querySelector('#password_confirmation');
-        
+
             togglePassword.addEventListener('click', function () {
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
@@ -129,8 +129,8 @@
                 }
             });
         });
-    </script>  
-    
+    </script>
+
     <script>
         // Function to validate 'No. Kad Pengenalan' field
         function validateNoKp(input) {

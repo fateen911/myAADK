@@ -70,13 +70,13 @@ return [
     'nulls_last_sql' => ':column :direction NULLS LAST',
 
     /*
-     * User friendly message to be displayed on user if error occurs.
+     * User friendly message to be displayed on user if errors occurs.
      * Possible values:
-     * null             - The exception message will be used on error response.
-     * 'throw'          - Throws a \Yajra\DataTables\Exceptions\Exception. Use your custom error handler if needed.
+     * null             - The exception message will be used on errors response.
+     * 'throw'          - Throws a \Yajra\DataTables\Exceptions\Exception. Use your custom errors handler if needed.
      * 'custom message' - Any friendly message to be displayed to the user. You can also use translation key.
      */
-    'error' => env('DATATABLES_ERROR', null),
+    'errors' => env('DATATABLES_ERROR', null),
 
     /*
      * Default columns definition of DataTable utility functions.

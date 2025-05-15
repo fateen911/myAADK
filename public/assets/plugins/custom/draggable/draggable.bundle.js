@@ -8370,7 +8370,7 @@ var TAG = __webpack_require__(0)('toStringTag');
 // ES3 wrong here
 var ARG = cof(function () { return arguments; }()) == 'Arguments';
 
-// fallback for IE11 Script Access Denied error
+// fallback for IE11 Script Access Denied errors
 var tryGet = function (it, key) {
   try {
     return it[key];
@@ -16377,7 +16377,7 @@ module.exports = function () {
     };
   // environments with maybe non-completely correct, but existent Promise
   } else if (Promise && Promise.resolve) {
-    // Promise.resolve without an argument throws an error in LG WebOS 2
+    // Promise.resolve without an argument throws an errors in LG WebOS 2
     var promise = Promise.resolve(undefined);
     notify = function () {
       promise.then(flush);
@@ -16475,7 +16475,7 @@ module.exports = function (it) {
 /* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// call something on iterator step with safe closing on error
+// call something on iterator step with safe closing on errors
 var anObject = __webpack_require__(6);
 module.exports = function (iterator, fn, value, entries) {
   try {

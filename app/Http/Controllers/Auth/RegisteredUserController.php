@@ -46,13 +46,13 @@ class RegisteredUserController extends Controller
     {
         // Combine email name and domain
         $email = $request->emelPegawai . '@aadk.gov.my';
-        
+
         // Check if the user already exists
         $user = User::where('no_kp', '=', $request->no_kp)->first();
         $pegawai = Pegawai::where('no_kp', '=', $request->no_kp)->first();
         $permohonan_pegawai = PegawaiMohonDaftar::where('no_kp', '=', $request->no_kp)->first();
 
-        if ($user === null && $pegawai === null) 
+        if ($user === null && $pegawai === null)
         {
             $pegawaiData = [
                 'nama' => strtoupper($request->nama),
@@ -69,9 +69,9 @@ class RegisteredUserController extends Controller
             $pegawai = PegawaiMohonDaftar::create($pegawaiData);
 
             return redirect()->route('login')->with('success', 'Permohonan mendaftar sebagai pengguna sistem telah dihantar untuk semakan dan keputusan permohonan akan dihantar melalui notifikasi emel.');
-        } 
+        }
         else {
-            return redirect()->route('login')->with('error', 'Pegawai ' . $request->nama . ' telah didaftarkan dalam sistem ini.');
+            return redirect()->route('login')->with('errors', 'Pegawai ' . $request->nama . ' telah didaftarkan dalam sistem ini.');
         }
     }
 }

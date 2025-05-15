@@ -110,7 +110,7 @@
                             </option>
                         @endforeach
                     </select>
-                </div>                
+                </div>
                 <!--begin::Input group-->
                 <div class="fv-row mb-7">
                     <label class="fs-6 fw-semibold mb-2">Kata Laluan Baharu</label>
@@ -153,14 +153,14 @@
                 const peranan_pegawai = document.getElementById('tahap_pengguna').value;
                 const negeri_bertugas = document.getElementById('negeri_bertugas').value;
                 const daerah_bertugas = document.getElementById('daerah_bertugas').value;
-            
-                // Initialize error message
+
+                // Initialize errors message
                 let errorMessage = '';
-            
+
                 // Common required field check
                 if (!status || !name || !no_kp || !email || !no_tel || !jawatan || !peranan_pegawai) {
                     errorMessage = 'Sila isi semua medan yang bertanda *.';
-                } 
+                }
                 else {
                     if (peranan_pegawai == 3) {
                         // No additional checks for peranan_pegawai == 3
@@ -176,14 +176,14 @@
                         }
                     }
                 }
-            
-                // If there is an error message, prevent form submission and display the message
+
+                // If there is an errors message, prevent form submission and display the message
                 if (errorMessage) {
                     event.preventDefault();  // Prevent form submission
-                    alert(errorMessage);     // Display the error message to the user 
+                    alert(errorMessage);     // Display the errors message to the user
                 }
             });
-        </script>   
+        </script>
 
         {{-- Validate input --}}
         <script>
@@ -226,7 +226,7 @@
                     alert('Sila masukkan emel.');
                     return false; // Prevent form submission
                 }
-            
+
                 // Check if email contains '@'
                 if (emailInput.includes('@')) {
                     alert('Sila masukkan nama e-mel pengguna sahaja tanpa domain.');
@@ -244,7 +244,7 @@
                 const tahapPengguna = document.getElementById('tahap_pengguna').value;
                 const negeriField = document.getElementById('kemaskini_negeri_field');
                 const daerahField = document.getElementById('kemaskini_daerah_field');
-                
+
                 if (negeriField && daerahField) {
                     if (tahapPengguna === "3") {
                         negeriField.style.display = 'none';
@@ -258,12 +258,12 @@
                     }
                 }
             }
-        
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Call toggleFields on page load to set initial state
                 toggleFields();
             });
-        </script> 
+        </script>
 
         {{-- Filter daerah based on negeri --}}
         <script>
@@ -272,7 +272,7 @@
                 const negeriSelect = document.getElementById('negeri_bertugas');
                 const daerahSelect = document.getElementById('daerah_bertugas');
                 const selectedNegeriId = negeriSelect.value;
-                
+
                 console.log("Selected Negeri ID:", selectedNegeriId);
 
                 Array.from(daerahSelect.options).forEach(option => {

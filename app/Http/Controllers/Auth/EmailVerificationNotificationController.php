@@ -20,7 +20,7 @@ class EmailVerificationNotificationController extends Controller
 
     //     if (!$user || sha1($user->email) !== $hash) {
     //         // Invalid verification link
-    //         return redirect('/login')->with('error', 'Link pengesahan tidak sah.');
+    //         return redirect('/login')->with('errors', 'Link pengesahan tidak sah.');
     //     }
 
     //     // Mark the user's email as verified

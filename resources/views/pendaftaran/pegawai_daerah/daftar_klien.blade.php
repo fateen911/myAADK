@@ -46,7 +46,7 @@
 		}
 
 		.input-group-text {
-			background-color: #f3f3f3; 
+			background-color: #f3f3f3;
 			padding: 0.75rem 0.75rem;
 			margin-left: -1px;
 		}
@@ -106,7 +106,7 @@
                             <div class="row align-items-center">
                                 <!--begin::form-->
                                 <form class="form w-100" action="{{ route('pegawai-daerah.semak.kp') }}" method="post">
-                                @csrf 
+                                @csrf
                                     <!--begin::Heading-->
                                     <div class="text-center mb-11">
                                         <br>
@@ -227,10 +227,10 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!--end::Javascript-->
-	
+
     {{-- POP-UP / ALERT MESSAGE --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () 
+        document.addEventListener('DOMContentLoaded', function ()
         {
             @if(session('success'))
                 Swal.fire({
@@ -241,11 +241,11 @@
                 });
             @endif
 
-            @if(session('error'))
+            @if(session('errors'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Tidak Didaftarkan!',
-                    text: '{!! session('error') !!}',
+                    text: '{!! session('errors') !!}',
                     confirmButtonText: 'OK'
                 });
             @endif
@@ -319,21 +319,21 @@
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numbers = '0123456789';
             const symbols = '!@#$%^&*()-_+=<>?';
-            
+
             const allCharacters = lowercase + uppercase + numbers + symbols;
             let password = '';
-            
+
             password += lowercase[Math.floor(Math.random() * lowercase.length)];
             password += uppercase[Math.floor(Math.random() * uppercase.length)];
             password += numbers[Math.floor(Math.random() * numbers.length)];
             password += symbols[Math.floor(Math.random() * symbols.length)];
-            
+
             for (let i = 4; i < length; i++) {
                 password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
             }
-            
+
             password = password.split('').sort(() => 0.5 - Math.random()).join('');
-            
+
             document.getElementById(inputId).value = password;
         }
 
@@ -343,21 +343,21 @@
             const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numbers = '0123456789';
             const symbols = '!@#$%^&*()-_+=<>?';
-            
+
             const allCharacters = lowercase + uppercase + numbers + symbols;
             let password = '';
-            
+
             password += lowercase[Math.floor(Math.random() * lowercase.length)];
             password += uppercase[Math.floor(Math.random() * uppercase.length)];
             password += numbers[Math.floor(Math.random() * numbers.length)];
             password += symbols[Math.floor(Math.random() * symbols.length)];
-            
+
             for (let i = 4; i < length; i++) {
                 password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
             }
-            
+
             password = password.split('').sort(() => 0.5 - Math.random()).join('');
-            
+
             document.getElementById(inputId).value = password;
         }
     </script>
@@ -384,12 +384,12 @@
 
                 // Validate each 'no_tel' field
                 noTelElements.forEach(function(element) {
-                    const errorMessage = element.nextElementSibling; // Assuming there's an element for error message
+                    const errorMessage = element.nextElementSibling; // Assuming there's an element for errors message
                     if (element.value.length < 10 || element.value.length > 11) {
                         errorMessage.textContent = 'Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.';
                         valid = false;
                     } else {
-                        errorMessage.textContent = ''; // Clear any previous error message
+                        errorMessage.textContent = ''; // Clear any previous errors message
                     }
                 });
 
@@ -404,12 +404,12 @@
 
                 // Validate each 'no_tel' field
                 noTelElements.forEach(function(element) {
-                    const errorMessage = element.nextElementSibling; // Assuming there's an element for error message
+                    const errorMessage = element.nextElementSibling; // Assuming there's an element for errors message
                     if (element.value.length < 10 || element.value.length > 11) {
                         errorMessage.textContent = 'Bilangan digit nombor telefon mesti antara 10 hingga 11 digit.';
                         valid = false;
                     } else {
-                        errorMessage.textContent = ''; // Clear any previous error message
+                        errorMessage.textContent = ''; // Clear any previous errors message
                     }
                 });
 

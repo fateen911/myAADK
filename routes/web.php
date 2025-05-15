@@ -36,92 +36,103 @@ Route::get('/waris-view', [WarisViewController::class, 'viewWaris']);
 
 Route::get('/klien-view-add', [KlienViewController::class, 'addKlien']);
 
-//ERROR
-Route::get('/404-not-found', function () {
-    return view('error.404_not_found');
-})->name('error.404_not_found');
-
-Route::get('/500-system-error', function () {
-    return view('error.500_system_error');
-})->name('error.500_system_error');
-
 // DASHBOARD
 Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
-//TRY
-Route::get('/pengurusan-program/tryQR',[PengurusanProgController::class, 'tryQR'])->name('pengurusan_program.tryQR');
-Route::get('/pengurusan-program/try',[PengurusanProgController::class, 'try'])->name('pengurusan_program.try');
-
 //LANDING PAGE
-Route::get('/landing-page/version-1', [LandingPageController::class, 'landingV1'])->name('landing_page.version_1');
-Route::get('/landing-page/version-2', [LandingPageController::class, 'landingV2'])->name('landing_page.version_2');
 Route::get('/landing-page/version-3', [LandingPageController::class, 'landingV3'])->name('landing_page.version_3');
-
-// PENGURUSAN PROGRAM - QR CODE
-Route::get('/pengurusan-program/qr-code/{id}',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
-Route::get('/pengurusan_program/share', [PengurusanProgController::class, 'share']);
-
-// PENGURUSAN PROGRAM - PEGAWAI AADK
-Route::get('/pengurusan-program/pegawai-aadk/daftar-prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
-Route::post('/pengurusan-program/pegawai-aadk/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
-Route::get('/pengurusan-program/pegawai-aadk/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
-Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
-Route::get('/pengurusan-program/pegawai-aadk/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPA'])->name('pengurusan_program.pegawai_aadk.batal_prog');
-Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
-Route::get('/pengurusan-program/pegawai-aadk/senarai-prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
-
-
-// PENGURUSAN PROGRAM - PENRADBIR SISTEM
-Route::get('/pengurusan-program/pentadbir-sistem/daftar-prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
-Route::post('/pengurusan-program/pentadbir-sistem/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
-Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPS'])->name('pengurusan_program.pentadbir_sistem.batal_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/senarai-prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
-Route::get('/pengurusan-program/pentadbir-sistem/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');
-Route::post('/pengurusan-program/pentadbir-sistem/post-tambah-kategori',[PengurusanProgController::class, 'postTambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_tambah_kategori');
-Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-kategori',[PengurusanProgController::class, 'postKemaskiniKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_kategori');
-Route::get('/pengurusan-program/pentadbir-sistem/padam-kategori/{id}',[PengurusanProgController::class, 'padamKategoriPS'])->name('pengurusan_program.pentadbir_sistem.padam_kategori');
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan-program/klien/daftar-kehadiran/{id}',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
 Route::post('/pengurusan-program/klien/post-daftar-kehadiran/{id}',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
-Route::post('/pengurusan-program/klien/post-daftar-kehadiran-2/{id}',[PengurusanProgController::class, 'postDaftarKehadiran2'])->name('pengurusan_program.klien.post_daftar_kehadiran2');
 Route::get('/pengurusan-program/klien/pengesahan-kehadiran/{id}',[PengurusanProgController::class, 'pengesahanKehadiran'])->name('pengurusan_program.klien.pengesahan_kehadiran');
 Route::post('/pengurusan-program/klien/post-pengesahan-kehadiran/{id}',[PengurusanProgController::class, 'postPengesahanKehadiran'])->name('pengurusan_program.klien.post_pengesahan_kehadiran');
 
-// PENGURUSAN PROGRAM - HEBAHAN
-Route::get('/pengurusan-program/hebahan/papar-hebahan/{id}', [PengurusanProgController::class, 'paparHebahan'])->name('pengurusan_program.papar_hebahan');
-Route::get('/pengurusan-program/hebahan/papar-sms/{id}', [PengurusanProgController::class, 'paparSms'])->name('pengurusan_program.papar_sms');
-Route::get('/pengurusan-program/hebahan/papar-emel/{id}', [PengurusanProgController::class, 'paparEmel'])->name('pengurusan_program.papar_emel');
-Route::get('/pengurusan-program/hebahan/papar-telegram/{id}', [PengurusanProgController::class, 'paparTelegram'])->name('pengurusan_program.papar_telegram');
-Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter_hebahan');
-Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis_hebahan');
-Route::post('/pengurusan-program/hebahan/jenis-hebahan-2/{id}', [PengurusanProgController::class, 'jenisHebahan2'])->name('pengurusan_program.jenis_hebahan_2');
-Route::post('/pengurusan-program/hebahan/sms/{id}', [PengurusanProgController::class, 'hebahanSMS'])->name('pengurusan_program.hebahan_sms');
-Route::post('/pengurusan-program/hebahan/telegram/{id}', [PengurusanProgController::class, 'hebahanTelegram'])->name('pengurusan_program.hebahan_telegram');
-Route::post('/pengurusan-program/hebahan/telegram/webhook', [PengurusanProgController::class, 'handleWebhook']);
 
-Route::post('/telegram-webhook', [TelegramBotController::class, 'handle']);
+// ACCESS CONTROL
+// Pentadbir Sistem and Pegawai Ibu Pejabat AADK (levels 1 and 3)
+Route::middleware(['auth', 'level:1,3'])->group(function () {
 
-// PENGURUSAN PROGRAM - PDF/EXCEL
-Route::get('/pengurusan-program/pdf-pengesahan/{id}',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
-Route::get('/pengurusan-program/excel-pengesahan/{id}',[PengurusanProgController::class, 'excelPengesahan'])->name('pengurusan_program.excel_pengesahan');
-Route::get('/pengurusan-program/pdf-perekodan/{id}',[PengurusanProgController::class, 'pdfPerekodan'])->name('pengurusan_program.pdf_perekodan');
-Route::get('/pengurusan-program/excel-perekodan/{id}',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
+    // PENGURUSAN PROGRAM - PENRADBIR SISTEM
+    Route::get('/pengurusan-program/pentadbir-sistem/daftar-prog',[PengurusanProgController::class, 'daftarProgPS'])->name('pengurusan_program.pentadbir_sistem.daftar_prog');
+    Route::post('/pengurusan-program/pentadbir-sistem/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPS'])->name('pengurusan_program.pentadbir_sistem.post_daftar_prog');
+    Route::get('/pengurusan-program/pentadbir-sistem/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.kemaskini_prog');
+    Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_prog');
+    Route::get('/pengurusan-program/pentadbir-sistem/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPS'])->name('pengurusan_program.pentadbir_sistem.batal_prog');
+    Route::get('/pengurusan-program/pentadbir-sistem/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPS'])->name('pengurusan_program.pentadbir_sistem.maklumat_prog');
+    Route::get('/pengurusan-program/pentadbir-sistem/senarai-prog',[PengurusanProgController::class, 'senaraiProgPS'])->name('pengurusan_program.pentadbir_sistem.senarai_prog');
+    Route::get('/pengurusan-program/pentadbir-sistem/tambah-kategori',[PengurusanProgController::class, 'tambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.tambah_kategori');
+    Route::post('/pengurusan-program/pentadbir-sistem/post-tambah-kategori',[PengurusanProgController::class, 'postTambahKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_tambah_kategori');
+    Route::post('/pengurusan-program/pentadbir-sistem/post-kemaskini-kategori',[PengurusanProgController::class, 'postKemaskiniKategoriPS'])->name('pengurusan_program.pentadbir_sistem.post_kemaskini_kategori');
+    Route::get('/pengurusan-program/pentadbir-sistem/padam-kategori/{id}',[PengurusanProgController::class, 'padamKategoriPS'])->name('pengurusan_program.pentadbir_sistem.padam_kategori');
 
-// PENGURUSAN PROGRAM - JSON
-Route::get('/klien-semua', [PengurusanProgController::class, 'klienSemua']);
-Route::get('/klien-negeri/{id}', [PengurusanProgController::class, 'klienNegeri']);
-Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah']);
-Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
-Route::get('/kategori-data/{id}', [PengurusanProgController::class, 'kategoriData']);
-Route::get('/program/{id}', [PengurusanProgController::class, 'program']);
-Route::get('/program-dianjurkan', [PengurusanProgController::class, 'programDianjurkan']);
-Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
-Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
-Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
+    // PELAPORAN - AKTIVITI - PENTADBIR & BRPP
+    Route::get('/pelaporan/aktiviti/analisis', [PelaporanController::class, 'analisis'])->name('pelaporan.aktiviti.analisis');
+    Route::get('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti', [PelaporanController::class, 'senaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti');
+    Route::post('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti');
+    Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.json_fIlter_aktiviti');
+});
+
+// Pegawai AADK Negeri and Pegawai AADK Daerah (levels 4 and 5)
+Route::middleware(['auth', 'level:4,5'])->group(function () {
+
+    // PENGURUSAN PROGRAM - PEGAWAI AADK
+    Route::get('/pengurusan-program/pegawai-aadk/daftar-prog',[PengurusanProgController::class, 'daftarProgPA'])->name('pengurusan_program.pegawai_aadk.daftar_prog');
+    Route::post('/pengurusan-program/pegawai-aadk/post-daftar-prog',[PengurusanProgController::class, 'postDaftarProgPA'])->name('pengurusan_program.pegawai_aadk.post_daftar_prog');
+    Route::get('/pengurusan-program/pegawai-aadk/kemaskini-prog/{id}',[PengurusanProgController::class, 'kemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.kemaskini_prog');
+    Route::post('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/{id}',[PengurusanProgController::class, 'postKemaskiniProgPA'])->name('pengurusan_program.pegawai_aadk.post_kemaskini_prog');
+    Route::get('/pengurusan-program/pegawai-aadk/batal-prog/{id}',[PengurusanProgController::class, 'batalProgPA'])->name('pengurusan_program.pegawai_aadk.batal_prog');
+    Route::get('/pengurusan-program/pegawai-aadk/maklumat-prog/{id}',[PengurusanProgController::class, 'maklumatProgPA'])->name('pengurusan_program.pegawai_aadk.maklumat_prog');
+    Route::get('/pengurusan-program/pegawai-aadk/senarai-prog',[PengurusanProgController::class, 'senaraiProgPA'])->name('pengurusan_program.pegawai_aadk.senarai_prog');
+
+    // PELAPORAN - AKTIVITI - PEGAWAI NEGERI & DAERAH
+    Route::get('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.senarai_aktiviti');
+    Route::post('/pelaporan/aktiviti/aktivitiND/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.filter_senarai_aktiviti');
+    Route::get('/pelaporan/aktiviti/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktiviti'])->name('pelaporan.aktiviti.aktivitiND.json_fIlter_aktiviti');
+
+});
+
+// All except klien (levels 1,3,4,5)
+Route::middleware(['auth', 'level:1,3,4,5'])->group(function () {
+
+    // PENGURUSAN PROGRAM - JSON
+    Route::get('/klien-semua', [PengurusanProgController::class, 'klienSemua']);
+    Route::get('/klien-negeri/{id}', [PengurusanProgController::class, 'klienNegeri']);
+    Route::get('/klien-daerah/{id}', [PengurusanProgController::class, 'klienDaerah']);
+    Route::get('/kategori', [PengurusanProgController::class, 'kategori']);
+    Route::get('/kategori-data/{id}', [PengurusanProgController::class, 'kategoriData']);
+    Route::get('/program/{id}', [PengurusanProgController::class, 'program']);
+    Route::get('/program-dianjurkan', [PengurusanProgController::class, 'programDianjurkan']);
+    Route::get('/pengesahan/{id}', [PengurusanProgController::class, 'pengesahan']);
+    Route::get('/perekodan/{id}', [PengurusanProgController::class, 'perekodan']);
+    Route::get('/daerah/{id}', [PengurusanProgController::class, 'daerah']);
+
+    // PENGURUSAN PROGRAM - HEBAHAN
+    Route::get('/pengurusan-program/hebahan/papar-hebahan/{id}', [PengurusanProgController::class, 'paparHebahan'])->name('pengurusan_program.papar_hebahan');
+    Route::get('/pengurusan-program/hebahan/papar-sms/{id}', [PengurusanProgController::class, 'paparSms'])->name('pengurusan_program.papar_sms');
+    Route::get('/pengurusan-program/hebahan/papar-emel/{id}', [PengurusanProgController::class, 'paparEmel'])->name('pengurusan_program.papar_emel');
+    Route::get('/pengurusan-program/hebahan/papar-telegram/{id}', [PengurusanProgController::class, 'paparTelegram'])->name('pengurusan_program.papar_telegram');
+    Route::get('/pengurusan-program/hebahan/filter-hebahan', [PengurusanProgController::class, 'filterHebahan'])->name('pengurusan_program.filter_hebahan');
+    Route::post('/pengurusan-program/hebahan/jenis-hebahan/{id}', [PengurusanProgController::class, 'jenisHebahan'])->name('pengurusan_program.jenis_hebahan');
+    Route::post('/pengurusan-program/hebahan/jenis-hebahan-2/{id}', [PengurusanProgController::class, 'jenisHebahan2'])->name('pengurusan_program.jenis_hebahan_2');
+
+    // PENGURUSAN PROGRAM - KLIEN
+    Route::post('/pengurusan-program/klien/post-daftar-kehadiran-2/{id}',[PengurusanProgController::class, 'postDaftarKehadiran2'])->name('pengurusan_program.klien.post_daftar_kehadiran2');
+
+    // PENGURUSAN PROGRAM - PDF/EXCEL
+    Route::get('/pengurusan-program/pdf-pengesahan/{id}',[PengurusanProgController::class, 'pdfPengesahan'])->name('pengurusan_program.pdf_pengesahan');
+    Route::get('/pengurusan-program/excel-pengesahan/{id}',[PengurusanProgController::class, 'excelPengesahan'])->name('pengurusan_program.excel_pengesahan');
+    Route::get('/pengurusan-program/pdf-perekodan/{id}',[PengurusanProgController::class, 'pdfPerekodan'])->name('pengurusan_program.pdf_perekodan');
+    Route::get('/pengurusan-program/excel-perekodan/{id}',[PengurusanProgController::class, 'excelPerekodan'])->name('pengurusan_program.excel_perekodan');
+    Route::get('/pengurusan-program/qr-code/{id}',[PengurusanProgController::class, 'qrCode'])->name('pengurusan_program.qr_code');
+
+    // PELAPORAN - AKTIVITI
+    Route::get('/pelaporan/aktiviti/excel', [PelaporanController::class, 'excelPelaporanAktiviti'])->name('pelaporan.aktiviti.excel');
+    Route::get('/pelaporan/aktiviti/pdf', [PelaporanController::class, 'pdfPelaporanAktiviti'])->name('pelaporan.aktiviti.pdf');
+    Route::get('/pelaporan/aktiviti/senarai-kehadiran/{id}', [PelaporanController::class, 'pelaporanKehadiran'])->name('pelaporan.aktiviti.kehadiran');
+    Route::get('/pelaporan/program/{id}', [PelaporanController::class, 'pelaporanProgram']);
+
+});
 
 // KEMASKINI PROFIL AKAUN PENGGUNA
 Route::middleware('auth')->group(function () {
@@ -286,22 +297,6 @@ Route::get('/pegawai-daerah/modul-kepulihan/tidak-pernah-menjawab', [ModalKepuli
 Route::get('/klien/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'view'])->middleware('auth')->name('pejabat-pengawasan');
 Route::post('/klien/hantar/kemaskini/pejabat-pengawasan', [PejabatPengawasanController::class, 'update'])->name('kemaskini.pejabat-pengawasan');
 
-// PELAPORAN - AKTIVITI
-Route::get('/pelaporan/aktiviti/excel', [PelaporanController::class, 'excelPelaporanAktiviti'])->name('pelaporan.aktiviti.excel');
-Route::get('/pelaporan/aktiviti/pdf', [PelaporanController::class, 'pdfPelaporanAktiviti'])->name('pelaporan.aktiviti.pdf');
-Route::get('/pelaporan/aktiviti/senarai-kehadiran/{id}', [PelaporanController::class, 'pelaporanKehadiran'])->name('pelaporan.aktiviti.kehadiran');
-Route::get('/pelaporan/program/{id}', [PelaporanController::class, 'pelaporanProgram']);
-
-// PELAPORAN - AKTIVITI - PEGAWAI NEGERI & DAERAH
-Route::get('/pelaporan/aktiviti/aktivitiND/senarai-aktiviti', [PelaporanController::class, 'senaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.senarai_aktiviti');
-Route::post('/pelaporan/aktiviti/aktivitiND/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktiviti'])->name('pelaporan.aktiviti.aktivitiND.filter_senarai_aktiviti');
-Route::get('/pelaporan/aktiviti/aktivitiND/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktiviti'])->name('pelaporan.aktiviti.aktivitiND.json_fIlter_aktiviti');
-
-// PELAPORAN - AKTIVITI - PENTADBIR & BRPP
-Route::get('/pelaporan/aktiviti/analisis', [PelaporanController::class, 'analisis'])->name('pelaporan.aktiviti.analisis');
-Route::get('/pelaporan/aktiviti/aktivitiPB/senarai-aktiviti', [PelaporanController::class, 'senaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.senarai_aktiviti');
-Route::post('/pelaporan/aktiviti/aktivitiPB/filter-senarai-aktiviti', [PelaporanController::class, 'filterSenaraiAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.filter_senarai_aktiviti');
-Route::get('/pelaporan/aktiviti/aktivitiPB/json-filter-aktiviti/{id}', [PelaporanController::class, 'jsonFilterAktivitiPB'])->name('pelaporan.aktiviti.aktivitiPB.json_fIlter_aktiviti');
 
 
 // PELAPORAN - PENTADBIR & BRPP - MODAL KEPULIHAN

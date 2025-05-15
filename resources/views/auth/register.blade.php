@@ -13,7 +13,7 @@
                 <x-application-logo class="w-10 h-10 fill-current text-gray-500" />
             </a>
         </div>
-    
+
         <form method="POST" action="{{ route('register') }}" id="pegawai_mohon_daftar_form" novalidate>
             @csrf
             <!-- Nama -->
@@ -22,14 +22,14 @@
                 <input type="text" class="form-control w-full" placeholder="" id="nama" name="nama" style="text-transform: uppercase;" required/>
                 <x-input-error :messages="$errors->get('nama')" class="mt-2" />
             </div>
-    
+
             {{-- No Kad Pengenalan --}}
             <div class="mt-4">
                 <x-input-label for="no_kp" :value="__('No. Kad Pengenalan')" :required="true"/>
                 <input type="text" class="form-control w-full" placeholder="Contoh: 980406010678" id="no_kp" name="no_kp" inputmode="numeric" maxlength="12" required/>
                 <x-input-error :messages="$errors->get('no_kp')" class="mt-2" />
             </div>
-      
+
             <!-- Email Address -->
             <div class="mt-4">
                 <x-input-label for="emelPegawai" :value="__('E-mel')" :required="true"/>
@@ -39,14 +39,14 @@
                 </div>
                 <x-input-error :messages="$errors->get('emelPegawai')" class="mt-2" />
             </div>
-    
+
             {{-- No Telefon --}}
             <div class="mt-4">
                 <x-input-label for="no_tel" :value="__('No. Telefon')" :required="true"/>
                 <input type="text" class="form-control w-full" placeholder="Contoh: 0109000000" id="no_tel" name="no_tel" inputmode="numeric" maxlength="11" required />
                 <x-input-error :messages="$errors->get('no_tel')" class="mt-2" />
             </div>
-    
+
             <!-- Jawatan -->
             <div class="mt-4">
                 <x-input-label for="jawatan" :value="__('Jawatan')" :required="true"/>
@@ -58,7 +58,7 @@
                 </select>
                 <x-input-error :messages="$errors->get('jawatan')" class="mt-2" />
             </div>
-    
+
             <!-- Peranan -->
             <div class="mt-4">
                 <x-input-label for="peranan" :value="__('Peranan')" :required="true"/>
@@ -70,7 +70,7 @@
                 </select>
                 <x-input-error :messages="$errors->get('peranan')" class="mt-2" />
             </div>
-    
+
             <!-- Negeri Bertugas -->
             <div class="mt-4" id="mohon_negeri_field">
                 <x-input-label for="negeri_bertugas" :value="__('Negeri Bertugas')" :required="true"/>
@@ -82,7 +82,7 @@
                 </select>
                 <x-input-error :messages="$errors->get('negeri_bertugas')" class="mt-2" />
             </div>
-    
+
             <!-- Daerah Bertugas -->
             <div class="mt-4" id="mohon_daerah_field">
                 <x-input-label for="daerah_bertugas" :value="__('Daerah Bertugas')" :required="true"/>
@@ -94,13 +94,13 @@
                 </select>
                 <x-input-error :messages="$errors->get('daerah_bertugas')" class="mt-2" />
             </div>
-    
+
             <div class="flex items-center justify-center mt-4">
                 <x-primary-button type="submit" class="ms-4">
                     {{ __('DAFTAR') }}
                 </x-primary-button>
             </div>
-    
+
             <div class="flex items-center justify-center mt-2">
                 <a class="underline text-sm text-gray-500 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                     {{ __('Klik di sini untuk log masuk?') }}
@@ -121,12 +121,12 @@
                         confirmButtonText: 'OK'
                     });
                 @endif
-            
-                @if(session('error'))
+
+                @if(session('errors'))
                     Swal.fire({
                         icon: 'error',
                         title: 'Tidak Berjaya!',
-                        text: '{{ session('error') }}',
+                        text: '{{ session('errors') }}',
                         confirmButtonText: 'OK'
                     });
                 @endif
@@ -177,7 +177,7 @@
                             option.style.display = 'none';
                         }
                     });
-                    daerahSelect.value = ''; 
+                    daerahSelect.value = '';
                 }
 
                 // Event listeners
@@ -223,7 +223,7 @@
                     const negeriBertugas = document.getElementById('negeri_bertugas').value;
                     const daerahBertugas = document.getElementById('daerah_bertugas').value;
 
-                    // Custom validation and error messages
+                    // Custom validation and errors messages
                     if (!nama) {
                         alert('Sila masukkan nama penuh anda.');
                         e.preventDefault(); // Prevent form submission
