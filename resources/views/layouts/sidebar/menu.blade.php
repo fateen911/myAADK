@@ -600,9 +600,9 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan_program.pegawai_aadk.senarai_prog') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pengurusan_program.pentadbir_sistem.senarai_prog') ? 'active' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pengurusan-program/pegawai-aadk/senarai-prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan-program/pegawai-aadk/senarai-prog') }}';">
+                        <a class="menu-link" href="{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pengurusan-program/pentadbir-sistem/senarai-prog') }}';">
                             <span class="menu-icon">
                                 <i class="ki-duotone bi-activity fs-2">
                                     <span class="path1"></span>
