@@ -81,7 +81,7 @@
                 <!--begin::Content-->
                 <div id="kt_account_settings_profile_details" class="collapse show">
                     <!--begin::Form-->
-                    <form method="post" action="{{ route('profile.update') }}" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('profile.update') }}" class="form" enctype="multipart/form-data" id="profileForm">
                         @csrf
                         @method('patch')
 
@@ -142,7 +142,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/default.png')">
                                             <!--begin::Preview existing avatar-->
                                             @if(Auth::user()->gambar_profil !== null)
-                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('/assets/gambar_profil/{{$user->gambar_profil}}')"></div>
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('storage/gambar_profil/' . $user->gambar_profil) }}')"></div>
                                             @else
                                                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/default.png)"></div>
                                             @endif
@@ -167,7 +167,7 @@
                                             </span>
                                             <!--end::Cancel-->
                                             <!--begin::Remove-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Padam Gambar">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Padam Gambar" onclick="confirmDeleteImage(event)">
                                                 <i class="ki-duotone ki-cross fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -297,7 +297,7 @@
                 <!--end::Card header-->
                 <!--begin::Content-->
                 <div id="kt_account_settings_signin_method" class="collapse show">
-                    <form method="post" action="{{ route('password.update') }}" id="kt_account_profile_details_form" class="form" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('password.update') }}" class="form" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <!--begin::Card body-->
@@ -525,5 +525,33 @@
         document.querySelector('[data-kt-image-input-action="remove"]').addEventListener('click', function() {
             document.getElementById('remove_gambar_profil').value = 1;
         });
+    </script>
+
+    <script>
+        function confirmDeleteImage(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Padam Gambar?',
+                text: "Adakah anda pasti ingin memadam gambar profil terkini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, padam!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('remove_gambar_profil').value = 1;
+
+                    // Optional UI feedback
+                    const preview = document.querySelector('.image-input-wrapper');
+                    if (preview) preview.style.backgroundImage = 'none';
+
+                    // Submit the parent form
+                    document.getElementById('profileForm').submit();
+                }
+            });
+        }
     </script>
 @endsection

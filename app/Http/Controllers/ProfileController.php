@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Klien;
@@ -131,51 +132,113 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Update email if it is changed
-        if($user->tahap_pengguna == 2)
-        {
-            if($request->email !== $user->email)
-            {
-                User::where('no_kp', Auth::user()->no_kp)
-                    ->update([
-                        'email' => $request->email,
-                    ]);
+        // Tahap 2: Klien - handle email update only
+        if ($user->tahap_pengguna == 2) {
+            if ($request->email !== $user->email) {
+                User::where('no_kp', $user->no_kp)->update([
+                    'email' => $request->email,
+                ]);
 
-                Klien::where('no_kp',Auth::user()->no_kp)
-                    ->update([
-                        'emel' => $request->email,
-                    ]);
+                Klien::where('no_kp', $user->no_kp)->update([
+                    'emel' => $request->email,
+                ]);
             }
+
+            return Redirect::route('profile.edit')->with('success', 'Emel klien telah berjaya dikemaskini.');
         }
-        else if ($user->tahap_pengguna == 1 || $user->tahap_pengguna == 3 || $user->tahap_pengguna == 4 || $user->tahap_pengguna == 5) 
-        {
-            
-            // The existing file upload logic
-            if ($request->remove_gambar_profil == 1) {
-                if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
-                    // Delete the old photo from the server
-                    unlink(public_path('assets/gambar_profil/' . $user->gambar_profil));
-        
-                    // Set the gambar_profil to null in the database
-                    User::where('no_kp', Auth::user()->no_kp)->update([
-                        'gambar_profil' => null,
-                    ]);
-                }
-            } 
-            else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
-                // Save the new photo
-                $filename = strval(Auth::user()->no_kp) . "_" . $request->gambar_profil->getClientOriginalName();
-                $request->gambar_profil->move(public_path('assets/gambar_profil'), $filename);
-        
-                User::where('no_kp', Auth::user()->no_kp)
-                    ->update([
-                        'gambar_profil' => $filename,
-                    ]);
+
+        // Tahap 1, 3, 4, 5: Pegawai/Admin - handle image update
+        if ($request->remove_gambar_profil == 1) {
+            if ($user->gambar_profil && Storage::exists('public/gambar_profil/' . $user->gambar_profil)) {
+                // Delete the old image from storage
+                Storage::delete('public/gambar_profil/' . $user->gambar_profil);
+
+                // Update DB to null
+                User::where('no_kp', $user->no_kp)->update([
+                    'gambar_profil' => null,
+                ]);
             }
+        } 
+        else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
+            $request->validate([
+                'gambar_profil' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            ]);
+
+            // Delete old image if exists
+            if ($user->gambar_profil && Storage::exists('public/gambar_profil/' . $user->gambar_profil)) {
+                Storage::delete('public/gambar_profil/' . $user->gambar_profil);
+            }
+
+            // Rename and store the new image
+            $filename = $user->no_kp . '_' . time() . '.' . $request->gambar_profil->extension();
+            $request->file('gambar_profil')->storeAs('public/gambar_profil', $filename);
+
+            // Update DB with new filename
+            User::where('no_kp', $user->no_kp)->update([
+                'gambar_profil' => $filename,
+            ]);
         }
-        
-        return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
+
+        return Redirect::route('profile.edit')->with('success', 'Gambar profil pengguna telah berjaya dikemaskini.');
     }
+    
+    // public function update(Request $request)
+    // {
+    //     $user = Auth::user();
+
+    //     // Update email if it is changed
+    //     if($user->tahap_pengguna == 2)
+    //     {
+    //         if($request->email !== $user->email)
+    //         {
+    //             User::where('no_kp', Auth::user()->no_kp)
+    //                 ->update([
+    //                     'email' => $request->email,
+    //                 ]);
+
+    //             Klien::where('no_kp',Auth::user()->no_kp)
+    //                 ->update([
+    //                     'emel' => $request->email,
+    //                 ]);
+    //         }
+    //     }
+    //     else if ($user->tahap_pengguna == 1 || $user->tahap_pengguna == 3 || $user->tahap_pengguna == 4 || $user->tahap_pengguna == 5) 
+    //     {
+    //         // The existing file upload logic
+    //         if ($request->remove_gambar_profil == 1) {
+    //             if ($user->gambar_profil && file_exists(public_path('assets/gambar_profil/' . $user->gambar_profil))) {
+    //                 // Delete the old photo from the server
+    //                 unlink(public_path('assets/gambar_profil/' . $user->gambar_profil));
+        
+    //                 // Set the gambar_profil to null in the database
+    //                 User::where('no_kp', Auth::user()->no_kp)->update([
+    //                     'gambar_profil' => null,
+    //                 ]);
+    //             }
+    //         } 
+    //         else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
+    //             $request->validate([
+    //                 'gambar_profil' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+    //             ]);
+
+    //             // Delete old file
+    //             if ($user->gambar_profil && Storage::exists('public/gambar_profil/' . $user->gambar_profil)) {
+    //                 Storage::delete('public/gambar_profil/' . $user->gambar_profil);
+    //             }
+
+    //             // Rename and store securely
+    //             $filename = strval(Auth::user()->no_kp) . '_' . time() . '.' . $request->gambar_profil->extension();
+    //             $request->file('gambar_profil')->storeAs('public/gambar_profil', $filename);
+
+    //             // Update DB
+    //             User::where('no_kp', Auth::user()->no_kp)->update([
+    //                 'gambar_profil' => $filename,
+    //             ]);
+    //         }
+    //     }
+        
+    //     return Redirect::route('profile.edit')->with('success', 'Maklumat profil berjaya dikemaskini.');
+    // }
 
     /**
      * Delete the user's account.
