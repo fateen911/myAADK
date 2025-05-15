@@ -221,18 +221,6 @@ class HomeController extends Controller
                                             ->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
                                             ->count();
 
-                    // $tidak_menjawab = DB::table('klien as u')
-                    //                 ->leftJoin('rawatan_klien as rk', 'u.id', '=', 'rk.klien_id')
-                    //                 ->leftJoin('keputusan_kepulihan_klien as kk', function($join) {
-                    //                     $join->on('u.id', '=', 'kk.klien_id')
-                    //                         ->whereRaw('kk.updated_at = (SELECT MAX(updated_at) FROM keputusan_kepulihan_klien WHERE klien_id = u.id)');
-                    //                 })
-                    //                 ->where(function ($query) {
-                    //                     $query->whereNull('kk.klien_id') // No records in keputusan_kepulihan_klien
-                    //                           ->orWhere('kk.updated_at', '<=', now()->subMonths(6)); // Latest record is more than 6 months old
-                    //                 })
-                    //                 ->count();
-
                     // Count tahap kepulihan
                     $latestTahapKepulihan = DB::table('keputusan_kepulihan_klien as kk')
                                                 ->select('kk.klien_id', 'kk.tahap_kepulihan_id')

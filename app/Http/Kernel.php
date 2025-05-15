@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'pegawaiBRPP' => \App\Http\Middleware\PegawaiBRPP::class,
         'pegawaiNegeri' => \App\Http\Middleware\PegawaiNegeri::class,
         'pegawaiDaerah' => \App\Http\Middleware\PegawaiDaerah::class,
+        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
     ];
 }

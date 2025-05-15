@@ -18,10 +18,6 @@ use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\WarisViewController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 // SECOND DB
 Route::get('/test-second-db', [DatabaseTestController::class, 'testSecondDb']);
 Route::get('/klien-view', [KlienViewController::class, 'viewKlien']);
@@ -35,9 +31,6 @@ Route::get('/klien-view-add', [KlienViewController::class, 'addKlien']);
 Route::get('/', function () {
     return view('landing_page.version_3');
 });
-
-// DASHBOARD
-Route::get('/dashboard',[HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan-program/klien/daftar-kehadiran/{id}',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
@@ -56,6 +49,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
+
+Route::middleware(['auth', 'prevent-back-history'])->group(function () {
+    Route::get('/dashboard',[HomeController::class, 'index'])->name('dashboard');  
+});
+
 
 // Pentadbir Sistem (levels 1)
 Route::middleware(['auth', 'level:1'])->group(function () {
