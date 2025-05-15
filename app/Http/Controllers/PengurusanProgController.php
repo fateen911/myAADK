@@ -73,7 +73,7 @@ class PengurusanProgController extends Controller
 
     public function kategori()
     {
-        $kategori = KategoriProgram::all();
+        $kategori = KategoriProgram::where('status',1)->get();
         return response()->json($kategori);
     }
 
@@ -630,6 +630,7 @@ class PengurusanProgController extends Controller
         $kategori = new KategoriProgram();
         $kategori->nama =   $request->nama;
         $kategori->kod  =   $request->kod;
+        $kategori->status  =   1;
         $kategori->save();
 
         return redirect()->back()->with('success', 'Kategori aktiviti ditambah.');
@@ -639,7 +640,7 @@ class PengurusanProgController extends Controller
         $kategori = KategoriProgram::find($id);
 
         if ($kategori) {
-            $kategori->delete();
+            $kategori->status = 0;
             return redirect()->back()->with('success2', 'Kategori aktiviti berjaya dipadam.');
         } else {
             return redirect()->back()->with('error2', 'Kategori aktiviti gagal dipadam.');
@@ -951,8 +952,9 @@ class PengurusanProgController extends Controller
         ]);
 
         $kategori = new KategoriProgram();
-        $kategori->nama =   $request->nama;
-        $kategori->kod  =   $request->kod;
+        $kategori->nama     =   $request->nama;
+        $kategori->kod      =   $request->kod;
+        $kategori->status   =   1;
         $kategori->save();
 
         return redirect()->back()->with('success', 'Kategori aktiviti berjaya ditambah.');
@@ -979,7 +981,9 @@ class PengurusanProgController extends Controller
         $kategori = KategoriProgram::find($id);
 
         if ($kategori) {
-            $kategori->delete();
+            $kategori->update([
+                'status'    =>   0,
+            ]);
             return redirect()->back()->with('success2', 'Kategori aktiviti berjaya dipadam.');
         } else {
             return redirect()->back()->with('error2', 'Kategori aktiviti gagal dipadam.');
