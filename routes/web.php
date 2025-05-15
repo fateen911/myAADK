@@ -203,7 +203,7 @@ Route::middleware(['auth', 'level:4'])->group(function () {
 // Pegawai Daerah (levels 5)
 Route::middleware(['auth', 'level:5'])->group(function () {
 
-    // DAFTAR or KEMASKINI KLIEN
+    // DAFTAR atau KEMASKINI KLIEN
     Route::get('/pegawai-daerah/senarai-daftar/klien',[DaftarPenggunaController::class, 'senaraiDaftarKlien'])->middleware('auth')->name('pegawai-daerah.senarai-klien');
     Route::get('/pegawai-daerah/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlienDaerah'])->name('pegawai-daerah-ajax-senarai-klien');
     Route::post('/pegawai-daerah/semak-kp', [DaftarPenggunaController::class, 'semakKpDaerah'])->name('pegawai-daerah.semak.kp');
