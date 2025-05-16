@@ -254,7 +254,7 @@
                             }
 
                             rows += '<tr>';
-                            rows += '<td class="text-uppercase"><a href="{{url('/pelaporan/aktiviti/senarai-kehadiran')}}/' + program.id + '">' + program.nama + '</a></td>';
+                            rows += '<td class="text-uppercase"><a href="{{url('/pelaporan/aktiviti/senarai-kehadiran')}}/' + program.encrypted_id + '">' + program.nama + '</a></td>';
                             rows += '<td class="text-uppercase">' +  program.custom_id+ '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + program.tempat + '</td>';

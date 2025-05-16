@@ -106,7 +106,7 @@
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran/'.$program->id)}}" method="POST" >
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran/'.$program->encrypted_id)}}" method="POST" >
                         @csrf
                         <div class="fv-row text-start">
                             <div class="d-flex flex-column flex-md-row justify-content-center gap-3">

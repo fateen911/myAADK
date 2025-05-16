@@ -31,6 +31,7 @@ use App\Models\User;
 use App\Models\Pegawai;
 use App\Models\NotifikasiPegawaiDaerah;
 use App\Models\TahapKepulihan;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -1538,7 +1539,7 @@ class PelaporanController extends Controller
                     }
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -1562,7 +1563,7 @@ class PelaporanController extends Controller
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -1587,7 +1588,7 @@ class PelaporanController extends Controller
                     $daerah = DaerahPejabat::where('kod', $item->daerah)->first();
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -1935,7 +1936,7 @@ class PelaporanController extends Controller
                     }
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -1969,7 +1970,7 @@ class PelaporanController extends Controller
                     }
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -2004,7 +2005,7 @@ class PelaporanController extends Controller
                     }
 
                     $program[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -2123,7 +2124,7 @@ class PelaporanController extends Controller
                     }
 
                     $data[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -2158,7 +2159,7 @@ class PelaporanController extends Controller
                     }
 
                     $data[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -2194,7 +2195,7 @@ class PelaporanController extends Controller
                     }
 
                     $data[] = [
-                        'id'        =>  $item->id,
+                        'id'        =>  $item->encrypted_id,
                         'nama'      =>  strtoupper($item->nama),
                         'custom_id' =>  $item->custom_id,
                         'kategori'  =>  strtoupper($item->kategori->nama),
@@ -2212,8 +2213,9 @@ class PelaporanController extends Controller
         return redirect()->back()->with('errors', 'User tidak dijumpai');
     }
 
-    public function pelaporanKehadiran($id)
+    public function pelaporanKehadiran($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::with('kategori')->find($id);
 
         // Notifications and unread count for tahap_pengguna == 5

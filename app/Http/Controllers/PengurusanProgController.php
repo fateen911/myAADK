@@ -19,6 +19,7 @@ use App\Models\NotifikasiPegawaiDaerah;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HebahanMail;
@@ -294,7 +295,7 @@ class PengurusanProgController extends Controller
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $program->version);
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->encrypted_id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -307,7 +308,7 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version='  . $program->version);
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->encrypted_id . '?version='  . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -326,12 +327,13 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya didaftar.');
     }
 
-    public function kemaskiniProgPA($id)
+    public function kemaskiniProgPA($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         $kategori = KategoriProgram::all();
         $program = Program::with('kategori')->find($id);
 
@@ -390,8 +392,9 @@ class PengurusanProgController extends Controller
         }
     }
 
-    public function postkemaskiniProgPA(Request $request,$id)
+    public function postkemaskiniProgPA(Request $request,$encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         //Date format for database
         $format_1 = str_replace("/", "-", $request->tarikh_mula);
         $format_2 = str_replace("/", "-", $request->tarikh_tamat);
@@ -431,7 +434,7 @@ class PengurusanProgController extends Controller
             $version = $program->version + 1;
             //PENGESAHAN
             // Generate the unique link with event ID
-            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $version);
+            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->encrypted_id . '?version=' . $version);
 
             // Generate the QR code for the event link
             $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -444,7 +447,7 @@ class PengurusanProgController extends Controller
             $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
             //PEREKODAN
-            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $version);
+            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->encrypted_id . '?version=' . $version);
 
             // Generate the QR code for the event link
             $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -485,11 +488,13 @@ class PengurusanProgController extends Controller
 
             $notif = "Aktiviti berjaya dikemaskini dan dihebahkan.";
         }
-        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', $notif);
     }
 
-    public function batalProgPA($id){
+    public function batalProgPA($encryptedId){
+
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::find($id);
         $program->update([
             'status' => "BATAL",
@@ -513,12 +518,14 @@ class PengurusanProgController extends Controller
             }
         }
 
-        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya dibatalkan.');
     }
 
-    public function maklumatProgPA($id)
+    public function maklumatProgPA($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
+
         $program = Program::with('kategori')->find($id);
         $pengesahan = PengesahanKehadiranProgram::all();
         $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
@@ -727,7 +734,7 @@ class PengurusanProgController extends Controller
 
         //PENGESAHAN
         // Generate the unique link with event ID
-        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $program->version);
+        $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->encrypted_id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -740,7 +747,7 @@ class PengurusanProgController extends Controller
         $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
         //PEREKODAN
-        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $program->version);
+        $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->encrypted_id . '?version=' . $program->version);
 
         // Generate the QR code for the event link
         $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -759,13 +766,14 @@ class PengurusanProgController extends Controller
             'qr_perekodan'      =>  $qr_perekodan,
         ]);
 
-        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya didaftar.');
     }
 
-    public function kemaskiniProgPS($id)
+    public function kemaskiniProgPS($encryptedId)
     {
         $kategori = KategoriProgram::all();
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::with('kategori')->find($id);
 
         $negeri = NegeriPejabat::all();
@@ -779,8 +787,9 @@ class PengurusanProgController extends Controller
         }
     }
 
-    public function postkemaskiniProgPS(Request $request,$id)
+    public function postkemaskiniProgPS(Request $request,$encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         //Date format for database
         $format_1 = str_replace("/", "-", $request->tarikh_mula);
         $format_2 = str_replace("/", "-", $request->tarikh_tamat);
@@ -797,7 +806,7 @@ class PengurusanProgController extends Controller
         'tarikh_tamat'         =>   $tarikh_tamat,
         'tempat'               =>   $request->tempat,
         'negeri'               =>   $request->negeri,
-        'daerah'              =>   $request->daerah,
+        'daerah'               =>   $request->daerah,
         'penganjur'            =>   $request->penganjur,
         'nama_pegawai'         =>   $request->nama_pegawai,
         'no_tel_dihubungi'     =>   $request->no_tel_dihubungi,
@@ -820,7 +829,7 @@ class PengurusanProgController extends Controller
             $version = $program->version + 1;
             //PENGESAHAN
             // Generate the unique link with event ID
-            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->id . '?version=' . $version);
+            $pautan_pengesahan = url('/pengurusan-program/klien/pengesahan-kehadiran/'. $program->encrypted_id . '?version=' . $version);
 
             // Generate the QR code for the event link
             $generate_qr_1 = QrCode::format('png')->size(300)->generate($pautan_pengesahan);
@@ -833,7 +842,7 @@ class PengurusanProgController extends Controller
             $qr_pengesahan = 'qr_pengesahan_' . $program->id . '.png';
 
             //PEREKODAN
-            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->id . '?version=' . $version);
+            $pautan_perekodan = url('/pengurusan-program/klien/daftar-kehadiran/'. $program->encrypted_id . '?version=' . $version);
 
             // Generate the QR code for the event link
             $generate_qr_2 = QrCode::format('png')->size(300)->generate($pautan_perekodan);
@@ -874,12 +883,12 @@ class PengurusanProgController extends Controller
 
             $notif = "Aktiviti berjaya dikemaskini dan dihebahkan.";
         }
-        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', $notif);
     }
 
-    public function batalProgPS($id){
-
+    public function batalProgPS($encryptedId){
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::find($id);
         $program->update([
             'status' => "BATAL",
@@ -903,12 +912,13 @@ class PengurusanProgController extends Controller
             }
         }
 
-        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->id;
+        $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/" . $program->encrypted_id;
         return redirect()->to($direct)->with('success', 'Aktiviti berjaya dibatalkan.');
     }
 
-    public function maklumatProgPS($id)
+    public function maklumatProgPS($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::with('kategori')->find($id);
         $pengesahan = PengesahanKehadiranProgram::all();
         $hadir = $pengesahan->where('program_id',$id)->where('keputusan','HADIR')->count();
@@ -980,8 +990,9 @@ class PengurusanProgController extends Controller
     }
 
     //KLIEN
-    public function daftarKehadiran($id, Request $request) //perekodan
+    public function daftarKehadiran($encryptedId, Request $request) //perekodan
     {
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::find($id);
         if (!$program) {
             return abort(404, 'Program not found');
@@ -1005,13 +1016,14 @@ class PengurusanProgController extends Controller
         }
     }
 
-    public function postDaftarKehadiran(Request $request, $id) //perekodan
+    public function postDaftarKehadiran(Request $request, $encryptedId) //perekodan
     {
         $request->validate([
             'no_kp'  =>  'required'
         ]);
 
         $klien = Klien::where('no_kp', $request->no_kp)->first();
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::where('id', $id)->first();
         if (is_null($klien)){
             return redirect()->back()->with('errors', 'No Kad Pengenalan tidak sah.');
@@ -1043,13 +1055,15 @@ class PengurusanProgController extends Controller
         return view('pengurusan_program.klien.perekodan_berjaya', compact('program'));
     }
 
-    public function postDaftarKehadiran2(Request $request, $id) //perekodan
+    public function postDaftarKehadiran2(Request $request, $encryptedId) //perekodan
     {
         $request->validate([
             'no_kp'  =>  'required|string|max:255'
         ]);
 
         $klien = Klien::where('no_kp', $request->no_kp)->first();
+
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::where('id', $id)->first();
 
         if (is_null($klien)){
@@ -1081,8 +1095,9 @@ class PengurusanProgController extends Controller
         return redirect()->back()->with('success2', 'Kehadiran berjaya direkodkan.');
     }
 
-    public function pengesahanKehadiran($id, Request $request)
+    public function pengesahanKehadiran($encryptedId, Request $request)
     {
+        $id = Crypt::decryptString($encryptedId);
         $program = Program::find($id);
 
         if (!$program) {
@@ -1107,13 +1122,15 @@ class PengurusanProgController extends Controller
         }
     }
 
-    public function postPengesahanKehadiran(Request $request, $id)
+    public function postPengesahanKehadiran(Request $request, $encryptedId)
     {
         $request->validate([
             'no_kp'     =>  'required'
         ]);
 
         $klien = Klien::where('no_kp', $request->no_kp)->first();
+        $id = Crypt::decryptString($encryptedId);
+
         $program = Program::where('id', $id)->first();
         if (is_null($klien)){
             return redirect()->back()->with('errors', 'No Kad Pengenalan tidak sah.');

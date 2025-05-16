@@ -77,7 +77,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/'.$program->id) }}" method="POST">
+                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pentadbir-sistem/post-kemaskini-prog/'.$program->encrypted_id) }}" method="POST">
                         @csrf
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">

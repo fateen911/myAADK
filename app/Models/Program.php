@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Program extends Model
 {
     use HasFactory;
 
     protected $table = 'program';
+    protected $hidden = ['id']; // Hides the raw ID from JSON
+    protected $appends = ['encrypted_id']; // Automatically adds encrypted_id to JSON
 
     protected $fillable = [
         'kategori_id',
@@ -35,7 +38,10 @@ class Program extends Model
         'status',
         'version',
     ];
-
+    public function getEncryptedIdAttribute()
+    {
+        return Crypt::encryptString($this->id);
+    }
     public function kategori()
     {
         return $this->belongsTo(KategoriProgram::class);

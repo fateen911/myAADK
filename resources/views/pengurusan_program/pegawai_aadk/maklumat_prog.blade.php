@@ -189,10 +189,10 @@
                             </div>
                             @if($program->status == "BELUM SELESAI"  || $program->status == "PINDA")
                                 <div class="card-title">
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->id)}}" class="btn btn-sm btn-primary btn-active-secondary">
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/kemaskini-prog/'.$program->encrypted_id)}}" class="btn btn-sm btn-primary btn-active-secondary">
                                         Kemaskini &nbsp; <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <a href="{{url('/pengurusan-program/pegawai-aadk/batal-prog/'.$program->id)}}" id="batal" data-link="{{url('/pengurusan-program/pegawai-aadk/batal-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
+                                    <a href="{{url('/pengurusan-program/pegawai-aadk/batal-prog/'.$program->encrypted_id)}}" id="batal" data-link="{{url('/pengurusan-program/pegawai-aadk/batal-prog/'.$program->id)}}" class="btn btn-sm btn-danger btn-active-secondary">
                                         Batal <i class="bi bi-trash3-fill"></i>
                                     </a>
                                 </div>

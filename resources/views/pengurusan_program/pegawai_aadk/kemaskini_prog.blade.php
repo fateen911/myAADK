@@ -79,7 +79,7 @@
                 <!--begin::Content container-->
                 <div id="kt_app_content_container" class="app-container container-xxl">
                     <!--begin::Form-->
-                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/'.$program->id) }}" method="POST">
+                    <form id="program_form" class="form d-flex flex-column flex-lg-row" action="{{ url('/pengurusan-program/pegawai-aadk/post-kemaskini-prog/'.$program->encrypted_id) }}" method="POST">
                         @csrf
                         <!--begin::Main column-->
                         <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
@@ -245,7 +245,7 @@
                             <!--end::General options-->
                             <div class="d-flex justify-content-end">
                                 <!--begin::Button-->
-                                <a href="{{ url('pengurusan-program/pegawai-aadk/maklumat-prog/'.$program->id) }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
+                                <a href="{{ url('pengurusan-program/pegawai-aadk/maklumat-prog/'.$program->encrypted_id) }}" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Batal</a>
                                 <!--end::Button-->
                                 <!--begin::Button-->
                                 <button type="button" id="submitBtn" class="btn btn-primary">

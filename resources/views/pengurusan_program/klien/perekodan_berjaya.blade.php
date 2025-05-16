@@ -85,7 +85,7 @@
                         Tempat: {{$program->tempat}} <br>
                         <br>
                         <hr>
-                        <a href="{{url('/pengurusan-program/klien/daftar-kehadiran/'.$program->id. '?version=' . $program->version)}}">Klik sini untuk kehadiran yang lain.</a>
+                        <a href="{{url('/pengurusan-program/klien/daftar-kehadiran/'.$program->encrypted_id. '?version=' . $program->version)}}">Klik sini untuk kehadiran yang lain.</a>
                     </div>
                     <!--end::Text-->
                 </div>

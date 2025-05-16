@@ -106,7 +106,7 @@
                     </div>
                     <!--end::Text-->
                     <!--begin::Form-->
-                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan-program/klien/post-pengesahan-kehadiran/'.$program->id)}}" method="POST">
+                    <form class="w-md-350px mb-2 mx-auto" action="{{url('/pengurusan-program/klien/post-pengesahan-kehadiran/'.$program->encrypted_id)}}" method="POST">
                         @csrf
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
