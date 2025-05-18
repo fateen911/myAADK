@@ -147,33 +147,48 @@ class ProfileController extends Controller
             return Redirect::route('profile.edit')->with('success', 'Emel klien telah berjaya dikemaskini.');
         }
 
-        // Tahap 1, 3, 4, 5: Pegawai/Admin - handle image update
+        // Handle image removal
         if ($request->remove_gambar_profil == 1) {
-            if ($user->gambar_profil && Storage::exists('public/gambar_profil/' . $user->gambar_profil)) {
-                // Delete the old image from storage
-                Storage::delete('public/gambar_profil/' . $user->gambar_profil);
-
-                // Update DB to null
-                User::where('no_kp', $user->no_kp)->update([
-                    'gambar_profil' => null,
-                ]);
+            $existingImage = $user->gambar_profil;
+            if ($existingImage && file_exists(public_path('assets/gambar_profil/' . $existingImage))) {
+                unlink(public_path('assets/gambar_profil/' . $existingImage));
+                User::where('no_kp', $user->no_kp)->update(['gambar_profil' => null]);
             }
         } 
+        // Handle image upload with sanitization
         else if ($request->hasFile('gambar_profil') && $request->file('gambar_profil')->isValid()) {
             $request->validate([
                 'gambar_profil' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             ]);
 
-            // Delete old image if exists
-            if ($user->gambar_profil && Storage::exists('public/gambar_profil/' . $user->gambar_profil)) {
-                Storage::delete('public/gambar_profil/' . $user->gambar_profil);
+            $originalName = $request->file('gambar_profil')->getClientOriginalName();
+            $extension = strtolower($request->file('gambar_profil')->getClientOriginalExtension());
+
+            // Sanitize: remove all non-alphanumeric characters from name (keep 1 dot for extension)
+            $nameOnly = pathinfo($originalName, PATHINFO_FILENAME);
+            $nameOnly = preg_replace("/[^a-zA-Z0-9]/", "", $nameOnly); // Remove anything not alphanumeric
+
+            // Ensure name and extension are not empty
+            if (empty($nameOnly) || empty($extension)) {
+                return Redirect::back()->withErrors(['gambar_profil' => 'Nama fail tidak sah.']);
             }
 
-            // Rename and store the new image
-            $filename = $user->no_kp . '_' . time() . '.' . $request->gambar_profil->extension();
-            $request->file('gambar_profil')->storeAs('public/gambar_profil', $filename);
+            // Generate secure hashed filename (based on name + current date)
+            $date = date('YmdHis');
+            $hashedName = hash('sha256', $nameOnly . $date);
 
-            // Update DB with new filename
+            // Final filename (e.g., abcd123... .jpg)
+            $filename = substr($hashedName, 0, 200) . '.' . substr($extension, 0, 10);
+
+            // Limit length strictly < 255
+            if (strlen($filename) >= 255) {
+                return Redirect::back()->withErrors(['gambar_profil' => 'Nama fail terlalu panjang.']);
+            }
+
+            // Move file to public/assets/gambar_profil
+            $request->file('gambar_profil')->move(public_path('assets/gambar_profil'), $filename);
+
+            // Update database
             User::where('no_kp', $user->no_kp)->update([
                 'gambar_profil' => $filename,
             ]);

@@ -235,7 +235,7 @@
                     <div class="cursor-pointer symbol symbol-35px symbol-2by3 fs-4" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" style="font-weight: bold; color:white;">
                         @if(Auth::user()->tahap_pengguna != 2)
                             @if(Auth::user()->gambar_profil)
-                                <img src="{{ asset('storage/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
+                                <img src="{{ asset('assets/gambar_profil/' . Auth::user()->gambar_profil) }}" alt="Gambar" class="profile-picture" />
                                 {{ strtoupper(Auth::user()->name) }}
                             @else
                                 <i class="fa fa-user" style="color: white; padding-right:10px; font-size:16px;"></i>

@@ -142,7 +142,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/default.png')">
                                             <!--begin::Preview existing avatar-->
                                             @if(Auth::user()->gambar_profil !== null)
-                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('storage/gambar_profil/' . $user->gambar_profil) }}')"></div>
+                                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset('assets/gambar_profil/' . $user->gambar_profil) }}')"></div>
                                             @else
                                                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/default.png)"></div>
                                             @endif
@@ -167,7 +167,7 @@
                                             </span>
                                             <!--end::Cancel-->
                                             <!--begin::Remove-->
-                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Padam Gambar" onclick="confirmDeleteImage(event)">
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Padam Gambar" onclick="markImageForRemoval(event)">
                                                 <i class="ki-duotone ki-cross fs-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -522,36 +522,44 @@
     </script>
 
     <script>
-        document.querySelector('[data-kt-image-input-action="remove"]').addEventListener('click', function() {
+        function markImageForRemoval(event) {
+            event.preventDefault();
+
+            // Set hidden input to signal removal
             document.getElementById('remove_gambar_profil').value = 1;
-        });
+
+            // Remove the preview visually
+            const wrapper = document.querySelector('.image-input-wrapper');
+            if (wrapper) {
+                wrapper.style.backgroundImage = 'none';
+            }
+        }
     </script>
 
     <script>
-        function confirmDeleteImage(event) {
-            event.preventDefault();
+        document.getElementById('profileForm').addEventListener('submit', function (e) {
+            const shouldDelete = document.getElementById('remove_gambar_profil').value === '1';
 
-            Swal.fire({
-                title: 'Padam Gambar?',
-                text: "Adakah anda pasti ingin memadam gambar profil terkini?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, padam!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('remove_gambar_profil').value = 1;
+            if (shouldDelete) {
+                e.preventDefault(); // Stop form for now
 
-                    // Optional UI feedback
-                    const preview = document.querySelector('.image-input-wrapper');
-                    if (preview) preview.style.backgroundImage = 'none';
-
-                    // Submit the parent form
-                    document.getElementById('profileForm').submit();
-                }
-            });
-        }
+                Swal.fire({
+                    title: 'Padam Gambar?',
+                    text: "Adakah anda pasti ingin memadam gambar profil ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, padam!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit(); // ✅ Proceed with submission
+                    }
+                    // If cancelled: do nothing
+                });
+            }
+            // else, let form submit normally
+        });
     </script>
 @endsection
