@@ -477,7 +477,7 @@ class PengurusanProgController extends Controller
                 $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->get();
             }
             else {
-                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->negeri_pejabat)->get();
+                $klien = Klien::where('negeri_pejabat', $program->negeri_pejabat)->where('daerah_pejabat',$program->daerah_pejabat)->get();
             }
 
             // Send communication based on the selected method
