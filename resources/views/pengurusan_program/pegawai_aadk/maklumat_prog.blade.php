@@ -514,7 +514,7 @@
         @if($program->status != "BELUM SELESAI")
         <!--begin::Tab pane perekodan-->
         <div class="tab-pane fade" id="kt_ecommerce_add_product_reviews" role="tab-panel">
-            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->id)}}" method="POST">
+            <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" action="{{url('/pengurusan-program/klien/post-daftar-kehadiran-2/'.$program->encrypted_id)}}" method="POST">
                 <!--begin::Aside column-->
                 @csrf
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10 h-400px">

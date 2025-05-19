@@ -99,7 +99,9 @@
                                         <select class="form-select" name="kategori" aria-label="Select example" required>
                                             <option selected="selected" value="">Sila Pilih</option>
                                             @foreach($kategori as $item)
-                                                <option value="{{$item->id}}">{{$item->nama}}</option>
+                                                @if($item->status==1)
+                                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                         {{--                                                            <!--begin::Description-->--}}

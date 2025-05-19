@@ -154,8 +154,10 @@ class PengurusanProgController extends Controller
     }
 
     //QR CODE
-    public function qrCode($id)
+    public function qrCode($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
+
         $program = Program::with('kategori')->find($id);
         $qrCode = QrCode::size(400)->generate($program->pautan_perekodan); // Replace with your URL or data
 
@@ -1166,8 +1168,9 @@ class PengurusanProgController extends Controller
     }
 
     //HEBAHAN
-    public function paparHebahan($id)
+    public function paparHebahan($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
         $user_id = Auth::id();
         $user = User::find($user_id);
         $program = Program::with('kategori')->find($id);
@@ -1319,7 +1322,7 @@ class PengurusanProgController extends Controller
         $user_id = Auth::id();
         $user = User::find($user_id);
 
-        if ($user->tahap_pengguna == '1') {//pentadbir
+        if ($user->tahap_pengguna == '1'||$user->tahap_pengguna == '3') {//pentadbir
             $direct = "/pengurusan-program/pentadbir-sistem/senarai-prog/";
         }
         else if ($user->tahap_pengguna == '5' || $user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai daerah, negeri, brpp
@@ -1393,12 +1396,12 @@ class PengurusanProgController extends Controller
 
         $user_id = Auth::id();
         $user = User::find($user_id);
-
-        if ($user->tahap_pengguna == '1') {//pentadbir
-            $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$id;
+        $program = Program::find($id);
+        if ($user->tahap_pengguna == '1'||$user->tahap_pengguna == '3') {//pentadbir
+            $direct = "/pengurusan-program/pentadbir-sistem/maklumat-prog/".$program->encrypted_id;
         }
         else if ($user->tahap_pengguna == '5'|| $user->tahap_pengguna == '4' || $user->tahap_pengguna == '3') {//pegawai daerah, negeri or pegawai brpp
-            $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$id;
+            $direct = "/pengurusan-program/pegawai-aadk/maklumat-prog/".$program->encrypted_id;
         }
 
         return redirect()->to($direct)->with('success', 'Hebahan berjaya dihantar.');

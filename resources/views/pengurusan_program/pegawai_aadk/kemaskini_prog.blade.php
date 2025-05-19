@@ -101,10 +101,12 @@
                                         <select class="form-select" name="kategori" aria-label="Select example" required>
                                             <option selected="selected">Sila Pilih</option>
                                             @foreach($kategori as $item)
-                                                @if($program->kategori_id == $item->id)
-                                                    <option value="{{$item->id}}" selected>{{$item->nama}}</option>
-                                                @else
-                                                    <option value="{{$item->id}}">{{$item->nama}}</option>
+                                                @if($item->status==1)
+                                                    @if($program->kategori_id == $item->id)
+                                                        <option value="{{$item->id}}" selected>{{$item->nama}}</option>
+                                                    @else
+                                                        <option value="{{$item->id}}">{{$item->nama}}</option>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         </select>
@@ -296,7 +298,7 @@
                     type: 'GET',
                     success: function(response) {
                         $('#daerah').empty();
-                        $('#daerah').append('<option value="">Pilih Daerah</option>');
+                        $('#daerah').append('<option value="{{$program->daerah}}">{{ \Illuminate\Support\Str::replaceFirst('AADK DAERAH', '', $daerahP->daerah) }}</option>');
                         $.each(response, function(key, daerah) {
                             var nameWithoutPrefix = daerah.daerah.replace(/^AADK DAERAH\s*/, '');
                             $('#daerah').append('<option value="' + daerah.kod + '">' + nameWithoutPrefix + '</option>');

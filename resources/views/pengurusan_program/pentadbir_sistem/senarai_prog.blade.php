@@ -209,7 +209,7 @@
 
                             else if(program.status=='PINDA'){
                                 color = "badge-light-yellow text-darkyellow";
-                                btn   = " ";
+                                btn   = "disabled";
                                 btn2   = " ";
                             }
 
@@ -219,8 +219,8 @@
                             rows += '<td class="text-uppercase">' + program.custom_id + '</td>';
                             rows += '<td class="text-uppercase">' + program.kategori.nama + '</td>';
                             rows += '<td class="text-uppercase">' + '<span class="badge '+color+' fs-7 fw-bold">' + program.status + '</span>' + '</td>';
-                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm '+btn2+'" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
-                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm '+btn+'" href={{url('/pengurusan-program/qr-code')}}/' + program.id + '><i class="bi bi-qr-code fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a id="program" class="btn btn-icon btn-info btn-sm '+btn2+'" data-toggle="modal" data-target="#hebahanModal" data-id="' + program.encrypted_id + '"><i class="bi bi-share-fill fs-3"></i></a></td>';
+                            rows += '<td class="text-uppercase text-center"><a class="btn btn-icon btn-success btn-sm '+btn+'" href="{{url('/pengurusan-program/qr-code')}}/' + program.encrypted_id + '"><i class="bi bi-qr-code fs-3"></i></a></td>';
                             rows += '</tr>';
                         });
                         $('#sortTable1 tbody').html(rows);
