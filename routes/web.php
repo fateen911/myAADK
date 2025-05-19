@@ -32,6 +32,10 @@ Route::get('/', function () {
     return view('landing_page.version_3');
 });
 
+// AJAX GET DAERAH 
+Route::get('/get-daerah/{id}', action: [ProfilKlienController::class, 'getDaerah'])->name('getDaerah');
+Route::get('/get-daerah-bertugas/{negeri_id}', [DaftarPenggunaController::class, 'getDaerahBertugas'])->name('get-daerah-bertugas');
+
 // PENGURUSAN PROGRAM - KLIEN
 Route::get('/pengurusan-program/klien/daftar-kehadiran/{id}',[PengurusanProgController::class, 'daftarKehadiran'])->name('pengurusan_program.klien.daftar_kehadiran');
 Route::post('/pengurusan-program/klien/post-daftar-kehadiran/{id}',[PengurusanProgController::class, 'postDaftarKehadiran'])->name('pengurusan_program.klien.post_daftar_kehadiran');
@@ -68,7 +72,6 @@ Route::middleware(['auth', 'level:1'])->group(function () {
     Route::post('/pentadbir/kelulusan/permohonan/pendaftaran-pegawai/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiLulus'])->middleware('auth')->name('kelulusan-permohonan-pegawai');
     Route::post('/pentadbir/permohonan/pendaftaran-pegawai/ditolak/{id}', [DaftarPenggunaController::class, 'permohonanPegawaiDitolak'])->middleware('auth')->name('permohonan-pegawai-ditolak');
 
-    Route::get('/get-daerah-bertugas/{negeri_id}', [DaftarPenggunaController::class, 'getDaerahBertugas'])->name('get-daerah-bertugas');
     Route::get('/pentadbir/ajax/senarai-klien', [DaftarPenggunaController::class, 'getDataKlien'])->name('ajax-senarai-klien');
     Route::get('/modal/daftar-klien/{id}', [DaftarPenggunaController::class, 'modalDaftarKlien'])->name('modal-daftar-klien');
     Route::get('/modal/kemaskini-klien/{id}', [DaftarPenggunaController::class, 'modalKemaskiniKlien'])->name('modal-kemaskini-klien');
@@ -102,8 +105,6 @@ Route::middleware(['auth', 'level:2'])->group(function () {
     // PENGURUSAN PROFIL
     Route::get('/pengurusan/profil-peribadi', [ProfilKlienController::class, 'pengurusanProfil'])->middleware('auth')->name('pengurusan-profil');
     Route::get('muat-turun/PDF/profil-diri', [ProfilKlienController::class, 'muatTurunProfilDiri'])->name('export.profil.diri');
-    Route::get('muat-turun/PDF/profil-klien/{id}', [ProfilKlienController::class, 'muatTurunProfilKlien'])->name('export.profil.klien');
-    Route::get('/get-daerah/{id}', action: [ProfilKlienController::class, 'getDaerah'])->name('getDaerah');
 
     // SEND REQUEST TO UPDATE PROFILE
     Route::post('/klien/profil-peribadi/request-update', [ProfilKlienController::class, 'klienRequestUpdate'])->name('klien.requestUpdate');
@@ -300,6 +301,7 @@ Route::middleware(['auth', 'level:1,3,4,5'])->group(function () {
 
     // PENGURUSAN PROFIL KLIEN
     Route::get('/pentadbir-pegawai/maklumat-klien/{id}', [ProfilKlienController::class, 'maklumatKlien'])->middleware('auth')->name('maklumat-klien');
+    Route::get('muat-turun/PDF/profil-klien/{id}', [ProfilKlienController::class, 'muatTurunProfilKlien'])->name('export.profil.klien');
 
     // UPDATE CLIENT'S PROFILE WITHOUT NEED TO APPROVE THE REQUEST
     Route::post('/kemaskini/maklumat/peribadi-klien/{id}', [ProfilKlienController::class, 'kemaskiniMaklumatPeribadiKlien'])->middleware('auth')->name('kemaskini.maklumat.peribadi.klien');

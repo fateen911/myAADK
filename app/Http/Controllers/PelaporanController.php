@@ -561,12 +561,14 @@ class PelaporanController extends Controller
         $filteredData = $query->get();
 
         // Generate PDF using Snappy
-        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
-                ->setOption('disable-smart-shrinking', true)
-                ->setOption('lowquality', true) // Speeds up processing
-                ->setOption('enable-local-file-access', true);
+        $pdf = PDF::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'vertical');
 
-        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
+        // $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
+        //         ->setOption('disable-smart-shrinking', true)
+        //         ->setOption('lowquality', true) // Speeds up processing
+        //         ->setOption('enable-local-file-access', true);
+
+        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
     // PEGAWAI NEGERI
@@ -1039,11 +1041,9 @@ class PelaporanController extends Controller
         $filteredData = $query->get();
 
         // Generate PDF using Snappy
-        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
-            ->setPaper('a4', 'landscape')
-            ->setOption('enable-local-file-access', true); // Add this line
+        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'landscape');
 
-        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
+        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
 
@@ -1503,11 +1503,9 @@ class PelaporanController extends Controller
         $filteredData = $query->get();
 
         // Generate PDF using Snappy
-        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))
-            ->setPaper('a4', 'landscape')
-            ->setOption('enable-local-file-access', true); // Add this line
+        $pdf = SnappyPdf::loadView('pelaporan.modal_kepulihan.pdf_tidak_pernah_menjawab', compact('filteredData'))->setPaper('a4', 'vertical');
 
-        return $pdf->inline('Senarai_Tidak_Pernah_Menjawab.pdf');
+        return $pdf->stream('Senarai_Tidak_Pernah_Menjawab.pdf');
     }
 
 
