@@ -98,16 +98,27 @@
                 });
             @endif
 
-            @if(session('errors'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Tidak Berjaya!',
-                    text: '{{ session('errors') }}',
-                    confirmButtonText: 'OK'
-                });
-            @endif
+            // @if(session('errors'))
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Tidak Berjaya!',
+            //         text: '{{ session('errors') }}',
+            //         confirmButtonText: 'OK'
+            //     });
+            // @endif
         });
     </script>
+
+    @if ($errors->has('no_kp') || $errors->has('password'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Tidak Berjaya!',
+                text: `{!! $errors->first('no_kp') ?? $errors->first('password') !!}`,
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
