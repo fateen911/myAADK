@@ -166,7 +166,11 @@
 
         $daerah1 = DB::table('pejabat_pengawasan_klien')->where('klien_id', $klien->id)->select('daerah_aadk_baru', 'daerah_aadk_asal')->first();
 
-        $daerah_semasa = $daerah1->daerah_aadk_baru ?? $daerah1->daerah_aadk_asal;
+        $daerah_semasa = null;
+
+        if ($daerah1) {
+            $daerah_semasa = $daerah1->daerah_aadk_baru ?? $daerah1->daerah_aadk_asal;
+        }
 
         $daerahPCCP = DB::table('senarai_daerah_pejabat')->where('kod', $daerah_semasa)->value('daerah');
     @endphp
