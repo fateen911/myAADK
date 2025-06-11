@@ -12,5 +12,5 @@ Artisan::command('inspire', function () {
 Schedule::command('program:update-status')->everyMinute();
 Schedule::command('users:freeze-inactive')->daily();
 Schedule::command('send:program-invitations')->dailyAt('10:00');
-Schedule::command('klien:relaps')->daily();
+Schedule::command('klien:relaps')->everyMinute();
 
