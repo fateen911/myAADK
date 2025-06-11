@@ -36,6 +36,14 @@ class KlienRelapsCommand extends Command
 
                 $this->info("User {$user->id} dibekukan.");
             }
+            else{
+                $user->update([
+                    'acc_status' => 'AKTIF',
+                    'updated_at' => now(),
+                ]);
+
+                $this->info("User {$user->id} diaktifkan.");
+            }
         }
 
         $this->info('KlienRelapsCommand selesai.');
