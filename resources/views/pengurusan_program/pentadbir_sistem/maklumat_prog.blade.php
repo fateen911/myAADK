@@ -240,7 +240,7 @@
 
                             <!--begin::Input group-->
                             <div class="mb-6 fv-row">
-                                <label class="form-label">Tempat Aktiviti:</label>
+                                <label class="form-label">Alamat Lengkap Tempat Aktiviti:</label>
                                 <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{$program->tempat}}</p>
                             </div>
                             <!--end::Input group-->
@@ -260,7 +260,7 @@
                                                 $displayName = Str::replaceFirst('AADK NEGERI', '', $negeri->negeri);
                                             }
                                         @endphp
-                                        <label class="form-label">Negeri:</label>
+                                        <label class="form-label">AADK Negeri:</label>
                                         <p class="text-bg-light p-3 rounded border-bottom border-secondary text-uppercase">{{ $displayName }}</p>
                                     </div>
                                     <!--end::Input group-->
@@ -268,7 +268,7 @@
                                 <div class="d-flex flex-column flex-row-fluid w-100 w-lg-350px">
                                     <!--begin::Input group-->
                                     <div class="mb-2 fv-row">
-                                        <label class="form-label">Daerah:</label>
+                                        <label class="form-label">AADK Daerah:</label>
                                         <p class="text-bg-light p-3 rounded border-bottom border-secondary">{{ \Illuminate\Support\Str::replaceFirst('AADK DAERAH', '', $daerah->daerah) }}</p>
                                     </div>
                                 </div>

@@ -163,7 +163,7 @@
                                     <!--end::Input group-->
 
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Tempat Aktiviti</label>
+                                        <label class="required form-label">Alamat Lengkap Tempat Aktiviti</label>
                                         <input type="text" name="tempat" id="tempat" class="form-control mb-2" value="{{$program->tempat}}" required/>
                                     </div>
 
@@ -171,7 +171,7 @@
                                     <div class="mb-5 fv-row">
                                         <div class="form d-flex flex-column flex-lg-row mb-6">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                                <label class="form-label">Negeri</label>
+                                                <label class="form-label">AADK Negeri</label>
                                                 <select id="negeri" class="form-select" name="negeri" required>
                                                     @php
                                                         $displayName = $negeriP->negeri;
@@ -188,7 +188,7 @@
                                             </div>
 
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Daerah</label>
+                                                <label class="form-label">AADK Daerah</label>
                                                 @if($tahap == '4')
                                                     <select id="daerah" class="form-select" name="daerah"  required>
                                                         <option value="{{$program->daerah}}">{{ \Illuminate\Support\Str::replaceFirst('AADK DAERAH', '', $daerahP->daerah) }}</option>

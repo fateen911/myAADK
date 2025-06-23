@@ -155,7 +155,7 @@
 
                                     <!--begin::Input group-->
                                     <div class="mb-5 fv-row">
-                                        <label class="required form-label">Tempat Aktiviti</label>
+                                        <label class="required form-label">Alamat Lengkap Tempat Aktiviti</label>
                                         <input type="text" name="tempat" class="form-control mb-2" value="" required/>
                                     </div>
                                     <!--end::Input group-->
@@ -164,7 +164,7 @@
                                     <div class="mb-5 fv-row">
                                         <div class="form d-flex flex-column flex-lg-row mb-6">
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px me-lg-10">
-                                                <label class="form-label">Negeri</label>
+                                                <label class="form-label">AADK Negeri</label>
                                                 <select id="negeri" class="form-select" name="negeri"  required>
                                                     <option value="">Sila Pilih Negeri</option>
                                                     @foreach($negeri as $item)
@@ -183,7 +183,7 @@
                                                 </select>
                                             </div>
                                             <div class="d-flex flex-column flex-row-fluid w-100 w-lg-300px">
-                                                <label class="form-label">Daerah</label>
+                                                <label class="form-label">AADK Daerah</label>
                                                 <select id="daerah" class="form-select" name="daerah"  required>
                                                     <option value="">Sila Pilih Daerah</option>
                                                     <!--AJAX-->
