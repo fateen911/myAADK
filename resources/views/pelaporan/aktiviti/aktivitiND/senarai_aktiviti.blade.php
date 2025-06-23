@@ -157,7 +157,7 @@
                                 <th class="min-w-175px">Nama Aktiviti</th>
                                 <th class="min-w-40px">ID</th>
                                 <th class="min-w-200px">Kategori</th>
-                                <th class="min-w-100px">Tempat</th>
+                                <th class="min-w-100px">Tempat Aktiviti</th>
                                 <th class="min-w-50px">Status</th>
                             </tr>
                             </thead>

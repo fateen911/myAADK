@@ -187,9 +187,9 @@
                                 <th class="min-w-175px">Nama Aktiviti</th>
                                 <th class="min-w-40px">ID</th>
                                 <th class="min-w-100px">Kategori</th>
-                                <th class="min-w-150px">Tempat</th>
-                                <th class="min-w-150px">Negeri</th>
-                                <th class="min-w-150px">Daerah</th>
+                                <th class="min-w-150px">Tempat Aktiviti</th>
+                                <th class="min-w-150px">AADK Negeri</th>
+                                <th class="min-w-150px">AADK Daerah</th>
                                 <th class="min-w-50px">Status</th>
                             </tr>
                             </thead>

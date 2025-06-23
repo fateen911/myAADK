@@ -34,7 +34,7 @@ class PelaporanAktivitiExcel implements FromArray, WithHeadings, WithStyles, Wit
         $data = [
             [''], // Empty row for spacing
             [''], // Empty row for spacing
-            ['BIL.','NAMA', 'ID', 'KATEGORI', 'TEMPAT', 'NEGERI', 'DAERAH', 'STATUS']
+            ['BIL.','NAMA', 'ID', 'KATEGORI', 'TEMPAT AKTIVITI', 'AADK NEGERI', 'AADK DAERAH', 'STATUS']
         ];
 
         $count = 1;

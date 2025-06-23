@@ -58,9 +58,9 @@
             <th class="min-w-100px uppercase">Nama</th>
             <th class="min-w-100px uppercase">ID</th>
             <th class="min-w-100px uppercase">Kategori</th>
-            <th class="min-w-100px uppercase">Tempat</th>
-            <th class="min-w-60px uppercase">Negeri</th>
-            <th class="min-w-60px uppercase">Daerah</th>
+            <th class="min-w-100px uppercase">Tempat Aktiviti</th>
+            <th class="min-w-60px uppercase">AADK Negeri</th>
+            <th class="min-w-60px uppercase">AADK Daerah</th>
             <th class="min-w-100px uppercase">Status</th>
         </tr>
         </thead>
