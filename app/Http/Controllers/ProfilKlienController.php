@@ -199,7 +199,7 @@ class ProfilKlienController extends Controller
         return DataTables::of($telahKemaskini)->make(true);
     }
 
-    public function klienBelumKemaskiniPB()
+    public function klienBelumKemaskiniProfilPB()
     {
         // Clients who have never updated their profile
         $belumKemaskini = Klien::join('senarai_negeri_pejabat as n', 'klien.negeri_pejabat', '=', 'n.negeri_id')
