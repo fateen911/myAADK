@@ -650,11 +650,11 @@
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
-                    <div data-kt-menu-trigger="click" class="menu-item {{ request()->routeIs('pelaporan.modal_kepulihan') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->routeIs('pelaporan.analisis.modal_kepulihan', 'pelaporan.rekod.modal_kepulihan') ? 'show' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ url('/pelaporan/modal-kepulihan') }}" onclick="event.preventDefault(); window.location.href='{{ url('/pelaporan/modal-kepulihan') }}';">
+                        <a class="menu-link" href="javascript:void(0);">
                             <span class="menu-icon">
-                                <i class="ki-duotone ki-graph-up fs-2">
+                                <i class="bi bi-graph-up fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                     <span class="path3"></span>
@@ -664,8 +664,30 @@
                                 </i>
                             </span>
                             <span class="menu-title">Modal Kepulihan</span>
+                            <span class="menu-arrow"></span>
                         </a>
                         <!--end:Menu link-->
+
+                        <!--begin:Submenu-->
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.analisis.modal_kepulihan') ? 'active' : '' }}" href="{{ url('/pelaporan/analisis/modal-kepulihan') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Analisis Data</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->routeIs('pelaporan.rekod.modal_kepulihan') ? 'active' : '' }}" href="{{ url('/pelaporan/rekod/modal-kepulihan') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Rekod Modal Kepulihan</span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--end:Submenu-->
                     </div>
                     <!--end:Menu item-->
 
