@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
         $pegawai = Pegawai::where('no_kp', '=', $request->no_kp)->first();
         $permohonan_pegawai = PegawaiMohonDaftar::where('no_kp', '=', $request->no_kp)->first();
 
-        if ($user === null && $pegawai === null)
+        if ($user === null && $pegawai === null && $permohonan_pegawai === null)
         {
             $pegawaiData = [
                 'nama' => strtoupper($request->nama),
