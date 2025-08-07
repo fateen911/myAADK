@@ -464,7 +464,14 @@ class DaftarPenggunaController extends Controller
             return response()->json(['data' => []]); // Ensure empty response when no records exist
         }
 
-        return DataTables::of($query)->make(true);
+        return DataTables::of($query)
+            ->filterColumn('negeri_bertugas', function($query, $keyword) {
+                $query->where('senarai_negeri_pejabat.negeri', 'like', "%{$keyword}%");
+            })
+            ->filterColumn('daerah_bertugas', function($query, $keyword) {
+                $query->where('senarai_daerah_pejabat.daerah', 'like', "%{$keyword}%");
+            })
+            ->make(true);
     }
 
     public function getDataPermohonanPegawai()
