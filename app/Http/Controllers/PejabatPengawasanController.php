@@ -87,12 +87,20 @@ class PejabatPengawasanController extends Controller
                 'klien_id' => $klienId,
                 'negeri_aadk_asal' => $klien->negeri_pejabat,
                 'daerah_aadk_asal' => $klien->daerah_pejabat,
+
+                'alamat_rumah_asal' => $klien->alamat_rumah,
+                'poskod_rumah_asal' => $klien->poskod,
+                'negeri_rumah_asal' => $klien->negeri,
+                'daerah_rumah_asal' => $klien->daerah,
+
                 'negeri_aadk_baru' => $validatedData['negeri_baharu'],
                 'daerah_aadk_baru' => $validatedData['daerah_baharu'],
+
                 'alamat_rumah_baru' => $validatedData['alamat_rumah'],
                 'poskod_rumah_baru' => $validatedData['poskod'],
                 'negeri_rumah_baru' => $validatedData['negeri'],
                 'daerah_rumah_baru' => $validatedData['daerah'],
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
