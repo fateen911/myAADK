@@ -21,9 +21,9 @@ class FreezeInactiveUsers extends Command
         // Calculate the date 3 months ago
         $threeMonthsAgo = Carbon::now()->subMonths(3);
 
-        // Find users who have been inactive for more than 3 months
-        $inactiveUsers = User::where('last_active_at', '<', $threeMonthsAgo)
-            ->orWhereNull('last_active_at') // Never active users
+        // Find users who have been inactive for more than 3 months (last_active_at exists)
+        $inactiveUsers = User::whereNotNull('last_active_at')
+            ->where('last_active_at', '<', $threeMonthsAgo)
             ->where('acc_status', 'AKTIF') // Only active users
             ->get();
 
@@ -34,6 +34,6 @@ class FreezeInactiveUsers extends Command
             // Log output
             $this->info("User {$user->name} has been frozen due to inactivity.");
         }
-
     }
+
 }
