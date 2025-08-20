@@ -275,9 +275,9 @@
                         <label class="form-check-label" for="ATS">ATS (Syabu, Ice & Batu)</label>
                     </div>
                     <div class="radio-group">
-                        <input class="form-check-input" type="checkbox" name="jenis_dadah[]" value="Opiat (Ganja, Heroin, Morfin & Kodein)" id="Opiat"
-                            {{ (in_array('Opiat (Ganja, Heroin, Morfin & Kodein)', $jenis_dadah)) || in_array('Opiat (Ganja, Heroin, Morfin & Kodein)', old('jenis_dadah', [])) ? 'checked' : '' }} onchange="validateCheckboxes()">
-                        <label class="form-check-label" for="Opiat">Opiat (Ganja, Heroin, Morfin & Kodein)</label>
+                        <input class="form-check-input" type="checkbox" name="jenis_dadah[]" value="Opiat (Heroin, Morfin & Kodein)" id="Opiat"
+                            {{ (in_array('Opiat (Heroin, Morfin & Kodein)', $jenis_dadah)) || in_array('Opiat (Heroin, Morfin & Kodein)', old('jenis_dadah', [])) ? 'checked' : '' }} onchange="validateCheckboxes()">
+                        <label class="form-check-label" for="Opiat">Opiat (Heroin, Morfin & Kodein)</label>
                     </div>
                     <div class="radio-group">
                         <input class="form-check-input" type="checkbox" name="jenis_dadah[]" value="Ganja (Ganja, Hashish, Marijuana)" id="Ganja"
