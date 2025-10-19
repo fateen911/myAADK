@@ -332,11 +332,11 @@ class ModalKepulihanController extends Controller
         $skor = round($skor, 3);
 
         $tahapKepulihanId = 0;
-        if ($skor >= 0.00 && $skor <= 0.25) {
+        if ($skor >= 0.00 && $skor <= 0.259) {
             $tahapKepulihanId = 1;
-        } elseif ($skor >= 0.26 && $skor <= 0.50) {
+        } elseif ($skor >= 0.26 && $skor <= 0.509) {
             $tahapKepulihanId = 2;
-        } elseif ($skor >= 0.51 && $skor <= 0.75) {
+        } elseif ($skor >= 0.51 && $skor <= 0.759) {
             $tahapKepulihanId = 3;
         } elseif ($skor >= 0.76 && $skor <= 1.00) {
             $tahapKepulihanId = 4;
